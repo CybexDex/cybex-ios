@@ -12,8 +12,25 @@ import SwiftyUserDefaults
 
 extension AppDelegate {
     func setupUserSetting() {
+        let name = Defaults[.username]
+        if name.count > 0 {
+            UserManager.shared.name.accept(name)
+        }
+
+        let loginType = Defaults[.loginType]
+        if loginType > 0 {
+            UserManager.shared.loginType = UserManager.LoginType(rawValue: loginType)!
+        }
+
+        let unlockType = Defaults[.unlockType]
+        if unlockType > 0 {
+            UserManager.shared.unlockType = UserManager.UnlockType(rawValue: unlockType)!
+        }
+
+        UserManager.shared.lockTime = UserManager.LockTime(rawValue: Defaults[.locktime])!
+
         if Defaults.hasKey(.frequencyType) {
-            UserManager.shared.frequencyType = UserManager.FrequencyType(rawValue: Defaults[.frequencyType])!
+            UserManager.shared.frequencyType = FrequencyType(rawValue: Defaults[.frequencyType])!
         }
 
         NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in

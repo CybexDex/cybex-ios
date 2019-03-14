@@ -6,12 +6,12 @@ import UIKit
 import AppKit
 #endif
 
-func addOpacityAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, animationCache: AnimationCache?, completion: @escaping (() -> Void)) {
+func addOpacityAnimation(_ animation: BasicAnimation, _ context: AnimationContext, sceneLayer: CALayer, animationCache: AnimationCache?, completion: @escaping (() -> Void)) {
     guard let opacityAnimation = animation as? OpacityAnimation else {
         return
     }
 
-    guard let nodeId = animation.nodeId, let node = Node.nodeBy(id: nodeId) else {
+    guard let node = animation.node, let renderer = animation.nodeRenderer else {
         return
     }
 
@@ -25,7 +25,7 @@ func addOpacityAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, anima
 
     generatedAnimation.completion = { finished in
 
-        animationCache?.freeLayer(node)
+        animationCache?.freeLayer(renderer)
 
         if animation.paused {
             animation.pausedProgress += animation.progress
@@ -58,7 +58,7 @@ func addOpacityAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, anima
         animation.onProgressUpdate?(t)
     }
 
-    if let layer = animationCache?.layerForNode(node, animation: animation) {
+    if let renderer = animation.nodeRenderer, let layer = animationCache?.layerForNodeRenderer(renderer, context, animation: animation) {
         let animationId = animation.ID
         layer.add(generatedAnimation, forKey: animationId)
         animation.removeFunc = { [weak layer] in

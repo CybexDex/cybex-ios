@@ -1,38 +1,70 @@
-os: osx
-language: objective-c
-matrix:
+branches:
+  only: 
+    - master
+stages:
+  - lint
+  - test
+jobs:
   include:
-    - {osx_image: xcode8.3, env: 'SWFT=3.1  PLAT=macOS  DST="arch=x86_64"'}
-    - {osx_image: xcode8.3, env: 'SWFT=3.1  PLAT=iOS    DST="OS=10.3.1,name=iPhone SE"'}
+    - &pod
+      stage: lint
+      osx_image: xcode8.3
+      env: SWIFT=3.1
+      name: pod lib lint --swift-version=3.1
+      os: osx
+      language: objective-c
+      cache: cocoapods
+      before_install:
+        gem install cocoapods --prerelease --version 1.6.0.beta.1
+      install:
+        carthage bootstrap --no-build PromiseKit
+      script: |
+        cd Carthage/Checkouts/PromiseKit
+        mv .github/PromiseKit.podspec .
+        rm -rf Extensions/Accounts/Sources
+        cp -R ../../../Sources Extensions/Accounts
+        pod lib lint --subspec=PromiseKit/Accounts --fail-fast --swift-version=$SWIFT
+    - <<: *pod
+      osx_image: xcode9.2
+      env: SWIFT=3.2
+      name: pod lib lint --swift-version=3.2
+    - <<: *pod
+      osx_image: xcode9.4
+      env: SWIFT=3.3
+      name: pod lib lint --swift-version=3.3
+    - <<: *pod
+      osx_image: xcode10
+      env: SWIFT=3.4
+      name: pod lib lint --swift-version=3.4
+    - <<: *pod
+      osx_image: xcode9.2
+      env: SWIFT=4.0
+      name: pod lib lint --swift-version=4.0
+    - <<: *pod
+      osx_image: xcode9.4
+      env: SWIFT=4.1
+      name: pod lib lint --swift-version=4.1
+    - <<: *pod
+      osx_image: xcode10
+      env: SWIFT=4.2
+      name: pod lib lint --swift-version=4.2
 
-    - {osx_image: xcode9.2, env: 'SWFT=3.2  PLAT=macOS  DST="arch=x86_64"'}
-    - {osx_image: xcode9.2, env: 'SWFT=3.2  PLAT=iOS    DST="OS=11.2,name=iPhone SE"'}
-
-    - {osx_image: xcode9.4, env: 'SWFT=3.3  PLAT=macOS  DST="arch=x86_64"'}
-    - {osx_image: xcode9.4, env: 'SWFT=3.3  PLAT=iOS    DST="OS=11.4,name=iPhone 5s"'}
-
-    - {osx_image: xcode10,  env: 'SWFT=3.4  PLAT=macOS  DST="arch=x86_64"'}
-    - {osx_image: xcode10,  env: 'SWFT=3.4  PLAT=iOS    DST="OS=12.0,name=iPhone SE"'}
-
-    - {osx_image: xcode9.2, env: 'SWFT=4.0  PLAT=macOS  DST="arch=x86_64"'}
-    - {osx_image: xcode9.2, env: 'SWFT=4.0  PLAT=iOS    DST="OS=11.2,name=iPhone SE"'}
-
-    - {osx_image: xcode9.4, env: 'SWFT=4.1  PLAT=macOS  DST="arch=x86_64" TEST=1'}
-    - {osx_image: xcode9.4, env: 'SWFT=4.1  PLAT=iOS    DST="OS=11.4,name=iPhone 5s" TEST=1'}
-
-    - {osx_image: xcode10,  env: 'SWFT=4.2  PLAT=macOS  DST="arch=x86_64"'}
-    - {osx_image: xcode10,  env: 'SWFT=4.2  PLAT=iOS    DST="OS=12.0,name=iPhone SE"'}
-cache:
-  directories:
-  - Carthage
-before_install:
-  - carthage bootstrap --cache-builds --no-use-binaries --platform $PLAT --verbose
-install:
-  - xcodebuild -scheme PMKAccounts -target PMKAccounts -quiet -destination "$DST" SWIFT_VERSION=$SWFT SWIFT_TREAT_WARNINGS_AS_ERRORS=YES build
-  - if [[ $TEST == "1" ]]; then
-      xcodebuild -scheme PMKAccounts -target PMKACTests -quiet -destination "$DST" build;
-    fi
-script:
-  - if [[ $TEST == "1" ]]; then
-      xcodebuild -scheme PMKAccounts -quiet -destination "$DST" test;
-    fi
+    - &test
+      stage: test
+      osx_image: xcode10
+      name: macOS Tests
+      env: DST='arch=x86_64' PLAT=macOS
+      os: osx
+      language: objective-c
+      cache:
+        directories:
+        - Carthage
+      before_install:
+        carthage bootstrap --cache-builds --no-use-binaries --platform $PLAT
+      install:
+        xcodebuild -scheme PMKAccounts -target PMKAccounts -quiet -destination "$DST" SWIFT_TREAT_WARNINGS_AS_ERRORS=YES build
+      script:
+        xcodebuild -scheme PMKAccounts -quiet -destination "$DST" test
+    - <<: *test
+      env: DST='OS=12.0,name=iPhone SE' PLAT=iOS
+      name: iOS Tests

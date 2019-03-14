@@ -14,12 +14,12 @@ import UIKit
 import AppKit
 #endif
 
-func addShapeAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, animationCache: AnimationCache?, completion: @escaping (() -> Void)) {
+func addShapeAnimation(_ animation: BasicAnimation, _ context: AnimationContext, sceneLayer: CALayer, animationCache: AnimationCache?, completion: @escaping (() -> Void)) {
     guard let shapeAnimation = animation as? ShapeAnimation else {
         return
     }
 
-    guard let nodeId = animation.nodeId, let shape = Node.nodeBy(id: nodeId) as? Shape else {
+    guard let shape = animation.node as? Shape, let renderer = animation.nodeRenderer else {
         return
     }
 
@@ -28,19 +28,19 @@ func addShapeAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, animati
     let duration = animation.autoreverses ? animation.getDuration() / 2.0 : animation.getDuration()
 
     let mutatingShape = SceneUtils.shapeCopy(from: fromShape)
-    nodesMap.replace(node: shape, to: mutatingShape)
-    animationCache?.replace(original: shape, replacement: mutatingShape)
+    renderer.replaceNode(with: mutatingShape)
 
-    guard let layer = animationCache?.layerForNode(mutatingShape, animation: animation, shouldRenderContent: false) else {
+    guard let layer = animationCache?.layerForNodeRenderer(renderer, context, animation: animation, shouldRenderContent: false) else {
         return
     }
 
     // Creating proper animation
-    let generatedAnim = generateShapeAnimation(
-        from: mutatingShape,
-        to: toShape,
-        duration: duration,
-        renderTransform: layer.renderTransform!)
+    let generatedAnim = generateShapeAnimation(context,
+                                               from: mutatingShape,
+                                               to: toShape,
+                                               animation: shapeAnimation,
+                                               duration: duration,
+                                               renderTransform: layer.renderTransform!)
 
     generatedAnim.repeatCount = Float(animation.repeatCount)
     generatedAnim.timingFunction = caTimingFunction(animation.easing)
@@ -63,7 +63,7 @@ func addShapeAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, animati
             mutatingShape.fill = fromShape.fill
         }
 
-        animationCache?.freeLayer(mutatingShape)
+        animationCache?.freeLayer(renderer)
 
         if !animation.cycled && !animation.manualStop {
             animation.completion?()
@@ -107,6 +107,7 @@ func addShapeAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, animati
         layer.lineCap = MCAShapeLayerLineCap.mapToGraphics(model: stroke.cap)
         layer.lineJoin = MCAShapeLayerLineJoin.mapToGraphics(model: stroke.join)
         layer.lineDashPattern = stroke.dashes.map { NSNumber(value: $0) }
+        layer.lineDashPhase = CGFloat(stroke.offset)
     } else if shape.fill == nil {
         layer.strokeColor = MColor.black.cgColor
         layer.lineWidth = 1.0
@@ -126,7 +127,7 @@ func addShapeAnimation(_ animation: BasicAnimation, sceneLayer: CALayer, animati
     }
 }
 
-fileprivate func generateShapeAnimation(from: Shape, to: Shape, duration: Double, renderTransform: CGAffineTransform) -> CAAnimation {
+fileprivate func generateShapeAnimation(_ context: AnimationContext, from: Shape, to: Shape, animation: ShapeAnimation, duration: Double, renderTransform: CGAffineTransform) -> CAAnimation {
 
     let group = CAAnimationGroup()
 
@@ -146,9 +147,12 @@ fileprivate func generateShapeAnimation(from: Shape, to: Shape, duration: Double
     // Transform
     let scaleAnimation = CABasicAnimation(keyPath: "transform")
     scaleAnimation.duration = duration
-    let view = nodesMap.getView(from)
-    scaleAnimation.fromValue = CATransform3DMakeAffineTransform(AnimationUtils.absolutePosition(from, view: view).toCG())
-    scaleAnimation.toValue = CATransform3DMakeAffineTransform(AnimationUtils.absolutePosition(to, view: view).toCG())
+    let parentPos = AnimationUtils.absolutePosition(animation.nodeRenderer?.parentRenderer, context)
+    let fromPos = parentPos.concat(with: from.place)
+    let toParentPos = animation.toParentGlobalTransfrom
+    let toPos = toParentPos.concat(with: to.place)
+    scaleAnimation.fromValue = CATransform3DMakeAffineTransform(fromPos.toCG())
+    scaleAnimation.toValue = CATransform3DMakeAffineTransform(toPos.toCG())
 
     group.animations?.append(scaleAnimation)
 
@@ -200,6 +204,16 @@ fileprivate func generateShapeAnimation(from: Shape, to: Shape, duration: Double
         dashPatternAnimation.duration = duration
 
         group.animations?.append(dashPatternAnimation)
+    }
+
+    // Dash offset
+    if fromStroke.offset != toStroke.offset {
+        let dashOffsetAnimation = CABasicAnimation(keyPath: "lineDashPhase")
+        dashOffsetAnimation.fromValue = fromStroke.offset
+        dashOffsetAnimation.toValue = toStroke.offset
+        dashOffsetAnimation.duration = duration
+
+        group.animations?.append(dashOffsetAnimation)
     }
 
     // Group

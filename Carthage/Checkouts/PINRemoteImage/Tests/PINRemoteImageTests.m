@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <PINRemoteImage/PINAnimatedImageView.h>
 #import <PINRemoteImage/PINRemoteImage.h>
 #import <PINRemoteImage/PINURLSessionManager.h>
 #import <PINRemoteImage/PINImageView+PINRemoteImage.h>
@@ -15,15 +16,12 @@
 #import <PINRemoteImage/PINRequestRetryStrategy.h>
 #import <PINCache/PINCache.h>
 
+#import "NSDate+PINCacheTests.h"
 #import "PINResume.h"
 #import "PINRemoteImageDownloadTask.h"
 #import "PINSpeedRecorder.h"
 
 #import <objc/runtime.h>
-
-#if USE_FLANIMATED_IMAGE
-#import <FLAnimatedImage/FLAnimatedImage.h>
-#endif
 
 static BOOL requestRetried = NO;
 
@@ -232,7 +230,6 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
     [super tearDown];
 }
 
-#if USE_FLANIMATED_IMAGE
 - (void)testGIFDownload
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Download animatedImage"];
@@ -243,7 +240,7 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
         UIImage *outImage = result.image;
         id outAnimatedImage = result.alternativeRepresentation;
         
-        XCTAssert(outAnimatedImage && [outAnimatedImage isKindOfClass:[FLAnimatedImage class]], @"Failed downloading animatedImage or animatedImage is not an FLAnimatedImage.");
+        XCTAssert(outAnimatedImage && [outAnimatedImage isKindOfClass:[PINCachedAnimatedImage class]], @"Failed downloading animatedImage or animatedImage is not a PINCachedAnimatedImage.");
         XCTAssert(outImage == nil, @"Image is not nil.");
         
         [expectation fulfill];
@@ -251,7 +248,6 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
     
     [self waitForExpectationsWithTimeout:[self timeoutTimeInterval] handler:nil];
 }
-#endif
 
 - (void)testInitWithNilConfiguration
 {
@@ -333,7 +329,7 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
   [self waitForExpectationsWithTimeout:[self timeoutTimeInterval] handler:nil];
 }
 
-- (void)testSkipFLAnimatedImageDownload
+- (void)testSkipPINAnimatedImageDownload
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Download animated image"];
     [self.imageManager downloadImageWithURL:[self GIFURL]
@@ -394,7 +390,7 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
                                  completion:^(PINRemoteImageManagerResult *result)
      {
          UIImage *outImage = result.image;
-         FLAnimatedImage *outAnimatedImage = result.alternativeRepresentation;
+         PINCachedAnimatedImage *outAnimatedImage = result.alternativeRepresentation;
          
          XCTAssert(outImage && [outImage isKindOfClass:[UIImage class]], @"Failed downloading image or image is not a UIImage.");
          XCTAssert(CGSizeEqualToSize(outImage.size, CGSizeMake(16,16)), @"Failed decoding image, image size is wrong.");
@@ -627,12 +623,11 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
     [self waitForExpectationsWithTimeout:[self timeoutTimeInterval] handler:nil];
 }
 
-#if USE_FLANIMATED_IMAGE
-- (void)testFLAnimatedImageView
+- (void)testPINAnimatedImageView
 {
     XCTestExpectation *imageSetExpectation = [self expectationWithDescription:@"animatedImageView did not have animated image set"];
-    FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
-    __weak FLAnimatedImageView *weakImageView = imageView;
+    PINAnimatedImageView *imageView = [[PINAnimatedImageView alloc] init];
+    __weak PINAnimatedImageView *weakImageView = imageView;
     [imageView pin_setImageFromURL:[self GIFURL]
                         completion:^(PINRemoteImageManagerResult *result)
      {
@@ -642,7 +637,6 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
 
     [self waitForExpectationsWithTimeout:[self timeoutTimeInterval] handler:nil];
 }
-#endif
 
 - (void)testEarlyReturn
 {
@@ -663,7 +657,6 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
     XCTAssert(image != nil, @"image callback did not occur synchronously.");
 }
 
-#if USE_FLANIMATED_IMAGE
 - (void)testload
 {
     srand([[NSDate date] timeIntervalSince1970]);
@@ -696,7 +689,6 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
     }
     XCTAssert(dispatch_group_wait(group, [self timeoutWithInterval:100]) == 0, @"Group timed out.");
 }
-#endif
 
 - (void)testInvalidObject
 {
@@ -952,6 +944,73 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
     XCTAssert(dispatch_semaphore_wait(semaphore, [self timeout]) == 0, @"Semaphore timed out.");
 }
 
+- (void)testCacheControlSupport
+{
+    self.imageManager = [[PINRemoteImageManager alloc] initWithSessionConfiguration:nil alternativeRepresentationProvider:nil imageCache:[PINRemoteImageManager defaultImageTtlCache]];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    id cache = self.imageManager.cache;
+    XCTAssert([cache isKindOfClass:[PINCache class]]);
+    PINCache *pinCache = (PINCache *)cache;
+    pinCache.diskCache.ageLimit = 0; // forever, which is more than 31536000 (which is about a yr fwiw)
+    XCTAssert(pinCache.diskCache.isTTLCache, @"Default imageManager did not use a ttl cache");
+
+    // JPEGURL_Small includes the header "Cache-Control: max-age=31536000, immutable"
+    // If that ever changes, this might start failing
+    [self.imageManager downloadImageWithURL:[self JPEGURL_Small] completion:^(PINRemoteImageManagerResult *result) {
+        XCTAssert(result.resultType == PINRemoteImageResultTypeDownload, @"Expected PINRemoteImageResultTypeDownload(3), got %d", result.resultType);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    XCTAssert(dispatch_semaphore_wait(semaphore, [self timeout]) == 0, @"Semaphore timed out.");
+
+    NSString *key = [self.imageManager cacheKeyForURL:[self JPEGURL_Small] processorKey:nil];
+    id diskCachedObj = [cache objectFromDiskForKey:key];
+    XCTAssert(diskCachedObj != nil, @"Image was not found in the disk cache");
+    [self.imageManager downloadImageWithURL:[self JPEGURL_Small] completion:^(PINRemoteImageManagerResult *result) {
+        XCTAssert(result.resultType == PINRemoteImageResultTypeMemoryCache, @"Expected PINRemoteImageResultTypeCache(2), got %d", result.resultType);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    XCTAssert(dispatch_semaphore_wait(semaphore, [self timeout]) == 0, @"Semaphore timed out.");
+
+    [NSDate startMockingDateWithDate:[NSDate dateWithTimeIntervalSinceNow:32000000]];
+    diskCachedObj = [cache objectFromDiskForKey:key];
+    XCTAssert(diskCachedObj == nil, @"Image was not discarded from the disk cache");
+    [self.imageManager downloadImageWithURL:[self JPEGURL_Small] completion:^(PINRemoteImageManagerResult *result) {
+        XCTAssert(result.resultType == PINRemoteImageResultTypeDownload, @"Expected PINRemoteImageResultTypeDownload(3), got %d", result.resultType);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    XCTAssert(dispatch_semaphore_wait(semaphore, [self timeout]) == 0, @"Semaphore timed out.");
+    [NSDate stopMockingDate];
+
+
+    // nonTransparentWebPURL includes the header "expires: <about 1 yr from now>"
+    // If that ever changes, this might start failing
+    [self.imageManager downloadImageWithURL:[self nonTransparentWebPURL] completion:^(PINRemoteImageManagerResult *result) {
+        XCTAssert(result.resultType == PINRemoteImageResultTypeDownload, @"Expected PINRemoteImageResultTypeDownload(3), got %d", result.resultType);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    XCTAssert(dispatch_semaphore_wait(semaphore, [self timeout]) == 0, @"Semaphore timed out.");
+
+    key = [self.imageManager cacheKeyForURL:[self nonTransparentWebPURL] processorKey:nil];
+    diskCachedObj = [cache objectFromDiskForKey:key];
+    XCTAssert(diskCachedObj != nil, @"Image was not found in the disk cache");
+    [self.imageManager downloadImageWithURL:[self nonTransparentWebPURL] completion:^(PINRemoteImageManagerResult *result) {
+        XCTAssert(result.resultType == PINRemoteImageResultTypeMemoryCache, @"Expected PINRemoteImageResultTypeCache(2), got %d", result.resultType);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    XCTAssert(dispatch_semaphore_wait(semaphore, [self timeout]) == 0, @"Semaphore timed out.");
+
+    [NSDate startMockingDateWithDate:[NSDate dateWithTimeIntervalSinceNow:32000000]];
+    diskCachedObj = [cache objectFromDiskForKey:key];
+    XCTAssert(diskCachedObj == nil, @"Image was not discarded from the disk cache");
+    [self.imageManager downloadImageWithURL:[self nonTransparentWebPURL] completion:^(PINRemoteImageManagerResult *result) {
+        XCTAssert(result.resultType == PINRemoteImageResultTypeDownload, @"Expected PINRemoteImageResultTypeDownload(3), got %d", result.resultType);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    XCTAssert(dispatch_semaphore_wait(semaphore, [self timeout]) == 0, @"Semaphore timed out.");
+    [NSDate stopMockingDate];
+
+}
+
 - (void)testAuthentication
 {
 	XCTestExpectation *expectation = [self expectationWithDescription:@"Authentification challenge was called"];
@@ -1136,7 +1195,7 @@ static inline BOOL PINImageAlphaInfoIsOpaque(CGImageAlphaInfo info) {
     //I want this retain cycle
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
-    __block void (^checkConcurrentDownloads) ();
+    __block void (^checkConcurrentDownloads) (void);
     checkConcurrentDownloads = ^{
         usleep(10000);
         [self.imageManager.sessionManager concurrentDownloads:^(NSUInteger concurrentDownloads) {

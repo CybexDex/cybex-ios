@@ -21,11 +21,14 @@ enum NodeURLString: String {
     case singapore = "wss://singapore-01.cybex.io"
     case tokyo = "wss://tokyo-01.cybex.io"
     case korea = "wss://korea-01.cybex.io"
+    case hkback = "wss://hkbak.cybex.io"
 
     case test = "wss://hangzhou.51nebula.com/"
+    case tmp = "ws://10.18.120.241:28090"
+
     static var all: [NodeURLString] {
-        //    return [.test]
-        return [.shanghai, .beijing, .hongkong, .singapore, .tokyo, .korea]
+//            return [.tmp]
+        return [.hongkong, .hkback, .singapore, .tokyo, .korea]
     }
 }
 

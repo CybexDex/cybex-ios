@@ -103,24 +103,20 @@ extension DepolyTicketViewController {
 
                 let requeset = GetFullAccountsRequest(name: UserManager.shared.name.value!) { (response) in
                     if let data = response as? FullAccount {
-                        if let balances = data.balances {
-                            for balance in balances {
-                                if balance.assetType == info.id {
-                                    let balanceDecimal = balance.balance.decimal()
-                                    if balanceDecimal > 0 {
-                                        self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat(balanceDecimal.string(digits: 0, roundingMode: .down))
-                                    }
-                                    else {
-                                        self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat("-")
-                                    }
+                        for balance in data.balances {
+                            if balance.assetType == info.id {
+                                let balanceDecimal = balance.balance.decimal()
+                                if balanceDecimal > 0 {
+                                    self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat(balanceDecimal.string(digits: 0, roundingMode: .down))
+                                }
+                                else {
+                                    self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat("-")
                                 }
                             }
                         }
                     }
                 }
                 CybexWebSocketService.shared.send(request: requeset, priority: .veryHigh)
-
-
             }
             else {
                 self.chooseAsset = nil
@@ -131,7 +127,7 @@ extension DepolyTicketViewController {
     }
 
     func generateInfo(_ callback: @escaping (String?) -> Void) {
-        guard let fromAccount = UserManager.shared.account.value,
+        guard let fromAccount = UserManager.shared.getCachedAccount(),
             let amount = containView.amountView.textField.text,
             let asset = chooseAsset,
             let toAccount = toAccount else {
@@ -174,7 +170,7 @@ extension DepolyTicketViewController {
     }
 
     func ticketUse() {
-        guard UserManager.shared.account.value != nil, let chooseAsset = chooseAsset else { return }
+        guard !UserManager.shared.isLocked, let chooseAsset = chooseAsset else { return }
 
         startLoading()
 
@@ -204,11 +200,10 @@ extension DepolyTicketViewController {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         var items = [String]()
-        let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+        let balances = UserManager.shared.fullAccount.value?.balances.filter({ (balance) -> Bool in
             return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0
         })
 

@@ -58,13 +58,10 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
 
 extension SettingCoordinator: SettingStateManagerProtocol {
     func changeEnveronment(_ callback:@escaping(Bool) -> Void) {
-        var isTest = false
         if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
             Defaults[.environment] = ""
-            isTest = false
         } else {
             Defaults[.environment] = "test"
-            isTest = true
         }
 //        MarketConfiguration.shared.marketPairs = []
 //        AssetConfiguration.shared.whiteListOfIds = []

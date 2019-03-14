@@ -18,8 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-a3-GaV">
+                                <rect key="frame" x="13" y="20" width="349" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="IaZ-qh-8gZ"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjy-RN-PdR">
-                                <rect key="frame" x="0.0" y="20" width="375" height="32"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="GYZ-NL-AEN"/>
                                 </constraints>
@@ -33,25 +39,25 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h5-WD-fuk">
-                                <rect key="frame" x="0.0" y="52" width="375" height="615"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="575"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-Ue-uhf">
-                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="615"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="575"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y8d-pJ-zNu">
-                                                <rect key="frame" x="375" y="0.0" width="375" height="615"/>
+                                                <rect key="frame" x="375" y="0.0" width="375" height="575"/>
                                                 <connections>
                                                     <segue destination="0g1-Ao-zfw" kind="embed" identifier="ExchangeViewControllerSell" id="Is8-tK-ZT7"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvr-lP-awK">
-                                                <rect key="frame" x="750" y="0.0" width="375" height="615"/>
+                                                <rect key="frame" x="750" y="0.0" width="375" height="575"/>
                                                 <connections>
                                                     <segue destination="ogn-X9-Efg" kind="embed" identifier="OpenedOrdersViewController" id="LVv-cy-Lxu"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jac-cH-uZ5">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="575"/>
                                                 <connections>
                                                     <segue destination="Fdf-gi-ksD" kind="embed" identifier="ExchangeViewControllerBuy" id="6xO-gd-IjE"/>
                                                 </connections>
@@ -79,18 +85,21 @@
                         <constraints>
                             <constraint firstItem="fjy-RN-PdR" firstAttribute="trailing" secondItem="sJD-hv-SVJ" secondAttribute="trailing" id="2JQ-MR-Uq7"/>
                             <constraint firstItem="sJD-hv-SVJ" firstAttribute="trailing" secondItem="9h5-WD-fuk" secondAttribute="trailing" id="8tY-Zz-FDP"/>
-                            <constraint firstItem="fjy-RN-PdR" firstAttribute="top" secondItem="sJD-hv-SVJ" secondAttribute="top" id="ET4-XG-ZNH"/>
                             <constraint firstItem="9h5-WD-fuk" firstAttribute="leading" secondItem="sJD-hv-SVJ" secondAttribute="leading" id="IAE-HF-974"/>
                             <constraint firstAttribute="bottom" secondItem="Qfk-Ue-uhf" secondAttribute="bottom" id="MEH-ih-JDl"/>
+                            <constraint firstItem="ITN-a3-GaV" firstAttribute="leading" secondItem="sJD-hv-SVJ" secondAttribute="leading" constant="13" id="NEF-xv-RJ2"/>
                             <constraint firstItem="y8d-pJ-zNu" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" id="NnK-qR-dEl"/>
                             <constraint firstItem="jac-cH-uZ5" firstAttribute="height" secondItem="Qfk-Ue-uhf" secondAttribute="height" id="O4F-76-OCg"/>
                             <constraint firstItem="Qfk-Ue-uhf" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" multiplier="3" id="YXn-sA-mjI"/>
                             <constraint firstItem="sJD-hv-SVJ" firstAttribute="bottom" secondItem="9h5-WD-fuk" secondAttribute="bottom" id="baU-1N-dDz"/>
                             <constraint firstItem="kvr-lP-awK" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" id="crx-qG-eRU"/>
                             <constraint firstItem="jac-cH-uZ5" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" id="efq-2O-zgS"/>
+                            <constraint firstItem="ITN-a3-GaV" firstAttribute="top" secondItem="sJD-hv-SVJ" secondAttribute="top" id="kRk-pf-TKR"/>
                             <constraint firstItem="y8d-pJ-zNu" firstAttribute="height" secondItem="Qfk-Ue-uhf" secondAttribute="height" id="l1b-Nb-xav"/>
+                            <constraint firstItem="fjy-RN-PdR" firstAttribute="top" secondItem="ITN-a3-GaV" secondAttribute="bottom" id="nwO-y4-YBu"/>
                             <constraint firstItem="fjy-RN-PdR" firstAttribute="leading" secondItem="sJD-hv-SVJ" secondAttribute="leading" id="pgy-Cr-DFk"/>
                             <constraint firstItem="kvr-lP-awK" firstAttribute="height" secondItem="Qfk-Ue-uhf" secondAttribute="height" id="rxg-az-OkW"/>
+                            <constraint firstItem="sJD-hv-SVJ" firstAttribute="trailing" secondItem="ITN-a3-GaV" secondAttribute="trailing" constant="13" id="s4h-65-4Pm"/>
                             <constraint firstItem="9h5-WD-fuk" firstAttribute="top" secondItem="fjy-RN-PdR" secondAttribute="bottom" id="tch-sy-6va"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sJD-hv-SVJ"/>
@@ -101,7 +110,9 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="bannerHeightConstraint" destination="IaZ-qh-8gZ" id="CIB-dT-HJw"/>
                         <outlet property="scrollView" destination="9h5-WD-fuk" id="6GE-U9-99E"/>
+                        <outlet property="topBanner" destination="ITN-a3-GaV" id="3Ir-Jn-UDV"/>
                         <outlet property="topView" destination="fjy-RN-PdR" id="uxK-yB-L9X"/>
                     </connections>
                 </viewController>

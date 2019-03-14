@@ -1,4 +1,0 @@
-framework module AwaitKit {
-  header "AwaitKit-Swift.h"
-  requires objc
-}

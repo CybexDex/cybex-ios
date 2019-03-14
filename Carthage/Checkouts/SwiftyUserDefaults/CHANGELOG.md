@@ -1,7 +1,34 @@
 ### Next
 
+### 4.0.0-beta.2 (2019-03-09)
+
+* Regenerated the project as a potential fix to Carthage linking problems in beta 1. [@sunshinejr](https://github.com/sunshinejr)
+
+### 4.0.0-beta.1 (2019-02-25)
+
+* Added support for launch arguments/plist for `Bool`, `Double`, `Int`, `String` values. [@sunshinejr](https://github.com/sunshinejr)
+* Added support for KVO! [DivineDominion](https://github.com/DivineDominion), [toshi0383](https://github.com/toshi0383), [@sunshinejr](https://github.com/sunshinejr)
+* Brought back dictionary support for `[String: Any]`/`[String: String]` and corresponding array version of it `[[String: Any]]`/`[[String: String]]`. [@sunshinejr](https://github.com/sunshinejr)
+
+### 4.0.0-alpha.3 (2019-02-19)
+
+* Fixed a non-optional vs optional comparison bug ([#176](https://github.com/radex/SwiftyUserDefaults/issues/176)). [@z3bi](https://github.com/z3bi) and [@sunshinejr](https://github.com/sunshinejr)
+* Fixed an invalid Info.plist error ([#173](https://github.com/radex/SwiftyUserDefaults/issues/173)). [@sunshinejr](https://github.com/sunshinejr)
+
+### 4.0.0-alpha.2 (2019-02-18)
+
+* Swift 4.2 support. [@sunshinejr](https://github.com/sunshinejr)
+* Early Swift 5.0 support! [@sunshinejr](https://github.com/sunshinejr)
+* Rewritten core. We use `DefaultsBridges` now to define getters/setters for given type. [@sunshinejr](https://github.com/sunshinejr)
+* Fixed a bug where you couldn't extend non-final class like `NSColor`. [@sunshinejr](https://github.com/sunshinejr)
+* Removed type-based default values. This means you need to use key-based defaultValue or use an optional `DefaultsKey` from now on. [@sunshinejr](https://github.com/sunshinejr)
+* Improved CI infra: Swift 4.1/4.2/5.0 builds with CocoaPods/Carthage/SPM integration scripts. [@sunshinejr](https://github.com/sunshinejr)
+
+
 ### 4.0.0-alpha.1 (2018-05-08)
 
+* Swift 4.1 support [@sunshinejr](https://github.com/sunshinejr)
+* Added `Codable` support! [@sunshinejr](https://github.com/sunshinejr)
 * Added generic subscripts support (better `DefaultsKey` init diagnostics and accessing `Defaults[.key]`) [@sunshinejr](https://github.com/sunshinejr)
 * Added default values protocols (`DefaultsDefaultValueType`, `DefaultsDefaultArrayValueType`) - this means that you can extend any type with default value so you can create non-optional `DefaultsKey` afterwards! [@sunshinejr](https://github.com/sunshinejr)
 * Added default values in `DefaultsKey`, e.g. `DefaultsKey<String>("test", defaultValue: "default value")` [@sunshinejr](https://github.com/sunshinejr)

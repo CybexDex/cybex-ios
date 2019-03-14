@@ -41,6 +41,7 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
     var containerView: UIView?
     var order: LimitOrderStatus?
     var cancleOrderInfo: [String: Any]?
+    var isCancelAll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +92,8 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
                                                 R.string.localizable.cancle_openedorder_sell.key.localized()
 
                                             if self.isVisible {
-                                                self.showCancelOpenOrderConfirm(ensureTitle)
+                                                self.isCancelAll = false
+                                                self.showPureContentConfirm(ensureTitle)
                                             }
 
                                         } else {
@@ -135,12 +137,15 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
         self.timer = nil
         
         self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
-            guard let self = self, let coor = self.coordinator else { return }
-            if coor.checkConnectStatus() {
-                self.setupData()
-            }
-            else {
-                self.coordinator?.reconnect()
+            main {
+                guard let self = self, let coor = self.coordinator else { return }
+
+                if coor.checkConnectStatus() {
+                    self.setupData()
+                }
+                else {
+                    self.coordinator?.reconnect()
+                }
             }
         }
         timer?.start()
@@ -217,6 +222,17 @@ extension OpenedOrdersViewController {
             }
         }
     }
+
+    @objc func cancelAllOrder(_ data: [String: Any]) {
+        if self.isLoading() {
+            return
+        }
+
+        if self.isVisible {
+            isCancelAll = true
+            self.showPureContentConfirm(content: "open_order_confirm_cancel_all")
+        }
+    }
     
     func postCancelOrder() {
         // order.isBuy ? pair.base : pair.quote
@@ -229,6 +245,20 @@ extension OpenedOrdersViewController {
                                     R.string.localizable.cancel_create_success.key.localized() :
                                     R.string.localizable.cancel_create_fail.key.localized())
             })
+        }
+    }
+
+    func postCancelAllOrder() {
+        // order.isBuy ? pair.base : pair.quote
+        if let coor = self.coordinator {
+            coor.cancelAllOrder(pair) {[weak self] (success) in
+                guard let self = self else { return }
+                self.endLoading()
+                self.showToastBox(success,
+                                  message: success ?
+                                    R.string.localizable.cancel_create_success.key.localized() :
+                                    R.string.localizable.cancel_create_fail.key.localized())
+            }
         }
     }
     
@@ -248,6 +278,11 @@ extension OpenedOrdersViewController {
     override func returnEnsureAction() {
         self.startLoading()
         ShowToastManager.shared.hide()
-        self.postCancelOrder()
+
+        if isCancelAll {
+            postCancelAllOrder()
+        } else {
+            self.postCancelOrder()
+        }
     }
 }

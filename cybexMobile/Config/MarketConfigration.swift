@@ -46,6 +46,11 @@ class MarketConfiguration {
     static let shared = MarketConfiguration()
 
     var marketPairs: BehaviorRelay<[Pair]> = BehaviorRelay(value: []) //首页过滤白名单后的所有交易对
+    var gameMarketPairs: [Pair] = [
+        Pair(base: AssetConfiguration.CybexAsset.ArenaUSDT.id, quote: AssetConfiguration.CybexAsset.ArenaETH.id),
+        Pair(base: AssetConfiguration.CybexAsset.ArenaUSDT.id, quote: AssetConfiguration.CybexAsset.ArenaEOS.id),
+        Pair(base: AssetConfiguration.CybexAsset.ArenaUSDT.id, quote: AssetConfiguration.CybexAsset.ArenaBTC.id)
+    ]
     var importMarketLists: BehaviorRelay<[ImportantMarketPair]> = BehaviorRelay(value: [])
 
     private init() {
@@ -63,6 +68,13 @@ class MarketConfiguration {
              AssetConfiguration.CybexAsset.CYB,
              AssetConfiguration.CybexAsset.USDT,
              AssetConfiguration.CybexAsset.BTC]
+    }
+
+    //交易大赛base
+    static var gameMarketBaseAssets: [AssetConfiguration.CybexAsset] {
+        return Defaults.isTestEnv ?
+            [AssetConfiguration.CybexAsset.ArenaUSDT] :
+            [AssetConfiguration.CybexAsset.ArenaUSDT]
     }
 }
 

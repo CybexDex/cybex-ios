@@ -145,3 +145,26 @@ extension BaseViewController: UIPopoverPresentationControllerDelegate {
         return UIModalPresentationStyle.none
     }
 }
+
+extension BaseViewController {
+    func openSelectedActionViewController(_ selectedIndex: Int, actions: [XLActionController.Action<String>], cancelAction: XLActionController.Action<String> = Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: nil) ) {
+        let actionController = PeriscopeActionController()
+        actionController.selectedIndex = IndexPath(row: selectedIndex, section: 0)
+
+        for action in actions {
+            actionController.addAction(action)
+        }
+        actionController.addSection(PeriscopeSection())
+        actionController.addAction(cancelAction)
+
+        present(actionController, animated: true, completion: nil)
+    }
+}
+
+extension UIViewController {
+    func pushCloudPasswordViewController(_ card: Card?) {
+        let vc = R.storyboard.main.cloudPasswordSettingViewController()!
+        vc.card = card
+        self.navigationController?.pushViewController(vc)
+    }
+}

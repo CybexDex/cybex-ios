@@ -35,7 +35,7 @@ extension DisposableTest
         var counter = 0
         
         let disposable = Disposables.create {
-            counter = counter + 1
+            counter += 1
         }
         
         XCTAssert(counter == 0)
@@ -376,7 +376,7 @@ extension DisposableTest {
                 let expectation = self.expectation(description: "1")
                 let singleAssignmentDisposable = SingleAssignmentDisposable()
                 let disposable = Disposables.create {
-                    count.increment()
+                    increment(&count)
                     expectation.fulfill()
                 }
                 #if os(Linux)
@@ -407,11 +407,11 @@ extension DisposableTest {
             XCTAssertNil(e)
         }
 
-        XCTAssertEqual(count.load(), 1000)
+        XCTAssertEqual(globalLoad(&count), 1000)
     }
 }
 
-fileprivate class TestDisposable: Disposable {
+private class TestDisposable: Disposable {
     var count = 0
     func dispose() {
         count += 1

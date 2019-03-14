@@ -125,7 +125,7 @@ class BusinessViewController: BaseViewController {
     }
     
     func changeButtonState() {
-        if UserManager.shared.isLoginIn {
+        if UserManager.shared.logined {
             guard let pair = pair, let quoteInfo = appData.assetInfo[pair.quote] else { return }
             self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key : R.string.localizable.openedSell.key
             if let title = self.containerView.button.button.titleLabel?.text {
@@ -149,20 +149,16 @@ class BusinessViewController: BaseViewController {
         let decimalPrice = price.decimal()
         
         guard  decimalAmount != 0, decimalPrice != 0 else { return }
-        
-        let openedOrderDetailView = StyleContentView(frame: .zero)
+
+
         let ensureTitle = self.type == .buy ?
             R.string.localizable.openedorder_buy_ensure.key.localized() :
             R.string.localizable.openedorder_sell_ensure.key.localized()
-        
-        ShowToastManager.shared.setUp(title: ensureTitle, contentView: openedOrderDetailView, animationType: .upDown)
-        ShowToastManager.shared.showAnimationInView(self.view)
-        ShowToastManager.shared.delegate = self
-        
+
         let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterJade
         let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterJade
         let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterJade
-        openedOrderDetailView.data = UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
+        showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy))
     }
     
     override func configureObserveState() {
@@ -233,7 +229,7 @@ class BusinessViewController: BaseViewController {
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     func addUserManagerObserverSubscribeAction() {
-        UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (_) in
+        UserManager.shared.fullAccount.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
                 let quoteInfo = appData.assetInfo[pair.quote] else { return }
@@ -260,7 +256,7 @@ class BusinessViewController: BaseViewController {
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
                 let text = self.containerView.priceTextfield.text, text != "", text.decimal() != 0,
                 text.components(separatedBy: ".").count <= 2 && text != "." else {
-                    self.containerView.value.text = "≈¥0.0000"
+                    self.containerView.value.text = self.handlerRMBLabel("0.0000")
                     return
             }
 
@@ -268,13 +264,22 @@ class BusinessViewController: BaseViewController {
             if let baseAsset = AssetConfiguration.CybexAsset(baseInfo.id) {
                 rmbPrice = text.decimal() * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
-            self.containerView.value.text = "≈¥" + rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+            self.containerView.value.text = self.handlerRMBLabel(rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision))
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             
             self.checkBalance()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+
+    func handlerRMBLabel(_ str: String) -> String {
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable,
+            let parent = self.parent?.parent as? TradeViewController, let context = parent.context, context.pageType == .game {
+            return ""
+        }
+
+        return "≈¥" + str
     }
     
     func addNotificationSubscribeAction() {
@@ -331,7 +336,7 @@ class BusinessViewController: BaseViewController {
         }
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self](_) in
             guard let self = self else {return}
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 self.containerView.amountTextfield.resignFirstResponder()
                 appCoodinator.showLogin()
                 return
@@ -340,7 +345,7 @@ class BusinessViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.priceTextfield, queue: nil) {[weak self](_) in
             guard let self = self else {return}
             
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 self.containerView.priceTextfield.resignFirstResponder()
                 appCoodinator.showLogin()
                 return
@@ -389,7 +394,7 @@ extension BusinessViewController {
             return
         }
         
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             appCoodinator.showLogin()
             return
         }

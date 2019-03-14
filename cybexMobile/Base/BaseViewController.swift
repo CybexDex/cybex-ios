@@ -13,6 +13,7 @@ import SwiftTheme
 import RxCocoa
 import RxSwift
 import SwifterSwift
+import CoreNFC
 
 class BaseViewController: UIViewController {
     weak var toast: BeareadToast?
@@ -20,7 +21,6 @@ class BaseViewController: UIViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
     }
 
     required init?(coder aDswicoder: NSCoder) {
@@ -59,14 +59,18 @@ class BaseViewController: UIViewController {
         let color = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
         navigationController?.navigationBar.setBackgroundImage(UIImage(color: color), for: .default)
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
     }
 
     func configureObserveState() {
@@ -75,22 +79,32 @@ class BaseViewController: UIViewController {
     }
 
     func startLoading() {
-        guard let hud = toast else {
-            toast = BeareadToast.showLoading(inView: self.view)
-            return
-        }
+        UIApplication.shared.keyWindow?.showProgress()
 
-        if !hud.isDescendant(of: self.view) {
-            toast = BeareadToast.showLoading(inView: self.view)
-        }
+//        guard let hud = toast else {
+//            toast = BeareadToast.showLoading(inView: self.view)
+//            return
+//        }
+//
+//        if !hud.isDescendant(of: self.view) {
+//            toast = BeareadToast.showLoading(inView: self.view)
+//        }
     }
 
     func isLoading() -> Bool {
-        return self.toast?.alpha == 1
+        return UIApplication.shared.keyWindow?.iprogressHud?.isShowing() ?? false
+//        return self.toast?.alpha == 1
     }
 
     func endLoading() {
-        toast?.hide(true)
+        UIApplication.shared.keyWindow?.dismissProgress()
+//        toast?.hide(true)
+    }
+
+    func endAllLoading(_ tableview: UITableView) {
+        self.stopPullRefresh(tableview)
+        self.stopInfiniteScrolling(tableview, haveNoMore: true)
+        endLoading()
     }
 
     func configRightNavButton(_ image: UIImage? = nil) {
@@ -125,6 +139,8 @@ class BaseViewController: UIViewController {
 
 extension UIViewController {
     @objc open func leftAction(_ sender: UIButton) {
+        UIApplication.shared.keyWindow?.dismissProgress()
+
         navigationController?.popViewController(animated: true)
     }
 
@@ -138,147 +154,8 @@ extension UIViewController {
     }
 
     @objc func interactivePopOver(_ isCanceled: Bool) {
-
-    }
-}
-
-extension UIViewController: ShowManagerDelegate {
-    func showPasswordBox(_ title: String = R.string.localizable.withdraw_unlock_wallet.key.localized(), middleType: CybexTextView.TextViewType = .normal) {
-        if ShowToastManager.shared.showView != nil {
-            ShowToastManager.shared.hide(0)
+        if isCanceled {
+            UIApplication.shared.keyWindow?.dismissProgress()
         }
-
-        SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .smallBig, middleType: middleType)
-            ShowToastManager.shared.delegate = self
-            ShowToastManager.shared.showAnimationInView(self.view)
-        }
-    }
-
-    func showToastBox(_ success: Bool, message: String, manager: ShowToastManager = ShowToastManager.shared) {
-        if manager.showView != nil {
-            ShowToastManager.shared.hide(0)
-        }
-        SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(titleImage: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name,
-                                          message: message,
-                                          animationType: .smallBig, showType: .alertImage)
-            ShowToastManager.shared.showAnimationInView(self.view)
-            ShowToastManager.shared.hide(2.0)
-        }
-    }
-    
-    func showToast(message: String, manager: ShowToastManager = ShowToastManager.shared) {
-        if manager.showView != nil {
-            ShowToastManager.shared.hide(0)
-        }
-        SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(message: message,
-                                          animationType: .smallBig, showType: .alertImage)
-            ShowToastManager.shared.showAnimationInView(self.view)
-            ShowToastManager.shared.hide(2.0)
-        }
-    }
-
-    func showCancelOpenOrderConfirm(_ title: String) {
-        if ShowToastManager.shared.showView != nil {
-            ShowToastManager.shared.hide(0)
-        }
-        SwifterSwift.delay(milliseconds: 100) {
-            let subView = CybexShowTitleView(frame: .zero)
-            subView.title.locali = ""
-            subView.contentLable.locali = "openedorder_ensure_message"
-
-            ShowToastManager.shared.setUp(title: R.string.localizable.tip_title.key.localized(), contentView: subView, animationType: .smallBig, middleType: .normal)
-            ShowToastManager.shared.showAnimationInView(self.view)
-            ShowToastManager.shared.delegate = self
-        }
-    }
-
-    func showConfirm(_ title: String, attributes: [NSAttributedString]?, setup: (([StyleLabel]) -> Void)? = nil) {
-        if ShowToastManager.shared.showView != nil {
-            ShowToastManager.shared.hide(0)
-        }
-        SwifterSwift.delay(milliseconds: 100) {
-            let subView = StyleContentView(frame: .zero)
-            subView.data = attributes
-            setup?(subView.labels)
-
-            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .smallBig, middleType: .normal)
-            ShowToastManager.shared.showAnimationInView(self.view)
-            ShowToastManager.shared.delegate = self
-        }
-    }
-
-    func showConfirmImage(_ titleImage: String, title: String, content: String) {
-        if ShowToastManager.shared.showView != nil {
-            ShowToastManager.shared.hide(0)
-        }
-        SwifterSwift.delay(milliseconds: 100) {
-            let subView = CybexShowTitleView(frame: .zero)
-            subView.title.locali = title
-            subView.contentLable.locali = content
-            ShowToastManager.shared.setUp(titleImage: titleImage, contentView: subView, animationType: .smallBig)
-            ShowToastManager.shared.showAnimationInView(self.view)
-            ShowToastManager.shared.delegate = self
-        }
-    }
-
-    func showWaiting(_ title: String, content: String, time: Int) {
-        if ShowToastManager.shared.showView != nil {
-            ShowToastManager.shared.hide(0)
-        }
-        SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(title, content: content, time: time, animationType: ShowToastManager.ShowAnimationType.smallBig)
-            ShowToastManager.shared.showAnimationInView(self.view)
-            ShowToastManager.shared.delegate = self
-        }
-    }
-
-    func returnEnsureAction() {
-
-    }
-    func returnEnsureImageAction() {
-
-    }
-    func cancelImageAction(_ sender: CybexTextView) {
-
-    }
-
-    @objc func passwordPassed(_ passed: Bool) {
-
-    }
-    
-    @objc func passwordDetecting() {
-
-    }
-    
-    @objc func codePassed(_ passed: Bool) {
-        
-    }
-
-    func returnUserPassword(_ sender: String, textView: CybexTextView) {
-        ShowToastManager.shared.hide()
-//        if textView.viewType == .code {
-//            self.codePassed(GameModel.codeArray.contains(sender))
-//            return
-//        }
-        
-        
-        passwordDetecting()
-        
-        if let name = UserManager.shared.name.value {
-            UserManager.shared.unlock(name, password: sender) {[weak self] (success, _) in
-                self?.passwordPassed(success)
-            }
-        }
-    }
-
-    func ensureWaitingAction(_ sender: CybexWaitingView) {
-
-    }
-
-    func returnInviteCode(_ sender: String) {
-
     }
 }

@@ -27,6 +27,7 @@ protocol TransferCoordinatorProtocol {
     func presentPubKeyOptions(_ pubkeys: [String], pubkeyChoosedIndex: @escaping (Int) -> Void)
     
     func reopenAction()
+    func chooseOrAddAddress()
 }
 
 protocol TransferStateManagerProtocol {
@@ -38,21 +39,18 @@ protocol TransferStateManagerProtocol {
 
     func setAccount(_ account: String)
 
-    func setAmount(_ amount: String, canFetchFee: Bool)
+    func setAmount(_ amount: String)
 
-    func setMemo(_ memo: String, canFetchFee: Bool)
-
-    func validAmount()
+    func setMemo(_ memo: String)
 
     func validAccount()
 
-    func checkAmount(_ transferAmount: Decimal)
+    func validAmount()
 
     func transfer(_ vestingPeroid: UInt64, toPubKey: String, callback: @escaping (Any) -> Void)
     
-    func getGatewayFee(_ assetId: String, amount: String, memo: String)
+    func calculateFee(_ assetId: String, memo: String)
 
-    func chooseOrAddAddress()
 
     func dispatchAccountAction(_ type: AccountValidStatus)
 
@@ -105,7 +103,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         var context = PickerContext()
@@ -135,12 +132,16 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         var items = [String]()
-        let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-            return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0
+        var excludeBalance: [String] = []
+        if let enable = AppConfiguration.shared.enableSetting.value?.contestEnabled, enable {
+            excludeBalance = MarketConfiguration.shared.gameMarketPairs.map { $0.quote }
+        }
+
+        let balances = UserManager.shared.fullAccount.value?.balances.filter({ (balance) -> Bool in
+            return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0 && !excludeBalance.contains(balance.assetType)
         })
         if let balances = balances {
             for balance in balances {
@@ -192,7 +193,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         let items = AddressManager.shared.getTransferAddressList()
@@ -257,7 +257,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                 let value = pow(10, assetInfo.precision)
                 let amount = amount.decimal() * value
 
-                guard let fromAccount = UserManager.shared.account.value, let toAccount = self.state.toAccount.value else {
+                guard let fromAccount = UserManager.shared.getCachedAccount(), let toAccount = self.state.toAccount.value else {
                     return
                 }
 
@@ -297,9 +297,8 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                         to_memo_key: toAccount.memoKey)
 
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                    main {
-                        callback(data)
-                    }
+                    callback(data)
+                    Log.print(data)
                 }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)
             }
@@ -340,23 +339,14 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         validAccount()
     }
 
-    func setAmount(_ amount: String, canFetchFee: Bool) {
+    func setAmount(_ amount: String) {
         self.state.amount.accept(amount)
-        if canFetchFee {
-            validAmount()
-        }
+        self.validAmount()
     }
 
-    func setMemo(_ memo: String, canFetchFee: Bool) {
+    func setMemo(_ memo: String) {
         self.state.memo.accept(memo)
-        if canFetchFee {
-            validAmount()
-        }
-    }
-
-    func validAmount() {
-        let balance = self.state.balance.value
-        getGatewayFee(balance?.assetType ?? "", amount: self.state.amount.value, memo: self.state.memo.value)
+        calculateFee(self.state.balance.value?.assetType ?? "", memo: self.state.memo.value)
     }
 
     func getTransferAccountInfo() {
@@ -370,54 +360,39 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         }
     }
 
-    func getGatewayFee(_ assetId: String, amount: String, memo: String) {
+    func calculateFee(_ assetId: String, memo: String) {
         guard let currentVC = self.rootVC.topViewController as? TransferViewController else { return }
-        let fromUserId = UserManager.shared.account.value?.id ?? "0"
-        let fromMemoKey = UserManager.shared.account.value?.memoKey ?? ""
-        let toUserId = self.state.toAccount.value?.id ?? "0"
-        let toMemoKey = self.state.toAccount.value?.memoKey ?? fromMemoKey
 
         var operationString: String!
         if try! currentVC.switchVestingObservable.value() {
-            operationString = BitShareCoordinator.getTransterWithVestingOperation(fromUserId.getSuffixID, to_user_id: toUserId.getSuffixID, asset_id: assetId.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0, memo: memo, from_memo_key: fromMemoKey, to_memo_key: toMemoKey, vestingPeroid: 0, toPubKey: "")
+            operationString = BitShareCoordinator.getTransterWithVestingOperation(0, to_user_id: 0, asset_id: 0, amount: 0, fee_id: 0, fee_amount: 0, memo: memo, from_memo_key: "", to_memo_key: "", vestingPeroid: 0, toPubKey: "")
         }
         else {
-            operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,
-                                                                          to_user_id: toUserId.getSuffixID,
-                                                                          asset_id: assetId.getSuffixID,
+            operationString = BitShareCoordinator.getTransterOperation(0,
+                                                                          to_user_id: 0,
+                                                                          asset_id: 0,
                                                                           amount: 0,
                                                                           fee_id: 0,
                                                                           fee_amount: 0,
                                                                           memo: memo,
-                                                                          from_memo_key: fromMemoKey,
-                                                                          to_memo_key: toMemoKey)
+                                                                          from_memo_key: "",
+                                                                          to_memo_key: "")
         }
         
         CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
             self.store.dispatch(SetFeeAction(fee: Fee.deserialize(from: dictionary)!))
-            if success {
-                var transferAmount = self.state.amount.value.decimal()
-                let value = assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[assetId]?.precision)!)
-                transferAmount *= value
-                self.checkAmount(transferAmount)
-
-            } else {
-                if self.state.amount.value.decimal() != 0 {
-                    self.store.dispatch(ValidAmountAction(isValid: false))
-                }
-                //            self.store.dispatch(ValidAmountAction(isValid: false))
-            }
         }
 
 
     }
 
-    func checkAmount(_ transferAmount: Decimal) {
-        if let balance = self.state.balance.value {
-            let totalAmount = balance.balance.decimal()
-            
+    func validAmount() {
+        if let balance = self.state.balance.value, self.state.amount.value.decimal() != 0 {
+            let totalAmount = balance.balance
+            let transferAmount = self.state.amount.value.decimal() * pow(10, (appData.assetInfo[balance.assetType]?.precision)!)
+
             var feeAmount: Decimal = 0
             if let fee = self.state.fee.value {
                 if fee.assetId == balance.assetType {
@@ -425,14 +400,23 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                     let value = fee.assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[fee.assetId]?.precision)!)
                     feeAmount *= value
                 }
+                else {
+                    let focusBalance = UserHelper.getBalanceFromAssetID(fee.assetId)
+                    let focusAmount = AssetHelper.getRealAmount(fee.assetId, amount: fee.amount)
+
+                    if focusBalance < focusAmount {
+                        self.store.asyncDispatch(ValidAmountAction(isValid: false))
+                        return
+                    }
+                }
             }
-            if transferAmount + feeAmount > totalAmount {
-                self.store.dispatch(ValidAmountAction(isValid: false))
+            if transferAmount + feeAmount > totalAmount.decimal() {
+                self.store.asyncDispatch(ValidAmountAction(isValid: false))
             } else {
-                self.store.dispatch(ValidAmountAction(isValid: true))
+                self.store.asyncDispatch(ValidAmountAction(isValid: true))
             }
         } else {
-            self.store.dispatch(ValidAmountAction(isValid: true))
+            self.store.asyncDispatch(ValidAmountAction(isValid: true))
         }
     }
 
@@ -448,4 +432,12 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         }
     }
 
+}
+
+extension Store {
+    func asyncDispatch(_ action: Action) {
+        DispatchQueue.main.async {
+            self.dispatch(action)
+        }
+    }
 }

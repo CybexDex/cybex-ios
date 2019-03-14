@@ -94,6 +94,10 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
                                                        "EMA",
                                                        "MACD",
                                                        "BOLL"]))
+        case RecordChooseType.tradeShowType.rawValue:
+            self.store.dispatch(FetchDataAction(data: [R.string.localizable.orderbook_show_type_1.key.localized(),
+                                                       R.string.localizable.orderbook_show_type_2.key.localized(),
+                                                       R.string.localizable.orderbook_show_type_3.key.localized()]))
         case RecordChooseType.orderbook.rawValue:
             var data: [String] = []
             for index in 0..<count {

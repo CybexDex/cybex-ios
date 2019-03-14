@@ -22,20 +22,12 @@ class AddressName: NSObject {
     }
 }
 
-extension TransferAddress: DefaultsDefaultArrayValueType {
-    static let defaultArrayValue: [TransferAddress] = []
-}
-
 struct WithdrawAddress: Codable, DefaultsSerializable, Equatable {
     var id: String
     var name: String//标签
     var address: String//地址或者账户
     var currency: String
     var memo: String?
-}
-
-extension WithdrawAddress: DefaultsDefaultArrayValueType {
-    static let defaultArrayValue: [WithdrawAddress] = []
 }
 
 class AddressManager {

@@ -10,7 +10,7 @@ class ShapeRenderer: NodeRenderer {
 
     weak var shape: Shape?
 
-    init(shape: Shape, view: MView?, animationCache: AnimationCache?) {
+    init(shape: Shape, view: MacawView?, animationCache: AnimationCache?) {
         self.shape = shape
         super.init(node: shape, view: view, animationCache: animationCache)
     }
@@ -60,7 +60,7 @@ class ShapeRenderer: NodeRenderer {
         }
     }
 
-    override func doFindNodeAt(location: CGPoint, ctx: CGContext) -> Node? {
+    override func doFindNodeAt(path: NodePath, ctx: CGContext) -> NodePath? {
         guard let shape = shape else {
             return .none
         }
@@ -80,10 +80,10 @@ class ShapeRenderer: NodeRenderer {
 
         var contains = false
         if let mode = drawingMode {
-            contains = ctx.pathContains(CGPoint(x: location.x, y: location.y), mode: mode)
+            contains = ctx.pathContains(path.location, mode: mode)
 
             if contains {
-                return node()
+                return path
             }
         }
 
@@ -129,6 +129,8 @@ class ShapeRenderer: NodeRenderer {
             ctx!.setFillColor(color.toCG())
         } else if let gradient = fill as? Gradient {
             drawGradient(gradient, ctx: ctx, opacity: opacity)
+        } else if let pattern = fill as? Pattern {
+            drawPattern(pattern, ctx: ctx, opacity: opacity)
         } else {
             print("Unsupported fill: \(fill)")
         }
@@ -167,6 +169,26 @@ class ShapeRenderer: NodeRenderer {
         }
         ctx!.replacePathWithStrokedPath()
         drawGradient(gradient, ctx: ctx, opacity: opacity)
+    }
+
+    fileprivate func drawPattern(_ pattern: Pattern, ctx: CGContext?, opacity: Double) {
+        guard let shape = shape else {
+            return
+        }
+        var patternNode = pattern.content
+        if !pattern.userSpace, let node = BoundsUtils.createNodeFromRespectiveCoords(respectiveNode: pattern.content, absoluteLocus: shape.form) {
+            patternNode = node
+        }
+        let renderer = RenderUtils.createNodeRenderer(patternNode, view: view, animationCache: animationCache)
+
+        var patternBounds = pattern.bounds
+        if !pattern.userSpace {
+            let boundsTranform = BoundsUtils.transformForLocusInRespectiveCoords(respectiveLocus: pattern.bounds, absoluteLocus: shape.form)
+            patternBounds = pattern.bounds.applying(boundsTranform)
+        }
+        let tileImage = renderer.renderToImage(bounds: patternBounds, inset: 0)
+        ctx?.clip()
+        ctx?.draw(tileImage.cgImage!, in: patternBounds.toCG(), byTiling: true)
     }
 
     fileprivate func drawGradient(_ gradient: Gradient, ctx: CGContext?, opacity: Double) {
@@ -215,6 +237,14 @@ class ShapeRenderer: NodeRenderer {
             ctx!.drawRadialGradient(cgGradient!, startCenter: innerCenter, startRadius: 0, endCenter: outerCenter, endRadius: radius, options: [.drawsAfterEndLocation, .drawsBeforeStartLocation])
         }
         ctx!.restoreGState()
+    }
+
+    override func replaceNode(with replacementNode: Node) {
+        super.replaceNode(with: replacementNode)
+
+        if let node = replacementNode as? Shape {
+            shape = node
+        }
     }
 
 }

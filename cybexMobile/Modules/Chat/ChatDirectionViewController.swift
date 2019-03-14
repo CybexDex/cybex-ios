@@ -99,7 +99,7 @@ class ChatDirectionViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
                 
-            case .loadMore(let page):
+            case .loadMore(let _):
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
                 
             case .noMore:

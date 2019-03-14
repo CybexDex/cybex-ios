@@ -10,13 +10,23 @@ import UIKit
 
 class MyOpenedOrdersView: UIView {
     @IBOutlet weak var tableView: UITableView!
+    var headerView: OpenedOrdersHeaderView!
 
     enum Event: String {
         case cancelOrder
+        case cancelAllOrder
     }
 
     var data: Any? {
         didSet {
+            if headerView == nil, data != nil {
+                headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 42))
+                headerView.cancelAllEvent.delegate(on: self) { (self, _) in
+                    self.next?.sendEventWith(Event.cancelAllOrder.rawValue, userinfo: [:])
+                }
+                tableView.tableHeaderView = headerView
+            }
+            
             if let _ = data as? [LimitOrderStatus] {
                 self.tableView.reloadData()
             }

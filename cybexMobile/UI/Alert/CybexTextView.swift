@@ -30,16 +30,17 @@ class CybexTextView: UIView {
             contentView.addSubview(middleView!)
             middleView?.leading(to: contentView, offset: 20)
             middleView?.trailing(to: contentView, offset: -20)
-            middleView?.top(to: contentView, offset: 16)
+            middleView?.top(to: contentView, offset: 25)
             middleView?.bottom(to: contentView, offset: 0)
         }
     }
 
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     var delegate: CybexTextViewDelegate?
     var data: Any? {
         didSet {
             self.middleView?.content  = data
-            updateHeight()
+            self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
         }
     }
 
@@ -76,7 +77,7 @@ class CybexTextView: UIView {
         self.cancle.setTitleColor(ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo, for: .normal)
     }
 
-    override var  intrinsicContentSize: CGSize {
+    override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
 
@@ -85,7 +86,9 @@ class CybexTextView: UIView {
         return (lastView?.frame.origin.y)! + (lastView?.frame.size.height)!
     }
 
-    fileprivate func updateHeight() {
+    @objc fileprivate func updateHeight() {
+        self.contentViewHeight.constant = middleView!.height + 25
+
         layoutIfNeeded()
         self.frame.size.height = dynamicHeight()
         invalidateIntrinsicContentSize()

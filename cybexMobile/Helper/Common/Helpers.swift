@@ -13,22 +13,22 @@ typealias CommonAnyCallback = (Any) -> Void
 
 struct Log {
     //debug crash only
-    static func assertionFailure(_ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) {
-        Swift.assertionFailure("[Log] \(message())", file: file, line: line)
+    static func assertionFailure(_ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line, flag: String = "Log") {
+        Swift.assertionFailure("[\(flag)] \(message())", file: file, line: line)
     }
 
     //debug release crash
-    static func fatalError(_ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) -> Never {
-        Swift.fatalError("[Log] \(message())", file: file, line: line)
+    static func fatalError(_ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line,  flag: String = "Log") -> Never {
+        Swift.fatalError("[\(flag)] \(message())", file: file, line: line)
     }
 
-    static func print(_ items: Any...) {
+    static func print(_ items: Any..., flag: String = "Log") {
         #if DEBUG
 
         let s = items.reduce("") { result, next in
             return result + String(describing: next)
         }
-        Swift.print("[Log] \(s)")
+        Swift.print("[\(flag)] \(s)")
 
         #endif
     }

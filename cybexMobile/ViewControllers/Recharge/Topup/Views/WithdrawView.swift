@@ -25,7 +25,7 @@ class WithdrawView: UIView {
     @IBOutlet weak var tagView: UIView!
     
     @IBAction func saveTag(_ sender: Any) {
-        self.next?.sendEventWith(EventName.copyTag.rawValue, userinfo: ["tag": tagLabel.text])
+        self.next?.sendEventWith(EventName.copyTag.rawValue, userinfo: ["tag": tagLabel.text ?? ""])
     }
     
     @IBAction func saveCode(_ sender: Any) {

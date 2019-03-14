@@ -8,15 +8,14 @@
 
 import UIKit
 
-class CybexShowTitleView: UIView, Views {
-    var content: Any?
+class CybexShowTitleView: UIView {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var contentLable: UILabel!
 
-    fileprivate func updateHeight() {
+    @objc fileprivate func updateHeight() {
         layoutIfNeeded()
-        self.frame.size.height = dynamicHeight()
+        self.frame.size.height = dynamicHeight() + 25
         invalidateIntrinsicContentSize()
     }
 
@@ -59,5 +58,16 @@ class CybexShowTitleView: UIView, Views {
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+}
+
+extension CybexShowTitleView: Views {
+    var content: Any? {
+        get {
+            return self.contentLable.text
+        }
+        set {
+            self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
+        }
     }
 }

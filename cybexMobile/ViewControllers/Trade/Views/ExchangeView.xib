@@ -32,7 +32,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="655"/>
                             <subviews>
                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Swa-VX-CqK">
-                                    <rect key="frame" x="0.0" y="0.0" width="209" height="350"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="202" height="350"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="350" id="qvl-NH-DP0"/>
                                     </constraints>
@@ -70,14 +70,14 @@
                                     <rect key="frame" x="13" y="384" width="349" height="271"/>
                                 </containerView>
                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qj8-zn-bi9">
-                                    <rect key="frame" x="209" y="0.0" width="166" height="350"/>
+                                    <rect key="frame" x="202" y="0.0" width="160" height="350"/>
                                 </containerView>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="qj8-zn-bi9" firstAttribute="width" secondItem="Swa-VX-CqK" secondAttribute="width" multiplier="166:209" id="1AS-Ct-ohh"/>
                                 <constraint firstItem="pj3-3h-nPl" firstAttribute="top" secondItem="WR4-bl-i3D" secondAttribute="bottom" id="2x0-GH-FGn"/>
                                 <constraint firstItem="WR4-bl-i3D" firstAttribute="top" secondItem="Swa-VX-CqK" secondAttribute="bottom" id="4HZ-lX-7eK"/>
-                                <constraint firstAttribute="trailing" secondItem="qj8-zn-bi9" secondAttribute="trailing" id="6yf-T8-isu"/>
+                                <constraint firstAttribute="trailing" secondItem="qj8-zn-bi9" secondAttribute="trailing" constant="13" id="6yf-T8-isu"/>
                                 <constraint firstAttribute="bottom" secondItem="pj3-3h-nPl" secondAttribute="bottom" id="Bo1-fM-g05"/>
                                 <constraint firstItem="qj8-zn-bi9" firstAttribute="height" secondItem="Swa-VX-CqK" secondAttribute="height" id="Ia3-b8-tT2"/>
                                 <constraint firstItem="qj8-zn-bi9" firstAttribute="top" secondItem="yvM-bg-mXi" secondAttribute="top" id="IhY-4n-tia"/>

@@ -58,7 +58,7 @@ class PairDetailView: UIView {
             return
         }
 
-        guard let baseInfo = appData.assetInfo[ticker.base], let _ = appData.assetInfo[ticker.quote] else {
+        guard let _ = appData.assetInfo[ticker.base], let _ = appData.assetInfo[ticker.quote] else {
             return
         }
 

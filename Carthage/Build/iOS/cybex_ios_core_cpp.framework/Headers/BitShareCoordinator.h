@@ -10,7 +10,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BitShareCoordinator : NSObject
 + (NSString *)getUserKeys:(NSString *)username password:(NSString *)password;
-  
++ (NSString *)getActiveUserKeys:(NSString *)publicKey;
++ (void)setDerivedOperationExtensions:(NSString *)master_public_key derived_private_key:(NSString *)derived_private_key
+                   derived_public_key:(NSString *)derived_public_key nonce:(int)nonce signature:(NSString *)signature;
+
   /**
    需要先调用getuserkey
    **/
@@ -26,13 +29,20 @@ NS_ASSUME_NONNULL_BEGIN
                        user_id:(int)user_id order_id:(int)order_id
                         fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
 + (NSString *)cancelLimitOrderOperation:(int)order_id user_id:(int)user_id fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
-  
+
+// asset_id receive_asset_id 都为0 取消个人全部order
++ (NSString *)cancelAllLimitOrder:(int)block_num block_id:(NSString *)block_id
+                    expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
+                       user_id:(int)user_id asset_id:(int)asset_id receive_asset_id:(int)receive_asset_id
+                        fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
++ (NSString *)cancelAllLimitOrderOperation:(int)asset_id receive_asset_id:(int)receive_asset_id user_id:(int)user_id fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
+
   // memokey 需要线上取和生成的比较看是否有权限
 + (NSString *)getTransaction:(int)block_num block_id:(NSString *)block_id
                   expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                 from_user_id:(int)from_user_id to_user_id:(int)to_user_id
                     asset_id:(int)asset_id receive_asset_id:(int)receive_asset_id
-                      amount:(int64_t)amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount memo:(NSString *)memo from_memo_key:(NSString *)from_memo_key to_memo_key:(NSString *)to_memo_key;
+                      amount:(int64_t)amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount memo:(NSString *)memo from_memo_key:(NSString *)from_memo_key to_memo_key:(NSString *)to_memo_keyb;
 
 + (NSString *)getTransactionWithVesting:(int)block_num block_id:(NSString *)block_id
                   expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
@@ -94,6 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
                        claimed_amount:(int64_t)claimed_amount
                              claimed_own:(NSString *)claimed_own;
 
++ (NSString *)generatePrivateKey:(NSString *)message;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,11 +29,11 @@ class LimitOrder: HandyJSON {
 
         let (base, _) = MarketHelper.calculateAssetRelation(
             assetIDAName: (assetAInfo != nil) ?
-                assetAInfo!.symbol.filterJade : "",
+                assetAInfo!.symbol.filterOnlyJade : "",
             assetIDBName: (assetBInfo != nil) ?
-                assetBInfo!.symbol.filterJade : "")
+                assetBInfo!.symbol.filterOnlyJade : "")
 
-        return (base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : ""))
+        return (base == ((assetAInfo != nil) ? assetAInfo!.symbol : ""))
     }
 
     required init() {
@@ -47,6 +47,13 @@ class LimitOrder: HandyJSON {
         mapper <<< sellPrice            <-- "sell_price"
     }
 
+    func rmbValue() -> Decimal {
+        let realAmount = AssetHelper.getRealAmount(sellPrice.base.assetID, amount: forSale)
+        let priceValue = AssetHelper.singleAssetRMBPrice(sellPrice.base.assetID)
+        let decimallimitOrderValue: Decimal = realAmount * priceValue
+
+        return decimallimitOrderValue
+    }
 }
 
 class LimitOrderStatus: HandyJSON {
@@ -106,9 +113,9 @@ class LimitOrderStatus: HandyJSON {
         let assetBInfo = appData.assetInfo[self.asset2]
         let (base, quote) = MarketHelper.calculateAssetRelation(
             assetIDAName: (assetAInfo != nil) ?
-                assetAInfo!.symbol.filterJade : "",
+                assetAInfo!.symbol.filterOnlyJade : "",
             assetIDBName: (assetBInfo != nil) ?
-                assetBInfo!.symbol.filterJade : "")
+                assetBInfo!.symbol.filterOnlyJade : "")
         
         return Pair(base: base.assetID, quote: quote.assetID)
     }

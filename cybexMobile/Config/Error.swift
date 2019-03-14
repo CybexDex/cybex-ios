@@ -9,13 +9,18 @@
 import Foundation
 import SwiftyJSON
 import Localize_Swift
+import PromiseKit
 
 enum CybexError: Error {
+    static let domain = "cybexError"
+    static let common = NSError(domain: CybexError.domain, code: 0, userInfo: nil)
+
     case networkError(code: NetworkErrorCode)
     case serviceHTTPError(desc: String)
     case serviceFriendlyError(code:Int, desc: JSON)
     case keychainOperation(status: OSStatus)
     case generalError(reason: GeneralErrorReason)
+    case tipError(_ reason: UserTipError)
 
     var localizedDescription: String {
         switch self {
@@ -38,6 +43,33 @@ enum CybexError: Error {
             return "\(status)"
         case .generalError(let reason):
             return reason.errorDescription
+        case .tipError(let reason):
+            return reason.errorDescription
+        }
+    }
+}
+
+extension CybexError {
+    enum UserTipError {
+        case userNotExist
+        case unlockFail
+        case registerFail(code: Int)
+        case loginFail
+
+        var errorDescription: String {
+            switch self {
+            case let .registerFail(code):
+                if code == 403 {
+                    return R.string.localizable.registerFail403.key.localized()
+                } else if code == 429 {
+                    return R.string.localizable.registerFail429.key.localized()
+                } else {
+                    return R.string.localizable.registerFail.key.localized()
+                }
+
+            default:
+                return ""
+            }
         }
     }
 }

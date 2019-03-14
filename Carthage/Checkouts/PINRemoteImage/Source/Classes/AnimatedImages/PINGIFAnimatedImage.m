@@ -36,6 +36,7 @@
 - (instancetype)initWithAnimatedImageData:(NSData *)animatedImageData
 {
     if (self = [super init]) {
+        _animatedImageData = animatedImageData;
         _imageSource =
             CGImageSourceCreateWithData((CFDataRef)animatedImageData,
                                         (CFDictionaryRef)@{(__bridge NSString *)kCGImageSourceTypeIdentifierHint:
@@ -79,7 +80,13 @@
         }
     }
     
-    if (frameDuration < kPINAnimatedImageMinimumDuration) {
+    static dispatch_once_t onceToken;
+    static Float32 maximumFrameDuration;
+    dispatch_once(&onceToken, ^{
+        maximumFrameDuration = 1.0 / [PINAnimatedImage maximumFramesPerSecond];
+    });
+    
+    if (frameDuration < maximumFrameDuration) {
         frameDuration = kPINAnimatedImageDefaultDuration;
     }
     
@@ -94,6 +101,11 @@
     if (_durations) {
         free(_durations);
     }
+}
+
+- (NSData *)data
+{
+    return _animatedImageData;
 }
 
 - (size_t)frameCount

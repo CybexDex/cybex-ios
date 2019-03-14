@@ -16,6 +16,64 @@ struct AccountPermission: HandyJSON {
     var trade: Bool = false
 }
 
+class FullAccount: HandyJSON {
+    var account: Account?
+    var balances: [Balance] = []
+    var limitOrders: [LimitOrder] = []
+
+    //rmb value
+    var limitOrderValue: Decimal = 0
+    var limitOrderBuyValue: Decimal = 0
+    var limitOrderSellValue: Decimal = 0
+    var balance: Decimal = 0
+
+    required init() {}
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< limitOrders <-- "limit_orders"
+    }
+
+    func existMoreActiveKey() -> Bool {
+        guard let account = account else { return false }
+        return account.activePubKeys.count > 1
+    }
+
+    func calculateLimitOrderValue() {
+        var decimallimitOrderValue: Decimal = 0
+        var decimalBuylimitOrderValue: Decimal = 0
+        var decimalSelllimitOrderValue: Decimal = 0
+
+        for limitOrderValue in limitOrders {
+            let value = limitOrderValue.rmbValue()
+            decimallimitOrderValue += value
+
+            if limitOrderValue.isBuy {
+                decimalBuylimitOrderValue += value
+            } else {
+                decimalSelllimitOrderValue += value
+            }
+        }
+
+        limitOrderValue = decimallimitOrderValue
+        limitOrderBuyValue = decimalBuylimitOrderValue
+        limitOrderSellValue = decimalSelllimitOrderValue
+    }
+
+
+    func calculateBalanceValue() {
+        var balanceValues: Decimal = 0
+
+        for balanceValue in balances {
+            balanceValues += balanceValue.rmbValue()
+        }
+
+        balanceValues += limitOrderValue
+
+        balance = balanceValues
+    }
+
+}
+
 class Account: HandyJSON {
     var membershipExpirationDate: String = ""
     var name: String = ""
@@ -30,10 +88,10 @@ class Account: HandyJSON {
         mapper <<<
             membershipExpirationDate <-- ("membership_expiration_date", ToStringTransform())
         mapper <<< name <-- ("name", ToStringTransform())
-        mapper <<< activeAuths <-- "active.key_auths"
-        mapper <<< ownerAuths <-- "owner.key_auths"
+        mapper <<< activeAuths <-- ["active_keys_auths", "active.key_auths"]
+        mapper <<< ownerAuths <-- ["owner_keys_auths", "owner.key_auths"]
         mapper <<< id <-- "id"
-        mapper <<< memoKey <-- "options.memo_key"
+        mapper <<< memoKey <-- ["memo_key", "options.memo_key"]
     }
 
     var activePubKeys: [String] {

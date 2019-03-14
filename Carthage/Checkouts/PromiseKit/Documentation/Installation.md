@@ -8,7 +8,7 @@ We recommend Carthage over CocoaPods, but both installation methods are supporte
 use_frameworks!
 
 target "Change Me!" do
-  pod "PromiseKit", "~> 6.0"
+  pod "PromiseKit", "~> 6.8"
 end
 ```
 
@@ -34,14 +34,20 @@ CocoaPods are aware of this [issue](https://github.com/CocoaPods/CocoaPods/issue
 ## Carthage
 
 ```ruby
-github "mxcl/PromiseKit" ~> 6.0
+github "mxcl/PromiseKit" ~> 6.8
 ```
+
+> Please note, since PromiseKit 6.8.1 our Carthage support has transitioned to
+Swift 4 and above only. Strictly we *do* still support Swift 3.1 for Carthage,
+and if you like you could edit the PromiseKit `project.pbxproj` file during
+`carthage bootstrap` to make this possible. This change was involuntary and due
+to Xcode 10.2 dropping support for Swift 3.
 
 ## SwiftPM
 
-```ruby
+```swift
 package.dependencies.append(
-    .Package(url: "https://github.com/mxcl/PromiseKit", majorVersion: 6)
+    .package(url: "https://github.com/mxcl/PromiseKit", from: "6.8.0")
 )
 ```
 
@@ -58,8 +64,8 @@ PromiseKit contains Swift, so there have been rev-lock issues with Xcode:
 | PromiseKit | Swift                   | Xcode    |   CI Status  |   Release Notes   |
 | ---------- | ----------------------- | -------- | ------------ | ----------------- |
 |      6     | 3.1, 3.2, 3.3, 4.x      | 8.3, 9.x, 10.x | ![ci-master] | [2018/02][news-6] |
-|      5     | 3.1, 3.2, 3.3, 4.x      | 8.3, 9.x | *Deprecated* |       *n/a*       |
-|      4†    | 3.0, 3.1, 3.2, 3.3, 4.x | 8.x, 9.x | ![ci-master] | [2016/09][news-4] |
+|      5     | 3.1, 3.2, 3.3, 4.x      | 8.3, 9.x, 10.x | *Deprecated* |       *n/a*       |
+|      4†    | 3.0, 3.1, 3.2, 3.3, 4.x | 8.x, 9.x, 10.x | ![ci-master] | [2016/09][news-4] |
 |      3     | 2.x                     | 7.x, 8.0 | ![ci-swift2] | [2015/10][news-3] |
 |      2     | 1.x                     | 7.x      | *Deprecated* | [2015/10][news-3] |
 |      1‡    | *N/A*                   | *        | ![ci-legacy] |         –         |

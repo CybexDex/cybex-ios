@@ -1,7 +1,7 @@
 //
 // SwiftyUserDefaults
 //
-// Copyright (c) 2015-2018 Radosław Pietruszewski, Łukasz Mróz
+// Copyright (c) 2015-present Radosław Pietruszewski, Łukasz Mróz
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ public extension UserDefaults {
     /// Use with caution!
     /// - Note: This method only removes keys on the receiver `UserDefaults` object.
     ///         System-defined keys will still be present afterwards.
-    public func removeAll() {
+    func removeAll() {
         for (key, _) in dictionaryRepresentation() {
             removeObject(forKey: key)
         }

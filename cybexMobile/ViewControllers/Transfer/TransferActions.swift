@@ -27,16 +27,14 @@ struct TransferState: BaseState {
 
     var amountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
-    var balance: BehaviorRelay<Balance?> = BehaviorRelay(value: nil)
+    var balance: BehaviorRelay<Balance?> = BehaviorRelay(value: nil) // 币种
 
     var fee: BehaviorRelay<Fee?> = BehaviorRelay(value: nil)
 
-    var account: BehaviorRelay<String> = BehaviorRelay(value: "")
-
     var amount: BehaviorRelay<String> = BehaviorRelay(value: "")
-
     var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
 
+    var account: BehaviorRelay<String> = BehaviorRelay(value: "")
     var toAccount: BehaviorRelay<Account?> = BehaviorRelay(value: nil)
 }
 

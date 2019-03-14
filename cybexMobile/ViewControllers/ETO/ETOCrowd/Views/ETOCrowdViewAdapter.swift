@@ -11,7 +11,7 @@ import Localize_Swift
 
 extension ETOCrowdView {
     func adapterModelToETOCrowdView(_ model: ETOProjectModel) {
-        guard let balances = UserManager.shared.balances.value else { return }
+        guard let balances = UserManager.shared.fullAccount.value?.balances else { return }
 
         let balance = balances.filter { (balance) -> Bool in
             if let name = appData.assetInfo[balance.assetType]?.symbol.filterJade {

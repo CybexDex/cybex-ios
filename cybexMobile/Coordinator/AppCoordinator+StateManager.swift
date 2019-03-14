@@ -8,7 +8,6 @@
 
 import Foundation
 import ReSwift
-import AwaitKit
 import Repeat
 import SwifterSwift
 import Reachability
@@ -33,8 +32,14 @@ extension AppCoordinator {
         for index in 0..<MarketConfiguration.marketBaseAssets.count {
             let base = MarketConfiguration.marketBaseAssets[index]
             let pairs = MarketConfiguration.shared.marketPairs.value.filter({return $0.base == base.id })
+
             self.fetchMarketFrom(pairs, priority: priority)
         }
+
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+            self.fetchMarketFrom(MarketConfiguration.shared.gameMarketPairs, priority: priority)
+        }
+
     }
 
     func fetchMarketFrom(_ pairs: [Pair], priority: Operation.QueuePriority = .normal) {

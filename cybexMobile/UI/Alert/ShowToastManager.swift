@@ -102,7 +102,29 @@ class ShowToastManager {
     private  var showType: ShowManagerType?
 
     private init() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self](notification) in
+            guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let duration = userinfo.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as? Double, let curve = userinfo.object(forKey: UIResponder.keyboardAnimationCurveUserInfoKey) as? UInt else { return }
 
+            self.showViewTop.constant = -120
+
+            self.superView?.setNeedsLayout()
+
+            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
+                self.superView?.layoutIfNeeded()
+            }, completion: nil)
+        }
+
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self](notification) in
+            guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let duration = userinfo.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as? Double, let curve = userinfo.object(forKey: UIResponder.keyboardAnimationCurveUserInfoKey) as? UInt else { return }
+
+            self.showViewTop.constant = -32
+            
+            self.superView?.setNeedsLayout()
+
+            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
+                self.superView?.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
 
     // 倒计时
@@ -122,7 +144,7 @@ class ShowToastManager {
             showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: false)
             showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: false)
             showView?.centerXToSuperview(nil, offset: 0, priority: .required, isActive: true, usingSafeArea: true)
-            showView?.centerYToSuperview(nil, offset: -32, priority: .required, isActive: true, usingSafeArea: true)
+            showViewTop = showView?.centerYToSuperview(nil, offset: -32, priority: .required, isActive: true, usingSafeArea: true)
             self.superView?.layoutIfNeeded()
             if animationShow == .fadeInOut {
                 showView?.alpha   = 0.0
@@ -139,6 +161,7 @@ class ShowToastManager {
                                initialSpringVelocity: 0,
                                options: UIView.AnimationOptions.curveEaseIn,
                                animations: {
+
                                 self.showView?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 }, completion: { (_) in
 
@@ -149,6 +172,8 @@ class ShowToastManager {
             let top: CGFloat  = showType == .sheetImage ? -200 : -800
             showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
             showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
+            showView?.centerXToSuperview(nil, offset: 0, priority: .required, isActive: true, usingSafeArea: true)
+            self.showView?.content = self.showView?.content
 
             if showType == .sheetImage {
                 showViewTop = showView?.topToSuperview(nil, offset: top, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
@@ -163,6 +188,7 @@ class ShowToastManager {
                 showViewTop?.constant = -32
             }
             UIView.animate(withDuration: ShowToastManager.durationTime) {
+                self.showView?.content = self.showView?.content
                 self.superView?.layoutIfNeeded()
             }
         }
@@ -239,10 +265,10 @@ class ShowToastManager {
         }
     }
 
-    func setUp(title: String, contentView: (UIView&Views), animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
+    func setUp(title: String, contentView: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alertImage
-        self.setupText(contentView, title: title, cybexTextViewType: middleType)
+        self.setupText(contentView, ensureButtonLocali: ensureButtonLocali, title: title, cybexTextViewType: middleType)
     }
 
     func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType) {
@@ -273,12 +299,13 @@ class ShowToastManager {
         showView     = sheetView
     }
 
-    fileprivate func setupText(_ sender: (UIView&Views), title: String, cybexTextViewType: CybexTextView.TextViewType) {
+    fileprivate func setupText(_ sender: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, title: String, cybexTextViewType: CybexTextView.TextViewType) {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
         textView.middleView = sender
         textView.title.text = title
         textView.viewType = cybexTextViewType
+        textView.ensure.locali = ensureButtonLocali
         if cybexTextViewType == .time, let textMiddleView = textView.middleView as? CybexPasswordView {
             textMiddleView.textField.isSecureTextEntry = false
             textMiddleView.textField.placeholder = ""

@@ -120,7 +120,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
     func checkValidStatus(_ transferAmount: Decimal) {
         guard self.state.validStatus.value == .notValid else { return }
 
-        guard let balances = UserManager.shared.balances.value, let data = self.state.data.value, let userModel = self.state.userData.value else { return }
+        guard let balances = UserManager.shared.fullAccount.value?.balances, let data = self.state.data.value, let userModel = self.state.userData.value else { return }
 
         let balance = balances.filter { (balance) -> Bool in
             if let name = appData.assetInfo[balance.assetType]?.symbol.filterJade {
@@ -183,7 +183,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         }
 
         guard !assetID.isEmpty,
-            let uid = UserManager.shared.account.value?.id,
+            let uid = UserManager.shared.getCachedAccount()?.id,
             let info = appData.assetInfo[assetID],
             let feeInfo = appData.assetInfo[fee.assetId] else { return }
         let value = pow(10, info.precision)

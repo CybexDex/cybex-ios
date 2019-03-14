@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxAtomic"
-  s.version          = "4.4.0"
+  s.version          = "4.4.2"
   s.summary          = "Atomic primitives for RxSwift"
   s.description      = <<-DESC
 Atomic primitives for RxSwift.
@@ -11,6 +11,8 @@ Atomic primitives for RxSwift.
   s.source           = { :git => "https://github.com/ReactiveX/RxSwift.git", :tag => s.version.to_s }
 
   s.requires_arc          = true
+
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.9'

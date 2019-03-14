@@ -13,6 +13,7 @@ class NoticeBoardViewController: BaseViewController {
     var password: String?
 
     @IBOutlet weak var noticeView: NoticeBoardView!
+    let didConfirm = Delegate<Void, Void>()
 
     override func viewDidLoad() {
         self.noticeView.data = password
@@ -21,6 +22,7 @@ class NoticeBoardViewController: BaseViewController {
 
 extension NoticeBoardViewController {
     @objc func confirm(_ data: [String: Any]) {
-        self.coordinator?.dismiss()
+        self.dismiss(animated: true, completion: nil)
+        didConfirm.call()
     }
 }

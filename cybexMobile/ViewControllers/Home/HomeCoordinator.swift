@@ -11,7 +11,7 @@ import ReSwift
 import NBLCommonModule
 
 protocol HomeCoordinatorProtocol {
-    func openMarket(index: Int, currentBaseIndex: Int)
+    func openMarket(_ pair: Pair)
 }
 
 protocol HomeStateManagerProtocol {
@@ -40,10 +40,9 @@ class HomeCoordinator: NavCoordinator {
 }
 
 extension HomeCoordinator: HomeCoordinatorProtocol {
-    func openMarket(index: Int, currentBaseIndex: Int) {
+    func openMarket(_ pair: Pair) {
         let vc = R.storyboard.main.marketViewController()!
-        vc.curIndex = index
-        vc.currentBaseIndex = currentBaseIndex
+        vc.pair = pair
         vc.rechargeShowType = PairRechargeView.ShowType.show.rawValue
 
         let coordinator = MarketCoordinator(rootVC: self.rootVC)

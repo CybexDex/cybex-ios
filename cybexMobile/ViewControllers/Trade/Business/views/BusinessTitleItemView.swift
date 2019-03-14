@@ -30,7 +30,7 @@ class BusinessTitleItemView: UIView {
                 return
             }
 
-            self.total.text = " " + ticker.quoteVolume.suffixNumber(digitNum: AppConfiguration.amountPrecision)
+            self.total.text = " " + ticker.baseVolume.suffixNumber(digitNum: AppConfiguration.amountPrecision)
             self.change.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
             if ticker.percentChange.decimal() > 1000 {
                 self.change.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)

@@ -74,8 +74,6 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-typealias FullAccount = (account: Account?, balances: [Balance]?, limitOrder: [LimitOrder]?)
-
 struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
     var name: String
     var response: RPCSResponse
@@ -91,31 +89,18 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
     func transferResponse(from resultObject: Any) throws -> Any {
         let result = JSON(resultObject).arrayValue
 
-        let resultValue: FullAccount = (nil, nil, nil)
+        let resultValue: FullAccount? = nil
+
         if result.count == 0 {
             return resultValue
         }
 
-        guard let full = result.first?.arrayValue[1],
-            let accountDic = full["account"].dictionaryObject
-            else {
-                return resultValue
+        guard let full = result.first?.arrayValue[1] else {
+            return resultValue
         }
 
-        let account = Account.deserialize(from: accountDic)
 
-        let balancesArr = full["balances"].arrayValue
-        let limitOrderArr = full["limit_orders"].arrayValue
-
-        let balances = balancesArr.map { (obj) -> Balance in
-            return Balance.deserialize(from: obj.dictionaryObject!) ?? Balance()
-        }
-
-        let limitOrders = limitOrderArr.map { (obj) -> LimitOrder in
-            return LimitOrder.deserialize(from: obj.dictionaryObject!) ?? LimitOrder()
-        }
-
-        return (account, balances, limitOrders)
+        return FullAccount.deserialize(from: full.dictionaryObject)
     }
 }
 
@@ -153,34 +138,41 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
-        if let response = resultObject as? [[String: Any]] {
-            if ids.first == ObjectID.dynamicGlobalPropertyObject.rawValue {
-                var headBlockId = ""
-                var headBlockNumber = ""
-                for res in response.first! {
-                    if refLib {
-                        if res.key == "last_irreversible_block_num", let value = res.value as? Int {
-                            headBlockNumber = String(describing: value)
-                        }
-                    }
-                    else {
-                        if res.key == "head_block_id" {
-                            headBlockId = String(describing: res.value)
-                        } else if res.key == "head_block_number" {
-                            headBlockNumber = String(describing: res.value)
-                        }
-                    }
-                }
-                return (block_id:headBlockId, block_num:headBlockNumber)
+        if var result = resultObject as? [Any] {
+            result = result.filter { (val) -> Bool in
+                return val is [String: Any]
             }
 
-            return response.map { data in
-                return AssetInfo.deserialize(from: data)
+            if let response = result as? [[String: Any]] {
+                if ids.first == ObjectID.dynamicGlobalPropertyObject.rawValue {
+                    var headBlockId = ""
+                    var headBlockNumber = ""
+                    for res in response.first! {
+                        if refLib {
+                            if res.key == "last_irreversible_block_num", let value = res.value as? Int {
+                                headBlockNumber = String(describing: value)
+                            }
+                        }
+                        else {
+                            if res.key == "head_block_id" {
+                                headBlockId = String(describing: res.value)
+                            } else if res.key == "head_block_number" {
+                                headBlockNumber = String(describing: res.value)
+                            }
+                        }
+                    }
+                    return (block_id:headBlockId, block_num:headBlockNumber)
+                }
+
+                return response.map { data in
+                    return AssetInfo.deserialize(from: data)
+                }
             }
         } else {
-            throw CastError(actualValue: resultObject, expectedType: Response.self)
+            return resultObject
         }
 
+        return resultObject
     }
 }
 

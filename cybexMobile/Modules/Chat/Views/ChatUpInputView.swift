@@ -36,7 +36,7 @@ class ChatUpInputView: CybexBaseView {
     }
     
     func setupBtnState() {
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             self.sendBtn.setTitle(R.string.localizable.eto_project_login.key.localized(), for: .normal)
             return
         }
@@ -81,7 +81,7 @@ class ChatUpInputView: CybexBaseView {
     }
     
     @IBAction func sendMessageAction(_ sender: UIButton) {
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             appCoodinator.showLogin()
             return
         }

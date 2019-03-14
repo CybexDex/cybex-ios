@@ -19,6 +19,7 @@ enum StyleNames: String {
     case alertContent
     case address
     case bold12With20
+    case bold14With24
 }
 
 enum LineViewStyleNames: String {
@@ -95,19 +96,29 @@ class RichStyle {
         Styles.register(StyleNames.withdrawIntroduce.rawValue, style: withStyle)
 
         let bold12With20 = Style {
-            let font = SystemFonts.PingFangHK_Regular.font(size: 12)
+            let font = SystemFonts.PingFangSC_Regular.font(size: 12)
             $0.font = font
             $0.color = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
 
             $0.setupLineHeight(20, fontHeight: font.lineHeight)
         }
 
+        let bold14With24 = Style {
+            let font = SystemFonts.PingFangSC_Regular.font(size: 14)
+            $0.font = font
+            $0.color = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+
+            $0.setupLineHeight(24, fontHeight: font.lineHeight)
+        }
+
         Styles.register(StyleNames.bold12With20.rawValue, style: bold12With20)
+        Styles.register(StyleNames.bold14With24.rawValue, style: bold14With24)
 
         passwordStyle()
         alertDetailStyle()
         initLineViewStyle()
         addressStyle()
+
     }
 
     func addressStyle() {

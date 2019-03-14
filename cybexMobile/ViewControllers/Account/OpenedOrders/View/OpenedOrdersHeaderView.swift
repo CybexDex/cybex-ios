@@ -10,67 +10,67 @@ import UIKit
 
 class OpenedOrdersHeaderView: UIView {
 
-  @IBOutlet weak var totalValueL: UILabel!
-  @IBOutlet weak var totalValueTip: UILabel!
+    @IBOutlet weak var headerCancelButton: UIStackView!
 
-    @IBOutlet weak var sectionTitleView: LockupAssetsSectionView!
+    let cancelAllEvent = Delegate<Void, Void>()
+
     var data: Any? {
-    didSet {
-      if let value = data as? String {
-        self.totalValueL.text = value == "0" ? "≈¥0.0000" : "≈¥" + value.formatCurrency(digitNum: 4)
-      }
+        didSet {
+
+        }
     }
-  }
 
-    @IBOutlet weak var sectionView: LockupAssetsSectionView!
+    fileprivate func setup() {
+        headerCancelButton.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe(onNext: {[weak self] (tap) in
+            guard let self = self else { return }
 
-  fileprivate func setup() {
+            self.cancelAllEvent.call()
+        }).disposed(by: disposeBag)
+    }
 
-  }
+    override var intrinsicContentSize: CGSize {
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
+    }
 
-  override var intrinsicContentSize: CGSize {
-    return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
-  }
+    fileprivate func updateHeight() {
+        layoutIfNeeded()
+        self.height = dynamicHeight()
+        invalidateIntrinsicContentSize()
+    }
 
-  fileprivate func updateHeight() {
-    layoutIfNeeded()
-    self.height = dynamicHeight()
-    invalidateIntrinsicContentSize()
-  }
+    fileprivate func dynamicHeight() -> CGFloat {
+        let lastView = self.subviews.last?.subviews.last
+        return lastView!.bottom
+    }
 
-  fileprivate func dynamicHeight() -> CGFloat {
-    let lastView = self.subviews.last?.subviews.last
-    return lastView!.bottom
-  }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutIfNeeded()
+    }
 
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    layoutIfNeeded()
-  }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        loadViewFromNib()
+        setup()
+    }
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    loadViewFromNib()
-    setup()
-  }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        loadViewFromNib()
+        setup()
+    }
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    loadViewFromNib()
-    setup()
-  }
-
-  fileprivate func loadViewFromNib() {
-    let bundle = Bundle(for: type(of: self))
-    let nibName = String(describing: type(of: self))
-    let nib = UINib.init(nibName: nibName, bundle: bundle)
-    guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+    fileprivate func loadViewFromNib() {
+        let bundle = Bundle(for: type(of: self))
+        let nibName = String(describing: type(of: self))
+        let nib = UINib.init(nibName: nibName, bundle: bundle)
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
 
-    addSubview(view)
-    view.frame = self.bounds
-    view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-  }
+        addSubview(view)
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
 
 }

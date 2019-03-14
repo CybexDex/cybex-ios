@@ -28,6 +28,8 @@ class CybexPasswordView: UIView {
             } else {
                 errorView.isHidden = true
             }
+
+            self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
         }
     }
 
@@ -47,7 +49,7 @@ class CybexPasswordView: UIView {
         return (lastView?.frame.origin.y)! + (lastView?.frame.size.height)!
     }
 
-    fileprivate func updateHeight() {
+    @objc fileprivate func updateHeight() {
         layoutIfNeeded()
         self.frame.size.height = dynamicHeight()
         invalidateIntrinsicContentSize()

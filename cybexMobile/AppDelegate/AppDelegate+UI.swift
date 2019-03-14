@@ -19,6 +19,7 @@ extension AppDelegate {
 
         setupLoading()
         initWindow()
+        initProgressHud()
     }
 
     func configThemeAndLocalize() {
@@ -46,7 +47,7 @@ extension AppDelegate {
             .subscribe(onNext: { (_) in
                 if let vc = appCoodinator.startLoadingVC, !(vc is HomeViewController) {
                     appCoodinator.startLoadingVC = nil
-                    vc.endLoading()
+//                    vc.endLoading()
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -57,5 +58,29 @@ extension AppDelegate {
         self.window?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
         window?.rootViewController = AppConfiguration.shared.appCoordinator.rootVC
         self.window?.makeKeyAndVisible()
+    }
+
+    func initProgressHud() {
+        let iprogress: iProgressHUD = iProgressHUD()
+        iprogress.delegete = self
+        iprogress.iprogressStyle = .horizontal
+        iprogress.indicatorStyle = .orbit
+        iprogress.isShowModal = false
+        iprogress.boxSize = 35
+        iprogress.boxYOffset = 100
+
+        iprogress.attachProgress(toViews: self.window!)
+    }
+}
+
+
+extension AppDelegate: iProgressHUDDelegete {
+    func onShow(view: UIView) {
+    }
+
+    func onDismiss(view: UIView) {
+    }
+
+    func onTouch(view: UIView) {
     }
 }

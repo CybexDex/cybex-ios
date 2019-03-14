@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2017 Zhiyu Zhu/朱智语
-
+ Copyright (c) 2017-2019 ApolloZhu <public-apollonian@outlook.com>
+ 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -36,15 +36,17 @@ open class QRCode {
     ///
     /// - Parameters:
     ///   - text: content of the QRCode.
+    ///   - encoding: encoding used for generating data from text.
     ///   - errorCorrectLevel: error correct level, defaults to high.
     ///   - hasBorder: if the image codes has a border around, defaults and suggests to be true.
     ///
     /// - Warning: Is computationally intensive.
     public init?(_ text: String,
+                 encoding: String.Encoding = .utf8,
                  errorCorrectLevel: QRErrorCorrectLevel = .H,
                  withBorder hasBorder: Bool = true) {
         guard let typeNumber = try? QRCodeType.typeNumber(of: text, errorCorrectLevel: errorCorrectLevel)
-            , let model = QRCodeModel(text: text, typeNumber: typeNumber, errorCorrectLevel: errorCorrectLevel)
+            , let model = QRCodeModel(text: text, encoding: encoding, typeNumber: typeNumber, errorCorrectLevel: errorCorrectLevel)
             else { return nil }
         self.typeNumber = typeNumber
         self.model = model

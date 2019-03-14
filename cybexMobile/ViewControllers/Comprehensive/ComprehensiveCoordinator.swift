@@ -74,22 +74,7 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
 
     func openMarketList(_ pair: Pair) {
         if let marketVC = R.storyboard.main.marketViewController() {
-            var currentBaseIndex = 0
-            for index in 0..<MarketConfiguration.marketBaseAssets.count {
-                if pair.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[index] {
-                    currentBaseIndex = index
-                }
-            }
-            let tickers = MarketHelper.filterQuoteAssetTicker(pair.base)
-            var curIndex = 0
-            for index in 0..<tickers.count {
-                let ticker = tickers[index]
-                if ticker.base == pair.base && ticker.quote == pair.quote {
-                    curIndex = index
-                }
-            }
-            marketVC.curIndex = curIndex
-            marketVC.currentBaseIndex = currentBaseIndex
+            marketVC.pair = pair
             marketVC.rechargeShowType = PairRechargeView.ShowType.show.rawValue
             let coordinator = MarketCoordinator(rootVC: self.rootVC)
             marketVC.coordinator = coordinator

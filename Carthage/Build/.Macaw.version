@@ -1,9 +1,9 @@
 {
-  "commitish" : "0.9.3",
+  "commitish" : "0.9.4",
   "iOS" : [
     {
       "name" : "Macaw",
-      "hash" : "87bf69920976602c4491d2934418ac45c2541ee8062fa0b9b8c87279fccd053f"
+      "hash" : "49da22fffc6a74f48733140aab18096834d40aea4359fa2c322e13c354307ef1"
     }
   ]
 }

@@ -34,6 +34,7 @@ class AppCoordinator {
     var homeCoordinator: NavCoordinator!
     var tradeCoordinator: NavCoordinator!
     var etoCoordinator: NavCoordinator!
+    var gameCoordinator: NavCoordinator!
     var accountCoordinator: NavCoordinator!
     var container: [NavCoordinator]!
 
@@ -90,19 +91,33 @@ class AppCoordinator {
         etoCoordinator = ETOCoordinator(rootVC: eto)
         eto.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navEto.key.localized(), image: R.image.ic_eto_24_px(), selectedImage: R.image.ic_eto_active_24_px())
 
+        let game = BaseNavigationController()
+        gameCoordinator = TradeCoordinator(rootVC: game)
+        game.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navContest.key.localized(), image: R.image.ic_game_24_px(), selectedImage: R.image.game_copy())
+
         comprehensiveCoordinator.pushVC(ComprehensiveCoordinator.self, animated: false, context: nil)
         homeCoordinator.pushVC(HomeCoordinator.self, animated: false, context: nil)
-        tradeCoordinator.pushVC(TradeCoordinator.self, animated: false, context: nil)
+        tradeCoordinator.pushVC(TradeCoordinator.self, animated: false, context: TradeContext())
         accountCoordinator.pushVC(AccountCoordinator.self, animated: false, context: nil)
 
-        if let status = AppConfiguration.shared.enableSetting.value, status.isETOEnabled == true {
+        self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator] as [NavCoordinator]
+        rootVC.viewControllers = [comprehensive, home, trade]
+
+        if let status = AppConfiguration.shared.enableSetting.value, status.contestEnabled == true {
+            var context = TradeContext()
+            context.pageType = .game
+            gameCoordinator.pushVC(TradeCoordinator.self, animated: false, context: context)
+            self.container.append(gameCoordinator)
+            rootVC.viewControllers?.append(game)
+        } else if let status = AppConfiguration.shared.enableSetting.value, status.isETOEnabled == true {
             etoCoordinator.pushVC(ETOCoordinator.self, animated: false, context: nil)
-            self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator, etoCoordinator, accountCoordinator] as [NavCoordinator]
-            rootVC.viewControllers = [comprehensive, home, trade, eto, account]
-        } else {
-            self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
-            rootVC.viewControllers = [comprehensive, home, trade, account]
-        }
+            self.container.append(etoCoordinator)
+            rootVC.viewControllers?.append(eto)
+        } 
+
+        self.container.append(accountCoordinator)
+        rootVC.viewControllers?.append(account)
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification),
                                                object: nil,
                                                queue: nil,
@@ -129,7 +144,7 @@ class AppCoordinator {
                 case 2: value.title = R.string.localizable.navTrade.key.localized()
                     break
                 case 3: value.title = viewComtrollers.count == 4 ?
-                    R.string.localizable.navAccount.key.localized() : R.string.localizable.navEto.key.localized()
+                    R.string.localizable.navAccount.key.localized() : (self.rootVC.viewControllers!.contains(game) ? R.string.localizable.navContest.key.localized() : R.string.localizable.navEto.key.localized())
                     break
                 case 4: value.title = R.string.localizable.navAccount.key.localized()
                     break
