@@ -25,7 +25,7 @@ class StyleContentView: UIView, Views {
     var data: [NSAttributedString]? {
         didSet {
             setupUI()
-            updateHeight()
+            self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
         }
     }
 
@@ -52,7 +52,7 @@ class StyleContentView: UIView, Views {
                     lable.leading(to: self)
                     lable.trailing(to: self)
                     if data.count - 1 == index {
-                        lable.bottom(to: self, offset: -18)
+//                        lable.bottom(to: self, offset: -18)
                     }
                 }
                 labels.append(lable)
@@ -63,7 +63,7 @@ class StyleContentView: UIView, Views {
         }
     }
 
-    func updateHeight() {
+    @objc func updateHeight() {
         guard let _ = self.subviews.last else {
             return
         }
@@ -71,7 +71,7 @@ class StyleContentView: UIView, Views {
         for view in self.subviews {
             height += view.height
         }
-        self.height = height
+        self.height = height + 25
         invalidateIntrinsicContentSize()
     }
 

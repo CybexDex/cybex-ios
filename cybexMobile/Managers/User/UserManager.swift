@@ -192,14 +192,25 @@ extension UserManager {
 
 //eNotes
 extension UserManager {
-    func enotesLogin(_ username: String) -> Promise<Void> {
-        return fetchAccountInfo(username).map({ (fullaccount, account) -> Void in
-            self.saveUserInfo(username)
-            self.loginType = .nfc
-            self.unlockType = .nfc
-            self.handlerFullAcount(fullaccount)
-        })
+    func enotesLogin(_ username: String, pubKey: String) -> Promise<Void> {
+        if let keys: AccountKeys = AccountKeys.deserialize(from: BitShareCoordinator.getActiveUserKeys(pubKey)) {
+            let promise = fetchAccountInfo(username).map { (full, account) -> Void in
+                if self.checkPermission(keys, account: account) {
+                    self.keys = keys
+                    self.saveUserInfo(username)
+                    self.loginType = .nfc
+                    self.unlockType = .nfc
+                    self.handlerFullAcount(full)
+                }
+                else {
+                    throw CybexError.tipError(.loginFail)
+                }
+            }
 
+            return promise
+        } else {
+            return Promise(error: CybexError.tipError(.loginFail))
+        }
     }
 
     func checkNeedCloudPassword() -> Bool {
@@ -220,8 +231,8 @@ class UserManager {
 
     enum UnlockType: Int {
         case none
-        case cloudPassword
         case nfc
+        case cloudPassword
 
         func description() -> String {
             switch self {
@@ -294,7 +305,7 @@ class UserManager {
     }
 
     var isLocked: Bool {
-        return self.keys == nil
+        return self.keys == nil && unlockType == .cloudPassword
     }
 
     var logined: Bool {

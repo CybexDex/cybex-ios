@@ -111,7 +111,7 @@ class SettingViewController: BaseViewController {
             chooseUnlockType()
         } else if sender == eNotesCloudPasswordSet {
             if UserManager.shared.checkNeedCloudPassword() {
-                pushCloudPasswordViewController()
+                pushCloudPasswordViewController(nil)
             }
         } else if sender == language {
             self.coordinator?.openSettingDetail(type: .language)

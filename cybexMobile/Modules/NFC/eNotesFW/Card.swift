@@ -45,6 +45,18 @@ public struct Card {
 
     public var cert = Cert()
 
+    var base58PubKey: String = ""
+    var base58OnePubKey: String = ""
+    var base58OnePriKey: String = ""
+    var compactSign: String = ""
+
+    mutating func marshalCard(_ sign: String, onePubkey: String, onePriKey: String, pubkey: String) {
+        base58OnePriKey = onePriKey
+        base58OnePubKey = onePubkey
+        base58PubKey = pubkey
+        compactSign = sign
+    }
+
     func validatorPin(_ pin: String) -> (success: Bool, signature: String, privateKey: String) {
         //需要先用pin码做1次sha256以后调用方法deCrypt3des解密oneTimeSignature得到R和S，然后调用方法toCanonicalised得到最后的S值，调用getRecId得到recId
         let pinSha256 = pin.data(using: .utf8)!.sha256().hexEncodedString()
@@ -138,7 +150,7 @@ extension Card {
     static func toCanonicalised(s: String) -> String {
         var bnS = BigUInt(s,radix:16)!
 
-        if(bnS > SECP256K1.secp256k1_halfN){
+        if(bnS > (SECP256K1.secp256k1_N >> 1)){
             bnS = SECP256K1.secp256k1_N - bnS
             return String(bnS, radix: 16, uppercase: true)
         }

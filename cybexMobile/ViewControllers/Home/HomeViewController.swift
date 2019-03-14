@@ -13,6 +13,7 @@ import RxSwift
 import SwiftyJSON
 import TinyConstraints
 import Repeat
+import BigInt
 
 enum ViewType: Int {
     case homeContent    = 1
@@ -177,12 +178,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
-//        if #available(iOS 11.0, *) {
-////            Defaults[.pinCodes]["xxx"] = ""
-//            NFCManager.shared.start()
-//            return
-//        }
-
         if vcType == ViewType.homeContent.rawValue {//首页
             if let selectedPair = data["pair"] as? Pair {
                 self.coordinator?.openMarket(selectedPair)

@@ -297,9 +297,8 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                         to_memo_key: toAccount.memoKey)
 
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                    main {
-                        callback(data)
-                    }
+                    callback(data)
+                    Log.print(data)
                 }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)
             }

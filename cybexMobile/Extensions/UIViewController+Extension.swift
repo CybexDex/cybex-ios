@@ -161,9 +161,10 @@ extension BaseViewController {
     }
 }
 
-extension BaseViewController {
-    func pushCloudPasswordViewController() {
+extension UIViewController {
+    func pushCloudPasswordViewController(_ card: Card?) {
         let vc = R.storyboard.main.cloudPasswordSettingViewController()!
+        vc.card = card
         self.navigationController?.pushViewController(vc)
     }
 }

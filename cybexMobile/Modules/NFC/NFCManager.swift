@@ -18,7 +18,6 @@ class NFCManager: NSObject {
     static let shared = NFCManager()
 
     var session: NFCNDEFReaderSession?
-    var needReadRepeat = true
     var didReceivedMessage = Delegate<Card, Void>()
     var pinCodeErrorMessage = Delegate<Card, Void>()
     var pinCodeNotExist = Delegate<Card, Void>()
@@ -52,14 +51,19 @@ class NFCManager: NSObject {
 extension NFCManager: NFCNDEFReaderSessionDelegate {
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
         // Process detected NFCNDEFMessage objects.
-        guard let card = Utils.parseNDEFMessage(messages: messages) else {
+        guard var card = Utils.parseNDEFMessage(messages: messages) else {
             self.session?.invalidate()
             return
         }
 
         var privateKey: String = card.oneTimePrivateKey
         var signature: String = card.oneTimeSignature
+
         let pkKey = Card.compressedPublicKey(card.blockchainPublicKey)
+        let onePkKey = Card.compressedPublicKey(card.oneTimePublicKey)
+        let pvKey = Card.compressedPrivateKey(privateKey)
+
+        card.marshalCard("", onePubkey: onePkKey, onePriKey: pvKey, pubkey: pkKey)
 
         let status = card.transactionPinStatus
         if status {
@@ -69,45 +73,36 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
                     privateKey = data.privateKey
                     signature = data.signature
                 } else {
-                    pinCodeErrorMessage.call(card)
+                    DispatchQueue.main.async {
+                        self.pinCodeErrorMessage.call(card)
+                    }
                     self.session?.invalidate()
                     return
                 }
             } else {
-                pinCodeNotExist.call(card)
+                DispatchQueue.main.async {
+                    self.pinCodeNotExist.call(card)
+                }
                 self.session?.invalidate()
                 return
             }
         }
         
         Log.print("------reading tag..........")
-        guard let sign = card.getBlockchainSignature(signature), let signHex = unhexlify(sign), Card.isCanonical(signHex) else {
-            needReadRepeat = true
-            Log.print("------tag not match")
-
-            repeatRead()
+        guard let sign = card.getBlockchainSignature(signature) else {
+            self.session?.invalidate()
             return
         }
+        card.marshalCard(sign, onePubkey: onePkKey, onePriKey: pvKey, pubkey: pkKey)
 
         Log.print("------", sign)
 
-        needReadRepeat = false
-//        let onePkKey = Card.compressedPublicKey(card.oneTimePublicKey)
-//        let pvKey = Card.compressedPrivateKey(privateKey)
-        self.didReceivedMessage.call(card)
+        DispatchQueue.main.async {
+            self.didReceivedMessage.call(card)
+        }
         self.session?.invalidate()
     }
 
-    func repeatRead() {
-        if needReadRepeat {
-            needReadRepeat = false
-            self.session?.invalidate()
-
-            SwifterSwift.delay(milliseconds: 100) {
-                self.begin()
-            }
-        }
-    }
 
     /// - Tag: endScanning
     func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {
@@ -116,7 +111,7 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
             // Show an alert when the invalidation reason is not because of a success read
             // during a single tag read mode, or user canceled a multi-tag read mode session
             // from the UI or programmatically using the invalidate method call.
-            if readerError.code == .readerSessionInvalidationErrorFirstNDEFTagRead, needReadRepeat {
+            if readerError.code == .readerSessionInvalidationErrorFirstNDEFTagRead {
 
             }
 

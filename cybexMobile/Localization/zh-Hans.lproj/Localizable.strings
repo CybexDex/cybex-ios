@@ -599,6 +599,7 @@
 "enotes_cloudpassword_haveset" = "已设置";
 "enotes_use_type_0" = "使用eNotes";
 "enotes_use_type_1" = "使用密码";
+"enotes_password_wrong" = "密码错误，请重试!";
 "enotes_transfer_memo_hint" = "eNotes卡暂不支持转账附言，请输入云密码";
 "enotes_feature_hint" = "使用该功能，必须添加云密码并使用云密码解锁账户，是否现在添加？";
 "enotes_feature_add" = "去添加";

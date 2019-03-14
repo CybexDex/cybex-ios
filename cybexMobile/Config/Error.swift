@@ -54,6 +54,7 @@ extension CybexError {
         case userNotExist
         case unlockFail
         case registerFail(code: Int)
+        case loginFail
 
         var errorDescription: String {
             switch self {
