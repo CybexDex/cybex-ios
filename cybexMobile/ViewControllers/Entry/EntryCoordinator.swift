@@ -11,7 +11,7 @@ import ReSwift
 
 protocol EntryCoordinatorProtocol {
     func switchToRegister()
-    func switchToEnotesLogin()
+    func switchToEnotesLogin(_ pinCodeValidator: ((Card) -> Void)?, error: ((Card) -> Void)?);
 
     func dismiss()
 }
@@ -37,8 +37,23 @@ class EntryCoordinator: NavCoordinator {
 }
 
 extension EntryCoordinator: EntryCoordinatorProtocol {
-    func switchToEnotesLogin() {
+    func switchToEnotesLogin(_ pinCodeValidator: ((Card) -> Void)?, error: ((Card) -> Void)?) {
+        if #available(iOS 11.0, *) {
+            NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                UserManager.shared.enotesLogin(card.account, pubKey: card.base58PubKey).done {
+                    self.dismiss()
+                    }.catch({ (error) in
 
+                    })
+            }
+            NFCManager.shared.pinCodeNotExist.delegate(on: self) { (self, card) in
+                pinCodeValidator?(card)
+            }
+            NFCManager.shared.pinCodeErrorMessage.delegate(on: self) { (self, card) in
+                error?(card)
+            }
+            NFCManager.shared.start()
+        }
     }
     
     func switchToRegister() {

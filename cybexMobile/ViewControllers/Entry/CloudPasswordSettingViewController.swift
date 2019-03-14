@@ -22,6 +22,7 @@ class CloudPasswordSettingViewController: BaseViewController {
 
     var passwordValid = false
     var confirmValid = false
+    var card: Card? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +136,7 @@ class CloudPasswordSettingViewController: BaseViewController {
 
                 self.startLoading()
 
-                let password = self.passwordTextField.text ?? ""
+                _ = self.passwordTextField.text ?? ""
 
                 let jsonstr = ""
                 

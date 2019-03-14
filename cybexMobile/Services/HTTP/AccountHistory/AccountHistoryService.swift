@@ -104,7 +104,7 @@ extension AccountHistoryAPI: TargetType {
         case let .getTransferRecord(userId: uid, page: page): //asset=null&acct_from=1.2.19803&acct_to=1.2.4733&page=0&limit=2
             return ["asset": "null", "acct_from": "or", "acct_to": uid, "page": page, "limit": 20]
         case let .getFillByPairs(userId: uid, page: page, filterInPairs: filterInPairs, filterOutPairs: filterOutPairs):
-            var fout = filterOutPairs.count == 0 ? "null" : filterOutPairs.map { "\($0.quote)_\($0.base),\($0.base)_\($0.quote)" }.joined(separator: ",")
+            let fout = filterOutPairs.count == 0 ? "null" : filterOutPairs.map { "\($0.quote)_\($0.base),\($0.base)_\($0.quote)" }.joined(separator: ",")
             let fin = filterInPairs == nil ? "null" : "\(filterInPairs!.quote)_\(filterInPairs!.base),\(filterInPairs!.base)_\(filterInPairs!.quote)"
             return ["account": uid, "start": "null", "end": "null", "filter_in": fin, "filter_out": fout, "limit": 20, "page": page]
         }

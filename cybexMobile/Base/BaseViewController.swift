@@ -59,14 +59,18 @@ class BaseViewController: UIViewController {
         let color = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
         navigationController?.navigationBar.setBackgroundImage(UIImage(color: color), for: .default)
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
     }
 
     func configureObserveState() {
@@ -75,22 +79,26 @@ class BaseViewController: UIViewController {
     }
 
     func startLoading() {
-        guard let hud = toast else {
-            toast = BeareadToast.showLoading(inView: self.view)
-            return
-        }
+        UIApplication.shared.keyWindow?.showProgress()
 
-        if !hud.isDescendant(of: self.view) {
-            toast = BeareadToast.showLoading(inView: self.view)
-        }
+//        guard let hud = toast else {
+//            toast = BeareadToast.showLoading(inView: self.view)
+//            return
+//        }
+//
+//        if !hud.isDescendant(of: self.view) {
+//            toast = BeareadToast.showLoading(inView: self.view)
+//        }
     }
 
     func isLoading() -> Bool {
-        return self.toast?.alpha == 1
+        return UIApplication.shared.keyWindow?.iprogressHud?.isShowing() ?? false
+//        return self.toast?.alpha == 1
     }
 
     func endLoading() {
-        toast?.hide(true)
+        UIApplication.shared.keyWindow?.dismissProgress()
+//        toast?.hide(true)
     }
 
     func endAllLoading(_ tableview: UITableView) {
@@ -131,6 +139,8 @@ class BaseViewController: UIViewController {
 
 extension UIViewController {
     @objc open func leftAction(_ sender: UIButton) {
+        UIApplication.shared.keyWindow?.dismissProgress()
+
         navigationController?.popViewController(animated: true)
     }
 
@@ -144,6 +154,8 @@ extension UIViewController {
     }
 
     @objc func interactivePopOver(_ isCanceled: Bool) {
-
+        if isCanceled {
+            UIApplication.shared.keyWindow?.dismissProgress()
+        }
     }
 }

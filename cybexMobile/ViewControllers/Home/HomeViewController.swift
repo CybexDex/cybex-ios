@@ -13,6 +13,7 @@ import RxSwift
 import SwiftyJSON
 import TinyConstraints
 import Repeat
+import BigInt
 
 enum ViewType: Int {
     case homeContent    = 1
@@ -81,7 +82,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.startLoading()
     }
 
     func setupUI() {
@@ -143,6 +143,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
                 guard let self = self else { return }
                 self.updateUI()
                 self.endLoading()
+
                 self.timer = Timer.scheduledTimer(timeInterval: 3,
                                                   target: self,
                                                   selector: #selector(self.updateUI),
@@ -160,7 +161,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     @objc func refreshTableView() {
         if self.isVisible {
-            self.endLoading()
             let data = appData.tickerData.value
             if self.vcType == ViewType.homeContent.rawValue || self.vcType == ViewType.comprehensive.rawValue {
 //                self.contentView?.data = data.filter({$0.baseVolume != "0"})
@@ -177,12 +177,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
-//        if #available(iOS 11.0, *) {
-////            Defaults[.pinCodes]["xxx"] = ""
-//            NFCManager.shared.start()
-//            return
-//        }
-
         if vcType == ViewType.homeContent.rawValue {//首页
             if let selectedPair = data["pair"] as? Pair {
                 self.coordinator?.openMarket(selectedPair)

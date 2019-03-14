@@ -609,7 +609,7 @@
 
 "contest_notice" = "The contest has a duration of 14 days. Participation by API and quantitative models is encouraged by the host that will provide various assistance for quantitative APIs.\nThis contest uses the virtual assets ARENA.ETH, ARENA.USDT, ARENA.EOS, ARENA.BTC that can be freely traded during the game (transfer not permitted). Only 3 trading pairs are accessible during the game: ARENA.ETH/ARENA.USDT, ARENA.EOS/ARENA.USDT, ARENA.BTC/ARENA.USDT.\nEach contestant will be given an initial capital of 100,000 ARENA.USDT by the form of an airdrop once successfully registered to the game. During the competition, the host will take snapshots of the account balance of the competitors regularly and convert it to USDT value by the median price of the corresponding assets in CYBEX exchange.\nReward calculations are based on changes in account balances. The final rank will be made by considerating yield rate (ie, the difference between the balance and the initial capital), the Sharpe ratio (revenue volatility), and the turnover rate(accumulated volume per natural day exceeds 20%), etc. comprehensively. The real-time ranking status can be queried on the official website.\nTo ensure fairness, please help us in the prevention of cheating in any form.";
 "contest_notice_title" = "Contest Rules";
-"contest_notice_not_tip" = "Do not remind";
+"contest_notice_not_tip" = "Do not show";
 "contest_notice_close" = "Cancel";
 
 "enotes_unlock_type_title" = "Default unlock method";
@@ -620,6 +620,7 @@
 "enotes_cloudpassword_haveset" = "Setted";
 "enotes_use_type_0" = "Use eNotes";
 "enotes_use_type_1" = "Use password";
+"enotes_password_wrong" = "Wrong password. Try again!";
 "enotes_transfer_memo_hint" = "Enotes card does not support memo now. Please enter cloud password.";
 "enotes_feature_hint" = "The function is not accessible until cloud wallet password is added and used to unlock the account. Add password now?";
 "enotes_feature_add" = "Add";
@@ -630,3 +631,4 @@
 "confirm_hint_title" = "HINT";
 "lock_time" = "%d min";
 "lock_time_title" = "UnLock Time";
+"progress_hud_loading" = "loading...";

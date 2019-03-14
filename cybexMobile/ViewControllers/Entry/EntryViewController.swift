@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import SwiftTheme
+import SwiftyUserDefaults
 
 class EntryViewController: BaseViewController {
 
@@ -22,22 +23,26 @@ class EntryViewController: BaseViewController {
     @IBOutlet weak var createTitle: UILabel!
     @IBOutlet weak var loginButton: Button!
     @IBOutlet weak var enotesLogin: UILabel!
-    
+
+    var card: Card? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
 
-        if #available(iOS 11.0, *) {
-            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-                self.enotesLogin.isHidden = false
-            } else {
-                self.enotesLogin.isHidden = true
-            }
-        } else {
-            self.enotesLogin.isHidden = true
-        }
-        
+        self.enotesLogin.isHidden = true
+
+//        if #available(iOS 11.0, *) {
+//            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+//                self.enotesLogin.isHidden = false
+//            } else {
+//                self.enotesLogin.isHidden = true
+//            }
+//        } else {
+//            self.enotesLogin.isHidden = true
+//        }
+
         setupEvent()
     }
 
@@ -85,7 +90,12 @@ extension EntryViewController {
         self.enotesLogin.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let self = self else { return }
 
-            self.coordinator?.switchToEnotesLogin()
+            self.coordinator?.switchToEnotesLogin({[weak self] (card) in
+                self?.card = card
+                self?.showPasswordBox(R.string.localizable.enotes_pin_validtor_title.key.localized(), middleType: .code)
+            }, error: { (card) in
+
+            })
         }).disposed(by: disposeBag)
 
         self.loginButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
@@ -104,4 +114,26 @@ extension EntryViewController {
         }).disposed(by: disposeBag)
     }
 
+    override func passwordPassed(_ passed: Bool) {
+        if passed {
+            ShowToastManager.shared.hide()
+        } else {
+            ShowToastManager.shared.data = R.string.localizable.enotes_password_wrong.key.localized()
+        }
+    }
+
+    override func returnUserPassword(_ sender: String, textView: CybexTextView) {
+        if let card = self.card, card.validatorPin(sender).success {
+            UserManager.shared.enotesLogin(card.account, pubKey: card.base58PubKey).done {
+                Defaults[.pinCodes][card.base58PubKey] = sender
+                self.passwordPassed(true)
+                self.coordinator?.dismiss()
+                }.catch({ (error) in
+                    self.passwordPassed(false)
+                })
+        }
+        else {
+            self.passwordPassed(false)
+        }
+    }
 }

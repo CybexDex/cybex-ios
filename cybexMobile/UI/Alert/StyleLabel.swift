@@ -24,12 +24,12 @@ class StyleLabel: UIView {
         didSet {
             if let data = data {
                 content.attributedText = data
-                updateHeight()
+                self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
             }
         }
     }
 
-    fileprivate func updateHeight() {
+    @objc fileprivate func updateHeight() {
         layoutIfNeeded()
         self.frame.size.height = dynamicHeight()
         invalidateIntrinsicContentSize()

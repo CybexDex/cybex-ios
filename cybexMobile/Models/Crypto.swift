@@ -15,19 +15,11 @@ class AccountKeys: HandyJSON {
     var memoKey: Key?
 
     var pubKeys: [String] {
-        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
-            return []
-        }
-
-        return [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey]
+        return [memoKey, ownerKey, activeKey].compactMap({ $0?.publicKey })
     }
 
     var keys: [Key] {
-        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
-            return []
-        }
-
-        return [memoKey, ownKey, activeKey]
+        return [memoKey, ownerKey, activeKey].compactMap({ $0 })
     }
 
     required init() {
@@ -47,10 +39,7 @@ class AccountKeys: HandyJSON {
     }
 
     func addresses() -> [String] {
-        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
-            return []
-        }
-        return activeKey.addresses + memoKey.addresses + ownKey.addresses
+        return [activeKey, memoKey, ownerKey].compactMap({ $0 }).reduce([], { $0 + $1.addresses })
     }
 }
 

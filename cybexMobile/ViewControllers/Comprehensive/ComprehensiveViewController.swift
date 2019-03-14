@@ -140,7 +140,7 @@ class ComprehensiveViewController: BaseViewController {
                                  self.coordinator!.state.announces.asObservable()).subscribe(onNext: { [weak self](hotPairs, middleItems, banners, announces) in
                                     guard let self = self else { return }
                                     if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
-                                        self.endLoading()
+//                                        self.endLoading()
                                     }
 
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

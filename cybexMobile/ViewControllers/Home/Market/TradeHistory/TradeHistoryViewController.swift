@@ -92,9 +92,6 @@ class TradeHistoryViewController: BaseViewController {
             return
         }
 
-        if grandVC.isLoading() {
-            grandVC.endLoading()
-        }
         if parentVC.type.rawValue == grandVC.selectedIndex {
             self.data = data
         }

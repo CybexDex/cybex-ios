@@ -149,20 +149,16 @@ class BusinessViewController: BaseViewController {
         let decimalPrice = price.decimal()
         
         guard  decimalAmount != 0, decimalPrice != 0 else { return }
-        
-        let openedOrderDetailView = StyleContentView(frame: .zero)
+
+
         let ensureTitle = self.type == .buy ?
             R.string.localizable.openedorder_buy_ensure.key.localized() :
             R.string.localizable.openedorder_sell_ensure.key.localized()
-        
-        ShowToastManager.shared.setUp(title: ensureTitle, contentView: openedOrderDetailView, animationType: .upDown)
-        ShowToastManager.shared.showAnimationInView(self.view)
-        ShowToastManager.shared.delegate = self
-        
+
         let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterJade
         let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterJade
         let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterJade
-        openedOrderDetailView.data = UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
+        showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy))
     }
     
     override func configureObserveState() {

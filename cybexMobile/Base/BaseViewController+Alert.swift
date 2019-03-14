@@ -115,7 +115,7 @@ extension UIViewController: ShowManagerDelegate {
     }
 
     @objc func passwordPassed(_ passed: Bool) {
-
+        
     }
 
     @objc func passwordDetecting() {
