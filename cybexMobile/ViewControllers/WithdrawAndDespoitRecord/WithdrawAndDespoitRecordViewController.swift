@@ -30,7 +30,6 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.endLoading()
     }
 
     override func refreshViewController() {

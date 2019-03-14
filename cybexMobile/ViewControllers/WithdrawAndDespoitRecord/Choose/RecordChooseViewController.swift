@@ -101,7 +101,7 @@ class RecordChooseViewController: BaseViewController {
 
             case .loading(let reason):
                 if reason == .initialRefresh {
-                    self.startLoading()
+//                    self.startLoading()
                 }
 
             case .refresh(let type):

@@ -20,6 +20,8 @@ extension AppDelegate {
         let loginType = Defaults[.loginType]
         if loginType > 0 {
             UserManager.shared.loginType = UserManager.LoginType(rawValue: loginType)!
+        } else {
+            UserManager.shared.logout()
         }
 
         let unlockType = Defaults[.unlockType]
