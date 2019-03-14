@@ -538,6 +538,11 @@
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
 		7364D3F422363E2000021978 /* BaseViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3F322363E2000021978 /* BaseViewController+Alert.swift */; };
 		7364D3F62236489200021978 /* CloudPasswordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3F52236489200021978 /* CloudPasswordSettingViewController.swift */; };
+		7364D3FC223A040000021978 /* iProgressHUDUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3F8223A03FA00021978 /* iProgressHUDUtilities.swift */; };
+		7364D3FD223A040000021978 /* iProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3F9223A03FB00021978 /* iProgressHUD.swift */; };
+		7364D3FE223A040000021978 /* iProgressHUDGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3FA223A03FB00021978 /* iProgressHUDGlobal.swift */; };
+		7364D3FF223A040000021978 /* iProgressHUDDelegete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3FB223A03FD00021978 /* iProgressHUDDelegete.swift */; };
+		7364D402223A047F00021978 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7364D400223A047F00021978 /* NVActivityIndicatorView.framework */; };
 		736761E521BE46750065FD35 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E421BE46750065FD35 /* RegisterService.swift */; };
 		736761E821BE4C2D0065FD35 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E721BE4C2D0065FD35 /* IMService.swift */; };
 		736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */; };
@@ -1442,6 +1447,11 @@
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
 		7364D3F322363E2000021978 /* BaseViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseViewController+Alert.swift"; sourceTree = "<group>"; };
 		7364D3F52236489200021978 /* CloudPasswordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPasswordSettingViewController.swift; sourceTree = "<group>"; };
+		7364D3F8223A03FA00021978 /* iProgressHUDUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iProgressHUDUtilities.swift; sourceTree = "<group>"; };
+		7364D3F9223A03FB00021978 /* iProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iProgressHUD.swift; sourceTree = "<group>"; };
+		7364D3FA223A03FB00021978 /* iProgressHUDGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iProgressHUDGlobal.swift; sourceTree = "<group>"; };
+		7364D3FB223A03FD00021978 /* iProgressHUDDelegete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iProgressHUDDelegete.swift; sourceTree = "<group>"; };
+		7364D400223A047F00021978 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		736761E421BE46750065FD35 /* RegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		736761E721BE4C2D0065FD35 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPWebSocketService.swift; sourceTree = "<group>"; };
@@ -1828,6 +1838,7 @@
 				7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */,
 				7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */,
 				7354F54021F57660000AA621 /* MarqueeLabelSwift.framework in Frameworks */,
+				7364D402223A047F00021978 /* NVActivityIndicatorView.framework in Frameworks */,
 				73A4CBAA21EEDB6E00C93DA6 /* PINCache.framework in Frameworks */,
 				73A4CBAE21EEDE0400C93DA6 /* PINOperation.framework in Frameworks */,
 				73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */,
@@ -3040,6 +3051,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7364D3F7223A03E100021978 /* IProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				7364D3F9223A03FB00021978 /* iProgressHUD.swift */,
+				7364D3FB223A03FD00021978 /* iProgressHUDDelegete.swift */,
+				7364D3FA223A03FB00021978 /* iProgressHUDGlobal.swift */,
+				7364D3F8223A03FA00021978 /* iProgressHUDUtilities.swift */,
+			);
+			path = IProgressHUD;
+			sourceTree = "<group>";
+		};
 		736761E621BE4C220065FD35 /* IM */ = {
 			isa = PBXGroup;
 			children = (
@@ -3723,6 +3745,7 @@
 		8B5274A9974EFCDE3D932E9EA52C257A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				7364D3F7223A03E100021978 /* IProgressHUD */,
 				7345FD8B219EBF7E0066BD0E /* FCUUID */,
 				739EFB4C2181D10E00424061 /* RxGesture */,
 				BF3F4A11835F406941DE98690F1996FF /* Jdenticon */,
@@ -4037,6 +4060,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7364D400223A047F00021978 /* NVActivityIndicatorView.framework */,
 				73B47844222CFF3000189632 /* SipHash.framework */,
 				73B4783C222CFBA400189632 /* BigInt.framework */,
 				73B4783D222CFBA400189632 /* keccak.framework */,
@@ -5140,6 +5164,7 @@
 				737E596D21A541E6001199E4 /* JWK.swift in Sources */,
 				73A45F8A21E5F1A300B52A7F /* DeployTicketView.swift in Sources */,
 				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,
+				7364D3FD223A040000021978 /* iProgressHUD.swift in Sources */,
 				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
 				7333856821BFA4410026765F /* AppConfigration.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
@@ -5212,6 +5237,7 @@
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
 				3BF5B7E42134F5A800E8BFC9 /* ETODetailHeaderViewAdapter.swift in Sources */,
 				73B4784A222D126900189632 /* Base58.swift in Sources */,
+				7364D3FC223A040000021978 /* iProgressHUDUtilities.swift in Sources */,
 				AF84FCBA2E7219D1FC633DA7881BD0ED /* MarketActions.swift in Sources */,
 				3B0EB652210313B200F19C31 /* YourPortfolioTableHeadView.swift in Sources */,
 				92F32777AC4AC77905155B74B115E1A1 /* MarketCache.swift in Sources */,
@@ -5334,6 +5360,7 @@
 				221EC251210609A10059F856 /* TransferView.swift in Sources */,
 				10F005E5213C8CAD146ED273B0CDF11F /* RechargeItemView.swift in Sources */,
 				3B0EB6682103155C00F19C31 /* YourPortfolioViewController.swift in Sources */,
+				7364D3FE223A040000021978 /* iProgressHUDGlobal.swift in Sources */,
 				73B47835222CEB8E00189632 /* Utils.swift in Sources */,
 				6AF937D55236FFDCE1D8F1B34F7D29ED /* RechargeReducers.swift in Sources */,
 				7204FFC42153A62B00EB0FC7 /* HotAssetsViewAdapter.swift in Sources */,
@@ -5460,6 +5487,7 @@
 				7267DA1A21351D5A004AF9AF /* ETOProjectCell.swift in Sources */,
 				225746E821073E480017FA1A /* PickerView.swift in Sources */,
 				7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */,
+				7364D3FF223A040000021978 /* iProgressHUDDelegete.swift in Sources */,
 				728C2827215B80480097840A /* AnnounceScrollView.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,

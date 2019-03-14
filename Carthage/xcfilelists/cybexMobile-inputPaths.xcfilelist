@@ -25,6 +25,7 @@ $(SRCROOT)/Carthage/Build/iOS/Localize_Swift.framework
 $(SRCROOT)/Carthage/Build/iOS/Macaw.framework
 $(SRCROOT)/Carthage/Build/iOS/MarqueeLabelSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Moya.framework
+$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework
 $(SRCROOT)/Carthage/Build/iOS/NotificationBanner.framework
 $(SRCROOT)/Carthage/Build/iOS/PINCache.framework
 $(SRCROOT)/Carthage/Build/iOS/PINOperation.framework

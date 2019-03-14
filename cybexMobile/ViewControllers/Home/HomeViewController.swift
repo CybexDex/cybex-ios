@@ -82,7 +82,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.startLoading()
     }
 
     func setupUI() {
@@ -144,6 +143,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
                 guard let self = self else { return }
                 self.updateUI()
                 self.endLoading()
+
                 self.timer = Timer.scheduledTimer(timeInterval: 3,
                                                   target: self,
                                                   selector: #selector(self.updateUI),
@@ -161,7 +161,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     @objc func refreshTableView() {
         if self.isVisible {
-            self.endLoading()
             let data = appData.tickerData.value
             if self.vcType == ViewType.homeContent.rawValue || self.vcType == ViewType.comprehensive.rawValue {
 //                self.contentView?.data = data.filter({$0.baseVolume != "0"})

@@ -1,0 +1,18 @@
+PODS:
+  - NVActivityIndicatorView (4.6.1):
+    - NVActivityIndicatorView/Presenter (= 4.6.1)
+  - NVActivityIndicatorView/Presenter (4.6.1)
+
+DEPENDENCIES:
+  - NVActivityIndicatorView (from `../`)
+
+EXTERNAL SOURCES:
+  NVActivityIndicatorView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  NVActivityIndicatorView: 672fdd9931bbb436f93142b9c5e104967ea98d6a
+
+PODFILE CHECKSUM: e5d164996aa6d71a0eda53503111c16d861ecbc6
+
+COCOAPODS: 1.5.3

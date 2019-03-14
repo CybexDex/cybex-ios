@@ -610,3 +610,4 @@
 "confirm_hint_title" = "提示";
 "lock_time" = "%d分钟";
 "lock_time_title" = "解锁时间";
+"progress_hud_loading" = "加载中...";

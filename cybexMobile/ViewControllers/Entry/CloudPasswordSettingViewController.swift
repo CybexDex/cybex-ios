@@ -136,7 +136,7 @@ class CloudPasswordSettingViewController: BaseViewController {
 
                 self.startLoading()
 
-                let password = self.passwordTextField.text ?? ""
+                _ = self.passwordTextField.text ?? ""
 
                 let jsonstr = ""
                 
