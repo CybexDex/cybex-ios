@@ -307,6 +307,7 @@ class CybexWebSocketService: NSObject {
     private func connectNode(node: NodeURLString) {
         if socket.readyState != .OPEN {
             Log.print("connecting node: \(node.rawValue)")
+            UIHelper.showStatusBar(R.string.localizable.socket_loading.key, style: .info)
 
             self.idGenerator = JsonIdGenerator()
             self.batchFactory.idGenerator = self.idGenerator
@@ -335,6 +336,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             try? webSocket.send(data: data)
         } else {
             Log.print(" node: \(webSocket.url!.absoluteString) --- connected")
+            UIHelper.showStatusBar(R.string.localizable.socket_success.key, style: .success)
 
             isConnecting = false
             self.register()
@@ -367,6 +369,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             }
         } else {
             Log.print(error)
+            UIHelper.showStatusBar(R.string.localizable.socket_failed.key, style: .danger)
 
             disconnect()
         }

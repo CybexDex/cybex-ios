@@ -611,3 +611,7 @@
 "lock_time" = "%d分钟";
 "lock_time_title" = "解锁时间";
 "progress_hud_loading" = "加载中...";
+"socket_loading" = "连接中...";
+"socket_success" = "连接成功";
+"socket_failed" = "连接失败";
+

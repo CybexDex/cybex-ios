@@ -14,14 +14,12 @@ import ChatRoom
 import MapKit
 import cybex_ios_core_cpp
 import TinyConstraints
-import BeareadToast_swift
 import SwiftTheme
 
 import IQKeyboardManagerSwift
 
 class ChatViewController: MessagesViewController {
     let sectionInset = UIEdgeInsets(top: 12, left: 13, bottom: 12, right: 13)
-    weak var toast: BeareadToast?
 
     var downInputView: ChatDownInputView?
     var messageView: ChatDirectionIconView?
@@ -52,21 +50,11 @@ class ChatViewController: MessagesViewController {
         super.viewDidLoad()
         IQKeyboardManager.shared.enableAutoToolbar = false
         setupUI()
+        self.view.initProgressHud()
+
         self.startLoading()
         setupData()
         setupEvent()
-    }
-    
-    
-    func startLoading() {
-        guard let hud = toast else {
-            toast = BeareadToast.showLoading(inView: self.view)
-            return
-        }
-        
-        if !hud.isDescendant(of: self.view) {
-            toast = BeareadToast.showLoading(inView: self.view)
-        }
     }
     
     override func leftAction(_ sender: UIButton) {
@@ -80,14 +68,6 @@ class ChatViewController: MessagesViewController {
         }
     }
 
-    func isLoading() -> Bool {
-        return self.toast?.alpha == 1
-    }
-    
-    func endLoading() {
-        toast?.hide(true)
-    }
-    
     func setupShadowView() {
         self.shadowView = UIView(frame: self.view.bounds)
         self.shadowView?.theme_backgroundColor = [UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5).hexString(true) ,UIColor.steel50.hexString(true)]
@@ -349,14 +329,13 @@ class ChatViewController: MessagesViewController {
             default:
                 break
             }
-            
-            if message != "已链接" {
-                _ = BeareadToast.showError(text: message, inView: self.view, hide: 1)
+
+            if message == "已链接" {
+                UIHelper.showSuccessTop(message)
+            } else {
+                UIHelper.showErrorTop(message)
             }
-            else {
-                _ = BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
-            }
-            
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         #endif

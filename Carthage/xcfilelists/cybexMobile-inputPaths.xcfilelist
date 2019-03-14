@@ -3,7 +3,6 @@ $(SRCROOT)/Carthage/Build/iOS/Alamofire.framework
 $(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityLogger.framework
 $(SRCROOT)/Carthage/Build/iOS/Apollo.framework
 $(SRCROOT)/Carthage/Build/iOS/AsyncDisplayKit.framework
-$(SRCROOT)/Carthage/Build/iOS/BeareadToast_swift.framework
 $(SRCROOT)/Carthage/Build/iOS/BigInt.framework
 $(SRCROOT)/Carthage/Build/iOS/BiometricAuthentication.framework
 $(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework
@@ -33,6 +32,7 @@ $(SRCROOT)/Carthage/Build/iOS/PINRemoteImage.framework
 $(SRCROOT)/Carthage/Build/iOS/Presentr.framework
 $(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework
 $(SRCROOT)/Carthage/Build/iOS/Proposer.framework
+$(SRCROOT)/Carthage/Build/iOS/QuickLayout.framework
 $(SRCROOT)/Carthage/Build/iOS/ReSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Reachability.framework
 $(SRCROOT)/Carthage/Build/iOS/ReactiveMoya.framework
@@ -48,6 +48,7 @@ $(SRCROOT)/Carthage/Build/iOS/SDCAlertView.framework
 $(SRCROOT)/Carthage/Build/iOS/SipHash.framework
 $(SRCROOT)/Carthage/Build/iOS/SnapKit.framework
 $(SRCROOT)/Carthage/Build/iOS/SocketRocket.framework
+$(SRCROOT)/Carthage/Build/iOS/SwiftEntryKit.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftRichString.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftTheme.framework
 $(SRCROOT)/Carthage/Build/iOS/SwifterSwift.framework

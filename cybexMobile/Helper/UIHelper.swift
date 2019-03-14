@@ -15,6 +15,9 @@ class UIHelper {
         case margin = 13
     }
 
+    static var statusBanner: StatusBarNotificationBanner? = nil
+
+    @discardableResult
     class func showSuccessTop(_ str: String) -> NotificationBanner {
         let banner = NotificationBanner(title: "", subtitle: str, style: .success)
         banner.duration = 2
@@ -25,7 +28,45 @@ class UIHelper {
         if banner.bannerQueue.numberOfBanners == 0 {
             banner.show()
         }
+        return banner
+    }
 
+    @discardableResult
+    class func showErrorTop(_ str: String) -> NotificationBanner {
+        let banner = NotificationBanner(title: "", subtitle: str, style: .danger)
+        banner.duration = 2
+        banner.subtitleLabel?.textAlignment = NSTextAlignment.center
+        banner.autoDismiss = true
+        banner.dismissOnSwipeUp = true
+        banner.dismissOnTap = true
+        if banner.bannerQueue.numberOfBanners == 0 {
+            banner.show()
+        }
+
+        return banner
+    }
+
+    @discardableResult
+    class func showStatusBar(_ str: String, style: BannerStyle) -> StatusBarNotificationBanner {
+        let banner = StatusBarNotificationBanner(title: str, style: style)
+        #if DEBUG
+        banner.titleLabel?.locali = str
+        banner.duration = 2
+        banner.titleLabel?.textAlignment = NSTextAlignment.center
+        if style == .danger || style == .success {
+            banner.autoDismiss = true
+            statusBanner?.dismiss()
+            statusBanner = nil
+            banner.show()
+        } else {
+            banner.autoDismiss = false
+
+            if statusBanner == nil {
+                statusBanner = banner
+                banner.show()
+            }
+        }
+        #endif
         return banner
     }
 

@@ -483,7 +483,6 @@
 		73539BA82178A0D7008395AC /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA72178A0D6008395AC /* ActiveLabel.framework */; };
 		73539BAA2178A391008395AC /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA92178A390008395AC /* Apollo.framework */; };
 		73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BC72178A7CA008395AC /* AsyncOperation.swift */; };
-		73539BFC2179764E008395AC /* BeareadToast_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BFB2179764D008395AC /* BeareadToast_swift.framework */; };
 		73539BFE217980CF008395AC /* BiometricAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BFD217980CE008395AC /* BiometricAuthentication.framework */; };
 		73539C00217980D6008395AC /* Proposer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BFF217980D6008395AC /* Proposer.framework */; };
 		73539C05217989D7008395AC /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C02217989D6008395AC /* SwiftyJSON.framework */; };
@@ -704,6 +703,8 @@
 		73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB321EF493D00C93DA6 /* DataCompression.swift */; };
 		73A4CBB821F073A100C93DA6 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB721F073A000C93DA6 /* BinUtils.swift */; };
 		73AA83A521A7D1F2001B24DF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AA83A421A7D1F2001B24DF /* Utils.swift */; };
+		73AE179B223A59E00061F41A /* QuickLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AE179A223A59E00061F41A /* QuickLayout.framework */; };
+		73AE179D223A59EE0061F41A /* SwiftEntryKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AE179C223A59EE0061F41A /* SwiftEntryKit.framework */; };
 		73B4782D222CEB8E00189632 /* Cert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47821222CEB8E00189632 /* Cert.swift */; };
 		73B4782E222CEB8E00189632 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47822222CEB8E00189632 /* Card.swift */; };
 		73B4782F222CEB8E00189632 /* CertificateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47823222CEB8E00189632 /* CertificateParser.swift */; };
@@ -1392,7 +1393,6 @@
 		73539BA72178A0D6008395AC /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		73539BA92178A390008395AC /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
 		73539BC72178A7CA008395AC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
-		73539BFB2179764D008395AC /* BeareadToast_swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BeareadToast_swift.framework; path = Carthage/Build/iOS/BeareadToast_swift.framework; sourceTree = "<group>"; };
 		73539BFD217980CE008395AC /* BiometricAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BiometricAuthentication.framework; path = Carthage/Build/iOS/BiometricAuthentication.framework; sourceTree = "<group>"; };
 		73539BFF217980D6008395AC /* Proposer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Proposer.framework; path = Carthage/Build/iOS/Proposer.framework; sourceTree = "<group>"; };
 		73539C02217989D6008395AC /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -1618,6 +1618,8 @@
 		73A4CBB321EF493D00C93DA6 /* DataCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCompression.swift; sourceTree = "<group>"; };
 		73A4CBB721F073A000C93DA6 /* BinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
 		73AA83A421A7D1F2001B24DF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		73AE179A223A59E00061F41A /* QuickLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLayout.framework; path = Carthage/Build/iOS/QuickLayout.framework; sourceTree = "<group>"; };
+		73AE179C223A59EE0061F41A /* SwiftEntryKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftEntryKit.framework; path = Carthage/Build/iOS/SwiftEntryKit.framework; sourceTree = "<group>"; };
 		73B47821222CEB8E00189632 /* Cert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cert.swift; sourceTree = "<group>"; };
 		73B47822222CEB8E00189632 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		73B47823222CEB8E00189632 /* CertificateParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateParser.swift; sourceTree = "<group>"; };
@@ -1834,6 +1836,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
+				73AE179B223A59E00061F41A /* QuickLayout.framework in Frameworks */,
+				73AE179D223A59EE0061F41A /* SwiftEntryKit.framework in Frameworks */,
 				7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */,
 				7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */,
 				7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */,
@@ -1849,7 +1853,6 @@
 				7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */,
 				7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */,
 				735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */,
-				73539BFC2179764E008395AC /* BeareadToast_swift.framework in Frameworks */,
 				73539BFE217980CF008395AC /* BiometricAuthentication.framework in Frameworks */,
 				7336B7BD214F717E0086A9DF /* ESTabBarController.framework in Frameworks */,
 				73539C37217992F1008395AC /* Fabric.framework in Frameworks */,
@@ -4060,6 +4063,8 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73AE179C223A59EE0061F41A /* SwiftEntryKit.framework */,
+				73AE179A223A59E00061F41A /* QuickLayout.framework */,
 				7364D400223A047F00021978 /* NVActivityIndicatorView.framework */,
 				73B47844222CFF3000189632 /* SipHash.framework */,
 				73B4783C222CFBA400189632 /* BigInt.framework */,
@@ -4112,7 +4117,6 @@
 				73539C02217989D6008395AC /* SwiftyJSON.framework */,
 				73539BFF217980D6008395AC /* Proposer.framework */,
 				73539BFD217980CE008395AC /* BiometricAuthentication.framework */,
-				73539BFB2179764D008395AC /* BeareadToast_swift.framework */,
 				73539BA92178A390008395AC /* Apollo.framework */,
 				73539BA72178A0D6008395AC /* ActiveLabel.framework */,
 				735A3D012160A73000FC8922 /* NBLCommonModule.framework */,

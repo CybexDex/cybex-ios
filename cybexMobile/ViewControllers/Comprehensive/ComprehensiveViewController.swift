@@ -52,6 +52,7 @@ class ComprehensiveViewController: BaseViewController {
     }
 
     func setupData() {
+        startLoading()
         self.coordinator?.fetchData()
     }
 

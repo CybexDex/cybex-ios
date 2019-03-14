@@ -81,6 +81,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        startLoading()
         setupUI()
     }
 
@@ -142,7 +144,11 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             .subscribe(onNext: {[weak self] (_) in
                 guard let self = self else { return }
                 self.updateUI()
-                self.endLoading()
+                if self.vcType == ViewType.comprehensive.rawValue {
+                    self.parent?.endLoading()
+                } else {
+                    self.endLoading()
+                }
 
                 self.timer = Timer.scheduledTimer(timeInterval: 3,
                                                   target: self,

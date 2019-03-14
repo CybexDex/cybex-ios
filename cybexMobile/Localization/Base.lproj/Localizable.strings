@@ -630,3 +630,6 @@
 "lock_time" = "%d min";
 "lock_time_title" = "UnLock Time";
 "progress_hud_loading" = "loading...";
+"socket_loading" = "Connecting...";
+"socket_success" = "Connection successful";
+"socket_failed" = "Connection fail";

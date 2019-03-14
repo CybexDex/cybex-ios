@@ -1,0 +1,9 @@
+{
+  "commitish" : "v0.3.0",
+  "iOS" : [
+    {
+      "name" : "Loaf",
+      "hash" : "8df437156aa0759d0cbf31245273f43504c3b36cba280e14af0e1dcdbb33d9c1"
+    }
+  ]
+}
