@@ -19,9 +19,9 @@ platform :ios do
   ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "300"
   ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10"
   
-#  delete_keychain(
-#    name: "ios-build"
-#  ) if File.exist? File.expand_path("~/Library/Keychains/ios-build-db")
+  delete_keychain(
+    name: "ios-build"
+  ) if File.exist? File.expand_path("~/Library/Keychains/ios-build-db")
     
   create_keychain(
     name: "ios-build",
