@@ -37,7 +37,7 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
             }
         }
     }
-    var timer: Repeater?
+    var timer: Disposable?
     var containerView: UIView?
     var order: LimitOrderStatus?
     var cancleOrderInfo: [String: Any]?
@@ -50,6 +50,13 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
         self.coordinator?.connect()
         self.startLoading()
         setupData()
+
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
+            self.timer?.dispose()
+        }
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
+            self.startFetchOpenedOrders()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,33 +131,19 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
     }
     
     func startFetchOpenedOrders() {
-        if self.timer == nil {
-            NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
-                self.timer?.pause()
-                self.timer = nil
-            }
-            NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-                self.startFetchOpenedOrders()
-            }
-        }
-        self.timer?.pause()
-        self.timer = nil
-        
-        self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
-            main {
-                guard let self = self, let coor = self.coordinator else { return }
+        self.timer?.dispose()
 
-                if coor.checkConnectStatus() {
-                    self.setupData()
-                }
-                else {
-                    self.coordinator?.reconnect()
-                }
+        timer = Observable<Int>.interval(3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (n) in
+            guard let self = self, let coor = self.coordinator else { return }
+            if coor.checkConnectStatus() {
+                self.setupData()
             }
-        }
-        timer?.start()
-        
+            else {
+                self.coordinator?.reconnect()
+            }
+        })
     }
+
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self, let limitOrders = data, self.isVisible else { return }
@@ -199,7 +192,7 @@ extension OpenedOrdersViewController: TradePair {
     }
 
     func disappear() {
-        self.timer?.pause()
+        self.timer?.dispose()
         self.timer = nil
         self.coordinator?.disconnect()
     }

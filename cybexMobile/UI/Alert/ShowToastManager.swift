@@ -105,25 +105,27 @@ class ShowToastManager {
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self](notification) in
             guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let duration = userinfo.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as? Double, let curve = userinfo.object(forKey: UIResponder.keyboardAnimationCurveUserInfoKey) as? UInt else { return }
 
-            self.showViewTop.constant = -120
+            if self.showViewTop != nil {
+                self.showViewTop.constant = -120
+                self.superView?.setNeedsLayout()
 
-            self.superView?.setNeedsLayout()
-
-            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
-                self.superView?.layoutIfNeeded()
-            }, completion: nil)
+                UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
+                    self.superView?.layoutIfNeeded()
+                }, completion: nil)
+            }
         }
 
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self](notification) in
             guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let duration = userinfo.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as? Double, let curve = userinfo.object(forKey: UIResponder.keyboardAnimationCurveUserInfoKey) as? UInt else { return }
 
-            self.showViewTop.constant = -32
-            
-            self.superView?.setNeedsLayout()
+            if self.showViewTop != nil {
+                self.showViewTop.constant = -32
+                self.superView?.setNeedsLayout()
 
-            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
-                self.superView?.layoutIfNeeded()
-            }, completion: nil)
+                UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
+                    self.superView?.layoutIfNeeded()
+                }, completion: nil)
+            }
         }
     }
 

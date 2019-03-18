@@ -54,6 +54,7 @@ class UIHelper {
         banner.duration = 2
         banner.titleLabel?.textAlignment = NSTextAlignment.center
         if style == .danger || style == .success {
+            banner.bannerQueue.removeAll()
             banner.autoDismiss = true
             statusBanner?.dismiss()
             statusBanner = nil

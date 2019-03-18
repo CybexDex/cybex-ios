@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import Repeat
+import RxSwift
 
 var appData: AppPropertyState {
     return appState.property
@@ -27,7 +28,7 @@ class AppConfiguration {
     var rmbPrices: BehaviorRelay<[RMBPrices]> = BehaviorRelay(value: [])
 
     var appCoordinator: AppCoordinator!
-    var timer: Repeater?
+    var timer: Disposable?
 
     static let rmbPrecision = 4
     static let percentPrecision = 2
@@ -36,6 +37,14 @@ class AppConfiguration {
     private init() {
         let rootVC = BaseTabbarViewController()
         appCoordinator = AppCoordinator(rootVC: rootVC)
+
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
+            self.timer?.dispose()
+        }
+
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
+            self.startFetchOuterPrice()
+        }
     }
 
     static var ServerIconsBaseURLString = "https://app.cybex.io/icons/"
@@ -62,25 +71,15 @@ extension AppConfiguration {
     }
 
     func startFetchOuterPrice() {
-        self.timer?.pause()
-        self.timer = nil
+        timer?.dispose()
 
         self.fetchOuterPrice()
-
-        self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
+        timer = Observable<Int>.interval(3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (n) in
             guard let self = self else { return }
             self.fetchOuterPrice()
-        }
-        timer?.start()
 
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
-            self.timer?.pause()
-            self.timer = nil
-        }
-
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-            self.startFetchOuterPrice()
-        }
+            Log.print(n, flag: "timer----")
+        })
     }
 
     private func fetchOuterPrice() {

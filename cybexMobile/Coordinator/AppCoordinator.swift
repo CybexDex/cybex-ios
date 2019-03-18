@@ -14,9 +14,10 @@ import SwiftTheme
 import SwifterSwift
 import Repeat
 import RxCocoa
+import RxSwift
 
 class AppCoordinator {
-    var fetchPariTimer: Repeater?
+    var fetchMarketListTimer: Disposable?
 
     var store = Store<AppState> (
         reducer: appReducer,
@@ -52,9 +53,8 @@ class AppCoordinator {
             return false
         }
 
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
-            self.fetchPariTimer?.pause()
-            self.fetchPariTimer = nil
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
+            self.fetchMarketListTimer?.dispose()
         }
     }
 
