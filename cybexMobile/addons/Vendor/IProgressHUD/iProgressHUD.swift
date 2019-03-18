@@ -48,7 +48,7 @@ open class iProgressHUD {
     /** Setting the caption distance with indicator view. Default is 0. */
     open var captionDistance: CGFloat = 0
     /** Show or hide the caption view. Default is true. */
-    open var isShowCaption: Bool = true
+    open var isShowCaption: Bool = false
     /** Show or hide the modal view. Default is true. */
     open var isShowModal: Bool = true
     /** Show or hide the box view. Default is true. */
@@ -62,7 +62,7 @@ open class iProgressHUD {
     /** Change the modal view color. Default is white. */
     open var modalColor: UIColor = .white
     /** Change the box view color. Default is black. */
-    open var boxColor: UIColor = .black
+    open var boxColor: UIColor = UIColor.black.withAlphaComponent(0)
     /** Change the text color of caption. Default is white. */
     open var captionColor: UIColor = .white
     /** Change the indicator view color. Default is white. */

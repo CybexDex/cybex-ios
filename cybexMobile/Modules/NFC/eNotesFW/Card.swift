@@ -152,6 +152,7 @@ extension Card {
 
         if(bnS > (SECP256K1.secp256k1_N >> 1)){
             bnS = SECP256K1.secp256k1_N - bnS
+
             return String(bnS, radix: 16, uppercase: true)
         }
 

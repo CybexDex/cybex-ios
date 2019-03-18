@@ -9,8 +9,11 @@
 import Foundation
 import WebKit
 import TinyConstraints
+import SwiftTheme
 
 class BaseWebViewController: BaseViewController {
+    let progressView = UIProgressView(progressViewStyle: .default)
+    private var estimatedProgressObserver: NSKeyValueObservation?
 
     public var url: URL? {
         didSet {
@@ -39,6 +42,8 @@ class BaseWebViewController: BaseViewController {
         super.viewDidLoad()
 
         self.edgesForExtendedLayout = []
+        setupProgressView()
+        setupEstimatedProgressObserver()
 
         webView.uiDelegate = self
         webView.navigationDelegate = self
@@ -50,6 +55,33 @@ class BaseWebViewController: BaseViewController {
         }
     }
 
+    private func setupProgressView() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        navigationBar.addSubview(progressView)
+
+        progressView.isHidden = true
+        progressView.progressTintColor = UIColor.pastelOrange
+        let color = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
+        progressView.trackTintColor = color
+
+        NSLayoutConstraint.activate([
+            progressView.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor),
+
+            progressView.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            progressView.heightAnchor.constraint(equalToConstant: 2.0)
+            ])
+    }
+
+    private func setupEstimatedProgressObserver() {
+        estimatedProgressObserver = webView.observe(\.estimatedProgress, options: [.new]) { [weak self] webView, _ in
+            self?.progressView.progress = Float(webView.estimatedProgress)
+        }
+    }
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -57,23 +89,40 @@ class BaseWebViewController: BaseViewController {
 
 extension BaseWebViewController: WKUIDelegate, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.startLoading()
+        if progressView.isHidden {
+            // Make sure our animation is visible.
+            progressView.isHidden = false
+        }
+
+        UIView.animate(withDuration: 0.33,
+                       animations: {
+                        self.progressView.alpha = 1.0
+        })
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        endLoading()
+        UIView.animate(withDuration: 0.33,
+                       animations: {
+                        self.progressView.alpha = 0.0
+        },
+                       completion: { isFinished in
+                        // Update `isHidden` flag accordingly:
+                        //  - set to `true` in case animation was completly finished.
+                        //  - set to `false` in case animation was interrupted, e.g. due to starting of another animation.
+                        self.progressView.isHidden = isFinished
+        })
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         if error._code == NSURLErrorCancelled {
             return
         } else {
-            endLoading()
+//            endLoading()
         }
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        endLoading()
+//        endLoading()
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

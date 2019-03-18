@@ -298,7 +298,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                     callback(data)
-                    Log.print(data)
+//                    Log.print(data, flag: "eNotes---")
                 }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)
             }

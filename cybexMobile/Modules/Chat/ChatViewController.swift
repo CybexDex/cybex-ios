@@ -331,7 +331,7 @@ class ChatViewController: MessagesViewController {
             }
 
             if message == "已链接" {
-                UIHelper.showSuccessTop(message)
+                UIHelper.showSuccessTop(message, autodismiss: true)
             } else {
                 UIHelper.showErrorTop(message)
             }

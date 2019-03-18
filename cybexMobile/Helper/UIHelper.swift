@@ -18,11 +18,11 @@ class UIHelper {
     static var statusBanner: StatusBarNotificationBanner? = nil
 
     @discardableResult
-    class func showSuccessTop(_ str: String) -> NotificationBanner {
+    class func showSuccessTop(_ str: String, autodismiss: Bool = false) -> NotificationBanner {
         let banner = NotificationBanner(title: "", subtitle: str, style: .success)
         banner.duration = 2
         banner.subtitleLabel?.textAlignment = NSTextAlignment.center
-        banner.autoDismiss = false
+        banner.autoDismiss = autodismiss
         banner.dismissOnSwipeUp = true
         banner.dismissOnTap = true
         if banner.bannerQueue.numberOfBanners == 0 {

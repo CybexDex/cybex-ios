@@ -163,10 +163,11 @@ extension UIView {
         let iprogress: iProgressHUD = iProgressHUD()
         iprogress.delegete = dele
         iprogress.iprogressStyle = .horizontal
-        iprogress.indicatorStyle = .orbit
+        iprogress.indicatorStyle = .lineScalePulseOut
         iprogress.isShowModal = false
-        iprogress.boxSize = 35
-        iprogress.boxYOffset = 100
+        iprogress.boxSize = 50
+        iprogress.boxYOffset = 25
+        iprogress.indicatorColor = UIColor.pastelOrange
 
         iprogress.attachProgress(toViews: self)
     }
