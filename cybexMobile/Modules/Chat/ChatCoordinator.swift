@@ -46,6 +46,12 @@ class ChatCoordinator: NavCoordinator {
 
     let service = ChatService(UIDevice.current.uuid())
 
+    lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
+        if !AppHelper.shared.infront {
+            self.service.disconnect()
+        }
+    })
+
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
 
 
@@ -128,7 +134,7 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
-            self.service.disconnect()
+            self.disconnectDispatch()
         }
     }
     

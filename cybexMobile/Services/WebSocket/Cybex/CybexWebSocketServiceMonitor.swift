@@ -12,7 +12,7 @@ import Reachability
 extension CybexWebSocketService {
     func monitor() {
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (notifi) in
-            CybexWebSocketService.shared.disconnect()
+            self.disconnectDispatch()
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notifi) in

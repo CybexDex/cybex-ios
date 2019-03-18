@@ -53,6 +53,12 @@ class CybexWebSocketService: NSObject {
 
     private var currentNode: NodeURLString?
 
+    lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
+        if !AppHelper.shared.infront {
+            self.disconnect()
+        }
+    })
+    
     var needAutoConnect = true
     private var autoConnectCount = 0
     private let maxAutoConnectCount = 5
