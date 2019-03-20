@@ -77,7 +77,7 @@ class SettingViewController: BaseViewController {
 
     func refreshCloudPasswordStatus() {
         if UserManager.shared.loginType == .nfc {
-            if UserManager.shared.checkNeedCloudPassword() {
+            if !UserManager.shared.checkExistCloudPassword() {
                 eNotesCloudPasswordSet.contentLocali = R.string.localizable.enotes_cloudpassword_unset.key
                 eNotesCloudPasswordSet.rightIcon.isHidden = false
             } else {
@@ -110,7 +110,7 @@ class SettingViewController: BaseViewController {
         if sender == eNotesUnlockType {
             chooseUnlockType()
         } else if sender == eNotesCloudPasswordSet {
-            if UserManager.shared.checkNeedCloudPassword() {
+            if !UserManager.shared.checkExistCloudPassword() {
                 pushCloudPasswordViewController(nil)
             }
         } else if sender == language {

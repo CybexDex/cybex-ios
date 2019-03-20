@@ -41,9 +41,9 @@ extension EntryCoordinator: EntryCoordinatorProtocol {
         if #available(iOS 11.0, *) {
             NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
                 UserManager.shared.enotesLogin(card.account, pubKey: card.base58PubKey).done {
-                    self.dismiss()
+                        self.dismiss()
                     }.catch({ (error) in
-
+                        self.rootVC.topViewController?.showToastBox(false, message: R.string.localizable.enotes_not_match.key.localized())
                     })
             }
             NFCManager.shared.pinCodeNotExist.delegate(on: self) { (self, card) in

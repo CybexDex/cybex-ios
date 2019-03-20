@@ -314,7 +314,7 @@ class ETOProjectViewModel {
             } else {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offerAt!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
-            result += R.string.localizable.eto_currency.key.localized() + data.baseTokenName.filterJade + "\n"
+            result += R.string.localizable.eto_currency.key.localized() + data.baseTokenName.filterSystemPrefix + "\n"
 
             result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.baseTokenName + "=" + "\(data.rate)" + data.tokenName
         }

@@ -11,7 +11,7 @@ import UIKit
 class CybexShowTitleView: UIView {
 
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var contentLable: UILabel!
+    @IBOutlet weak var contentLable: BaseLabel!
 
     @objc fileprivate func updateHeight() {
         layoutIfNeeded()

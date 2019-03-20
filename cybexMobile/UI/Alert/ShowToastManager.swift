@@ -20,6 +20,7 @@ protocol Views {
 @objc protocol ShowManagerDelegate {
     func returnUserPassword(_ sender: String, textView: CybexTextView)
     @objc func returnEnsureAction()
+    @objc func returnEnsureActionWithData(_ tag: String)
     @objc func returnEnsureImageAction()
     @objc func cancelImageAction(_ sender: CybexTextView)
     @objc func ensureWaitingAction(_ sender: CybexWaitingView)
@@ -31,6 +32,7 @@ class ShowToastManager {
     static let shared = ShowToastManager()
     var timerTime: TimeInterval = 30
     var timer: Timer?
+    var tag = ""
 
     var delegate: ShowManagerDelegate?
 
@@ -204,6 +206,7 @@ class ShowToastManager {
         self.showView = nil
         self.shadowView = nil
         self.data = nil
+        self.tag = ""
     }
 
     func hide(_ time: TimeInterval) {
@@ -267,21 +270,24 @@ class ShowToastManager {
         }
     }
 
-    func setUp(title: String, contentView: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
+    func setUp(title: String, contentView: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal, tag: String) {
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alertImage
+        self.tag = tag
         self.setupText(contentView, ensureButtonLocali: ensureButtonLocali, title: title, cybexTextViewType: middleType)
     }
 
-    func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType) {
+    func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType, tag: String) {
         self.animationShow  = animationType
+        self.tag = tag
         self.showType       = ShowManagerType.alertImage
         self.setupTextImage(contentView, titleImage: titleImage)
     }
 
-    func setUp(_ title: String, content: String, time: Int, animationType: ShowAnimationType) {
+    func setUp(_ title: String, content: String, time: Int, animationType: ShowAnimationType, tag: String) {
         self.animationShow = animationType
         self.showType = ShowManagerType.waiting
+        self.tag = tag
         self.setupWaiting(title, content: content, time: time)
     }
 
@@ -371,9 +377,6 @@ extension ShowToastManager: CybexTextViewDelegate {
             self.updateCybexTextViewType(sender)
             self.delegate?.returnInviteCode(password)
         }
-        else if let type = sender.viewType, type == .code {
-            self.delegate?.returnUserPassword(password, textView: sender)
-        }
         else {
             self.delegate?.returnUserPassword(password, textView: sender)
         }
@@ -385,8 +388,12 @@ extension ShowToastManager: CybexTextViewDelegate {
     }
 
     func returnEnsureAction() {
+        let data = self.tag
         self.hide(0)
+
+        self.delegate?.returnEnsureActionWithData(data)
         self.delegate?.returnEnsureAction()
+
         if self.isShowSingleBtn != nil {
             self.ensureClickBlock()
         }

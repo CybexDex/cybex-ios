@@ -21,7 +21,7 @@ platform :ios do
   
   delete_keychain(
     name: "ios-build"
-  ) if File.exist? File.expand_path("ios-build-db")
+  ) if File.exist? File.expand_path("~/Library/Keychains/ios-build-db")
     
   create_keychain(
     name: "ios-build",

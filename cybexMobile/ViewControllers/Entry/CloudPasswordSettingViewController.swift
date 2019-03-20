@@ -11,6 +11,8 @@ import UIKit
 import SwiftTheme
 import RxSwift
 import RxCocoa
+import SwiftyJSON
+import cybex_ios_core_cpp
 
 class CloudPasswordSettingViewController: BaseViewController {
 
@@ -19,7 +21,8 @@ class CloudPasswordSettingViewController: BaseViewController {
     @IBOutlet weak var errorStackView: UIStackView!
     @IBOutlet weak var passwordRuleHint: UILabel!
     @IBOutlet weak var ensureButton: Button!
-
+    @IBOutlet weak var hintLabel: BaseLabel!
+    
     var passwordValid = false
     var confirmValid = false
     var card: Card? = nil
@@ -45,6 +48,7 @@ class CloudPasswordSettingViewController: BaseViewController {
         confirmPasswordTextField.activityView?.isHidden = true
         confirmPasswordTextField.tailImage = nil
 
+        self.hintLabel.locali = R.string.localizable.enotes_cloudpassword_set_hint.key
     }
 
     func setupPasswordEvent() {
@@ -136,22 +140,107 @@ class CloudPasswordSettingViewController: BaseViewController {
 
                 self.startLoading()
 
-                _ = self.passwordTextField.text ?? ""
-
-                let jsonstr = ""
+                let password = self.passwordTextField.text ?? ""
                 
-                let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                    self.endLoading()
-                    if String(describing: data) == "<null>"{
-                        self.showToastBox(true, message: R.string.localizable.lockup_asset_claim_success.key.localized())
-                    } else {
-                        self.showToastBox(false, message: R.string.localizable.lockup_asset_claim_fail.key.localized())
-                    }
-                }, jsonstr: jsonstr)
+                if let name = UserManager.shared.name.value, let accountkeys = UserManager.shared.generateAccountKeys(name, password: password) {
+                    CybexDatabaseApiService.request(target: .getAccount(name: name), success: { (json) in
+                        guard let operation = self.compositeOperation(json, accountkeys: accountkeys) else {
+                            return
+                        }
 
-                CybexWebSocketService.shared.send(request: withdrawRequest)
+                        CybexChainHelper.calculateFee(operation,
+                                                      operationID: .accountUpdate, focusAssetId: AssetConfiguration.CybexAsset.CYB.id) { (success, amount, assetID) in
+                                                        if success {
+                                                            guard let newOperation = self.updateFeeOfOperation(operation, amount: amount) else {
+                                                                return
+                                                            }
+
+                                                            CybexChainHelper.blockchainParams { (blockchainParams) in
+                                                                if #available(iOS 11.0, *) {
+                                                                    NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                                                                        BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+
+                                                                        let jsonstr = BitShareCoordinator.updateAccount(blockchainParams.block_num.int32, block_id: blockchainParams.block_id, expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration, chain_id: CybexConfiguration.shared.chainID.value, operation: newOperation)
+                                                                        let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                                                                            self.endLoading()
+                                                                            if String(describing: data) == "<null>"{
+                                                                                self.showToastBox(true, message: R.string.localizable.enotes_cloudPassword_add_success.key.localized())
+                                                                                UserManager.shared.unlock(name, password: password).done({ (fullaccount) in
+                                                                                    UserManager.shared.handlerFullAcount(fullaccount)
+                                                                                }).cauterize()
+
+                                                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                                                                    self.navigationController?.popViewController()
+                                                                                })
+                                                                            } else {
+                                                                                self.showToastBox(false, message: R.string.localizable.enotes_cloudPassword_add_fail.key.localized())
+                                                                            }
+                                                                        }, jsonstr: jsonstr)
+
+                                                                        CybexWebSocketService.shared.send(request: withdrawRequest)
+
+                                                                    }
+                                                                    NFCManager.shared.start()
+                                                                }
+
+
+
+                                                            }
+                                                        }
+                        }
+
+                    }, error: { (error) in
+
+                    }, failure: { (error) in
+
+                    })
+
+
+
+                }
+
+
 
             }).disposed(by: disposeBag)
+    }
+
+    func compositeOperation(_ fullaccount: JSON, accountkeys: AccountKeys) -> String? {
+        guard let id = fullaccount[0][1]["account"]["id"].rawString(),
+            var active = fullaccount[0][1]["account"]["active"].dictionaryObject,
+            var activeKeyAuths = active["key_auths"] as? [Any],
+            var options = fullaccount[0][1]["account"]["options"].dictionaryObject,
+            let ownerKey = accountkeys.ownerKey?.publicKey
+        else {
+                return nil
+        }
+
+        activeKeyAuths.append([ownerKey, 1])
+        active["key_auths"] = activeKeyAuths
+        options["memo_key"] = ownerKey
+
+        let dic = ["fee": ["amount": 0, "asset_id": "1.3.0"],
+                   "account": id,
+                   "active": active,
+                   "new_options": options,
+                   "extensions":[:]
+            ] as [String : Any]
+
+        return JSON(dic).rawString()
+    }
+
+    func updateFeeOfOperation(_ op: String, amount: Decimal) -> String? {
+        guard var json = JSON(parseJSON: op).dictionaryObject,
+            var fee = json["fee"] as? [String: Any],
+            let asset = appData.assetInfo[AssetConfiguration.CybexAsset.CYB.id]
+            else {
+                return nil
+        }
+
+        fee["amount"] = (amount * pow(10, asset.precision)).int64Value
+
+        json["fee"] = fee
+
+        return JSON(json).rawString()
     }
 
 }

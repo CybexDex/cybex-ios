@@ -861,7 +861,7 @@
                                     <constraint firstAttribute="height" constant="48" id="LgI-Um-1Ji"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="register"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="alert_ensure"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -887,6 +887,7 @@
                         <outlet property="confirmPasswordTextField" destination="DWP-vx-2Tc" id="dux-ri-I6o"/>
                         <outlet property="ensureButton" destination="Y4e-sd-AxN" id="SvH-pc-qza"/>
                         <outlet property="errorStackView" destination="Is1-nW-km2" id="Bup-7x-PHg"/>
+                        <outlet property="hintLabel" destination="N6W-ab-1Lg" id="Ktk-jE-NXF"/>
                         <outlet property="passwordRuleHint" destination="ebB-qq-J2U" id="ySj-AQ-v4e"/>
                         <outlet property="passwordTextField" destination="xQc-ho-ABL" id="1PV-o9-Eyy"/>
                     </connections>

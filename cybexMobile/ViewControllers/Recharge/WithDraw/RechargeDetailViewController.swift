@@ -44,7 +44,7 @@ class RechargeDetailViewController: BaseViewController {
             if let trade = self.trade {
                 self.balance = UserHelper.getBalanceWithAssetId(trade.id)
                 self.precision = appData.assetInfo[trade.id]?.precision
-                self.isEOS = trade.id == AssetConfiguration.CybexAsset.EOS.id || appData.assetInfo[trade.id]?.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue
+                self.isEOS = trade.id == AssetConfiguration.CybexAsset.EOS.id || appData.assetInfo[trade.id]?.symbol.filterSystemPrefix == AssetConfiguration.CybexAsset.XRP.rawValue
                 self.coordinator?.getFee(trade.id, address: "", isEOS: self.isEOS)
             }
         }
@@ -63,10 +63,10 @@ class RechargeDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-            self.title = tradeInfo.symbol.filterJade + R.string.localizable.recharge_title.key.localized()
+            self.title = tradeInfo.symbol.filterSystemPrefix + R.string.localizable.recharge_title.key.localized()
             
             self.startLoading()
-            self.coordinator?.fetchWithDrawInfoData(tradeInfo.symbol.filterJade)
+            self.coordinator?.fetchWithDrawInfoData(tradeInfo.symbol.filterSystemPrefix)
         }
         
         setupUI()
@@ -163,7 +163,7 @@ class RechargeDetailViewController: BaseViewController {
                     }
 
                     if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-                        let assetName = tradeInfo.symbol.filterJade
+                        let assetName = tradeInfo.symbol.filterSystemPrefix
 
                         self.contentView.addressView.addressState = .loading
                         RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
@@ -286,10 +286,10 @@ class RechargeDetailViewController: BaseViewController {
             }
             
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id], let precision = self.precision, let balance = self.balance {
-                self.contentView.insideFee.text = data.fee.formatCurrency(digitNum: precision) + " " + tradeInfo.symbol.filterJade
+                self.contentView.insideFee.text = data.fee.formatCurrency(digitNum: precision) + " " + tradeInfo.symbol.filterSystemPrefix
                 self.contentView.avaliableView.content.text = AssetHelper.getRealAmount(
                     balance.assetType,
-                    amount: balance.balance).formatCurrency(digitNum: tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
+                    amount: balance.balance).formatCurrency(digitNum: tradeInfo.precision) + " " + tradeInfo.symbol.filterSystemPrefix
             }
             self.setFinalAmount()
             SwifterSwift.delay(milliseconds: 300) {
@@ -304,9 +304,9 @@ class RechargeDetailViewController: BaseViewController {
             if let data = result, data.success, let feeInfo = appData.assetInfo[data.0.assetId] {
                 let fee = data.0
                 if let trade = self.trade, let precision = self.precision, feeInfo.id == trade.id {
-                    self.contentView.gateAwayFee.text = fee.amount.formatCurrency(digitNum: precision) + " " + feeInfo.symbol.filterJade
+                    self.contentView.gateAwayFee.text = fee.amount.formatCurrency(digitNum: precision) + " " + feeInfo.symbol.filterSystemPrefix
                 } else {
-                    self.contentView.gateAwayFee.text = fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterJade
+                    self.contentView.gateAwayFee.text = fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterSystemPrefix
                 }
                 self.feeAssetId = fee.assetId
                 self.setFinalAmount()
@@ -332,7 +332,7 @@ class RechargeDetailViewController: BaseViewController {
             let balance = self.balance,
             let balanceInfo = appData.assetInfo[balance.assetType],
             let precision = self.precision else { return }
-        self.contentView.finalAmount.text = finalAmount.formatCurrency(digitNum: precision) + " " + balanceInfo.symbol.filterJade
+        self.contentView.finalAmount.text = finalAmount.formatCurrency(digitNum: precision) + " " + balanceInfo.symbol.filterSystemPrefix
     }
 }
 
@@ -396,7 +396,7 @@ extension RechargeDetailViewController {
     func confirm() {
         if self.contentView.withdraw.isEnable, let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
             let data = UIHelper.getWithdrawDetailInfo(addressInfo: self.contentView.addressView.content.text!,
-                                                      amountInfo: self.contentView.amountView.content.text! + " " + tradeInfo.symbol.filterJade,
+                                                      amountInfo: self.contentView.amountView.content.text! + " " + tradeInfo.symbol.filterSystemPrefix,
                                                       withdrawFeeInfo: self.contentView.insideFee.text!,
                                                       gatewayFeeInfo: self.contentView.gateAwayFee.text!,
                                                       receiveAmountInfo: self.contentView.finalAmount.text!,

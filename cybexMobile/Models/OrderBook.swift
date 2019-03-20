@@ -29,9 +29,9 @@ class LimitOrder: HandyJSON {
 
         let (base, _) = MarketHelper.calculateAssetRelation(
             assetIDAName: (assetAInfo != nil) ?
-                assetAInfo!.symbol.filterOnlyJade : "",
+                assetAInfo!.symbol.filterOnlySystemPrefix : "",
             assetIDBName: (assetBInfo != nil) ?
-                assetBInfo!.symbol.filterOnlyJade : "")
+                assetBInfo!.symbol.filterOnlySystemPrefix : "")
 
         return (base == ((assetAInfo != nil) ? assetAInfo!.symbol : ""))
     }
@@ -113,9 +113,9 @@ class LimitOrderStatus: HandyJSON {
         let assetBInfo = appData.assetInfo[self.asset2]
         let (base, quote) = MarketHelper.calculateAssetRelation(
             assetIDAName: (assetAInfo != nil) ?
-                assetAInfo!.symbol.filterOnlyJade : "",
+                assetAInfo!.symbol.filterOnlySystemPrefix : "",
             assetIDBName: (assetBInfo != nil) ?
-                assetBInfo!.symbol.filterOnlyJade : "")
+                assetBInfo!.symbol.filterOnlySystemPrefix : "")
         
         return Pair(base: base.assetID, quote: quote.assetID)
     }

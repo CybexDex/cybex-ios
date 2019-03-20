@@ -18,7 +18,7 @@ class LockupAssetsView: UIView {
         didSet {
             guard let data = data as? LockupAssteData else { return }
             self.iconImgV.kf.setImage(with: URL(string: data.icon))
-            nameL.text = data.name.filterJade
+            nameL.text = data.name.filterSystemPrefix
             if data.progress.formatCurrency(digitNum: 0) == "1" {
                 self.claimBtn.isEnabled = true
                 self.claimBtn.setBackgroundImage(R.image.btn_color_orange(), for: .normal)

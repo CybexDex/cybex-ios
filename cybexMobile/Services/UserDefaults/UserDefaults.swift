@@ -21,6 +21,7 @@ extension DefaultsKeys {
 
     static let username = DefaultsKey<String>("com.nbltrust.cybex.username", defaultValue: "")
     static let keys = DefaultsKey<String>("com.nbltrust.cybex.keys", defaultValue: "")
+    static let enotesKeys = DefaultsKey<String>("com.nbltrust.cybex.enotesKeys", defaultValue: "")
     static let account = DefaultsKey<String>("com.nbltrust.cybex.account", defaultValue: "")
 
     static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList", defaultValue: [])

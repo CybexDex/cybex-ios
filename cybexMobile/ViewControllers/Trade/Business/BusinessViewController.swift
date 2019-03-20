@@ -87,7 +87,7 @@ class BusinessViewController: BaseViewController {
     func refreshView() {
         guard let pair = pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
         
-        self.containerView.quoteName.text = quoteInfo.symbol.filterJade
+        self.containerView.quoteName.text = quoteInfo.symbol.filterSystemPrefix
         
         self.coordinator?.getFee(self.type == .buy ? baseInfo.id : quoteInfo.id)
         
@@ -129,7 +129,7 @@ class BusinessViewController: BaseViewController {
             guard let pair = pair, let quoteInfo = appData.assetInfo[pair.quote] else { return }
             self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key : R.string.localizable.openedSell.key
             if let title = self.containerView.button.button.titleLabel?.text {
-                self.containerView.button.button.setTitle("\(title) \(quoteInfo.symbol.filterJade)", for: .normal)
+                self.containerView.button.button.setTitle("\(title) \(quoteInfo.symbol.filterSystemPrefix)", for: .normal)
             }
         } else {
             self.containerView.button.locali = R.string.localizable.business_login_title.key
@@ -155,9 +155,9 @@ class BusinessViewController: BaseViewController {
             R.string.localizable.openedorder_buy_ensure.key.localized() :
             R.string.localizable.openedorder_sell_ensure.key.localized()
 
-        let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterJade
-        let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterJade
-        let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterJade
+        let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterSystemPrefix
+        let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterSystemPrefix
+        let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterSystemPrefix
         showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy))
     }
     
@@ -186,7 +186,7 @@ class BusinessViewController: BaseViewController {
             }
             
             let info = self.type == .buy ? baseInfo : quoteInfo
-            let symbol = info.symbol.filterJade
+            let symbol = info.symbol.filterSystemPrefix
             let realAmount = balance.formatCurrency(digitNum: info.precision)
             
             self.containerView.balance.text = "\(realAmount) \(symbol)"
@@ -202,7 +202,7 @@ class BusinessViewController: BaseViewController {
                 return
             }
 
-            self.containerView.fee.text = feeAmount.formatCurrency(digitNum: info.precision) + " \(info.symbol.filterJade)"
+            self.containerView.fee.text = feeAmount.formatCurrency(digitNum: info.precision) + " \(info.symbol.filterSystemPrefix)"
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //total
@@ -225,7 +225,7 @@ class BusinessViewController: BaseViewController {
 //                    self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterJade)"
 //                    return
 //                }
-                self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterJade)"
+                self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterSystemPrefix)"
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     func addUserManagerObserverSubscribeAction() {

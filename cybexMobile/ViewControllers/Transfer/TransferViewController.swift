@@ -102,11 +102,11 @@ class TransferViewController: BaseViewController {
             guard let self = self else { return }
             if let balance = balance, let balanceInfo = appData.assetInfo[balance.assetType] {
                 if let info = appData.assetInfo[balance.assetType] {
-                    self.transferView.crypto = info.symbol.filterJade
+                    self.transferView.crypto = info.symbol.filterSystemPrefix
                     self.transferView.precision = info.precision
                     let realBalance = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance)
                     let transferBalanceKey = R.string.localizable.transfer_balance.key.localized()
-                    self.transferView.balance = transferBalanceKey + realBalance.formatCurrency(digitNum: info.precision) + " " + balanceInfo.symbol.filterJade
+                    self.transferView.balance = transferBalanceKey + realBalance.formatCurrency(digitNum: info.precision) + " " + balanceInfo.symbol.filterSystemPrefix
                     self.transferView.quantityView.textField.text = ""
                     self.coordinator?.setAmount("")
                 }
@@ -118,7 +118,7 @@ class TransferViewController: BaseViewController {
             guard let self = self else { return }
             if let data = result, let feeInfo = appData.assetInfo[data.assetId] {
                 let fee = data
-                self.transferView.fee = fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterJade
+                self.transferView.fee = fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterSystemPrefix
                 self.coordinator?.validAmount()
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -208,8 +208,8 @@ class TransferViewController: BaseViewController {
             let fee = self.coordinator?.state.fee.value {
             if let feeInfo = appData.assetInfo[fee.assetId] {
                 let data = UIHelper.getTransferInfo(account,
-                                           quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!,
-                                           fee: fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterJade,
+                                           quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix)!,
+                                           fee: fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterSystemPrefix,
                                            memo: memo.replacingOccurrences(of: "\n", with: "...\n"))
                 showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
             }
@@ -226,6 +226,8 @@ class TransferViewController: BaseViewController {
         self.coordinator?.transfer(timeUnit[self.selectedVestingTimeIndex] * timeAmount,
                                    toPubKey: self.transferView.postVestingView.pubkeyTextview.text ?? "", callback: {[weak self] (data) in
                                     guard let self = self else { return }
+
+                                    Log.print(data)
                                     self.endLoading()
                                     ShowToastManager.shared.hide()
                                     if self.isVisible {
@@ -266,14 +268,26 @@ extension TransferViewController {
         }
     }
 
-    override func returnEnsureAction() {
+    override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.enotes_feature_hint.key.localized() { // 添加云账户
+            pushCloudPasswordViewController(nil)
+            return
+        }
         if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
             if #available(iOS 11.0, *) {
-                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
-                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
-                    self.transfer()
+                if !self.coordinator!.state.memo.value.isEmpty {
+                    if !UserManager.shared.checkExistCloudPassword() {
+                        showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+                    } else {
+                        showPasswordBox(R.string.localizable.enotes_unlock_type_1.key.localized(), hintKey: R.string.localizable.enotes_transfer_memo_hint.key, middleType: .normal)
+                    }
+                } else {
+                    NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                        BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+                        self.transfer()
+                    }
+                    NFCManager.shared.start()
                 }
-                NFCManager.shared.start()
             }
         } else if UserManager.shared.isLocked {
             showPasswordBox()
@@ -325,7 +339,7 @@ extension TransferViewController {
     @objc func memo(_ data: [String: Any]) {
         guard let content = data["content"] as? String else { return }
 
-        if !content.isEmpty, !UserManager.shared.permission.withdraw {
+        if !content.isEmpty, !UserManager.shared.permission.withdraw, UserManager.shared.unlockType == .cloudPassword {
             showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
             return
         }

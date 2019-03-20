@@ -626,6 +626,8 @@
 "enotes_pin_validtor_title" = "Verify eNotes password";
 "enotes_not_match" = "Wrong eNotes Card";
 "enotes_login" = "eNotes Login";
+"enotes_cloudPassword_add_success" = "Added Success";
+"enotes_cloudPassword_add_fail" = "Added Fail";
 "confirm_hint_title" = "HINT";
 "lock_time" = "%d min";
 "lock_time_title" = "UnLock Time";

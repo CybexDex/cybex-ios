@@ -20,7 +20,7 @@ protocol LockupAssetsStateManagerProtocol {
     // 定义拉取数据的方法
     func fetchLockupAssetsData(_ address: [String])
     
-    func applyLockupAsset(_ sender: LockupAssteData, callback: @escaping (Bool)->())
+    func applyLockupAsset(_ sender: LockupAssteData, cloudpasswordUnlock: Bool, callback: @escaping (Bool)->())
 }
 
 class LockupAssetsCoordinator: NavCoordinator {
@@ -49,7 +49,7 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
         CybexWebSocketService.shared.send(request: request)
     }
     
-    func applyLockupAsset(_ sender: LockupAssteData, callback: @escaping (Bool)->()) {
+    func applyLockupAsset(_ sender: LockupAssteData, cloudpasswordUnlock: Bool ,callback: @escaping (Bool)->()) {
         guard let fromAccount = UserManager.shared.getCachedAccount() else {
             callback(false)
             return
@@ -59,32 +59,52 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                 let amount = balance.amount.decimal()
                 let balanceAmount = amount
 
-                guard let keys = UserManager.shared.getCachedKeysExcludePrivate(), let pubkey = KeyHelper.getPubKeyFrom(sender.owner, account: keys) else {
-                    return
-                }
-                BitShareCoordinator.resetDefaultPublicKey(pubkey)
-
-                let jsonstr = BitShareCoordinator.getClaimedSign(blockInfo.block_num.int32,
-                                                                 block_id: blockInfo.block_id,
-                                                                 expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                 chain_id: CybexConfiguration.shared.chainID.value,
-                                                                 fee_asset_id: 0,
-                                                                 fee_amount: 0,
-                                                                 deposit_to_account_id: fromAccount.id.getSuffixID,
-                                                                 claimed_id: sender.id.getSuffixID,
-                                                                 claimed_asset_id: balance.assetID.getSuffixID,
-                                                                 claimed_amount: balanceAmount.int64Value,
-                                                                 claimed_own: sender.owner)
-
-                let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                    if String(describing: data) == "<null>"{
-                        callback(true)
-                    } else {
-                        callback(false)
+                if cloudpasswordUnlock {
+                    guard let keys = UserManager.shared.getCachedKeysExcludePrivate(), let pubkey = KeyHelper.getPubKeyFrom(sender.owner, account: keys) else {
+                        return
                     }
-                }, jsonstr: jsonstr)
+                    BitShareCoordinator.resetDefaultPublicKey(pubkey)
+                } else {
+                    if #available(iOS 11.0, *) {
+                        NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                            BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+                            claimBroadcast()
+                        }
+                        NFCManager.shared.start()
+                        return
+                    }
+                }
 
-                CybexWebSocketService.shared.send(request: withdrawRequest)
+
+                if cloudpasswordUnlock {
+                    BitShareCoordinator.resetDefaultPublicKey(UserManager.shared.permission.defaultKey)
+                }
+
+                func claimBroadcast() {
+                    let jsonstr = BitShareCoordinator.getClaimedSign(blockInfo.block_num.int32,
+                                                                     block_id: blockInfo.block_id,
+                                                                     expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                                                                     chain_id: CybexConfiguration.shared.chainID.value,
+                                                                     fee_asset_id: 0,
+                                                                     fee_amount: 0,
+                                                                     deposit_to_account_id: fromAccount.id.getSuffixID,
+                                                                     claimed_id: sender.id.getSuffixID,
+                                                                     claimed_asset_id: balance.assetID.getSuffixID,
+                                                                     claimed_amount: balanceAmount.int64Value,
+                                                                     claimed_own: sender.owner)
+
+                    let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                        if String(describing: data) == "<null>"{
+                            callback(true)
+                        } else {
+                            callback(false)
+                        }
+                    }, jsonstr: jsonstr)
+
+                    CybexWebSocketService.shared.send(request: withdrawRequest)
+                }
+
+                claimBroadcast()
             }
 
         }

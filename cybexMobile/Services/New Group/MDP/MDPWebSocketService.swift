@@ -17,7 +17,7 @@ class MDPWebSocketService: NSObject {
         case ticker = "TICKER"
 
         var topic: String {
-            return Defaults.isTestEnv ? "\(self.rawValue).TEST" : self.rawValue
+            return self.rawValue
         }
     }
 
@@ -145,7 +145,7 @@ class MDPWebSocketService: NSObject {
 
     fileprivate func topicToPair(_ topic: String) -> Pair {
         let pairStr = topic.components(separatedBy: ".")[1]
-        let pair = pairStr.filterOnlyJade.replacingOccurrences(of: "_", with: ".")
+        let pair = pairStr.filterOnlySystemPrefix.replacingOccurrences(of: "_", with: ".")
 
         var baseAssets = MarketConfiguration.marketBaseAssets.map({ $0.name })
         if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {

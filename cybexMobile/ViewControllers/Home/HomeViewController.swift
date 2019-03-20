@@ -120,26 +120,39 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.contentView?.tableView.reloadData()
+
+        if checkNeedRefresh(appData.tickerData.value) {
+            self.updateUI()
+            if self.vcType == ViewType.comprehensive.rawValue {
+                self.parent?.endLoading()
+            } else {
+                self.endLoading()
+            }
+        }
+    }
+
+    func checkNeedRefresh(_ result: [Ticker]) -> Bool {
+        if self.vcType == ViewType.comprehensive.rawValue {
+            if result.count >= MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
+                return true
+            }
+        } else {
+            let tickers = result.filter { (ticker) -> Bool in
+                return ticker.base == self.base
+            }
+            if tickers.count == MarketConfiguration.shared.marketPairs.value.filter({ $0.base == self.base}).count,
+                tickers.count != 0 {
+                return true
+            }
+        }
+        return false
     }
 
     override func configureObserveState() {
         appData.tickerData.asObservable().filter({[weak self] (result) -> Bool in
             guard let self = self else { return false}
-            if self.vcType == ViewType.comprehensive.rawValue {
-                if result.count >= MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
-                    return true
-                }
-            } else {
-                let tickers = result.filter { (ticker) -> Bool in
-                    return ticker.base == self.base
-                }
-                if tickers.count == MarketConfiguration.shared.marketPairs.value.filter({ $0.base == self.base}).count,
-                    tickers.count != 0 {
-                    return true
-                }
-            }
-            return false
+
+            return self.checkNeedRefresh(result)
         }).take(1)
             .subscribe(onNext: {[weak self] (_) in
                 guard let self = self else { return }

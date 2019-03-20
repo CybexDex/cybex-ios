@@ -14,7 +14,7 @@ extension ETOCrowdView {
         guard let balances = UserManager.shared.fullAccount.value?.balances else { return }
 
         let balance = balances.filter { (balance) -> Bool in
-            if let name = appData.assetInfo[balance.assetType]?.symbol.filterJade {
+            if let name = appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix {
                 return name == model.baseTokenName
             }
 

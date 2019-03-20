@@ -78,7 +78,7 @@ class TradeViewController: BaseViewController {
     var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
     private(set) var context: TradeContext?
 
-    var pair: Pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
+    var pair: Pair = Defaults.isTestEnv ? Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id) : Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
         didSet {
             self.children.forEach { (viewController) in
                 if var viewController = viewController as? TradePair {
@@ -226,7 +226,7 @@ class TradeViewController: BaseViewController {
     }
     
     func refreshView() {
-        self.tradeTitltView.title.text = pair.quote.symbol.filterJade + "/" + pair.base.symbol.filterJade
+        self.tradeTitltView.title.text = pair.quote.symbol.filterSystemPrefix + "/" + pair.base.symbol.filterSystemPrefix
         self.children.forEach { (viewController) in
             if let viewController = viewController as? TradePair {
                 viewController.refresh()
@@ -267,7 +267,7 @@ extension TradeViewController: TradeNavTitleViewDelegate {
             self.coordinator?.removeHomeVC { [weak self] in
                 self?.isShowingTitleView = false
                 guard let self = self else { return }
-                self.tradeTitltView.title.text = self.pair.quote.symbol.filterJade + "/" + self.pair.base.symbol.filterJade
+                self.tradeTitltView.title.text = self.pair.quote.symbol.filterSystemPrefix + "/" + self.pair.base.symbol.filterSystemPrefix
             }
         } else {
             self.chooseTitleView = UIView()

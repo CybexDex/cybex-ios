@@ -31,17 +31,17 @@ class EntryViewController: BaseViewController {
 
         setupUI()
 
-        self.enotesLogin.isHidden = true
+//        self.enotesLogin.isHidden = true
 
-//        if #available(iOS 11.0, *) {
-//            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-//                self.enotesLogin.isHidden = false
-//            } else {
-//                self.enotesLogin.isHidden = true
-//            }
-//        } else {
-//            self.enotesLogin.isHidden = true
-//        }
+        if #available(iOS 11.0, *) {
+            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+                self.enotesLogin.isHidden = false
+            } else {
+                self.enotesLogin.isHidden = true
+            }
+        } else {
+            self.enotesLogin.isHidden = true
+        }
 
         setupEvent()
     }
@@ -92,7 +92,7 @@ extension EntryViewController {
 
             self.coordinator?.switchToEnotesLogin({[weak self] (card) in
                 self?.card = card
-                self?.showPasswordBox(R.string.localizable.enotes_pin_validtor_title.key.localized(), middleType: .code)
+                self?.showPasswordBox(R.string.localizable.enotes_pin_validtor_title.key.localized(), middleType: .normal)
             }, error: { (card) in
 
             })
@@ -129,7 +129,8 @@ extension EntryViewController {
                 self.passwordPassed(true)
                 self.coordinator?.dismiss()
                 }.catch({ (error) in
-                    self.passwordPassed(false)
+                    self.passwordPassed(true)
+                    self.showToastBox(false, message: R.string.localizable.enotes_not_match.key.localized())
                 })
         }
         else {

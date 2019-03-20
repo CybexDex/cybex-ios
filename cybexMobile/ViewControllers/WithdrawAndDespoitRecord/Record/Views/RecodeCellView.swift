@@ -24,12 +24,12 @@ class RecodeCellView: UIView {
             if let data = data as? Record {
                 let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "node_dark" : "node_white"
                 time.text = data.updateAt.string(withFormat: "MM/dd HH:mm:ss")
-                name.text = data.asset.filterJade
+                name.text = data.asset.filterSystemPrefix
                 state.text = data.state.desccription()
 
                 var assetInfo: AssetInfo?
                 for (_, value) in appData.assetInfo {
-                    if value.symbol.filterOnlyJade == data.asset.filterJade {
+                    if value.symbol.filterOnlySystemPrefix == data.asset.filterSystemPrefix {
                         assetInfo = value
                         break
                     }
@@ -47,7 +47,7 @@ class RecodeCellView: UIView {
                         "_grey.png"))
                     amount.text = AssetHelper.getRealAmount(assetInfo.id, amount: String(data.amount)).string.formatCurrency(digitNum: assetInfo.precision) +
                         " " +
-                        assetInfo.symbol.filterJade
+                        assetInfo.symbol.filterSystemPrefix
                 } else {
                     amount.text = "-"
                 }

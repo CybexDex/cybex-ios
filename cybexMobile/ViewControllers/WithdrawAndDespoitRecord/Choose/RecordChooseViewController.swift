@@ -182,7 +182,7 @@ extension RecordChooseViewController {
             let data = self.coordinator?.state.data.value {
             
             for(index, info) in data.enumerated() {
-                if info.filterJade == result {
+                if info.filterSystemPrefix == result {
                     self.selectedIndex = index
                     break
                 }

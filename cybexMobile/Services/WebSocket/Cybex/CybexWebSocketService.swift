@@ -17,6 +17,7 @@ import RxCocoa
 enum NodeURLString: String {
     case shanghai = "wss://shanghai.51nebula.com"
     case beijing = "wss://beijing.51nebula.com"
+
     case hongkong = "wss://hongkong.cybex.io"
     case singapore = "wss://singapore-01.cybex.io"
     case tokyo = "wss://tokyo-01.cybex.io"
@@ -24,11 +25,18 @@ enum NodeURLString: String {
     case hkback = "wss://hkbak.cybex.io"
 
     case test = "wss://hangzhou.51nebula.com/"
+    case test2 = "wss://shenzhen.51nebula.com/"
+
+
     case tmp = "ws://10.18.120.241:28090"
 
-    static var all: [NodeURLString] {
-//            return [.tmp]
+    static var product: [NodeURLString] {
+        //        return [.tmp]
         return [.hongkong, .hkback, .singapore, .tokyo, .korea]
+    }
+
+    static var dev: [NodeURLString] {
+        return [.test, .test2]
     }
 }
 
@@ -48,10 +56,11 @@ class CybexWebSocketService: NSObject {
     private var batchFactory: BatchFactory!
     private(set) var idGenerator: JsonIdGenerator = JsonIdGenerator()
 
-    private var socket = SRWebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
+    private var socket = SRWebSocket(url: URL(string: NodeURLString.hongkong.rawValue)!)
     private var testsockets: [SRWebSocket] = []
 
     private var currentNode: NodeURLString?
+    private var nodes: [NodeURLString] = NodeURLString.product
 
     lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
         if !AppHelper.shared.infront {
@@ -114,7 +123,7 @@ class CybexWebSocketService: NSObject {
 
         self.testsockets.removeAll()
 
-        for (idx, node) in NodeURLString.all.enumerated() {
+        for (idx, node) in nodes.enumerated() {
             var testsocket: SRWebSocket!
 
             if idx < testsockets.count {
@@ -145,10 +154,10 @@ class CybexWebSocketService: NSObject {
             isConnecting = true
             isClosing = false
             needAutoConnect = true
-            if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-                self.currentNode = NodeURLString.test
-                connectNode(node: NodeURLString.test)
-                return
+            if Defaults.isTestEnv {
+                nodes = NodeURLString.dev
+            } else {
+                nodes = NodeURLString.product
             }
             detectFastNode()
         }
@@ -360,7 +369,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         if isDetectingSocket(webSocket) {
             errorCount += 1
 
-            if errorCount == NodeURLString.all.count {
+            if errorCount == nodes.count {
                 closeAllTestSocket()
 
                 if needAutoConnect {

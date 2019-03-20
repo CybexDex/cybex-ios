@@ -103,7 +103,7 @@ class ChatViewController: MessagesViewController {
     
     func loadFirstMessages() {
         if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
-            let channel = quoteInfo.symbol.filterOnlyJade + "/" + baseInfo.symbol.filterOnlyJade
+            let channel = quoteInfo.symbol.filterOnlySystemPrefix + "/" + baseInfo.symbol.filterOnlySystemPrefix
             self.coordinator?.connectChat(channel)
         }
     }
@@ -151,7 +151,7 @@ class ChatViewController: MessagesViewController {
     
     func setupUI() {
         if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
-            self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
+            self.title = quoteInfo.symbol.filterSystemPrefix + "/" + baseInfo.symbol.filterSystemPrefix
         }
         
         self.view.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
@@ -308,7 +308,7 @@ class ChatViewController: MessagesViewController {
             guard let self = self else { return }
             
             if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
-                self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade + "(\(numberOfMember))"
+                self.title = quoteInfo.symbol.filterSystemPrefix + "/" + baseInfo.symbol.filterSystemPrefix + "(\(numberOfMember))"
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         

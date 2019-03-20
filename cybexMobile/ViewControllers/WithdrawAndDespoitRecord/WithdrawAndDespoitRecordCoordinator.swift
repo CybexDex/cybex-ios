@@ -78,7 +78,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                         } else {
                             var assetInfo: AssetInfo?
                             for (_, value) in appData.assetInfo {
-                                if value.symbol.filterJade == info.filterJade {
+                                if value.symbol.filterSystemPrefix == info.filterSystemPrefix {
                                     assetInfo = value
                                     break
                                 }

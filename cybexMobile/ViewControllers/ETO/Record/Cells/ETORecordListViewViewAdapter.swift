@@ -13,7 +13,7 @@ extension ETORecordListViewView {
         nameLabel.text = model.projectName
         actionLabel.text = model.ieoType.showTitle()
 
-        amountLabel.text = "\(model.tokenCount) \(model.token.filterJade)"
+        amountLabel.text = "\(model.tokenCount) \(model.token.filterSystemPrefix)"
         timeLabel.text = model.createdAt.string(withFormat: "yyyy-MM-dd HH:mm:ss")
         statusLabel.text = model.reason.showTitle()
         let reason = (model.reason == .ok || statusLabel.text == R.string.localizable.eto_invalid_partly_sub.key.localized())

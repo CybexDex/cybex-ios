@@ -13,7 +13,10 @@ import RxCocoa
 
 class AssetConfiguration {
     //base asset name
-    static let JadeSymbol = "JADE"
+    static var systemSymbol: String {
+        return Defaults.isTestEnv ? "TEST" : "JADE"
+    }
+
     static let ArenaSymbol = "ARENA"
 
     enum CybexAsset: String, CaseIterable {
@@ -35,15 +38,15 @@ class AssetConfiguration {
             case .CYB:
                 return "1.3.0"
             case .BTC:
-                return Defaults.isTestEnv ? "1.3.58" : "1.3.3"
+                return Defaults.isTestEnv ? "1.3.3" : "1.3.3"
             case .ETH:
-                return Defaults.isTestEnv ? "1.3.53" : "1.3.2"
+                return Defaults.isTestEnv ? "1.3.2" : "1.3.2"
             case .USDT:
-                return Defaults.isTestEnv ? "1.3.56" : "1.3.27"
+                return Defaults.isTestEnv ? "1.3.23" : "1.3.27"
             case .XRP:
                 return Defaults.isTestEnv ? "1.3.999" : "1.3.999"
             case .EOS:
-                return Defaults.isTestEnv ? "1.3.57" : "1.3.4"
+                return Defaults.isTestEnv ? "1.3.4" : "1.3.4"
             //交易大赛
             case .ArenaEOS:
                 return Defaults.isTestEnv ? "1.3.1146" : "1.3.1150"
@@ -154,7 +157,7 @@ extension String {
     }
 
     var symbolOnlyFilterJade: String {
-        return appData.assetInfo[self]?.symbol.filterOnlyJade ?? self
+        return appData.assetInfo[self]?.symbol.filterOnlySystemPrefix ?? self
     }
     
     var precision: Int {

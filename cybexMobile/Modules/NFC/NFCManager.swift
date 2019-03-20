@@ -21,6 +21,7 @@ class NFCManager: NSObject {
     var didReceivedMessage = Delegate<Card, Void>()
     var pinCodeErrorMessage = Delegate<Card, Void>()
     var pinCodeNotExist = Delegate<Card, Void>()
+    var cardNotMatched = Delegate<Card, Void>()
 
     private override init() {
         super.init()
@@ -60,6 +61,16 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
         var signature: String = card.oneTimeSignature
 
         let pkKey = Card.compressedPublicKey(card.blockchainPublicKey)
+        if let cachedPubkey = UserManager.shared.getCachedEnotesKeysExcludePrivate()?.activeKey?.publicKey, cachedPubkey != pkKey {
+            DispatchQueue.main.async {
+                appCoodinator.topViewController()?.showToastBox(false, message: R.string.localizable.enotes_not_match.key.localized())
+
+                self.cardNotMatched.call(card)
+            }
+            self.session?.invalidate()
+            return
+        }
+
         let onePkKey = Card.compressedPublicKey(card.oneTimePublicKey)
         let pvKey = Card.compressedPrivateKey(privateKey)
 

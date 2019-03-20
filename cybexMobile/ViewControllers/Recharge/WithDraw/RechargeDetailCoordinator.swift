@@ -127,7 +127,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
     func getFee(_ assetId: String, address: String, isEOS: Bool) {
-        let name = appData.assetInfo[assetId]?.symbol.filterJade
+        let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
         let memo = self.state.memo.value
 
         var memoAddress = GatewayService.withDrawMemo(name!, address: address)
@@ -166,7 +166,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
     func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback: @escaping (Any) -> Void) {
         if let memoKey = self.state.memoKey.value {
-            let name = appData.assetInfo[assetId]?.symbol.filterJade
+            let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
             let memo = self.state.memo.value
             var memoAddress = GatewayService.withDrawMemo(name!, address: address)
             if isEOS {

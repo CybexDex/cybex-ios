@@ -154,7 +154,7 @@ extension RechargeRecodeViewController: UITableViewDelegate, UITableViewDataSour
             if selectedRecord.state.desccription() == R.string.localizable.recode_state_new.key.localized() {
                 return
             }
-            self.coordinator?.openRecordDetailUrl(hash, asset: self.data[indexPath.row].asset.filterJade)
+            self.coordinator?.openRecordDetailUrl(hash, asset: self.data[indexPath.row].asset.filterSystemPrefix)
         }
     }
 }

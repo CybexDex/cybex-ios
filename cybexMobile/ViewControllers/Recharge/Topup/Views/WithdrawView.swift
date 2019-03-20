@@ -40,7 +40,7 @@ class WithdrawView: UIView {
         didSet {
             if let data = data as? AccountAddressRecord {
                 self.projectInfoView.isHidden = false
-                if data.asset.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue {
+                if data.asset.filterSystemPrefix == AssetConfiguration.CybexAsset.XRP.rawValue {
                     self.tagLabel.text = data.address.components(separatedBy: "[").last?.replacingOccurrences(of: "]", with: "")
                     self.address.text = data.address.components(separatedBy: "[").first
                 }

@@ -10,6 +10,6 @@ import Foundation
 
 extension RecordChooseCellView {
     func adapterModelToRecordChooseCellView(_ model: String) {
-        self.nameLabel.text = model.filterJade
+        self.nameLabel.text = model.filterSystemPrefix
     }
 }

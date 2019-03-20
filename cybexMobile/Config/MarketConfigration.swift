@@ -62,6 +62,7 @@ class MarketConfiguration {
         return Defaults.isTestEnv ?
             [AssetConfiguration.CybexAsset.ETH,
              AssetConfiguration.CybexAsset.CYB,
+             AssetConfiguration.CybexAsset.USDT,
              AssetConfiguration.CybexAsset.BTC] :
 
             [AssetConfiguration.CybexAsset.ETH,

@@ -31,12 +31,21 @@ class LockupAssetsViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
 
-        guard let keys = UserManager.shared.getCachedKeysExcludePrivate() else {
-            return
+        var keys: AccountKeys? {
+            didSet {
+                self.startLoading()
+                if let keys = keys {
+                    self.coordinator?.fetchLockupAssetsData(keys.addresses())
+                }
+            }
         }
 
-        self.startLoading()
-        self.coordinator?.fetchLockupAssetsData(keys.addresses())
+        if UserManager.shared.unlockType == .nfc, let key = UserManager.shared.getCachedEnotesKeysExcludePrivate() {
+            keys = key
+        } else if UserManager.shared.unlockType == .cloudPassword, let key = UserManager.shared.getCachedKeysExcludePrivate() {
+            keys = key
+        }
+
     }
     
     func setupUI() {
@@ -136,7 +145,7 @@ extension LockupAssetsViewController {
     }
     
     @objc override func returnEnsureAction() {
-        self.coordinator?.applyLockupAsset(self.selectedData,callback: { [weak self] success in
+        self.coordinator?.applyLockupAsset(self.selectedData, cloudpasswordUnlock: UserManager.shared.unlockType == .cloudPassword, callback: { [weak self] success in
             guard let self = self else { return }
             if self.isVisible {
                 if success == true {

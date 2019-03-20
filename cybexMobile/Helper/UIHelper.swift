@@ -159,7 +159,7 @@ class UIHelper {
         let quantity = R.string.localizable.transfer_quantity.key.localized()
         let account = R.string.localizable.transfer_account_title.key.localized()
 
-        let amount = info.amount + " " +  info.name.filterJade
+        let amount = info.amount + " " +  info.name.filterSystemPrefix
         let quantityInfo = "<name>\(quantity):</name> <\(contentStyle)>" + amount + "</\(contentStyle)>"
         let accountInfo = "<name>\(account):</name> <\(contentStyle)>" + name + "</\(contentStyle)>"
 

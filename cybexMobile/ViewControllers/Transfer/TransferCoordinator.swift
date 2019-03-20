@@ -146,7 +146,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         if let balances = balances {
             for balance in balances {
                 if let info = appData.assetInfo[balance.assetType] {
-                    items.append(info.symbol.filterJade)
+                    items.append(info.symbol.filterSystemPrefix)
                 }
             }
         }

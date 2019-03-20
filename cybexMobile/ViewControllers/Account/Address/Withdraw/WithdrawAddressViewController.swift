@@ -32,9 +32,9 @@ class WithdrawAddressViewController: BaseViewController {
         self.rightLabel.isHidden = !self.coordinator!.isEOS()
         if let assetInfo = appData.assetInfo[self.asset] {
             if self.coordinator!.isEOS() {
-                self.title = assetInfo.symbol.filterJade + " " + R.string.localizable.eos_withdraw_account.key.localized()
+                self.title = assetInfo.symbol.filterSystemPrefix + " " + R.string.localizable.eos_withdraw_account.key.localized()
             } else {
-                self.title = assetInfo.symbol.filterJade + " " + R.string.localizable.withdraw_address.key.localized()
+                self.title = assetInfo.symbol.filterSystemPrefix + " " + R.string.localizable.withdraw_address.key.localized()
             }
         }
         else {

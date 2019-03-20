@@ -607,6 +607,9 @@
 "enotes_pin_validtor_title" = "验证eNotes卡密码";
 "enotes_not_match" = "请使用正确的eNotes卡";
 "enotes_login" = "eNotes登录";
+"enotes_cloudPassword_add_success" = "添加成功";
+"enotes_cloudPassword_add_fail" = "添加失败";
+
 "confirm_hint_title" = "提示";
 "lock_time" = "%d分钟";
 "lock_time_title" = "解锁时间";
@@ -614,4 +617,3 @@
 "socket_loading" = "连接中...";
 "socket_success" = "连接成功";
 "socket_failed" = "连接失败";
-

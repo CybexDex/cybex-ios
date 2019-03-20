@@ -19,7 +19,7 @@ enum DatabaseApi {
 
 struct CybexDatabaseApiService {
     enum Config {
-        static let productURL = URL(string: "https://shanghai.51nebula.com")!
+        static let productURL = URL(string: "https://hongkong.cybex.io")! // http://10.18.120.241:28090
         static let devURL = URL(string: "https://hangzhou.51nebula.com")!
     }
 

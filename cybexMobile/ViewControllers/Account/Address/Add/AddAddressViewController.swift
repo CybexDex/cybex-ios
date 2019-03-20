@@ -35,14 +35,14 @@ class AddAddressViewController: BaseViewController {
 
     func setupUI() {
         if addressType == .withdraw {
-            self.containerView.asset.content.text = appData.assetInfo[self.asset]?.symbol.filterJade
+            self.containerView.asset.content.text = appData.assetInfo[self.asset]?.symbol.filterSystemPrefix
             if self.asset == AssetConfiguration.CybexAsset.EOS.id {
                 self.title = R.string.localizable.address_title_add_eos.key.localized()
                 self.containerView.address.title = R.string.localizable.eos_withdraw_account.key
             } else {
                 self.title = R.string.localizable.address_title_add.key.localized()
                 self.containerView.address.title = R.string.localizable.withdraw_address.key
-                if appData.assetInfo[self.asset]?.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue {
+                if appData.assetInfo[self.asset]?.symbol.filterSystemPrefix == AssetConfiguration.CybexAsset.XRP.rawValue {
                     self.containerView.memo.isHidden = false
                     self.containerView.memo.name.text = "Tag"
                 }

@@ -49,7 +49,7 @@ class TransferContentView: UIView {
                         feeInfo.assetId,
                         amount: feeInfo.amount).string(
                             digits: assetInfo.precision,
-                            roundingMode: .down) + " " + assetInfo.symbol.filterJade
+                            roundingMode: .down) + " " + assetInfo.symbol.filterSystemPrefix
                 }
                 updateHeight()
             }
