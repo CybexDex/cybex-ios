@@ -118,6 +118,7 @@
 		34DC0886711DBC04C2F6364BB16F838A /* SettingReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F141E295116D5EF1B22601B72C767881 /* SettingReducers.swift */; };
 		3694F2505E21A01BF3C935E69F510D95 /* TradeLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C7D2F3CFBAF442DC519EF7F5AFB93B /* TradeLineView.xib */; };
 		39B1BBF9B99CF53A16A6AE77910821EA /* WithNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB324B58456952A4BD2C57EFFC5F9FB /* WithNoDataView.xib */; };
+		3A92C473CEB75FF3DC7D8B9F /* Pods_ChatRoom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896125DE0904048AA24F9B28 /* Pods_ChatRoom.framework */; };
 		3B0EB651210313B200F19C31 /* NormalCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB643210313A900F19C31 /* NormalCellView.xib */; };
 		3B0EB652210313B200F19C31 /* YourPortfolioTableHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB644210313AA00F19C31 /* YourPortfolioTableHeadView.swift */; };
 		3B0EB653210313B200F19C31 /* NormalContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB645210313AB00F19C31 /* NormalContentCell.xib */; };
@@ -820,7 +821,6 @@
 		B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D964BF5B38EBF2F80A562403D0FC416 /* CBKLineVolumeView.swift */; };
 		B7C833CEBC9B338666CA2D979065BF91 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */; };
 		B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D554D2BDB71F16685FFE7768E315B7 /* BusinessTitleCell.swift */; };
-		BA1961C57E84EBA279ADECF2 /* Pods_ChatRoom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896125DE0904048AA24F9B28 /* Pods_ChatRoom.framework */; };
 		BAB27405E1C42F6C20B9DBF1FDDBC100 /* CBKLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFE42BE9F95886821D524A4445FFA86 /* CBKLineView.swift */; };
 		BC2357553B9276EF5A8F867AC75534EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353A01867231C8CC09DA7A1507BF18D /* AppDelegate.swift */; };
 		BD11B7517E2B6A4051899973BEAEF8BC /* BusinessActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983D32E4B826DBC669B51E2EE2A65EFE /* BusinessActions.swift */; };
@@ -1844,7 +1844,7 @@
 				73731D7D21A2CE68005B9B3C /* RxSwift.framework in Frameworks */,
 				734AB3F921A289400091BE82 /* SwiftyJSON.framework in Frameworks */,
 				734AB3FE21A299A80091BE82 /* Repeat.framework in Frameworks */,
-				BA1961C57E84EBA279ADECF2 /* Pods_ChatRoom.framework in Frameworks */,
+				3A92C473CEB75FF3DC7D8B9F /* Pods_ChatRoom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
