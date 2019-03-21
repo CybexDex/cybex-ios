@@ -67,7 +67,7 @@ platform :ios do
       xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
       scheme:"cybexMobile",
-      project:"cybexMobile.xcodeproj",
+      workspace:"cybexMobile.xcworkspace",
       configuration:"Release",
       export_method:"ad-hoc",
       export_options: {
@@ -102,7 +102,7 @@ platform :ios do
     gym(
       output_name: "cybex-appstore",
       scheme:"cybexMobile",
-      project:"cybexMobile.xcodeproj",
+      workspace:"cybexMobile.xcworkspace",
       configuration:"Release",
       export_method:"app-store",
       export_options: {
@@ -137,7 +137,7 @@ platform :ios do
       gym(
         output_name: "cybex-testflight",
         scheme:"cybexMobile",
-        project:"cybexMobile.xcodeproj",
+        workspace:"cybexMobile.xcworkspace",
         configuration:"Release",
         export_method:"app-store",
         export_options: {
