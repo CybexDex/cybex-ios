@@ -211,7 +211,7 @@ class TransferViewController: BaseViewController {
                                            quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix)!,
                                            fee: fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterSystemPrefix,
                                            memo: memo.replacingOccurrences(of: "\n", with: "...\n"))
-                if memo.isEmpty, UserManager.shared.checkExistCloudPassword() {
+                if memo.isEmpty, UserManager.shared.checkExistCloudPassword(), UserManager.shared.loginType == .nfc {
                     let titleLocali = UserManager.shared.unlockType == .cloudPassword ? R.string.localizable.enotes_use_type_0.key : R.string.localizable.enotes_use_type_1.key
                     showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data, rightTitleLocali: titleLocali, tag: titleLocali, setup: nil)
                 } else {

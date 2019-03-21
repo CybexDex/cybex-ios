@@ -353,7 +353,7 @@ extension RechargeDetailViewController {
     }
 
     func checkPermisson() {
-        if !UserManager.shared.permission.withdraw {
+        if !UserManager.shared.permission.withdraw, UserManager.shared.unlockType == .cloudPassword {
             self.showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
             return
         }
@@ -384,11 +384,7 @@ extension RechargeDetailViewController {
                 return
             }
 
-            if !UserManager.shared.isLocked {
-                self.confirm()
-            } else {
-                self.showPasswordBox()
-            }
+            self.confirm()
         }
 
     }
@@ -402,10 +398,44 @@ extension RechargeDetailViewController {
                                                       receiveAmountInfo: self.contentView.finalAmount.text!,
                                                       isEOS: self.isEOS,
                                                       memoInfo: self.contentView.memoView.content.text!)
-            if self.isVisible {
-                showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: data)
-            }
+            showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: data)
         }
+    }
+
+    func withdraw() {
+        guard let address = self.contentView.addressView.content.text, let gatewayFee = self.coordinator?.state.fee.value
+            else { return }
+        startLoading()
+        self.coordinator?.withDraw(assetId: (self.trade?.id)!,
+                                   amount: self.requireAmount,
+                                   address: address,
+                                   feeId: self.feeAssetId,
+                                   feeAmount: gatewayFee.0.amount,
+                                   isEOS: self.isEOS,
+                                   callback: {[weak self] (data) in
+                                    guard let self = self else { return }
+                                    self.endLoading()
+                                    main {
+                                        ShowToastManager.shared.hide()
+                                        if self.isVisible {
+                                            if String(describing: data) == "<null>"{
+
+                                                if AddressManager.shared.containAddressOfWithDraw(address, currency: self.trade!.id).0 == false {
+                                                    self.showConfirmImage(R.image.icCheckCircleGreen.name,
+                                                                          title: R.string.localizable.withdraw_success_title.key.localized(),
+                                                                          content: R.string.localizable.withdraw_success_content.key.localized())
+                                                } else {
+                                                    self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
+                                                    SwifterSwift.delay(milliseconds: 100) {
+                                                        self.coordinator?.pop()
+                                                    }
+                                                }
+                                            } else {
+                                                self.showToastBox(false, message: R.string.localizable.recharge_withdraw_failed.key.localized())
+                                            }
+                                        }
+                                    }
+        })
     }
     
     override func passwordDetecting() {
@@ -416,7 +446,7 @@ extension RechargeDetailViewController {
         endLoading()
         if passed {
             ShowToastManager.shared.hide()
-            confirm()
+            withdraw()
         } else {
             if self.isVisible {
                 self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
@@ -433,42 +463,23 @@ extension RechargeDetailViewController {
 
 extension RechargeDetailViewController {
     // 提现操作
-    override func returnEnsureAction() {
-        guard let address = self.contentView.addressView.content.text, let gatewayFee = self.coordinator?.state.fee.value
-            else { return }
-        startLoading()
-        self.coordinator?.withDraw(assetId: (self.trade?.id)!,
-                                     amount: self.requireAmount,
-                                     address: address,
-                                     feeId: self.feeAssetId,
-                                     feeAmount: gatewayFee.0.amount,
-                                     isEOS: self.isEOS,
-                                     callback: {[weak self] (data) in
-                                        guard let self = self else { return }
-                                        self.endLoading()
-                                        main {
-                                            ShowToastManager.shared.hide()
-                                            if self.isVisible {
-                                                if String(describing: data) == "<null>"{
-                                                    
-                                                    if AddressManager.shared.containAddressOfWithDraw(address, currency: self.trade!.id).0 == false {
-                                                        self.showConfirmImage(R.image.icCheckCircleGreen.name,
-                                                                              title: R.string.localizable.withdraw_success_title.key.localized(),
-                                                                              content: R.string.localizable.withdraw_success_content.key.localized())
-                                                    } else {
-                                                        self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
-                                                        SwifterSwift.delay(milliseconds: 100) {
-                                                            self.coordinator?.pop()
-                                                        }
-                                                    }
-                                                } else {
-                                                    self.showToastBox(false, message: R.string.localizable.recharge_withdraw_failed.key.localized())
-                                                }
-                                            }
-                                        }
-        })
+    override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.enotes_feature_hint.key.localized() { // 添加云账户
+            pushCloudPasswordViewController(nil)
+            return
+        }
+        if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+            if !UserManager.shared.checkExistCloudPassword() {
+                showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+            } else {
+                showPasswordBox(R.string.localizable.enotes_unlock_type_1.key.localized(), hintKey: R.string.localizable.enotes_transfer_memo_hint.key, middleType: .normal)
+            }
+        } else if UserManager.shared.isLocked {
+            showPasswordBox()
+        } else {
+            withdraw()
+        }
     }
-    
     override func returnEnsureImageAction() {
         if let address = self.contentView.addressView.content.text,
             let memo = self.contentView.memoView.content.text,

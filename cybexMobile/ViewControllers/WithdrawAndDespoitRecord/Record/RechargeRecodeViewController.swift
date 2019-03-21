@@ -32,13 +32,27 @@ class RechargeRecodeViewController: BaseViewController {
 
         setupUI()
         setupEvent()
+
+        self.coordinator?.fetchAssetUrl()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         fetchRecords()
     }
 
     func fetchRecords() {
-        self.coordinator?.fetchAssetUrl()
-        if UserManager.shared.isLocked {
-            self.showPasswordBox()
+        if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+            if #available(iOS 11.0, *) {
+                if !UserManager.shared.checkExistCloudPassword() {
+                    showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+                } else {
+                    showPasswordBox(R.string.localizable.enotes_unlock_type_1.key.localized(), hintKey: R.string.localizable.enotes_transfer_memo_hint.key, middleType: .normal)
+                }
+            }
+        } else if UserManager.shared.isLocked {
+            showPasswordBox()
         } else {
             self.startLoading()
             fetchDepositRecords(offset: 0) {}
@@ -182,6 +196,13 @@ extension RechargeRecodeViewController {
             if self.isVisible {
                 self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
             }
+        }
+    }
+
+    override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.enotes_feature_hint.key.localized() { // 添加云账户
+            pushCloudPasswordViewController(nil)
+            return
         }
     }
 }

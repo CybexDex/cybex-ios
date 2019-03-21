@@ -529,19 +529,24 @@ extension ChatViewController {
             self.showToastBox(false, message: R.string.localizable.chat_space_message.key.localized())
             return
         }
-        
-       
+
         if self.isRealName {
-            if !UserManager.shared.isLocked {
+            if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+                if #available(iOS 11.0, *) {
+                    if !UserManager.shared.checkExistCloudPassword() {
+                        showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+                    } else {
+                        showPasswordBox(R.string.localizable.enotes_unlock_type_1.key.localized(), hintKey: R.string.localizable.enotes_transfer_memo_hint.key, middleType: .normal)
+                    }
+                }
+            } else if UserManager.shared.isLocked {
+                self.downInputView?.inputTextField.text = message
+                self.downInputView?.setupBtnState()
+                showPasswordBox()
+            } else {
                 self.coordinator?.send(message,
                                        username: UserManager.shared.name.value!,
                                        sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message).replacingOccurrences(of: "\"", with: "") : "")
-            }
-            else {
-                self.downInputView?.inputTextField.text = message
-                self.downInputView?.setupBtnState()
-                self.showPasswordBox()
-                return
             }
         }
         else {
@@ -583,10 +588,11 @@ extension ChatViewController {
     }
     
     override func passwordPassed(_ passed: Bool) {
+        guard let message = self.downInputView?.inputTextField.text else {
+            return
+        }
+
         if passed {
-            guard let message = self.downInputView?.inputTextField.text else {
-                return
-            }
             self.coordinator?.send(message,
                                    username: UserManager.shared.name.value!,
                                    sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message).replacingOccurrences(of: "\"", with: "") : "")
@@ -595,6 +601,13 @@ extension ChatViewController {
         }
         else {
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
+    }
+
+    override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.enotes_feature_hint.key.localized() { // 添加云账户
+            pushCloudPasswordViewController(nil)
+            return
         }
     }
 }

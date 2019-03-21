@@ -13,6 +13,7 @@ import ReSwift
 import SwiftTheme
 import Localize_Swift
 import SwifterSwift
+import cybex_ios_core_cpp
 
 class BusinessViewController: BaseViewController {
     var pair: Pair? {
@@ -158,7 +159,13 @@ class BusinessViewController: BaseViewController {
         let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterSystemPrefix
         let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterSystemPrefix
         let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterSystemPrefix
-        showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy))
+
+        if UserManager.shared.checkExistCloudPassword(), UserManager.shared.loginType == .nfc {
+            let titleLocali = UserManager.shared.unlockType == .cloudPassword ? R.string.localizable.enotes_use_type_0.key : R.string.localizable.enotes_use_type_1.key
+            showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy), rightTitleLocali: titleLocali, tag: titleLocali, setup: nil)
+        } else {
+            showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy))
+        }
     }
     
     override func configureObserveState() {
@@ -400,12 +407,8 @@ extension BusinessViewController {
         }
         
         guard checkBalance() else { return }
-        //    if UserManager.shared.isLocked {
-        //      showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
-        //    }
-        //    else {
+
         self.showOpenedOrderInfo()
-        //    }
     }
     
     @objc func adjustPrice(_ data: [String: Bool]) {
@@ -414,6 +417,25 @@ extension BusinessViewController {
         }
         self.coordinator?.adjustPrice(data["plus"]!, pricePricision: self.pricePrecision)
     }
+
+    override func returnEnsureActionWithData(_ tag: String) {
+        if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+            if #available(iOS 11.0, *) {
+                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+                    self.coordinator?.parentStartLoading(self.parent)
+                    self.postOrder()
+                }
+                NFCManager.shared.start()
+            }
+        } else if UserManager.shared.isLocked {
+            showPasswordBox()
+        } else {
+            self.coordinator?.parentStartLoading(self.parent)
+            postOrder()
+        }
+    }
+
     func postOrder() {
         guard let pair = self.pair else { return }
         self.coordinator?.postLimitOrder(pair, isBuy: self.type == .buy, callback: {[weak self] (success) in
@@ -425,16 +447,20 @@ extension BusinessViewController {
             self.showToastBox(success, message: success ? R.string.localizable.order_create_success.key.localized() : R.string.localizable.order_create_fail.key.localized())
         })
     }
-    
-    override func returnEnsureAction() {
-        ShowToastManager.shared.hide()
-        if UserManager.shared.isLocked {
-            SwifterSwift.delay(milliseconds: 100) {
-                self.showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
+
+    override func didClickedRightAction(_ tag: String) {
+        if tag == R.string.localizable.enotes_use_type_0.key { //enotes
+            if #available(iOS 11.0, *) {
+                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+
+                    self.coordinator?.parentStartLoading(self.parent)
+                    self.postOrder()
+                }
+                NFCManager.shared.start()
             }
         } else {
-            self.coordinator?.parentStartLoading(self.parent)
-            postOrder()
+            showPasswordBox()
         }
     }
     
