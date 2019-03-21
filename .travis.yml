@@ -1,15 +1,13 @@
 language: swift
 osx_image: xcode10.1
+xcode_workspace: cybexMobile.xcworkspace
 notifications:
     slack: cybexio:Km9uGhorR7XtYUVoaA8WQ3i6
 before_install:
-    - gem install cocoapods --pre
     - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
     - cp .travis/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
     - cp .travis/AppStore_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
     - touch R.generated.swift && chmod 777 R.generated.swift
-    - pod repo update
-    - pod install
 script:
     - ".travis/build.sh"
 env:
