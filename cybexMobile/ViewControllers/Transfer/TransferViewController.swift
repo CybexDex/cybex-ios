@@ -211,7 +211,12 @@ class TransferViewController: BaseViewController {
                                            quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix)!,
                                            fee: fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterSystemPrefix,
                                            memo: memo.replacingOccurrences(of: "\n", with: "...\n"))
-                showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
+                if memo.isEmpty, UserManager.shared.checkExistCloudPassword() {
+                    let titleLocali = UserManager.shared.unlockType == .cloudPassword ? R.string.localizable.enotes_use_type_0.key : R.string.localizable.enotes_use_type_1.key
+                    showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data, rightTitleLocali: titleLocali, tag: titleLocali, setup: nil)
+                } else {
+                    showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
+                }
             }
         }
     }
@@ -293,6 +298,20 @@ extension TransferViewController {
             showPasswordBox()
         } else {
             transfer()
+        }
+    }
+
+    override func didClickedRightAction(_ tag: String) {
+        if tag == R.string.localizable.enotes_use_type_0.key { //enotes
+            if #available(iOS 11.0, *) {
+                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+                    self.transfer()
+                }
+                NFCManager.shared.start()
+            } 
+        } else {
+            showPasswordBox()
         }
     }
 

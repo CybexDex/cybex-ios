@@ -50,7 +50,7 @@ extension UIViewController: ShowManagerDelegate {
         }
     }
 
-    func showPureContentConfirm(_ title: String = R.string.localizable.tip_title.key.localized(), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, content: String = "openedorder_ensure_message", tag: String = "") {
+    func showPureContentConfirm(_ title: String = R.string.localizable.tip_title.key.localized(), rightTitleLocali: String = "", ensureButtonLocali: String = R.string.localizable.alert_ensure.key, content: String = "openedorder_ensure_message", tag: String = "") {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
@@ -59,13 +59,13 @@ extension UIViewController: ShowManagerDelegate {
             subView.title.locali = ""
             subView.contentLable.locali = content
 
-            ShowToastManager.shared.setUp(title: title, contentView: subView, ensureButtonLocali: ensureButtonLocali, animationType: .smallBig, middleType: .normal, tag: tag)
+            ShowToastManager.shared.setUp(title: title, contentView: subView, rightTitleLocali: rightTitleLocali, ensureButtonLocali: ensureButtonLocali, animationType: .smallBig, middleType: .normal, tag: tag)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.delegate = self
         }
     }
 
-    func showConfirm(_ title: String, attributes: [NSAttributedString]?, tag: String = "", setup: (([StyleLabel]) -> Void)? = nil) {
+    func showConfirm(_ title: String, attributes: [NSAttributedString]?, rightTitleLocali: String = "", tag: String = "", setup: (([StyleLabel]) -> Void)? = nil) {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
@@ -74,7 +74,7 @@ extension UIViewController: ShowManagerDelegate {
             subView.data = attributes
             setup?(subView.labels)
 
-            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .smallBig, middleType: .normal, tag: tag)
+            ShowToastManager.shared.setUp(title: title, contentView: subView, rightTitleLocali: rightTitleLocali, animationType: .smallBig, middleType: .normal, tag: tag)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.delegate = self
         }
@@ -151,5 +151,9 @@ extension UIViewController: ShowManagerDelegate {
 
     func returnInviteCode(_ sender: String) {
 
+    }
+
+    @objc func didClickedRightAction(_ tag: String) {
+        
     }
 }

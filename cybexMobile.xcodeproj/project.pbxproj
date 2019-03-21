@@ -224,6 +224,7 @@
 		6C88B282D0F65F3A6830B8B450AC462A /* TradeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180662D8DE400CE772AC18F4D9A12F8B /* TradeView.xib */; };
 		6D56D7D9D38BE89CB6BD8D314E0E6370 /* QuotesTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 741A2DA2C21BB14B876030C22DA8D34B /* QuotesTitleView.xib */; };
 		6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF14FC4A3BFAB5A78D89088EA656DA2 /* OpenedOrdersReducers.swift */; };
+		6F50C4A0B4EA25621797DA8B /* Pods_cybexMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CCE8A1FA1884E553344A22B /* Pods_cybexMobile.framework */; };
 		6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90712234E28EE675FA991ADB398400A0 /* LockupAssetsViewController.swift */; };
 		70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D27CA3E4885E696C2D1EAEFD1BAB4 /* QuotesTitleView.swift */; };
 		7204FFBE2153A0FD00EB0FC7 /* ComprehensiveBlockItemViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7204FFBB2153A0FD00EB0FC7 /* ComprehensiveBlockItemViewAdapter.swift */; };
@@ -796,6 +797,7 @@
 		A33E06706616C92F527D5547D28DEBF6 /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0B155D51A3B4BB9BBE8DD11F1A846 /* Optional+Extensions.swift */; };
 		A390401CBDF18D681CE95ABF9268BBF3 /* WithdrawDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E1124F9287490DFCA1D7EFE4779FCB /* WithdrawDetailViewController.swift */; };
 		A396423FD35CDC17D68637F91A3F8A45 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0973B8B46EF51BF8FC558A1FED9DA347 /* Images.xcassets */; };
+		A73B3315EB02870D1EA5C154 /* Pods_cybexMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E172AB7E82CA66A2BC49CAB0 /* Pods_cybexMobileTests.framework */; };
 		A806E796D672D304574E9E46E50F16EC /* TradeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E858C76B4CC86DB04C8805532F442 /* TradeActions.swift */; };
 		A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AA08C50F42A7D121A14CF241089D7D /* PairRechargeView.swift */; };
 		A91E01A343738BBD63B5015631CE57A7 /* MarketCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CB328FC52B5402A33AD2D5978BDFA /* MarketCoordinator.swift */; };
@@ -818,6 +820,7 @@
 		B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D964BF5B38EBF2F80A562403D0FC416 /* CBKLineVolumeView.swift */; };
 		B7C833CEBC9B338666CA2D979065BF91 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */; };
 		B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D554D2BDB71F16685FFE7768E315B7 /* BusinessTitleCell.swift */; };
+		BA1961C57E84EBA279ADECF2 /* Pods_ChatRoom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896125DE0904048AA24F9B28 /* Pods_ChatRoom.framework */; };
 		BAB27405E1C42F6C20B9DBF1FDDBC100 /* CBKLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFE42BE9F95886821D524A4445FFA86 /* CBKLineView.swift */; };
 		BC2357553B9276EF5A8F867AC75534EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353A01867231C8CC09DA7A1507BF18D /* AppDelegate.swift */; };
 		BD11B7517E2B6A4051899973BEAEF8BC /* BusinessActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983D32E4B826DBC669B51E2EE2A65EFE /* BusinessActions.swift */; };
@@ -966,6 +969,7 @@
 		1A7B610EE01DFB63C0F436ABA5DAC4C0 /* LockupAssetsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsCell.xib; sourceTree = "<group>"; };
 		1A947EAD38CA62A8F502D99D36FBD718 /* PairDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairDetailView.xib; sourceTree = "<group>"; };
 		1AD6F13246E773CDB0FBCFF806F8A69B /* OpenedOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersViewController.swift; sourceTree = "<group>"; };
+		1BAFBAD14357E986687FAE1E /* Pods-cybexMobileTests.tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.tests.xcconfig"; path = "Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.tests.xcconfig"; sourceTree = "<group>"; };
 		1BF8145AB9B72F9B7DDBD35D7F421C2A /* TradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeView.swift; sourceTree = "<group>"; };
 		1DA52DB9F7B13F75FCF7C39FBC99A67F /* RechargeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCoordinator.swift; sourceTree = "<group>"; };
 		1E6EBD4C21D3851900E3EDE7 /* EvaViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaViewAdapter.swift; sourceTree = "<group>"; };
@@ -1078,6 +1082,7 @@
 		41798F47D921274B133BA2F69B2DA49C /* AccountPortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioView.swift; sourceTree = "<group>"; };
 		444887A40A212BFF9EE0524690C69956 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		44988AC3DD3CDF143C1110A85E06F788 /* SettingDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailReducers.swift; sourceTree = "<group>"; };
+		482C547E4A6841055A3A8145 /* Pods-cybexMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		49E6EAA94348BAE36CA858BA5045D6D3 /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
 		4A4D27CA3E4885E696C2D1EAEFD1BAB4 /* QuotesTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTitleView.swift; sourceTree = "<group>"; };
 		4B7C11547581F7533308AFFDAA3EE874 /* EntryActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryActions.swift; sourceTree = "<group>"; };
@@ -1085,6 +1090,8 @@
 		4C14509E978A6A84AD1A5E97E1E66761 /* WithdrawDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailCoordinator.swift; sourceTree = "<group>"; };
 		4CAF894CE4DB0CD3B11F47C1BB626167 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyHistoryCellView.xib; sourceTree = "<group>"; };
+		4E39C3B7DF53F8EFD0F0B458 /* Pods-ChatRoom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatRoom.debug.xcconfig"; path = "Target Support Files/Pods-ChatRoom/Pods-ChatRoom.debug.xcconfig"; sourceTree = "<group>"; };
+		4EF0C0C5824F7AC0971CE2F4 /* Pods-ChatRoom.tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatRoom.tests.xcconfig"; path = "Target Support Files/Pods-ChatRoom/Pods-ChatRoom.tests.xcconfig"; sourceTree = "<group>"; };
 		4EF92464D8A6E8AB4AF83309A4153BDC /* BusinessTitleItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessTitleItemView.xib; sourceTree = "<group>"; };
 		4FA37BD7DEAD43AFE0462EF55AA3DCB0 /* OrderBookCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderBookCellView.xib; sourceTree = "<group>"; };
 		50A07B4ADE5C7814A5340F9673316BEC /* OrderBookContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderBookContentView.xib; sourceTree = "<group>"; };
@@ -1255,6 +1262,7 @@
 		729B86A32154C7BB00C6E0E4 /* ComprehensiveBlockItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveBlockItemsView.swift; sourceTree = "<group>"; };
 		729B86A42154C7BB00C6E0E4 /* ComprehensiveBlockItemsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComprehensiveBlockItemsView.xib; sourceTree = "<group>"; };
 		72AAC8AF2106FC840040793F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		72AD513E61D3414E080FDBC3 /* Pods-cybexMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.release.xcconfig"; path = "Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		72B42E79217723DD00587403 /* PairDetailDateViewViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairDetailDateViewViewAdapter.swift; sourceTree = "<group>"; };
 		72B42E7A217723DD00587403 /* PairDetailDateViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairDetailDateViewView.swift; sourceTree = "<group>"; };
 		72B42E7B217723DD00587403 /* PairDetailDateViewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairDetailDateViewView.xib; sourceTree = "<group>"; };
@@ -1683,6 +1691,7 @@
 		869BD1986B2A46B921485BD3E2316BB2 /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
 		86A8FA08FCF9444021EB22FB412E9BBA /* MyHistoryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryActions.swift; sourceTree = "<group>"; };
 		86D59926E634FB6AFB0AE01EF60BE9CA /* MyHistoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryCoordinator.swift; sourceTree = "<group>"; };
+		896125DE0904048AA24F9B28 /* Pods_ChatRoom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatRoom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A3D832D97F66172004BA431C498669E /* RegisterActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterActions.swift; sourceTree = "<group>"; };
 		8A57C2F2F141181D78DE24DECC795D52 /* CBBOLLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBOLLModel.swift; sourceTree = "<group>"; };
 		8AAFE37FBA002EC9690645C11A0D723A /* HomeContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeContentView.xib; sourceTree = "<group>"; };
@@ -1710,6 +1719,7 @@
 		9AF65F612F7F7D85BA6BC98FA8C7F91A /* CybexPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexPasswordView.swift; sourceTree = "<group>"; };
 		9B7061C65E348D739A983603E60536D6 /* YourPortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioCell.swift; sourceTree = "<group>"; };
 		9BA151A9FE7616E94AD8C23BFF6CF10E /* CybexLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexLabel.xib; sourceTree = "<group>"; };
+		9CCE8A1FA1884E553344A22B /* Pods_cybexMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D9C8C07FC5136726CAB024DE28F5DCA /* PairCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairCardCell.xib; sourceTree = "<group>"; };
 		9DE012ABDA856199C8C01B82B417717E /* RegisterReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReducers.swift; sourceTree = "<group>"; };
 		9E2974E4F9CAD426BA5EA87B501D850E /* CybexAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexAlertView.xib; sourceTree = "<group>"; };
@@ -1763,6 +1773,7 @@
 		D5B0221158F989694BC734C29818238C /* LockupAssetsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsSectionView.swift; sourceTree = "<group>"; };
 		D5DBC2C0B93A30F13528E542DFB9D0A4 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		D6641FBBE1138F95A426447E21E05B55 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		D6CA43C1AC824DC7B5125E1E /* Pods-cybexMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.release.xcconfig"; path = "Target Support Files/Pods-cybexMobile/Pods-cybexMobile.release.xcconfig"; sourceTree = "<group>"; };
 		DB76A27170AA32D7DC8F5BD22BFF40D4 /* KLineConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLineConfiguration.swift; sourceTree = "<group>"; };
 		DB940BBE6C92F4788E212C6B14C3EDB4 /* OrderBookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookCoordinator.swift; sourceTree = "<group>"; };
 		DC541DB8BFC2146C5859E00C363C5B58 /* BaseTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabbarViewController.swift; sourceTree = "<group>"; };
@@ -1771,16 +1782,20 @@
 		DD606656A250A840B13C511345FAB615 /* EmptySegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		DDB324B58456952A4BD2C57EFFC5F9FB /* WithNoDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithNoDataView.xib; sourceTree = "<group>"; };
 		E093755D3EE93945EE2536872B0EFA54 /* GradientLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLabelView.swift; sourceTree = "<group>"; };
+		E172AB7E82CA66A2BC49CAB0 /* Pods_cybexMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C76C0E0663C42AA3187F510A3AF9C1 /* HomeSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSectionHeaderView.xib; sourceTree = "<group>"; };
 		E1F999943C67E4ED6E626A8BA802C612 /* RechargeSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeSegment.swift; sourceTree = "<group>"; };
 		E2372538C137AE590F07952D446927D2 /* SettingActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingActions.swift; sourceTree = "<group>"; };
 		E23A7899E7F6A8D557A94E81F2014FC5 /* LockupAssetsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsCoordinator.swift; sourceTree = "<group>"; };
+		E28DDA7C429262E80BB0E0CB /* Pods-cybexMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.debug.xcconfig"; path = "Target Support Files/Pods-cybexMobile/Pods-cybexMobile.debug.xcconfig"; sourceTree = "<group>"; };
+		E2D6989FA8328AEEB8389CB1 /* Pods-ChatRoom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatRoom.release.xcconfig"; path = "Target Support Files/Pods-ChatRoom/Pods-ChatRoom.release.xcconfig"; sourceTree = "<group>"; };
 		E353A01867231C8CC09DA7A1507BF18D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E473B25626CA499D56EA2280AB068727 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
 		E4FF8329A7AFC8D994A046019EFEE53D /* AccountOpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpenedOrdersView.swift; sourceTree = "<group>"; };
 		E5E1124F9287490DFCA1D7EFE4779FCB /* WithdrawDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailViewController.swift; sourceTree = "<group>"; };
 		E6540994D41CA4578B6323D1A7C5D726 /* SettingDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailCoordinator.swift; sourceTree = "<group>"; };
 		E66F4589374DD221E8CAA0D5A0BC3175 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		E67FFC64D65036FC65E8A88E /* Pods-cybexMobile.tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.tests.xcconfig"; path = "Target Support Files/Pods-cybexMobile/Pods-cybexMobile.tests.xcconfig"; sourceTree = "<group>"; };
 		E733F11F37A6A399AD7DC995A3985502 /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
 		E8382753BAEF516983F1C18FCE77A64A /* RechargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailViewController.swift; sourceTree = "<group>"; };
 		E84928E21FFBC4F2CE9B9E99DB30918B /* UIColor+Cybexblack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cybexblack.swift"; sourceTree = "<group>"; };
@@ -1817,6 +1832,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73B3315EB02870D1EA5C154 /* Pods_cybexMobileTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1828,6 +1844,7 @@
 				73731D7D21A2CE68005B9B3C /* RxSwift.framework in Frameworks */,
 				734AB3F921A289400091BE82 /* SwiftyJSON.framework in Frameworks */,
 				734AB3FE21A299A80091BE82 /* Repeat.framework in Frameworks */,
+				BA1961C57E84EBA279ADECF2 /* Pods_ChatRoom.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1911,6 +1928,7 @@
 				73B47843222CFC3400189632 /* PromiseKit.framework in Frameworks */,
 				731C11C7214D045E00761955 /* Result.framework in Frameworks */,
 				731C11C8214D045E00761955 /* Moya.framework in Frameworks */,
+				6F50C4A0B4EA25621797DA8B /* Pods_cybexMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4138,6 +4156,9 @@
 				731C11B1214D045900761955 /* RxMoya.framework */,
 				731C11B4214D045B00761955 /* RxSwift.framework */,
 				731C11B8214D045D00761955 /* SocketRocket.framework */,
+				896125DE0904048AA24F9B28 /* Pods_ChatRoom.framework */,
+				9CCE8A1FA1884E553344A22B /* Pods_cybexMobile.framework */,
+				E172AB7E82CA66A2BC49CAB0 /* Pods_cybexMobileTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4293,6 +4314,7 @@
 				7386F28D2121204A00ABC924 /* cybexMobileTests */,
 				739221342153A6D500744811 /* rswift */,
 				72C9149921A4FAB900B38084 /* Recovered References */,
+				F91324F4A6ECE1B643F0F7CD /* Pods */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -4326,6 +4348,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F91324F4A6ECE1B643F0F7CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E39C3B7DF53F8EFD0F0B458 /* Pods-ChatRoom.debug.xcconfig */,
+				4EF0C0C5824F7AC0971CE2F4 /* Pods-ChatRoom.tests.xcconfig */,
+				E2D6989FA8328AEEB8389CB1 /* Pods-ChatRoom.release.xcconfig */,
+				E28DDA7C429262E80BB0E0CB /* Pods-cybexMobile.debug.xcconfig */,
+				E67FFC64D65036FC65E8A88E /* Pods-cybexMobile.tests.xcconfig */,
+				D6CA43C1AC824DC7B5125E1E /* Pods-cybexMobile.release.xcconfig */,
+				482C547E4A6841055A3A8145 /* Pods-cybexMobileTests.debug.xcconfig */,
+				1BAFBAD14357E986687FAE1E /* Pods-cybexMobileTests.tests.xcconfig */,
+				72AD513E61D3414E080FDBC3 /* Pods-cybexMobileTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FFDB405BF2117671244D17CE3159E764 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -4354,6 +4392,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4BD332E06FC30061DD04F460410F3898 /* Build configuration list for PBXNativeTarget "cybexMobile" */;
 			buildPhases = (
+				B31EE82BDFA6C17FF6B47C8E /* [CP] Check Pods Manifest.lock */,
 				02A4601F42D25E8414E0B1DB5D0ED37C /* R.swift */,
 				EE22259AA50E1965825123B5D2382194 /* color set */,
 				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
@@ -4366,6 +4405,7 @@
 				73539C702179ABCF008395AC /* Integrate Reveal Server */,
 				7398BEC42181C209004C042E /* swiftlint */,
 				73A33072219420B900707D8F /* Embed Frameworks */,
+				CE54B84C6D5D7E24BDAB53E8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4400,6 +4440,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73A33071219420B900707D8F /* Build configuration list for PBXNativeTarget "ChatRoom" */;
 			buildPhases = (
+				832A59ED6ECD0EB5910EDD41 /* [CP] Check Pods Manifest.lock */,
 				73A33061219420B900707D8F /* Headers */,
 				73A33062219420B900707D8F /* Sources */,
 				73A33063219420B900707D8F /* Frameworks */,
@@ -4834,6 +4875,50 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
 		};
+		832A59ED6ECD0EB5910EDD41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChatRoom-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B31EE82BDFA6C17FF6B47C8E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cybexMobile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -4851,6 +4936,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]; then\nbuildNumber=$(git rev-list HEAD | wc -l | tr -d ' ')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nfi\n";
+		};
+		CE54B84C6D5D7E24BDAB53E8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		DWAWYO8YO3NSR6BB5KZUVXZI /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4870,7 +4972,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 			showEnvVarsInLog = 0;
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {
@@ -5584,7 +5686,7 @@
 /* Begin XCBuildConfiguration section */
 		0DEA2D3ABA7BF666011D972A16C5B728 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 737E597421A5487C001199E4 /* Config.xcconfig */;
+			baseConfigurationReference = D6CA43C1AC824DC7B5125E1E /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5681,7 +5783,7 @@
 		};
 		26695AD676D4F3122177FD6581ACB0F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 737E597421A5487C001199E4 /* Config.xcconfig */;
+			baseConfigurationReference = E28DDA7C429262E80BB0E0CB /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5847,7 +5949,7 @@
 		};
 		730E599E219921F9006DDCDD /* Tests */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 737E597421A5487C001199E4 /* Config.xcconfig */;
+			baseConfigurationReference = E67FFC64D65036FC65E8A88E /* Pods-cybexMobile.tests.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5898,6 +6000,7 @@
 		};
 		730E599F219921F9006DDCDD /* Tests */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BAFBAD14357E986687FAE1E /* Pods-cybexMobileTests.tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5932,6 +6035,7 @@
 		};
 		730E59A0219921F9006DDCDD /* Tests */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EF0C0C5824F7AC0971CE2F4 /* Pods-ChatRoom.tests.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -5939,7 +6043,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -6006,6 +6110,7 @@
 		};
 		7386F2942121204B00ABC924 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 482C547E4A6841055A3A8145 /* Pods-cybexMobileTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -6040,6 +6145,7 @@
 		};
 		7386F2952121204B00ABC924 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72AD513E61D3414E080FDBC3 /* Pods-cybexMobileTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -6074,6 +6180,7 @@
 		};
 		73A3306F219420B900707D8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E39C3B7DF53F8EFD0F0B458 /* Pods-ChatRoom.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -6081,7 +6188,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -6121,6 +6228,7 @@
 		};
 		73A33070219420B900707D8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2D6989FA8328AEEB8389CB1 /* Pods-ChatRoom.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -6128,7 +6236,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;

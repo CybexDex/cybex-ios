@@ -142,10 +142,12 @@ struct SECP256K1 {
     static func signForRecovery(hash: Data, privateKey: Data, useExtraEntropy: Bool = false) throws -> (serializedSignature: Data, rawSignature: Data) {
         try hash.checkHashSize()
         try SECP256K1.verifyPrivateKey(privateKey: privateKey)
+
         for _ in 0 ... 1024 {
             do {
                 var recoverableSignature = try SECP256K1.recoverableSign(hash: hash, privateKey: privateKey, useExtraEntropy: useExtraEntropy)
                 let truePublicKey = try SECP256K1.privateKeyToPublicKey(privateKey: privateKey)
+            
                 let recoveredPublicKey = try SECP256K1.recoverPublicKey(hash: hash, recoverableSignature: &recoverableSignature)
                 if Data(toByteArray(truePublicKey.data)) != Data(toByteArray(recoveredPublicKey.data)) {
                     //                print("Didn't recover correctly!")
@@ -301,6 +303,7 @@ struct SECP256K1 {
         try SECP256K1.verifyPrivateKey(privateKey: privateKey)
         var recoverableSignature: secp256k1_ecdsa_recoverable_signature = secp256k1_ecdsa_recoverable_signature()
         let extraEntropy = Data.random(length: 32)
+        
         let result = hash.withUnsafeBytes { (hashPointer: UnsafePointer<UInt8>) -> Int32 in
             privateKey.withUnsafeBytes { (privateKeyPointer: UnsafePointer<UInt8>) in
                 extraEntropy.withUnsafeBytes { (extraEntropyPointer: UnsafePointer<UInt8>) in
@@ -332,6 +335,7 @@ struct SECP256K1 {
         let result = privateKey.withUnsafeBytes { (privateKeyPointer: UnsafePointer<UInt8>) -> Int32 in
             secp256k1_ec_seckey_verify(context!, privateKeyPointer)
         }
+        
         guard result == 1 else { throw SECP256K1Error.invalidPrivateKey }
     }
 

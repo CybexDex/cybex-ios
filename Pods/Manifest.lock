@@ -1,0 +1,20 @@
+PODS:
+  - cocore (1.1.0)
+  - coswift (1.1.2):
+    - cocore (~> 1.1.0)
+
+DEPENDENCIES:
+  - coswift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - cocore
+    - coswift
+
+SPEC CHECKSUMS:
+  cocore: dfaf5fb52b518fbbb5076061386294051a8f62d3
+  coswift: 70c091e93203daa20e9fdc378dbfefaa5f9057de
+
+PODFILE CHECKSUM: 2184051fdf2efe21991dcc67689a16e38808eeec
+
+COCOAPODS: 1.7.0.beta.2

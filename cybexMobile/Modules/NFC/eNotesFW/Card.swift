@@ -92,23 +92,6 @@ public struct Card {
         return data.sha256().sha256()
     }
 
-    func getSerializedSignature(_ sign: String, compressed: Bool = false) -> Data? {
-        let data = unhexlify(sign)!
-
-        var recoverableSignature: secp256k1_ecdsa_recoverable_signature = secp256k1_ecdsa_recoverable_signature()
-
-        let arrayPtr = UnsafeMutableBufferPointer<secp256k1_ecdsa_recoverable_signature>(start: &recoverableSignature, count: data.count)
-        _ = data.copyBytes(to: arrayPtr)
-
-        guard let serializedSignature = SECP256K1.serializeSignature(recoverableSignature: &recoverableSignature) else { return nil }
-
-        guard let d = SECP256K1.unmarshalSignature(signatureData: serializedSignature) else { return nil }
-
-        let vData = d.v + 27 + (compressed ? 0 : 4)
-
-        return vData.data + Data(bytes: d.r) + Data(bytes: d.s)
-    }
-
     func getSignData(_ r: String, s: String, activePubkey: String, compressed: Bool = false, hashData: Data) -> Data? {
         let sig = r + s
 

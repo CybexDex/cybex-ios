@@ -20,6 +20,7 @@ protocol Views {
 @objc protocol ShowManagerDelegate {
     func returnUserPassword(_ sender: String, textView: CybexTextView)
     @objc func returnEnsureAction()
+    @objc func didClickedRightAction(_ tag: String)
     @objc func returnEnsureActionWithData(_ tag: String)
     @objc func returnEnsureImageAction()
     @objc func cancelImageAction(_ sender: CybexTextView)
@@ -270,11 +271,11 @@ class ShowToastManager {
         }
     }
 
-    func setUp(title: String, contentView: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal, tag: String) {
+    func setUp(title: String, contentView: (UIView&Views), rightTitleLocali: String = "", ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal, tag: String) {
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alertImage
         self.tag = tag
-        self.setupText(contentView, ensureButtonLocali: ensureButtonLocali, title: title, cybexTextViewType: middleType)
+        self.setupText(contentView, rightTitleLocali: rightTitleLocali, ensureButtonLocali: ensureButtonLocali, title: title, cybexTextViewType: middleType)
     }
 
     func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType, tag: String) {
@@ -307,10 +308,18 @@ class ShowToastManager {
         showView     = sheetView
     }
 
-    fileprivate func setupText(_ sender: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, title: String, cybexTextViewType: CybexTextView.TextViewType) {
+    fileprivate func setupText(_ sender: (UIView&Views), rightTitleLocali: String = "", ensureButtonLocali: String = R.string.localizable.alert_ensure.key, title: String, cybexTextViewType: CybexTextView.TextViewType) {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
         textView.middleView = sender
+        if !rightTitleLocali.isEmpty {
+            textView.rightTitle.locali = rightTitleLocali
+            textView.rightTitle.isHidden = false
+            textView.title.textAlignment = .left
+        } else {
+            textView.rightTitle.isHidden = true
+            textView.title.textAlignment = .center
+        }
         textView.title.text = title
         textView.viewType = cybexTextViewType
         textView.ensure.locali = ensureButtonLocali
@@ -329,7 +338,7 @@ class ShowToastManager {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
         textView.middleView = sender
-        textView.title.isHidden = true
+        textView.titleView.isHidden = true
         textView.titleImageView.isHidden = false
         textView.titleImageView.image = UIImage(named: titleImage)
         showView = textView
@@ -402,6 +411,12 @@ extension ShowToastManager: CybexTextViewDelegate {
     func returnEnsureImageAction() {
         self.hide(0)
         self.delegate?.returnEnsureImageAction()
+    }
+
+    func didClickedRightAction() {
+        self.hide(0)
+
+        self.delegate?.didClickedRightAction(self.tag)
     }
 }
 

@@ -1,0 +1,20 @@
+
+
+platform :ios, '8.0'
+use_frameworks!
+target 'coobjcBaseExample' do
+
+pod 'coobjc', :path => '../../'
+pod 'cocore', :path => '../../'
+
+end
+
+target 'coobjcBaseExampleTests' do
+
+    pod 'coobjc', :path => '../../'
+    pod 'cocore', :path => '../../'
+
+    pod 'Specta', '~> 1.0'
+    pod 'Expecta',     '~> 1.0'   # expecta matchers
+    pod 'OCMock',      '~> 2.2'   # OCMock
+end
