@@ -1,3 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh
+${PODS_ROOT}/Flutter/Flutter.framework
 ${BUILT_PRODUCTS_DIR}/cocore/cocore.framework
 ${BUILT_PRODUCTS_DIR}/coswift/coswift.framework
+${BUILT_PRODUCTS_DIR}/flutter_boost/flutter_boost.framework
+${BUILT_PRODUCTS_DIR}/xservice_kit/xservice_kit.framework

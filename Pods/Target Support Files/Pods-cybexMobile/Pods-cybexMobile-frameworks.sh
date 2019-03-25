@@ -161,16 +161,25 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${PODS_ROOT}/Flutter/Flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/cocore/cocore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/coswift/coswift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/flutter_boost/flutter_boost.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/xservice_kit/xservice_kit.framework"
 fi
 if [[ "$CONFIGURATION" == "Tests" ]]; then
+  install_framework "${PODS_ROOT}/Flutter/Flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/cocore/cocore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/coswift/coswift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/flutter_boost/flutter_boost.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/xservice_kit/xservice_kit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${PODS_ROOT}/Flutter/Flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/cocore/cocore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/coswift/coswift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/flutter_boost/flutter_boost.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/xservice_kit/xservice_kit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

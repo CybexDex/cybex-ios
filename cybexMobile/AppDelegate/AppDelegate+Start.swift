@@ -7,9 +7,15 @@
 //
 
 import Foundation
+import flutter_boost
 
 extension AppDelegate {
     func start() {
         AppConfiguration.shared.appCoordinator.start()
+
+        FlutterBoostPlugin.sharedInstance()?.startFlutter(with: FLBRoute.shared, onStart: { (vc) in
+            
+        })
     }
+
 }

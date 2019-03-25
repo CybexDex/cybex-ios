@@ -14,6 +14,7 @@ import SwiftyJSON
 import TinyConstraints
 import Repeat
 import BigInt
+import Flutter
 
 enum ViewType: Int {
     case homeContent    = 1
@@ -197,6 +198,11 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
         if vcType == ViewType.homeContent.rawValue {//首页
+//            FLBRoute.shared.openPage("first", params: [:], animated: true) { (success) in
+//
+//            }
+//
+//            return
             if let selectedPair = data["pair"] as? Pair {
                 self.coordinator?.openMarket(selectedPair)
             }

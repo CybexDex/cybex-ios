@@ -570,6 +570,7 @@
 		737E597121A5422B001199E4 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E597021A5422B001199E4 /* JWT.swift */; };
 		737E597321A5423E001199E4 /* JWTHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E597221A5423E001199E4 /* JWTHelpers.swift */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
+		73856E7E2248EBAE008D8C43 /* FLBRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73856E7D2248EBAE008D8C43 /* FLBRoute.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
 		7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29E2121665100ABC924 /* AddressHomeActions.swift */; };
@@ -1487,6 +1488,7 @@
 		737E597221A5423E001199E4 /* JWTHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTHelpers.swift; sourceTree = "<group>"; };
 		737E597421A5487C001199E4 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		73856E7D2248EBAE008D8C43 /* FLBRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLBRoute.swift; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7386F296212120B500ABC924 /* cybexMobileTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cybexMobileTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -3678,6 +3680,7 @@
 			isa = PBXGroup;
 			children = (
 				73D012982159D71800C95896 /* URLNavigationMap.swift */,
+				73856E7D2248EBAE008D8C43 /* FLBRoute.swift */,
 			);
 			path = Route;
 			sourceTree = "<group>";
@@ -4406,6 +4409,7 @@
 				7398BEC42181C209004C042E /* swiftlint */,
 				73A33072219420B900707D8F /* Embed Frameworks */,
 				CE54B84C6D5D7E24BDAB53E8 /* [CP] Embed Pods Frameworks */,
+				739DA3312248D703000E1BB8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -4874,6 +4878,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
+		};
+		739DA3312248D703000E1BB8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" thin\n";
 		};
 		832A59ED6ECD0EB5910EDD41 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5477,6 +5498,7 @@
 				73731D8321A5378E005B9B3C /* Helpers.swift in Sources */,
 				E593AB226F596677B1664A82995509CA /* RechargeViewController.swift in Sources */,
 				73B47830222CEB8E00189632 /* X509Certificate.swift in Sources */,
+				73856E7E2248EBAE008D8C43 /* FLBRoute.swift in Sources */,
 				60FB6241E99099A751F12BD01130832D /* RegisterActions.swift in Sources */,
 				73A3311C219425DA00707D8F /* ChatUser.swift in Sources */,
 				73731D8721A53846005B9B3C /* CallbackQueue.swift in Sources */,
@@ -5699,6 +5721,7 @@
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
+				FLUTTER_ROOT = $HOME/flutter;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -5800,6 +5823,7 @@
 				"DEBUG_INFORMATION_FORMAT[sdk=iphonesimulator*]" = dwarf;
 				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
+				FLUTTER_ROOT = $HOME/flutter;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -5965,6 +5989,7 @@
 				"DEBUG_INFORMATION_FORMAT[sdk=iphonesimulator*]" = dwarf;
 				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
+				FLUTTER_ROOT = $HOME/flutter;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

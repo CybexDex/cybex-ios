@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/cocore" "${PODS_CONFIGURATION_BUILD_DIR}/coswift"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/cocore" "${PODS_CONFIGURATION_BUILD_DIR}/coswift" "${PODS_CONFIGURATION_BUILD_DIR}/flutter_boost" "${PODS_CONFIGURATION_BUILD_DIR}/xservice_kit" "${PODS_ROOT}/Flutter"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/cocore/cocore.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/coswift/coswift.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/cocore/cocore.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/coswift/coswift.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/flutter_boost/flutter_boost.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/xservice_kit/xservice_kit.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -l"c++" -framework "cocore" -framework "coswift"
+OTHER_LDFLAGS = $(inherited) -l"c++" -framework "Flutter" -framework "cocore" -framework "coswift" -framework "flutter_boost" -framework "xservice_kit"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
