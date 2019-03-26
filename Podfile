@@ -28,14 +28,4 @@ target 'cybexMobile' do
   end
 
 end
-#
-#post_install do |installer|
-#  # Downgrade Swift language version to 4.0 for Pods that don't support Swift 5
-#  installer.pods_project.targets.each do |target|
-#    if ['Web3'].include? target.name
-#      target.build_configurations.each do |config|
-#        config.build_settings['SWIFT_VERSION'] = '4.0'
-#      end
-#    end
-#  end
-#end
+

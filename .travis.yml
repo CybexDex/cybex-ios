@@ -8,6 +8,11 @@ before_install:
     - cp .travis/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
     - cp .travis/AppStore_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
     - touch R.generated.swift && chmod 777 R.generated.swift
+    - git clone https://github.com/flutter/flutter.git --depth 1
+    - cd cybex_flutter
+    - ./flutter/bin/flutter doctor
+    - ./flutter/bin/flutter packages get
+    - cd ..
 script:
     - ".travis/build.sh"
 env:
