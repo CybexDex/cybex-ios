@@ -11,7 +11,7 @@ import ReSwift
 class AutomaticallySkipRepeatsTests: XCTestCase {
 
     private var store: Store<State>!
-    fileprivate var subscriptionUpdates: Int = 0
+    private var subscriptionUpdates: Int = 0
 
     override func setUp() {
         super.setUp()

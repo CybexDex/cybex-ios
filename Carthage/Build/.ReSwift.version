@@ -1,9 +1,9 @@
 {
-  "commitish" : "4.0.1",
+  "commitish" : "4.1.1",
   "iOS" : [
     {
       "name" : "ReSwift",
-      "hash" : "02275e56af55c19c948747fdb53534806ce2184287e514813d774d54c0e7df88"
+      "hash" : "b553d1ab00eaa8c0c5d9c1bc151719b8bfe3066deae6232dfb7c8e4894e436d1"
     }
   ]
 }

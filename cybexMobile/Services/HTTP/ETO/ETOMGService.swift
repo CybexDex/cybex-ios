@@ -13,7 +13,7 @@ import SwiftyJSON
 import SwiftyUserDefaults
 
 enum ETOMGAPI {
-    case getBanner()
+    case getBanner
     case getProjects(offset:Int, limit:Int)
     case getProjectDetail(id: Int)
     case refreshProject(id:Int)

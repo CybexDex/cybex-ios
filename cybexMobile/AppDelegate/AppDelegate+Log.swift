@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import AlamofireNetworkActivityLogger
 
 extension AppDelegate {
     func setupLog() {
-        NetworkActivityLogger.shared.startLogging()
-        NetworkActivityLogger.shared.level = .error
+//        NetworkActivityLogger.shared.startLogging()
+//        NetworkActivityLogger.shared.level = .error
     }
 }

@@ -1,9 +1,9 @@
 {
-  "commitish" : "3.0.6",
+  "commitish" : "3.1.0",
   "iOS" : [
     {
       "name" : "Starscream",
-      "hash" : "909e4cc80fabbd9027b2b378eb9ebd2912f1f46421acc42656e4b8990eccb394"
+      "hash" : "70c22716cb678f308594e71db2016f60b5ffc24936402c90048055f308d49f1c"
     }
   ]
 }

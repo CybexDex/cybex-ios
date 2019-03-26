@@ -1,13 +1,13 @@
 {
-  "commitish" : "3.2.0",
+  "commitish" : "3.2.1",
   "iOS" : [
     {
       "name" : "MarqueeLabel",
-      "hash" : "390e6d0c75473ac8dbf99ef3578f83bca3f5b0fd08455c501012fad38a42d7f7"
+      "hash" : "1a5e4096a08b58f63e316d7328f9795528d2dcdfbc83905e4bc0ce84d5be0373"
     },
     {
       "name" : "MarqueeLabelSwift",
-      "hash" : "4ec5a83b91fb1281020a1d1be7956b94763fd0ff573e39bade3a8a164929d565"
+      "hash" : "6be219cd842153ae1738d690c29e6b90845e59cf3befc1d1c44f830bdd6cea5a"
     }
   ]
 }

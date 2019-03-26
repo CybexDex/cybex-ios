@@ -78,8 +78,17 @@ public struct EKProperty {
     /** Image View style descriptor */
     public struct ImageContent {
         
-        /** The image */
-        public var image: UIImage
+        /** Repeated-reversed animation throughout the presentation of an image */
+        public enum TransformAnimation {
+            case animate(duration: TimeInterval, options: UIView.AnimationOptions, transform: CGAffineTransform)
+            case none
+        }
+        
+        /** The images */
+        public var images: [UIImage]
+        
+        /** Image sequence duration, if any */
+        public var imageSequenceAnimationDuration: TimeInterval
         
         /** Image View size - can be forced. If nil, then the image view hugs content and resists compression */
         public var size: CGSize?
@@ -87,28 +96,48 @@ public struct EKProperty {
         /** Content mode */
         public var contentMode: UIView.ContentMode
         
-        /** Shuld the image can rounded */
-        public var makeRound: Bool
-    
-        public init(image: UIImage, size: CGSize? = nil, contentMode: UIView.ContentMode = .scaleToFill, makeRound: Bool = false) {
-            self.image = image
-            self.size = size
-            self.contentMode = contentMode
-            self.makeRound = makeRound
+        /** Should the image be rounded */
+        public var makesRound: Bool
+        
+        /** Repeated-Reversed animation */
+        public var animation: TransformAnimation
+        
+        public init(imageName: String, animation: TransformAnimation = .none, size: CGSize? = nil, contentMode: UIView.ContentMode = .scaleToFill, makesRound: Bool = false) {
+            let image = UIImage(named: imageName)!
+            self.init(image: image, size: size, contentMode: contentMode, makesRound: makesRound)
         }
         
-        public init(imageName: String, size: CGSize? = nil, contentMode: UIView.ContentMode = .scaleToFill, makeRound: Bool = false) {
-            self.init(image: UIImage(named: imageName)!, size: size, contentMode: contentMode, makeRound: makeRound)
+        public init(image: UIImage, animation: TransformAnimation = .none, size: CGSize? = nil, contentMode: UIView.ContentMode = .scaleToFill, makesRound: Bool = false) {
+            self.images = [image]
+            self.size = size
+            self.contentMode = contentMode
+            self.makesRound = makesRound
+            self.animation = animation
+            self.imageSequenceAnimationDuration = 0
+        }
+        
+        public init(images: [UIImage], imageSequenceAnimationDuration: TimeInterval = 1, animation: TransformAnimation = .none, size: CGSize? = nil, contentMode: UIView.ContentMode = .scaleToFill, makesRound: Bool = false) {
+            self.images = images
+            self.size = size
+            self.contentMode = contentMode
+            self.makesRound = makesRound
+            self.animation = animation
+            self.imageSequenceAnimationDuration = imageSequenceAnimationDuration
+        }
+        
+        public init(imagesNames: [String], imageSequenceAnimationDuration: TimeInterval = 1, animation: TransformAnimation = .none, size: CGSize? = nil, contentMode: UIView.ContentMode = .scaleToFill, makesRound: Bool = false) {
+            let images = imagesNames.map { UIImage(named: $0)! }
+            self.init(images: images, imageSequenceAnimationDuration: imageSequenceAnimationDuration, animation: animation, size: size, contentMode: contentMode, makesRound: makesRound)
         }
         
         /** Quick thumbail property generator */
         public static func thumb(with image: UIImage, edgeSize: CGFloat) -> ImageContent {
-            return ImageContent(image: image, size: CGSize(width: edgeSize, height: edgeSize), contentMode: .scaleAspectFill, makeRound: true)
+            return ImageContent(images: [image], size: CGSize(width: edgeSize, height: edgeSize), contentMode: .scaleAspectFill, makesRound: true)
         }
         
         /** Quick thumbail property generator */
         public static func thumb(with imageName: String, edgeSize: CGFloat) -> ImageContent {
-            return ImageContent(imageName: imageName, size: CGSize(width: edgeSize, height: edgeSize), contentMode: .scaleAspectFill, makeRound: true)
+            return ImageContent(imagesNames: [imageName], size: CGSize(width: edgeSize, height: edgeSize), contentMode: .scaleAspectFill, makesRound: true)
         }
     }
     
@@ -125,6 +154,7 @@ public struct EKProperty {
         public var leadingImage: UIImage!
         public var placeholder: LabelContent
         public var textStyle: LabelStyle
+        public var tintColor: UIColor!
         public var bottomBorderColor: UIColor
         let contentWrapper = ContentWrapper()
         public var textContent: String {
@@ -136,10 +166,11 @@ public struct EKProperty {
             }
         }
         
-        public init(keyboardType: UIKeyboardType = .default, placeholder: LabelContent, textStyle: LabelStyle, isSecure: Bool = false, leadingImage: UIImage? = nil, bottomBorderColor: UIColor = .clear) {
+        public init(keyboardType: UIKeyboardType = .default, placeholder: LabelContent, tintColor: UIColor? = nil, textStyle: LabelStyle, isSecure: Bool = false, leadingImage: UIImage? = nil, bottomBorderColor: UIColor = .clear) {
             self.keyboardType = keyboardType
             self.placeholder = placeholder
             self.textStyle = textStyle
+            self.tintColor = tintColor
             self.isSecure = isSecure
             self.leadingImage = leadingImage
             self.bottomBorderColor = bottomBorderColor

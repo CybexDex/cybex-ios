@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
-import flutter_boost
+import Flutter
+import FlutterPluginRegistrant // Only if you have Flutter Plugins.
 
 @UIApplicationMain
 class AppDelegate: FlutterAppDelegate {
     var flutterEngine : FlutterEngine?
 
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        self.flutterEngine = FlutterEngine(name: "io.flutter", project: nil)
+        self.flutterEngine?.run(withEntrypoint: nil)
+        GeneratedPluginRegistrant.register(with: self.flutterEngine)
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable") //隐藏 constraint log
 
@@ -41,7 +45,7 @@ class AppDelegate: FlutterAppDelegate {
             }
         }
 
-        return true
+        return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     override func application(_ app: UIApplication,

@@ -3,11 +3,11 @@
   "iOS" : [
     {
       "name" : "SwiftyUserDefaults",
-      "hash" : "efa40a10d93095fe58461c8d70203fc23533fa613ec93185b3e5e5eaf4bf5ee0"
+      "hash" : "63249f97af5b232a618d00d19856e227c0adf2d755289eef88c595c759826779"
     },
     {
       "name" : "SwiftyUserDefaults",
-      "hash" : "efa40a10d93095fe58461c8d70203fc23533fa613ec93185b3e5e5eaf4bf5ee0"
+      "hash" : "63249f97af5b232a618d00d19856e227c0adf2d755289eef88c595c759826779"
     }
   ]
 }

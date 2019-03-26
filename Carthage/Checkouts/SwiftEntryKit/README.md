@@ -141,7 +141,7 @@ source 'https://github.com/cocoapods/specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'SwiftEntryKit', '0.8.8'
+pod 'SwiftEntryKit', '0.8.9'
 ```
 
 Then, run the following command:
@@ -164,7 +164,7 @@ $ brew install carthage
 To integrate SwiftEntryKit into your Xcode project using Carthage, specify the following in your `Cartfile`:
 
 ```ogdl
-github "huri000/SwiftEntryKit" == 0.8.8
+github "huri000/SwiftEntryKit" == 0.8.9
 ```
 
 ## Usage
@@ -362,7 +362,7 @@ attributes.positionConstraints.verticalOffset = 10
 
 Autorotation - whether the entry autorotates along with the orientation of the device. Defaults to `true`.
 ```Swift
-attributes.positionConstraints.isRotationEnabled = false
+attributes.positionConstraints.rotation.isEnabled = false
 ```
 
 Keyboard Releation - used to bind an entry to the keyboard once the keyboard is displayed.

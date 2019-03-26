@@ -174,12 +174,12 @@ extension UIView {
 }
 
 extension UIViewController: iProgressHUDDelegete {
-    func onShow(view: UIView) {
+    public func onShow(view: UIView) {
     }
 
-    func onDismiss(view: UIView) {
+    public func onDismiss(view: UIView) {
     }
 
-    func onTouch(view: UIView) {
+    public func onTouch(view: UIView) {
     }
 }
