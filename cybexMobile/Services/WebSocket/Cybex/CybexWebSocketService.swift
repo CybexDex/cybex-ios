@@ -28,10 +28,11 @@ enum NodeURLString: String {
     case test2 = "wss://shenzhen.51nebula.com/"
 
 
-    case tmp = "ws://10.18.120.241:28090"
+    case tmp = "ws://10.18.120.241:28090" //local
+    case uat = "ws://47.100.98.113:38090" //uat
 
     static var product: [NodeURLString] {
-        //        return [.tmp]
+//        return [.uat]
         return [.hongkong, .hkback, .singapore, .tokyo, .korea]
     }
 

@@ -19,8 +19,8 @@ enum DatabaseApi {
 
 struct CybexDatabaseApiService {
     enum Config {
-        static let productURL = URL(string: "https://hongkong.cybex.io")! // http://10.18.120.241:28090
-        static let devURL = URL(string: "https://hangzhou.51nebula.com")!
+        static let productURL = URL(string: "https://hongkong.cybex.io")! // https://hongkong.cybex.io
+        static let devURL = URL(string: "https://hangzhou.51nebula.com")! //http://47.100.98.113:38090
     }
 
     static let provider = MoyaProvider<DatabaseApi>(callbackQueue: nil, manager: defaultManager(),
