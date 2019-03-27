@@ -54,6 +54,9 @@ jobs:
           name: Install Swiftlint
           command: brew install swiftlint
       - run:
+          name: Add Python directory to PATH
+          command: echo 'export PATH=~/Library/Python/2.7/bin:$PATH' >> $BASH_ENV        
+      - run:
           name: Install Ruby Dependencies
           command: bundle check || bundle install
           environment:
@@ -85,6 +88,9 @@ jobs:
       - run:
           name: Run Danger
           command: bundle exec danger
+      - run:
+          name: CocoaPods Spec linting
+          command: bundle exec pod lib lint
       - run:
           name: Send Code Coverage to Codecov.io
           command: bash <(curl -s https://codecov.io/bash) -J Moya

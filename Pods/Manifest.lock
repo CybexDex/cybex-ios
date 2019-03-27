@@ -1,60 +1,64 @@
 PODS:
-  - Alamofire (4.8.1)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - cocore (1.1.0)
   - coswift (1.1.2):
     - cocore (~> 1.1.0)
+  - CryptoSwift (0.14.0)
+  - EthereumABI (1.1.1):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 0.13)
+    - EthereumAddress (~> 1.0.0)
+  - EthereumAddress (1.0.0):
+    - CryptoSwift (~> 0.13)
   - Flutter (1.0.0)
   - FlutterPluginRegistrant (0.0.1):
     - Flutter
-  - keccak.c (0.1.3)
-  - Moya (12.0.1):
-    - Moya/Core (= 12.0.1)
-  - Moya/Core (12.0.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.0)
-  - PromiseKit (6.8.3):
-    - PromiseKit/CorePromise (= 6.8.3)
-    - PromiseKit/Foundation (= 6.8.3)
-    - PromiseKit/UIKit (= 6.8.3)
-  - PromiseKit/CorePromise (6.8.3)
-  - PromiseKit/Foundation (6.8.3):
+  - PromiseKit (6.4.1):
+    - PromiseKit/CorePromise (= 6.4.1)
+    - PromiseKit/Foundation (= 6.4.1)
+    - PromiseKit/UIKit (= 6.4.1)
+  - PromiseKit/CorePromise (6.4.1)
+  - PromiseKit/Foundation (6.4.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.8.3):
+  - PromiseKit/UIKit (6.4.1):
     - PromiseKit/CorePromise
-  - Result (4.1.0)
-  - scrypt.c (0.1.1)
-  - secp256k1.c (0.1.2)
+  - scrypt (2.0):
+    - CryptoSwift (~> 0.11)
+  - secp256k1_swift (1.0.3)
   - SipHash (1.2.2)
-  - web3swift.pod (2.1.10):
+  - SwiftRLP (1.2):
     - BigInt (~> 3.1)
-    - keccak.c (~> 0.1)
-    - PromiseKit (~> 6.4)
-    - scrypt.c (~> 0.1)
-    - secp256k1.c (~> 0.1)
+  - web3swift (2.1.0):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 0.13)
+    - EthereumABI (~> 1.1.1)
+    - EthereumAddress (~> 1.0.0)
+    - PromiseKit (~> 6.4.1)
+    - scrypt (~> 2.0)
+    - secp256k1_swift (~> 1.0.3)
+    - SwiftRLP (~> 1.1)
 
 DEPENDENCIES:
   - coswift
   - Flutter (from `./cybex_flutter/.ios/Flutter/engine`)
   - FlutterPluginRegistrant (from `./cybex_flutter/.ios/Flutter/FlutterPluginRegistrant`)
-  - Moya
-  - web3swift.pod
+  - web3swift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - BigInt
     - cocore
     - coswift
-    - keccak.c
-    - Moya
+    - CryptoSwift
+    - EthereumABI
+    - EthereumAddress
     - PromiseKit
-    - Result
-    - scrypt.c
-    - secp256k1.c
+    - scrypt
+    - secp256k1_swift
     - SipHash
-    - web3swift.pod
+    - SwiftRLP
+    - web3swift
 
 EXTERNAL SOURCES:
   Flutter:
@@ -63,21 +67,21 @@ EXTERNAL SOURCES:
     :path: "./cybex_flutter/.ios/Flutter/FlutterPluginRegistrant"
 
 SPEC CHECKSUMS:
-  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   cocore: dfaf5fb52b518fbbb5076061386294051a8f62d3
   coswift: 70c091e93203daa20e9fdc378dbfefaa5f9057de
+  CryptoSwift: 35a10419f4dbf0619c13f8c1c180037e115323fa
+  EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
+  EthereumAddress: f476e1320dca3a0024431e713ede7a09c7eb7796
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   FlutterPluginRegistrant: 3f4d45b679eb21eb53e786e8884a26157555ce9f
-  keccak.c: 859583afdaccb4e4fcc0f0096064d101580313f4
-  Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
-  PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
-  scrypt.c: b42ae06183251329d2b2c620c226fb541a4a3592
-  secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
+  PromiseKit: 4c76a6506638034e3d7bede97b2ff7743f7bd2dc
+  scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
+  secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
-  web3swift.pod: e3bd1c18a84e9fc1c4bfab8ebc0754b0806a7bcd
+  SwiftRLP: 98a02b2210128353ca02e4c2f4d83e2a9796db4f
+  web3swift: 9e823131417a6e21565fc327d23f1f874a838844
 
-PODFILE CHECKSUM: 4d8bf293dc15336f11f8ceeded39fa8c804962fc
+PODFILE CHECKSUM: 047d2b80afc411e3564c27f012841cc76a600309
 
 COCOAPODS: 1.7.0.beta.2

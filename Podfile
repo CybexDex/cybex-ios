@@ -20,9 +20,7 @@ target 'cybexMobile' do
   # Pods for cybexMobile
 
     pod 'coswift'
-    pod 'Moya'
-    pod 'web3swift.pod'
-
+    pod 'web3swift'
   target 'cybexMobileTests' do
     inherit! :search_paths
     # Pods for testing

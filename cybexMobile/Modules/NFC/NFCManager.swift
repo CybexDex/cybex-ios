@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreNFC
-import secp256k1
 import CryptoSwift
 import SwifterSwift
 import SwiftyUserDefaults

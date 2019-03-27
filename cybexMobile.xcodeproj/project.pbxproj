@@ -476,7 +476,6 @@
 		734AB3FB21A289640091BE82 /* NBLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AB3FA21A289640091BE82 /* NBLModel.swift */; };
 		734AB3FD21A28B9F0091BE82 /* ChatServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AB3FC21A28B9F0091BE82 /* ChatServiceProvider.swift */; };
 		734AB3FE21A299A80091BE82 /* Repeat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0A21798D22008395AC /* Repeat.framework */; };
-		735253DE224A096500521DC5 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72457119219D5BF9007595CC /* CryptoSwift.framework */; };
 		73539BA82178A0D7008395AC /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA72178A0D6008395AC /* ActiveLabel.framework */; };
 		73539BAA2178A391008395AC /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA92178A390008395AC /* Apollo.framework */; };
 		73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BC72178A7CA008395AC /* AsyncOperation.swift */; };
@@ -662,6 +661,9 @@
 		7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */; };
 		7398BEBF2181BFD3004C042E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEBE2181BFD3004C042E /* Style.swift */; };
 		7398BEC32181C1AE004C042E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEC22181C1AE004C042E /* R.generated.swift */; };
+		739AB59C224B66620023AEA9 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 739AB59B224B66620023AEA9 /* Moya.framework */; };
+		739AB59E224B666C0023AEA9 /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 739AB59D224B666C0023AEA9 /* RxMoya.framework */; };
+		739AB5A0224B67B90023AEA9 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 739AB59F224B67B90023AEA9 /* CryptoSwift.framework */; };
 		739EFB5B2181D10E00424061 /* GestureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB4D2181D10E00424061 /* GestureFactory.swift */; };
 		739EFB5C2181D10E00424061 /* RxGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB4E2181D10E00424061 /* RxGestureRecognizerDelegate.swift */; };
 		739EFB5D2181D10E00424061 /* UIGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB502181D10E00424061 /* UIGestureRecognizer+RxGesture.swift */; };
@@ -710,7 +712,6 @@
 		73B47836222CEB8E00189632 /* ASN1Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4782A222CEB8E00189632 /* ASN1Identifier.swift */; };
 		73B47837222CEB8E00189632 /* Asn1Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4782B222CEB8E00189632 /* Asn1Decoder.swift */; };
 		73B47838222CEB8E00189632 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4782C222CEB8E00189632 /* Array+Extension.swift */; };
-		73B47848222D065900189632 /* LibSecp256k1Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47847222D065800189632 /* LibSecp256k1Extension.swift */; };
 		73B4784A222D126900189632 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47849222D126900189632 /* Base58.swift */; };
 		73B4784C222D1ADE00189632 /* RIPEMD160+StackOveflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4784B222D1ADE00189632 /* RIPEMD160+StackOveflow.swift */; };
 		73C048CF2225285700F756FF /* CybexScrollNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C048CE2225285700F756FF /* CybexScrollNoticeView.swift */; };
@@ -1171,7 +1172,6 @@
 		722EC86321895F490091F1BF /* RechargeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RechargeHeaderView.xib; sourceTree = "<group>"; };
 		7231103921805D7E0007E95D /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = Carthage/Build/iOS/UMCommon.framework; sourceTree = "<group>"; };
 		7231103A21805D7F0007E95D /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = Carthage/Build/iOS/UMAnalytics.framework; sourceTree = "<group>"; };
-		72457119219D5BF9007595CC /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		724C5D382153472800FF1DE7 /* GatewayQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayQueryService.swift; sourceTree = "<group>"; };
 		724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveViewAdapter.swift; sourceTree = "<group>"; };
 		724C5D3F21538ABD00FF1DE7 /* ComprehensiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveView.swift; sourceTree = "<group>"; };
@@ -1565,6 +1565,9 @@
 		7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WKWebViewJavascriptBridge.framework; path = Carthage/Build/iOS/WKWebViewJavascriptBridge.framework; sourceTree = "<group>"; };
 		7398BEBE2181BFD3004C042E /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		7398BEC22181C1AE004C042E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		739AB59B224B66620023AEA9 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
+		739AB59D224B666C0023AEA9 /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
+		739AB59F224B67B90023AEA9 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		739EFB4D2181D10E00424061 /* GestureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureFactory.swift; sourceTree = "<group>"; };
 		739EFB4E2181D10E00424061 /* RxGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
 		739EFB502181D10E00424061 /* UIGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
@@ -1613,7 +1616,6 @@
 		73B4782A222CEB8E00189632 /* ASN1Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1Identifier.swift; sourceTree = "<group>"; };
 		73B4782B222CEB8E00189632 /* Asn1Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asn1Decoder.swift; sourceTree = "<group>"; };
 		73B4782C222CEB8E00189632 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		73B47847222D065800189632 /* LibSecp256k1Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibSecp256k1Extension.swift; sourceTree = "<group>"; };
 		73B47849222D126900189632 /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
 		73B4784B222D1ADE00189632 /* RIPEMD160+StackOveflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RIPEMD160+StackOveflow.swift"; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
@@ -1819,6 +1821,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				739AB59E224B666C0023AEA9 /* RxMoya.framework in Frameworks */,
+				739AB59C224B66620023AEA9 /* Moya.framework in Frameworks */,
+				739AB5A0224B67B90023AEA9 /* CryptoSwift.framework in Frameworks */,
 				730BB3F0224A326600F07032 /* cybex_ios_core_cpp.framework in Frameworks */,
 				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
 				7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */,
@@ -1853,7 +1858,6 @@
 				73539C1721798D26008395AC /* GrowingTextView.framework in Frameworks */,
 				73539C1821798D26008395AC /* IQKeyboardManagerSwift.framework in Frameworks */,
 				73539C1921798D26008395AC /* UIFontComplete.framework in Frameworks */,
-				735253DE224A096500521DC5 /* CryptoSwift.framework in Frameworks */,
 				73539C2921799039008395AC /* Macaw.framework in Frameworks */,
 				73539C2A21799039008395AC /* SwiftTheme.framework in Frameworks */,
 				73539C2B21799039008395AC /* XLActionController.framework in Frameworks */,
@@ -2750,7 +2754,6 @@
 		72C9149921A4FAB900B38084 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				72457119219D5BF9007595CC /* CryptoSwift.framework */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -3620,7 +3623,6 @@
 			children = (
 				73B4784B222D1ADE00189632 /* RIPEMD160+StackOveflow.swift */,
 				73B47849222D126900189632 /* Base58.swift */,
-				73B47847222D065800189632 /* LibSecp256k1Extension.swift */,
 			);
 			path = Web3;
 			sourceTree = "<group>";
@@ -4032,6 +4034,9 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				739AB59F224B67B90023AEA9 /* CryptoSwift.framework */,
+				739AB59D224B666C0023AEA9 /* RxMoya.framework */,
+				739AB59B224B66620023AEA9 /* Moya.framework */,
 				730BB3EF224A326600F07032 /* cybex_ios_core_cpp.framework */,
 				7364D400223A047F00021978 /* NVActivityIndicatorView.framework */,
 				7354F54321F5766D000AA621 /* SnapKit.framework */,
@@ -4340,7 +4345,7 @@
 				7398BEC42181C209004C042E /* swiftlint */,
 				73A33072219420B900707D8F /* Embed Frameworks */,
 				739DA3312248D703000E1BB8 /* ShellScript */,
-				CB29F2186DF6C950ADEE94FA /* [CP] Embed Pods Frameworks */,
+				188D7FB0488E498F5B08EAAD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4679,6 +4684,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT/rswift\" generate \"$SRCROOT\"\n";
 		};
+		188D7FB0488E498F5B08EAAD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		63B89CB4897862A41FC84BA0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4889,23 +4911,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]; then\nbuildNumber=$(git rev-list HEAD | wc -l | tr -d ' ')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nfi\n";
 		};
-		CB29F2186DF6C950ADEE94FA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DWAWYO8YO3NSR6BB5KZUVXZI /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4924,7 +4929,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 			showEnvVarsInLog = 0;
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {
@@ -5528,7 +5533,6 @@
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */,
 				221C616E2137FCCF0021C007 /* ImageShareViewController.swift in Sources */,
-				73B47848222D065900189632 /* LibSecp256k1Extension.swift in Sources */,
 				73539C4D2179A210008395AC /* URLConvertible.swift in Sources */,
 				722EC86521895F490091F1BF /* RechargeHeaderView.swift in Sources */,
 				739EFB632181D10E00424061 /* UITapGestureRecognizer+RxGesture.swift in Sources */,

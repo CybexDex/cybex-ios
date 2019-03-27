@@ -1,7 +1,16 @@
 # master
+*Please add new entries at the top.*
 
+# 5.0.0
 
-# 4.0.0*Please add new entries at the top.*
+1. Support Swift 5.0 (Xcode 10.2) (#711, kudos to @ikesyo)
+1. Dropped support for Swift 4.1 (Xcode 9)
+1. Migrated from `hashValue` to `hash(into:)`, fixing deprecation warning in Swift 5 (#707, kudos to @ChristopherRogers)
+1. New operator `materializeResults` and `dematerializeResults` (#679, kudos to @ra1028)
+1. New convenience initializer for `Action` that takes a `ValidatingProperty` as its state (#637, kudos to @Marcocanc)
+1. Fix legacy date implementation. (#683, kudos to @shoheiyokoyama)
+
+# 4.0.0
 
 1. When unfair locks from libplatform are unavailable, ReactiveSwift now fallbacks to error checking Pthread mutexes instead of the default. Mitigations regarding issues with `pthread_mutex_trylock` have also been applied. (#654, kudos to @andersio)
 1. Fix some documentation errors about Carthage usage (#655)

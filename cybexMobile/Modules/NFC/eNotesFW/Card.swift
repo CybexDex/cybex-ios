@@ -25,12 +25,14 @@
 //
 import Foundation
 import BigInt
-import web3swift
+import Web3swift
 import CryptoSwift
-import secp256k1
 import CommonCrypto
+import secp256k1_swift
 
 public struct Card {
+    static var secp256k1_N = BigUInt("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", radix: 16)!
+
     //这个key就是acitvePublickKey
     public var blockchainPublicKey = ""
     public var oneTimePrivateKey = ""
@@ -133,8 +135,8 @@ extension Card {
     static func toCanonicalised(s: String) -> String {
         var bnS = BigUInt(s,radix:16)!
 
-        if(bnS > (SECP256K1.secp256k1_N >> 1)){
-            bnS = SECP256K1.secp256k1_N - bnS
+        if(bnS > (Card.secp256k1_N >> 1)){
+            bnS = Card.secp256k1_N - bnS
 
             return String(bnS, radix: 16, uppercase: true)
         }
