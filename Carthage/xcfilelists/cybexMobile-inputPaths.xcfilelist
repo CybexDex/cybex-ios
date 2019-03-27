@@ -1,4 +1,5 @@
 $(SRCROOT)/Carthage/Build/iOS/ActiveLabel.framework
+$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework
 $(SRCROOT)/Carthage/Build/iOS/Apollo.framework
 $(SRCROOT)/Carthage/Build/iOS/AsyncDisplayKit.framework
 $(SRCROOT)/Carthage/Build/iOS/BiometricAuthentication.framework
@@ -31,6 +32,7 @@ $(SRCROOT)/Carthage/Build/iOS/Proposer.framework
 $(SRCROOT)/Carthage/Build/iOS/ReSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Reachability.framework
 $(SRCROOT)/Carthage/Build/iOS/Repeat.framework
+$(SRCROOT)/Carthage/Build/iOS/Result.framework
 $(SRCROOT)/Carthage/Build/iOS/Rswift.framework
 $(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework
 $(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework

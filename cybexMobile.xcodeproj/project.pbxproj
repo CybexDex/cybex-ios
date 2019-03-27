@@ -726,6 +726,8 @@
 		73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */; };
 		73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */; };
 		73E61F6F21FFFC9400B54612 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */; };
+		73E9BFFB224B824E0023B274 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9BFFA224B824E0023B274 /* Alamofire.framework */; };
+		73E9BFFD224B8EC30023B274 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9BFFC224B8EC30023B274 /* Result.framework */; };
 		73F113EC2216A700008C2D37 /* KeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F113EB2216A700008C2D37 /* KeyHelper.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
@@ -1631,6 +1633,8 @@
 		73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostVestingView+Layout.swift"; sourceTree = "<group>"; };
 		73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPageTabViewController.swift; sourceTree = "<group>"; };
 		73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		73E9BFFA224B824E0023B274 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		73E9BFFC224B8EC30023B274 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		73F113EB2216A700008C2D37 /* KeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHelper.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
@@ -1822,7 +1826,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				739AB59E224B666C0023AEA9 /* RxMoya.framework in Frameworks */,
+				73E9BFFD224B8EC30023B274 /* Result.framework in Frameworks */,
 				739AB59C224B66620023AEA9 /* Moya.framework in Frameworks */,
+				73E9BFFB224B824E0023B274 /* Alamofire.framework in Frameworks */,
 				739AB5A0224B67B90023AEA9 /* CryptoSwift.framework in Frameworks */,
 				730BB3F0224A326600F07032 /* cybex_ios_core_cpp.framework in Frameworks */,
 				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
@@ -4034,6 +4040,8 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73E9BFFC224B8EC30023B274 /* Result.framework */,
+				73E9BFFA224B824E0023B274 /* Alamofire.framework */,
 				739AB59F224B67B90023AEA9 /* CryptoSwift.framework */,
 				739AB59D224B666C0023AEA9 /* RxMoya.framework */,
 				739AB59B224B66620023AEA9 /* Moya.framework */,
