@@ -23,7 +23,6 @@ before_install:
 
     - security import .travis/AppleWWDRCA.cer -k ios-build.keychain -A
     - security import .travis/nbl-dis.p12 -k ios-build.keychain -P $KEY_PASSWORD -A
-    - "security set-key-partition-list -S apple-tool:,apple: -s -k $KEY_PASSWORD ios-build.keychain > /dev/null"
 script:
     - ".travis/build.sh"
 env:
