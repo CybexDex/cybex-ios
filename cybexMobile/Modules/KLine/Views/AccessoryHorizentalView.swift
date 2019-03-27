@@ -17,7 +17,7 @@ class AccessoryHorizentalView: UIView {
       guard let curIndicator = data as? Indicator else { return }
 
       self.collectionView.reloadData()
-      self.collectionView.selectItem(at: IndexPath(item: Indicator.all.index(of: curIndicator) ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        self.collectionView.selectItem(at: IndexPath(item: Indicator.all.firstIndex(of: curIndicator) ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
   }
 

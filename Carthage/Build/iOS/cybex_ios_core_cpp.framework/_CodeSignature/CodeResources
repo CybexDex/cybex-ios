@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/cybex_ios_core_cpp.h</key>
 		<data>
-		HMQUkf9BN65dyQINAT2D/LSyveA=
+		bNcwfJxZA3I0+BWB6czwh/7uDDs=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		4LBbvwfYQYLkLJzrR8xm17MlWQ4=
+		IIjmfV0Z+z5lJFIKKaz/DV3Tvvs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -457,11 +457,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HMQUkf9BN65dyQINAT2D/LSyveA=
+			bNcwfJxZA3I0+BWB6czwh/7uDDs=
 			</data>
 			<key>hash2</key>
 			<data>
-			v7L6yYndT1dhQeYxuTKK52Ol0cW1pp1UFTLO9vpxumk=
+			8VsLf+1GjDJZt45m8ZAZffe5lNwdvINdnCcgYfgz+WY=
 			</data>
 		</dict>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftdoc</key>
@@ -479,11 +479,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4LBbvwfYQYLkLJzrR8xm17MlWQ4=
+			IIjmfV0Z+z5lJFIKKaz/DV3Tvvs=
 			</data>
 			<key>hash2</key>
 			<data>
-			i83qNKqZ35kIZ1DmF8LjDqCCm6z8/5PJl8Y7NyP7jAg=
+			snbJpCBI0hn77/5t9z4D83tD4czLchJ6cfmpbiI/Nic=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

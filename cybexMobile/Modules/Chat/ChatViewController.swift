@@ -314,7 +314,7 @@ class ChatViewController: MessagesViewController {
         
         #if DEBUG
         self.coordinator?.state.chatState.asObservable().skip(1).subscribe(onNext: { [weak self](connectState) in
-            guard let self = self, let connectState = connectState else { return }
+            guard let _ = self, let connectState = connectState else { return }
             
             var message = ""
             switch connectState{

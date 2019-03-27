@@ -104,7 +104,7 @@ public extension ObservableType where E: UIPanGestureRecognizer {
 
      - parameter view: A `TargetView` value on which the gesture took place.
      */
-    public func asTranslation(in view: TargetView = .view) -> Observable<(translation: CGPoint, velocity: CGPoint)> {
+    func asTranslation(in view: TargetView = .view) -> Observable<(translation: CGPoint, velocity: CGPoint)> {
         return self.map { gesture in
             let view = view.targetView(for: gesture)
             return (

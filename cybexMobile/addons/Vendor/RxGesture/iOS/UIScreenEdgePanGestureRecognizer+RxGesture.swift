@@ -74,7 +74,7 @@ public extension Reactive where Base: UIView {
      - parameter edges: The edges on which this gesture recognizes, relative to the current interface orientation
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public func screenEdgePanGesture(
+    func screenEdgePanGesture(
         edges: UIRectEdge,
         configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = UIScreenEdgePanGestureRecognizerDefaults.configuration
         ) -> ControlEvent<UIScreenEdgePanGestureRecognizer> {

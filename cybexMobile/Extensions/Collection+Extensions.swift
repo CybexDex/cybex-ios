@@ -17,7 +17,7 @@ extension Collection {
 extension Array where Element: Hashable {
   func containHashable<T: Hashable>(_ element: T) -> (Contain: Bool, Index: Int) {
     let hashNum = self.map { $0.hashValue }
-    if let index = hashNum.index(of: element.hashValue) {
+    if let index = hashNum.firstIndex(of: element.hashValue) {
       return (true, index)
     }
     return (false, 0)

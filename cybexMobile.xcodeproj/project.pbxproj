@@ -420,6 +420,7 @@
 		7307A92F212518DC00BD6444 /* themify.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A916212518DB00BD6444 /* themify.ttf */; };
 		7307A931212518F300BD6444 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A930212518F300BD6444 /* BaseView.swift */; };
 		7307A94521257BE900BD6444 /* AddressCellViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A94421257BE900BD6444 /* AddressCellViewAdapter.swift */; };
+		730BB3F0224A326600F07032 /* cybex_ios_core_cpp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730BB3EF224A326600F07032 /* cybex_ios_core_cpp.framework */; };
 		731C11BB214D045E00761955 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11AD214D045700761955 /* RxBlocking.framework */; };
 		731C11C0214D045E00761955 /* Guitar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B2214D045A00761955 /* Guitar.framework */; };
 		731C11C1214D045E00761955 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B3214D045A00761955 /* RxCocoa.framework */; };
@@ -659,7 +660,6 @@
 		7392F5EF219AC6A8007FFCD0 /* MessageKitAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */; };
 		73930B3821F870E600840FAD /* AccountHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73930B3721F870E600840FAD /* AccountHistoryService.swift */; };
 		7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */; };
-		7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */; };
 		7398BEBF2181BFD3004C042E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEBE2181BFD3004C042E /* Style.swift */; };
 		7398BEC32181C1AE004C042E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEC22181C1AE004C042E /* R.generated.swift */; };
 		739EFB5B2181D10E00424061 /* GestureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB4D2181D10E00424061 /* GestureFactory.swift */; };
@@ -1317,6 +1317,7 @@
 		7307A916212518DB00BD6444 /* themify.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = themify.ttf; sourceTree = "<group>"; };
 		7307A930212518F300BD6444 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7307A94421257BE900BD6444 /* AddressCellViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellViewAdapter.swift; sourceTree = "<group>"; };
+		730BB3EF224A326600F07032 /* cybex_ios_core_cpp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cybex_ios_core_cpp.framework; path = Carthage/Build/iOS/cybex_ios_core_cpp.framework; sourceTree = "<group>"; };
 		731C11AD214D045700761955 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		731C11B2214D045A00761955 /* Guitar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Guitar.framework; path = Carthage/Build/iOS/Guitar.framework; sourceTree = "<group>"; };
 		731C11B3214D045A00761955 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -1562,7 +1563,6 @@
 		7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MessageKitAssets.bundle; sourceTree = "<group>"; };
 		73930B3721F870E600840FAD /* AccountHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHistoryService.swift; sourceTree = "<group>"; };
 		7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WKWebViewJavascriptBridge.framework; path = Carthage/Build/iOS/WKWebViewJavascriptBridge.framework; sourceTree = "<group>"; };
-		7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cybex_ios_core_cpp.framework; path = Carthage/Build/iOS/cybex_ios_core_cpp.framework; sourceTree = "<group>"; };
 		7398BEBE2181BFD3004C042E /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		7398BEC22181C1AE004C042E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		739EFB4D2181D10E00424061 /* GestureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureFactory.swift; sourceTree = "<group>"; };
@@ -1819,6 +1819,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				730BB3F0224A326600F07032 /* cybex_ios_core_cpp.framework in Frameworks */,
 				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
 				7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */,
 				7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */,
@@ -1833,7 +1834,6 @@
 				73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */,
 				7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */,
 				7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */,
-				7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */,
 				735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */,
 				73539BFE217980CF008395AC /* BiometricAuthentication.framework in Frameworks */,
 				7336B7BD214F717E0086A9DF /* ESTabBarController.framework in Frameworks */,
@@ -4032,6 +4032,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				730BB3EF224A326600F07032 /* cybex_ios_core_cpp.framework */,
 				7364D400223A047F00021978 /* NVActivityIndicatorView.framework */,
 				7354F54321F5766D000AA621 /* SnapKit.framework */,
 				7354F54121F57666000AA621 /* NotificationBanner.framework */,
@@ -4046,7 +4047,6 @@
 				7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */,
 				7231103A21805D7F0007E95D /* UMAnalytics.framework */,
 				7231103921805D7E0007E95D /* UMCommon.framework */,
-				7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */,
 				73539C6E2179AAA8008395AC /* libsqlite3.tbd */,
 				73539C34217992EF008395AC /* Crashlytics.framework */,
 				73539C36217992F0008395AC /* Device.framework */,
@@ -4454,10 +4454,9 @@
 			};
 			buildConfigurationList = F2463CE10B3BCCDB7560E546B4D5BE9A /* Build configuration list for PBXProject "cybexMobile" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -4925,7 +4924,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 			showEnvVarsInLog = 0;
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {
@@ -5730,7 +5729,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "";
 			};
 			name = Release;
 		};
@@ -5766,6 +5765,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5779,9 +5779,9 @@
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -5839,7 +5839,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.2;
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "";
 			};
 			name = Debug;
 		};
@@ -5896,7 +5896,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = TESTS;
 				SWIFT_VERSION = 4.2;
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "";
 			};
 			name = Tests;
 		};
@@ -5944,9 +5944,9 @@
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Tests;
@@ -6005,6 +6005,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6029,6 +6030,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -6153,6 +6156,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6177,6 +6181,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -6202,6 +6208,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6223,6 +6230,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
