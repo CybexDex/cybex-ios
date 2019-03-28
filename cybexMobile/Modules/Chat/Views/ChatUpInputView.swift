@@ -86,7 +86,7 @@ class ChatUpInputView: CybexBaseView {
             return
         }
         self.next?.sendEventWith(Event.sendMessageEvent.rawValue,
-                                 userinfo: ["message": self.textView.text])
+                                 userinfo: ["message": self.textView.text ?? ""])
         self.textView.resignFirstResponder()
     }
     

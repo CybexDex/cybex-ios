@@ -360,8 +360,8 @@ class BusinessViewController: BaseViewController {
         }
     }
     deinit {
-        NotificationCenter.default.removeObserver(self.containerView.priceTextfield)
-        NotificationCenter.default.removeObserver(self.containerView.amountTextfield)
+        NotificationCenter.default.removeObserver(self.containerView.priceTextfield!)
+        NotificationCenter.default.removeObserver(self.containerView.amountTextfield!)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
     }
 }

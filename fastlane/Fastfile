@@ -49,7 +49,7 @@ platform :ios do
       xcodeproj: "cybexMobile.xcodeproj",
       profile: ".travis/AdHoc_cybex.mobileprovision", # optional if you use sigh
       build_configuration: "Release",
-      target_filter: "cybexMobile" # matches name or type of a target
+      target_filter: "cybexMobile", # matches name or type of a target
       code_signing_identity: "iPhone Distribution"
     )
     gym(

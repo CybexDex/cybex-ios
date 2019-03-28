@@ -430,7 +430,7 @@ public class LGButton: UIControl {
             } else {
                 rotation = max(gradientRotation, CGFloat(-360.0))
             }
-            var xAngle: Float = Float(rotation/360)
+            var xAngle = Float(rotation/360)
             if (gradientHorizontal) {
                 xAngle = 0.25
             }

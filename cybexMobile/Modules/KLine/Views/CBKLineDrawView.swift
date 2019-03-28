@@ -350,7 +350,9 @@ extension CBKLineDrawView {
             horizantalTop.constant = location.y
             indicatorHorizontalView.layoutIfNeeded()
 
-            if abs(previousOffset - location.x) < abs(nextOffset - location.x) {
+            let pre = abs(previousOffset - location.x)
+            let next = abs(nextOffset - location.x)
+            if pre < next {
                 verticalLeft.constant = previousOffset
                 indicatorVerticalView.layoutIfNeeded()
 
