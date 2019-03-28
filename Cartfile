@@ -12,6 +12,7 @@ github "nixzhu/Proposer"
 github "SwiftyJSON/SwiftyJSON"
 github "ra1028/DifferenceKit"
 github "ReactiveX/RxSwift"
+github "attaswift/BigInt"
 
 git "https://github.com/fxwx23/JSONRPCKit" "xcode10-swift4.2"
 github "ashleymills/Reachability.swift"

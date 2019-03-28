@@ -45,11 +45,11 @@ class MarketHelper {
         var indexA = -1
         var indexB = -1
 
-        if let index = relation.index(of: filterSymbolA) {
+        if let index = relation.firstIndex(of: filterSymbolA) {
             indexA = index
         }
         
-        if let index = relation.index(of: filterSymbolB) {
+        if let index = relation.firstIndex(of: filterSymbolB) {
             indexB = index
         }
 

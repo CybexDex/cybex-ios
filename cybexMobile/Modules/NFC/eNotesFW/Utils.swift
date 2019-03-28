@@ -10,7 +10,6 @@ import Foundation
 import CoreNFC
 import CommonCrypto
 import BigInt
-import Web3swift
 
 @available(iOS 11.0, *)
 public class Utils {

@@ -25,7 +25,6 @@
 //
 import Foundation
 import BigInt
-import Web3swift
 import CryptoSwift
 import CommonCrypto
 import secp256k1_swift
@@ -109,7 +108,7 @@ public struct Card {
             if publicKey.hexEncodedString() == activePubkey {
                 let v: UInt8 = UInt8(i) + 27 + (compressed ? 0 : 4)
 
-                return v.data + Data(bytes: rData) + Data(bytes: sData)
+                return v.data + Data(rData) + Data(sData)
             }
         }
         return nil
@@ -127,7 +126,7 @@ extension Card {
     static func compressedPrivateKey(_ privateKey: String) -> String {
         var privateKey = Data.fromHex(privateKey)!
         privateKey.insert(0x80, at: 0)
-
+        
         let encodedPvkey = privateKey.bytes.base58CheckEncodedString
         return encodedPvkey
     }

@@ -274,14 +274,20 @@ open class iProgressHUD {
             self.indicatorView.center.x = boxCenter.x
             self.captionView.center.x = boxCenter.x
             self.indicatorView.center.y = boxCenter.y
-            let indicatorY = CGPoint(x: boxCenter.x, y: (boxCenter.y - (indicatorView.frame.size.height / 2)) - ((captionView.frame.size.height + captionDistance) / 2))
+            let yl = boxCenter.y - (indicatorView.frame.size.height / 2)
+            let yr = captionView.frame.size.height + captionDistance
+            let y = yl - (yr / 2)
+            let indicatorY = CGPoint(x: boxCenter.x, y: y)
             self.indicatorView.setY(y: indicatorY.y)
             self.captionView.setY(y: (self.indicatorView.frame.maxY + captionDistance))
         } else if iprogressStyle == iProgressHUDStyles.horizontal {
             self.indicatorView.center.y = boxCenter.y
             self.captionView.center.y = boxCenter.y
             self.indicatorView.center.x = boxCenter.x
-            let indicatorX = CGPoint(x: (boxCenter.x - (indicatorView.frame.size.width / 2)) - ((captionView.frame.size.width + captionDistance) / 2), y: boxCenter.y)
+            let xl = boxCenter.x - (indicatorView.frame.size.width / 2)
+            let xr = captionView.frame.size.width + captionDistance
+            let x = xl - (xr / 2)
+            let indicatorX = CGPoint(x: x, y: boxCenter.y)
             self.indicatorView.setX(x: indicatorX.x)
             self.captionView.setX(x: (self.indicatorView.frame.maxX + captionDistance))
         }

@@ -707,13 +707,9 @@
 		73B47831222CEB8E00189632 /* ASN1Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47825222CEB8E00189632 /* ASN1Object.swift */; };
 		73B47832222CEB8E00189632 /* TlvTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47826222CEB8E00189632 /* TlvTag.swift */; };
 		73B47833222CEB8E00189632 /* Tlv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47827222CEB8E00189632 /* Tlv.swift */; };
-		73B47834222CEB8E00189632 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47828222CEB8E00189632 /* Data+Extension.swift */; };
 		73B47835222CEB8E00189632 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47829222CEB8E00189632 /* Utils.swift */; };
 		73B47836222CEB8E00189632 /* ASN1Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4782A222CEB8E00189632 /* ASN1Identifier.swift */; };
 		73B47837222CEB8E00189632 /* Asn1Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4782B222CEB8E00189632 /* Asn1Decoder.swift */; };
-		73B47838222CEB8E00189632 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4782C222CEB8E00189632 /* Array+Extension.swift */; };
-		73B4784A222D126900189632 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47849222D126900189632 /* Base58.swift */; };
-		73B4784C222D1ADE00189632 /* RIPEMD160+StackOveflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4784B222D1ADE00189632 /* RIPEMD160+StackOveflow.swift */; };
 		73C048CF2225285700F756FF /* CybexScrollNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C048CE2225285700F756FF /* CybexScrollNoticeView.swift */; };
 		73C048D12225286F00F756FF /* CybexScrollNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73C048D02225286F00F756FF /* CybexScrollNoticeView.xib */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
@@ -728,6 +724,17 @@
 		73E61F6F21FFFC9400B54612 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */; };
 		73E9BFFB224B824E0023B274 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9BFFA224B824E0023B274 /* Alamofire.framework */; };
 		73E9BFFD224B8EC30023B274 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9BFFC224B8EC30023B274 /* Result.framework */; };
+		73E9C047224C69560023B274 /* RIPEMD160+StackOveflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C03D224C694C0023B274 /* RIPEMD160+StackOveflow.swift */; };
+		73E9C048224C69560023B274 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C03E224C694D0023B274 /* NSRegularExpressionExtension.swift */; };
+		73E9C049224C69560023B274 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C03F224C694E0023B274 /* Dictionary+Extension.swift */; };
+		73E9C04C224C69560023B274 /* NativeTypesEncoding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C042224C69520023B274 /* NativeTypesEncoding+Extensions.swift */; };
+		73E9C04D224C69560023B274 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C043224C69530023B274 /* Data+Extension.swift */; };
+		73E9C04E224C69560023B274 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C044224C69540023B274 /* String+Extension.swift */; };
+		73E9C04F224C69560023B274 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C045224C69550023B274 /* Array+Extension.swift */; };
+		73E9C050224C69560023B274 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C046224C69560023B274 /* Base58.swift */; };
+		73E9C052224C69810023B274 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C051224C69810023B274 /* BigInt.framework */; };
+		73E9C054224C73320023B274 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C053224C73320023B274 /* PromiseKit.framework */; };
+		73E9C056224C75360023B274 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C055224C75360023B274 /* SipHash.framework */; };
 		73F113EC2216A700008C2D37 /* KeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F113EB2216A700008C2D37 /* KeyHelper.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
@@ -1613,13 +1620,9 @@
 		73B47825222CEB8E00189632 /* ASN1Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1Object.swift; sourceTree = "<group>"; };
 		73B47826222CEB8E00189632 /* TlvTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TlvTag.swift; sourceTree = "<group>"; };
 		73B47827222CEB8E00189632 /* Tlv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tlv.swift; sourceTree = "<group>"; };
-		73B47828222CEB8E00189632 /* Data+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		73B47829222CEB8E00189632 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		73B4782A222CEB8E00189632 /* ASN1Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1Identifier.swift; sourceTree = "<group>"; };
 		73B4782B222CEB8E00189632 /* Asn1Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asn1Decoder.swift; sourceTree = "<group>"; };
-		73B4782C222CEB8E00189632 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		73B47849222D126900189632 /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
-		73B4784B222D1ADE00189632 /* RIPEMD160+StackOveflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RIPEMD160+StackOveflow.swift"; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		73C048CE2225285700F756FF /* CybexScrollNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexScrollNoticeView.swift; sourceTree = "<group>"; };
 		73C048D02225286F00F756FF /* CybexScrollNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexScrollNoticeView.xib; sourceTree = "<group>"; };
@@ -1635,6 +1638,17 @@
 		73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		73E9BFFA224B824E0023B274 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		73E9BFFC224B8EC30023B274 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		73E9C03D224C694C0023B274 /* RIPEMD160+StackOveflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RIPEMD160+StackOveflow.swift"; sourceTree = "<group>"; };
+		73E9C03E224C694D0023B274 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
+		73E9C03F224C694E0023B274 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		73E9C042224C69520023B274 /* NativeTypesEncoding+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NativeTypesEncoding+Extensions.swift"; sourceTree = "<group>"; };
+		73E9C043224C69530023B274 /* Data+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		73E9C044224C69540023B274 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		73E9C045224C69550023B274 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		73E9C046224C69560023B274 /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
+		73E9C051224C69810023B274 /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = Carthage/Build/iOS/BigInt.framework; sourceTree = "<group>"; };
+		73E9C053224C73320023B274 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		73E9C055224C75360023B274 /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SipHash.framework; path = Carthage/Build/iOS/SipHash.framework; sourceTree = "<group>"; };
 		73F113EB2216A700008C2D37 /* KeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHelper.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
@@ -1825,11 +1839,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73E9C052224C69810023B274 /* BigInt.framework in Frameworks */,
+				73E9C056224C75360023B274 /* SipHash.framework in Frameworks */,
 				739AB59E224B666C0023AEA9 /* RxMoya.framework in Frameworks */,
 				73E9BFFD224B8EC30023B274 /* Result.framework in Frameworks */,
 				739AB59C224B66620023AEA9 /* Moya.framework in Frameworks */,
 				73E9BFFB224B824E0023B274 /* Alamofire.framework in Frameworks */,
 				739AB5A0224B67B90023AEA9 /* CryptoSwift.framework in Frameworks */,
+				73E9C054224C73320023B274 /* PromiseKit.framework in Frameworks */,
 				730BB3F0224A326600F07032 /* cybex_ios_core_cpp.framework in Frameworks */,
 				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
 				7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */,
@@ -2353,6 +2370,14 @@
 		608A4704AAC596F5EFAB29C5AC0A5F63 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				73E9C045224C69550023B274 /* Array+Extension.swift */,
+				73E9C046224C69560023B274 /* Base58.swift */,
+				73E9C043224C69530023B274 /* Data+Extension.swift */,
+				73E9C03F224C694E0023B274 /* Dictionary+Extension.swift */,
+				73E9C042224C69520023B274 /* NativeTypesEncoding+Extensions.swift */,
+				73E9C03E224C694D0023B274 /* NSRegularExpressionExtension.swift */,
+				73E9C03D224C694C0023B274 /* RIPEMD160+StackOveflow.swift */,
+				73E9C044224C69540023B274 /* String+Extension.swift */,
 				56B6DE7540D68B490C2D5E1A65CFF1C5 /* Collection+Extensions.swift */,
 				F884D56B10D138121BA6666F4E345338 /* Localization_Extensions.swift */,
 				E733F11F37A6A399AD7DC995A3985502 /* NSObject+Extensions.swift */,
@@ -3615,22 +3640,11 @@
 				73B47825222CEB8E00189632 /* ASN1Object.swift */,
 				73B47826222CEB8E00189632 /* TlvTag.swift */,
 				73B47827222CEB8E00189632 /* Tlv.swift */,
-				73B47828222CEB8E00189632 /* Data+Extension.swift */,
 				73B47829222CEB8E00189632 /* Utils.swift */,
 				73B4782A222CEB8E00189632 /* ASN1Identifier.swift */,
 				73B4782B222CEB8E00189632 /* Asn1Decoder.swift */,
-				73B4782C222CEB8E00189632 /* Array+Extension.swift */,
 			);
 			path = eNotesFW;
-			sourceTree = "<group>";
-		};
-		73B47846222D064300189632 /* Web3 */ = {
-			isa = PBXGroup;
-			children = (
-				73B4784B222D1ADE00189632 /* RIPEMD160+StackOveflow.swift */,
-				73B47849222D126900189632 /* Base58.swift */,
-			);
-			path = Web3;
 			sourceTree = "<group>";
 		};
 		73D012972159D70500C95896 /* Route */ = {
@@ -4040,6 +4054,9 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73E9C055224C75360023B274 /* SipHash.framework */,
+				73E9C053224C73320023B274 /* PromiseKit.framework */,
+				73E9C051224C69810023B274 /* BigInt.framework */,
 				73E9BFFC224B8EC30023B274 /* Result.framework */,
 				73E9BFFA224B824E0023B274 /* Alamofire.framework */,
 				739AB59F224B67B90023AEA9 /* CryptoSwift.framework */,
@@ -4113,7 +4130,6 @@
 		D81AB8D8584B64ADAFF37AA7BF174C4D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				73B47846222D064300189632 /* Web3 */,
 				7333856D21BFA7DB0026765F /* Common */,
 				7333857A21C0EB5B0026765F /* UIHelper.swift */,
 				7333857621C0BD4F0026765F /* UserHelper.swift */,
@@ -5179,13 +5195,13 @@
 				E13AE68F78264232722CD68636FC433B /* CGContextExtension.swift in Sources */,
 				73A45F9621E8476E00B52A7F /* DeployTicketResultViewController.swift in Sources */,
 				73A45F9321E6EA4500B52A7F /* ScanPreviewView.swift in Sources */,
+				73E9C050224C69560023B274 /* Base58.swift in Sources */,
 				1F89EA780689075E3FB3230FDB6EE703 /* Collection+Extensions.swift in Sources */,
 				DFA46607407072808EE78AEA1A37D728 /* ColorTheme.swift in Sources */,
 				3B0EB6602103149100F19C31 /* AccountViewController.swift in Sources */,
 				49652BAEE9A80FCCF6104C181395648C /* Constants.swift in Sources */,
 				8F231436DF08E691F844CC01B2AC1845 /* Crypto.swift in Sources */,
 				7386F2BE21216B9E00ABC924 /* WithdrawAddressActions.swift in Sources */,
-				73B47838222CEB8E00189632 /* Array+Extension.swift in Sources */,
 				BE882BD38F3D40A56E08366BC6C20DDC /* CybexActionView.swift in Sources */,
 				7267DA2121363BEE004AF9AF /* ETOHomeViewAdapter.swift in Sources */,
 				50C985D347323594C1A8239536E6AAAD /* CybexAlertView.swift in Sources */,
@@ -5211,6 +5227,7 @@
 				730229A1212E52B50073D5CE /* ETOManager.swift in Sources */,
 				73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */,
 				BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */,
+				73E9C04D224C69560023B274 /* Data+Extension.swift in Sources */,
 				054514C4C6457A51CC46615D25768574 /* EntryActions.swift in Sources */,
 				E5401ED6E9547DC2097AC58606842B84 /* EntryCoordinator.swift in Sources */,
 				7204FFC52153A62B00EB0FC7 /* HotAssetsView.swift in Sources */,
@@ -5229,6 +5246,7 @@
 				7333857B21C0EB5B0026765F /* UIHelper.swift in Sources */,
 				3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */,
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
+				73E9C04E224C69560023B274 /* String+Extension.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
 				72D58292219C188700BB9842 /* ChatDownInputView.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
@@ -5281,6 +5299,7 @@
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
+				73E9C049224C69560023B274 /* Dictionary+Extension.swift in Sources */,
 				5895D5BFE7B77EDC996C7CF7ADCF92ED /* KLineConfiguration.swift in Sources */,
 				AA2AF8469235125BB11F791F769C6392 /* LocalCache.swift in Sources */,
 				728C2814215A3A910097840A /* RecordChooseCellViewAdapter.swift in Sources */,
@@ -5307,7 +5326,7 @@
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
 				3BF5B7E42134F5A800E8BFC9 /* ETODetailHeaderViewAdapter.swift in Sources */,
-				73B4784A222D126900189632 /* Base58.swift in Sources */,
+				73E9C047224C69560023B274 /* RIPEMD160+StackOveflow.swift in Sources */,
 				7364D3FC223A040000021978 /* iProgressHUDUtilities.swift in Sources */,
 				AF84FCBA2E7219D1FC633DA7881BD0ED /* MarketActions.swift in Sources */,
 				3B0EB652210313B200F19C31 /* YourPortfolioTableHeadView.swift in Sources */,
@@ -5328,6 +5347,7 @@
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				73B4782D222CEB8E00189632 /* Cert.swift in Sources */,
 				406AB4BA0BF043D771D15D751F7AB45D /* MyHistoryReducers.swift in Sources */,
+				73E9C048224C69560023B274 /* NSRegularExpressionExtension.swift in Sources */,
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
 				7307A91E212518DC00BD6444 /* Iconic.swift in Sources */,
 				724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */,
@@ -5345,7 +5365,6 @@
 				41AC38B585A5D36715B3161B49381FB5 /* NoticeBoardViewController.swift in Sources */,
 				CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */,
 				225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */,
-				73B47834222CEB8E00189632 /* Data+Extension.swift in Sources */,
 				72968D302158DC4E00B0AA77 /* RecordHeaderView.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
 				73F113EC2216A700008C2D37 /* KeyHelper.swift in Sources */,
@@ -5494,7 +5513,6 @@
 				A806E796D672D304574E9E46E50F16EC /* TradeActions.swift in Sources */,
 				7333856421BFA4160026765F /* AssetConfigration.swift in Sources */,
 				8528FA970144D53CB71EF87725B0AAE9 /* TradeCell.swift in Sources */,
-				73B4784C222D1ADE00189632 /* RIPEMD160+StackOveflow.swift in Sources */,
 				728C281C215B6D6E0097840A /* AnnounceView.swift in Sources */,
 				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
 				724C5D392153472800FF1DE7 /* GatewayQueryService.swift in Sources */,
@@ -5538,6 +5556,7 @@
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
 				7333857921C0E1AE0026765F /* TradeHelper.swift in Sources */,
 				7333857121BFC7320026765F /* TradeConfigration.swift in Sources */,
+				73E9C04F224C69560023B274 /* Array+Extension.swift in Sources */,
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */,
 				221C616E2137FCCF0021C007 /* ImageShareViewController.swift in Sources */,
@@ -5567,6 +5586,7 @@
 				73B47832222CEB8E00189632 /* TlvTag.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
+				73E9C04C224C69560023B274 /* NativeTypesEncoding+Extensions.swift in Sources */,
 				72D5829B219C18F800BB9842 /* CBKKindView.swift in Sources */,
 				221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
@@ -5681,7 +5701,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
@@ -5783,7 +5803,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
@@ -5791,6 +5811,7 @@
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
 				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
@@ -5948,7 +5969,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
@@ -5956,6 +5977,7 @@
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = arm64;
 				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;

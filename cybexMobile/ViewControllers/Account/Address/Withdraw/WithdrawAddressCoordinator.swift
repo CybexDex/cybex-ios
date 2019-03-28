@@ -107,7 +107,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
                 let sortedNames = AddressHelper.sortNameBasedonAddress(names)
 
                 let data = list.sorted { (front, last) -> Bool in
-                    return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
+                    return sortedNames.firstIndex(of: front.name)! <= sortedNames.firstIndex(of: last.name)!
                 }
 
                 self.store.dispatch(WithdrawAddressDataAction(data: data))

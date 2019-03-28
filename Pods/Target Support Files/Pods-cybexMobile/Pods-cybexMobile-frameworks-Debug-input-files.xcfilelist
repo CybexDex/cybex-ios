@@ -1,15 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh
 ${PODS_ROOT}/../cybex_flutter/.ios/Flutter/engine/Flutter.framework
 ${BUILT_PRODUCTS_DIR}/FlutterPluginRegistrant/FlutterPluginRegistrant.framework
-${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework
-${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework
-${BUILT_PRODUCTS_DIR}/EthereumABI/EthereumABI.framework
-${BUILT_PRODUCTS_DIR}/EthereumAddress/EthereumAddress.framework
-${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
-${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework
-${BUILT_PRODUCTS_DIR}/SwiftRLP/SwiftRLP.framework
 ${BUILT_PRODUCTS_DIR}/cocore/cocore.framework
 ${BUILT_PRODUCTS_DIR}/coswift/coswift.framework
-${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework
 ${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework
-${BUILT_PRODUCTS_DIR}/web3swift/Web3swift.framework

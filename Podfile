@@ -20,7 +20,8 @@ target 'cybexMobile' do
   # Pods for cybexMobile
 
     pod 'coswift'
-    pod 'web3swift'
+    pod 'secp256k1_swift'
+
   target 'cybexMobileTests' do
     inherit! :search_paths
     # Pods for testing
