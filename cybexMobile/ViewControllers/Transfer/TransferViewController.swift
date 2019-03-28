@@ -323,9 +323,7 @@ extension TransferViewController {
     }
 
     override func cancelImageAction(_ sender: CybexTextView) {
-        if sender.title.isHidden == true {
-            self.coordinator?.reopenAction()
-        }
+        self.coordinator?.reopenAction()
     }
 
     @objc func selectCrypto(_ data: [String: Any]) {

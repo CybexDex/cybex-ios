@@ -455,9 +455,7 @@ extension RechargeDetailViewController {
     }
     
     override func cancelImageAction(_ sender: CybexTextView) {
-        if sender.title.isHidden == true {
-            self.coordinator?.pop()
-        }
+        self.coordinator?.pop()
     }
 }
 
