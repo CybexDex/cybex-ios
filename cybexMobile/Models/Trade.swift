@@ -75,59 +75,6 @@ struct RechargeWorldInfo: HandyJSON {
     }
 }
 
-class CombineTextTransform: TransformType {
-    public typealias Object = String
-    public typealias JSON = [[String: String]]
-
-    public init() {}
-
-    open func transformFromJSON(_ value: Any?) -> String? {
-        if let origin = value as? [[String: String]] {
-            return origin.compactMap({ (dict) -> String in
-                return dict["text"] ?? ""
-            }).joined(separator: "\n")
-        }
-
-        return nil
-    }
-
-    open func transformToJSON(_ value: String?) -> [[String: String]]? {
-        if let val = value {
-            return val.components(separatedBy: "\n").compactMap({ (str) -> [String: String] in
-                return ["text": str]
-            })
-        }
-        return nil
-    }
-}
-
-class ExportArrayValueTransform: TransformType {
-    public typealias Object = String
-    public typealias JSON = [[String: String]]
-
-    var index: Int
-    var key: String
-
-    public init(_ index: Int, key: String) {
-        self.index = index
-        self.key = key
-    }
-
-    open func transformFromJSON(_ value: Any?) -> String? {
-        if let origin = value as? [[String: String]] {
-            if index < origin.count {
-                return origin[index][key]
-            }
-        }
-
-        return nil
-    }
-
-    open func transformToJSON(_ value: String?) -> [[String: String]]? {
-        return nil
-    }
-}
-
 struct RechageWordVMData {
     var projectName: String = ""
     var projectAddress: String = ""

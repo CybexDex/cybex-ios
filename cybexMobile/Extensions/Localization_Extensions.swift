@@ -306,7 +306,7 @@ extension UIControl {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
     }
 
-    fileprivate func _resetOperation() {
+    @objc func _resetOperation() {
         self.changeOperations.forEach {[weak self] selector, picker in
             UIView.animate(withDuration: 0.3) {
                 guard let self = self else { return }

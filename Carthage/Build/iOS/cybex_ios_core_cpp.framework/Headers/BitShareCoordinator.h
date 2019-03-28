@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getRecodeLoginOperation:(NSString *)accountName asset:(NSString *)asset fundType:(NSString *)fundType size:(int)size offset:(int)offset expiration:(int)expiration;
   
 + (NSString *)getMemo:(NSString *)memo;
-
++ (NSString *)sign:(NSString *)str;
 + (NSString *)signMessage:(NSString *)username message:(NSString *)message;
 
 

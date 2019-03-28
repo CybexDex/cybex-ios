@@ -321,14 +321,14 @@ class TradeView: UIView {
         decimalView.rx.tapGesture().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
             guard let `self` = self else { return }
             self.deciImgView.image = R.image.ic2Up()
-            self.next?.sendEventWith(Event.chooseDecimalNumberEvent.rawValue, userinfo: ["data": self.deciLabel.text ?? "", "self": self.decimalView])
+            self.next?.sendEventWith(Event.chooseDecimalNumberEvent.rawValue, userinfo: ["data": self.deciLabel.text ?? "", "self": self.decimalView ?? ""])
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         showTypeView.rx.tapGesture().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
             guard let `self` = self else { return }
             self.showTypeImgView.image = R.image.ic2Up()
-            self.next?.sendEventWith(Event.switchTradeViewShowType.rawValue, userinfo: ["data": self.showTypeLabel.text ?? "", "self": self.showTypeView])
+            self.next?.sendEventWith(Event.switchTradeViewShowType.rawValue, userinfo: ["data": self.showTypeLabel.text ?? "", "self": self.showTypeView ?? ""])
 
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }

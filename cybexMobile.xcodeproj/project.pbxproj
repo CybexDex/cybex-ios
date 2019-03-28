@@ -735,6 +735,8 @@
 		73E9C052224C69810023B274 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C051224C69810023B274 /* BigInt.framework */; };
 		73E9C054224C73320023B274 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C053224C73320023B274 /* PromiseKit.framework */; };
 		73E9C056224C75360023B274 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C055224C75360023B274 /* SipHash.framework */; };
+		73E9C05A224C9E2A0023B274 /* Gateway2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C059224C9E2A0023B274 /* Gateway2Service.swift */; };
+		73E9C05C224CAE280023B274 /* GatewayResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C05B224CAE280023B274 /* GatewayResponseModel.swift */; };
 		73F113EC2216A700008C2D37 /* KeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F113EB2216A700008C2D37 /* KeyHelper.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
@@ -1649,6 +1651,8 @@
 		73E9C051224C69810023B274 /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = Carthage/Build/iOS/BigInt.framework; sourceTree = "<group>"; };
 		73E9C053224C73320023B274 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		73E9C055224C75360023B274 /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SipHash.framework; path = Carthage/Build/iOS/SipHash.framework; sourceTree = "<group>"; };
+		73E9C059224C9E2A0023B274 /* Gateway2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway2Service.swift; sourceTree = "<group>"; };
+		73E9C05B224CAE280023B274 /* GatewayResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayResponseModel.swift; sourceTree = "<group>"; };
 		73F113EB2216A700008C2D37 /* KeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHelper.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
@@ -2465,6 +2469,7 @@
 				222D9023D03155C8E60E50C1A2EDDF3D /* Operation.swift */,
 				79A548675EF6D07ABB4FDA96A41ADB66 /* OrderBook.swift */,
 				72AAC8AF2106FC840040793F /* Record.swift */,
+				73E9C05B224CAE280023B274 /* GatewayResponseModel.swift */,
 				149A7633B62C66BF0A91E02182615CB5 /* Trade.swift */,
 				A594949DD908310B30266DF5349ACA42 /* Vesting.swift */,
 				7333854E21BF674A0026765F /* PairPrecision.swift */,
@@ -3250,9 +3255,10 @@
 		7391101121BA503700412CE1 /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
-				736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */,
-				106A644C21D47A2F00112A4C /* Eva */,
 				8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */,
+				73E9C058224C9E000023B274 /* Gateway2 */,
+				73E9C057224C9DF80023B274 /* Cybex */,
+				106A644C21D47A2F00112A4C /* Eva */,
 				736761E621BE4C220065FD35 /* IM */,
 				7391102721BA512A00412CE1 /* Register */,
 				7391102621BA511F00412CE1 /* ETO */,
@@ -3671,6 +3677,22 @@
 				73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */,
 			);
 			path = OrderContainer;
+			sourceTree = "<group>";
+		};
+		73E9C057224C9DF80023B274 /* Cybex */ = {
+			isa = PBXGroup;
+			children = (
+				736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */,
+			);
+			path = Cybex;
+			sourceTree = "<group>";
+		};
+		73E9C058224C9E000023B274 /* Gateway2 */ = {
+			isa = PBXGroup;
+			children = (
+				73E9C059224C9E2A0023B274 /* Gateway2Service.swift */,
+			);
+			path = Gateway2;
 			sourceTree = "<group>";
 		};
 		7A99BB351484E3D92442AE34D9258030 /* Cells */ = {
@@ -5171,6 +5193,7 @@
 				461B84D25CFA564E9455211A24902BB7 /* CBKLineBrush.swift in Sources */,
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
 				7333856F21BFA8210026765F /* AppHelper.swift in Sources */,
+				73E9C05C224CAE280023B274 /* GatewayResponseModel.swift in Sources */,
 				1E6EBD4F21D3851900E3EDE7 /* EvaView.swift in Sources */,
 				45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */,
 				73539C4B2179A210008395AC /* NavigatorDelegate.swift in Sources */,
@@ -5576,6 +5599,7 @@
 				7267DA1A21351D5A004AF9AF /* ETOProjectCell.swift in Sources */,
 				225746E821073E480017FA1A /* PickerView.swift in Sources */,
 				7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */,
+				73E9C05A224C9E2A0023B274 /* Gateway2Service.swift in Sources */,
 				7364D3FF223A040000021978 /* iProgressHUDDelegete.swift in Sources */,
 				728C2827215B80480097840A /* AnnounceScrollView.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,

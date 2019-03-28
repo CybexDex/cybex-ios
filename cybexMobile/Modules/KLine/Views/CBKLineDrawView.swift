@@ -262,7 +262,8 @@ extension CBKLineDrawView {
                 lastPanPoint = location
                 return
             }
-            if abs(location.x - (lastPanPoint?.x ?? 0)) < klineUnit {
+            let rx = lastPanPoint?.x ?? 0
+            if abs(location.x - rx) < klineUnit {
                 return
             }
 

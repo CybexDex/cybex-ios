@@ -23,19 +23,19 @@ import RxSwift
 import RxCocoa
 
 /// Default values for `UILongPressGestureRecognizer` configuration
-public enum LongPressGestureRecognizerDefaults {
-    public static var numberOfTouchesRequired: Int = 1
-    public static var numberOfTapsRequired: Int = 0
-    public static var minimumPressDuration: CFTimeInterval = 0.5
-    public static var allowableMovement: CGFloat = 10
-    public static var configuration: ((UILongPressGestureRecognizer, RxGestureRecognizerDelegate) -> Void)?
+enum LongPressGestureRecognizerDefaults {
+    static var numberOfTouchesRequired: Int = 1
+    static var numberOfTapsRequired: Int = 0
+    static var minimumPressDuration: CFTimeInterval = 0.5
+    static var allowableMovement: CGFloat = 10
+    static var configuration: ((UILongPressGestureRecognizer, RxGestureRecognizerDelegate) -> Void)?
 }
 
 /// A `GestureRecognizerFactory` for `UITapGestureRecognizer`
-public struct LongPressGestureRecognizerFactory: GestureRecognizerFactory {
+struct LongPressGestureRecognizerFactory: GestureRecognizerFactory {
 
-    public typealias Gesture = UILongPressGestureRecognizer
-    public let configuration: (UILongPressGestureRecognizer, RxGestureRecognizerDelegate) -> Void
+    typealias Gesture = UILongPressGestureRecognizer
+    let configuration: (UILongPressGestureRecognizer, RxGestureRecognizerDelegate) -> Void
 
     /**
      Initialiaze a `GestureRecognizerFactory` for `UILongPressGestureRecognizer`
@@ -45,7 +45,7 @@ public struct LongPressGestureRecognizerFactory: GestureRecognizerFactory {
      - parameter allowableMovement: Maximum movement in pixels allowed before the gesture fails. Once recognized (after minimumPressDuration) there is no limit on finger movement for the remainder of the touch tracking
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public init(
+    init(
         numberOfTouchesRequired: Int = LongPressGestureRecognizerDefaults.numberOfTouchesRequired,
         numberOfTapsRequired: Int = LongPressGestureRecognizerDefaults.numberOfTapsRequired,
         minimumPressDuration: CFTimeInterval = LongPressGestureRecognizerDefaults.minimumPressDuration,
@@ -72,7 +72,7 @@ extension AnyGestureRecognizerFactory {
      - parameter allowableMovement: Maximum movement in pixels allowed before the gesture fails. Once recognized (after minimumPressDuration) there is no limit on finger movement for the remainder of the touch tracking
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public static func longPress(
+    static func longPress(
         numberOfTouchesRequired: Int = LongPressGestureRecognizerDefaults.numberOfTouchesRequired,
         numberOfTapsRequired: Int = LongPressGestureRecognizerDefaults.numberOfTapsRequired,
         minimumPressDuration: CFTimeInterval = LongPressGestureRecognizerDefaults.minimumPressDuration,
@@ -90,7 +90,7 @@ extension AnyGestureRecognizerFactory {
     }
 }
 
-public extension Reactive where Base: UIView {
+extension Reactive where Base: UIView {
 
     /**
      Returns an observable `UILongPressGestureRecognizer` events sequence
@@ -100,7 +100,7 @@ public extension Reactive where Base: UIView {
      - parameter allowableMovement: Maximum movement in pixels allowed before the gesture fails. Once recognized (after minimumPressDuration) there is no limit on finger movement for the remainder of the touch tracking
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public func longPressGesture(
+    func longPressGesture(
         numberOfTouchesRequired: Int = LongPressGestureRecognizerDefaults.numberOfTouchesRequired,
         numberOfTapsRequired: Int = LongPressGestureRecognizerDefaults.numberOfTapsRequired,
         minimumPressDuration: CFTimeInterval = LongPressGestureRecognizerDefaults.minimumPressDuration,
