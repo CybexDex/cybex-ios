@@ -124,7 +124,7 @@ class TradeViewController: BaseViewController {
         case .test:
             self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id)
         case .uat:
-            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id)
+            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
         }
 
         self.children.forEach { (viewController) in

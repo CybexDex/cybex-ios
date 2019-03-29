@@ -1,4 +1,4 @@
-binary "https://cybexdex.github.io/cybex-ios-core-cpp/Carthage/iOS/cybex-ios-core-cpp.json" "2.0.0"
+binary "https://cybexdex.github.io/cybex-ios-core-cpp/Carthage/iOS/cybex-ios-core-cpp.json" "2.0.1"
 git "https://chromium.googlesource.com/webm/libwebp" "v0.6.0"
 github "Alamofire/Alamofire" "4.8.1"
 github "AliSoftware/Reusable" "4.0.5"

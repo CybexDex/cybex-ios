@@ -20,7 +20,7 @@ class AssetConfiguration {
         case .test:
             return "TEST"
         case .uat:
-            return "TEST"
+            return "JADE"
         }
     }
 
@@ -68,7 +68,7 @@ class AssetConfiguration {
                 case .test:
                     return "1.3.23"
                 case .uat:
-                    return "1.3.23"
+                    return "1.3.27"
                 }
             case .XRP:
                 switch AppEnv.current {
@@ -96,7 +96,7 @@ class AssetConfiguration {
                 case .test:
                     return "1.3.1146"
                 case .uat:
-                    return "1.3.1146"
+                    return "1.3.1150"
                 }
             case .ArenaBTC:
                 switch AppEnv.current {
@@ -105,7 +105,7 @@ class AssetConfiguration {
                 case .test:
                     return "1.3.1147"
                 case .uat:
-                    return "1.3.1147"
+                    return "1.3.1151"
                 }
             case .ArenaETH:
                 switch AppEnv.current {
@@ -114,7 +114,7 @@ class AssetConfiguration {
                 case .test:
                     return "1.3.1144"
                 case .uat:
-                    return "1.3.1144"
+                    return "1.3.1149"
                 }
             case .ArenaUSDT:
                 switch AppEnv.current {
@@ -123,7 +123,7 @@ class AssetConfiguration {
                 case .test:
                     return "1.3.1145"
                 case .uat:
-                    return "1.3.1145"
+                    return "1.3.1148"
                 }
             }
         }

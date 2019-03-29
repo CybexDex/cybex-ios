@@ -24,9 +24,18 @@ class GatewayService {
     enum Config: NetworkHTTPEnv {
         static let productURL = URL(string: "https://gateway.cybex.io/gateway")!
         static let devURL = URL(string: "https://gateway.cybex.io/gateway")!
-        static let uatURL = URL(string: "https://gateway.cybex.io/gateway")!
+        static let uatURL = URL(string: "http://47.100.98.113:5681/gateway")!
 
-        static let gatewayID = "CybexGateway" //CybexGatewayDev
+        static var gatewayID: String {
+            switch AppEnv.current {
+            case .product:
+                return "CybexGateway"
+            case .test:
+                return "CybexGatewayDev"
+            case .uat:
+                return "CybexGateway"
+            }
+        }
     }
 
     let apollo = ApolloClient(url: Config.currentEnv)

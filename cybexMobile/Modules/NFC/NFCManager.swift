@@ -60,6 +60,8 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
         var signature: String = card.oneTimeSignature
 
         let pkKey = Card.compressedPublicKey(card.blockchainPublicKey)
+        Log.print(pkKey, flag: "-----eNotes-----")
+        
         if let cachedPubkey = UserManager.shared.getCachedEnotesKeysExcludePrivate()?.activeKey?.publicKey, cachedPubkey != pkKey {
             DispatchQueue.main.async {
                 appCoodinator.topViewController()?.showToastBox(false, message: R.string.localizable.enotes_not_match.key.localized())
