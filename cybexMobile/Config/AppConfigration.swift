@@ -10,6 +10,27 @@ import Foundation
 import RxCocoa
 import Repeat
 import RxSwift
+import SwiftyUserDefaults
+
+enum AppEnv: String, CaseIterable {
+    case product
+    case test
+    case uat
+
+    static var current: AppEnv {
+        return AppEnv(rawValue: Defaults[.environment]) ?? .product
+    }
+
+    var index: Int {
+        for (i, env) in AppEnv.allCases.enumerated() {
+            if self == env {
+                return i
+            }
+        }
+
+        return 0
+    }
+}
 
 var appData: AppPropertyState {
     return appState.property

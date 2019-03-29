@@ -1,38 +1,41 @@
 //
-//  EvaService.swift
+//  IMService.swift
 //  cybexMobile
 //
-//  Created by dzm on 2018/12/27.
+//  Created by koofrank on 2018/12/10.
 //  Copyright © 2018 Cybex. All rights reserved.
 //
 
 import Foundation
 import Moya
-import SwiftyUserDefaults
 import SwiftyJSON
 import Alamofire
+import SwiftyUserDefaults
 
-enum EvaApi {
-    case projectInfo(name: String, tokenName: String)
+enum RegisterApi {
+    case getPinCode
+
+    case register(_ pinID: String, captcha: String, name: String, keys: AccountKeys)
 }
 
-struct EvaService {
-    
-    enum Config {
-        static let productURL = URL(string: "https://api.evaluape.io")!
+struct RegisterService {
+    enum Config: NetworkHTTPEnv {
+        static let productURL = URL(string: "https://faucet.cybex.io")!
+        static let devURL = URL(string: "https://faucet.51nebula.com")!
+        static let uatURL = URL(string: "https://faucet.51nebula.com")!
     }
-    
-    static let provider = MoyaProvider<EvaApi>(callbackQueue: nil, manager: defaultManager(),
-                                               plugins: [NetworkLoggerPlugin(verbose: true)],
-                                               trackInflights: false)
-    
+
+    static let provider = MoyaProvider<RegisterApi>(callbackQueue: nil, manager: defaultManager(),
+                                                        plugins: [NetworkLoggerPlugin(verbose: true)],
+                                                        trackInflights: false)
+
     static func request(
-        target: EvaApi,
+        target: RegisterApi,
         success successCallback: @escaping (JSON) -> Void,
         error errorCallback: @escaping (CybexError) -> Void,
         failure failureCallback: @escaping (CybexError) -> Void
         ) {
-        
+
         provider.request(target) { (result) in
             switch result {
             case let .success(response):
@@ -40,20 +43,16 @@ struct EvaService {
                     let response = try response.filterSuccessfulStatusCodes()
                     let json = try JSON(response.mapJSON())
                     if json["code"].intValue == 0 {
-                        if let data = json.dictionaryObject?["data"] {
-                            successCallback(JSON(data))
-                        } else {
-                            successCallback(json)
-                        }
+                        successCallback(json)
                     } else {
                         errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
-                                                                      desc: json["msg"]))
+                                                                      desc: json["data"]))
                     }
                 } catch let serverError {
                     if let json = try? JSON(response.mapJSON()) {
                         if json["code"].intValue != 0 {
                             errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
-                                                                          desc: json["msg"]))
+                                                                          desc: json["data"]))
                         } else {
                             failureCallback(CybexError.serviceHTTPError(desc: serverError.localizedDescription))
                         }
@@ -64,68 +63,80 @@ struct EvaService {
             }
         }
     }
-    
+
     static func defaultManager() -> Alamofire.SessionManager {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
         configuration.timeoutIntervalForRequest = 15
-        
+
         let manager = Alamofire.SessionManager(configuration: configuration)
         manager.startRequestsImmediately = false
         return manager
     }
-    
 }
 
-extension EvaApi : TargetType {
+extension RegisterApi : TargetType {
     var baseURL: URL {
-        return Defaults.isTestEnv ? EvaService.Config.productURL : EvaService.Config.productURL
+        return RegisterService.Config.currentEnv
     }
-    
+
     var path: String {
         switch self {
-        case .projectInfo:
-            return "/project/show"
+        case .getPinCode:
+            return "/captcha"
+        case .register:
+            return "/register"
         }
     }
-    
+
     var method: Moya.Method {
         switch self {
-        default:
+        case .getPinCode:
+            return .get
+        case .register:
             return .post
         }
     }
-    
-    var sampleData: Data {
-        if let data = try? JSON(parameters).rawData() {
-            return data
-        }
-        return Data()
-    }
-    
+
     var urlParameters: [String: Any] {
         switch self {
         default:
             return [:]
         }
     }
-    
+
     var parameters: [String: Any] {
         switch self {
-        case let .projectInfo(name, tokenName):
-            return ["name" : name, "token_name" : tokenName]
+        case let .register(pinID, captcha, name, keys):
+            return ["cap": ["id": pinID, "captcha": captcha],
+             "account": ["name": name,
+                         "owner_key": keys.ownerKey?.publicKey,
+                         "active_key": keys.activeKey?.publicKey,
+                         "memo_key": keys.memoKey?.publicKey,
+                         "refcode": "",
+                         "referrer": ""]]
+        default:
+            return [:]
         }
     }
-    
+
     var task: Task {
         switch self {
         default:
-            return Task.requestParameters(parameters: parameters, encoding: URLEncoding.default)
+            return .requestCompositeParameters(bodyParameters: parameters,
+                                               bodyEncoding: JSONEncoding.default,
+                                               urlParameters: urlParameters)
         }
     }
-    
-    var headers: [String : String]? {
-        return nil
+
+    var sampleData: Data {
+        if let data = try? JSON(parameters).rawData() {
+            return data
+        }
+        return Data()
     }
-    
+
+    var headers: [String: String]? {
+        return ["Content-type": "application/json"]
+    }
 }

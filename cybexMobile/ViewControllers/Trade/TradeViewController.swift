@@ -78,7 +78,7 @@ class TradeViewController: BaseViewController {
     var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
     private(set) var context: TradeContext?
 
-    var pair: Pair = Defaults.isTestEnv ? Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id) : Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
+    var pair: Pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
         didSet {
             self.children.forEach { (viewController) in
                 if var viewController = viewController as? TradePair {
@@ -118,6 +118,15 @@ class TradeViewController: BaseViewController {
     }
 
     func setupData() {
+        switch AppEnv.current {
+        case .product:
+            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
+        case .test:
+            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id)
+        case .uat:
+            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id)
+        }
+
         self.children.forEach { (viewController) in
             if var viewController = viewController as? TradePair {
                 viewController.pariInfo = pair

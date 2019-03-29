@@ -1,37 +1,37 @@
 //
-//  CybexDatabaseApi.swift
-//  CybexTicket
+//  IMService.swift
+//  cybexMobile
 //
-//  Created by koofrank on 2019/1/13.
-//  Copyright © 2019 com.nbltrustdev. All rights reserved.
+//  Created by koofrank on 2018/12/10.
+//  Copyright © 2018 Cybex. All rights reserved.
 //
 
 import Foundation
 import Moya
 import SwiftyJSON
 import Alamofire
+import SwiftyUserDefaults
 
-enum DatabaseApi {
-    case getAccount(name: String)
-    case lookupSymbol(name: String)
-    case getRecentTransactionBy(_ id: String)
+enum IMAPI {
+    case messageCount(_ channel: String)
 }
 
-struct CybexDatabaseApiService {
-    enum Config {
-        static let productURL = URL(string: "https://hongkong.cybex.io")! // https://hongkong.cybex.io
-        static let devURL = URL(string: "https://hangzhou.51nebula.com")! //http://47.100.98.113:38090
+struct IMService {
+    enum Config: NetworkHTTPEnv {
+        static let productURL = URL(string: "https://chat.cybex.io")!
+        static let devURL = URL(string: "http://47.91.242.71:9099")!
+        static let uatURL = URL(string: "http://47.91.242.71:9099")!
     }
 
-    static let provider = MoyaProvider<DatabaseApi>(callbackQueue: nil, manager: defaultManager(),
+    static let provider = MoyaProvider<IMAPI>(callbackQueue: nil, manager: defaultManager(),
                                                     plugins: [NetworkLoggerPlugin(verbose: true)],
                                                     trackInflights: false)
 
     static func request(
-        target: DatabaseApi,
+        target: IMAPI,
         success successCallback: @escaping (JSON) -> Void,
-        error errorCallback: @escaping (JSON) -> Void,
-        failure failureCallback: @escaping (Error) -> Void
+        error errorCallback: @escaping (CybexError) -> Void,
+        failure failureCallback: @escaping (CybexError) -> Void
         ) {
 
         provider.request(target) { (result) in
@@ -40,22 +40,24 @@ struct CybexDatabaseApiService {
                 do {
                     let response = try response.filterSuccessfulStatusCodes()
                     let json = try JSON(response.mapJSON())
-                    if json["error"].dictionaryObject == nil {
-                        successCallback(json["result"])
+                    if json["code"].intValue == 0 {
+                        successCallback(json)
                     } else {
-                        errorCallback(json["error"])
+                        errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
+                                                                      desc: json["data"]))
                     }
                 } catch let serverError {
                     if let json = try? JSON(response.mapJSON()) {
-                        if json["error"].dictionaryObject == nil {
-                            errorCallback(json["error"])
+                        if json["code"].intValue != 0 {
+                            errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
+                                                                          desc: json["data"]))
                         } else {
-                            failureCallback(serverError)
+                            failureCallback(CybexError.serviceHTTPError(desc: serverError.localizedDescription))
                         }
                     }
                 }
             case let .failure(error):
-                failureCallback(error)
+                failureCallback(CybexError.serviceHTTPError(desc: error.localizedDescription))
             }
         }
     }
@@ -71,49 +73,37 @@ struct CybexDatabaseApiService {
     }
 }
 
-extension DatabaseApi : TargetType {
+extension IMAPI: TargetType {
     var baseURL: URL {
-        return CybexDatabaseApiService.Config.productURL
+        return IMService.Config.currentEnv
     }
 
     var path: String {
-        return ""
-    }
-
-    var apiMethod: String {
         switch self {
-        case .getAccount(name: _):
-            return DataBaseCatogery.getFullAccounts.rawValue.snakeCased()
-        case .lookupSymbol(name: _):
-            return DataBaseCatogery.lookupAssetSymbols.rawValue.snakeCased()
-        case .getRecentTransactionBy(_):
-            return DataBaseCatogery.getRecentTransactionById.rawValue.snakeCased()
+        case .messageCount:
+            return "/lastestMsgID"
         }
     }
 
     var method: Moya.Method {
-        return .post
+        switch self {
+        default:
+            return .get
+        }
     }
 
     var urlParameters: [String: Any] {
         switch self {
-        default:
-            return [:]
+        case let .messageCount(channel):
+            return ["channel": channel]
         }
     }
 
     var parameters: [String: Any] {
-       return ["jsonrpc": "2.0", "method": apiMethod, "params": wrapParams, "id": 1]
-    }
-
-    var wrapParams: Any {
         switch self {
-        case let .getAccount(name: name):
-            return [[name], false]
-        case let .lookupSymbol(name: name):
-            return [[name]]
-        case let .getRecentTransactionBy(id: id):
-            return [id]
+
+        default:
+            return [:]
         }
     }
 
@@ -137,4 +127,3 @@ extension DatabaseApi : TargetType {
         return ["Content-type": "application/json"]
     }
 }
-

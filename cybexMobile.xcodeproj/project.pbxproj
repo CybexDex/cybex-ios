@@ -737,6 +737,7 @@
 		73E9C056224C75360023B274 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C055224C75360023B274 /* SipHash.framework */; };
 		73E9C05A224C9E2A0023B274 /* Gateway2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C059224C9E2A0023B274 /* Gateway2Service.swift */; };
 		73E9C05C224CAE280023B274 /* GatewayResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C05B224CAE280023B274 /* GatewayResponseModel.swift */; };
+		73E9C07D224DEB2E0023B274 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C07C224DEB2E0023B274 /* Network.swift */; };
 		73F113EC2216A700008C2D37 /* KeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F113EB2216A700008C2D37 /* KeyHelper.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
@@ -1653,6 +1654,7 @@
 		73E9C055224C75360023B274 /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SipHash.framework; path = Carthage/Build/iOS/SipHash.framework; sourceTree = "<group>"; };
 		73E9C059224C9E2A0023B274 /* Gateway2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway2Service.swift; sourceTree = "<group>"; };
 		73E9C05B224CAE280023B274 /* GatewayResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayResponseModel.swift; sourceTree = "<group>"; };
+		73E9C07C224DEB2E0023B274 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		73F113EB2216A700008C2D37 /* KeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHelper.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
@@ -3695,6 +3697,16 @@
 			path = Gateway2;
 			sourceTree = "<group>";
 		};
+		73E9C07B224DEB140023B274 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				73E9C07C224DEB2E0023B274 /* Network.swift */,
+				7391101221BA504900412CE1 /* WebSocket */,
+				7391101121BA503700412CE1 /* HTTP */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		7A99BB351484E3D92442AE34D9258030 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -4036,8 +4048,7 @@
 		D20B8449A5999F7E7C8218C87D423298 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7391101221BA504900412CE1 /* WebSocket */,
-				7391101121BA503700412CE1 /* HTTP */,
+				73E9C07B224DEB140023B274 /* Network */,
 				B3A7B2B168414622D5415E459355C157 /* Cache */,
 				83887C87229474260A6CC0FED97CF07F /* UserDefaults */,
 			);
@@ -5591,6 +5602,7 @@
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
 				72B42E7D217723DD00587403 /* PairDetailDateViewView.swift in Sources */,
 				7307A91C212518DC00BD6444 /* FontAwesome.swift in Sources */,
+				73E9C07D224DEB2E0023B274 /* Network.swift in Sources */,
 				1885C2EE1E25930F2E94702A8C05C2BC /* UIColor+Cybexblack.swift in Sources */,
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
@@ -5783,9 +5795,10 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "";
+				"VALID_ARCHS[sdk=*]" = arm64;
 			};
 			name = Release;
 		};
@@ -5804,7 +5817,8 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
-				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*]" = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*]" = dwarf;
 				"DEBUG_INFORMATION_FORMAT[sdk=iphonesimulator*]" = dwarf;
 				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
@@ -5832,6 +5846,7 @@
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
@@ -5873,6 +5888,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -5895,8 +5911,11 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "";
+				"VALID_ARCHS[sdk=*]" = arm64;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Debug;
 		};
@@ -5930,6 +5949,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -5952,8 +5972,11 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = TESTS;
-				SWIFT_VERSION = 4.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "";
+				"VALID_ARCHS[sdk=*]" = arm64;
+				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 			};
 			name = Tests;
 		};
@@ -5971,7 +5994,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_ACTIVITY_MODE = "";
-				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*]" = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*]" = dwarf;
 				"DEBUG_INFORMATION_FORMAT[sdk=iphonesimulator*]" = dwarf;
 				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
@@ -6038,7 +6062,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobileTests/cybexMobileTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cybexMobile.app/cybexMobile";
 			};
@@ -6154,7 +6178,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobileTests/cybexMobileTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cybexMobile.app/cybexMobile";
 			};
@@ -6189,7 +6213,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobileTests/cybexMobileTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cybexMobile.app/cybexMobile";
 			};

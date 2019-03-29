@@ -20,6 +20,7 @@ class TransferTopView: UIView {
             if let data = data as? TransferRecordViewModel {
                 self.icon.image = data.isSend ? R.image.ic_sent_40_px() : R.image.ic_income_40_px()
                 self.state.text = data.isSend ? R.string.localizable.transfer_detail_send.key.localized() : R.string.localizable.transfer_detail_income.key.localized()
+
                 if let amountInfo = data.amount, let assetInfo = appData.assetInfo[amountInfo.assetId] {
                     self.amount.text = AssetHelper.getRealAmount(
                         amountInfo.assetId,

@@ -19,8 +19,9 @@ class CybexPopoverBackgroundView: UIPopoverBackgroundView {
         let image = ThemeManager.currentThemeIndex == 0 ? R.image.arrowUpBlack() : R.image.arrowUpWhite()
         imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.tintColor = CybexPopoverBackgroundView.arrowColor
-        
-        imageView.frame = CGRect(x: frame.width * 0.5 - 12, y: 0, width: 24, height: 10)
+
+        let hw = frame.width * 0.5
+        imageView.frame = CGRect(x: hw - 12, y: 0, width: 24, height: 10)
         self.addSubview(imageView)
     }
     
@@ -42,14 +43,16 @@ class CybexPopoverBackgroundView: UIPopoverBackgroundView {
         get {
             return UIPopoverArrowDirection.up
         }
+
         set{
+            let hw = frame.width * 0.5
             switch newValue {
             case .down:
-                imageView.frame = CGRect(x: frame.width * 0.5 - 12, y: self.frame.height - 10, width: 24, height: 10)
+                imageView.frame = CGRect(x: hw - 12, y: self.frame.height - 10, width: 24, height: 10)
                 imageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
                 break
             case .up:
-                imageView.frame = CGRect(x: frame.width * 0.5 - 12, y: 0, width: 24, height: 10)
+                imageView.frame = CGRect(x: hw - 12, y: 0, width: 24, height: 10)
                 break
             default:
                 break

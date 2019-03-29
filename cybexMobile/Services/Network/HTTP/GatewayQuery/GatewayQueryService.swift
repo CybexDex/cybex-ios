@@ -1,41 +1,55 @@
 //
-//  Gateway2Service.swift
+//  Gateway.swift
 //  cybexMobile
 //
-//  Created by koofrank on 2019/3/28.
-//  Copyright © 2019 Cybex. All rights reserved.
+//  Created by DKM on 2018/9/20.
+//  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import Foundation
+import Alamofire
 import Moya
 import SwiftyJSON
-import Alamofire
+import RxSwift
 import SwiftyUserDefaults
 import cybex_ios_core_cpp
 
-enum GatewayAPI {
-    case assetLists
-    case asset(name: String)
-    case validateAddress(assetName: String, address: String)
 
-    case topUPAddress(assetName: String, userName: String)
-    case transactions(fundType: FundType, assetName: String, userName: String, fromId: Int?)
-    case assetsOfTransactions(userName: String)
+/// 网关查询api
+///
+/// - login: 必须先登录在调用其他接口
+/// - records: 查询冲提现记录 默认 20 条
+/// - assetKinds: 查询冲提现币种种类
+enum GatewayQueryAPI {
+    case login(accountName: String)
+
+    case records(accountName: String, asset: String, fundType: FundType, offset: Int)
+
+    case assetKinds(accountName: String)
 }
 
-struct Gateway2Service {
-    enum Config {
-        static let productURL = URL(string: "http://47.75.48.121:8181")!
-        static let devURL = URL(string: "http://39.98.58.238:8181")!
+/// 网关查询 冲提现记录
+///
+/// - 需要先用私钥签名并且登录
+/// - 获取 accesstoken 之后查询使用
+/// - 600s 后需要再次登录获取
+struct GatewayQueryService {
+    enum Config: NetworkHTTPEnv {
+        static let productURL = URL(string: "https://gateway-query.cybex.io")!
+        static let devURL = URL(string: "https://gateway-query.cybex.io")!
+        static let uatURL = URL(string: "https://gateway-query.cybex.io")!
+
+        static let loginExpiration: Double = 600
     }
 
-    static let provider = MoyaProvider<GatewayAPI>(callbackQueue: nil, manager: defaultManager(),
+    static let provider = MoyaProvider<GatewayQueryAPI>(callbackQueue: nil, manager: defaultManager(),
                                                         plugins: [NetworkLoggerPlugin(verbose: true)],
                                                         trackInflights: false)
 
+    static var signer = ""
 
     static func request(
-        target: GatewayAPI,
+        target: GatewayQueryAPI,
         success successCallback: @escaping (JSON) -> Void,
         error errorCallback: @escaping (CybexError) -> Void,
         failure failureCallback: @escaping (CybexError) -> Void
@@ -50,6 +64,10 @@ struct Gateway2Service {
                     if json["code"].intValue == 200 {
                         let result = json["data"]
 
+                        //保存accesstoken
+                        if !result["signer"].stringValue.isEmpty {
+                            self.signer = result["signer"].stringValue
+                        }
                         successCallback(result)
                     } else {
                         errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
@@ -82,34 +100,26 @@ struct Gateway2Service {
     }
 }
 
-extension GatewayAPI: TargetType {
+extension GatewayQueryAPI: TargetType {
     var baseURL: URL {
-        return Defaults.isTestEnv ? Gateway2Service.Config.devURL : Gateway2Service.Config.productURL
-    }
-
-    var apiVersion: String {
-        return "/v1"
+        return GatewayQueryService.Config.currentEnv
     }
 
     var path: String {
         switch self {
-        case .assetLists:
-            return apiVersion + "/assets"
-        case let .asset(name: name):
-            return apiVersion + "/assets/\(name)"
-        case let .validateAddress(assetName: assetName, address: address):
-            return apiVersion + "/assets/\(assetName)/address/\(address)"
-        case let .topUPAddress(assetName: assetName, userName: userName):
-            return apiVersion + "/users/\(userName)/assets/\(assetName)/address"
-        case let .transactions(fundType: _, assetName: _, userName: userName, fromId: _):
-            return apiVersion + "/users/\(userName)/records"
-        case let .assetsOfTransactions(userName: userName):
-            return apiVersion + "/users/\(userName)/assets"
+        case .login:
+            return "/login"
+        case let .records(accountName, _, _, _):
+            return "/records/\(accountName)"
+        case let .assetKinds(accountName):
+            return "/account-assets/\(accountName)"
         }
     }
 
     var method: Moya.Method {
         switch self {
+        case .login:
+            return .post
         default:
             return .get
         }
@@ -117,12 +127,8 @@ extension GatewayAPI: TargetType {
 
     var urlParameters: [String: Any] {
         switch self {
-        case let .transactions(fundType: fundType, assetName: assetName, userName: _, fromId: fromId):
-            if let id = fromId {
-                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName, "lastid": id]
-            } else {
-                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName]
-            }
+        case let .records(_, asset, fundType, offset):
+            return ["asset": asset, "fundType": fundType.rawValue, "size": 20, "offset": offset]
         default:
             return [:]
         }
@@ -130,6 +136,10 @@ extension GatewayAPI: TargetType {
 
     var parameters: [String: Any] {
         switch self {
+        case let .login(accountName):
+            let (expiration, signer) = sign(accountName: accountName)
+
+            return ["op": ["accountName": accountName, "expiration": expiration], "signer": signer ]
         default:
             return [:]
         }
@@ -151,28 +161,30 @@ extension GatewayAPI: TargetType {
         return Data()
     }
 
-    var signer: String {
-        let time = Date().timeIntervalSince1970.string()
-        guard let userName = UserManager.shared.name.value else {
-            return ""
-        }
-
-        let token = BitShareCoordinator.sign("\(time)\(userName)")
-        let jwt = [time, userName, token]
-
-        return jwt.joined(separator: ".")
-    }
-
     var headers: [String: String]? {
         var commonHeader = ["Content-type": "application/json"]
 
         switch self {
-        case .topUPAddress, .transactions, .assetsOfTransactions:
-            commonHeader["authorization"] = "bearer " + signer
+        case .login:
             return commonHeader
         default:
-            return nil
+            commonHeader["authorization"] = "bearer " + GatewayQueryService.signer
+            return commonHeader
         }
     }
 }
 
+extension GatewayQueryAPI {
+    func sign(accountName: String) -> (expiration: Int, signer: String) {
+        let expiration = Date().timeIntervalSince1970 + GatewayQueryService.Config.loginExpiration
+
+        let signer = BitShareCoordinator.getRecodeLoginOperation(accountName,
+                                                                 asset: "",
+                                                                 fundType: "",
+                                                                 size: Int32(0),
+                                                                 offset: Int32(0),
+                                                                 expiration: Int32(expiration))
+
+        return (Int(expiration), JSON(parseJSON: signer)["signer"].stringValue)
+    }
+}

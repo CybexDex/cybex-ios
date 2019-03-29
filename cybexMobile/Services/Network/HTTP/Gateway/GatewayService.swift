@@ -21,18 +21,17 @@ import PromiseKit
 /// apollo-codegen print-schema schema.json
 ///
 class GatewayService {
-    enum Config {
+    enum Config: NetworkHTTPEnv {
         static let productURL = URL(string: "https://gateway.cybex.io/gateway")!
         static let devURL = URL(string: "https://gateway.cybex.io/gateway")!
+        static let uatURL = URL(string: "https://gateway.cybex.io/gateway")!
 
         static let gatewayID = "CybexGateway" //CybexGatewayDev
     }
 
-    let apollo = ApolloClient(url: Config.productURL)
+    let apollo = ApolloClient(url: Config.currentEnv)
 
-    static let shared = GatewayService()
-
-    private init() {
+    init() {
 
     }
 

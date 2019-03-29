@@ -1,9 +1,9 @@
 //
-//  AppService.swift
+//  AccountHistoryService.swift
 //  cybexMobile
 //
-//  Created by koofrank on 2018/12/7.
-//  Copyright © 2018 Cybex. All rights reserved.
+//  Created by koofrank on 2019/1/23.
+//  Copyright © 2019 Cybex. All rights reserved.
 //
 
 import Foundation
@@ -13,44 +13,24 @@ import Alamofire
 import SwiftyUserDefaults
 import Localize_Swift
 
-enum AppAPI {
-    case setting  // 是否显示ETO Share
-    case checkVersionUpdate
-    case checkAppStoreVersionUpdate
-    case explorerURL
-
-    case assetWhiteList
-    case stickTopMarketPair
-    case marketlist(base: String)
-    case precisionSetting // 深度图精度
-
-    case withdrawList
-    case topUpList
-    case withdrawAnnounce(assetId: String)
-    case topUpAnnounce(assetId: String)
-
-    //首页运营页面
-    case hotpair
-    case homebanner
-    case announce
-    case items
-
-    case outerPrice
-    case evaluapeSetting
+enum AccountHistoryAPI {
+    case getFillByPairs(userId: String, page: Int, filterInPairs: Pair?, filterOutPairs: [Pair])
+    case getTransferRecord(userId:String, page: Int)
 }
 
-struct AppService {
-    enum Config {
-        static let productURL = URL(string: "https://app.cybex.io")!
-        static let devURL = URL(string: "http://47.91.242.71:3039")!
+struct AccountHistoryService {
+    enum Config: NetworkHTTPEnv {
+        static let productURL = URL(string: "https://live.cybex.io")!
+        static let devURL = URL(string: "http://39.105.55.115:8081")!
+        static let uatURL = URL(string: "http://47.100.98.113:8081")!
     }
 
-    static let provider = MoyaProvider<AppAPI>(callbackQueue: nil, manager: defaultManager(),
-                                                        plugins: [NetworkLoggerPlugin(verbose: true)],
-                                                        trackInflights: false)
+    static let provider = MoyaProvider<AccountHistoryAPI>(callbackQueue: nil, manager: defaultManager(),
+                                               plugins: [NetworkLoggerPlugin(verbose: true)],
+                                               trackInflights: false)
 
     static func request(
-        target: AppAPI,
+        target: AccountHistoryAPI,
         success successCallback: @escaping (JSON) -> Void,
         error errorCallback: @escaping (CybexError) -> Void,
         failure failureCallback: @escaping (CybexError) -> Void
@@ -99,49 +79,17 @@ struct AppService {
     }
 }
 
-extension AppAPI: TargetType {
+extension AccountHistoryAPI: TargetType {
     var baseURL: URL {
-        return Defaults.isTestEnv ? AppService.Config.devURL : AppService.Config.productURL
+        return AccountHistoryService.Config.currentEnv
     }
 
     var path: String {
         switch self {
-        case .setting:
-            return "/json/settings.json"
-        case .checkVersionUpdate:
-            return "/iOS_update.json"
-        case .checkAppStoreVersionUpdate:
-            return "/iOS_store_update.json"
-        case .hotpair:
-            return "/v1/api/hotpair"
-        case .announce:
-            return "/v1/api/announce"
-        case .homebanner:
-            return "/v1/api/banners"
-        case .items:
-            return "/v1/api/app_sublinks"
-        case .outerPrice:
-            return "/price"
-        case .marketlist:
-            return "/market_list"
-        case .assetWhiteList:
-            return "/json/assets.json"
-        case .withdrawList:
-            return "/json/withdraw.json"
-        case .topUpList:
-            return "/json/deposit.json"
-        case .stickTopMarketPair:
-            return "/json/marketlists.json"
-        case .explorerURL:
-            return "/json/blockexplorer.json"
-        case let .withdrawAnnounce(assetId):
-            return "/json/withdraw/\(assetId).json"
-        case let .topUpAnnounce(assetId):
-            return "/json/deposit/\(assetId).json"
-        case .precisionSetting:
-            return "/json/pairs.json"
-        case .evaluapeSetting:
-            return "/json/evaluape.json"
+        case .getTransferRecord(userId: _, page: _):
+            return "/get_ops_by_transfer_accountspair_mongo"
+        case .getFillByPairs:
+            return "/get_fill_bypair"
         }
     }
 
@@ -154,16 +102,12 @@ extension AppAPI: TargetType {
 
     var urlParameters: [String: Any] {
         switch self {
-        case .announce:
-            return ["lang": lang]
-        case .homebanner:
-            return ["lang": lang]
-        case .items:
-            return ["lang": lang, "env": env]
-        case let .marketlist(base):
-            return ["base": base]
-        default:
-            return [:]
+        case let .getTransferRecord(userId: uid, page: page): //asset=null&acct_from=1.2.19803&acct_to=1.2.4733&page=0&limit=2
+            return ["asset": "null", "acct_from": "or", "acct_to": uid, "page": page, "limit": 20]
+        case let .getFillByPairs(userId: uid, page: page, filterInPairs: filterInPairs, filterOutPairs: filterOutPairs):
+            let fout = filterOutPairs.count == 0 ? "null" : filterOutPairs.map { "\($0.quote)_\($0.base),\($0.base)_\($0.quote)" }.joined(separator: ",")
+            let fin = filterInPairs == nil ? "null" : "\(filterInPairs!.quote)_\(filterInPairs!.base),\(filterInPairs!.base)_\(filterInPairs!.quote)"
+            return ["account": uid, "start": "null", "end": "null", "filter_in": fin, "filter_out": fout, "limit": 20, "page": page]
         }
     }
 
@@ -192,12 +136,5 @@ extension AppAPI: TargetType {
         return ["Content-type": "application/json"]
     }
 
-    //Extra
-    var lang: String {
-        return (Localize.currentLanguage() == "en" ? "en" : "zh")
-    }
-
-    var env: String { //是否是企业版 AppStore版本
-        return AppConfiguration.shared.isAppStoreVersion() ? "" : "pro"
-    }
 }
+

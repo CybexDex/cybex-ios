@@ -59,23 +59,35 @@ class MarketConfiguration {
 
     //行情页面base列表
     static var marketBaseAssets: [AssetConfiguration.CybexAsset] {
-        return Defaults.isTestEnv ?
-            [AssetConfiguration.CybexAsset.ETH,
-             AssetConfiguration.CybexAsset.CYB,
-             AssetConfiguration.CybexAsset.USDT,
-             AssetConfiguration.CybexAsset.BTC] :
-
-            [AssetConfiguration.CybexAsset.ETH,
-             AssetConfiguration.CybexAsset.CYB,
-             AssetConfiguration.CybexAsset.USDT,
-             AssetConfiguration.CybexAsset.BTC]
+        switch AppEnv.current {
+        case .product:
+            return [AssetConfiguration.CybexAsset.ETH,
+                    AssetConfiguration.CybexAsset.CYB,
+                    AssetConfiguration.CybexAsset.USDT,
+                    AssetConfiguration.CybexAsset.BTC]
+        case .test:
+            return [AssetConfiguration.CybexAsset.ETH,
+                    AssetConfiguration.CybexAsset.CYB,
+                    AssetConfiguration.CybexAsset.USDT,
+                    AssetConfiguration.CybexAsset.BTC]
+        case .uat:
+            return [AssetConfiguration.CybexAsset.ETH,
+                    AssetConfiguration.CybexAsset.CYB,
+                    AssetConfiguration.CybexAsset.USDT,
+                    AssetConfiguration.CybexAsset.BTC]
+        }
     }
 
     //交易大赛base
     static var gameMarketBaseAssets: [AssetConfiguration.CybexAsset] {
-        return Defaults.isTestEnv ?
-            [AssetConfiguration.CybexAsset.ArenaUSDT] :
-            [AssetConfiguration.CybexAsset.ArenaUSDT]
+        switch AppEnv.current {
+        case .product:
+            return [AssetConfiguration.CybexAsset.ArenaUSDT]
+        case .test:
+            return [AssetConfiguration.CybexAsset.ArenaUSDT]
+        case .uat:
+            return [AssetConfiguration.CybexAsset.ArenaUSDT]
+        }
     }
 }
 

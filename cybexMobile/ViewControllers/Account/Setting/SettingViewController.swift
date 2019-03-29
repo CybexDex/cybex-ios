@@ -128,9 +128,7 @@ class SettingViewController: BaseViewController {
         } else if sender == theme {
             self.coordinator?.openSettingDetail(type: .theme)
         } else if sender == environment {
-            self.coordinator?.changeEnveronment({ isTest in
-                self.showToastBox(true, message: isTest == true ? "当前为测试环境" : "当前为正式环境")
-            })
+            self.switchEnv()
         }
     }
     
@@ -179,6 +177,20 @@ extension SettingViewController {
             })
         ]
         openSelectedActionViewController(UserManager.shared.frequencyType.rawValue, actions: actions)
+    }
+
+    func switchEnv() {
+        let actions = AppEnv.allCases.map { (env) -> XLActionController.Action<String> in
+            return Action(env.rawValue, style: .destructive, handler: {[weak self] _ in
+                guard let self = self else {return}
+
+                self.showToastBox(true, message: "当前为\(env.rawValue)环境")
+                Defaults[.environment] = env.rawValue
+                self.coordinator?.changeEnveronment()
+            })
+        }
+
+        openSelectedActionViewController(AppEnv.current.index, actions: actions)
     }
 
     func chooseUnlockType() {

@@ -25,9 +25,10 @@ enum ETOMGAPI {
 }
 
 struct ETOMGService {
-    enum Config {
+    enum Config: NetworkHTTPEnv {
         static let productURL = URL(string: "https://eto.cybex.io/api")!
         static let devURL = URL(string: "https://ieo-apitest.cybex.io/api")!
+        static let uatURL = URL(string: "https://ieo-apitest.cybex.io/api")!
     }
 
     static let provider = MoyaProvider<ETOMGAPI>(callbackQueue: nil,
@@ -82,7 +83,7 @@ struct ETOMGService {
 
 extension ETOMGAPI: TargetType {
     var baseURL: URL {
-        return Defaults.isTestEnv ? ETOMGService.Config.devURL : ETOMGService.Config.productURL
+        return ETOMGService.Config.currentEnv
     }
 
     var path: String {

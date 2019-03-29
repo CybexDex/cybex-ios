@@ -21,11 +21,13 @@ class MDPWebSocketService: NSObject {
         }
     }
 
-    static var host: String {
-       return Defaults.isTestEnv ? "ws://47.244.40.252:18888" : "wss://mdp.cybex.io"
+    enum Config: NetworkHTTPEnv {
+        static let productURL = URL(string: "wss://mdp.cybex.io")!
+        static let devURL = URL(string: "ws://47.244.40.252:18888")!
+        static let uatURL = URL(string: "wss://rteuat.cybex.io")!
     }
 
-    lazy var socket = SRWebSocket(url: URL(string: MDPWebSocketService.host)!)
+    lazy var socket = SRWebSocket(url: Config.currentEnv)
 
     public let mdpServiceDidConnected = Delegate<(), Void>()
     public let tickerDataDidReceived = Delegate<(Decimal, Pair), Void>()
@@ -73,7 +75,7 @@ class MDPWebSocketService: NSObject {
 
         if !checkNetworConnected()  {
             socket.close()
-            socket = SRWebSocket(url: URL(string: MDPWebSocketService.host)!)
+            socket = SRWebSocket(url: Config.currentEnv)
             socket.delegate = self
             socket.open()
         }

@@ -153,7 +153,7 @@ public extension Data
     /// - note: Fixed at compression level 5 (best trade off between speed and time)
     func gzip() -> Data?
     {
-        var header = Data(bytes: [0x1f, 0x8b, 0x08, 0x00]) // magic, magic, deflate, noflags
+        var header = Data([0x1f, 0x8b, 0x08, 0x00]) // magic, magic, deflate, noflags
         
         var unixtime = UInt32(Date().timeIntervalSince1970).littleEndian
         header.append(Data(bytes: &unixtime, count: MemoryLayout<UInt32>.size))

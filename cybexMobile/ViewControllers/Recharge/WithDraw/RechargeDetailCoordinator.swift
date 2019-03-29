@@ -109,7 +109,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
     func fetchWithDrawInfoData(_ assetName: String) {
-        GatewayService.shared.getWithdrawInfo(assetName: assetName).done { (data) in
+        GatewayService().getWithdrawInfo(assetName: assetName).done { (data) in
             if case let data? = data {
                 self.getWithdrawAccountInfo(data.gatewayAccount)
                 self.store.dispatch(FetchWithdrawInfo(data: data))
@@ -155,7 +155,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
    class func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void) {
-        GatewayService.shared.verifyAddress(assetName: assetName, address: address).done { (data) in
+        GatewayService().verifyAddress(assetName: assetName, address: address).done { (data) in
             if case let data? = data {
                 callback(data.valid)
             } else {

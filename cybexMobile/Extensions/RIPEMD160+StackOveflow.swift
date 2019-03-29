@@ -340,7 +340,7 @@ public struct RIPEMD160 {
         var X = [UInt32](repeating: 0, count: 16)
         /* append the bit m_n == 1 */
         buffer.append(0x80)
-        buffer.withUnsafeBytes { _ = memcpy(&X, $0, buffer.count) }
+        buffer.withUnsafeBytes { _ = memcpy(&X, $0.baseAddress, buffer.count) }
         
         if (count & 63) > 55 {
             /* length goes to next block */
@@ -356,14 +356,17 @@ public struct RIPEMD160 {
         compress(X)
         
         var data = Data(count: 20)
-        data.withUnsafeMutableBytes { (ptr: UnsafeMutablePointer<UInt32>) in
+
+        data.withUnsafeMutableBytes { (dptr) in
+            let ptr = dptr.baseAddress!.assumingMemoryBound(to: UInt32.self)
+
             ptr[0] = MDbuf.0
             ptr[1] = MDbuf.1
             ptr[2] = MDbuf.2
             ptr[3] = MDbuf.3
             ptr[4] = MDbuf.4
         }
-        
+
         buffer = Data()
         
         return data

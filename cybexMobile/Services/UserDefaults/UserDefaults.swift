@@ -27,16 +27,10 @@ extension DefaultsKeys {
     static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList", defaultValue: [])
     static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList", defaultValue: [])
 
-    static let environment = DefaultsKey<String>("environment", defaultValue: "")
+    static let environment = DefaultsKey<String>("environment", defaultValue: "product")
     static let showContestTip = DefaultsKey<Bool>("showContestTip", defaultValue: false)
 
     static let isRealName = DefaultsKey<Bool>("isRealName", defaultValue: false)
     
     static let hasCode = DefaultsKey<Bool>("hasCode", defaultValue: false)
-}
-
-extension UserDefaults {
-    var isTestEnv : Bool {
-        return Defaults[.environment] == "test"
-    }
 }

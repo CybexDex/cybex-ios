@@ -14,13 +14,12 @@ protocol SettingCoordinatorProtocol {
     func openSettingDetail(type: SettingPage)
     func dismiss()
     func openHelpWebView()
-    
 }
 
 protocol SettingStateManagerProtocol {
     var state: SettingState { get }
 
-    func changeEnveronment(_ callback:@escaping(Bool) -> Void)
+    func changeEnveronment()
 }
 
 class SettingCoordinator: NavCoordinator {
@@ -57,7 +56,7 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
 }
 
 extension SettingCoordinator: SettingStateManagerProtocol {
-    func changeEnveronment(_ callback:@escaping(Bool) -> Void) {
+    func changeEnveronment() {
         UserManager.shared.logout()
 
         CybexWebSocketService.shared.disconnect()
@@ -69,13 +68,6 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         MarketConfiguration.shared.marketPairs.accept([])
         CybexWebSocketService.shared.canSendMessageReactive.accept(false)
         appData.tickerData.accept([])
-        if Defaults.isTestEnv {
-            Defaults[.environment] = ""
-            callback(false)
-        } else {
-            Defaults[.environment] = "test"
-            callback(true)
-        }
 
         CybexWebSocketService.shared.connect()
 

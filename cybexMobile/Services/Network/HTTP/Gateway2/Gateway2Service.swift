@@ -1,9 +1,9 @@
 //
-//  IMService.swift
+//  Gateway2Service.swift
 //  cybexMobile
 //
-//  Created by koofrank on 2018/12/10.
-//  Copyright © 2018 Cybex. All rights reserved.
+//  Created by koofrank on 2019/3/28.
+//  Copyright © 2019 Cybex. All rights reserved.
 //
 
 import Foundation
@@ -11,25 +11,32 @@ import Moya
 import SwiftyJSON
 import Alamofire
 import SwiftyUserDefaults
+import cybex_ios_core_cpp
 
-enum RegisterApi {
-    case getPinCode
+enum GatewayAPI {
+    case assetLists
+    case asset(name: String)
+    case validateAddress(assetName: String, address: String)
 
-    case register(_ pinID: String, captcha: String, name: String, keys: AccountKeys)
+    case topUPAddress(assetName: String, userName: String)
+    case transactions(fundType: FundType, assetName: String, userName: String, fromId: Int?)
+    case assetsOfTransactions(userName: String)
 }
 
-struct RegisterService {
-    enum Config {
-        static let productURL = URL(string: "https://faucet.cybex.io")!
-        static let devURL = URL(string: "https://faucet.51nebula.com")!
+struct Gateway2Service {
+    enum Config: NetworkHTTPEnv {
+        static let productURL = URL(string: "http://47.75.48.121:8181")!
+        static let devURL = URL(string: "http://39.98.58.238:8181")!
+        static let uatURL = URL(string: "http://39.98.58.238:8181")!
     }
 
-    static let provider = MoyaProvider<RegisterApi>(callbackQueue: nil, manager: defaultManager(),
+    static let provider = MoyaProvider<GatewayAPI>(callbackQueue: nil, manager: defaultManager(),
                                                         plugins: [NetworkLoggerPlugin(verbose: true)],
                                                         trackInflights: false)
 
+
     static func request(
-        target: RegisterApi,
+        target: GatewayAPI,
         success successCallback: @escaping (JSON) -> Void,
         error errorCallback: @escaping (CybexError) -> Void,
         failure failureCallback: @escaping (CybexError) -> Void
@@ -41,8 +48,10 @@ struct RegisterService {
                 do {
                     let response = try response.filterSuccessfulStatusCodes()
                     let json = try JSON(response.mapJSON())
-                    if json["code"].intValue == 0 {
-                        successCallback(json)
+                    if json["code"].intValue == 200 {
+                        let result = json["data"]
+
+                        successCallback(result)
                     } else {
                         errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
                                                                       desc: json["data"]))
@@ -74,31 +83,47 @@ struct RegisterService {
     }
 }
 
-extension RegisterApi : TargetType {
+extension GatewayAPI: TargetType {
     var baseURL: URL {
-        return Defaults.isTestEnv ? RegisterService.Config.devURL : RegisterService.Config.productURL
+        return Gateway2Service.Config.currentEnv
+    }
+
+    var apiVersion: String {
+        return "/v1"
     }
 
     var path: String {
         switch self {
-        case .getPinCode:
-            return "/captcha"
-        case .register:
-            return "/register"
+        case .assetLists:
+            return apiVersion + "/assets"
+        case let .asset(name: name):
+            return apiVersion + "/assets/\(name)"
+        case let .validateAddress(assetName: assetName, address: address):
+            return apiVersion + "/assets/\(assetName)/address/\(address)"
+        case let .topUPAddress(assetName: assetName, userName: userName):
+            return apiVersion + "/users/\(userName)/assets/\(assetName)/address"
+        case let .transactions(fundType: _, assetName: _, userName: userName, fromId: _):
+            return apiVersion + "/users/\(userName)/records"
+        case let .assetsOfTransactions(userName: userName):
+            return apiVersion + "/users/\(userName)/assets"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .getPinCode:
+        default:
             return .get
-        case .register:
-            return .post
         }
     }
 
     var urlParameters: [String: Any] {
         switch self {
+        case let .transactions(fundType: fundType, assetName: assetName, userName: _, fromId: fromId):
+            if let id = fromId {
+                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName, "lastid": id]
+            } else {
+                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName]
+            }
         default:
             return [:]
         }
@@ -106,14 +131,6 @@ extension RegisterApi : TargetType {
 
     var parameters: [String: Any] {
         switch self {
-        case let .register(pinID, captcha, name, keys):
-            return ["cap": ["id": pinID, "captcha": captcha],
-             "account": ["name": name,
-                         "owner_key": keys.ownerKey?.publicKey,
-                         "active_key": keys.activeKey?.publicKey,
-                         "memo_key": keys.memoKey?.publicKey,
-                         "refcode": "",
-                         "referrer": ""]]
         default:
             return [:]
         }
@@ -135,7 +152,28 @@ extension RegisterApi : TargetType {
         return Data()
     }
 
+    var signer: String {
+        let time = Date().timeIntervalSince1970.string()
+        guard let userName = UserManager.shared.name.value else {
+            return ""
+        }
+
+        let token = BitShareCoordinator.sign("\(time)\(userName)")
+        let jwt = [time, userName, token]
+
+        return jwt.joined(separator: ".")
+    }
+
     var headers: [String: String]? {
-        return ["Content-type": "application/json"]
+        var commonHeader = ["Content-type": "application/json"]
+
+        switch self {
+        case .topUPAddress, .transactions, .assetsOfTransactions:
+            commonHeader["authorization"] = "bearer " + signer
+            return commonHeader
+        default:
+            return nil
+        }
     }
 }
+

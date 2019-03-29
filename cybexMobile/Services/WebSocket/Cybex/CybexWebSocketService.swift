@@ -30,15 +30,6 @@ enum NodeURLString: String {
 
     case tmp = "ws://10.18.120.241:28090" //local
     case uat = "ws://47.100.98.113:38090" //uat
-
-    static var product: [NodeURLString] {
-//        return [.uat]
-        return [.hongkong, .hkback, .singapore, .tokyo, .korea]
-    }
-
-    static var dev: [NodeURLString] {
-        return [.test, .test2]
-    }
 }
 
 typealias CybexWebSocketResponse = (JSON) -> Void
@@ -54,14 +45,28 @@ open class AsyncRequestOperation: AsyncBlockOperation {
 }
 
 class CybexWebSocketService: NSObject {
+    enum Config: NetworkWebsocketNodeEnv {
+        static var productURL: [URL] {
+            return [NodeURLString.hongkong, NodeURLString.hkback, NodeURLString.singapore, NodeURLString.tokyo, NodeURLString.korea].map { URL(string: $0.rawValue)! }
+        }
+
+        static var devURL: [URL] {
+            return [NodeURLString.test, NodeURLString.test2].map { URL(string: $0.rawValue)! }
+        }
+
+        static var uatURL: [URL] {
+            return [NodeURLString.uat].map { URL(string: $0.rawValue)! }
+        }
+    }
+
     private var batchFactory: BatchFactory!
     private(set) var idGenerator: JsonIdGenerator = JsonIdGenerator()
 
     private var socket = SRWebSocket(url: URL(string: NodeURLString.hongkong.rawValue)!)
     private var testsockets: [SRWebSocket] = []
 
-    private var currentNode: NodeURLString?
-    private var nodes: [NodeURLString] = NodeURLString.product
+    private var currentNode: URL?
+    private var nodes: [URL] = []
 
     lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
         if !AppHelper.shared.infront {
@@ -130,7 +135,7 @@ class CybexWebSocketService: NSObject {
             if idx < testsockets.count {
                 testsocket = testsockets[idx]
             } else {
-                var request = URLRequest(url: URL(string: node.rawValue)!)
+                var request = URLRequest(url: node)
                 request.timeoutInterval = autoConnectCount.double * 1.0 + 0.5//随着重试次数增加 增加超时时间
                 testsocket = SRWebSocket(urlRequest: request)
                 testsocket.delegate = self
@@ -155,11 +160,8 @@ class CybexWebSocketService: NSObject {
             isConnecting = true
             isClosing = false
             needAutoConnect = true
-            if Defaults.isTestEnv {
-                nodes = NodeURLString.dev
-            } else {
-                nodes = NodeURLString.product
-            }
+
+            nodes = Config.currentEnv
             detectFastNode()
         }
     }
@@ -320,15 +322,15 @@ class CybexWebSocketService: NSObject {
 
     // MARK: - Nodes -
 
-    private func connectNode(node: NodeURLString) {
+    private func connectNode(node: URL) {
         if socket.readyState != .OPEN {
-            Log.print("connecting node: \(node.rawValue)")
+            Log.print("connecting node: \(node.absoluteString)")
             UIHelper.showStatusBar(R.string.localizable.socket_loading.key, style: .info)
 
             self.idGenerator = JsonIdGenerator()
             self.batchFactory.idGenerator = self.idGenerator
 
-            let request = URLRequest(url: URL(string: node.rawValue)!)
+            let request = URLRequest(url: node)
 
             socket = SRWebSocket(urlRequest: request)
 
@@ -396,7 +398,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         if self.currentNode == nil && isDetectingSocket(webSocket) {
             self.closeAllTestSocket()
 
-            self.currentNode = NodeURLString(rawValue: webSocket.url!.absoluteString)!
+            self.currentNode = URL(string: webSocket.url!.absoluteString)!
             connectNode(node: self.currentNode!)
 
             return

@@ -35,6 +35,10 @@ extension AppDelegate {
             UserManager.shared.frequencyType = FrequencyType(rawValue: Defaults[.frequencyType])!
         }
 
+        accountObserved()
+    }
+
+    func accountObserved() {
         NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
             guard let reachability = note.object as? Reachability else {
                 return
@@ -59,7 +63,5 @@ extension AppDelegate {
             }
 
         }
-        
-
     }
 }
