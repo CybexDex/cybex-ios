@@ -68,7 +68,7 @@ class SettingViewController: BaseViewController {
             refreshCloudPasswordStatus()
         }
 
-        language.contentLocali =  R.string.localizable.setting_language.key
+        language.contentLocali = R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
         theme.contentLocali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
         frequency.contentLocali = UserManager.shared.frequencyType.description()
@@ -108,7 +108,9 @@ class SettingViewController: BaseViewController {
     
     func clickCellView(_ sender: NormalCellView) {
         if sender == eNotesUnlockType {
-            chooseUnlockType()
+            if UserManager.shared.checkExistCloudPassword() {
+                chooseUnlockType()
+            }
         } else if sender == eNotesCloudPasswordSet {
             if !UserManager.shared.checkExistCloudPassword() {
                 pushCloudPasswordViewController(nil)

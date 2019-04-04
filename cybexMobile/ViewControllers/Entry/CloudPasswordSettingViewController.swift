@@ -173,6 +173,7 @@ class CloudPasswordSettingViewController: BaseViewController {
                                                                                     self.navigationController?.popViewController()
                                                                                 })
                                                                             } else {
+                                                                                self.ensureButton.canRepeat = true
                                                                                 self.showToastBox(false, message: R.string.localizable.enotes_cloudPassword_add_fail.key.localized())
                                                                             }
                                                                         }, jsonstr: jsonstr)

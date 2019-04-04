@@ -429,6 +429,7 @@
 		731C11C4214D045E00761955 /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B6214D045C00761955 /* HandyJSON.framework */; };
 		731C11C5214D045E00761955 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B7214D045C00761955 /* ReSwift.framework */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
+		732DDEC52255F00A002EE523 /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732DDEC42255F009002EE523 /* Sentry.framework */; };
 		7333854F21BF674A0026765F /* PairPrecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333854E21BF674A0026765F /* PairPrecision.swift */; };
 		7333855121BF943D0026765F /* AppDelegate+Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855021BF943D0026765F /* AppDelegate+Business.swift */; };
 		7333855321BF9A210026765F /* AppDelegate+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855221BF9A210026765F /* AppDelegate+Analytics.swift */; };
@@ -1338,6 +1339,7 @@
 		731C11B6214D045C00761955 /* HandyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandyJSON.framework; path = Carthage/Build/iOS/HandyJSON.framework; sourceTree = "<group>"; };
 		731C11B7214D045C00761955 /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
 		731C11B8214D045D00761955 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/iOS/SocketRocket.framework; sourceTree = "<group>"; };
+		732DDEC42255F009002EE523 /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
 		73335AC821476AA700CEF254 /* cybexMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cybexMobile.entitlements; sourceTree = "<group>"; };
 		7333854E21BF674A0026765F /* PairPrecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairPrecision.swift; sourceTree = "<group>"; };
 		7333855021BF943D0026765F /* AppDelegate+Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Business.swift"; sourceTree = "<group>"; };
@@ -1845,6 +1847,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				732DDEC52255F00A002EE523 /* Sentry.framework in Frameworks */,
 				73E9C052224C69810023B274 /* BigInt.framework in Frameworks */,
 				73E9C056224C75360023B274 /* SipHash.framework in Frameworks */,
 				739AB59E224B666C0023AEA9 /* RxMoya.framework in Frameworks */,
@@ -4087,6 +4090,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				732DDEC42255F009002EE523 /* Sentry.framework */,
 				73E9C055224C75360023B274 /* SipHash.framework */,
 				73E9C053224C73320023B274 /* PromiseKit.framework */,
 				73E9C051224C69810023B274 /* BigInt.framework */,
@@ -4403,6 +4407,7 @@
 				73A33072219420B900707D8F /* Embed Frameworks */,
 				739DA3312248D703000E1BB8 /* ShellScript */,
 				188D7FB0488E498F5B08EAAD /* [CP] Embed Pods Frameworks */,
+				732DDEC62255F09C002EE523 /* Sentry */,
 			);
 			buildRules = (
 			);
@@ -4835,6 +4840,24 @@
 			shellPath = /bin/sh;
 			shellScript = "fengniao --exclude Carthage --force\n";
 		};
+		732DDEC62255F09C002EE523 /* Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Sentry;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ ${CONFIGURATION} == \"Release\" ]; then\nif which sentry-cli >/dev/null; then\nexport SENTRY_URL=\"http://120.27.16.142:9000/\"\nexport SENTRY_ORG=\"sentry\"\nexport SENTRY_PROJECT=\"cybex\"\nexport SENTRY_AUTH_TOKEN=\"11d7eb3003be43c780c7e78e8a26923d190b703eddf54f34b0043fa2fa6f3ce5\" \nERROR=$(sentry-cli upload-dif \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\nif [ ! $? -eq 0 ]; then\necho \"warning: sentry-cli - $ERROR - $SENTRY_AUTH_TOKEN\"\nfi\nelse\necho \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\nfi\n";
+		};
 		73539C702179ABCF008395AC /* Integrate Reveal Server */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4986,7 +5009,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 			showEnvVarsInLog = 0;
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {

@@ -65,7 +65,7 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
         if let cachedPubkey = UserManager.shared.getCachedEnotesKeysExcludePrivate()?.activeKey?.publicKey, cachedPubkey != pkKey {
             DispatchQueue.main.async {
                 appCoodinator.topViewController()?.showToastBox(false, message: R.string.localizable.enotes_not_match.key.localized())
-
+                appCoodinator.topViewController()?.endLoading()
                 self.cardNotMatched.call(card)
             }
             self.session?.invalidate()
@@ -73,7 +73,7 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
         }
 
         let onePkKey = Card.compressedPublicKey(card.oneTimePublicKey)
-        let pvKey = Card.compressedPrivateKey(privateKey)
+        var pvKey = Card.compressedPrivateKey(privateKey)
 
         card.marshalCard("", onePubkey: onePkKey, onePriKey: pvKey, pubkey: pkKey)
 
@@ -84,6 +84,7 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
                 if data.success {
                     privateKey = data.privateKey
                     signature = data.signature
+                    pvKey = Card.compressedPrivateKey(privateKey)
                 } else {
                     DispatchQueue.main.async {
                         self.pinCodeErrorMessage.call(card)

@@ -197,8 +197,9 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                  from_memo_key: fromMemoKey,
                                                                  to_memo_key: memoKey)
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                    main {
-                        callback(data)
+                    callback(data)
+                    if String(describing: data) != "<null>"{
+                        Log.fail(data)
                     }
                 }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)

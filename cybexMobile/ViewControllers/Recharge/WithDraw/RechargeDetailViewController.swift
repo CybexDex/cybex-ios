@@ -102,21 +102,26 @@ class RechargeDetailViewController: BaseViewController {
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
                 guard let self = self else { return }
-                if self.contentView.addressView.content.isFirstResponder || self.contentView.amountView.content.isFirstResponder {
-                    self.contentView.feeView.isHidden       = true
-                    self.contentView.introduceView.isHidden = true
-                    self.view.layoutIfNeeded()
-                }
+                    self.switchHiddenInfo(true)
+//                    self.view.layoutIfNeeded()
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
                 guard let self = self else { return }
-                self.contentView.feeView.isHidden       = false
-                self.contentView.introduceView.isHidden = false
-                self.view.layoutIfNeeded()
+                self.switchHiddenInfo(false)
+//                self.view.layoutIfNeeded()
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+
+    func switchHiddenInfo(_ hidden: Bool) {
+        DispatchQueue.main.async {
+            self.contentView.feeView.isHidden       = hidden
+            self.contentView.introduceView.isHidden = hidden
+            self.contentView.feeView.allsubviews().forEach { $0.isHidden = hidden }
+            self.contentView.introduceView.allsubviews().forEach { $0.isHidden = hidden }
+        }
     }
     
     func setupEndEditingEvent() {
@@ -470,7 +475,7 @@ extension RechargeDetailViewController {
             if !UserManager.shared.checkExistCloudPassword() {
                 showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
             } else {
-                showPasswordBox(R.string.localizable.enotes_unlock_type_1.key.localized(), hintKey: R.string.localizable.enotes_transfer_memo_hint.key, middleType: .normal)
+                showPasswordBox()
             }
         } else if UserManager.shared.isLocked {
             showPasswordBox()

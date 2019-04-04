@@ -55,7 +55,7 @@ class AppConfiguration {
     static let percentPrecision = 2
     static let amountPrecision = 2
 
-    static let debounceDisconnectTime = 6
+    static let debounceDisconnectTime = 10
 
     private init() {
         let rootVC = BaseTabbarViewController()

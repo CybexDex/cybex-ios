@@ -55,6 +55,7 @@ extension CybexError {
         case unlockFail
         case registerFail(code: Int)
         case loginFail
+        case databaseApiError(json: JSON)
 
         var errorDescription: String {
             switch self {
@@ -66,7 +67,8 @@ extension CybexError {
                 } else {
                     return R.string.localizable.registerFail.key.localized()
                 }
-
+            case let .databaseApiError(json: json):
+                return ""
             default:
                 return ""
             }

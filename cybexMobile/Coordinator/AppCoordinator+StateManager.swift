@@ -65,7 +65,6 @@ extension AppCoordinator {
             }
             self.state.property.otherRequestRelyData.accept(1)
             self.fetchAllPairsMarkets(.veryLow)
-
         })
     }
 

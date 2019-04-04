@@ -32,9 +32,6 @@ func businessReducer(action: Action, state: BusinessState?) -> BusinessState {
         state.amount.accept(action.amount.formatCurrency(digitNum: action.pricision))
     case _ as ResetTrade:
         state.price.accept("")
-        state.feeAmount.accept(0)
-        state.balance.accept(0)
-        state.feeID.accept("")
         state.amount.accept("")
     case let action as ChangeAmountAction:
         state.amount.accept(action.amount)

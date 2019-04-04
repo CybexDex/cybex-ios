@@ -10,11 +10,14 @@ import Foundation
 import Moya
 import SwiftyJSON
 import Alamofire
+import PromiseKit
 
 enum DatabaseApi {
     case getAccount(name: String)
     case lookupSymbol(name: String)
     case getRecentTransactionBy(_ id: String)
+    case getKeyReferences(pubkey: String)
+    case getObjects(id: String)
 }
 
 struct CybexDatabaseApiService {
@@ -61,6 +64,19 @@ struct CybexDatabaseApiService {
         }
     }
 
+    static func request(target: DatabaseApi) -> Promise<JSON> {
+        let (promise, seal) = Promise<JSON>.pending()
+
+        request(target: target, success: { (json) in
+            seal.fulfill(json)
+        }, error: { (json) in
+            seal.reject(CybexError.tipError(.databaseApiError(json: json)))
+        }) { (error) in
+            seal.reject(error)
+        }
+        return promise
+    }
+
     static func defaultManager() -> Alamofire.SessionManager {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
@@ -89,6 +105,10 @@ extension DatabaseApi : TargetType {
             return DataBaseCatogery.lookupAssetSymbols.rawValue.snakeCased()
         case .getRecentTransactionBy(_):
             return DataBaseCatogery.getRecentTransactionById.rawValue.snakeCased()
+        case .getKeyReferences(_):
+            return DataBaseCatogery.getKeyReferences.rawValue.snakeCased()
+        case .getObjects(_):
+            return DataBaseCatogery.getObjects.rawValue.snakeCased()
         }
     }
 
@@ -115,6 +135,10 @@ extension DatabaseApi : TargetType {
             return [[name]]
         case let .getRecentTransactionBy(id: id):
             return [id]
+        case let .getKeyReferences(pubkey: pubkey):
+            return [[pubkey]]
+        case let .getObjects(id: id):
+            return [[id]]
         }
     }
 

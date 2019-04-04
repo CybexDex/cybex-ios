@@ -536,7 +536,7 @@ extension ChatViewController {
                     if !UserManager.shared.checkExistCloudPassword() {
                         showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
                     } else {
-                        showPasswordBox(R.string.localizable.enotes_unlock_type_1.key.localized(), hintKey: R.string.localizable.enotes_transfer_memo_hint.key, middleType: .normal)
+                        showPasswordBox()
                     }
                 }
             } else if UserManager.shared.isLocked {

@@ -22,6 +22,7 @@ class AppDelegate: FlutterAppDelegate {
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable") //隐藏 constraint log
 
+        setupSentry()
         setupAnalytics()
         setupThirdParty()
         setupLog()

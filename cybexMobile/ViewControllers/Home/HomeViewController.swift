@@ -198,6 +198,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
         if vcType == ViewType.homeContent.rawValue {//首页
+            sendStatEvent("test")
 //            let flutterEngine = (UIApplication.shared.delegate as? AppDelegate)?.flutterEngine
 //            let flutterViewController = FlutterViewController(engine: flutterEngine, nibName: nil, bundle: nil)!
 //            flutterViewController.setInitialRoute("route1")

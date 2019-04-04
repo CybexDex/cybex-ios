@@ -126,8 +126,7 @@ extension UserManager {
     }
 
     func checkPermission(_ keys: AccountKeys, account: Account) -> Bool {
-        let permission = account.checkPermission([keys, getCachedEnotesKeysExcludePrivate()].compactMap({ $0 }))
-        self.permission = permission
+        let permission = account.checkPermission([keys].compactMap({ $0 }))
 
         if permission.unlock {
             BitShareCoordinator.resetDefaultPublicKey(permission.defaultKey)
@@ -211,18 +210,30 @@ extension UserManager {
 
 //eNotes
 extension UserManager {
-    func enotesLogin(_ username: String, pubKey: String) -> Promise<Void> {
+    func enotesLogin(_ pubKey: String) -> Promise<Void> {
         if let keys: AccountKeys = AccountKeys.deserialize(from: BitShareCoordinator.getActiveUserKeys(pubKey)) {
-            let promise = fetchAccountInfo(username).map { (full, account) -> Void in
-                if account.activePubKeys.contains(pubKey) {
-                    self.enotesKeys = keys
-                    self.saveEnotesKeys()
-                    self.saveUserInfo(username)
-                    self.loginType = .nfc
-                    self.unlockType = .nfc
-                    self.timer?.pause()
-                    self.timer = nil
-                    self.handlerFullAcount(full)
+            let promise = CybexDatabaseApiService.request(target: .getKeyReferences(pubkey: pubKey)).then { (json) -> Promise<JSON>  in
+                if let id = json[0][0].string {
+                    return CybexDatabaseApiService.request(target: .getObjects(id: id))
+                } else {
+                    throw CybexError.tipError(.loginFail)
+                }
+            }.then { (json) -> Promise<Void> in
+                if let name = json[0]["name"].string {
+                    return self.fetchAccountInfo(name).map { (full, account) -> Void in
+                        if account.activePubKeys.contains(pubKey) {
+                            self.enotesKeys = keys
+                            self.saveEnotesKeys()
+                            self.saveUserInfo(name)
+                            self.loginType = .nfc
+                            self.unlockType = .nfc
+                            self.timer?.pause()
+                            self.timer = nil
+                            self.handlerFullAcount(full)
+                        } else {
+                            throw CybexError.tipError(.loginFail)
+                        }
+                    }
                 } else {
                     throw CybexError.tipError(.loginFail)
                 }

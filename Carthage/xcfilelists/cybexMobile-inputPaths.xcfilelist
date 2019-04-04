@@ -41,6 +41,7 @@ $(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework
 $(SRCROOT)/Carthage/Build/iOS/RxMoya.framework
 $(SRCROOT)/Carthage/Build/iOS/RxSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/SDCAlertView.framework
+$(SRCROOT)/Carthage/Build/iOS/Sentry.framework
 $(SRCROOT)/Carthage/Build/iOS/SipHash.framework
 $(SRCROOT)/Carthage/Build/iOS/SnapKit.framework
 $(SRCROOT)/Carthage/Build/iOS/SocketRocket.framework

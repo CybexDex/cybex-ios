@@ -443,6 +443,7 @@ extension BusinessViewController {
             self.coordinator?.parentEndLoading(self.parent)
             if success {
                 self.coordinator?.resetState()
+                self.refreshView()
             }
             self.showToastBox(success, message: success ? R.string.localizable.order_create_success.key.localized() : R.string.localizable.order_create_fail.key.localized())
         })

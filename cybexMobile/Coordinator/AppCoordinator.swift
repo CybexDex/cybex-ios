@@ -52,10 +52,6 @@ class AppCoordinator {
             }
             return false
         }
-
-        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
-            self.fetchMarketListTimer?.dispose()
-        }
     }
 
     func start() {

@@ -32,6 +32,22 @@ struct Log {
 
         #endif
     }
+
+    static func fail(_ items: Any..., flag: String = "BusinessFail") {
+        let s = items.reduce("") { result, next in
+            return result + String(describing: next)
+        }
+
+        let output = "[\(flag)] \(s)"
+
+        #if DEBUG
+
+        Swift.print(output)
+
+        #endif
+
+        sendStatEvent(output)
+    }
 }
 
 func guardSharedProperty<T>(_ input: T?) -> T {
