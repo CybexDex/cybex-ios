@@ -18,7 +18,7 @@ class AnimationProducer {
         let animation: ContentsAnimation
         let layer: CALayer
         weak var cache: AnimationCache?
-        let topRenderers: [NodeRenderer]
+        let topLayers: [ShapeLayer]
         let startDate: Date
         let finishDate: Date
         let completion: (() -> Void)?
@@ -268,14 +268,19 @@ class AnimationProducer {
 
         var animationRenderers = [NodeRenderer]()
         if let groupRenderer = renderer as? GroupRenderer {
-            animationRenderers.append(contentsOf: groupRenderer.renderers)
+            animationRenderers.append(contentsOf: groupRenderer.getAllChildrenRecursive())
         }
         let bottomRenderer = animationRenderers.min { $0.zPosition < $1.zPosition }
 
-        var topRenderers = [NodeRenderer]()
+        var topLayers = [ShapeLayer]()
         if let bottomRenderer = bottomRenderer, let allRenderers = allRenderers {
-            for renderer in allRenderers where !(renderer is GroupRenderer) && renderer.zPosition > bottomRenderer.zPosition {
-                topRenderers.append(renderer)
+            for renderer in allRenderers
+                where !(renderer is GroupRenderer)
+                    && renderer.zPosition > bottomRenderer.zPosition
+                    && !animationRenderers.contains(renderer) {
+                        if let layer = cache?.layerForNodeRenderer(renderer, context, animation: contentsAnimation) {
+                            topLayers.append(layer)
+                        }
             }
         }
 
@@ -283,7 +288,7 @@ class AnimationProducer {
             animation: contentsAnimation,
             layer: layer,
             cache: cache,
-            topRenderers: topRenderers,
+            topLayers: topLayers,
             startDate: Date(),
             finishDate: Date(timeInterval: contentsAnimation.duration, since: startDate),
             completion: completion
@@ -340,6 +345,9 @@ class AnimationProducer {
                 contentsAnimations.remove(at: count - 1 - index)
                 animationDesc.cache?.freeLayer(renderer)
                 animationDesc.completion?()
+                for layer in animationDesc.topLayers {
+                    animationDesc.cache?.freeLayer(layer: layer)
+                }
                 continue
             }
 
@@ -362,10 +370,9 @@ class AnimationProducer {
                 }
             }
 
-            for renderer in animationDesc.topRenderers {
-                let layer = animationDesc.cache?.layerForNodeRenderer(renderer, context, animation: animationDesc.animation)
-                layer?.setNeedsDisplay()
-                layer?.displayIfNeeded()
+            for layer in animationDesc.topLayers {
+                layer.setNeedsDisplay()
+                layer.displayIfNeeded()
             }
         }
     }

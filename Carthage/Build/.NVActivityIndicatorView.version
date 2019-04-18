@@ -1,13 +1,15 @@
 {
-  "commitish" : "4.6.1",
+  "commitish" : "4.7.0",
   "iOS" : [
     {
       "name" : "NVActivityIndicatorViewAppExtension",
-      "hash" : "9b226c55cdf515ccbcb25f856b31ae9136746dc6dba1d30153f021ada8e9124c"
+      "hash" : "ea82c6266111a9fb1c3ac3aca2f76282d1734a4227ed2f223d26d56dc03d1542",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     },
     {
       "name" : "NVActivityIndicatorView",
-      "hash" : "e96082dac066ec01855052809d0580cc55aac16b6c09e205680fd199623a9f44"
+      "hash" : "29f715c3d5fe72a77bef0aeaaf7db9702769466796fc39122ed5f0f2a7924f5f",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

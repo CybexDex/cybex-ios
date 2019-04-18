@@ -68,7 +68,7 @@ extension NavCoordinator {
         }
 
         if presentSetup == nil {
-            SwifterSwift.delay(milliseconds: 100) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 topside?.present(nav, animated: animated, completion: nil)
             }
         } else if let top = topside {
@@ -91,7 +91,7 @@ extension NavCoordinator {
         }
 
         if presentSetup == nil {
-            SwifterSwift.delay(milliseconds: 100) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 topside.present(viewController, animated: animated, completion: nil)
             }
         } else {

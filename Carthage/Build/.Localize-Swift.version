@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "Localize_Swift",
-      "hash" : "09f41a0c58bebe6afbbfe156a41112a79b4f873298c65d10963065b03fa75cfa"
+      "hash" : "90ba2b216d961b0795c71f8710c64ffc650a13f71e370b54d8fccdb182fcc69e",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -1,9 +1,0 @@
-{
-  "commitish" : "2.3.0",
-  "iOS" : [
-    {
-      "name" : "AlamofireNetworkActivityLogger",
-      "hash" : "4d8118cdcd78c4a612df654672af397cea94d2cf1f1f1bec1f19e40dbe87d4f4"
-    }
-  ]
-}

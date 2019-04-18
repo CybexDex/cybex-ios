@@ -175,7 +175,7 @@ extension GameViewController {
         
     }
     
-    override func cancelImageAction(_ sender: CybexTextView) {
+    override func cancelImageAction(_ tag: String) {
         self.seal?.fulfill("3")
     }
     

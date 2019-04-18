@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CRb-ZU-aKh">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="watchOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
     </dependencies>
@@ -8,7 +12,7 @@
         <!--NumberPad-->
         <scene sceneID="xDD-Gb-LOX">
             <objects>
-                <controller identifier="NumberPad" fullScreen="YES" id="i87-te-Kf6" customClass="NumberPadInterfaceController" customModule="watchOS_Example_Extension">
+                <controller identifier="NumberPad" fullScreen="YES" id="i87-te-Kf6" customClass="NumberPadInterfaceController" customModule="watchOS_Example" customModuleProvider="target">
                     <items>
                         <group width="1" height="0.20000000000000001" alignment="left" id="Mkx-Zv-Roj">
                             <items>
@@ -117,7 +121,7 @@
         <!--Version Display Interface Controller-->
         <scene sceneID="O0f-3r-sKj">
             <objects>
-                <controller fullScreen="YES" id="CRb-ZU-aKh" customClass="VersionDisplayInterfaceController" customModule="watchOS_Example_Extension">
+                <controller fullScreen="YES" id="CRb-ZU-aKh" customClass="VersionDisplayInterfaceController" customModule="watchOS_Example" customModuleProvider="target">
                     <items>
                         <label width="1" alignment="left" text="EFQRCode" textAlignment="center" id="Fro-dS-7yC">
                             <color key="textColor" red="0.38039215686274508" green="0.81176470588235294" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -155,7 +159,7 @@
         <!--Unit Tests-->
         <scene sceneID="26e-eU-Vke">
             <objects>
-                <controller identifier="Tests" title="Unit Tests" id="bqn-P8-jul" customClass="UnitTestInterfaceController" customModule="watchOS_Example_Extension">
+                <controller identifier="Tests" title="Unit Tests" id="bqn-P8-jul" customClass="UnitTestInterfaceController" customModule="watchOS_Example" customModuleProvider="target">
                     <items>
                         <activity alignment="left" id="Z77-Ph-U7f"/>
                         <table alignment="left" id="beI-sM-P2H">
@@ -193,7 +197,7 @@
         <!--EFQRCode-->
         <scene sceneID="iSG-4e-WHm">
             <objects>
-                <controller title="EFQRCode" id="x7r-oY-9um" customClass="ParametersInterfaceController" customModule="watchOS_Example_Extension">
+                <controller title="EFQRCode" id="x7r-oY-9um" customClass="ParametersInterfaceController" customModule="watchOS_Example" customModuleProvider="target">
                     <items>
                         <button width="1" alignment="left" title="Generate" id="FcX-tR-c93">
                             <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -323,12 +327,12 @@ Width &amp; Height</string>
                                 <action selector="pickedBinarizationThreshold:" destination="x7r-oY-9um" id="zMm-2H-NTd"/>
                             </connections>
                         </picker>
-                        <switch width="1" alignment="left" title="Circular Point Shape" numberOfLines="1" minimumScaleFactor="0.10000000000000001" id="TeM-rT-bHj">
-                            <color key="tintColor" red="0.3803921569" green="0.81176470590000005" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <label width="1" alignment="left" text="Point Shape" textAlignment="center" id="3Y5-pz-aKM"/>
+                        <picker height="40" alignment="left" focusStyle="stack" id="xtz-td-Dau">
                             <connections>
-                                <action selector="prefersCircular:" destination="x7r-oY-9um" id="Jy8-MZ-Vq9"/>
+                                <action selector="pickedPointShape:" destination="x7r-oY-9um" id="vfw-z9-TVU"/>
                             </connections>
-                        </switch>
+                        </picker>
                         <button width="1" alignment="left" title="Generate" id="UDk-vC-rXj">
                             <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -349,6 +353,7 @@ Width &amp; Height</string>
                         <outlet property="magnificationHeightButton" destination="dIX-c1-Atv" id="c69-Tr-Ibv"/>
                         <outlet property="magnificationWidthButton" destination="HHX-1E-4RW" id="B1r-WH-AFf"/>
                         <outlet property="modePicker" destination="a6K-zF-snE" id="Qca-XF-9ae"/>
+                        <outlet property="pointShapePicker" destination="xtz-td-Dau" id="zGq-fq-Df0"/>
                         <outlet property="watermarkModePicker" destination="Z4t-N1-j6n" id="jvH-CI-ZDP"/>
                         <outlet property="watermarkPicker" destination="OW9-Hq-tI2" id="zOo-hZ-Pud"/>
                         <outlet property="widthButton" destination="XF9-rQ-Phv" id="kR8-Hk-f5u"/>

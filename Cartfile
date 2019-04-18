@@ -24,7 +24,7 @@ github "Nirma/UIFontComplete"
 github "malcommac/Repeat"
 github "MoZhouqi/KMNavigationBarTransition"
 github "IcaliaLabs/Presentr"
-github "EyreFree/EFQRCode"
+#github "EyreFree/EFQRCode"
 github "KennethTsang/GrowingTextView"
 
 github "SwifterSwift/SwifterSwift"

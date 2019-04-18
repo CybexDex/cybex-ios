@@ -491,7 +491,6 @@
 		73539C1721798D26008395AC /* GrowingTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0B21798D23008395AC /* GrowingTextView.framework */; };
 		73539C1821798D26008395AC /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0C21798D23008395AC /* IQKeyboardManagerSwift.framework */; };
 		73539C1921798D26008395AC /* UIFontComplete.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0D21798D24008395AC /* UIFontComplete.framework */; };
-		73539C1A21798D26008395AC /* EFQRCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0E21798D24008395AC /* EFQRCode.framework */; };
 		73539C1B21798D26008395AC /* JSONRPCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0F21798D25008395AC /* JSONRPCKit.framework */; };
 		73539C1C21798D26008395AC /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C1021798D25008395AC /* SwiftyUserDefaults.framework */; };
 		73539C1D21798D26008395AC /* Localize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C1121798D25008395AC /* Localize_Swift.framework */; };
@@ -735,7 +734,6 @@
 		73E9C050224C69560023B274 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C046224C69560023B274 /* Base58.swift */; };
 		73E9C052224C69810023B274 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C051224C69810023B274 /* BigInt.framework */; };
 		73E9C054224C73320023B274 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C053224C73320023B274 /* PromiseKit.framework */; };
-		73E9C056224C75360023B274 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E9C055224C75360023B274 /* SipHash.framework */; };
 		73E9C05A224C9E2A0023B274 /* Gateway2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C059224C9E2A0023B274 /* Gateway2Service.swift */; };
 		73E9C05C224CAE280023B274 /* GatewayResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C05B224CAE280023B274 /* GatewayResponseModel.swift */; };
 		73E9C07D224DEB2E0023B274 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9C07C224DEB2E0023B274 /* Network.swift */; };
@@ -1403,7 +1401,6 @@
 		73539C0B21798D23008395AC /* GrowingTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowingTextView.framework; path = Carthage/Build/iOS/GrowingTextView.framework; sourceTree = "<group>"; };
 		73539C0C21798D23008395AC /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		73539C0D21798D24008395AC /* UIFontComplete.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFontComplete.framework; path = Carthage/Build/iOS/UIFontComplete.framework; sourceTree = "<group>"; };
-		73539C0E21798D24008395AC /* EFQRCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EFQRCode.framework; path = Carthage/Build/iOS/EFQRCode.framework; sourceTree = "<group>"; };
 		73539C0F21798D25008395AC /* JSONRPCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONRPCKit.framework; path = Carthage/Build/iOS/JSONRPCKit.framework; sourceTree = "<group>"; };
 		73539C1021798D25008395AC /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyUserDefaults.framework; path = Carthage/Build/iOS/SwiftyUserDefaults.framework; sourceTree = "<group>"; };
 		73539C1121798D25008395AC /* Localize_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Localize_Swift.framework; path = Carthage/Build/iOS/Localize_Swift.framework; sourceTree = "<group>"; };
@@ -1653,7 +1650,6 @@
 		73E9C046224C69560023B274 /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
 		73E9C051224C69810023B274 /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = Carthage/Build/iOS/BigInt.framework; sourceTree = "<group>"; };
 		73E9C053224C73320023B274 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
-		73E9C055224C75360023B274 /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SipHash.framework; path = Carthage/Build/iOS/SipHash.framework; sourceTree = "<group>"; };
 		73E9C059224C9E2A0023B274 /* Gateway2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway2Service.swift; sourceTree = "<group>"; };
 		73E9C05B224CAE280023B274 /* GatewayResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayResponseModel.swift; sourceTree = "<group>"; };
 		73E9C07C224DEB2E0023B274 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -1849,7 +1845,6 @@
 			files = (
 				732DDEC52255F00A002EE523 /* Sentry.framework in Frameworks */,
 				73E9C052224C69810023B274 /* BigInt.framework in Frameworks */,
-				73E9C056224C75360023B274 /* SipHash.framework in Frameworks */,
 				739AB59E224B666C0023AEA9 /* RxMoya.framework in Frameworks */,
 				73E9BFFD224B8EC30023B274 /* Result.framework in Frameworks */,
 				739AB59C224B66620023AEA9 /* Moya.framework in Frameworks */,
@@ -1900,7 +1895,6 @@
 				73539C3021799039008395AC /* ESPullToRefresh.framework in Frameworks */,
 				73539C3221799039008395AC /* TinyConstraints.framework in Frameworks */,
 				73A3306D219420B900707D8F /* ChatRoom.framework in Frameworks */,
-				73539C1A21798D26008395AC /* EFQRCode.framework in Frameworks */,
 				73539C1B21798D26008395AC /* JSONRPCKit.framework in Frameworks */,
 				73539C1C21798D26008395AC /* SwiftyUserDefaults.framework in Frameworks */,
 				73539C1D21798D26008395AC /* Localize_Swift.framework in Frameworks */,
@@ -4091,7 +4085,6 @@
 			isa = PBXGroup;
 			children = (
 				732DDEC42255F009002EE523 /* Sentry.framework */,
-				73E9C055224C75360023B274 /* SipHash.framework */,
 				73E9C053224C73320023B274 /* PromiseKit.framework */,
 				73E9C051224C69810023B274 /* BigInt.framework */,
 				73E9BFFC224B8EC30023B274 /* Result.framework */,
@@ -4127,7 +4120,6 @@
 				73539C2021799035008395AC /* SwiftTheme.framework */,
 				73539C2821799039008395AC /* TinyConstraints.framework */,
 				73539C2121799035008395AC /* XLActionController.framework */,
-				73539C0E21798D24008395AC /* EFQRCode.framework */,
 				73539C0821798D21008395AC /* Fakery.framework */,
 				73539C0B21798D23008395AC /* GrowingTextView.framework */,
 				73539C0C21798D23008395AC /* IQKeyboardManagerSwift.framework */,
@@ -4405,9 +4397,8 @@
 				73539C702179ABCF008395AC /* Integrate Reveal Server */,
 				7398BEC42181C209004C042E /* swiftlint */,
 				73A33072219420B900707D8F /* Embed Frameworks */,
-				739DA3312248D703000E1BB8 /* ShellScript */,
-				188D7FB0488E498F5B08EAAD /* [CP] Embed Pods Frameworks */,
 				732DDEC62255F09C002EE523 /* Sentry */,
+				68BCE4348CD1CFADA1FC515A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4746,23 +4737,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT/rswift\" generate \"$SRCROOT\"\n";
 		};
-		188D7FB0488E498F5B08EAAD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		63B89CB4897862A41FC84BA0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4803,6 +4777,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Carthage/Build/iOS/Fabric.framework/run\" a0bbb6d623feca529afaf6ed110e62a77f47b16a 3b264ff6cab506aaf14bce576c156ea66229ad7b6dfb666b4fbb91089deb17e2\n";
+		};
+		68BCE4348CD1CFADA1FC515A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		730E59A621992248006DDCDD /* unuse files */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4911,23 +4902,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
-		};
-		739DA3312248D703000E1BB8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed\n";
 		};
 		832A59ED6ECD0EB5910EDD41 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

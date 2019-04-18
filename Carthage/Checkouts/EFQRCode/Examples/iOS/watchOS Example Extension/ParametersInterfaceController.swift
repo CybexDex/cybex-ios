@@ -33,7 +33,13 @@ enum EFImage {
 }
 
 class ParametersInterfaceController: WKInterfaceController {
-    private var link = "https://github.com/EFPrefix/EFQRCode"
+    override func willActivate() {
+        super.willActivate()
+        self.contentDisplay?.setText(link)
+    }
+
+    private static let lastContent = StorageUserDefaults<NSString>(key: "lastContent")
+    private var link = (ParametersInterfaceController.lastContent.value as String?) ?? "https://github.com/EFPrefix/EFQRCode"
     @IBOutlet var contentDisplay: WKInterfaceLabel!
     @IBAction func changeLink() {
         presentTextInputController(withSuggestions: [link], allowedInputMode: .allowEmoji) {
@@ -297,12 +303,27 @@ class ParametersInterfaceController: WKInterfaceController {
         binarizationThreshold = binarizationThresholds[value]
     }
     
-    private var isCircular = false
-    @IBAction func prefersCircular(_ value: Bool) {
-        isCircular = value
+    private var pointShape = EFPointShape.square
+    private var pointShapeString = ["square", "circle", "diamond"]
+    @IBOutlet var pointShapePicker: WKInterfacePicker! {
+        didSet {
+            guard let picker = pointShapePicker else {
+                return
+            }
+            picker.setItems(pointShapeString.map {
+                let item = WKPickerItem()
+                item.title = $0
+                return item
+            })
+        }
+    }
+    @IBAction func pickedPointShape(_ value: Int) {
+        pointShape = EFPointShape(rawValue: value) ?? pointShape
     }
     
     override func contextForSegue(withIdentifier segueIdentifier: String) -> Any? {
+        ParametersInterfaceController.lastContent.value = link as NSString
+
         let generator = EFQRCodeGenerator(content: link, size: EFIntSize(width: width, height: height))
         generator.setInputCorrectionLevel(inputCorrectionLevel: correctionLevel)
         generator.setMode(mode: selectedMode)
@@ -312,7 +333,7 @@ class ParametersInterfaceController: WKInterfaceController {
         generator.setForegroundPointOffset(foregroundPointOffset: foregroundPointOffset)
         generator.setAllowTransparent(allowTransparent: allowsTransparent)
         generator.setBinarizationThreshold(binarizationThreshold: binarizationThreshold)
-        generator.setPointShape(pointShape: isCircular ? .circle : .square)
+        generator.setPointShape(pointShape: pointShape)
         
         switch watermark {
         case .gif(let data)?: // GIF

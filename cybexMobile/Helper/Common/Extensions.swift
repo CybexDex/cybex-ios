@@ -88,11 +88,12 @@ extension UIView {
     }
 
     var windowWithNavSafeAreaInsets: UIEdgeInsets {
-        return windowSafeAreaInsets.insetBy(top: 44)
+        return UIEdgeInsets(top: windowSafeAreaInsets.top + 44, left: windowSafeAreaInsets.left, bottom: windowSafeAreaInsets.bottom, right: windowSafeAreaInsets.right)
+
     }
 
     var windowWithNavAndBottomSafeAreaInsets: UIEdgeInsets {
-        return windowWithNavSafeAreaInsets.insetBy(bottom: 44)
+        return UIEdgeInsets(top: windowSafeAreaInsets.top, left: windowSafeAreaInsets.left, bottom: windowSafeAreaInsets.bottom + 44, right: windowSafeAreaInsets.right)
     }
 }
 

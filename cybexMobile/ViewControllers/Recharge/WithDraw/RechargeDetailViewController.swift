@@ -297,7 +297,7 @@ class RechargeDetailViewController: BaseViewController {
                     amount: balance.balance).formatCurrency(digitNum: tradeInfo.precision) + " " + tradeInfo.symbol.filterSystemPrefix
             }
             self.setFinalAmount()
-            SwifterSwift.delay(milliseconds: 300) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.changeWithdrawState()
             }
             self.contentView.amountView.textplaceholder = R.string.localizable.recharge_min.key.localized() + String(describing: data.minValue)
@@ -315,9 +315,9 @@ class RechargeDetailViewController: BaseViewController {
                 }
                 self.feeAssetId = fee.assetId
                 self.setFinalAmount()
-                SwifterSwift.delay(milliseconds: 300, completion: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.changeWithdrawState()
-                })
+                }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -378,7 +378,7 @@ extension RechargeDetailViewController {
         withdrawing = true
         self.view.endEditing(true)
 
-        SwifterSwift.delay(milliseconds: 300) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.withdrawing = false
 
             self.checkPermisson()
@@ -428,10 +428,10 @@ extension RechargeDetailViewController {
                                                 if AddressManager.shared.containAddressOfWithDraw(address, currency: self.trade!.id).0 == false {
                                                     self.showConfirmImage(R.image.icCheckCircleGreen.name,
                                                                           title: R.string.localizable.withdraw_success_title.key.localized(),
-                                                                          content: R.string.localizable.withdraw_success_content.key.localized())
+                                                                          content: R.string.localizable.withdraw_success_content.key.localized(), tag: R.string.localizable.withdraw_success_content.key.localized())
                                                 } else {
                                                     self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
-                                                    SwifterSwift.delay(milliseconds: 100) {
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                         self.coordinator?.pop()
                                                     }
                                                 }
@@ -459,8 +459,10 @@ extension RechargeDetailViewController {
         }
     }
     
-    override func cancelImageAction(_ sender: CybexTextView) {
-        self.coordinator?.pop()
+    override func cancelImageAction(_ tag: String) {
+        if tag == R.string.localizable.withdraw_success_content.key.localized() {
+            self.coordinator?.pop()
+        }
     }
 }
 

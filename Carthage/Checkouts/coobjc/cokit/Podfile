@@ -1,9 +1,0 @@
-platform :ios, '8.0'
-
-target 'cokit' do
-
-pod 'coobjc', :path => '../'
-pod 'cocore', :path => '../'
-
-        
-end

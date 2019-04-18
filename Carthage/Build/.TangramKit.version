@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "TangramKit",
-      "hash" : "efc9a77c00ba681872bc9b0f11f9f3157fd1f3e477f701f5e89c776e6810cca0"
+      "hash" : "74d09e1c73b34e7dcbc1a1b1f6fcbf5a20fe65013ce21e8d0ff9cc2af1d274ff",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -183,7 +183,7 @@ extension OpenedOrdersViewController {
 
             if UserManager.shared.checkExistCloudPassword(), UserManager.shared.loginType == .nfc {
                 let titleLocali = UserManager.shared.unlockType == .cloudPassword ? R.string.localizable.enotes_use_type_0.key : R.string.localizable.enotes_use_type_1.key
-                self.showPureContentConfirm(R.string.localizable.tip_title.key.localized(), rightTitleLocali: titleLocali, ensureButtonLocali: R.string.localizable.alert_ensure.key, content: "openedorder_ensure_message", tag: "")
+                self.showPureContentConfirm(R.string.localizable.tip_title.key.localized(), rightTitleLocali: titleLocali, ensureButtonLocali: R.string.localizable.alert_ensure.key, content: "openedorder_ensure_message", tag: titleLocali)
             } else {
                 self.showPureContentConfirm()
             }

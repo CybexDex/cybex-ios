@@ -7,7 +7,6 @@ $(SRCROOT)/Carthage/Build/iOS/BiometricAuthentication.framework
 $(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Device.framework
 $(SRCROOT)/Carthage/Build/iOS/DifferenceKit.framework
-$(SRCROOT)/Carthage/Build/iOS/EFQRCode.framework
 $(SRCROOT)/Carthage/Build/iOS/ESPullToRefresh.framework
 $(SRCROOT)/Carthage/Build/iOS/ESTabBarController.framework
 $(SRCROOT)/Carthage/Build/iOS/FSPagerView.framework
@@ -42,7 +41,6 @@ $(SRCROOT)/Carthage/Build/iOS/RxMoya.framework
 $(SRCROOT)/Carthage/Build/iOS/RxSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/SDCAlertView.framework
 $(SRCROOT)/Carthage/Build/iOS/Sentry.framework
-$(SRCROOT)/Carthage/Build/iOS/SipHash.framework
 $(SRCROOT)/Carthage/Build/iOS/SnapKit.framework
 $(SRCROOT)/Carthage/Build/iOS/SocketRocket.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftRichString.framework

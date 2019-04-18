@@ -1,9 +1,10 @@
 {
-  "commitish" : "3.0.0",
+  "commitish" : "4.0.0",
   "iOS" : [
     {
       "name" : "UIFontComplete",
-      "hash" : "3debe085192f9bc3b68f4be59da9a7d66b4847b11ef53823af2735d780dcaf61"
+      "hash" : "4b57b62af54ae1a928155b2c8435671c8266afcc33feaf9ef0bb3461b708cc24",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

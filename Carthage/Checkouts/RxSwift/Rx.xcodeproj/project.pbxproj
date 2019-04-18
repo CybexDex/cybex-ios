@@ -783,20 +783,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C8165AC521891B5800494BEF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8A56ACE1AD7424700B4673B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C8165ABB21891AFF00494BEF;
-			remoteInfo = RxAtomic;
-		};
-		C8165AC721891B5F00494BEF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8A56ACE1AD7424700B4673B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C8165ABB21891AFF00494BEF;
-			remoteInfo = RxAtomic;
-		};
 		C83508C91C386F6F0027C24C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C8A56ACE1AD7424700B4673B /* Project object */;
@@ -2511,7 +2497,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C8165AC821891B5F00494BEF /* PBXTargetDependency */,
 				C872BD241BC052B800D7175E /* PBXTargetDependency */,
 			);
 			name = RxBlocking;
@@ -2650,7 +2635,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C8165AC621891B5800494BEF /* PBXTargetDependency */,
 			);
 			name = RxSwift;
 			productName = RxSwift;
@@ -2730,6 +2714,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -2842,7 +2827,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint is not installed\"\nfi\n\n";
+			shellScript = "if [[ \"${TRAVIS}\" != \"\" ]] || [[ \"${LINT}\" != \"\" ]]; then\n    if which swiftlint >/dev/null; then\n        swiftlint\n    else\n        echo \"warning: SwiftLint is not installed\"\n    fi\nelse \n    echo \"To run swiftlint please set TRAVIS or LINT environmental variable.\"\nfi\n";
 		};
 		A21D625C21E1D82B00E3E359 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2860,7 +2845,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint is not installed\"\nfi\n\n";
+			shellScript = "if [[ \"${TRAVIS}\" != \"\" ]] || [[ \"${LINT}\" != \"\" ]]; then\n    if which swiftlint >/dev/null; then\n        swiftlint\n    else\n        echo \"warning: SwiftLint is not installed\"\n    fi\nelse \n    echo \"To run swiftlint please set TRAVIS or LINT environmental variable.\"\nfi\n";
 		};
 		A21D625D21E1D83800E3E359 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2878,7 +2863,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint is not installed\"\nfi\n\n";
+			shellScript = "if [[ \"${TRAVIS}\" != \"\" ]] || [[ \"${LINT}\" != \"\" ]]; then\n    if which swiftlint >/dev/null; then\n        swiftlint\n    else\n        echo \"warning: SwiftLint is not installed\"\n    fi\nelse \n    echo \"To run swiftlint please set TRAVIS or LINT environmental variable.\"\nfi\n";
 		};
 		A21F589121E109AD0051AEA2 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2896,7 +2881,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint is not installed\"\nfi\n";
+			shellScript = "if [[ \"${TRAVIS}\" != \"\" ]] || [[ \"${LINT}\" != \"\" ]]; then\n    if which swiftlint >/dev/null; then\n        swiftlint\n    else\n        echo \"warning: SwiftLint is not installed\"\n    fi\nelse \n    echo \"To run swiftlint please set TRAVIS or LINT environmental variable.\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3739,16 +3724,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C8165AC621891B5800494BEF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C8165ABB21891AFF00494BEF /* RxAtomic */;
-			targetProxy = C8165AC521891B5800494BEF /* PBXContainerItemProxy */;
-		};
-		C8165AC821891B5F00494BEF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C8165ABB21891AFF00494BEF /* RxAtomic */;
-			targetProxy = C8165AC721891B5F00494BEF /* PBXContainerItemProxy */;
-		};
 		C83508CA1C386F6F0027C24C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C8A56AD61AD7424700B4673B /* RxSwift */;

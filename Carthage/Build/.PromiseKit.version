@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "PromiseKit",
-      "hash" : "72bf4bf8c005afce3e69c6b377f121f2ed31d7c987aa492c6c2834cf3120a2d5"
+      "hash" : "81ea97490e0dc827c30dae1a021482efed455c2be0822a5aedd211b683736b66",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

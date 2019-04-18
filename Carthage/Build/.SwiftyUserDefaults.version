@@ -3,11 +3,13 @@
   "iOS" : [
     {
       "name" : "SwiftyUserDefaults",
-      "hash" : "63249f97af5b232a618d00d19856e227c0adf2d755289eef88c595c759826779"
+      "hash" : "f9288bc61cd2ed680382976a8914794e602fbdcf62b5661fa5e2191665f04a65",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     },
     {
       "name" : "SwiftyUserDefaults",
-      "hash" : "63249f97af5b232a618d00d19856e227c0adf2d755289eef88c595c759826779"
+      "hash" : "f9288bc61cd2ed680382976a8914794e602fbdcf62b5661fa5e2191665f04a65",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

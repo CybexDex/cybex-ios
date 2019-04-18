@@ -1,9 +1,10 @@
 {
-  "commitish" : "1.0.0",
+  "commitish" : "1.1.1",
   "iOS" : [
     {
       "name" : "DifferenceKit",
-      "hash" : "f07247e5471bab0b08f5f62dd527cb4f515b22f6a2e395912a56c8a372464e2d"
+      "hash" : "45ced2e4bbe7f2b0691e8ffa14f8746e00153994e6b37e541f0726f0c592f5b7",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

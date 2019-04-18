@@ -1,9 +1,10 @@
 {
-  "commitish" : "4.1.1",
+  "commitish" : "5.0.0",
   "iOS" : [
     {
       "name" : "XLActionController",
-      "hash" : "1207fd6fad172ac306ed8882d4244a6a0b03b2e404de06b25f029ac673acfd43"
+      "hash" : "175f45def85eb2dcda70840a7fd51140e4c9cb7a9573cc9ce7282f314e324098",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -47,7 +47,7 @@
         <img src="https://img.shields.io/badge/made%20with-%3C3-orange.svg">
     </a>
     <a href="http://shang.qq.com/wpa/qunwpa?idkey=d0f732585dcb0c6f2eb26bc9e0327f6305d18260eeba89ed26a201b520c572c0">
-        <img src="http://image.eyrefree.org/QQGroup.png">
+        <img src="https://img.shields.io/badge/Q群-769966374-32befc.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAA4VBMVEUAAAAAAAAAAAD3rwgAAAAAAADpICBuTQNUDAwAAAAAAAAAAAAAAADnICAAAAAAAACbFRUAAAD5rgkfFgEAAADHGxu1GBhGOyQ6LhMPCgAAAAB0UQRbDAziHh7hHh5HRUEAAAAPAgIQCwEQEBAdBAQgICAvIQIvLy8+LAJAQEBJCgpWRBpbW1tfX19gYGBqZVptTARvb299VwSAgICEhISHh4ePhnGbbAWgoKCseAawsLC7gwbAwMDExMTFrKzLjgfoHx/powfqpAjvZGTw8PDxcnLxenrzj4/5rgj5x8f///9y6ONcAAAAIHRSTlMAECAgMEBQVlhggZGhobHBwdHR3eHh4+fp7/Hx9/f5+3tefS0AAACkSURBVHjaNc1FAsJAEAXRDj64BAv2IbgEd2s0gfsfiJkAtXurIpkWMQBd0K8O3KZfhWEeW9YB8LnUYY2Gi6WJqJIHwKo7GAMpRT/aV0d2BhRD/Xp7tt9OGs2yYoy5mpUxc0BOc/yvkiQSwJPZtu3XCdAoDtjMb5k8C9KN1utx+zFChsD97bYzRII0Ss2/7IUliILFjZKV8ZLM61xK+V6tsHbSRB+BYB6Vhuib7wAAAABJRU5ErkJggg==">
     </a>
 </p>
 
@@ -103,7 +103,7 @@ git clone git@github.com:EFPrefix/EFQRCode.git; cd EFQRCode; git submodule updat
 EFQRCode 可以通过 [CocoaPods](http://cocoapods.org) 进行获取。只需要在你的 Podfile 中添加如下代码就能实现引入：
 
 ```ruby
-pod 'EFQRCode', '~> 4.5.0'
+pod 'EFQRCode', '~> 5.0.0'
 ```
 
 然后，执行如下命令即可：
@@ -126,7 +126,7 @@ $ brew install carthage
 通过在你的 `Cartfile` 添加如下语句可以将 EFQRCode 引入你的项目：
 
 ```ogdl
-github "EFPrefix/EFQRCode" ~> 4.5.0
+github "EFPrefix/EFQRCode" ~> 5.0.0
 ```
 
 接下来执行 `carthage update` 命令生成 Framework 并且将生成的 `EFQRCode.framework` 拖入工程即可。
@@ -139,7 +139,7 @@ github "EFPrefix/EFQRCode" ~> 4.5.0
 
 ```swift
 dependencies: [
-    .Package(url: "https://github.com/EFPrefix/EFQRCode.git", Version(4, 5, 0))
+    .Package(url: "https://github.com/EFPrefix/EFQRCode.git", Version(5, 0, 0))
 ]
 ```
 
@@ -271,7 +271,11 @@ Python|[https://github.com/sylnsfar/qrcode](https://github.com/sylnsfar/qrcode)
     <img src="https://opencollective.com/efqrcode/contributors.svg?width=890" />
 </a>
 
-## 支持者
+## 捐赠
+
+如果你认为这个项目给你带来了帮助，你可以给我买杯咖啡。如果你喜欢这个项目，并愿意为它的发展提供进一步的支持，你可以选择在 [Open Collective](https://opencollective.com/efqrcode) 上成为 `支持者` 或 `赞助商`。
+
+### 支持者
 
 感谢所有的支持者！ 🙏 [[Become a backer](https://opencollective.com/efqrcode#backer)]
 
@@ -279,7 +283,7 @@ Python|[https://github.com/sylnsfar/qrcode](https://github.com/sylnsfar/qrcode)
     <img src="https://opencollective.com/efqrcode/backers.svg?width=890">
 </a>
 
-## 赞助商
+### 赞助商
 
 通过成为赞助商来支持这个项目，您的徽标将显示在这里并且链接到您的网站。 [[Become a sponsor](https://opencollective.com/efqrcode#sponsor)]
 
@@ -314,20 +318,43 @@ Python|[https://github.com/sylnsfar/qrcode](https://github.com/sylnsfar/qrcode)
     <img src="https://opencollective.com/efqrcode/sponsor/9/avatar.svg">
 </a>
 
-## 捐赠
+感谢您的支援，🙏
 
-如果你认为这个项目给你带来了帮助，你可以给我买杯咖啡。如果你喜欢这个项目，并愿意为它的发展提供进一步的支持，你可以选择在 [Open Collective](https://opencollective.com/efqrcode) 上成为 `支持者` 或 `赞助商`。
+## 使用 EFQRCode 的应用
 
-如果你没有 `Open Collective` 帐户或者你认为它的操作太复杂，下面的付款方式也是支持的：
+<div class="space_for_appsight EFQRCode">
+    <a href="https://www.appsight.io/app/%E7%BA%A2%E8%A2%96%E8%AF%BB%E4%B9%A6" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/001/345/043/media/tiny.png?1551923326" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="红袖读书">
+    </a>
+    <a href="https://www.appsight.io/app/join" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/001/253/338/media/tiny.png?1530300113" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="Join - Medical Communication">
+    </a>
+    <a href="https://www.appsight.io/app/826953" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/001/154/094/media/tiny.png?1523038915" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="Coinomi Wallet">
+    </a>
+    <a href="https://www.appsight.io/app/mymk" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/001/142/715/media/tiny.png?1522686154" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="myMK">
+    </a>
+    <a href="https://www.appsight.io/app/mume-vpn" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/000/880/440/media/tiny.png?1507339273" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="Mume VPN">
+    </a>
+    <a href="https://www.appsight.io/app/blizzard-battle-net" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/000/863/841/media/tiny.png?1506955529" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="Blizzard Battle.net">
+    </a>
+    <a href="https://www.appsight.io/app/%E5%85%B3%E5%85%AB-%E5%85%A8%E6%B0%91%E5%A8%B1%E4%B9%90%E6%98%8E%E6%98%9F%E5%85%AB%E5%8D%A6%E5%A4%B4%E6%9D%A1%E6%96%B0%E9%97%BB%E8%B5%84%E8%AE%AF%E8%A7%86%E9%A2%91%E7%A4%BE%E5%8C%BA" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/000/613/969/media/tiny.png?1495232846" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="关八-最懂娱乐圈">
+    </a>
+    <a href="https://www.appsight.io/app/pilot-speech-translator" targer="_blank">
+        <img src="https://d3ixtyf8ei2pcx.cloudfront.net/icons/000/531/486/media/tiny.png?1491242852" title="" style="margin: 2px;" data-toggle="tooltip" data-placement="top" data-original-title="Pilot Speech Translator">
+    </a>
+</div>
 
-![Donations](https://raw.githubusercontent.com/EFPrefix/EFQRCode/assets/QRCode/Donations.jpg?raw=true)
-
-感谢您的支援，🙏！
+[更多...](https://www.appsight.io/sdk/efqr-code)
 
 ## 联系
 
 邮箱：[eyrefree@eyrefree.org](mailto:eyrefree@eyrefree.org)   
-EFQRCode 交流群：[769966374](http://shang.qq.com/wpa/qunwpa?idkey=d0f732585dcb0c6f2eb26bc9e0327f6305d18260eeba89ed26a201b520c572c0)
+技术交流群：[769966374](http://shang.qq.com/wpa/qunwpa?idkey=d0f732585dcb0c6f2eb26bc9e0327f6305d18260eeba89ed26a201b520c572c0)
 
 ## 协议
 

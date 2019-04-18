@@ -10,6 +10,7 @@ import Foundation
 import WebKit
 import TinyConstraints
 import SwiftTheme
+import SwifterSwift
 
 class BaseWebViewController: BaseViewController {
     let progressView = UIProgressView(progressViewStyle: .default)
@@ -20,7 +21,7 @@ class BaseWebViewController: BaseViewController {
             guard let url = url else { return }
             if let fragment = url.fragment {
                 let max = UInt32.max - 1
-                let random = Int.random(between: 1, and: Int(max))
+                let random = Int.random(in: 1...Int(max))
                 let chUrl = URL(string: url.absoluteString.replacingOccurrences(of: "#\(fragment)", with: "#\(random)"))!
                 webView.load(URLRequest.init(url: chUrl))
             } else {

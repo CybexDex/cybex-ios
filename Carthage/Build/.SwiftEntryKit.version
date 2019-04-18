@@ -1,9 +1,0 @@
-{
-  "commitish" : "0.8.9",
-  "iOS" : [
-    {
-      "name" : "SwiftEntryKit",
-      "hash" : "b394e6f4587f4ca6a0a4aacaec8e4de743c17e433baacbabd7a1914224c66e0b"
-    }
-  ]
-}

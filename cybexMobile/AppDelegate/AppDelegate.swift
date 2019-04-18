@@ -8,17 +8,12 @@
 
 import Foundation
 import UIKit
-import Flutter
-import FlutterPluginRegistrant // Only if you have Flutter Plugins.
 
 @UIApplicationMain
-class AppDelegate: FlutterAppDelegate {
-    var flutterEngine : FlutterEngine?
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
 
-    override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        self.flutterEngine = FlutterEngine(name: "io.flutter", project: nil)
-        self.flutterEngine?.run(withEntrypoint: nil)
-        GeneratedPluginRegistrant.register(with: self.flutterEngine)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable") //隐藏 constraint log
 
@@ -46,10 +41,10 @@ class AppDelegate: FlutterAppDelegate {
             }
         }
 
-        return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+        return true
     }
 
-    override func application(_ app: UIApplication,
+    func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         if navigator.open(url) {

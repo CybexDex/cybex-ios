@@ -8,19 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = "Macaw"
-  s.version          = "0.9.4"
+  s.version          = "0.9.5"
   s.summary          = "Powerful and easy-to-use vector graphics library with SVG support written in Swift."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-#  s.description      = <<-DESC
-#                       DESC
-
   s.homepage         = 'https://github.com/exyte/Macaw.git'
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { 'Exyte' => 'info@exyte.com' }
   s.source           = { :git => 'https://github.com/exyte/Macaw.git', :tag => s.version.to_s }
@@ -29,16 +20,11 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "9.0"
   s.osx.deployment_target = "10.12"
   s.requires_arc = true
-  s.swift_version = "4.2"
+  s.swift_version = "5.0"
 
   s.source_files = [
      'Source/**/*.swift'
   ]
-  # s.resource_bundles = {
-  #   'Macaw' => ['Pod/Assets/*.png']
-  # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SWXMLHash' 
+  s.dependency 'SWXMLHash'
 end

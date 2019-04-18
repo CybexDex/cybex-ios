@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "SQLite",
-      "hash" : "87c042e087e9e0637ec5bdd95a684a5c0e2a8376f745d74a3b8d123d080e3949"
+      "hash" : "b4c527af91b613cf579368dff28030843025e9b504f3fc35d3be6e394103e45e",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

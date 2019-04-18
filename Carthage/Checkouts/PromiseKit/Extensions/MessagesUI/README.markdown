@@ -7,7 +7,7 @@ The Objective-C equivalents of this repo are in the UIKit extensions.
 ## CocoaPods
 
 ```ruby
-pod "PromiseKit/MessagesUI", "~> 6.0"
+pod "PromiseKit/MessageUI", "~> 6.0"
 ```
 
 The extensions are built into `PromiseKit.framework` thus nothing else is needed.

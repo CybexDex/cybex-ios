@@ -1,17 +1,20 @@
 {
-  "commitish" : "2962d2315962a68f2f00ac5483f09dbdb48b625d",
+  "commitish" : "567ae3a18afe1bc93c3aaee49ec9ffdb4f5b350f",
   "iOS" : [
     {
       "name" : "ReactiveMoya",
-      "hash" : "c70eb0ffcfdc3eafd8fa6eb6740c649a11c5863295907e5cef32508a7c04a83d"
+      "hash" : "2997d1f9ff4cfb142a6d282154732d14d7665484d2cfc89a85475e29bca2c8a2",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     },
     {
       "name" : "RxMoya",
-      "hash" : "de04bd924bafceae5454648c5c2d5cb79d21f9c385845e76ddbd4e2ea85be450"
+      "hash" : "910b17fddab2febc933f66e8ba112df6aa2a5b9922f1ac508a9db4b019893745",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     },
     {
       "name" : "Moya",
-      "hash" : "38ede440b83b727827971d864a8920a5d7cdc93b4f2f2d41fb2421154ab1b7fa"
+      "hash" : "f30be59c013c1476f3a2d8776afaf82c1914b706f7e2d43c2f122c7a8c4b99ac",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -23,13 +23,13 @@ protocol Views {
     @objc func didClickedRightAction(_ tag: String)
     @objc func returnEnsureActionWithData(_ tag: String)
     @objc func returnEnsureImageAction()
-    @objc func cancelImageAction(_ sender: CybexTextView)
+    @objc func cancelImageAction(_ tag: String)
     @objc func ensureWaitingAction(_ sender: CybexWaitingView)
     func returnInviteCode(_ sender: String)
 }
 
 class ShowToastManager {
-    static let durationTime: TimeInterval = 0.5
+    static let durationTime: TimeInterval = 0.3
     static let shared = ShowToastManager()
     var timerTime: TimeInterval = 30
     var timer: Timer?
@@ -161,7 +161,7 @@ class ShowToastManager {
             } else if animationShow == .smallBig {
                 showView?.transform = CGAffineTransform.init(scaleX: 0.3, y: 0.3)
                 UIView.animate(withDuration: ShowToastManager.durationTime,
-                               delay: 0.1,
+                               delay: 0.05,
                                usingSpringWithDamping: 0.5,
                                initialSpringVelocity: 0,
                                options: UIView.AnimationOptions.curveEaseIn,
@@ -212,7 +212,7 @@ class ShowToastManager {
 
     func hide(_ time: TimeInterval) {
         if animationShow == .none || animationShow == .smallBig {
-            SwifterSwift.delay(milliseconds: time * 1000) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 self.showView?.removeFromSuperview()
                 self.shadowView?.removeFromSuperview()
                 self.showView = nil
@@ -392,8 +392,10 @@ extension ShowToastManager: CybexTextViewDelegate {
     }
 
     func clickCancle(_ sender: CybexTextView) {
+        let data = self.tag
+
         self.hide(0)
-        self.delegate?.cancelImageAction(sender)
+        self.delegate?.cancelImageAction(data)
     }
 
     func returnEnsureAction() {

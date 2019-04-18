@@ -1,9 +1,0 @@
-{
-  "commitish" : "1.6.1",
-  "iOS" : [
-    {
-      "name" : "SwiftyBeaver",
-      "hash" : "8c0e16b933db0715ccfd89c3ab7615bb0fde6f979f2bbcdf698ff77c8f62a84b"
-    }
-  ]
-}

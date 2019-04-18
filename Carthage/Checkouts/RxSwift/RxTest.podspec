@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RxTest"
-  s.version          = "4.4.2"
+  s.version          = "4.5.0"
   s.summary          = "RxSwift Testing extensions"
   s.description      = <<-DESC
 Unit testing extensions for RxSwift. This library contains mock schedulers, observables, and observers
@@ -56,7 +56,6 @@ func testMap() {
 
   s.framework    = 'XCTest'
 
-  s.dependency 'RxAtomic', '~> 4.4', '>= 4.4.2'
   s.dependency 'RxSwift', '~> 4.4', '>= 4.4.2'
 
   s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }

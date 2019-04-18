@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "Fakery",
-      "hash" : "a9a37744ecc387fdc78525a25bf33560b629ebd7a2c40579f5fece97e030d9f6"
+      "hash" : "76ebcaaa80eb5f2e94511b7e599248a7a12435415776004a1aa3b1f4f00d4a78",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

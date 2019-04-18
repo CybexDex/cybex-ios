@@ -1,10 +1,9 @@
 # UIFontComplete
 [![Build Status](https://travis-ci.org/Nirma/UIFontComplete.svg?branch=master)](https://travis-ci.org/Nirma/UIFontComplete)
-![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg)
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20tvOS-333333.svg)
 ![CodeCov](https://img.shields.io/codecov/c/github/Nirma/UIFontComplete.svg)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/UIFontComplete.svg)](#cocoapods)
-[![CocoaPods](https://img.shields.io/cocoapods/dt/UIFontComplete.svg)]()
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
  [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)

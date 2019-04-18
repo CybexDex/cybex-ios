@@ -3,11 +3,7 @@
   "iOS" : [
     {
       "name" : "SocketRocket",
-      "hash" : "017abdc27e915b5fe9ea77ac9c9965004a5acb9bc3a5c13dc99d84ba5df5488e"
-    },
-    {
-      "name" : "SocketRocket",
-      "hash" : "017abdc27e915b5fe9ea77ac9c9965004a5acb9bc3a5c13dc99d84ba5df5488e"
+      "hash" : "15133c1e0e71fa08c36adfea132ce6a900246197a34ecc476ff1c72f9d35ec71"
     }
   ]
 }

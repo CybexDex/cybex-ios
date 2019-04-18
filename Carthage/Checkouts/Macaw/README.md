@@ -80,13 +80,13 @@ We're working hard to provide full documentation. Currently you can take a look 
 
 To install it, simply add the following line to your Podfile:
 ```ruby
-pod "Macaw", "0.9.3"
+pod "Macaw", "0.9.5"
 ```
 
 ## [Carthage](http://github.com/Carthage/Carthage)
 
 ```ogdl
-github "Exyte/Macaw" ~> 0.9.3
+github "Exyte/Macaw" ~> 0.9.5
 ```
 
 ## Building from sources
@@ -100,6 +100,8 @@ To build Macaw from sources:
 ## Who is using Macaw?
 Over one thousand users already utilize Macaw in their applications. We would like to prepare the list of top use cases.
 Please share your story with us at info@exyte.com and we will thank you with Macaw stickers!
+
+Follow Macaw on [twitter](https://twitter.com/MacawFramework) and [Instagram](https://www.instagram.com/macaw_framework/)
 
 <img src="https://i.imgur.com/m0pBChS.jpg" height="200">
 

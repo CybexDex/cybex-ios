@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "ReSwift",
-      "hash" : "b553d1ab00eaa8c0c5d9c1bc151719b8bfe3066deae6232dfb7c8e4894e436d1"
+      "hash" : "c9d2c324b34b6ef1339578361359b02ebe25887a579ebf8283aee725ee61b03d",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

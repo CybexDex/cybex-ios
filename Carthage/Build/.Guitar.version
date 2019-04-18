@@ -1,9 +1,10 @@
 {
-  "commitish" : "0.5.0",
+  "commitish" : "1.0.1",
   "iOS" : [
     {
       "name" : "Guitar",
-      "hash" : "9a0deebcd4b9d0d9a1d06ced32e149341a88958da48dc52fa79ac4c586d9c631"
+      "hash" : "ac7ec3622a2103213687fb95100e93b8f31a5cc3c6e1e6555b39ca818907485d",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

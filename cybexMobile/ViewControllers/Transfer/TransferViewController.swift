@@ -184,7 +184,7 @@ class TransferViewController: BaseViewController {
         transfering = true
         self.view.endEditing(true)
 
-        SwifterSwift.delay(milliseconds: 300) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.transfering = false
 
             if self.transferView.accountView.loadingState != .success ||
@@ -241,7 +241,7 @@ class TransferViewController: BaseViewController {
                                                 self.showConfirmImage(
                                                     R.image.icCheckCircleGreen.name,
                                                     title: R.string.localizable.transfer_success_title.key.localized(),
-                                                    content: R.string.localizable.transfer_success_content.key.localized())
+                                                    content: R.string.localizable.transfer_success_content.key.localized(), tag:R.string.localizable.transfer_success_content.key.localized())
                                                 self.accountName = self.coordinator!.state.account.value
                                             } else {
                                                 self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
@@ -322,8 +322,10 @@ extension TransferViewController {
         self.coordinator?.openAddTransferAddress(transferAddress)
     }
 
-    override func cancelImageAction(_ sender: CybexTextView) {
-        self.coordinator?.reopenAction()
+    override func cancelImageAction(_ tag: String) {
+        if tag == R.string.localizable.transfer_success_content.key.localized() {
+            self.coordinator?.reopenAction()
+        }
     }
 
     @objc func selectCrypto(_ data: [String: Any]) {

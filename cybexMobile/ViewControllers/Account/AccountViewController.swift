@@ -41,7 +41,7 @@ class AccountViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SwifterSwift.delay(milliseconds: 100) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.setupUI()
         }
     }

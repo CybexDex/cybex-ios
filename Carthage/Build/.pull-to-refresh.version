@@ -1,9 +1,10 @@
 {
-  "commitish" : "2.8",
+  "commitish" : "2.9",
   "iOS" : [
     {
       "name" : "ESPullToRefresh",
-      "hash" : "89c0e62c3bef69bf1ce3394e59668b681fbe9e9316a8c8032b1a0df13be4e077"
+      "hash" : "8f4104d1e1883b87a9aa1276386351244587139e52c649797405699c485ede3c",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

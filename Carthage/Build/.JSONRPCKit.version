@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "JSONRPCKit",
-      "hash" : "d4edab88dcb7aeaeb0e9e260e5c885c460f0ffddb108dbd2180620973493d319"
+      "hash" : "2f4f8b1a088dfbc961a53f92922922037e14baf6ddcad2f3e82105a7ae6303d2",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

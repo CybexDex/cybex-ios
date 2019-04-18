@@ -349,7 +349,7 @@ _objc_classes
 Apple LLVM version 10.0.1 (clang-1001.0.46.3)
 <swift-imported-modules>
 /Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/NotificationBanner
-Apple Swift version 5.0 effective-4.2 (swiftlang-1001.0.69.5 clang-1001.0.46.3)
+Apple Swift version 5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)
 /Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/NotificationBanner/NotificationBanner/Classes/StatusBarNotificationBanner.swift
 $sSo21NSAttributedStringKeyas20_SwiftNewtypeWrapperSCSYWb
 <compiler-generated>
@@ -843,8 +843,8 @@ _$s18NotificationBanner0aB5QueueC7defaultACvgZTo
 _$s18NotificationBanner0aB5QueueC7bannersSayAA04BaseaB0CGvgTo
 _$s18NotificationBanner0aB5QueueC7bannersSayAA04BaseaB0CGvsTo
 _$s18NotificationBanner0aB5QueueC15numberOfBannersSivgTo
-_$s18NotificationBanner0aB5QueueC03addB0_13queuePositionyAA04BaseaB0C_AA0cF0OtFTo
 _$sSlsSQ7ElementRpzrlE10firstIndex2of0C0QzSgAB_tFSay18NotificationBanner04BaseeF0CG_Tg5
+_$s18NotificationBanner0aB5QueueC03addB0_13queuePositionyAA04BaseaB0C_AA0cF0OtFTo
 _$sSa6remove2atxSi_tF18NotificationBanner04BasecD0C_Tg5
 _$s18NotificationBanner0aB5QueueC06removeB0yyAA04BaseaB0CFTo
 _$s18NotificationBanner0aB5QueueC8showNext8callbackyySbXE_tFTo
@@ -998,7 +998,6 @@ $sSa11_checkIndexyySiF18NotificationBanner04BasecD0C_Tg5
 $sSa15replaceSubrange_4withySnySiG_qd__nt7ElementQyd__RszSlRd__lF18NotificationBanner04BaseeF0C_s15CollectionOfOneVyAHGTg5
 suspend
 bannerPosition.get
-index
 numberOfBanners.get
 $s18NotificationBanner0aB5QueueC15numberOfBannersSivgTo
 $s18NotificationBanner0aB5QueueC7bannersSayAA04BaseaB0CGvsTo
@@ -1458,4 +1457,4 @@ autoDismiss.modify
 duration.modify
 delegate.modify
 delegate.set
-/Users/koofrank/Library/Caches/org.carthage.CarthageKit/DerivedData/10.2_10E125/NotificationBanner/5bae665eb44c034ed131be5692511d8468b364cd/Build/Intermediates.noindex/ArchiveIntermediates/NotificationBanner/IntermediateBuildFilesPath/NotificationBanner.build/Release-iphoneos/NotificationBanner.build/DerivedSources/NotificationBanner_vers.c
+/Users/koofrank/Library/Caches/org.carthage.CarthageKit/DerivedData/10.2_10E125/NotificationBanner/66881029b9734ea699a0d36dc864ec63d995df6b/Build/Intermediates.noindex/ArchiveIntermediates/NotificationBanner/IntermediateBuildFilesPath/NotificationBanner.build/Release-iphoneos/NotificationBanner.build/DerivedSources/NotificationBanner_vers.c

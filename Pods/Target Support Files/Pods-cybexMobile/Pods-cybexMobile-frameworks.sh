@@ -161,25 +161,25 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${PODS_ROOT}/../cybex_flutter/.ios/Flutter/engine/Flutter.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/FlutterPluginRegistrant/FlutterPluginRegistrant.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/cocore/cocore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/coswift/coswift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/swift_qrcodejs/swift_qrcodejs.framework"
 fi
 if [[ "$CONFIGURATION" == "Tests" ]]; then
-  install_framework "${PODS_ROOT}/../cybex_flutter/.ios/Flutter/engine/Flutter.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/FlutterPluginRegistrant/FlutterPluginRegistrant.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/cocore/cocore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/coswift/coswift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/swift_qrcodejs/swift_qrcodejs.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${PODS_ROOT}/../cybex_flutter/.ios/Flutter/engine/Flutter.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/FlutterPluginRegistrant/FlutterPluginRegistrant.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/cocore/cocore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/coswift/coswift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/swift_qrcodejs/swift_qrcodejs.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -592,21 +592,21 @@
 "contest_notice_close" = "取消";
 
 "enotes_unlock_type_title" = "默认解锁方式";
-"enotes_unlock_type_0" = "eNotes解锁";
+"enotes_unlock_type_0" = "CybKey解锁";
 "enotes_unlock_type_1" = "云密码解锁";
 "enotes_cloudpassword_title" = "设置云密码";
 "enotes_cloudpassword_unset" = "未设置";
 "enotes_cloudpassword_haveset" = "已设置";
-"enotes_use_type_0" = "使用eNotes";
+"enotes_use_type_0" = "使用CybKey";
 "enotes_use_type_1" = "使用密码";
 "enotes_password_wrong" = "密码错误，请重试!";
-"enotes_transfer_memo_hint" = "eNotes卡暂不支持转账附言，请输入云密码";
+"enotes_transfer_memo_hint" = "CybKey卡暂不支持转账附言，请输入云密码";
 "enotes_feature_hint" = "使用该功能，必须添加云密码并使用云密码解锁账户，是否现在添加？";
 "enotes_feature_add" = "去添加";
-"enotes_cloudpassword_set_hint" = "云密码能够让您没有随身携带eNotes卡时，也可以对账户进行操作。一旦设定不可更改、不可找回，请您务必牢记。我们强烈建议您使用长密码，确保资产安全。";
-"enotes_pin_validtor_title" = "验证eNotes卡密码";
-"enotes_not_match" = "请使用正确的eNotes卡";
-"enotes_login" = "eNotes登录";
+"enotes_cloudpassword_set_hint" = "云密码能够让您没有随身携带CybKey卡时，也可以对账户进行操作。一旦设定不可更改、不可找回，请您务必牢记。我们强烈建议您使用长密码，确保资产安全。";
+"enotes_pin_validtor_title" = "验证CybKey卡密码";
+"enotes_not_match" = "请使用正确的CybKey卡";
+"enotes_login" = "CybKey登录";
 "enotes_cloudPassword_add_success" = "添加成功";
 "enotes_cloudPassword_add_fail" = "添加失败";
 

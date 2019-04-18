@@ -1,17 +1,20 @@
 {
-  "commitish" : "46b167e0fe4e8834641a01c71b14cd18ad73bbd3",
+  "commitish" : "dc337d10a0bb44495821899afbe8e86bdd217007",
   "iOS" : [
     {
       "name" : "ApolloSQLite",
-      "hash" : "2ec54a0869adc31add021409690c27c72b25f2807010c2b1f876762944e2a4e9"
+      "hash" : "45cc89674ca6997041761b2abb9881a11da4b1001b60c1df642a7147b2ac9b22",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     },
     {
       "name" : "ApolloWebSocket",
-      "hash" : "f7a86f5f7044b5776fff19d5f2d04016ec62002ee3f8290be1a9ed994e4ebd28"
+      "hash" : "6c1036bc5cb7aa842eb1a832bea7d3d211d522fce971fe0a2502ee8e27e1f4c9",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     },
     {
       "name" : "Apollo",
-      "hash" : "16c3e1aaabc576dc737cfc7cad380db26360891340d062121c52da074ac4d35e"
+      "hash" : "b4287936c71b6e09f3ce37b9e4d59760892361caa5958305194faf85fe5fa018",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

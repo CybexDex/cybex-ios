@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "ActiveLabel",
-      "hash" : "8c4373785be35989f939a2a2d4e23dbfd4f03823a39380d9ecc3161571003204"
+      "hash" : "426e11731c0f7c4fc19eec47b846e67f4cd477f44ea34089e88741b2f7f740bf",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

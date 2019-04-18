@@ -1,9 +1,10 @@
 {
-  "commitish" : "2.1.0",
+  "commitish" : "3.0.0",
   "iOS" : [
     {
       "name" : "SwiftRichString",
-      "hash" : "f849346021e0d5d4ca01bbf18d9ee710a8511ee4944fa0f6e7dcb3a98286ab50"
+      "hash" : "f4962ba3bf4f14515afdc09d702c542c2b423cf0fb0753a86a2007c9028ffc8f",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -2,9 +2,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
-flutter_application_path = './cybex_flutter/'
-eval(File.read(File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')), binding)
-
 target 'ChatRoom' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
@@ -21,6 +18,7 @@ target 'cybexMobile' do
 
     pod 'coswift'
     pod 'secp256k1_swift'
+    pod 'EFQRCode', '~> 5.0.0'
 
   target 'cybexMobileTests' do
     inherit! :search_paths

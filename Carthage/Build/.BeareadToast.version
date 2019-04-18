@@ -1,9 +1,0 @@
-{
-  "commitish" : "8bd5db67b21ce34d5ebec7b3b0857005056d48e2",
-  "iOS" : [
-    {
-      "name" : "BeareadToast_swift",
-      "hash" : "9b1352796926a9cee001be35200a3d9b2912e8401266690a8e4fa993da2efdbf"
-    }
-  ]
-}

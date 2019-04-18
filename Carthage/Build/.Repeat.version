@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "Repeat",
-      "hash" : "45deff78a8449e4801533c5c474414b40644b322579bb7b860d7ab3f712b8e9e"
+      "hash" : "f5ca60e8872f776b078249d3e7d0c40597f9d8ca8fa9ad4ba99947cca55ac252",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

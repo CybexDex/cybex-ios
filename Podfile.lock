@@ -2,36 +2,31 @@ PODS:
   - cocore (1.1.0)
   - coswift (1.1.2):
     - cocore (~> 1.1.0)
-  - Flutter (1.0.0)
-  - FlutterPluginRegistrant (0.0.1):
-    - Flutter
+  - EFQRCode (5.0.0):
+    - swift_qrcodejs (~> 1.1.1)
   - secp256k1_swift (1.0.3)
+  - swift_qrcodejs (1.1.1)
 
 DEPENDENCIES:
   - coswift
-  - Flutter (from `./cybex_flutter/.ios/Flutter/engine`)
-  - FlutterPluginRegistrant (from `./cybex_flutter/.ios/Flutter/FlutterPluginRegistrant`)
+  - EFQRCode (~> 5.0.0)
   - secp256k1_swift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - cocore
     - coswift
+    - EFQRCode
     - secp256k1_swift
-
-EXTERNAL SOURCES:
-  Flutter:
-    :path: "./cybex_flutter/.ios/Flutter/engine"
-  FlutterPluginRegistrant:
-    :path: "./cybex_flutter/.ios/Flutter/FlutterPluginRegistrant"
+    - swift_qrcodejs
 
 SPEC CHECKSUMS:
   cocore: dfaf5fb52b518fbbb5076061386294051a8f62d3
   coswift: 70c091e93203daa20e9fdc378dbfefaa5f9057de
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  FlutterPluginRegistrant: 3f4d45b679eb21eb53e786e8884a26157555ce9f
+  EFQRCode: 07437cfbce3a1e497397a4f3d766c980d8972608
   secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
+  swift_qrcodejs: 0bacbfe321a99954c7b8e04c75562007ea4e4f7c
 
-PODFILE CHECKSUM: 65e02c60a76129f3ddb29f98b66d6d34275b5d83
+PODFILE CHECKSUM: 47c899f18141725d6af47bb91f2b0f866f1ded42
 
-COCOAPODS: 1.7.0.beta.2
+COCOAPODS: 1.7.0.beta.3

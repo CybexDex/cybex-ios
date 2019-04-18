@@ -146,10 +146,10 @@ class AddAddressViewController: BaseViewController {
             } else {
                 self.coordinator?.addAddress(self.addressType)
                 self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
-                SwifterSwift.delay(milliseconds: 1000, completion: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     ShowToastManager.shared.hide(0)
                     self.coordinator?.pop(self.popActionType)
-                })
+                }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }

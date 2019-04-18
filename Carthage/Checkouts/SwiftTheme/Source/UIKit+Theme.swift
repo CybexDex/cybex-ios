@@ -201,6 +201,13 @@ import UIKit
         set { setThemePicker(self, "setActivityIndicatorViewStyle:", newValue) }
     }
 }
+@objc public extension UIScrollView
+{
+    var theme_indicatorStyle: ThemeScrollViewIndicatorStylePicker? {
+        get { return getThemePicker(self, "setIndicatorStyle:") as? ThemeScrollViewIndicatorStylePicker }
+        set { setThemePicker(self, "setIndicatorStyle:", newValue) }
+    }
+}
 @objc public extension UIButton
 {
     func theme_setImage(_ picker: ThemeImagePicker?, forState state: UIControl.State) {

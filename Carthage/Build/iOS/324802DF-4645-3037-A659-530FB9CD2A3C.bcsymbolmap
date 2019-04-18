@@ -11,7 +11,7 @@ ___swift_reflection_version
 Apple LLVM version 10.0.1 (clang-1001.0.46.3)
 <swift-imported-modules>
 /Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/SWXMLHash
-Apple Swift version 5.0 effective-4.1.50 (swiftlang-1001.0.69.5 clang-1001.0.46.3)
+Apple Swift version 5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)
 /Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/SWXMLHash/Source/shim.swift
 rawValue.get
 <compiler-generated>
@@ -1240,7 +1240,7 @@ $s9SWXMLHash10XMLIndexerO5value11ofAttributeSayxGSS_tKAA26XMLAttributeDeserializ
 $s9SWXMLHash10XMLIndexerO5value11ofAttributeSayxGSS_tKAA26XMLAttributeDeserializableRzlFxAA10XMLElementCKXEfU0_
 objectdestroy
 $s9SWXMLHash10XMLIndexerOWOr
-/Users/koofrank/Library/Caches/org.carthage.CarthageKit/DerivedData/10.2_10E125/SWXMLHash/4.8.0/Build/Intermediates.noindex/ArchiveIntermediates/SWXMLHash iOS/IntermediateBuildFilesPath/SWXMLHash.build/Release-iphoneos/SWXMLHash iOS.build/DerivedSources/SWXMLHash_vers.c
+/Users/koofrank/Library/Caches/org.carthage.CarthageKit/DerivedData/10.2_10E125/SWXMLHash/4.9.0/Build/Intermediates.noindex/ArchiveIntermediates/SWXMLHash iOS/IntermediateBuildFilesPath/SWXMLHash.build/Release-iphoneos/SWXMLHash iOS.build/DerivedSources/SWXMLHash_vers.c
 __ZL15__ARCLite__loadv
 __ZL30add_image_hook_autoreleasepoolPK11mach_headerl
 __ZL34__arclite_objc_autoreleasePoolPushv

@@ -1,9 +1,10 @@
 {
-  "commitish" : "v4.3.0",
+  "commitish" : "v4.3.1",
   "iOS" : [
     {
       "name" : "Reachability",
-      "hash" : "052f21ad7c04ad4d45d623f2fb912add419f8a9ac610810e7714a7fadcfd3bd0"
+      "hash" : "f13cf6799b3fc7fbe9558df0e1b9ef8e019df0d52034ab5d66619fc8f25b237a",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -87,7 +87,7 @@ _$s35NVActivityIndicatorViewAppExtension0aB22AnimationBallGridPulseCN
 Apple LLVM version 10.0.1 (clang-1001.0.46.3)
 <swift-imported-modules>
 /Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/NVActivityIndicatorView/Source
-Apple Swift version 5.0 effective-4.2 (swiftlang-1001.0.69.5 clang-1001.0.46.3)
+Apple Swift version 5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)
 /Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/NVActivityIndicatorView/Source/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallGridPulse.swift
 $sSo9CGPathRefaMa
 <compiler-generated>
@@ -1188,7 +1188,7 @@ _$s35NVActivityIndicatorViewAppExtension0aB26AnimationBallScaleMultipleCACycfCTq
 _$s35NVActivityIndicatorViewAppExtension0aB26AnimationBallScaleMultipleCN
 /Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/NVActivityIndicatorView/Source/NVActivityIndicatorView/Animations/NVActivityIndicatorAnimationBallScaleMultiple.swift
 $s35NVActivityIndicatorViewAppExtension0aB26AnimationBallScaleMultipleCMa
-/Users/koofrank/Library/Caches/org.carthage.CarthageKit/DerivedData/10.2_10E125/NVActivityIndicatorView/4.6.1/Build/Intermediates.noindex/ArchiveIntermediates/NVActivityIndicatorViewAppExtension-iOS/IntermediateBuildFilesPath/NVActivityIndicatorView.build/Release-iphoneos/NVActivityIndicatorViewAppExtension-iOS.build/DerivedSources/NVActivityIndicatorViewAppExtension_vers.c
+/Users/koofrank/Library/Caches/org.carthage.CarthageKit/DerivedData/10.2_10E125/NVActivityIndicatorView/4.7.0/Build/Intermediates.noindex/ArchiveIntermediates/NVActivityIndicatorViewAppExtension-iOS/IntermediateBuildFilesPath/NVActivityIndicatorView.build/Release-iphoneos/NVActivityIndicatorViewAppExtension-iOS.build/DerivedSources/NVActivityIndicatorViewAppExtension_vers.c
 __ZL15__ARCLite__loadv
 __ZL30add_image_hook_autoreleasepoolPK11mach_headerl
 __ZL34__arclite_objc_autoreleasePoolPushv
