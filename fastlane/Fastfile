@@ -18,8 +18,6 @@ default_platform(:ios)
 ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "300"
 ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10"
 
-xcversion(version: "10.2")
-
 platform :ios do
   delete_keychain(
     name: "ios-build"

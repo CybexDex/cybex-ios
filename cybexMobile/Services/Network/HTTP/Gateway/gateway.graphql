@@ -42,8 +42,6 @@ fragment accountAddressRecord on AccountAddressRecord {
     address
     type
     asset
-    jadeOrders
-    latest
     createAt
     projectInfo {
         projectName

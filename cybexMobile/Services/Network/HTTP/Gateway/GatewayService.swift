@@ -116,7 +116,7 @@ class GatewayService {
             query: GetDepositAddressQuery(
                 accountName: accountName,
                 asset: assetName),
-            cachePolicy: .fetchIgnoringCacheData,
+            cachePolicy: .returnCacheDataElseFetch,
             queue: DispatchQueue.global()) { (result, error) in
                     if error != nil {
                         seal.fulfill(nil)

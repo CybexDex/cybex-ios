@@ -92,7 +92,7 @@ class WithdrawDetailViewController: BaseViewController {
                     if ShowToastManager.shared.showView != nil {
                         return
                     }
-                    self.showToastBox(false, message: R.string.localizable.recharge_retry.key.localized())
+                    self.showToastBox(false, message: R.string.localizable.noNetwork.key.localized())
                 }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
