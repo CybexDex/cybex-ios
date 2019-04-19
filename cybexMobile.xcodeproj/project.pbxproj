@@ -4461,6 +4461,9 @@
 					6597A0AC6C29D30281EBD879E45F3BAF = {
 						LastSwiftMigration = 920;
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 0;
+							};
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
@@ -4500,7 +4503,6 @@
 					};
 					7386F28B2121204A00ABC924 = {
 						CreatedOnToolsVersion = 9.4.1;
-						DevelopmentTeam = Z4LN46787D;
 						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6597A0AC6C29D30281EBD879E45F3BAF;

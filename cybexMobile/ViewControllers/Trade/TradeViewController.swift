@@ -118,13 +118,17 @@ class TradeViewController: BaseViewController {
     }
 
     func setupData() {
-        switch AppEnv.current {
-        case .product:
-            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
-        case .test:
-            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id)
-        case .uat:
-            self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
+        if let context = context, context.pageType == .game {
+            self.pair = Pair(base: AssetConfiguration.CybexAsset.ArenaUSDT.id, quote: AssetConfiguration.CybexAsset.ArenaETH.id)
+        } else {
+            switch AppEnv.current {
+            case .product:
+                self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
+            case .test:
+                self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id)
+            case .uat:
+                self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
+            }
         }
 
         self.children.forEach { (viewController) in
