@@ -297,7 +297,7 @@ class RechargeDetailViewController: BaseViewController {
                     amount: balance.balance).formatCurrency(digitNum: tradeInfo.precision) + " " + tradeInfo.symbol.filterSystemPrefix
             }
             self.setFinalAmount()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            delay(milliseconds: 300) {
                 self.changeWithdrawState()
             }
             self.contentView.amountView.textplaceholder = R.string.localizable.recharge_min.key.localized() + String(describing: data.minValue)
@@ -315,7 +315,7 @@ class RechargeDetailViewController: BaseViewController {
                 }
                 self.feeAssetId = fee.assetId
                 self.setFinalAmount()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                delay(milliseconds: 300) {
                     self.changeWithdrawState()
                 }
             }
@@ -378,7 +378,7 @@ extension RechargeDetailViewController {
         withdrawing = true
         self.view.endEditing(true)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        delay(milliseconds: 300) {
             self.withdrawing = false
 
             self.checkPermisson()
@@ -431,7 +431,7 @@ extension RechargeDetailViewController {
                                                                           content: R.string.localizable.withdraw_success_content.key.localized(), tag: R.string.localizable.withdraw_success_content.key.localized())
                                                 } else {
                                                     self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                    delay(milliseconds: 100) {
                                                         self.coordinator?.pop()
                                                     }
                                                 }

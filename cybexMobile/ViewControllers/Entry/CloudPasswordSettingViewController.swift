@@ -169,9 +169,10 @@ class CloudPasswordSettingViewController: BaseViewController {
                                                                                     UserManager.shared.handlerFullAcount(fullaccount)
                                                                                 }).cauterize()
 
-                                                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                                                                delay(milliseconds: 1000) {
                                                                                     self.navigationController?.popViewController()
-                                                                                })
+                                                                                }
+
                                                                             } else {
                                                                                 self.ensureButton.canRepeat = true
                                                                                 self.showToastBox(false, message: R.string.localizable.enotes_cloudPassword_add_fail.key.localized())

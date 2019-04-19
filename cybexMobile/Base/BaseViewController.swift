@@ -84,6 +84,11 @@ extension UIViewController {
         if window {
             UIApplication.shared.keyWindow?.showProgress()
         } else {
+            if let modalv = self.view.iprogressHud?.modalView,
+                let boxv = self.view.iprogressHud?.boxView {
+                self.view.bringSubviewToFront(modalv)
+                self.view.bringSubviewToFront(boxv)
+            }
             self.view.showProgress()
         }
     }

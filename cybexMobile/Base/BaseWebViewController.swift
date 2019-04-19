@@ -76,6 +76,10 @@ class BaseWebViewController: BaseViewController {
             ])
     }
 
+    deinit {
+        progressView.removeFromSuperview()
+    }
+
     private func setupEstimatedProgressObserver() {
         estimatedProgressObserver = webView.observe(\.estimatedProgress, options: [.new]) { [weak self] webView, _ in
             self?.progressView.progress = Float(webView.estimatedProgress)

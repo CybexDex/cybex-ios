@@ -148,7 +148,7 @@ class ComprehensiveViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(forName: .NetWorkChanged, object: nil, queue: nil) { [weak self](_) in
             guard let self = self else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            delay(milliseconds: 1000) {
                 self.coordinator?.fetchData()
             }
         }

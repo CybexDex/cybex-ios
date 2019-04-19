@@ -30,7 +30,7 @@ class PairListHorizantalView: UIView {
     }
 
     override func didMoveToSuperview() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             if (self.curIndex != nil) {
                 self.collectionView.selectItem(at: IndexPath(item: self.curIndex ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
             }

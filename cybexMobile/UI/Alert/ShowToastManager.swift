@@ -29,7 +29,7 @@ protocol Views {
 }
 
 class ShowToastManager {
-    static let durationTime: TimeInterval = 0.3
+    static let durationTime: TimeInterval = 0.5
     static let shared = ShowToastManager()
     var timerTime: TimeInterval = 30
     var timer: Timer?
@@ -161,7 +161,7 @@ class ShowToastManager {
             } else if animationShow == .smallBig {
                 showView?.transform = CGAffineTransform.init(scaleX: 0.3, y: 0.3)
                 UIView.animate(withDuration: ShowToastManager.durationTime,
-                               delay: 0.05,
+                               delay: 0.1,
                                usingSpringWithDamping: 0.5,
                                initialSpringVelocity: 0,
                                options: UIView.AnimationOptions.curveEaseIn,
@@ -212,7 +212,7 @@ class ShowToastManager {
 
     func hide(_ time: TimeInterval) {
         if animationShow == .none || animationShow == .smallBig {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            delay(milliseconds: time * 1000) {
                 self.showView?.removeFromSuperview()
                 self.shadowView?.removeFromSuperview()
                 self.showView = nil

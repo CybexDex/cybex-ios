@@ -146,7 +146,7 @@ class AddAddressViewController: BaseViewController {
             } else {
                 self.coordinator?.addAddress(self.addressType)
                 self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                delay(milliseconds: 1000) {
                     ShowToastManager.shared.hide(0)
                     self.coordinator?.pop(self.popActionType)
                 }

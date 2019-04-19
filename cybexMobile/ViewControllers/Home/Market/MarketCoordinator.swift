@@ -59,7 +59,7 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
         self.rootVC.tabBarController?.selectedIndex = 2
         self.rootVC.popToRootViewController(animated: false)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             if let baseNavi = self.rootVC.tabBarController?.viewControllers![2] as? BaseNavigationController, let vc = baseNavi.topViewController as? TradeViewController {
                 vc.pair = pair
                 vc.selectedIndex = isBuy ? 0 : 1

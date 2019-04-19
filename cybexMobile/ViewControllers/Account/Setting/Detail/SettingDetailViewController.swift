@@ -88,14 +88,14 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         switch self.pageType {
         case SettingPage.theme:
             self.coordinator?.popViewController(false)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            delay(milliseconds: 10) {
                 Defaults[.theme] = index
                 ThemeManager.setTheme(index: index)
             }
             
         case SettingPage.language:
             self.coordinator?.popViewController(false)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            delay(milliseconds: 10) {
                 let language = index == 1 ? "zh-Hans" : "en"
                 Defaults[.language] = language
                 Localize.setCurrentLanguage(language)

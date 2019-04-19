@@ -184,7 +184,7 @@ class TransferViewController: BaseViewController {
         transfering = true
         self.view.endEditing(true)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        delay(milliseconds: 300) {
             self.transfering = false
 
             if self.transferView.accountView.loadingState != .success ||

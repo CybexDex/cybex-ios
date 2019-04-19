@@ -223,7 +223,7 @@ extension AppCoordinator {
         }
 
         if presentSetup == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            delay(milliseconds: 100) {
                 topside?.present(nav, animated: animated, completion: nil)
             }
         } else if let top = topside {
@@ -249,7 +249,7 @@ extension AppCoordinator {
         }
 
         if presentSetup == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            delay(milliseconds: 100) {
                 topside.present(viewController, animated: animated, completion: nil)
             }
         } else {

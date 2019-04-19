@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import SwifterSwift
 
 extension UIViewController: ShowManagerDelegate {
     func showToastBox(_ success: Bool, message: String, manager: ShowToastManager = ShowToastManager.shared) {
         if manager.showView != nil {
             ShowToastManager.shared.hide(0)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             ShowToastManager.shared.setUp(titleImage: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name,
                                           message: message,
                                           animationType: .smallBig, showType: .alertImage)
@@ -27,7 +26,7 @@ extension UIViewController: ShowManagerDelegate {
         if manager.showView != nil {
             ShowToastManager.shared.hide(0)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             ShowToastManager.shared.setUp(message: message,
                                           animationType: .smallBig, showType: .alertImage)
             ShowToastManager.shared.showAnimationInView(self.view)
@@ -43,7 +42,7 @@ extension UIViewController: ShowManagerDelegate {
         let passwordView = CybexPasswordView(frame: .zero)
         passwordView.hint.locali = hintKey
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             ShowToastManager.shared.setUp(title: title, contentView: passwordView, animationType: .smallBig, middleType: middleType, tag: tag)
             ShowToastManager.shared.delegate = self
             ShowToastManager.shared.showAnimationInView(self.view)
@@ -54,7 +53,7 @@ extension UIViewController: ShowManagerDelegate {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             let subView = CybexShowTitleView(frame: .zero)
             subView.title.locali = ""
             subView.contentLable.locali = content
@@ -69,7 +68,7 @@ extension UIViewController: ShowManagerDelegate {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             let subView = StyleContentView(frame: .zero)
             subView.data = attributes
             setup?(subView.labels)
@@ -84,7 +83,7 @@ extension UIViewController: ShowManagerDelegate {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             let subView = CybexShowTitleView(frame: .zero)
             subView.title.locali = title
             subView.contentLable.locali = content
@@ -98,7 +97,7 @@ extension UIViewController: ShowManagerDelegate {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        delay(milliseconds: 100) {
             ShowToastManager.shared.setUp(title, content: content, time: time, animationType: ShowToastManager.ShowAnimationType.smallBig, tag: tag)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.delegate = self

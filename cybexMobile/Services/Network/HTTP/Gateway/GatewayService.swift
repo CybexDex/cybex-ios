@@ -66,7 +66,7 @@ class GatewayService {
     func verifyAddress(assetName: String, address: String) -> PromiseKit.Promise<WithdrawAddressInfo?> {
         let (promise, seal) = PromiseKit.Promise<WithdrawAddressInfo?>.pending()
 
-        _ = apollo.watch(query: VerifyAddressQuery(asset: assetName,
+        _ = apollo.fetch(query: VerifyAddressQuery(asset: assetName,
                                                    address: address),
                          cachePolicy: .fetchIgnoringCacheData,
                          queue: DispatchQueue.global()) { (result, error) in
@@ -88,7 +88,7 @@ class GatewayService {
     func getWithdrawInfo(assetName: String) -> PromiseKit.Promise<WithdrawinfoObject?> {
         let (promise, seal) = PromiseKit.Promise<WithdrawinfoObject?>.pending()
 
-        _ = apollo.watch(
+        _ = apollo.fetch(
             query: GetWithdrawInfoQuery(type: assetName),
             cachePolicy: .fetchIgnoringCacheData,
             queue: DispatchQueue.global()) { (result, error) in
@@ -112,10 +112,12 @@ class GatewayService {
     func getDepositAddress(accountName: String, assetName: String) -> PromiseKit.Promise<AccountAddressRecord?> {
         let (promise, seal) = PromiseKit.Promise<AccountAddressRecord?>.pending()
 
-        _ = apollo.watch(
+        _ = apollo.fetch(
             query: GetDepositAddressQuery(
                 accountName: accountName,
-                asset: assetName)) { (result, error) in
+                asset: assetName),
+            cachePolicy: .fetchIgnoringCacheData,
+            queue: DispatchQueue.global()) { (result, error) in
                     if error != nil {
                         seal.fulfill(nil)
                         return

@@ -163,6 +163,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             if let balance = balances, balance.count > 0 {
                 self.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
                 self.validAmount()
+                self.calculateFee(self.state.balance.value?.assetType ?? "", memo: self.state.memo.value)
             }
         }
 

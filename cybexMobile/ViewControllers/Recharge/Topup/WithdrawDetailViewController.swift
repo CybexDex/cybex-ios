@@ -98,8 +98,7 @@ class WithdrawDetailViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator?.state.msgInfo.asObservable().skip(1).subscribe(onNext: {[weak self] (data) in
             guard let self = self else { return }
-            self.endLoading()
-        
+
             if self.isEOS {
                 self.eosContainerView?.projectData = data
             } else {
