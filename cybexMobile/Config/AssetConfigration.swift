@@ -33,6 +33,8 @@ class AssetConfiguration {
         case USDT
         case XRP
         case EOS
+        case ATOM
+        case IRIS
 
         case ArenaETH
         case ArenaEOS
@@ -78,6 +80,24 @@ class AssetConfiguration {
                     return "1.3.999"
                 case .uat:
                     return "1.3.999"
+                }
+            case .ATOM:
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1382"
+                case .test:
+                    return "1.3.1382"
+                case .uat:
+                    return "1.3.1382"
+                }
+            case .IRIS:
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1383"
+                case .test:
+                    return "1.3.1383"
+                case .uat:
+                    return "1.3.1383"
                 }
             case .EOS:
                 switch AppEnv.current {

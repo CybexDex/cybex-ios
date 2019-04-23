@@ -276,8 +276,8 @@
 "eos_copy_code" = "Copy Code";
 "eos_reset_code" = "Get New Code";
 
-"xrp_code" = "XRP Deposit Tag";
-"xrp_code_tip" = "(Please send your XRP with the tag displayed below. please do not put any other information on Tag)";
+"xrp_code" = "Deposit Tag";
+"xrp_code_tip" = "(Please send with the tag displayed below. please do not put any other information on Tag)";
 
 "business_login_title" = "Log in to exchange";
 

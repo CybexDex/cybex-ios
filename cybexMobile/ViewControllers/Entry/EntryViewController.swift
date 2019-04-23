@@ -12,6 +12,7 @@ import RxCocoa
 import ReSwift
 import SwiftTheme
 import SwiftyUserDefaults
+import CoreNFC
 
 class EntryViewController: BaseViewController {
 
@@ -34,7 +35,7 @@ class EntryViewController: BaseViewController {
 //        self.enotesLogin.isHidden = true
 
         if #available(iOS 11.0, *) {
-            self.enotesLogin.isHidden = false
+            self.enotesLogin.isHidden = !NFCNDEFReaderSession.readingAvailable
         } else {
             self.enotesLogin.isHidden = true
         }

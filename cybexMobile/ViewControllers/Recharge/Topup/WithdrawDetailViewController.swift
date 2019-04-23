@@ -49,7 +49,7 @@ class WithdrawDetailViewController: BaseViewController {
             } else {
                 containerView = WithdrawView(frame: .zero)
                 self.view.addSubview(containerView!)
-                if name == AssetConfiguration.CybexAsset.XRP.rawValue {
+                if name == AssetConfiguration.CybexAsset.XRP.rawValue || name == AssetConfiguration.CybexAsset.ATOM.rawValue || name == AssetConfiguration.CybexAsset.IRIS.rawValue {
                     containerView?.tagView.isHidden = false
                 }
                 else {

@@ -263,7 +263,7 @@
 "eos_copy_code" = "复制验证码";
 "eos_reset_code" = "重新生成";
 
-"xrp_code" = "XRP充值Tag";
+"xrp_code" = "充值Tag";
 "xrp_code_tip" = "(请务必在转账备注中填写并核对正确)";
 
 "business_login_title" = "请登录";

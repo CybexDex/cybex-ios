@@ -135,7 +135,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         var result = false
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
             if let viewmodel = coor.state.selectedViewModel.value {
-                if viewmodel.viewModel.model.id == "1.3.999" {
+                if viewmodel.viewModel.model.id == AssetConfiguration.CybexAsset.XRP.id {
                     result = true
                 }
             }
