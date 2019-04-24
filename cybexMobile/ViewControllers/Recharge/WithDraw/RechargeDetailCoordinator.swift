@@ -23,13 +23,13 @@ protocol RechargeDetailStateManagerProtocol {
 
     func fetchWithDrawInfoData(_ assetName: String)
     static func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void)
-    func getFee(_ assetId: String, address: String, isEOS: Bool)
+    func getFee(_ assetId: String, address: String, tag: Bool)
     func withDraw(assetId: String,
                     amount: String,
                     address: String,
                     feeId: String,
                     feeAmount: String,
-                    isEOS: Bool,
+                    tag: Bool,
                     callback:@escaping (Any) -> Void)
     func getFinalAmount(feeId: String, amount: Decimal, available: Decimal) -> (Decimal, String)
 
@@ -126,12 +126,12 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         CybexWebSocketService.shared.send(request: requeset)
     }
 
-    func getFee(_ assetId: String, address: String, isEOS: Bool) {
+    func getFee(_ assetId: String, address: String, tag: Bool) {
         let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
         let memo = self.state.memo.value
 
         var memoAddress = GatewayService.withDrawMemo(name!, address: address)
-        if isEOS {
+        if tag {
             if !memo.isEmpty {
                 memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
             }
@@ -164,12 +164,12 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }.cauterize()
     }
 
-    func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback: @escaping (Any) -> Void) {
+    func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, tag: Bool, callback: @escaping (Any) -> Void) {
         if let memoKey = self.state.memoKey.value {
             let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
             let memo = self.state.memo.value
             var memoAddress = GatewayService.withDrawMemo(name!, address: address)
-            if isEOS {
+            if tag {
                 if !memo.isEmpty {
                     memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
                 }

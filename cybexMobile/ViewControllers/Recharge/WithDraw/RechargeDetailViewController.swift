@@ -44,8 +44,7 @@ class RechargeDetailViewController: BaseViewController {
             if let trade = self.trade {
                 self.balance = UserHelper.getBalanceWithAssetId(trade.id)
                 self.precision = appData.assetInfo[trade.id]?.precision
-                self.isEOS = trade.id == AssetConfiguration.CybexAsset.EOS.id || appData.assetInfo[trade.id]?.symbol.filterSystemPrefix == AssetConfiguration.CybexAsset.XRP.rawValue
-                self.coordinator?.getFee(trade.id, address: "", isEOS: self.isEOS)
+                self.coordinator?.getFee(trade.id, address: "", tag: trade.tag)
             }
         }
     }
@@ -58,7 +57,6 @@ class RechargeDetailViewController: BaseViewController {
     }
     var coordinator: (RechargeDetailCoordinatorProtocol & RechargeDetailStateManagerProtocol)?
     var precision: Int?
-    var isEOS: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,7 +174,7 @@ class RechargeDetailViewController: BaseViewController {
                                 self.isTrueAddress = true
                                 self.contentView.addressView.addressState = .success
                                 self.contentView.errorView.isHidden = true
-                                self.coordinator?.getFee(trade.id, address: address, isEOS: self.isEOS)
+                                self.coordinator?.getFee(trade.id, address: address, tag: trade.tag)
 
                                 if let amount = self.contentView.amountView.content.text?.decimal(), amount != 0 {
                                     self.checkAmountIsAvailable(amount)
@@ -203,7 +201,7 @@ class RechargeDetailViewController: BaseViewController {
             .subscribe(onNext: { [weak self](_) in
                 guard let self = self else { return }
                 guard let trade = self.trade, let _ = self.contentView.amountView.content.text, let address = self.contentView.addressView.content.text else { return }
-                self.coordinator?.getFee(trade.id, address: address, isEOS: self.isEOS)
+                self.coordinator?.getFee(trade.id, address: address, tag: trade.tag)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
@@ -401,22 +399,22 @@ extension RechargeDetailViewController {
                                                       withdrawFeeInfo: self.contentView.insideFee.text!,
                                                       gatewayFeeInfo: self.contentView.gateAwayFee.text!,
                                                       receiveAmountInfo: self.contentView.finalAmount.text!,
-                                                      isEOS: self.isEOS,
+                                                      tag: trade.tag,
                                                       memoInfo: self.contentView.memoView.content.text!)
             showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: data)
         }
     }
 
     func withdraw() {
-        guard let address = self.contentView.addressView.content.text, let gatewayFee = self.coordinator?.state.fee.value
+        guard let address = self.contentView.addressView.content.text, let trade = self.trade, let gatewayFee = self.coordinator?.state.fee.value
             else { return }
         startLoading()
-        self.coordinator?.withDraw(assetId: (self.trade?.id)!,
+        self.coordinator?.withDraw(assetId: trade.id,
                                    amount: self.requireAmount,
                                    address: address,
                                    feeId: self.feeAssetId,
                                    feeAmount: gatewayFee.0.amount,
-                                   isEOS: self.isEOS,
+                                   tag: trade.tag,
                                    callback: {[weak self] (data) in
                                     guard let self = self else { return }
                                     self.endLoading()
@@ -425,7 +423,7 @@ extension RechargeDetailViewController {
                                         if self.isVisible {
                                             if String(describing: data) == "<null>"{
 
-                                                if AddressManager.shared.containAddressOfWithDraw(address, currency: self.trade!.id).0 == false {
+                                                if AddressManager.shared.containAddressOfWithDraw(address, currency: trade.id).0 == false {
                                                     self.showConfirmImage(R.image.icCheckCircleGreen.name,
                                                                           title: R.string.localizable.withdraw_success_title.key.localized(),
                                                                           content: R.string.localizable.withdraw_success_content.key.localized(), tag: R.string.localizable.withdraw_success_content.key.localized())

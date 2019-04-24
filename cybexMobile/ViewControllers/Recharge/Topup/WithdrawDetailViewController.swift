@@ -22,9 +22,9 @@ class WithdrawDetailViewController: BaseViewController {
     var coordinator: (WithdrawDetailCoordinatorProtocol & WithdrawDetailStateManagerProtocol)?
     var isFetching: Bool = false
     
-    var isEOS: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupUI()
         setupData()
     }
@@ -39,25 +39,17 @@ class WithdrawDetailViewController: BaseViewController {
         if let trade = self.trade, let name = appData.assetInfo[trade.id]?.symbol.filterSystemPrefix {
             self.title = name + R.string.localizable.withdraw_title.key.localized()
 //            let message = Localize.currentLanguage() == "en" ? trade.enInfo: trade.cnInfo
-            if name == AssetConfiguration.CybexAsset.EOS.rawValue {
-                self.isEOS = true
-                eosContainerView = EOSWithdrawView(frame: .zero)
-                self.view.addSubview(eosContainerView!)
-                
-                eosContainerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-//                self.eosContainerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
-            } else {
-                containerView = WithdrawView(frame: .zero)
-                self.view.addSubview(containerView!)
-                if name == AssetConfiguration.CybexAsset.XRP.rawValue || name == AssetConfiguration.CybexAsset.ATOM.rawValue || name == AssetConfiguration.CybexAsset.IRIS.rawValue {
-                    containerView?.tagView.isHidden = false
-                }
-                else {
-                    containerView?.tagView.isHidden = true
-                }
-                containerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-//                self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
+            containerView = WithdrawView(frame: .zero)
+            self.view.addSubview(containerView!)
+            if trade.tag {
+                containerView?.tagView.isHidden = false
             }
+            else {
+                containerView?.tagView.isHidden = true
+            }
+            containerView?.needTag = trade.tag
+            containerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
+//                self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
         }
         if self.trade?.enable == false {
             if let errorMsg = Localize.currentLanguage() == "en" ? self.trade?.enMsg : self.trade?.cnMsg {
@@ -82,11 +74,7 @@ class WithdrawDetailViewController: BaseViewController {
             self.isFetching = false
             
             if let info = addressInfo {
-                if self.isEOS {
-                    self.eosContainerView?.data = info
-                } else {
-                    self.containerView?.data = info
-                }
+                self.containerView?.data = info
             } else {
                 main {
                     if ShowToastManager.shared.showView != nil {
@@ -98,13 +86,8 @@ class WithdrawDetailViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator?.state.msgInfo.asObservable().skip(1).subscribe(onNext: {[weak self] (data) in
             guard let self = self else { return }
+            self.containerView?.projectData = data
 
-            if self.isEOS {
-                self.eosContainerView?.projectData = data
-            } else {
-                self.containerView?.projectData = data
-            }
-            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     

@@ -76,7 +76,7 @@ class UIHelper {
                                      withdrawFeeInfo: String,
                                      gatewayFeeInfo: String,
                                      receiveAmountInfo: String,
-                                     isEOS: Bool,
+                                     tag: Bool,
                                      memoInfo: String) -> [NSAttributedString] {
         let address: String = R.string.localizable.utils_address.key.localized()
         let amount: String = R.string.localizable.utils_amount.key.localized()
@@ -86,10 +86,10 @@ class UIHelper {
         var memo: String = R.string.localizable.withdraw_memo.key.localized()
 
         let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
-        if isEOS && memoInfo.count > 0 && receiveAmountInfo.contains(AssetConfiguration.CybexAsset.XRP.rawValue) {
+        if tag && memoInfo.count > 0 {
             memo = "Tag"
         }
-        return (isEOS && memoInfo.count > 0) ?
+        return (tag && memoInfo.count > 0) ?
             (["<name>\(address):</name><\(content)>\n\(addressInfo)</\(content)>".set(style: "alertContent"),
               "<name>\(memo):</name><\(content)>  \(memoInfo)</\(content)>".set(style: "alertContent"),
               "<name>\(amount):</name><\(content)>  \(amountInfo)</\(content)>".set(style: "alertContent"),

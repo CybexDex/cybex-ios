@@ -381,7 +381,7 @@
 "transfer_account" = "Account";
 "transfer_account_name" = "Transfer Account";
 
-"address_or_account" = "Note/Account";
+"address_or_account" = "Address/Account";
 "account_or_address" = "Note/Address";
 
 "account_exit" = "The account is already existed";

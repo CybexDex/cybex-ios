@@ -40,6 +40,7 @@ class Current: HandyJSON {
 struct Trade: HandyJSON {
     var id: String = ""
     var enable: Bool = true
+    var tag: Bool = false
     var enMsg: String = ""
     var cnMsg: String = ""
     var enInfo: String = ""

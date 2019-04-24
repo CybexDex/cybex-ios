@@ -29,23 +29,17 @@ class WithdrawAddressViewController: BaseViewController {
 
     func setupUI() {
         configRightNavButton(R.image.ic_add_24_px())
-        self.rightLabel.isHidden = !self.coordinator!.isEOS()
+        self.rightLabel.isHidden = !self.coordinator!.needTag()
         if let assetInfo = appData.assetInfo[self.asset] {
-            if self.coordinator!.isEOS() {
-                self.title = assetInfo.symbol.filterSystemPrefix + " " + R.string.localizable.eos_withdraw_account.key.localized()
-            } else {
-                self.title = assetInfo.symbol.filterSystemPrefix + " " + R.string.localizable.withdraw_address.key.localized()
-            }
+            self.title = assetInfo.symbol.filterSystemPrefix + " " + R.string.localizable.withdraw_address.key.localized()
         }
         else {
-            self.localizedText = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
+            self.localizedText = R.string.localizable.withdraw_address.key.localizedContainer()
         }
-        if !self.coordinator!.isEOS() {
+        if self.coordinator!.needTag() {
             self.leftLabel.locali = R.string.localizable.account_or_address.key
-            if let isXRP = self.coordinator?.isXRP(), isXRP == true {
-                self.rightLabel.isHidden = false
-                self.rightLabel.locali = "Tag"
-            }
+            self.rightLabel.isHidden = false
+            self.rightLabel.locali = "Tag"
         }
 
         self.tableView.register(UINib(resource: R.nib.withdrawAddressTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
@@ -67,11 +61,7 @@ class WithdrawAddressViewController: BaseViewController {
             guard let self = self else { return }
 
             if data.count == 0 {
-                self.view.showNoData(
-                    self.coordinator!.isEOS() ?
-                        R.string.localizable.account_nodata.key.localized() :
-                        R.string.localizable.address_nodata.key.localized(),
-                    icon: R.image.img_no_address.name)
+                self.view.showNoData(R.string.localizable.address_nodata.key.localized(), icon: R.image.img_no_address.name)
             } else {
                 self.view.hiddenNoData()
             }

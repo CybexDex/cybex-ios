@@ -355,7 +355,7 @@
 "address_manager" = "地址管理";
 "transfer_account_name" = "转账账户";
 "transfer_account" = "账户";
-"address_or_account" = "标签/账户";
+"address_or_account" = "地址/账户";
 "account_or_address" = "标签/地址";
 
 "address_asset" = "币种";

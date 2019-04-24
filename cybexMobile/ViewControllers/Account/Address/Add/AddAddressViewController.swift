@@ -26,6 +26,8 @@ class AddAddressViewController: BaseViewController {
     var withdrawAddress: WithdrawAddress?
     var transferAddress: TransferAddress?
     var popActionType: PopType = .normal
+    var needTag: Bool = false
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -36,20 +38,18 @@ class AddAddressViewController: BaseViewController {
     func setupUI() {
         if addressType == .withdraw {
             self.containerView.asset.content.text = appData.assetInfo[self.asset]?.symbol.filterSystemPrefix
-            if self.asset == AssetConfiguration.CybexAsset.EOS.id {
-                self.title = R.string.localizable.address_title_add_eos.key.localized()
-                self.containerView.address.title = R.string.localizable.eos_withdraw_account.key
-            } else {
-                self.title = R.string.localizable.address_title_add.key.localized()
-                self.containerView.address.title = R.string.localizable.withdraw_address.key
-                if appData.assetInfo[self.asset]?.symbol.filterSystemPrefix == AssetConfiguration.CybexAsset.XRP.rawValue {
-                    self.containerView.memo.isHidden = false
-                    self.containerView.memo.name.text = "Tag"
-                }
-                else {
-                    self.containerView.memo.isHidden = true
-                }
+
+
+            self.title = R.string.localizable.address_title_add.key.localized()
+            self.containerView.address.title = R.string.localizable.address_or_account.key
+            if needTag {
+                self.containerView.memo.isHidden = false
+                self.containerView.memo.name.text = "Tag"
             }
+            else {
+                self.containerView.memo.isHidden = true
+            }
+
             if self.withdrawAddress != nil {
                 self.containerView.data = withdrawAddress
                 if withdrawAddress?.address.isEmpty == false {
@@ -59,9 +59,6 @@ class AddAddressViewController: BaseViewController {
         } else {
             self.title = R.string.localizable.account_title_add.key.localized()
             self.containerView.assetShadowView.isHidden = true
-            if self.asset != AssetConfiguration.CybexAsset.EOS.id {
-                self.containerView.memo.isHidden = true
-            }
             if self.transferAddress != nil {
                 self.containerView.data = transferAddress
                 if transferAddress?.address.isEmpty == false {
@@ -92,7 +89,12 @@ class AddAddressViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(forName: UITextView.textDidEndEditingNotification, object: self.containerView.address.content, queue: nil) { [weak self](_) in
             guard let self = self else {return}
+
             if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
+                if self.needTag {
+                    self.coordinator?.veritiedAddress(true)
+                    return
+                }
                 self.containerView.addressState = .loading
                 self.coordinator?.verityAddress(text.trimmed, type: self.addressType)
             } else {
