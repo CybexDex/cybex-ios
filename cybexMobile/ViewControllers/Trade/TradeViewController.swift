@@ -71,7 +71,6 @@ class TradeViewController: BaseViewController {
                 return vc
             }
         }
-
         return nil
     }
     
@@ -105,10 +104,10 @@ class TradeViewController: BaseViewController {
 
         currentTopViewController?.appear()
 
-        let noticeShow = !Defaults.hasKey(.showContestTip) || Defaults[.showContestTip]
-        if let context = self.context, context.pageType == .game, noticeShow {
-            self.coordinator?.showNoticeVC()
-        }
+//        let noticeShow = !Defaults.hasKey(.showContestTip) || Defaults[.showContestTip]
+//        if let context = self.context, context.pageType == .game, noticeShow {
+//            self.coordinator?.showNoticeVC()
+//        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -156,6 +155,15 @@ class TradeViewController: BaseViewController {
                                      R.string.localizable.trade_open_orders.key]
             self.titlesView!.selectedIndex = self.selectedIndex
         })
+        
+        self.topBanner.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(jumpToRuleVC))
+        self.topBanner.addGestureRecognizer(tap)
+    }
+    
+    @objc func jumpToRuleVC() {
+        self.coordinator?.openRuleVC()
     }
     
     deinit {

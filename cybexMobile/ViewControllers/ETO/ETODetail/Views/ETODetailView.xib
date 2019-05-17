@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,19 +28,19 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AE-fZ-SKu">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AE-fZ-SKu">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2d-WC-B2V">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2d-WC-B2V">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="688.5"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4r8-tz-KNu">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4r8-tz-KNu">
                                     <rect key="frame" x="13" y="0.0" width="349" height="688.5"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-rn-LH2" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-rn-LH2" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="189.5"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-AS-KDJ" customClass="ETODetailHeaderView" customModule="cybexMobile" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-AS-KDJ" customClass="ETODetailHeaderView" customModule="cybexMobile" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="349" height="189.5"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -59,7 +59,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="UMW-AS-KDJ" secondAttribute="trailing" id="ssu-73-z66"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Erh-Fy-qev">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Erh-Fy-qev">
                                             <rect key="frame" x="0.0" y="197.5" width="349" height="46"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj2-Ga-KRR">
@@ -84,7 +84,7 @@
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="locali" value="user_agreement"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muh-af-TAD" customClass="LGButton" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Muh-af-TAD" customClass="LGButton" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="233" y="0.0" width="116" height="38"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="116" id="aTo-Mk-5bo"/>
@@ -117,7 +117,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="Aj2-Ga-KRR" secondAttribute="bottom" constant="4" id="Yet-Aw-nUg"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGZ-wE-RFP" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGZ-wE-RFP" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="251.5" width="349" height="44"/>
                                             <color key="backgroundColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -136,25 +136,25 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BIe-Ro-csV">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIe-Ro-csV">
                                             <rect key="frame" x="0.0" y="303.5" width="349" height="385"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="1CO-LG-Zq6">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="1CO-LG-Zq6">
                                                     <rect key="frame" x="0.0" y="0.0" width="349" height="385"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gao-rn-eya" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gao-rn-eya" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="349" height="107"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="ETO_detail"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6bD-jk-BNx" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bD-jk-BNx" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="108" width="349" height="128"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="project_intro"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LtC-Yw-aVQ" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LtC-Yw-aVQ" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="237" width="349" height="148"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="project_website"/>

@@ -385,6 +385,7 @@
 		72E2A8F42151FB0C00FBB3CB /* Comprehensive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */; };
 		72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3A4C9214560580083E417 /* CybexWaitingView.swift */; };
 		72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72E3A4CA214560580083E417 /* CybexWaitingView.xib */; };
+		72E9A17B2289417100724A7B /* TradeContestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E9A17A2289417000724A7B /* TradeContestViewController.swift */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
 		72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */; };
 		72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */; };
@@ -1293,6 +1294,7 @@
 		72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comprehensive.storyboard; sourceTree = "<group>"; };
 		72E3A4C9214560580083E417 /* CybexWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWaitingView.swift; sourceTree = "<group>"; };
 		72E3A4CA214560580083E417 /* CybexWaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexWaitingView.xib; sourceTree = "<group>"; };
+		72E9A17A2289417000724A7B /* TradeContestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeContestViewController.swift; sourceTree = "<group>"; };
 		72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EOSWithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
 		72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EOSWithdrawView.xib; sourceTree = "<group>"; };
@@ -2355,6 +2357,7 @@
 		5A4919BA264F4C3F3E191C315F75F4A6 /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				72E9A1792289411A00724A7B /* Rule */,
 				3DAC30A1501675A9FB85271C4CD883BC /* Business */,
 				523397C4385E73D3E05F6F506930D2FF /* Myhistory */,
 				EBF4E469D6ADFD61897338814C5ABE2F /* Views */,
@@ -2851,6 +2854,14 @@
 				724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		72E9A1792289411A00724A7B /* Rule */ = {
+			isa = PBXGroup;
+			children = (
+				72E9A17A2289417000724A7B /* TradeContestViewController.swift */,
+			);
+			path = Rule;
 			sourceTree = "<group>";
 		};
 		72EC6A4E20F4611500CEAFF6 /* Views */ = {
@@ -5240,6 +5251,7 @@
 				50C985D347323594C1A8239536E6AAAD /* CybexAlertView.swift in Sources */,
 				B708A685A32CF984A16E8AA133B5032A /* CybexLabel.swift in Sources */,
 				C96D0912126309ECA43CED968127E06E /* CybexPasswordView.swift in Sources */,
+				72E9A17B2289417100724A7B /* TradeContestViewController.swift in Sources */,
 				C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */,
 				CD7ECF264F6C16A3649CE586A93D6269 /* CybexTitleView.swift in Sources */,
 				737E596021A53C8D001199E4 /* CryptoKey.swift in Sources */,
@@ -5737,7 +5749,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5841,7 +5853,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6017,7 +6029,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
