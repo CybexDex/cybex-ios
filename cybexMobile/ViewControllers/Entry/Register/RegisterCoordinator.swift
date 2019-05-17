@@ -60,7 +60,6 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
     func confirmRegister(_ password: String) {
         let vc = R.storyboard.main.noticeBoardViewController()!
         vc.password = password
-        vc.coordinator = self
         vc.didConfirm.delegate(on: self) { (self, _) in
             self.dismiss()
         }

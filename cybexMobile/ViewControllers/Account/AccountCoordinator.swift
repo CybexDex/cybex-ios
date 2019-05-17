@@ -8,6 +8,9 @@
 
 import UIKit
 import ReSwift
+import PromiseKit
+import SwiftyJSON
+import Presentr
 
 protocol AccountCoordinatorProtocol {
     func openOpenedOrders()
@@ -20,6 +23,8 @@ protocol AccountCoordinatorProtocol {
 
 protocol AccountStateManagerProtocol {
     var state: AccountState { get }
+
+    func showHelper(_ attrText: String)
 }
 
 class AccountCoordinator: NavCoordinator {
@@ -32,6 +37,17 @@ class AccountCoordinator: NavCoordinator {
     var state: AccountState {
         return store.state
     }
+
+    let presenter: Presentr = {
+        let width = ModalSize.custom(size: 272)
+        let height = ModalSize.custom(size: 340)
+        let center = ModalCenterPosition.center
+        let customType = PresentationType.custom(width: width, height: height, center: center)
+
+        let customPresenter = Presentr(presentationType: customType)
+        customPresenter.roundCorners = true
+        return customPresenter
+    }()
 
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.account.accountViewController()!
@@ -55,6 +71,22 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
 //        let coordinator = OpenedOrdersCoordinator(rootVC: self.rootVC)
 //        vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
+    }
+
+    func showHelper(_ attrText: String) {
+        let vc = R.storyboard.main.noticeBoardViewController()!
+        vc.attrText = attrText
+        vc.titleKey = R.string.localizable.coin_age_title.key
+        vc.confirmKey = R.string.localizable.coin_age_desc_get.key
+
+        vc.didConfirm.delegate(on: self) { (self, _) in
+            self.dismiss()
+        }
+        self.rootVC.topViewController?.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
+    }
+
+    func dismiss() {
+        appCoodinator.rootVC.dismiss(animated: true, completion: nil)
     }
 
     func openAddressManager() {
@@ -104,5 +136,5 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
 }
 
 extension AccountCoordinator: AccountStateManagerProtocol {
-
+ 
 }

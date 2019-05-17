@@ -382,4 +382,5 @@ struct AppEnableSetting: HandyJSON {
     var isETOEnabled: Bool = false
     var isShareEnabled: Bool = false
     var contestEnabled: Bool = false
+    var ageRate: Double = 0
 }

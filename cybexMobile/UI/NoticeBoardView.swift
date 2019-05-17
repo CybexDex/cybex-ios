@@ -17,15 +17,20 @@ class NoticeBoardView: UIView {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var confirm: Button!
+    @IBOutlet var title: UILabel!
 
     var data: Any? {
         didSet {
+            var str = R.string.localizable.registerConfirm.key.localized()
             if let password = data as? String {
-                let str = R.string.localizable.registerConfirm.key.localized().replacingOccurrences(of: "<password></password>", with: "<password>\(password)</password>")
-
-                self.textView.attributedText = str.set(style: StyleNames.password.rawValue)
+                str = str.replacingOccurrences(of: "<password></password>", with: "<password>\(password)</password>")
             }
+            fillContent(str)
         }
+    }
+
+    func fillContent(_ text: String) {
+        self.textView.attributedText = text.set(style: StyleNames.password.rawValue)
     }
 
     fileprivate func setup() {

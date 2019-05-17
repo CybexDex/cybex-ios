@@ -25,6 +25,7 @@ enum DataBaseCatogery: String {
     case getBlockHeader
     case getRecentTransactionById
     case getKeyReferences
+    case getAccountTokenAge
 }
 
 struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {

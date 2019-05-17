@@ -18,6 +18,7 @@ enum DatabaseApi {
     case getRecentTransactionBy(_ id: String)
     case getKeyReferences(pubkey: String)
     case getObjects(id: String)
+    case getAccountTokenAge(id: String)
 }
 
 struct CybexDatabaseApiService {
@@ -109,6 +110,8 @@ extension DatabaseApi : TargetType {
             return DataBaseCatogery.getKeyReferences.rawValue.snakeCased()
         case .getObjects(_):
             return DataBaseCatogery.getObjects.rawValue.snakeCased()
+        case .getAccountTokenAge(_):
+            return DataBaseCatogery.getAccountTokenAge.rawValue.snakeCased()
         }
     }
 
@@ -139,6 +142,8 @@ extension DatabaseApi : TargetType {
             return [[pubkey]]
         case let .getObjects(id: id):
             return [[id]]
+        case let .getAccountTokenAge(id: id):
+            return [id]
         }
     }
 
