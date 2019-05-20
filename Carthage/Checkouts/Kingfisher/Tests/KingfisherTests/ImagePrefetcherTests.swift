@@ -251,7 +251,7 @@ class ImagePrefetcherTests: XCTestCase {
         let exp = expectation(description: #function)
         let cache = KingfisherManager.shared.cache
         let key = testKeys[0]
-        cache.store(Image(), forKey: key)
+
         cache.store(testImage, forKey: key) { result in
             try! cache.memoryStorage.remove(forKey: key)
             
@@ -307,11 +307,53 @@ class ImagePrefetcherTests: XCTestCase {
             group.enter()
             let prefetcher = ImagePrefetcher(
                 resources: testURLs,
-                options: [.waitForCache])
+                options: [.cacheMemoryOnly])
             { _, _, _ in group.leave() }
             prefetcher.start()
         }
         group.notify(queue: .main) { exp.fulfill() }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+
+    func testPrefetchSources() {
+        let exp = expectation(description: #function)
+
+        let url = testURLs[0]
+        stub(url, data: testImageData)
+
+        let sources: [Source] = [
+            .provider(SimpleImageDataProvider(cacheKey: "1") { .success(testImageData) }),
+            .provider(SimpleImageDataProvider(cacheKey: "2") { .success(testImageData) }),
+            .network(url)
+        ]
+        var counter = 0
+        let prefetcher = ImagePrefetcher(
+            sources: sources,
+            options: [.waitForCache],
+            progressBlock: {
+                skipped, failed, completed in
+                counter += 1
+                XCTAssertEqual(skipped.count, 0)
+                XCTAssertEqual(failed.count, 0)
+                XCTAssertEqual(completed.count, counter)
+            },
+            completionHandler: {
+                skipped, failed, completed in
+                XCTAssertEqual(skipped.count, 0)
+                XCTAssertEqual(failed.count, 0)
+                XCTAssertEqual(completed.count, sources.count)
+                XCTAssertEqual(counter, sources.count)
+
+                let allCached = [ImageCache.default.isCached(forKey: "1"),
+                                 ImageCache.default.isCached(forKey: "2"),
+                                 ImageCache.default.isCached(forKey: url.absoluteString)
+                ].allSatisfy { $0 == true }
+                XCTAssertTrue(allCached)
+
+                exp.fulfill()
+            })
+        prefetcher.start()
+
         waitForExpectations(timeout: 3, handler: nil)
     }
 }

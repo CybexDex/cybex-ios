@@ -1,0 +1,11 @@
+opt_in_rules:
+  - empty_count
+
+included:
+  - ../Sources
+  - ReusableDemo
+
+line_length:
+  warning: 120
+  error: 160
+

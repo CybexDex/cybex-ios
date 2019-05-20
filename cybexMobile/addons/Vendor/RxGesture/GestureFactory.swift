@@ -32,11 +32,11 @@ public protocol GestureRecognizerFactory {
 private var gestureRecognizerStrongDelegateKey: UInt8 = 0
 public extension GestureRecognizerFactory {
 
-    public var configuration: (Gesture, RxGestureRecognizerDelegate) -> Void {
+    var configuration: (Gesture, RxGestureRecognizerDelegate) -> Void {
         return { _, _  in }
     }
 
-    public func make() -> Gesture {
+    func make() -> Gesture {
         let gesture = Gesture()
         let delegate = RxGestureRecognizerDelegate()
         objc_setAssociatedObject(

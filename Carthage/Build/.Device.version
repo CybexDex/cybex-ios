@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "Device",
-      "hash" : "a75b0be09c44e760c09d398d65edafac16902030ecbf0fa8b025fd1378d6536d"
+      "hash" : "24f3090f26b35fb2a0b9401d7ef66bd99b816ac3caf931b09acfbd7664db4c98",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

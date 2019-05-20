@@ -23,16 +23,16 @@ import RxSwift
 import RxCocoa
 
 /// Default values for `UITapGestureRecognizer` configuration
-public enum UITapGestureRecognizerDefaults {
-    public static var numberOfTouchesRequired: Int = 1
-    public static var numberOfTapsRequired: Int = 1
-    public static var configuration: ((UITapGestureRecognizer, RxGestureRecognizerDelegate) -> Void)?
+enum UITapGestureRecognizerDefaults {
+    static var numberOfTouchesRequired: Int = 1
+    static var numberOfTapsRequired: Int = 1
+    static var configuration: ((UITapGestureRecognizer, RxGestureRecognizerDelegate) -> Void)?
 }
 
 /// A `GestureRecognizerFactory` for `UITapGestureRecognizer`
-public struct TapGestureRecognizerFactory: GestureRecognizerFactory {
-    public typealias Gesture = UITapGestureRecognizer
-    public let configuration: (UITapGestureRecognizer, RxGestureRecognizerDelegate) -> Void
+struct TapGestureRecognizerFactory: GestureRecognizerFactory {
+    typealias Gesture = UITapGestureRecognizer
+    let configuration: (UITapGestureRecognizer, RxGestureRecognizerDelegate) -> Void
 
     /**
      Initialiaze a `GestureRecognizerFactory` for `UITapGestureRecognizer`
@@ -40,7 +40,7 @@ public struct TapGestureRecognizerFactory: GestureRecognizerFactory {
      - parameter numberOfTapsRequired: The number of taps required to match
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public init(
+    init(
         numberOfTouchesRequired: Int = UITapGestureRecognizerDefaults.numberOfTouchesRequired,
         numberOfTapsRequired: Int = UITapGestureRecognizerDefaults.numberOfTapsRequired,
         configuration: ((UITapGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = UITapGestureRecognizerDefaults.configuration
@@ -61,7 +61,7 @@ extension AnyGestureRecognizerFactory {
      - parameter numberOfTapsRequired: The number of taps required to match
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public static func tap(
+    static func tap(
         numberOfTouchesRequired: Int = UITapGestureRecognizerDefaults.numberOfTouchesRequired,
         numberOfTapsRequired: Int = UITapGestureRecognizerDefaults.numberOfTapsRequired,
         configuration: ((UITapGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = UITapGestureRecognizerDefaults.configuration
@@ -75,7 +75,7 @@ extension AnyGestureRecognizerFactory {
     }
 }
 
-public extension Reactive where Base: UIView {
+extension Reactive where Base: UIView {
 
     /**
      Returns an observable `UITapGestureRecognizer` events sequence
@@ -83,7 +83,7 @@ public extension Reactive where Base: UIView {
      - parameter numberOfTapsRequired: The number of taps required to match
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public func tapGesture(
+    func tapGesture(
         numberOfTouchesRequired: Int = UITapGestureRecognizerDefaults.numberOfTouchesRequired,
         numberOfTapsRequired: Int = UITapGestureRecognizerDefaults.numberOfTapsRequired,
         configuration: ((UITapGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = UITapGestureRecognizerDefaults.configuration

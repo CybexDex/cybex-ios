@@ -37,7 +37,7 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
             }
         }
     }
-    var timer: Repeater?
+    var timer: Disposable?
     var containerView: UIView?
     var order: LimitOrderStatus?
     var cancleOrderInfo: [String: Any]?
@@ -50,6 +50,13 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
         self.coordinator?.connect()
         self.startLoading()
         setupData()
+
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
+            self.timer?.dispose()
+        }
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
+            self.startFetchOpenedOrders()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,34 +82,6 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
     func setupEvent() {
 
     }
-
-    func showOrderInfo() {
-        let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0)
-        guard let order = self.order else { return }
-        startLoading()
-        CybexChainHelper.calculateFee(operation,
-                                      operationID: .limitOrderCancel,
-                                      focusAssetId: order.isBuyOrder() ? order.getPair().base : order.getPair().quote) { [weak self] (success, amount, assetId) in
-                                        guard let self = self else {return}
-                                        self.endLoading()
-                                        guard self.isVisible else {return}
-                                        if success, let order = self.order {
-                                            let ensureTitle = order.isBuyOrder() ?
-                                                R.string.localizable.cancle_openedorder_buy.key.localized() :
-                                                R.string.localizable.cancle_openedorder_sell.key.localized()
-
-                                            if self.isVisible {
-                                                self.isCancelAll = false
-                                                self.showPureContentConfirm(ensureTitle)
-                                            }
-
-                                        } else {
-                                            if self.isVisible {
-                                                self.showToastBox(false, message: R.string.localizable.withdraw_nomore.key.localized())
-                                            }
-                                        }
-        }
-    }
     
     func switchContainerView() {
         containerView?.removeFromSuperview()
@@ -124,33 +103,19 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
     }
     
     func startFetchOpenedOrders() {
-        if self.timer == nil {
-            NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
-                self.timer?.pause()
-                self.timer = nil
-            }
-            NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-                self.startFetchOpenedOrders()
-            }
-        }
-        self.timer?.pause()
-        self.timer = nil
-        
-        self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
-            main {
-                guard let self = self, let coor = self.coordinator else { return }
+        self.timer?.dispose()
 
-                if coor.checkConnectStatus() {
-                    self.setupData()
-                }
-                else {
-                    self.coordinator?.reconnect()
-                }
+        timer = Observable<Int>.interval(3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (n) in
+            guard let self = self, let coor = self.coordinator else { return }
+            if coor.checkConnectStatus() {
+                self.setupData()
             }
-        }
-        timer?.start()
-        
+            else {
+                self.coordinator?.reconnect()
+            }
+        })
     }
+
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self, let limitOrders = data, self.isVisible else { return }
@@ -199,7 +164,7 @@ extension OpenedOrdersViewController: TradePair {
     }
 
     func disappear() {
-        self.timer?.pause()
+        self.timer?.dispose()
         self.timer = nil
         self.coordinator?.disconnect()
     }
@@ -210,15 +175,17 @@ extension OpenedOrdersViewController {
         if self.isLoading() {
             return
         }
+
         if let order = data["order"] as? LimitOrderStatus {
             self.order = order
-            if UserManager.shared.isLocked {
-                if self.isLoading() {
-                    return
-                }
-                showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
+
+            self.isCancelAll = false
+
+            if UserManager.shared.checkExistCloudPassword(), UserManager.shared.loginType == .nfc {
+                let titleLocali = UserManager.shared.unlockType == .cloudPassword ? R.string.localizable.enotes_use_type_0.key : R.string.localizable.enotes_use_type_1.key
+                self.showPureContentConfirm(R.string.localizable.tip_title.key.localized(), rightTitleLocali: titleLocali, ensureButtonLocali: R.string.localizable.alert_ensure.key, content: "openedorder_ensure_message", tag: titleLocali)
             } else {
-                self.showOrderInfo()
+                self.showPureContentConfirm()
             }
         }
     }
@@ -228,10 +195,15 @@ extension OpenedOrdersViewController {
             return
         }
 
-        if self.isVisible {
-            isCancelAll = true
+        isCancelAll = true
+
+        if UserManager.shared.checkExistCloudPassword(), UserManager.shared.loginType == .nfc {
+            let titleLocali = UserManager.shared.unlockType == .cloudPassword ? R.string.localizable.enotes_use_type_0.key : R.string.localizable.enotes_use_type_1.key
+            self.showPureContentConfirm(R.string.localizable.tip_title.key.localized(), rightTitleLocali: titleLocali, ensureButtonLocali: R.string.localizable.alert_ensure.key, content: "open_order_confirm_cancel_all", tag: "")
+        } else {
             self.showPureContentConfirm(content: "open_order_confirm_cancel_all")
         }
+
     }
     
     func postCancelOrder() {
@@ -269,9 +241,34 @@ extension OpenedOrdersViewController {
     override func passwordPassed(_ passed: Bool) {
         self.endLoading()
         if passed {
-            showOrderInfo()
+            if isCancelAll {
+                postCancelAllOrder()
+            } else {
+                postCancelOrder()
+            }
         } else {
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
+    }
+
+    override func didClickedRightAction(_ tag: String) {
+        if tag == R.string.localizable.enotes_use_type_0.key { //enotes
+            if #available(iOS 11.0, *) {
+                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+
+                    self.startLoading()
+                    if self.isCancelAll {
+                        self.postCancelAllOrder()
+                    } else {
+                        self.postCancelOrder()
+                    }
+
+                }
+                NFCManager.shared.start()
+            }
+        } else {
+            showPasswordBox()
         }
     }
     
@@ -279,10 +276,26 @@ extension OpenedOrdersViewController {
         self.startLoading()
         ShowToastManager.shared.hide()
 
-        if isCancelAll {
-            postCancelAllOrder()
+        if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+            if #available(iOS 11.0, *) {
+                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+                    if self.isCancelAll {
+                        self.postCancelAllOrder()
+                    } else {
+                        self.postCancelOrder()
+                    }
+                }
+                NFCManager.shared.start()
+            }
+        } else if UserManager.shared.isLocked {
+            showPasswordBox()
         } else {
-            self.postCancelOrder()
+            if isCancelAll {
+                postCancelAllOrder()
+            } else {
+                postCancelOrder()
+            }
         }
     }
 }

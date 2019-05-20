@@ -96,7 +96,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     }
 
     func fetchBannersData() {
-        ETOMGService.request(target: ETOMGAPI.getBanner(), success: { (json) in
+        ETOMGService.request(target: ETOMGAPI.getBanner, success: { (json) in
             if let banners = json.arrayValue.map({ data in
                 ETOBannerModel.deserialize(from: data.dictionaryObject)
             }) as? [ETOBannerModel] {

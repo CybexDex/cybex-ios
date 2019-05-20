@@ -52,7 +52,7 @@ func convertTradeToWithDrawAddressHomeViewModel(_ data: [Trade]) -> [WithdrawAdd
             break
         }
 
-        let viewmodel = WithdrawAddressHomeViewModel(imageURLString: imageURLString, count: BehaviorRelay(value: ""), name: info.symbol.filterJade, model: trade)
+        let viewmodel = WithdrawAddressHomeViewModel(imageURLString: imageURLString, count: BehaviorRelay(value: ""), name: info.symbol.filterSystemPrefix, model: trade)
         viewmodels.append(viewmodel)
     }
 

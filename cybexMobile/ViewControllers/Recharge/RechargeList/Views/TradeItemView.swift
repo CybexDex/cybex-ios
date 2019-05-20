@@ -19,7 +19,7 @@ class TradeItemView: UIView {
                     URL(string: AppConfiguration.ServerIconsBaseURLString +
                         data.id.replacingOccurrences(of: ".", with: "_") +
                         "_grey.png"))
-                name.text = info.symbol.filterJade
+                name.text = info.symbol.filterSystemPrefix
                 assetAllName.text = "(\(data.projectName))"
                 if data.enable == false {
                     amount.text = R.string.localizable.deposti_enable_tip.key.localized()

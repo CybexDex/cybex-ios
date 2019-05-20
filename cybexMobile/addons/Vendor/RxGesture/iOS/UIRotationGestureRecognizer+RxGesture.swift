@@ -67,7 +67,7 @@ public extension Reactive where Base: UIView {
      Returns an observable `UIRotationGestureRecognizer` events sequence
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public func rotationGesture(
+    func rotationGesture(
         configuration: ((UIRotationGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = RotationGestureRecognizerDefaults.configuration
         ) -> ControlEvent<UIRotationGestureRecognizer> {
         return gesture(RotationGestureRecognizerFactory(
@@ -81,7 +81,7 @@ public extension ObservableType where E: UIRotationGestureRecognizer {
     /**
      Maps the observable `GestureRecognizer` events sequence to an observable sequence of rotation values of the gesture in radians alongside the gesture velocity.
      */
-    public func asRotation() -> Observable<(rotation: CGFloat, velocity: CGFloat)> {
+    func asRotation() -> Observable<(rotation: CGFloat, velocity: CGFloat)> {
         return self.map { gesture in
             return (gesture.rotation, gesture.velocity)
         }

@@ -77,9 +77,9 @@ class TradeHistoryViewController: BaseViewController {
             self.historyView.sellAmount.font  = UIFont.systemFont(ofSize: 11)
             self.historyView.time.font = UIFont.systemFont(ofSize: 11)
         }
-        self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
-        self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
-        self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
+        self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + baseInfo.symbol.filterSystemPrefix + ")"
+        self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quoteInfo.symbol.filterSystemPrefix + ")"
+        self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + baseInfo.symbol.filterSystemPrefix + ")"
         self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
 
         self.coordinator?.fetchData(pair)

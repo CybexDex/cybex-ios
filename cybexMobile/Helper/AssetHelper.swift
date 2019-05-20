@@ -9,6 +9,13 @@
 import Foundation
 
 class AssetHelper {
+    class func getPrecision(_ assetID: String) -> Int? {
+        if let info = appData.assetInfo[assetID] {
+            return info.precision
+        }
+        return nil
+    }
+
     class func singleAssetRMBPrice(_ assetID: String) -> Decimal {
         if let baseAsset = AssetConfiguration.CybexAsset(assetID), MarketConfiguration.marketBaseAssets.contains(baseAsset) {
             return AssetConfiguration.shared.rmbOf(asset: baseAsset)

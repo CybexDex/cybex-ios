@@ -1,9 +1,10 @@
 {
-  "commitish" : "3.3.1",
+  "commitish" : "4.0.0",
   "iOS" : [
     {
       "name" : "TinyConstraints",
-      "hash" : "06be0b6d6fa44e22b5b584acc9bf8c992c9dc399343b7c50de4f298c2727d78a"
+      "hash" : "07830a049a3c559fe38c55cae04fdb19ee41590a2681fd4b5ec5e876840e9e0f",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -14,9 +14,10 @@ import SwiftTheme
 import SwifterSwift
 import Repeat
 import RxCocoa
+import RxSwift
 
 class AppCoordinator {
-    var fetchPariTimer: Repeater?
+    var fetchMarketListTimer: Disposable?
 
     var store = Store<AppState> (
         reducer: appReducer,
@@ -40,7 +41,6 @@ class AppCoordinator {
 
     var entryCoordinator: NavCoordinator?
 
-    weak var startLoadingVC: BaseViewController?
     var isFirstStart: Bool = true
     init(rootVC: BaseTabbarViewController) {
         self.rootVC = rootVC
@@ -51,11 +51,6 @@ class AppCoordinator {
                 nav.topViewController?.refreshViewController()
             }
             return false
-        }
-
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
-            self.fetchPariTimer?.pause()
-            self.fetchPariTimer = nil
         }
     }
 
@@ -228,7 +223,7 @@ extension AppCoordinator {
         }
 
         if presentSetup == nil {
-            SwifterSwift.delay(milliseconds: 100) {
+            delay(milliseconds: 100) {
                 topside?.present(nav, animated: animated, completion: nil)
             }
         } else if let top = topside {
@@ -254,7 +249,7 @@ extension AppCoordinator {
         }
 
         if presentSetup == nil {
-            SwifterSwift.delay(milliseconds: 100) {
+            delay(milliseconds: 100) {
                 topside.present(viewController, animated: animated, completion: nil)
             }
         } else {

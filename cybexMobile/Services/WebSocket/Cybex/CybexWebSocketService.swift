@@ -17,6 +17,7 @@ import RxCocoa
 enum NodeURLString: String {
     case shanghai = "wss://shanghai.51nebula.com"
     case beijing = "wss://beijing.51nebula.com"
+
     case hongkong = "wss://hongkong.cybex.io"
     case singapore = "wss://singapore-01.cybex.io"
     case tokyo = "wss://tokyo-01.cybex.io"
@@ -24,12 +25,11 @@ enum NodeURLString: String {
     case hkback = "wss://hkbak.cybex.io"
 
     case test = "wss://hangzhou.51nebula.com/"
-    case tmp = "ws://10.18.120.241:28090"
+    case test2 = "wss://shenzhen.51nebula.com/"
 
-    static var all: [NodeURLString] {
-//            return [.tmp]
-        return [.hongkong, .hkback, .singapore, .tokyo, .korea]
-    }
+
+    case tmp = "ws://10.18.120.241:28090" //local
+    case uat = "ws://47.100.98.113:38090" //uat
 }
 
 typealias CybexWebSocketResponse = (JSON) -> Void
@@ -45,14 +45,35 @@ open class AsyncRequestOperation: AsyncBlockOperation {
 }
 
 class CybexWebSocketService: NSObject {
+    enum Config: NetworkWebsocketNodeEnv {
+        static var productURL: [URL] {
+            return [NodeURLString.hongkong, NodeURLString.hkback, NodeURLString.singapore, NodeURLString.tokyo, NodeURLString.korea].map { URL(string: $0.rawValue)! }
+        }
+
+        static var devURL: [URL] {
+            return [NodeURLString.test, NodeURLString.test2].map { URL(string: $0.rawValue)! }
+        }
+
+        static var uatURL: [URL] {
+            return [NodeURLString.uat].map { URL(string: $0.rawValue)! }
+        }
+    }
+
     private var batchFactory: BatchFactory!
     private(set) var idGenerator: JsonIdGenerator = JsonIdGenerator()
 
-    private var socket = SRWebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
+    private var socket = SRWebSocket(url: URL(string: NodeURLString.hongkong.rawValue)!)
     private var testsockets: [SRWebSocket] = []
 
-    private var currentNode: NodeURLString?
+    private var currentNode: URL?
+    private var nodes: [URL] = []
 
+    lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
+        if !AppHelper.shared.infront {
+            self.disconnect()
+        }
+    })
+    
     var needAutoConnect = true
     private var autoConnectCount = 0
     private let maxAutoConnectCount = 5
@@ -108,13 +129,13 @@ class CybexWebSocketService: NSObject {
 
         self.testsockets.removeAll()
 
-        for (idx, node) in NodeURLString.all.enumerated() {
+        for (idx, node) in nodes.enumerated() {
             var testsocket: SRWebSocket!
 
             if idx < testsockets.count {
                 testsocket = testsockets[idx]
             } else {
-                var request = URLRequest(url: URL(string: node.rawValue)!)
+                var request = URLRequest(url: node)
                 request.timeoutInterval = autoConnectCount.double * 1.0 + 0.5//随着重试次数增加 增加超时时间
                 testsocket = SRWebSocket(urlRequest: request)
                 testsocket.delegate = self
@@ -139,11 +160,8 @@ class CybexWebSocketService: NSObject {
             isConnecting = true
             isClosing = false
             needAutoConnect = true
-            if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-                self.currentNode = NodeURLString.test
-                connectNode(node: NodeURLString.test)
-                return
-            }
+
+            nodes = Config.currentEnv
             detectFastNode()
         }
     }
@@ -304,14 +322,15 @@ class CybexWebSocketService: NSObject {
 
     // MARK: - Nodes -
 
-    private func connectNode(node: NodeURLString) {
+    private func connectNode(node: URL) {
         if socket.readyState != .OPEN {
-            Log.print("connecting node: \(node.rawValue)")
+            Log.print("connecting node: \(node.absoluteString)")
+            UIHelper.showStatusBar(R.string.localizable.socket_loading.key, style: .info)
 
             self.idGenerator = JsonIdGenerator()
             self.batchFactory.idGenerator = self.idGenerator
 
-            let request = URLRequest(url: URL(string: node.rawValue)!)
+            let request = URLRequest(url: node)
 
             socket = SRWebSocket(urlRequest: request)
 
@@ -335,6 +354,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             try? webSocket.send(data: data)
         } else {
             Log.print(" node: \(webSocket.url!.absoluteString) --- connected")
+            UIHelper.showStatusBar(R.string.localizable.socket_success.key, style: .success)
 
             isConnecting = false
             self.register()
@@ -352,7 +372,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         if isDetectingSocket(webSocket) {
             errorCount += 1
 
-            if errorCount == NodeURLString.all.count {
+            if errorCount == nodes.count {
                 closeAllTestSocket()
 
                 if needAutoConnect {
@@ -367,6 +387,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             }
         } else {
             Log.print(error)
+            UIHelper.showStatusBar(R.string.localizable.socket_failed.key, style: .danger)
 
             disconnect()
         }
@@ -377,7 +398,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         if self.currentNode == nil && isDetectingSocket(webSocket) {
             self.closeAllTestSocket()
 
-            self.currentNode = NodeURLString(rawValue: webSocket.url!.absoluteString)!
+            self.currentNode = URL(string: webSocket.url!.absoluteString)!
             connectNode(node: self.currentNode!)
 
             return

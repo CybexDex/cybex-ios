@@ -9,14 +9,31 @@
 import Foundation
 
 class NoticeBoardViewController: BaseViewController {
-    var coordinator: RegisterCoordinatorProtocol?
     var password: String?
+    var attrText: String?
+
+    var titleKey: String?
+    var confirmKey: String?
 
     @IBOutlet weak var noticeView: NoticeBoardView!
     let didConfirm = Delegate<Void, Void>()
 
     override func viewDidLoad() {
-        self.noticeView.data = password
+        if let password = password {
+            self.noticeView.data = password
+        }
+
+        if let attrText = attrText {
+            self.noticeView.fillContent(attrText)
+        }
+
+        if let titleKey = titleKey {
+            self.noticeView.title.locali = titleKey
+        }
+
+        if let confirmKey = confirmKey {
+            self.noticeView.confirm.locali = confirmKey
+        }
     }
 }
 

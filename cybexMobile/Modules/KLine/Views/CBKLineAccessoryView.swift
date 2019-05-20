@@ -76,21 +76,12 @@ class CBKLineAccessoryView: UIView {
 
     // 背景色
     context.clear(rect)
-//    context.setFillColor(configuration.accessory.backgroundColor[configuration.themeIndex].cgColor)
-//    context.fill(rect)
 
     // 没有数据 不绘制
     guard let accessoryDrawKLineModels = accessoryDrawKLineModels else {
       return
     }
 
-//    guard CGRect.isSame(rect, bounds)
-//      else {
-//
-//        drawAssistString?.draw(in: rect)
-//        return
-//    }
-//
     context.saveGState()
     let strokeColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
     context.move(to: CGPoint(x: 15, y: 0))
@@ -101,9 +92,6 @@ class CBKLineAccessoryView: UIView {
     context.strokePath()
 
     context.restoreGState()
-
-//    fetchAssistString(model: accessoryDrawKLineModels.last!)
-//    drawAssistString?.draw(in: rect)
 
     switch configuration.accessory.indicatorType {
     case .MACD:

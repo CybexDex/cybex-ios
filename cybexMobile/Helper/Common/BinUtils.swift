@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreFoundation
+import CryptoSwift
 
 // MARK: protocol UnpackedType
 
@@ -64,23 +65,6 @@ extension String {
 }
 
 // MARK: Data extension
-
-extension Data {
-    public static func randomBytes(length: Int) -> Data? {
-        for _ in 0...1024 {
-            var data = Data(repeating: 0, count: length)
-            let result = data.withUnsafeMutableBytes {
-                (mutableBytes: UnsafeMutablePointer<UInt8>) -> Int32 in
-                SecRandomCopyBytes(kSecRandomDefault, 32, mutableBytes)
-            }
-            if result == errSecSuccess {
-                return data
-            }
-        }
-        return nil
-    }
-}
-
 
 func toByteArray<T>(_ value: T) -> [UInt8] {
     var value = value

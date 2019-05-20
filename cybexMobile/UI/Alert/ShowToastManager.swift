@@ -20,8 +20,10 @@ protocol Views {
 @objc protocol ShowManagerDelegate {
     func returnUserPassword(_ sender: String, textView: CybexTextView)
     @objc func returnEnsureAction()
+    @objc func didClickedRightAction(_ tag: String)
+    @objc func returnEnsureActionWithData(_ tag: String)
     @objc func returnEnsureImageAction()
-    @objc func cancelImageAction(_ sender: CybexTextView)
+    @objc func cancelImageAction(_ tag: String)
     @objc func ensureWaitingAction(_ sender: CybexWaitingView)
     func returnInviteCode(_ sender: String)
 }
@@ -31,6 +33,7 @@ class ShowToastManager {
     static let shared = ShowToastManager()
     var timerTime: TimeInterval = 30
     var timer: Timer?
+    var tag = ""
 
     var delegate: ShowManagerDelegate?
 
@@ -105,25 +108,27 @@ class ShowToastManager {
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self](notification) in
             guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let duration = userinfo.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as? Double, let curve = userinfo.object(forKey: UIResponder.keyboardAnimationCurveUserInfoKey) as? UInt else { return }
 
-            self.showViewTop.constant = -120
+            if self.showViewTop != nil {
+                self.showViewTop.constant = -120
+                self.superView?.setNeedsLayout()
 
-            self.superView?.setNeedsLayout()
-
-            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
-                self.superView?.layoutIfNeeded()
-            }, completion: nil)
+                UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
+                    self.superView?.layoutIfNeeded()
+                }, completion: nil)
+            }
         }
 
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self](notification) in
             guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let duration = userinfo.object(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as? Double, let curve = userinfo.object(forKey: UIResponder.keyboardAnimationCurveUserInfoKey) as? UInt else { return }
 
-            self.showViewTop.constant = -32
-            
-            self.superView?.setNeedsLayout()
+            if self.showViewTop != nil {
+                self.showViewTop.constant = -32
+                self.superView?.setNeedsLayout()
 
-            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
-                self.superView?.layoutIfNeeded()
-            }, completion: nil)
+                UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve))], animations: {
+                    self.superView?.layoutIfNeeded()
+                }, completion: nil)
+            }
         }
     }
 
@@ -202,11 +207,12 @@ class ShowToastManager {
         self.showView = nil
         self.shadowView = nil
         self.data = nil
+        self.tag = ""
     }
 
     func hide(_ time: TimeInterval) {
         if animationShow == .none || animationShow == .smallBig {
-            SwifterSwift.delay(milliseconds: time * 1000) {
+            delay(milliseconds: time * 1000) {
                 self.showView?.removeFromSuperview()
                 self.shadowView?.removeFromSuperview()
                 self.showView = nil
@@ -265,21 +271,24 @@ class ShowToastManager {
         }
     }
 
-    func setUp(title: String, contentView: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
+    func setUp(title: String, contentView: (UIView&Views), rightTitleLocali: String = "", ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal, tag: String) {
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alertImage
-        self.setupText(contentView, ensureButtonLocali: ensureButtonLocali, title: title, cybexTextViewType: middleType)
+        self.tag = tag
+        self.setupText(contentView, rightTitleLocali: rightTitleLocali, ensureButtonLocali: ensureButtonLocali, title: title, cybexTextViewType: middleType)
     }
 
-    func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType) {
+    func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType, tag: String) {
         self.animationShow  = animationType
+        self.tag = tag
         self.showType       = ShowManagerType.alertImage
         self.setupTextImage(contentView, titleImage: titleImage)
     }
 
-    func setUp(_ title: String, content: String, time: Int, animationType: ShowAnimationType) {
+    func setUp(_ title: String, content: String, time: Int, animationType: ShowAnimationType, tag: String) {
         self.animationShow = animationType
         self.showType = ShowManagerType.waiting
+        self.tag = tag
         self.setupWaiting(title, content: content, time: time)
     }
 
@@ -299,10 +308,18 @@ class ShowToastManager {
         showView     = sheetView
     }
 
-    fileprivate func setupText(_ sender: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, title: String, cybexTextViewType: CybexTextView.TextViewType) {
+    fileprivate func setupText(_ sender: (UIView&Views), rightTitleLocali: String = "", ensureButtonLocali: String = R.string.localizable.alert_ensure.key, title: String, cybexTextViewType: CybexTextView.TextViewType) {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
         textView.middleView = sender
+        if !rightTitleLocali.isEmpty {
+            textView.rightTitle.locali = rightTitleLocali
+            textView.rightTitle.isHidden = false
+            textView.title.textAlignment = .left
+        } else {
+            textView.rightTitle.isHidden = true
+            textView.title.textAlignment = .center
+        }
         textView.title.text = title
         textView.viewType = cybexTextViewType
         textView.ensure.locali = ensureButtonLocali
@@ -321,7 +338,7 @@ class ShowToastManager {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
         textView.middleView = sender
-        textView.title.isHidden = true
+        textView.titleView.isHidden = true
         textView.titleImageView.isHidden = false
         textView.titleImageView.image = UIImage(named: titleImage)
         showView = textView
@@ -369,22 +386,25 @@ extension ShowToastManager: CybexTextViewDelegate {
             self.updateCybexTextViewType(sender)
             self.delegate?.returnInviteCode(password)
         }
-        else if let type = sender.viewType, type == .code {
-            self.delegate?.returnUserPassword(password, textView: sender)
-        }
         else {
             self.delegate?.returnUserPassword(password, textView: sender)
         }
     }
 
     func clickCancle(_ sender: CybexTextView) {
+        let data = self.tag
+
         self.hide(0)
-        self.delegate?.cancelImageAction(sender)
+        self.delegate?.cancelImageAction(data)
     }
 
     func returnEnsureAction() {
+        let data = self.tag
         self.hide(0)
+
+        self.delegate?.returnEnsureActionWithData(data)
         self.delegate?.returnEnsureAction()
+
         if self.isShowSingleBtn != nil {
             self.ensureClickBlock()
         }
@@ -393,6 +413,12 @@ extension ShowToastManager: CybexTextViewDelegate {
     func returnEnsureImageAction() {
         self.hide(0)
         self.delegate?.returnEnsureImageAction()
+    }
+
+    func didClickedRightAction() {
+        self.hide(0)
+
+        self.delegate?.didClickedRightAction(self.tag)
     }
 }
 

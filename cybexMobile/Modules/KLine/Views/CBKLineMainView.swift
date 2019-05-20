@@ -262,9 +262,10 @@ extension CBKLineMainView {
         //
         //            return
         //        }
-        
+
+        let lx = abs(drawDatePoint.x - lastDrawDatePoint.x)
         if lastDrawDatePoint.equalTo(CGPoint.zero) ||
-            abs(drawDatePoint.x - lastDrawDatePoint.x) > (dateAttrString.size().width * 2) {
+            lx > (dateAttrString.size().width * 2) {
             let rect = CGRect(x: drawDatePoint.x,
                               y: drawDatePoint.y,
                               width: dateAttrString.size().width,

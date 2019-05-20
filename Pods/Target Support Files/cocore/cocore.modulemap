@@ -1,0 +1,6 @@
+framework module cocore {
+  umbrella header "cocore-umbrella.h"
+
+  export *
+  module * { export * }
+}

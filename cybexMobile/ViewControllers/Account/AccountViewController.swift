@@ -13,6 +13,9 @@ import RxSwift
 import CryptoSwift
 import SwiftRichString
 import SwifterSwift
+import Localize_Swift
+import PromiseKit
+import SwiftyJSON
 
 class AccountViewController: BaseViewController {
 
@@ -31,6 +34,8 @@ class AccountViewController: BaseViewController {
         } else {
             bgImageView.image = R.image.accountBg()
         }
+        self.accountContentView.headerView.coinAge.text = R.string.localizable.coin_age.key.localizedFormat("");
+
         setupUI()
         setupEvent()
 
@@ -41,7 +46,7 @@ class AccountViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SwifterSwift.delay(milliseconds: 100) {
+        delay(milliseconds: 100) {
             self.setupUI()
         }
     }
@@ -56,10 +61,12 @@ class AccountViewController: BaseViewController {
     }
 
     func setupIconImg() {
-
         if UserManager.shared.logined == false {
             accountContentView.headerView.icon = R.image.accountAvatar()
+            accountContentView.headerView.coinAgeContainer.isHidden = true
         } else {
+            getCoinAge()
+            accountContentView.headerView.coinAgeContainer.isHidden = false
             if let hash = UserManager.shared.avatarString {
                 let generator = IconGenerator(size: 168, hash: Data(hex: hash))
                 if let render = generator.render() {
@@ -107,6 +114,26 @@ class AccountViewController: BaseViewController {
 
     }
 
+    func getCoinAge() {
+        guard let id = UserManager.shared.fullAccount.value?.account?.id else { return }
+        //:[{"id":"10.1.17","asset":"1.3.0","account":"1.2.28","score":155842895}]
+        CybexDatabaseApiService.request(target: DatabaseApi.getAccountTokenAge(id: id)).map { (json) -> Decimal in
+            if let object = json.array?.first?.dictionaryObject,
+                let score = object["score"] as? Int,
+                let assetId = object["asset"] as? String,
+                let precision = AssetHelper.getPrecision(assetId) {
+
+                return score.decimal / pow(10, precision)
+            }
+            return 0
+            }.done { (score) in
+                if let rate = AppConfiguration.shared.enableSetting.value?.ageRate {
+                    let age = score * (1 - rate.decimal)
+                    self.accountContentView.headerView.coinAge.text = R.string.localizable.coin_age.key.localizedFormat("\(age.floor.intValue)");
+                }
+        }.cauterize()
+    }
+
     // 跳转到设置界面
     override func rightAction(_ sender: UIButton) {
         self.coordinator?.openSetting()
@@ -132,6 +159,10 @@ extension AccountViewController {
         if !UserManager.shared.logined {
             appCoodinator.showLogin()
         }
+    }
+
+    @objc func coinAgeDesc(_ data: [String: Any]) {
+        self.coordinator?.showHelper(R.string.localizable.coin_age_desc.key.localized())
     }
 
     @objc func clickCellView(_ sender: [String: Any]) {

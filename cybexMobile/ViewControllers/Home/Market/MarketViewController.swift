@@ -84,8 +84,8 @@ class MarketViewController: BaseViewController {
         var baseName = ""
 
         if let quoteInfo = appData.assetInfo[pair!.quote], let baseInfo = appData.assetInfo[pair!.base] {
-            quoteName = quoteInfo.symbol.filterJade
-            baseName = baseInfo.symbol.filterJade
+            quoteName = quoteInfo.symbol.filterSystemPrefix
+            baseName = baseInfo.symbol.filterSystemPrefix
         }
 
         title = quoteName + "/" + baseName
@@ -122,8 +122,8 @@ class MarketViewController: BaseViewController {
     
     func fetchNotReadMessageIdData() {
         if let quoteInfo = appData.assetInfo[pair!.quote], let baseInfo = appData.assetInfo[pair!.base] {
-            let quoteName = quoteInfo.symbol.filterOnlyJade
-            let baseName = baseInfo.symbol.filterOnlyJade
+            let quoteName = quoteInfo.symbol.filterOnlySystemPrefix
+            let baseName = baseInfo.symbol.filterOnlySystemPrefix
             let channel = quoteName + "/" + baseName
             self.coordinator?.fetchLastMessageId(channel, callback: { [weak self](lastId) in
                 guard let self = self else {

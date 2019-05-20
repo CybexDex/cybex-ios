@@ -103,13 +103,13 @@ class HomeContentView: UIView {
             return originalData.sorted(by: { (first, second) -> Bool in
                 guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else {return false}
 
-                return firstInfo.symbol.filterJade < secondInfo.symbol.filterJade
+                return firstInfo.symbol.filterSystemPrefix < secondInfo.symbol.filterSystemPrefix
             })
         case .nameDown:
             return originalData.sorted(by: { (first, second) -> Bool in
                 guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else {return false}
 
-                return firstInfo.symbol.filterJade > secondInfo.symbol.filterJade
+                return firstInfo.symbol.filterSystemPrefix > secondInfo.symbol.filterSystemPrefix
             })
         case .volUp:
             return originalData.sorted(by: { (first, second) -> Bool in

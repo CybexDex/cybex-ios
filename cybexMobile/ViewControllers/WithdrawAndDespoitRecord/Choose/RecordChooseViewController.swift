@@ -101,7 +101,7 @@ class RecordChooseViewController: BaseViewController {
 
             case .loading(let reason):
                 if reason == .initialRefresh {
-                    self.startLoading()
+//                    self.startLoading()
                 }
 
             case .refresh(let type):
@@ -182,7 +182,7 @@ extension RecordChooseViewController {
             let data = self.coordinator?.state.data.value {
             
             for(index, info) in data.enumerated() {
-                if info.filterJade == result {
+                if info.filterSystemPrefix == result {
                     self.selectedIndex = index
                     break
                 }

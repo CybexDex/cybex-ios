@@ -22,6 +22,12 @@ extension TimeInterval {
 
 }
 
+@discardableResult func delay(milliseconds: Double, queue: DispatchQueue = .main, completion: @escaping ()-> Void) -> DispatchWorkItem {
+    let task = DispatchWorkItem { completion() }
+    queue.asyncAfter(deadline: .now() + (milliseconds/1000), execute: task)
+    return task
+}
+
 /**
  Wraps a function in a new function that will only execute the wrapped function if `delay` has passed without this function being called.
  

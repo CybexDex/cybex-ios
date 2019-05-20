@@ -30,7 +30,6 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.endLoading()
     }
 
     override func refreshViewController() {
@@ -155,14 +154,14 @@ extension WithdrawAndDespoitRecordViewController: RecordChooseViewControllerDele
         switch sender.typeIndex {
         case .asset:
             self.assetSelectedIndex = index
-            self.headerView.assetInfoView.contentLabel.text = info.filterJade
+            self.headerView.assetInfoView.contentLabel.text = info.filterSystemPrefix
             self.headerView.assetInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.assetInfoView.stateImage.image = R.image.ic2()
             self.coordinator?.childrenFetchData(info, index: RecordChooseType.asset)
             break
         case .foudType:
             self.foundTypeSelectedIndex = index
-            self.headerView.typeInfoView.contentLabel.text = info.filterJade
+            self.headerView.typeInfoView.contentLabel.text = info.filterSystemPrefix
             self.headerView.typeInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.typeInfoView.stateImage.image = R.image.ic2()
             self.coordinator?.childrenFetchData(info, index: RecordChooseType.foudType)

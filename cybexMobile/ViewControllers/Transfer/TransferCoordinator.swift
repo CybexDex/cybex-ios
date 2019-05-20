@@ -146,7 +146,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         if let balances = balances {
             for balance in balances {
                 if let info = appData.assetInfo[balance.assetType] {
-                    items.append(info.symbol.filterJade)
+                    items.append(info.symbol.filterSystemPrefix)
                 }
             }
         }
@@ -163,6 +163,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             if let balance = balances, balance.count > 0 {
                 self.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
                 self.validAmount()
+                self.calculateFee(self.state.balance.value?.assetType ?? "", memo: self.state.memo.value)
             }
         }
 
@@ -298,7 +299,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                     callback(data)
-                    Log.print(data)
+                    Log.fail(data)
                 }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)
             }

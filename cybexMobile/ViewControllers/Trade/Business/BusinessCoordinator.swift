@@ -121,7 +121,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 
     func getBalance(_ assetID: String) {
         if let balances = UserManager.shared.fullAccount.value?.balances.filter({ (balance) -> Bool in
-            return balance.assetType.filterJade == assetID
+            return balance.assetType.filterSystemPrefix == assetID
         }).first {
             let amount = AssetHelper.getRealAmount(balances.assetType, amount: balances.balance)
             self.store.dispatch(BalanceFetchedAction(amount: amount))

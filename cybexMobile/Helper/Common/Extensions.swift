@@ -88,11 +88,12 @@ extension UIView {
     }
 
     var windowWithNavSafeAreaInsets: UIEdgeInsets {
-        return windowSafeAreaInsets.insetBy(top: 44)
+        return UIEdgeInsets(top: windowSafeAreaInsets.top + 44, left: windowSafeAreaInsets.left, bottom: windowSafeAreaInsets.bottom, right: windowSafeAreaInsets.right)
+
     }
 
     var windowWithNavAndBottomSafeAreaInsets: UIEdgeInsets {
-        return windowWithNavSafeAreaInsets.insetBy(bottom: 44)
+        return UIEdgeInsets(top: windowSafeAreaInsets.top, left: windowSafeAreaInsets.left, bottom: windowSafeAreaInsets.bottom + 44, right: windowSafeAreaInsets.right)
     }
 }
 
@@ -159,7 +160,7 @@ extension UIViewController {
             if result.update {
 
                 let contentView = StyleContentView(frame: .zero)
-                ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.smallBig)
+                ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.smallBig, tag: "")
                 ShowToastManager.shared.showAnimationInView(self.view)
 
                 let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
@@ -431,16 +432,16 @@ extension String {
         return Formatter.iso8601.date(from: self) // "Mar 22, 2017, 10:22 AM"
     }
     
-    var filterJade: String {//默认同时过滤Arena
+    var filterSystemPrefix: String {//默认同时过滤Arena
         // 正式
-        let jadeFilter = self.replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol).", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)_", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)", with: "")
-        return jadeFilter.filterArena
+        let filter = self.replacingOccurrences(of: "\(AssetConfiguration.systemSymbol).", with: "").replacingOccurrences(of: "\(AssetConfiguration.systemSymbol)_", with: "").replacingOccurrences(of: "\(AssetConfiguration.systemSymbol)", with: "")
+        return filter.filterArena
     }
 
-    var filterOnlyJade: String {
+    var filterOnlySystemPrefix: String {
         // 正式
-        let jadeFilter = self.replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol).", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)_", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)", with: "")
-        return jadeFilter
+        let filter = self.replacingOccurrences(of: "\(AssetConfiguration.systemSymbol).", with: "").replacingOccurrences(of: "\(AssetConfiguration.systemSymbol)_", with: "").replacingOccurrences(of: "\(AssetConfiguration.systemSymbol)", with: "")
+        return filter
     }
 
     var filterArena: String {

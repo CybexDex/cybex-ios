@@ -26,9 +26,7 @@ protocol WithdrawAddressStateManagerProtocol {
     func confirmdelete()
     func delete()
 
-    func isEOS() -> Bool
-    
-    func isXRP() -> Bool
+    func needTag() -> Bool
 }
 
 class WithdrawAddressCoordinator: NavCoordinator {
@@ -81,6 +79,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
                     vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
                     vc.addressType = .withdraw
                     vc.asset = id
+                    vc.needTag = viewmodel.viewModel.model.tag
                     self.rootVC.pushViewController(vc, animated: true)
                 }
             }
@@ -107,7 +106,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
                 let sortedNames = AddressHelper.sortNameBasedonAddress(names)
 
                 let data = list.sorted { (front, last) -> Bool in
-                    return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
+                    return sortedNames.firstIndex(of: front.name)! <= sortedNames.firstIndex(of: last.name)!
                 }
 
                 self.store.dispatch(WithdrawAddressDataAction(data: data))
@@ -118,24 +117,12 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     func select(_ address: WithdrawAddress?) {
         self.store.dispatch(WithdrawAddressSelectDataAction(data: address))
     }
-
-    func isEOS() -> Bool {
-        var result = false
-        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
-            if let viewmodel = coor.state.selectedViewModel.value {
-                if viewmodel.viewModel.model.id == AssetConfiguration.CybexAsset.EOS.id {
-                    result = true
-                }
-            }
-        }
-        return result
-    }
     
-    func isXRP() -> Bool {
+    func needTag() -> Bool {
         var result = false
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
             if let viewmodel = coor.state.selectedViewModel.value {
-                if viewmodel.viewModel.model.id == "1.3.999" {
+                if viewmodel.viewModel.model.tag {
                     result = true
                 }
             }
@@ -145,14 +132,9 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
 
     func copy() {
         if let addressData = self.state.selectedAddress.value {
-            if addressData.currency == AssetConfiguration.CybexAsset.EOS.id || addressData.currency == AssetConfiguration.CybexAsset.XRP.id {
-                if let memo = addressData.memo {
-                    UIPasteboard.general.string = addressData.address + "(\(memo))"
-                } else {
-                     UIPasteboard.general.string = addressData.address
-                }
-            }
-            else {
+            if needTag(), let memo = addressData.memo {
+                UIPasteboard.general.string = addressData.address + "[\(memo)]"
+            } else {
                 UIPasteboard.general.string = addressData.address
             }
 

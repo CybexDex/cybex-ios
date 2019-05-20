@@ -30,7 +30,7 @@ class AddAddressView: UIView {
     var data: Any? {
         didSet {
             if let address = data as? WithdrawAddress {
-                self.asset.content.text = appData.assetInfo[address.currency]?.symbol.filterJade
+                self.asset.content.text = appData.assetInfo[address.currency]?.symbol.filterSystemPrefix
                 self.address.content.text = address.address
                 self.memo.content.text = address.memo
             } else if let address = data as? TransferAddress {

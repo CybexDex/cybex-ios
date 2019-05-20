@@ -22,9 +22,9 @@ class WithdrawDetailViewController: BaseViewController {
     var coordinator: (WithdrawDetailCoordinatorProtocol & WithdrawDetailStateManagerProtocol)?
     var isFetching: Bool = false
     
-    var isEOS: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupUI()
         setupData()
     }
@@ -36,35 +36,27 @@ class WithdrawDetailViewController: BaseViewController {
     
     func setupUI() {
         self.configRightNavButton(R.image.icDepositNew24Px())
-        if let trade = self.trade, let name = appData.assetInfo[trade.id]?.symbol.filterJade {
+        if let trade = self.trade, let name = appData.assetInfo[trade.id]?.symbol.filterSystemPrefix {
             self.title = name + R.string.localizable.withdraw_title.key.localized()
 //            let message = Localize.currentLanguage() == "en" ? trade.enInfo: trade.cnInfo
-            if name == AssetConfiguration.CybexAsset.EOS.rawValue {
-                self.isEOS = true
-                eosContainerView = EOSWithdrawView(frame: .zero)
-                self.view.addSubview(eosContainerView!)
-                
-                eosContainerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-//                self.eosContainerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
-            } else {
-                containerView = WithdrawView(frame: .zero)
-                self.view.addSubview(containerView!)
-                if name == AssetConfiguration.CybexAsset.XRP.rawValue {
-                    containerView?.tagView.isHidden = false
-                }
-                else {
-                    containerView?.tagView.isHidden = true
-                }
-                containerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-//                self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
+            containerView = WithdrawView(frame: .zero)
+            self.view.addSubview(containerView!)
+            if trade.tag {
+                containerView?.tagView.isHidden = false
             }
+            else {
+                containerView?.tagView.isHidden = true
+            }
+            containerView?.needTag = trade.tag
+            containerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
+//                self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
         }
         if self.trade?.enable == false {
             if let errorMsg = Localize.currentLanguage() == "en" ? self.trade?.enMsg : self.trade?.cnMsg {
                 showToastBox(false, message: errorMsg)
             }
         } else {
-            if let balance = self.trade?.id, let name = appData.assetInfo[balance]?.symbol.filterJade {
+            if let balance = self.trade?.id, let name = appData.assetInfo[balance]?.symbol.filterSystemPrefix {
                 startLoading()
                 self.coordinator?.fetchDepositAddress(name)
             }
@@ -82,30 +74,20 @@ class WithdrawDetailViewController: BaseViewController {
             self.isFetching = false
             
             if let info = addressInfo {
-                if self.isEOS {
-                    self.eosContainerView?.data = info
-                } else {
-                    self.containerView?.data = info
-                }
+                self.containerView?.data = info
             } else {
                 main {
                     if ShowToastManager.shared.showView != nil {
                         return
                     }
-                    self.showToastBox(false, message: R.string.localizable.recharge_retry.key.localized())
+                    self.showToastBox(false, message: R.string.localizable.noNetwork.key.localized())
                 }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator?.state.msgInfo.asObservable().skip(1).subscribe(onNext: {[weak self] (data) in
             guard let self = self else { return }
-            self.endLoading()
-        
-            if self.isEOS {
-                self.eosContainerView?.projectData = data
-            } else {
-                self.containerView?.projectData = data
-            }
-            
+            self.containerView?.projectData = data
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
@@ -118,7 +100,7 @@ class WithdrawDetailViewController: BaseViewController {
         }
         startLoading()
         self.isFetching = true
-        let name = appData.assetInfo[(self.trade?.id)!]?.symbol.filterJade
+        let name = appData.assetInfo[(self.trade?.id)!]?.symbol.filterSystemPrefix
         self.coordinator?.resetDepositAddress(name!)
     }
 }

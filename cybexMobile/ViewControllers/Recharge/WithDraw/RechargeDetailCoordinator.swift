@@ -23,13 +23,13 @@ protocol RechargeDetailStateManagerProtocol {
 
     func fetchWithDrawInfoData(_ assetName: String)
     static func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void)
-    func getFee(_ assetId: String, address: String, isEOS: Bool)
+    func getFee(_ assetId: String, address: String, tag: Bool)
     func withDraw(assetId: String,
                     amount: String,
                     address: String,
                     feeId: String,
                     feeAmount: String,
-                    isEOS: Bool,
+                    tag: Bool,
                     callback:@escaping (Any) -> Void)
     func getFinalAmount(feeId: String, amount: Decimal, available: Decimal) -> (Decimal, String)
 
@@ -109,7 +109,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
     func fetchWithDrawInfoData(_ assetName: String) {
-        GatewayService.shared.getWithdrawInfo(assetName: assetName).done { (data) in
+        GatewayService().getWithdrawInfo(assetName: assetName).done { (data) in
             if case let data? = data {
                 self.getWithdrawAccountInfo(data.gatewayAccount)
                 self.store.dispatch(FetchWithdrawInfo(data: data))
@@ -126,12 +126,12 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         CybexWebSocketService.shared.send(request: requeset)
     }
 
-    func getFee(_ assetId: String, address: String, isEOS: Bool) {
-        let name = appData.assetInfo[assetId]?.symbol.filterJade
+    func getFee(_ assetId: String, address: String, tag: Bool) {
+        let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
         let memo = self.state.memo.value
 
         var memoAddress = GatewayService.withDrawMemo(name!, address: address)
-        if isEOS {
+        if tag {
             if !memo.isEmpty {
                 memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
             }
@@ -155,7 +155,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
    class func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void) {
-        GatewayService.shared.verifyAddress(assetName: assetName, address: address).done { (data) in
+        GatewayService().verifyAddress(assetName: assetName, address: address).done { (data) in
             if case let data? = data {
                 callback(data.valid)
             } else {
@@ -164,12 +164,12 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }.cauterize()
     }
 
-    func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback: @escaping (Any) -> Void) {
+    func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, tag: Bool, callback: @escaping (Any) -> Void) {
         if let memoKey = self.state.memoKey.value {
-            let name = appData.assetInfo[assetId]?.symbol.filterJade
+            let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
             let memo = self.state.memo.value
             var memoAddress = GatewayService.withDrawMemo(name!, address: address)
-            if isEOS {
+            if tag {
                 if !memo.isEmpty {
                     memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
                 }
@@ -197,8 +197,9 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                  from_memo_key: fromMemoKey,
                                                                  to_memo_key: memoKey)
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                    main {
-                        callback(data)
+                    callback(data)
+                    if String(describing: data) != "<null>"{
+                        Log.fail(data)
                     }
                 }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)

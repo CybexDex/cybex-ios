@@ -262,7 +262,8 @@ extension CBKLineDrawView {
                 lastPanPoint = location
                 return
             }
-            if abs(location.x - (lastPanPoint?.x ?? 0)) < klineUnit {
+            let rx = lastPanPoint?.x ?? 0
+            if abs(location.x - rx) < klineUnit {
                 return
             }
 
@@ -350,7 +351,9 @@ extension CBKLineDrawView {
             horizantalTop.constant = location.y
             indicatorHorizontalView.layoutIfNeeded()
 
-            if abs(previousOffset - location.x) < abs(nextOffset - location.x) {
+            let pre = abs(previousOffset - location.x)
+            let next = abs(nextOffset - location.x)
+            if pre < next {
                 verticalLeft.constant = previousOffset
                 indicatorVerticalView.layoutIfNeeded()
 

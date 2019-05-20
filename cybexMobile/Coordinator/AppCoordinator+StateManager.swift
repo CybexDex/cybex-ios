@@ -13,6 +13,7 @@ import SwifterSwift
 import Reachability
 import SwiftyJSON
 import HandyJSON
+import RxSwift
 
 extension AppCoordinator {
     func fetchTickerData(_ pair: Pair, priority: Operation.QueuePriority) {
@@ -52,24 +53,18 @@ extension AppCoordinator {
     }
 
     func repeatFetchMarket(_ priority: Operation.QueuePriority = .normal) {
-        if self.fetchPariTimer != nil {
-            self.fetchPariTimer?.pause()
-            self.fetchPariTimer = nil
-        }
+        fetchMarketListTimer?.dispose()
 
-        self.fetchPariTimer = Repeater.every(.seconds(UserManager.shared.refreshTime), { [weak self](timer) in
-            main {
-                guard let self = self else { return }
+        fetchMarketListTimer = Observable<Int>.interval(UserManager.shared.refreshTime, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (n) in
+            guard let self = self else { return }
 
-                if reachability.connection == .none ||
-                    !CybexWebSocketService.shared.checkNetworConnected() {
-                        appCoodinator.fetchPariTimer = nil
-                        timer.pause()
-                        return
-                }
-                self.state.property.otherRequestRelyData.accept(1)
-                self.fetchAllPairsMarkets(.veryLow)
+            if reachability.connection == .none ||
+                !CybexWebSocketService.shared.checkNetworConnected() {
+                self.fetchMarketListTimer?.dispose()
+                return
             }
+            self.state.property.otherRequestRelyData.accept(1)
+            self.fetchAllPairsMarkets(.veryLow)
         })
     }
 
@@ -90,8 +85,6 @@ extension AppCoordinator {
             fetchAllPairsMarkets(.high)
         }
 
-        if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
-            repeatFetchMarket(.veryLow)
-        }
+        repeatFetchMarket(.veryLow)
     }
 }

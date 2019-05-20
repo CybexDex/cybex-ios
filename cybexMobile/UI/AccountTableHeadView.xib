@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountTableHeadView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
+                <outlet property="coinAge" destination="Ktn-7G-Z0M" id="LQd-UC-Goy"/>
+                <outlet property="coinAgeContainer" destination="zto-wn-nbp" id="fy3-G2-YbV"/>
+                <outlet property="coinAgeIcon" destination="NsS-j4-nbH" id="rJB-p0-bvt"/>
                 <outlet property="iconImageView" destination="3JQ-ER-phP" id="ZR1-K7-j9i"/>
                 <outlet property="titleLabel" destination="gzX-sE-u4A" id="Z07-qf-yzo"/>
             </connections>
@@ -76,9 +79,28 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zto-wn-nbp">
+                    <rect key="frame" x="34" y="149" width="68" height="24"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktn-7G-Z0M">
+                            <rect key="frame" x="0.0" y="0.0" width="36" height="24"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="coin_age"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud_explain" translatesAutoresizingMaskIntoConstraints="NO" id="NsS-j4-nbH">
+                            <rect key="frame" x="44" y="0.0" width="24" height="24"/>
+                        </imageView>
+                    </subviews>
+                </stackView>
             </subviews>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gzX-sE-u4A" secondAttribute="trailing" constant="34" id="2cs-aw-jfJ"/>
+                <constraint firstItem="zto-wn-nbp" firstAttribute="leading" secondItem="gzX-sE-u4A" secondAttribute="leading" id="3Oc-IH-rXd"/>
+                <constraint firstItem="zto-wn-nbp" firstAttribute="top" secondItem="gzX-sE-u4A" secondAttribute="bottom" constant="7" id="88V-1g-HJm"/>
                 <constraint firstItem="qQn-Zv-smL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="SLQ-jp-SGp"/>
                 <constraint firstItem="gzX-sE-u4A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="SxX-ih-ql3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gzX-sE-u4A" secondAttribute="bottom" constant="40" id="b7j-h9-54S"/>
@@ -92,5 +114,6 @@
     </objects>
     <resources>
         <image name="accountAvatar" width="56" height="56"/>
+        <image name="cloud_explain" width="24" height="24"/>
     </resources>
 </document>

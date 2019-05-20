@@ -1,9 +1,10 @@
 {
-  "commitish" : "2.2",
+  "commitish" : "3.0",
   "iOS" : [
     {
       "name" : "BiometricAuthentication",
-      "hash" : "116369a7374b5273a05e95b4bd2a1b0c6c2fa7f840c10ade63fdf567ab8e0eeb"
+      "hash" : "1d294dfb8f0b22043c2e5c20fd18d88ad33d29f1ff912541da65e0b531a7a5b1",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

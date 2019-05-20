@@ -135,7 +135,8 @@ extension RegisterViewController {
             let keyboardRec = nsValue.cgRectValue
 
             if self.iconTopContainer.constant == 15 {
-                let distance = abs(self.view.height - self.errorStackView.bottom - keyboardRec.height)
+                let gap = self.view.height - self.errorStackView.bottom
+                let distance = abs(gap - keyboardRec.height)
                 self.iconTopContainer.constant -= (distance - 10)
             }
         }

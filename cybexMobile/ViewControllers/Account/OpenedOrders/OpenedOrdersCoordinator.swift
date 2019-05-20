@@ -40,6 +40,11 @@ class OpenedOrdersCoordinator: NavCoordinator {
 
     let service = OCOWebSocketService()
 
+    lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
+        if !AppHelper.shared.infront {
+            self.service.disconnect()
+        }
+    })
 }
 
 extension OpenedOrdersCoordinator: OpenedOrdersCoordinatorProtocol {
@@ -132,7 +137,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
-            self.service.disconnect()
+            self.disconnectDispatch()
         }
     }
 

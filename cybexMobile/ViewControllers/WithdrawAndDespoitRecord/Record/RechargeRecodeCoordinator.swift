@@ -38,13 +38,13 @@ extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
         guard let explorers = self.state.explorers.value else { return }
         var url = ""
         for explorer in explorers {
-            if explorer.asset.filterJade == asset {
+            if explorer.asset.filterSystemPrefix == asset {
                 url = explorer.explorer + hash
             }
         }
         if url.count == 0 {
             for explorer in explorers {
-                if explorer.asset.filterJade == "ETH" {
+                if explorer.asset.filterSystemPrefix == "ETH" {
                     url = explorer.explorer + hash
                 }
             }

@@ -11,11 +11,12 @@ import UIKit
 class ScanCornerView: UIView {
 
     lazy var lineView: UIImageView = {
-        let image = R.image.ic_mask_scanning_line()
+        let image = R.image.ic_mask_scanning_line()!
+        let total = image.size.width * image.size.height
         let lineView = UIImageView(frame: CGRect(x: 0,
                                                  y: 5,
                                                  width: self.width,
-                                                 height: self.width / (image?.size.width)! * (image?.size.height)!))
+                                                 height: self.width / total))
         lineView.image = image
         lineView.contentMode = .scaleAspectFit
         return lineView
@@ -32,7 +33,8 @@ class ScanCornerView: UIView {
 
         let animation = CABasicAnimation()
         animation.keyPath = "position"
-        animation.toValue = NSValue(cgPoint: CGPoint(x: lineView.center.x, y: self.height - lineView.height / 2 - 5))
+        let y = self.height - lineView.height / 2
+        animation.toValue = NSValue(cgPoint: CGPoint(x: lineView.center.x, y: y - 5))
         animation.duration = 1.5
         animation.autoreverses = true
         animation.repeatCount = HUGE

@@ -113,7 +113,7 @@ extension JWA {
 
             let sequenceEncoded = (modulusEncoded + exponentEncoded).encode(as: .sequence)
 
-            return Data(bytes: sequenceEncoded)
+            return Data(sequenceEncoded)
         }
     }
 }
@@ -159,7 +159,7 @@ extension JWA {
 
             let uncompressedIndicator: [UInt8] = [ASN1Type.uncompressIndicator.byte]
 
-            return Data(bytes: uncompressedIndicator + xBytes + yBytes)
+            return Data(uncompressedIndicator + xBytes + yBytes)
         }
     }
 }
@@ -202,7 +202,9 @@ private func lengthField(of valueField: [UInt8]) -> [UInt8] {
     }
 
     // The number of bytes needed to encode count.
-    let lengthBytesCount = Int((log2(Double(count)) / 8) + 1)
+
+    let k = log2(Double(count))
+    let lengthBytesCount = Int(k / 8 + 1)
 
     // The first byte in the length field encoding the number of remaining bytes.
     let firstLengthFieldByte = UInt8(128 + lengthBytesCount)

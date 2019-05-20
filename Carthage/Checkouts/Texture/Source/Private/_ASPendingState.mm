@@ -79,6 +79,7 @@ typedef struct {
   int setShouldGroupAccessibilityChildren:1;
   int setAccessibilityIdentifier:1;
   int setAccessibilityNavigationStyle:1;
+  int setAccessibilityCustomActions:1;
   int setAccessibilityHeaderElements:1;
   int setAccessibilityActivationPoint:1;
   int setAccessibilityPath:1;
@@ -86,7 +87,12 @@ typedef struct {
   int setLayoutMargins:1;
   int setPreservesSuperviewLayoutMargins:1;
   int setInsetsLayoutMarginsFromSafeArea:1;
+  int setActions:1;
+  int setMaskedCorners : 1;
 } ASPendingStateFlags;
+
+
+static constexpr ASPendingStateFlags kZeroFlags = {0};
 
 @implementation _ASPendingState
 {
@@ -136,10 +142,12 @@ typedef struct {
   BOOL shouldGroupAccessibilityChildren;
   NSString *accessibilityIdentifier;
   UIAccessibilityNavigationStyle accessibilityNavigationStyle;
+  NSArray *accessibilityCustomActions;
   NSArray *accessibilityHeaderElements;
   CGPoint accessibilityActivationPoint;
   UIBezierPath *accessibilityPath;
   UISemanticContentAttribute semanticContentAttribute API_AVAILABLE(ios(9.0), tvos(9.0));
+  NSDictionary<NSString *, id<CAAction>> *actions;
 
   ASPendingStateFlags _flags;
 }
@@ -209,6 +217,8 @@ ASDISPLAYNODE_INLINE void ASPendingStateApplyMetricsToLayer(_ASPendingState *sta
 @synthesize layoutMargins=layoutMargins;
 @synthesize preservesSuperviewLayoutMargins=preservesSuperviewLayoutMargins;
 @synthesize insetsLayoutMarginsFromSafeArea=insetsLayoutMarginsFromSafeArea;
+@synthesize actions=actions;
+@synthesize maskedCorners = maskedCorners;
 
 static CGColorRef blackColorRef = NULL;
 static UIColor *defaultTintColor = nil;
@@ -281,6 +291,7 @@ static UIColor *defaultTintColor = nil;
   shouldGroupAccessibilityChildren = NO;
   accessibilityIdentifier = nil;
   accessibilityNavigationStyle = UIAccessibilityNavigationStyleAutomatic;
+  accessibilityCustomActions = nil;
   accessibilityHeaderElements = nil;
   accessibilityActivationPoint = CGPointZero;
   accessibilityPath = nil;
@@ -408,6 +419,12 @@ static UIColor *defaultTintColor = nil;
 {
   cornerRadius = newCornerRadius;
   _flags.setCornerRadius = YES;
+}
+
+- (void)setMaskedCorners:(CACornerMask)newMaskedCorners
+{
+  maskedCorners = newMaskedCorners;
+  _flags.setMaskedCorners = YES;
 }
 
 - (void)setContentMode:(UIViewContentMode)newContentMode
@@ -584,6 +601,12 @@ static UIColor *defaultTintColor = nil;
 - (void)setSemanticContentAttribute:(UISemanticContentAttribute)attribute API_AVAILABLE(ios(9.0), tvos(9.0)) {
   semanticContentAttribute = attribute;
   _flags.setSemanticContentAttribute = YES;
+}
+
+- (void)setActions:(NSDictionary<NSString *,id<CAAction>> *)actionsArg
+{
+  actions = [actionsArg copy];
+  _flags.setActions = YES;
 }
 
 - (BOOL)isAccessibilityElement
@@ -777,6 +800,19 @@ static UIColor *defaultTintColor = nil;
   accessibilityNavigationStyle = newAccessibilityNavigationStyle;
 }
 
+- (NSArray *)accessibilityCustomActions
+{
+  return accessibilityCustomActions;
+}
+
+- (void)setAccessibilityCustomActions:(NSArray *)newAccessibilityCustomActions
+{
+  _flags.setAccessibilityCustomActions = YES;
+  if (accessibilityCustomActions != newAccessibilityCustomActions) {
+    accessibilityCustomActions = [newAccessibilityCustomActions copy];
+  }
+}
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (NSArray *)accessibilityHeaderElements
@@ -878,6 +914,12 @@ static UIColor *defaultTintColor = nil;
   if (flags.setCornerRadius)
     layer.cornerRadius = cornerRadius;
 
+  if (AS_AVAILABLE_IOS_TVOS(11, 11)) {
+    if (flags.setMaskedCorners) {
+      layer.maskedCorners = maskedCorners;
+    }
+  }
+
   if (flags.setContentMode)
     layer.contentsGravity = ASDisplayNodeCAContentsGravityFromUIContentMode(contentMode);
 
@@ -917,6 +959,9 @@ static UIColor *defaultTintColor = nil;
   if (flags.setOpaque)
     ASDisplayNodeAssert(layer.opaque == opaque, @"Didn't set opaque as desired");
 
+  if (flags.setActions)
+    layer.actions = actions;
+
   ASPendingStateApplyMetricsToLayer(self, layer);
   
   if (flags.needsLayout)
@@ -936,7 +981,7 @@ static UIColor *defaultTintColor = nil;
    because a different setter would be called.
    */
 
-  CALayer *layer = view.layer;
+  unowned CALayer *layer = view.layer;
 
   ASPendingStateFlags flags = _flags;
   if (__shouldSetNeedsDisplay(layer)) {
@@ -978,6 +1023,9 @@ static UIColor *defaultTintColor = nil;
 
   if (flags.setRasterizationScale)
     layer.rasterizationScale = rasterizationScale;
+
+  if (flags.setActions)
+    layer.actions = actions;
 
   if (flags.setClipsToBounds)
     view.clipsToBounds = clipsToBounds;
@@ -1123,7 +1171,13 @@ static UIColor *defaultTintColor = nil;
   
   if (flags.setAccessibilityNavigationStyle)
     view.accessibilityNavigationStyle = accessibilityNavigationStyle;
-  
+
+  if (AS_AVAILABLE_IOS_TVOS(8, 9)) {
+    if (flags.setAccessibilityCustomActions) {
+      view.accessibilityCustomActions = accessibilityCustomActions;
+    }
+  }
+
 #if TARGET_OS_TV
   if (flags.setAccessibilityHeaderElements)
     view.accessibilityHeaderElements = accessibilityHeaderElements;
@@ -1262,6 +1316,11 @@ static UIColor *defaultTintColor = nil;
   pendingState.shouldGroupAccessibilityChildren = view.shouldGroupAccessibilityChildren;
   pendingState.accessibilityIdentifier = view.accessibilityIdentifier;
   pendingState.accessibilityNavigationStyle = view.accessibilityNavigationStyle;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+  if (AS_AVAILABLE_IOS_TVOS(8, 9)) {
+    pendingState.accessibilityCustomActions = view.accessibilityCustomActions;
+  }
+#endif
 #if TARGET_OS_TV
   pendingState.accessibilityHeaderElements = view.accessibilityHeaderElements;
 #endif
@@ -1272,7 +1331,7 @@ static UIColor *defaultTintColor = nil;
 
 - (void)clearChanges
 {
-  _flags = (ASPendingStateFlags){ 0 };
+  _flags = kZeroFlags;
 }
 
 - (BOOL)hasSetNeedsLayout
@@ -1287,69 +1346,7 @@ static UIColor *defaultTintColor = nil;
 
 - (BOOL)hasChanges
 {
-  ASPendingStateFlags flags = _flags;
-
-  return (flags.setAnchorPoint
-  || flags.setPosition
-  || flags.setZPosition
-  || flags.setFrame
-  || flags.setBounds
-  || flags.setPosition
-  || flags.setTransform
-  || flags.setSublayerTransform
-  || flags.setContents
-  || flags.setContentsGravity
-  || flags.setContentsRect
-  || flags.setContentsCenter
-  || flags.setContentsScale
-  || flags.setRasterizationScale
-  || flags.setClipsToBounds
-  || flags.setBackgroundColor
-  || flags.setTintColor
-  || flags.setHidden
-  || flags.setAlpha
-  || flags.setCornerRadius
-  || flags.setContentMode
-  || flags.setUserInteractionEnabled
-  || flags.setExclusiveTouch
-  || flags.setShadowOpacity
-  || flags.setShadowOffset
-  || flags.setShadowRadius
-  || flags.setShadowColor
-  || flags.setBorderWidth
-  || flags.setBorderColor
-  || flags.setAutoresizingMask
-  || flags.setAutoresizesSubviews
-  || flags.setNeedsDisplayOnBoundsChange
-  || flags.setAllowsGroupOpacity
-  || flags.setAllowsEdgeAntialiasing
-  || flags.setEdgeAntialiasingMask
-  || flags.needsDisplay
-  || flags.needsLayout
-  || flags.setAsyncTransactionContainer
-  || flags.setOpaque
-  || flags.setSemanticContentAttribute
-  || flags.setLayoutMargins
-  || flags.setPreservesSuperviewLayoutMargins
-  || flags.setInsetsLayoutMarginsFromSafeArea
-  || flags.setIsAccessibilityElement
-  || flags.setAccessibilityLabel
-  || flags.setAccessibilityAttributedLabel
-  || flags.setAccessibilityHint
-  || flags.setAccessibilityAttributedHint
-  || flags.setAccessibilityValue
-  || flags.setAccessibilityAttributedValue
-  || flags.setAccessibilityTraits
-  || flags.setAccessibilityFrame
-  || flags.setAccessibilityLanguage
-  || flags.setAccessibilityElementsHidden
-  || flags.setAccessibilityViewIsModal
-  || flags.setShouldGroupAccessibilityChildren
-  || flags.setAccessibilityIdentifier
-  || flags.setAccessibilityNavigationStyle
-  || flags.setAccessibilityHeaderElements
-  || flags.setAccessibilityActivationPoint
-  || flags.setAccessibilityPath);
+  return memcmp(&_flags, &kZeroFlags, sizeof(ASPendingStateFlags));
 }
 
 - (void)dealloc

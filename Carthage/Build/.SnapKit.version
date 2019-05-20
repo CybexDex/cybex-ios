@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "SnapKit",
-      "hash" : "70b4b9541756c22c133d56be24a478db675996a27be41357cccd8e5c570eebbd"
+      "hash" : "81d14293f1fd039d051768aeceb592bcec9b71393269c4f05be68de7fe24422e",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

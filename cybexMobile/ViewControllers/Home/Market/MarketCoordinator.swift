@@ -59,7 +59,7 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
         self.rootVC.tabBarController?.selectedIndex = 2
         self.rootVC.popToRootViewController(animated: false)
 
-        SwifterSwift.delay(milliseconds: 100) {
+        delay(milliseconds: 100) {
             if let baseNavi = self.rootVC.tabBarController?.viewControllers![2] as? BaseNavigationController, let vc = baseNavi.topViewController as? TradeViewController {
                 vc.pair = pair
                 vc.selectedIndex = isBuy ? 0 : 1

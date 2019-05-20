@@ -30,18 +30,18 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     var pair: Pair? {
         didSet {
             if vcType == ViewType.businessTitle.rawValue {
-                guard let pair = pair, let index = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
+                guard let pair = pair, let index = MarketConfiguration.marketBaseAssets.map({ $0.id }).firstIndex(of: pair.base) else { return }
 
-                if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+                if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).firstIndex(where: { (ticker) -> Bool in
                     return ticker.quote == pair.quote
                 }) {
                     self.businessTitleView?.selectedIndex = selectedIndex
                     self.businessTitleView?.leftView.changeToHighStatus(1 + index, save: true)
                 }
             } else if vcType == ViewType.gameTradeTitle.rawValue {
-                guard let pair = pair, let index = MarketConfiguration.gameMarketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
+                guard let pair = pair, let index = MarketConfiguration.gameMarketBaseAssets.map({ $0.id }).firstIndex(of: pair.base) else { return }
 
-                if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+                if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).firstIndex(where: { (ticker) -> Bool in
                     return ticker.quote == pair.quote
                 }) {
                     self.businessTitleView?.selectedIndex = selectedIndex
@@ -81,6 +81,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        startLoading()
         setupUI()
     }
 
@@ -118,31 +120,48 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.contentView?.tableView.reloadData()
+
+        if checkNeedRefresh(appData.tickerData.value) {
+            self.updateUI()
+            if self.vcType == ViewType.comprehensive.rawValue {
+                self.parent?.endLoading()
+            } else {
+                self.endLoading()
+            }
+        }
+    }
+
+    func checkNeedRefresh(_ result: [Ticker]) -> Bool {
+        if self.vcType == ViewType.comprehensive.rawValue {
+            if result.count >= MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
+                return true
+            }
+        } else {
+            let tickers = result.filter { (ticker) -> Bool in
+                return ticker.base == self.base
+            }
+            if tickers.count == MarketConfiguration.shared.marketPairs.value.filter({ $0.base == self.base}).count,
+                tickers.count != 0 {
+                return true
+            }
+        }
+        return false
     }
 
     override func configureObserveState() {
         appData.tickerData.asObservable().filter({[weak self] (result) -> Bool in
             guard let self = self else { return false}
-            if self.vcType == ViewType.comprehensive.rawValue {
-                if result.count >= MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
-                    return true
-                }
-            } else {
-                let tickers = result.filter { (ticker) -> Bool in
-                    return ticker.base == self.base
-                }
-                if tickers.count == MarketConfiguration.shared.marketPairs.value.filter({ $0.base == self.base}).count,
-                    tickers.count != 0 {
-                    return true
-                }
-            }
-            return false
+
+            return self.checkNeedRefresh(result)
         }).take(1)
             .subscribe(onNext: {[weak self] (_) in
                 guard let self = self else { return }
                 self.updateUI()
-                self.endLoading()
+                if self.vcType == ViewType.comprehensive.rawValue {
+                    self.parent?.endLoading()
+                } else {
+                    self.endLoading()
+                }
 
                 self.timer = Timer.scheduledTimer(timeInterval: 3,
                                                   target: self,

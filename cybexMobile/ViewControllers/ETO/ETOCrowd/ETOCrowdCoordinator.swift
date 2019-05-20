@@ -58,7 +58,7 @@ extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
         let feeAmount = fee.amount.formatCurrency(digitNum: feeInfo.precision)
         self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(),
                                                    attributes: UIHelper.confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)",
-                                                    fee: "\(feeAmount) \(feeInfo.symbol.filterJade)"), setup: { (_) in
+                                                    fee: "\(feeAmount) \(feeInfo.symbol.filterSystemPrefix)"), setup: { (_) in
                 //            for label in labels {
                 //                label.content.numberOfLines = 1
                 //                label.content.lineBreakMode = .byTruncatingMiddle
@@ -80,7 +80,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         var assetID = ""
         for (_, value) in appData.assetInfo {
-            if value.symbol.filterJade == data.baseTokenName {
+            if value.symbol.filterSystemPrefix == data.baseTokenName {
                 assetID = value.id
                 break
             }
@@ -123,7 +123,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         guard let balances = UserManager.shared.fullAccount.value?.balances, let data = self.state.data.value, let userModel = self.state.userData.value else { return }
 
         let balance = balances.filter { (balance) -> Bool in
-            if let name = appData.assetInfo[balance.assetType]?.symbol.filterJade {
+            if let name = appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix {
                 return name == data.baseTokenName
             }
 
@@ -176,7 +176,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         var assetID = ""
         for (_, value) in appData.assetInfo {
-            if value.symbol.filterJade == data.baseTokenName {
+            if value.symbol.filterSystemPrefix == data.baseTokenName {
                 assetID = value.id
                 break
             }

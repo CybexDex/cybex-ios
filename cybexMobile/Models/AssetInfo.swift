@@ -54,7 +54,7 @@ class Asset: HandyJSON {
     }
 
     func volumeString() -> String {
-        let info = appData.assetInfo[assetID]!
+        guard let info = appData.assetInfo[assetID] else { return "" }
 
         return (amount.decimal() / pow(10, info.precision)).suffixNumber(digitNum: info.precision, padZero: true)
     }

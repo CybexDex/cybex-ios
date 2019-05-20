@@ -1,9 +1,10 @@
 {
-  "commitish" : "4.0.1",
+  "commitish" : "4.1.1",
   "iOS" : [
     {
       "name" : "ReSwift",
-      "hash" : "02275e56af55c19c948747fdb53534806ce2184287e514813d774d54c0e7df88"
+      "hash" : "c9d2c324b34b6ef1339578361359b02ebe25887a579ebf8283aee725ee61b03d",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

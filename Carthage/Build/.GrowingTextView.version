@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "GrowingTextView",
-      "hash" : "4921f2239a442f0e712f94ca792626b82bcdc9aa371aad27a6c4484068d4e099"
+      "hash" : "5cfc1900571ee49d95593d85df79025619a7e45b58df02190947ffd188485444",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

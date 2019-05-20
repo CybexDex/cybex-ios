@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NVActivityIndicatorView
 
-internal extension UIApplication {
+extension UIApplication {
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return topViewController(base: nav.visibleViewController)
@@ -27,43 +27,43 @@ internal extension UIApplication {
     }
 }
 
-public extension UIView {
+extension UIView {
     
     private struct AssociatedKeys {
         static var iprogressHud:iProgressHUD?
     }
     
     /** Set x Position */
-    internal func setX(x: CGFloat) {
+    func setX(x: CGFloat) {
         var frame: CGRect = self.frame
         frame.origin.x = x
         self.frame = frame
     }
     /** Set y Position */
-    internal func setY(y: CGFloat) {
+    func setY(y: CGFloat) {
         var frame: CGRect = self.frame
         frame.origin.y = y
         self.frame = frame
     }
     /** Set z Position */
-    internal func setZ(z: CGFloat) {
+    func setZ(z: CGFloat) {
         self.layer.zPosition = z
     }
     /** Set Width */
-    internal func setWidth(width: CGFloat) {
+    func setWidth(width: CGFloat) {
         var frame: CGRect = self.frame
         frame.size.width = width
         self.frame = frame
     }
     /** Set Height */
-    internal func setHeight(height: CGFloat) {
+    func setHeight(height: CGFloat) {
         var frame: CGRect = self.frame
         frame.size.height = height
         self.frame = frame
     }
     
     /** Get class of iProgressHUD. Make sure to attach progress first in this view. */
-    internal var iprogressHud: iProgressHUD? {
+    var iprogressHud: iProgressHUD? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.iprogressHud) as? iProgressHUD
         }
@@ -75,7 +75,7 @@ public extension UIView {
     }
     
     /** Show the iProgressHUD directly from this view. */
-    public func showProgress() {
+    func showProgress() {
         if iprogressHud == nil {
             print("Failed! iProgressHUD never attached in this view.")
             return
@@ -84,7 +84,7 @@ public extension UIView {
     }
     
     /** Stop the iProgressHUD directly from this view. */
-    public func dismissProgress() {
+    func dismissProgress() {
         if iprogressHud == nil {
             print("Failed! iProgressHUD never attached in this view.")
             return
@@ -93,7 +93,7 @@ public extension UIView {
     }
     
     /** Update the indicator style of iProgressHUD directly from this view. */
-    public func updateIndicator(style: NVActivityIndicatorType) {
+    func updateIndicator(style: NVActivityIndicatorType) {
         if iprogressHud == nil {
             print("Failed! iProgressHUD never attached in this view.")
             return
@@ -104,7 +104,7 @@ public extension UIView {
     }
     
     /** Update the caption of iProgressHUD directly from this view. */
-    public func updateCaption(text: String) {
+    func updateCaption(text: String) {
         if iprogressHud == nil {
             print("Failed! iProgressHUD never attached in this view.")
             return
@@ -116,7 +116,7 @@ public extension UIView {
     }
     
     /** Update colors of iProgressHUD. Set nil if want not to change. */
-    public func updateColors(modalColor: UIColor?, boxColor: UIColor?, indicatorColor: UIColor?, captionColor: UIColor?) {
+    func updateColors(modalColor: UIColor?, boxColor: UIColor?, indicatorColor: UIColor?, captionColor: UIColor?) {
         if iprogressHud == nil {
             print("Failed! iProgressHUD never attached in this view.")
             return
@@ -144,9 +144,9 @@ public extension UIView {
     }
 }
 
-internal extension iProgressHUD {
+extension iProgressHUD {
     
-    internal func copy() -> iProgressHUD {
+    func copy() -> iProgressHUD {
         let reinit = iProgressHUD()
         reinit.indicatorStyle = self.indicatorStyle
         reinit.iprogressStyle = self.iprogressStyle

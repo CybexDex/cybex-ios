@@ -14,14 +14,12 @@ import ChatRoom
 import MapKit
 import cybex_ios_core_cpp
 import TinyConstraints
-import BeareadToast_swift
 import SwiftTheme
 
 import IQKeyboardManagerSwift
 
 class ChatViewController: MessagesViewController {
     let sectionInset = UIEdgeInsets(top: 12, left: 13, bottom: 12, right: 13)
-    weak var toast: BeareadToast?
 
     var downInputView: ChatDownInputView?
     var messageView: ChatDirectionIconView?
@@ -52,21 +50,11 @@ class ChatViewController: MessagesViewController {
         super.viewDidLoad()
         IQKeyboardManager.shared.enableAutoToolbar = false
         setupUI()
+        self.view.initProgressHud()
+
         self.startLoading()
         setupData()
         setupEvent()
-    }
-    
-    
-    func startLoading() {
-        guard let hud = toast else {
-            toast = BeareadToast.showLoading(inView: self.view)
-            return
-        }
-        
-        if !hud.isDescendant(of: self.view) {
-            toast = BeareadToast.showLoading(inView: self.view)
-        }
     }
     
     override func leftAction(_ sender: UIButton) {
@@ -80,14 +68,6 @@ class ChatViewController: MessagesViewController {
         }
     }
 
-    func isLoading() -> Bool {
-        return self.toast?.alpha == 1
-    }
-    
-    func endLoading() {
-        toast?.hide(true)
-    }
-    
     func setupShadowView() {
         self.shadowView = UIView(frame: self.view.bounds)
         self.shadowView?.theme_backgroundColor = [UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5).hexString(true) ,UIColor.steel50.hexString(true)]
@@ -123,7 +103,7 @@ class ChatViewController: MessagesViewController {
     
     func loadFirstMessages() {
         if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
-            let channel = quoteInfo.symbol.filterOnlyJade + "/" + baseInfo.symbol.filterOnlyJade
+            let channel = quoteInfo.symbol.filterOnlySystemPrefix + "/" + baseInfo.symbol.filterOnlySystemPrefix
             self.coordinator?.connectChat(channel)
         }
     }
@@ -171,7 +151,7 @@ class ChatViewController: MessagesViewController {
     
     func setupUI() {
         if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
-            self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
+            self.title = quoteInfo.symbol.filterSystemPrefix + "/" + baseInfo.symbol.filterSystemPrefix
         }
         
         self.view.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
@@ -328,13 +308,13 @@ class ChatViewController: MessagesViewController {
             guard let self = self else { return }
             
             if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
-                self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade + "(\(numberOfMember))"
+                self.title = quoteInfo.symbol.filterSystemPrefix + "/" + baseInfo.symbol.filterSystemPrefix + "(\(numberOfMember))"
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         #if DEBUG
         self.coordinator?.state.chatState.asObservable().skip(1).subscribe(onNext: { [weak self](connectState) in
-            guard let self = self, let connectState = connectState else { return }
+            guard let _ = self, let connectState = connectState else { return }
             
             var message = ""
             switch connectState{
@@ -349,14 +329,13 @@ class ChatViewController: MessagesViewController {
             default:
                 break
             }
-            
-            if message != "已链接" {
-                _ = BeareadToast.showError(text: message, inView: self.view, hide: 1)
+
+            if message == "已链接" {
+                UIHelper.showSuccessTop(message, autodismiss: true)
+            } else {
+                UIHelper.showErrorTop(message)
             }
-            else {
-                _ = BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
-            }
-            
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         #endif
@@ -550,19 +529,24 @@ extension ChatViewController {
             self.showToastBox(false, message: R.string.localizable.chat_space_message.key.localized())
             return
         }
-        
-       
+
         if self.isRealName {
-            if !UserManager.shared.isLocked {
+            if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+                if #available(iOS 11.0, *) {
+                    if !UserManager.shared.checkExistCloudPassword() {
+                        showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+                    } else {
+                        showPasswordBox()
+                    }
+                }
+            } else if UserManager.shared.isLocked {
+                self.downInputView?.inputTextField.text = message
+                self.downInputView?.setupBtnState()
+                showPasswordBox()
+            } else {
                 self.coordinator?.send(message,
                                        username: UserManager.shared.name.value!,
                                        sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message).replacingOccurrences(of: "\"", with: "") : "")
-            }
-            else {
-                self.downInputView?.inputTextField.text = message
-                self.downInputView?.setupBtnState()
-                self.showPasswordBox()
-                return
             }
         }
         else {
@@ -604,10 +588,11 @@ extension ChatViewController {
     }
     
     override func passwordPassed(_ passed: Bool) {
+        guard let message = self.downInputView?.inputTextField.text else {
+            return
+        }
+
         if passed {
-            guard let message = self.downInputView?.inputTextField.text else {
-                return
-            }
             self.coordinator?.send(message,
                                    username: UserManager.shared.name.value!,
                                    sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message).replacingOccurrences(of: "\"", with: "") : "")
@@ -616,6 +601,13 @@ extension ChatViewController {
         }
         else {
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
+    }
+
+    override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.enotes_feature_hint.key.localized() { // 添加云账户
+            pushCloudPasswordViewController(nil)
+            return
         }
     }
 }

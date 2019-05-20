@@ -1,9 +1,10 @@
 {
-  "commitish" : "6.8.3",
+  "commitish" : "6.8.4",
   "iOS" : [
     {
       "name" : "PromiseKit",
-      "hash" : "0ce25dd836450721273c8d65c82341443a72f28eae32fd376e7ab4b3fb32b912"
+      "hash" : "81ea97490e0dc827c30dae1a021482efed455c2be0822a5aedd211b683736b66",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

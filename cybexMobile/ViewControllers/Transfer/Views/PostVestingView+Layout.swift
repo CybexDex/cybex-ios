@@ -50,7 +50,7 @@ extension PostVestingView {
         textfield.attributedPlaceholder = NSMutableAttributedString.init(string: R.string.localizable.vesting_time_hint.key.localized(), attributes: [NSAttributedString.Key.foregroundColor: UIColor.steel50, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
 
         stackview.arrangedSubviews[1].addSubview(textfield)
-        textfield.edges(to: textfield.superview!, excluding: .right, insets: UIEdgeInsets(top: 10, left: 12, bottom: -10, right: -10))
+        textfield.edges(to: textfield.superview!, excluding: .right, insets: UIEdgeInsets(top: 10, left: 12, bottom: 10, right: -10))
         textfield.keyboardType = .decimalPad
         textfield.delegate = self
         timeTextFiled = textfield

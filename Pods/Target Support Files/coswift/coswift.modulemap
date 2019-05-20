@@ -1,0 +1,6 @@
+framework module coswift {
+  umbrella header "coswift-umbrella.h"
+
+  export *
+  module * { export * }
+}

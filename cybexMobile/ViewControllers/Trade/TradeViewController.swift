@@ -71,7 +71,6 @@ class TradeViewController: BaseViewController {
                 return vc
             }
         }
-
         return nil
     }
     
@@ -105,10 +104,10 @@ class TradeViewController: BaseViewController {
 
         currentTopViewController?.appear()
 
-        let noticeShow = !Defaults.hasKey(.showContestTip) || Defaults[.showContestTip]
-        if let context = self.context, context.pageType == .game, noticeShow {
-            self.coordinator?.showNoticeVC()
-        }
+//        let noticeShow = !Defaults.hasKey(.showContestTip) || Defaults[.showContestTip]
+//        if let context = self.context, context.pageType == .game, noticeShow {
+//            self.coordinator?.showNoticeVC()
+//        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,6 +117,19 @@ class TradeViewController: BaseViewController {
     }
 
     func setupData() {
+        if let context = context, context.pageType == .game {
+            self.pair = Pair(base: AssetConfiguration.CybexAsset.ArenaUSDT.id, quote: AssetConfiguration.CybexAsset.ArenaETH.id)
+        } else {
+            switch AppEnv.current {
+            case .product:
+                self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
+            case .test:
+                self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.EOS.id)
+            case .uat:
+                self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
+            }
+        }
+
         self.children.forEach { (viewController) in
             if var viewController = viewController as? TradePair {
                 viewController.pariInfo = pair
@@ -143,6 +155,15 @@ class TradeViewController: BaseViewController {
                                      R.string.localizable.trade_open_orders.key]
             self.titlesView!.selectedIndex = self.selectedIndex
         })
+        
+        self.topBanner.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(jumpToRuleVC))
+        self.topBanner.addGestureRecognizer(tap)
+    }
+    
+    @objc func jumpToRuleVC() {
+        self.coordinator?.openRuleVC()
     }
     
     deinit {
@@ -226,7 +247,7 @@ class TradeViewController: BaseViewController {
     }
     
     func refreshView() {
-        self.tradeTitltView.title.text = pair.quote.symbol.filterJade + "/" + pair.base.symbol.filterJade
+        self.tradeTitltView.title.text = pair.quote.symbol.filterSystemPrefix + "/" + pair.base.symbol.filterSystemPrefix
         self.children.forEach { (viewController) in
             if let viewController = viewController as? TradePair {
                 viewController.refresh()
@@ -267,7 +288,7 @@ extension TradeViewController: TradeNavTitleViewDelegate {
             self.coordinator?.removeHomeVC { [weak self] in
                 self?.isShowingTitleView = false
                 guard let self = self else { return }
-                self.tradeTitltView.title.text = self.pair.quote.symbol.filterJade + "/" + self.pair.base.symbol.filterJade
+                self.tradeTitltView.title.text = self.pair.quote.symbol.filterSystemPrefix + "/" + self.pair.base.symbol.filterSystemPrefix
             }
         } else {
             self.chooseTitleView = UIView()

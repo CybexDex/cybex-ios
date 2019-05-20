@@ -12,4 +12,5 @@ extension AppDelegate {
     func start() {
         AppConfiguration.shared.appCoordinator.start()
     }
+
 }

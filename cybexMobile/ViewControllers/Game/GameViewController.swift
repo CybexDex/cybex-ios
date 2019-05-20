@@ -175,7 +175,7 @@ extension GameViewController {
         
     }
     
-    override func cancelImageAction(_ sender: CybexTextView) {
+    override func cancelImageAction(_ tag: String) {
         self.seal?.fulfill("3")
     }
     
@@ -254,7 +254,7 @@ extension GameViewController {
             return "0"
         }
         for balance in balances {
-            if let balanceInfo = appData.assetInfo[balance.assetType], balanceInfo.symbol.filterJade == asset.filterJade {
+            if let balanceInfo = appData.assetInfo[balance.assetType], balanceInfo.symbol.filterSystemPrefix == asset.filterSystemPrefix {
                 return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).string(digits: balanceInfo.precision, roundingMode: .down)
             }
         }

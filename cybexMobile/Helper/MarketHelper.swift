@@ -39,17 +39,17 @@ class MarketHelper {
                                   AssetConfiguration.CybexAsset.BTC.rawValue,
                                   AssetConfiguration.CybexAsset.CYB.rawValue]
 
-        let filterSymbolA = assetIDAName.filterJade
-        let filterSymbolB = assetIDBName.filterJade
+        let filterSymbolA = assetIDAName.filterSystemPrefix
+        let filterSymbolB = assetIDBName.filterSystemPrefix
 
         var indexA = -1
         var indexB = -1
 
-        if let index = relation.index(of: filterSymbolA) {
+        if let index = relation.firstIndex(of: filterSymbolA) {
             indexA = index
         }
         
-        if let index = relation.index(of: filterSymbolB) {
+        if let index = relation.firstIndex(of: filterSymbolB) {
             indexB = index
         }
 

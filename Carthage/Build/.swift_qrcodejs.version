@@ -1,9 +1,0 @@
-{
-  "commitish" : "1.1.0",
-  "iOS" : [
-    {
-      "name" : "swift_qrcodejs",
-      "hash" : "4f9d9ef415697bbcc9a9dfb6733c3aca1b29ea4fca03f0542ee8ec0d76bfb185"
-    }
-  ]
-}

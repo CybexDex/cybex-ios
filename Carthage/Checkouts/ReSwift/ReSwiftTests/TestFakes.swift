@@ -63,7 +63,9 @@ struct TestCustomAppState: StateType {
     }
 }
 
-struct SetValueAction: StandardActionConvertible {
+struct NoOpAction: Action {}
+
+struct SetValueAction {
 
     let value: Int?
     static let type = "SetValueAction"
@@ -71,19 +73,21 @@ struct SetValueAction: StandardActionConvertible {
     init (_ value: Int?) {
         self.value = value
     }
+}
 
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetValueAction: StandardActionConvertible {
     init(_ standardAction: StandardAction) {
         self.value = standardAction.payload!["value"] as! Int?
     }
 
     func toStandardAction() -> StandardAction {
         return StandardAction(type: SetValueAction.type, payload: ["value": value as AnyObject],
-                                isTypedAction: true)
+                              isTypedAction: true)
     }
-
 }
 
-struct SetValueStringAction: StandardActionConvertible {
+struct SetValueStringAction {
 
     var value: String
     static let type = "SetValueStringAction"
@@ -92,6 +96,10 @@ struct SetValueStringAction: StandardActionConvertible {
         self.value = value
     }
 
+}
+
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetValueStringAction: StandardActionConvertible {
     init(_ standardAction: StandardAction) {
         self.value = standardAction.payload!["value"] as! String
     }
@@ -104,7 +112,7 @@ struct SetValueStringAction: StandardActionConvertible {
 
 }
 
-struct SetCustomSubstateAction: StandardActionConvertible {
+struct SetCustomSubstateAction {
 
     var value: Int
     static let type = "SetCustomSubstateAction"
@@ -112,6 +120,11 @@ struct SetCustomSubstateAction: StandardActionConvertible {
     init (_ value: Int) {
         self.value = value
     }
+
+}
+
+@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
+extension SetCustomSubstateAction: StandardActionConvertible {
 
     init(_ standardAction: StandardAction) {
         self.value = standardAction.payload!["value"] as! Int
@@ -195,6 +208,19 @@ class TestStoreSubscriber<T>: StoreSubscriber {
 
     func newState(state: T) {
         receivedStates.append(state)
+    }
+}
+
+class BlockSubscriber<S>: StoreSubscriber {
+    typealias StoreSubscriberStateType = S
+    private let block: (S) -> Void
+
+    init(block: @escaping (S) -> Void) {
+        self.block = block
+    }
+
+    func newState(state: S) {
+        self.block(state)
     }
 }
 

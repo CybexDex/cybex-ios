@@ -94,9 +94,13 @@ extension UserManager {
 
     func logout() {
         Defaults.remove(.keys)
+        Defaults.remove(.enotesKeys)
         self.keys = nil
+        self.enotesKeys = nil
         self.loginType = .none
         self.unlockType = .none
+        timer?.pause()
+        timer = nil
 
         Defaults.remove(.username)
         Defaults.remove(.account)
@@ -122,8 +126,7 @@ extension UserManager {
     }
 
     func checkPermission(_ keys: AccountKeys, account: Account) -> Bool {
-        let permission = account.checkPermission(keys)
-        self.permission = permission
+        let permission = account.checkPermission([keys].compactMap({ $0 }))
 
         if permission.unlock {
             BitShareCoordinator.resetDefaultPublicKey(permission.defaultKey)
@@ -150,6 +153,7 @@ extension UserManager {
     }
 
     func generateAccountKeys(_ username: String, password: String) -> AccountKeys? {
+        BitShareCoordinator.cancelUserKey()
         let keysString = BitShareCoordinator.getUserKeys(username, password: password)
         return AccountKeys.deserialize(from: keysString)
     }
@@ -163,6 +167,7 @@ extension UserManager {
             let promise = fetchAccountInfo(name).map { (fullaccount, account) -> FullAccount in
                 if self.checkPermission(keys, account: account) {
                     self.keys = keys
+                    self.saveKeys()
                     return fullaccount
                 }
                 else {
@@ -183,26 +188,53 @@ extension UserManager {
         return AccountKeys.deserialize(from: keys)
     }
 
+    func getCachedEnotesKeysExcludePrivate() -> AccountKeys? {
+        let keys = Defaults[.enotesKeys]
+        return AccountKeys.deserialize(from: keys)
+    }
+
     func getCachedAccount() -> Account? {
         let account = Defaults[.account]
         return Account.deserialize(from: account)
+    }
+
+    func updateAccount() {
+        if let name = self.name.value {
+            UserManager.shared.fetchAccountInfo(name).done({ (fullaccount, _) in
+                self.handlerFullAcount(fullaccount)
+            }).cauterize()
+        }
     }
 
 }
 
 //eNotes
 extension UserManager {
-    func enotesLogin(_ username: String, pubKey: String) -> Promise<Void> {
+    func enotesLogin(_ pubKey: String) -> Promise<Void> {
         if let keys: AccountKeys = AccountKeys.deserialize(from: BitShareCoordinator.getActiveUserKeys(pubKey)) {
-            let promise = fetchAccountInfo(username).map { (full, account) -> Void in
-                if self.checkPermission(keys, account: account) {
-                    self.keys = keys
-                    self.saveUserInfo(username)
-                    self.loginType = .nfc
-                    self.unlockType = .nfc
-                    self.handlerFullAcount(full)
+            let promise = CybexDatabaseApiService.request(target: .getKeyReferences(pubkey: pubKey)).then { (json) -> Promise<JSON>  in
+                if let id = json[0][0].string {
+                    return CybexDatabaseApiService.request(target: .getObjects(id: id))
+                } else {
+                    throw CybexError.tipError(.loginFail)
                 }
-                else {
+            }.then { (json) -> Promise<Void> in
+                if let name = json[0]["name"].string {
+                    return self.fetchAccountInfo(name).map { (full, account) -> Void in
+                        if account.activePubKeys.contains(pubKey) {
+                            self.enotesKeys = keys
+                            self.saveEnotesKeys()
+                            self.saveUserInfo(name)
+                            self.loginType = .nfc
+                            self.unlockType = .nfc
+                            self.timer?.pause()
+                            self.timer = nil
+                            self.handlerFullAcount(full)
+                        } else {
+                            throw CybexError.tipError(.loginFail)
+                        }
+                    }
+                } else {
                     throw CybexError.tipError(.loginFail)
                 }
             }
@@ -213,8 +245,8 @@ extension UserManager {
         }
     }
 
-    func checkNeedCloudPassword() -> Bool {
-        if self.loginType == .nfc, let account = self.fullAccount.value, !account.existMoreActiveKey() {
+    func checkExistCloudPassword() -> Bool {
+        if self.loginType == .nfc, let account = self.fullAccount.value, account.existMoreActiveKey() {
             return true
         }
 
@@ -324,14 +356,16 @@ class UserManager {
     }
     
     var timer: Repeater?
-    private var keys: AccountKeys? {
+    private var keys: AccountKeys? { //云密码
         didSet {
             if keys == nil {
                 BitShareCoordinator.cancelUserKey()
             }
         }
     }
-    
+
+    private var enotesKeys: AccountKeys? // enotes keys
+
     var fullAccount: BehaviorRelay<FullAccount?> = BehaviorRelay(value: nil)
 
     private init() {
@@ -339,22 +373,23 @@ class UserManager {
             .subscribe(onNext: { (_) in
                 DispatchQueue.main.async {
                     if MarketConfiguration.shared.marketPairs.value.count > 0 &&
-                        !CybexWebSocketService.shared.overload(), let name = self.name.value {
-                        UserManager.shared.fetchAccountInfo(name).done({ (fullaccount, _) in
-                            self.handlerFullAcount(fullaccount)
-                        }).cauterize()
+                        !CybexWebSocketService.shared.overload() {
+                        self.updateAccount()
                     }
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
-    private func handlerFullAcount(_ data: FullAccount) {
+    func handlerFullAcount(_ data: FullAccount) {
         let fullaccount = data
         saveAccount(data.account)
 
-        if let keys = getCachedKeysExcludePrivate(), let account = data.account {
-            let permission = account.checkPermission(keys)
-            self.permission = permission
+        if let account = data.account {
+            let keys = [getCachedKeysExcludePrivate(), getCachedEnotesKeysExcludePrivate()].compactMap({ $0 })
+            if keys.count > 0 {
+                let permission = account.checkPermission(keys)
+                self.permission = permission
+            }
         }
 
         fullaccount.balances = data.balances.filter({ (balance) -> Bool in
@@ -383,9 +418,8 @@ class UserManager {
         timer?.start()
     }
 
-    private func saveUserInfo(_ username: String) {
+    func saveUserInfo(_ username: String) {
         self.saveName(username)
-        self.saveKeys()
         self.name.accept(username)
     }
 
@@ -404,4 +438,12 @@ class UserManager {
         
         Defaults[.keys] = keys.toJSONString() ?? ""
     }
+
+    private func saveEnotesKeys() {
+        guard let keys = enotesKeys else { return }
+        keys.removePrivateKey()
+
+        Defaults[.enotesKeys] = keys.toJSONString() ?? ""
+    }
+
 }

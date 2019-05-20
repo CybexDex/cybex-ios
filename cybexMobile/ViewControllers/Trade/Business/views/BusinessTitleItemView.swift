@@ -23,7 +23,7 @@ class BusinessTitleItemView: UIView {
             guard let ticker = data as? Ticker,
                 let baseInfo = appData.assetInfo[ticker.base],
                 let quoteInfo = appData.assetInfo[ticker.quote] else { return }
-            self.paris.text = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
+            self.paris.text = quoteInfo.symbol.filterSystemPrefix + "/" + baseInfo.symbol.filterSystemPrefix
             if ticker.latest == "0" {
                 self.total.text = "-"
                 self.change.text = "-"

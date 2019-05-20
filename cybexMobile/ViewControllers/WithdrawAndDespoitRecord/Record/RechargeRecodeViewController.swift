@@ -32,13 +32,27 @@ class RechargeRecodeViewController: BaseViewController {
 
         setupUI()
         setupEvent()
+
+        self.coordinator?.fetchAssetUrl()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         fetchRecords()
     }
 
     func fetchRecords() {
-        self.coordinator?.fetchAssetUrl()
-        if UserManager.shared.isLocked {
-            self.showPasswordBox()
+        if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+            if #available(iOS 11.0, *) {
+                if !UserManager.shared.checkExistCloudPassword() {
+                    showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+                } else {
+                    showPasswordBox()
+                }
+            }
+        } else if UserManager.shared.isLocked {
+            showPasswordBox()
         } else {
             self.startLoading()
             fetchDepositRecords(offset: 0) {}
@@ -86,6 +100,7 @@ class RechargeRecodeViewController: BaseViewController {
     }
 
     func fetchDepositRecords(offset: Int = 0, callback:@escaping () -> Void) {
+        startLoading()
         if let name = UserManager.shared.name.value {
             self.coordinator?.fetchRechargeRecodeList(name,
                                                       asset: self.assetInfo?.symbol ?? "",
@@ -153,7 +168,7 @@ extension RechargeRecodeViewController: UITableViewDelegate, UITableViewDataSour
             if selectedRecord.state.desccription() == R.string.localizable.recode_state_new.key.localized() {
                 return
             }
-            self.coordinator?.openRecordDetailUrl(hash, asset: self.data[indexPath.row].asset.filterJade)
+            self.coordinator?.openRecordDetailUrl(hash, asset: self.data[indexPath.row].asset.filterSystemPrefix)
         }
     }
 }
@@ -164,6 +179,8 @@ extension RechargeRecodeViewController {
     }
 
     override func passwordPassed(_ passed: Bool) {
+        self.endLoading()
+
         if passed {
             if self.data.count == 0 {
                 fetchDepositRecords(offset: 0) {}
@@ -176,10 +193,16 @@ extension RechargeRecodeViewController {
                 }
             }
         } else {
-            self.endLoading()
             if self.isVisible {
                 self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
             }
+        }
+    }
+
+    override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.enotes_feature_hint.key.localized() { // 添加云账户
+            pushCloudPasswordViewController(nil)
+            return
         }
     }
 }

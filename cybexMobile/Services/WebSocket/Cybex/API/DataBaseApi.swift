@@ -24,6 +24,8 @@ enum DataBaseCatogery: String {
     case getTicker
     case getBlockHeader
     case getRecentTransactionById
+    case getKeyReferences
+    case getAccountTokenAge
 }
 
 struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
@@ -92,15 +94,14 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
         let resultValue: FullAccount? = nil
 
         if result.count == 0 {
-            return resultValue
+            return resultValue as Any
         }
 
         guard let full = result.first?.arrayValue[1] else {
-            return resultValue
+            return resultValue as Any
         }
 
-
-        return FullAccount.deserialize(from: full.dictionaryObject)
+        return FullAccount.deserialize(from: full.dictionaryObject) as Any
     }
 }
 

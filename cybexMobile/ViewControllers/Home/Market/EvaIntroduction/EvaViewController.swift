@@ -60,7 +60,8 @@ class EvaViewController: BaseViewController {
     }
 
     @objc func adjustContainerHeight() {
-        self.containerViewController?.updateMarketListHeight(self.evaView.height + 44 + 76)
+        let h = self.evaView.height + 120
+        self.containerViewController?.updateMarketListHeight(h)
     }
 
     func fetchData() {

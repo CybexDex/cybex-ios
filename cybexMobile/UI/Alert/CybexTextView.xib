@@ -17,8 +17,10 @@
                 <outlet property="contentViewHeight" destination="nT6-EF-ldD" id="AhJ-pc-a44"/>
                 <outlet property="ensure" destination="NnL-GZ-Fim" id="F22-hY-gRK"/>
                 <outlet property="hSeparateView" destination="w9H-e4-pEm" id="1QF-3G-KzH"/>
+                <outlet property="rightTitle" destination="gck-Fk-8Zu" id="uZM-gW-A3b"/>
                 <outlet property="title" destination="sNM-6o-N5e" id="Ftz-Wc-TQn"/>
                 <outlet property="titleImageView" destination="0SS-6q-KQx" id="rWb-G8-Rkf"/>
+                <outlet property="titleView" destination="rHr-2w-ycI" id="Vgm-mA-ow8"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -33,30 +35,68 @@
                         <constraint firstAttribute="width" constant="32" id="jJy-c4-ddg"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNM-6o-N5e">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHr-2w-ycI">
                     <rect key="frame" x="0.0" y="0.0" width="546" height="50"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNs-Cq-HtA">
+                            <rect key="frame" x="18" y="0.0" width="510" height="50"/>
+                            <subviews>
+                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNM-6o-N5e">
+                                    <rect key="frame" x="0.0" y="0.0" width="510" height="50"/>
+                                    <color key="backgroundColor" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                            <color key="value" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Use password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gck-Fk-8Zu">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                    <color key="backgroundColor" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                    <color key="textColor" red="0.996" green="0.60799999999999998" blue="0.33300000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                            <color key="value" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
                     <color key="backgroundColor" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="3Ca-rY-G3h"/>
+                        <constraint firstAttribute="bottom" secondItem="DNs-Cq-HtA" secondAttribute="bottom" id="IyG-4E-YVJ"/>
+                        <constraint firstAttribute="height" constant="50" id="MhT-0c-lza"/>
+                        <constraint firstAttribute="trailing" secondItem="DNs-Cq-HtA" secondAttribute="trailing" constant="18" id="azY-2C-bCP"/>
+                        <constraint firstItem="DNs-Cq-HtA" firstAttribute="top" secondItem="rHr-2w-ycI" secondAttribute="top" id="kHx-n9-z7t"/>
+                        <constraint firstItem="DNs-Cq-HtA" firstAttribute="leading" secondItem="rHr-2w-ycI" secondAttribute="leading" constant="18" id="xM0-M0-ScP"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                             <color key="value" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </label>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TpJ-p0-0qU">
                     <rect key="frame" x="0.0" y="50" width="546" height="224"/>
                     <constraints>
@@ -142,23 +182,23 @@
             </subviews>
             <color key="backgroundColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="sNM-6o-N5e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6vC-D3-HWm"/>
+                <constraint firstItem="TpJ-p0-0qU" firstAttribute="top" secondItem="rHr-2w-ycI" secondAttribute="bottom" id="4jG-Ix-ajk"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rHr-2w-ycI" secondAttribute="trailing" id="Azf-5Z-r2D"/>
                 <constraint firstItem="w9H-e4-pEm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BpY-rw-oLb"/>
                 <constraint firstItem="rdy-of-kia" firstAttribute="top" secondItem="TpJ-p0-0qU" secondAttribute="bottom" id="HGa-Xf-THM"/>
                 <constraint firstItem="rdy-of-kia" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KYy-W7-CPu"/>
-                <constraint firstItem="TpJ-p0-0qU" firstAttribute="top" secondItem="sNM-6o-N5e" secondAttribute="bottom" id="P4C-eP-amu"/>
                 <constraint firstItem="w9H-e4-pEm" firstAttribute="top" secondItem="s3Z-4U-1wO" secondAttribute="top" id="PF9-rZ-Vlq"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sNM-6o-N5e" secondAttribute="trailing" id="Q84-i6-RaL"/>
                 <constraint firstItem="w9H-e4-pEm" firstAttribute="height" secondItem="s3Z-4U-1wO" secondAttribute="height" id="QCc-mo-OH0"/>
                 <constraint firstAttribute="trailing" secondItem="rdy-of-kia" secondAttribute="trailing" id="SPs-df-et2"/>
                 <constraint firstItem="0SS-6q-KQx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="TAb-u0-GWP"/>
+                <constraint firstItem="rHr-2w-ycI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Y7s-va-UEn"/>
+                <constraint firstItem="rHr-2w-ycI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fWN-kN-6S2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TpJ-p0-0qU" secondAttribute="trailing" id="mJm-Bu-KIr"/>
                 <constraint firstItem="TpJ-p0-0qU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nw3-Cd-fs0"/>
                 <constraint firstItem="s3Z-4U-1wO" firstAttribute="top" secondItem="rdy-of-kia" secondAttribute="bottom" id="oGE-nf-d3u"/>
                 <constraint firstAttribute="trailing" secondItem="s3Z-4U-1wO" secondAttribute="trailing" id="pfu-xx-ZhG"/>
                 <constraint firstItem="s3Z-4U-1wO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="rDy-0W-gDv"/>
                 <constraint firstItem="0SS-6q-KQx" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="tqz-0Q-4Bw"/>
-                <constraint firstItem="sNM-6o-N5e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="vNn-nM-A2J"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

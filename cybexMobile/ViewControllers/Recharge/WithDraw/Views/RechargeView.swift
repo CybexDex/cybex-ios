@@ -79,32 +79,23 @@ class RechargeView: CybexBaseView {
 
     func updateView() {
         if let balance = self.balance, let balanceInfo = appData.assetInfo[balance.assetType] {
-            avaliableView.content.text = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: balanceInfo.precision) + " " + balanceInfo.symbol.filterJade
+            avaliableView.content.text = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: balanceInfo.precision) + " " + balanceInfo.symbol.filterSystemPrefix
         } else {
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-                avaliableView.content.text = "--" + tradeInfo.symbol.filterJade
+                avaliableView.content.text = "--" + tradeInfo.symbol.filterSystemPrefix
             }
         }
     }
     
     func updateViewWithAssetName(_ tradeInfo: AssetInfo) {
-        if tradeInfo.symbol.filterJade == AssetConfiguration.CybexAsset.EOS.rawValue {
-            self.addressView.name = R.string.localizable.eos_withdraw_account.key
-            self.addressView.content.placeholder = R.string.localizable.eos_withdraw_account_placehold.key.localized()
-            self.addressView.content.setPlaceHolderTextColor(UIColor.steel50)
-
-            if AddressManager.shared.getWithDrawAddressListWith(tradeInfo.id).count == 0 {
-                self.addressView.btn.locali = R.string.localizable.add_account.key
-            } else {
-                self.addressView.btn.locali = R.string.localizable.choose_account.key
-            }
-        }
-        else if tradeInfo.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue {
+        if let trade = trade, trade.tag {
             self.memoView.title.text = "Tag"
             self.memoView.content.placeholder = R.string.localizable.withdraw_tag_placehold.key.localized()
             self.memoView.content.setPlaceHolderTextColor(UIColor.steel50)
+
             self.addressView.content.placeholder = R.string.localizable.withdraw_address_placehold.key.localized()
             self.addressView.content.setPlaceHolderTextColor(UIColor.steel50)
+
             if AddressManager.shared.getWithDrawAddressListWith(tradeInfo.id).count == 0 {
                 self.addressView.btn.locali = R.string.localizable.add_address.key
             } else {

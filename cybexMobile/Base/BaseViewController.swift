@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import BeareadToast_swift
 
 import SwiftTheme
 import RxCocoa
@@ -16,9 +15,6 @@ import SwifterSwift
 import CoreNFC
 
 class BaseViewController: UIViewController {
-    weak var toast: BeareadToast?
-    var rightNavButton: UIButton?
-
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -49,6 +45,7 @@ class BaseViewController: UIViewController {
 
         self.view.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
 
+        self.view.initProgressHud()
         configureObserveState()
     }
 
@@ -74,61 +71,6 @@ class BaseViewController: UIViewController {
     }
 
     func configureObserveState() {
-        //    fatalError("must be realize this methods!")
-
-    }
-
-    func startLoading() {
-        UIApplication.shared.keyWindow?.showProgress()
-
-//        guard let hud = toast else {
-//            toast = BeareadToast.showLoading(inView: self.view)
-//            return
-//        }
-//
-//        if !hud.isDescendant(of: self.view) {
-//            toast = BeareadToast.showLoading(inView: self.view)
-//        }
-    }
-
-    func isLoading() -> Bool {
-        return UIApplication.shared.keyWindow?.iprogressHud?.isShowing() ?? false
-//        return self.toast?.alpha == 1
-    }
-
-    func endLoading() {
-        UIApplication.shared.keyWindow?.dismissProgress()
-//        toast?.hide(true)
-    }
-
-    func endAllLoading(_ tableview: UITableView) {
-        self.stopPullRefresh(tableview)
-        self.stopInfiniteScrolling(tableview, haveNoMore: true)
-        endLoading()
-    }
-
-    func configRightNavButton(_ image: UIImage? = nil) {
-        rightNavButton = UIButton.init(type: .custom)
-        rightNavButton?.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        rightNavButton?.setImage(image ?? #imageLiteral(resourceName: "icSettings24Px"), for: .normal)
-        rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
-        rightNavButton?.isHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)
-    }
-
-    func configRightNavButton(_ locali: String) {
-        rightNavButton = UIButton.init(type: .custom)
-        rightNavButton?.frame = CGRect(x: 0, y: 0, width: 58, height: 24)
-        rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        rightNavButton?.locali = locali
-        rightNavButton?.setTitleColor(.steel, for: .normal)
-        rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
-        rightNavButton?.isHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)
-    }
-
-    @objc open func rightAction(_ sender: UIButton) {
 
     }
 
@@ -138,9 +80,43 @@ class BaseViewController: UIViewController {
 }
 
 extension UIViewController {
-    @objc open func leftAction(_ sender: UIButton) {
-        UIApplication.shared.keyWindow?.dismissProgress()
+    func startLoading(_ window: Bool = false) {
+        if window {
+            UIApplication.shared.keyWindow?.showProgress()
+        } else {
+            if let modalv = self.view.iprogressHud?.modalView,
+                let boxv = self.view.iprogressHud?.boxView {
+                self.view.bringSubviewToFront(modalv)
+                self.view.bringSubviewToFront(boxv)
+            }
+            self.view.showProgress()
+        }
+    }
 
+    func isLoading(_ window: Bool = false) -> Bool {
+        if window {
+            return UIApplication.shared.keyWindow?.iprogressHud?.isShowing() ?? false
+        } else {
+            return self.view.iprogressHud?.isShowing() ?? false
+        }
+    }
+
+    func endLoading(_ window: Bool = false) {
+        if window {
+            UIApplication.shared.keyWindow?.dismissProgress()
+        } else {
+            self.view.dismissProgress()
+        }
+    }
+
+    func endAllLoading(_ tableview: UITableView) {
+        self.stopPullRefresh(tableview)
+        self.stopInfiniteScrolling(tableview, haveNoMore: true)
+        endLoading(false)
+    }
+
+    @objc open func leftAction(_ sender: UIButton) {
+        endLoading(false)
         navigationController?.popViewController(animated: true)
     }
 
@@ -153,9 +129,62 @@ extension UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftNavButton)
     }
 
+    func configRightNavButton(_ image: UIImage? = nil) {
+        let rightNavButton = UIButton.init(type: .custom)
+        rightNavButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        rightNavButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        rightNavButton.setImage(image ?? #imageLiteral(resourceName: "icSettings24Px"), for: .normal)
+        rightNavButton.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
+        rightNavButton.isHidden = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton)
+    }
+
+    func configRightNavButton(_ locali: String) {
+        let rightNavButton = UIButton.init(type: .custom)
+        rightNavButton.frame = CGRect(x: 0, y: 0, width: 58, height: 24)
+        rightNavButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        rightNavButton.locali = locali
+        rightNavButton.setTitleColor(.steel, for: .normal)
+        rightNavButton.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
+        rightNavButton.isHidden = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton)
+    }
+
+    @objc open func rightAction(_ sender: UIButton) {
+
+    }
+
+
     @objc func interactivePopOver(_ isCanceled: Bool) {
         if isCanceled {
-            UIApplication.shared.keyWindow?.dismissProgress()
+            endLoading(false)
         }
+    }
+}
+
+
+extension UIView {
+    func initProgressHud(_ dele: iProgressHUDDelegete? = nil) {
+        let iprogress: iProgressHUD = iProgressHUD()
+        iprogress.delegete = dele
+        iprogress.iprogressStyle = .horizontal
+        iprogress.indicatorStyle = .lineScalePulseOut
+        iprogress.isShowModal = false
+        iprogress.boxSize = 50
+        iprogress.boxYOffset = 25
+        iprogress.indicatorColor = UIColor.pastelOrange
+
+        iprogress.attachProgress(toViews: self)
+    }
+}
+
+extension UIViewController: iProgressHUDDelegete {
+    public func onShow(view: UIView) {
+    }
+
+    public func onDismiss(view: UIView) {
+    }
+
+    public func onTouch(view: UIView) {
     }
 }

@@ -31,6 +31,6 @@ extension Data {
     func digest(using algorithm: CryptoAlgorithm) -> Data {
         var hash = [UInt8](repeating: 0, count: Int(algorithm.length))
         withUnsafeBytes { _ = algorithm.digest($0, CC_LONG(count), &hash) }
-        return Data(bytes: hash)
+        return Data(hash)
     }
 }

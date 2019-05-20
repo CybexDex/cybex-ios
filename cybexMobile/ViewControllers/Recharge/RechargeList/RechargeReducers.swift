@@ -76,7 +76,7 @@ func filterEmptyOrSortedNameTrades(_ trades: [Trade], isEmpty: Bool, name: Strin
     } else {
         let data = trades.filter({ (trade) -> Bool in
             guard let tradeInfo = appData.assetInfo[trade.id] else { return false }
-            return tradeInfo.symbol.filterJade.contains(name.uppercased())
+            return tradeInfo.symbol.filterSystemPrefix.contains(name.uppercased())
         })
         if isEmpty {
             return data.filter({$0.amount != "0"})

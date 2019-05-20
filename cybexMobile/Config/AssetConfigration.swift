@@ -13,7 +13,17 @@ import RxCocoa
 
 class AssetConfiguration {
     //base asset name
-    static let JadeSymbol = "JADE"
+    static var systemSymbol: String {
+        switch AppEnv.current {
+        case .product:
+            return "JADE"
+        case .test:
+            return "TEST"
+        case .uat:
+            return "JADE"
+        }
+    }
+
     static let ArenaSymbol = "ARENA"
 
     enum CybexAsset: String, CaseIterable {
@@ -23,36 +33,118 @@ class AssetConfiguration {
         case USDT
         case XRP
         case EOS
+        case ATOM
+        case IRIS
 
         case ArenaETH
         case ArenaEOS
         case ArenaUSDT
         case ArenaBTC
 
-        
         var id: String {
             switch self {
             case .CYB:
                 return "1.3.0"
             case .BTC:
-                return Defaults.isTestEnv ? "1.3.58" : "1.3.3"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.3"
+                case .test:
+                    return "1.3.3"
+                case .uat:
+                    return "1.3.3"
+                }
             case .ETH:
-                return Defaults.isTestEnv ? "1.3.53" : "1.3.2"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.2"
+                case .test:
+                    return "1.3.2"
+                case .uat:
+                    return "1.3.2"
+                }
             case .USDT:
-                return Defaults.isTestEnv ? "1.3.56" : "1.3.27"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.27"
+                case .test:
+                    return "1.3.23"
+                case .uat:
+                    return "1.3.27"
+                }
             case .XRP:
-                return Defaults.isTestEnv ? "1.3.999" : "1.3.999"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.999"
+                case .test:
+                    return "1.3.999"
+                case .uat:
+                    return "1.3.999"
+                }
+            case .ATOM:
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1382"
+                case .test:
+                    return "1.3.1382"
+                case .uat:
+                    return "1.3.1382"
+                }
+            case .IRIS:
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1383"
+                case .test:
+                    return "1.3.1383"
+                case .uat:
+                    return "1.3.1383"
+                }
             case .EOS:
-                return Defaults.isTestEnv ? "1.3.57" : "1.3.4"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.4"
+                case .test:
+                    return "1.3.4"
+                case .uat:
+                    return "1.3.4"
+                }
             //交易大赛
             case .ArenaEOS:
-                return Defaults.isTestEnv ? "1.3.1146" : "1.3.1150"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1150"
+                case .test:
+                    return "1.3.1146"
+                case .uat:
+                    return "1.3.1150"
+                }
             case .ArenaBTC:
-                return Defaults.isTestEnv ? "1.3.1147" : "1.3.1151"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1151"
+                case .test:
+                    return "1.3.1147"
+                case .uat:
+                    return "1.3.1151"
+                }
             case .ArenaETH:
-                return Defaults.isTestEnv ? "1.3.1144" : "1.3.1149"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1149"
+                case .test:
+                    return "1.3.1144"
+                case .uat:
+                    return "1.3.1149"
+                }
             case .ArenaUSDT:
-                return Defaults.isTestEnv ? "1.3.1145" : "1.3.1148"
+                switch AppEnv.current {
+                case .product:
+                    return "1.3.1148"
+                case .test:
+                    return "1.3.1145"
+                case .uat:
+                    return "1.3.1148"
+                }
             }
         }
 
@@ -154,7 +246,7 @@ extension String {
     }
 
     var symbolOnlyFilterJade: String {
-        return appData.assetInfo[self]?.symbol.filterOnlyJade ?? self
+        return appData.assetInfo[self]?.symbol.filterOnlySystemPrefix ?? self
     }
     
     var precision: Int {

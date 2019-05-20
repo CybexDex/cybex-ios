@@ -1,9 +1,10 @@
 {
-  "commitish" : "v9.0.1",
+  "commitish" : "v10.0",
   "iOS" : [
     {
       "name" : "SDCAlertView",
-      "hash" : "a4faa331dd173acbdbd50a55ed20083cd261a4390544ba8f79ba2d96543eeeb8"
+      "hash" : "766834d0ef40d1f64cab944bd483176b4974ac73046cda22d3d132831f8ba0b7",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

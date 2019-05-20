@@ -14,7 +14,7 @@ extension HotAssetView {
         guard let baseInfo = appData.assetInfo[model.base],
             let quoteInfo = appData.assetInfo[model.quote] else { return }
 
-        assetName.text = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
+        assetName.text = quoteInfo.symbol.filterSystemPrefix + "/" + baseInfo.symbol.filterSystemPrefix
         if model.latest == "0" {
             amountLabel.text = "-"
             rmbLabel.text = "-"

@@ -25,12 +25,13 @@
 //
 import Foundation
 import BigInt
-import web3swift
 import CryptoSwift
-import secp256k1
 import CommonCrypto
+import secp256k1_swift
 
 public struct Card {
+    static var secp256k1_N = BigUInt("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", radix: 16)!
+
     //这个key就是acitvePublickKey
     public var blockchainPublicKey = ""
     public var oneTimePrivateKey = ""
@@ -41,7 +42,7 @@ public struct Card {
     public var transactionPinStatus = false //是否加密
     public var oneTimeSignatureChecksum: UInt16 = 0
     public var oneTimePrivateKeyChecksum: UInt16 = 0
-    public var account = ""
+//    public var account = ""
 
     public var cert = Cert()
 
@@ -92,23 +93,6 @@ public struct Card {
         return data.sha256().sha256()
     }
 
-    func getSerializedSignature(_ sign: String, compressed: Bool = false) -> Data? {
-        let data = unhexlify(sign)!
-
-        var recoverableSignature: secp256k1_ecdsa_recoverable_signature = secp256k1_ecdsa_recoverable_signature()
-
-        let arrayPtr = UnsafeMutableBufferPointer<secp256k1_ecdsa_recoverable_signature>(start: &recoverableSignature, count: data.count)
-        _ = data.copyBytes(to: arrayPtr)
-
-        guard let serializedSignature = SECP256K1.serializeSignature(recoverableSignature: &recoverableSignature) else { return nil }
-
-        guard let d = SECP256K1.unmarshalSignature(signatureData: serializedSignature) else { return nil }
-
-        let vData = d.v + 27 + (compressed ? 0 : 4)
-
-        return vData.data + Data(bytes: d.r) + Data(bytes: d.s)
-    }
-
     func getSignData(_ r: String, s: String, activePubkey: String, compressed: Bool = false, hashData: Data) -> Data? {
         let sig = r + s
 
@@ -124,7 +108,7 @@ public struct Card {
             if publicKey.hexEncodedString() == activePubkey {
                 let v: UInt8 = UInt8(i) + 27 + (compressed ? 0 : 4)
 
-                return v.data + Data(bytes: rData) + Data(bytes: sData)
+                return v.data + Data(rData) + Data(sData)
             }
         }
         return nil
@@ -142,7 +126,7 @@ extension Card {
     static func compressedPrivateKey(_ privateKey: String) -> String {
         var privateKey = Data.fromHex(privateKey)!
         privateKey.insert(0x80, at: 0)
-
+        
         let encodedPvkey = privateKey.bytes.base58CheckEncodedString
         return encodedPvkey
     }
@@ -150,8 +134,9 @@ extension Card {
     static func toCanonicalised(s: String) -> String {
         var bnS = BigUInt(s,radix:16)!
 
-        if(bnS > (SECP256K1.secp256k1_N >> 1)){
-            bnS = SECP256K1.secp256k1_N - bnS
+        if(bnS > (Card.secp256k1_N >> 1)){
+            bnS = Card.secp256k1_N - bnS
+
             return String(bnS, radix: 16, uppercase: true)
         }
 

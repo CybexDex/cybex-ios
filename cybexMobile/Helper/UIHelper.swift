@@ -15,11 +15,28 @@ class UIHelper {
         case margin = 13
     }
 
-    class func showSuccessTop(_ str: String) -> NotificationBanner {
+    static var statusBanner: StatusBarNotificationBanner? = nil
+
+    @discardableResult
+    class func showSuccessTop(_ str: String, autodismiss: Bool = false) -> NotificationBanner {
         let banner = NotificationBanner(title: "", subtitle: str, style: .success)
         banner.duration = 2
         banner.subtitleLabel?.textAlignment = NSTextAlignment.center
-        banner.autoDismiss = false
+        banner.autoDismiss = autodismiss
+        banner.dismissOnSwipeUp = true
+        banner.dismissOnTap = true
+        if banner.bannerQueue.numberOfBanners == 0 {
+            banner.show()
+        }
+        return banner
+    }
+
+    @discardableResult
+    class func showErrorTop(_ str: String) -> NotificationBanner {
+        let banner = NotificationBanner(title: "", subtitle: str, style: .danger)
+        banner.duration = 2
+        banner.subtitleLabel?.textAlignment = NSTextAlignment.center
+        banner.autoDismiss = true
         banner.dismissOnSwipeUp = true
         banner.dismissOnTap = true
         if banner.bannerQueue.numberOfBanners == 0 {
@@ -29,12 +46,37 @@ class UIHelper {
         return banner
     }
 
+    @discardableResult
+    class func showStatusBar(_ str: String, style: BannerStyle) -> StatusBarNotificationBanner {
+        let banner = StatusBarNotificationBanner(title: str, style: style)
+        #if DEBUG
+        banner.titleLabel?.locali = str
+        banner.duration = 2
+        banner.titleLabel?.textAlignment = NSTextAlignment.center
+        if style == .danger || style == .success {
+            banner.bannerQueue.removeAll()
+            banner.autoDismiss = true
+            statusBanner?.dismiss()
+            statusBanner = nil
+            banner.show()
+        } else {
+            banner.autoDismiss = false
+
+            if statusBanner == nil {
+                statusBanner = banner
+                banner.show()
+            }
+        }
+        #endif
+        return banner
+    }
+
     class func getWithdrawDetailInfo(addressInfo: String,
                                      amountInfo: String,
                                      withdrawFeeInfo: String,
                                      gatewayFeeInfo: String,
                                      receiveAmountInfo: String,
-                                     isEOS: Bool,
+                                     tag: Bool,
                                      memoInfo: String) -> [NSAttributedString] {
         let address: String = R.string.localizable.utils_address.key.localized()
         let amount: String = R.string.localizable.utils_amount.key.localized()
@@ -44,10 +86,10 @@ class UIHelper {
         var memo: String = R.string.localizable.withdraw_memo.key.localized()
 
         let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
-        if isEOS && memoInfo.count > 0 && receiveAmountInfo.contains(AssetConfiguration.CybexAsset.XRP.rawValue) {
+        if tag && memoInfo.count > 0 {
             memo = "Tag"
         }
-        return (isEOS && memoInfo.count > 0) ?
+        return (tag && memoInfo.count > 0) ?
             (["<name>\(address):</name><\(content)>\n\(addressInfo)</\(content)>".set(style: "alertContent"),
               "<name>\(memo):</name><\(content)>  \(memoInfo)</\(content)>".set(style: "alertContent"),
               "<name>\(amount):</name><\(content)>  \(amountInfo)</\(content)>".set(style: "alertContent"),
@@ -117,7 +159,7 @@ class UIHelper {
         let quantity = R.string.localizable.transfer_quantity.key.localized()
         let account = R.string.localizable.transfer_account_title.key.localized()
 
-        let amount = info.amount + " " +  info.name.filterJade
+        let amount = info.amount + " " +  info.name.filterSystemPrefix
         let quantityInfo = "<name>\(quantity):</name> <\(contentStyle)>" + amount + "</\(contentStyle)>"
         let accountInfo = "<name>\(account):</name> <\(contentStyle)>" + name + "</\(contentStyle)>"
 

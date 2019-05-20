@@ -52,6 +52,7 @@ class ComprehensiveViewController: BaseViewController {
     }
 
     func setupData() {
+        startLoading()
         self.coordinator?.fetchData()
     }
 
@@ -138,7 +139,7 @@ class ComprehensiveViewController: BaseViewController {
                                  self.coordinator!.state.middleItems.asObservable(),
                                  self.coordinator!.state.banners.asObservable(),
                                  self.coordinator!.state.announces.asObservable()).subscribe(onNext: { [weak self](hotPairs, middleItems, banners, announces) in
-                                    guard let self = self else { return }
+                                    guard self != nil else { return }
                                     if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
 //                                        self.endLoading()
                                     }
@@ -147,11 +148,9 @@ class ComprehensiveViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(forName: .NetWorkChanged, object: nil, queue: nil) { [weak self](_) in
             guard let self = self else { return }
-            SwifterSwift.delay(milliseconds: 1000, completion: {
-                main {
-                    self.coordinator?.fetchData()
-                }
-            })
+            delay(milliseconds: 1000) {
+                self.coordinator?.fetchData()
+            }
         }
     }
 }

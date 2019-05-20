@@ -12,9 +12,13 @@ class AccountTableHeadView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var coinAge: UILabel!
+    @IBOutlet weak var coinAgeIcon: UIImageView!
+    @IBOutlet weak var coinAgeContainer: UIStackView!
 
     enum Event: String {
         case login
+        case coinAgeDesc
     }
 
     var title = "" {
@@ -38,6 +42,11 @@ class AccountTableHeadView: UIView {
         titleLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _  in
             guard let self = self else { return}
             self.next?.sendEventWith(Event.login.rawValue, userinfo: [:])
+        }).disposed(by: disposeBag)
+
+        coinAgeIcon.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _  in
+            guard let self = self else { return}
+            self.next?.sendEventWith(Event.coinAgeDesc.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
     }
 

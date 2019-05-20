@@ -55,7 +55,7 @@ public extension UIFont {
 }
 
 public extension UIImage {
-    public static func icon(from font: Fonts, iconColor: UIColor, code: String, imageSize: CGSize, ofSize size: CGFloat) -> UIImage {
+    static func icon(from font: Fonts, iconColor: UIColor, code: String, imageSize: CGSize, ofSize size: CGFloat) -> UIImage {
         let drawText = String.getIcon(from: font, code: code)
 
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
@@ -73,7 +73,7 @@ public extension UIImage {
 
 public extension String {
 
-    public static func getIcon(from font: Fonts, code: String) -> String? {
+    static func getIcon(from font: Fonts, code: String) -> String? {
         switch font {
         case .FontAwesome:
             return fontAwesomeIcon(code)
@@ -92,49 +92,49 @@ public extension String {
         }
     }
 
-    public static func fontAwesomeIcon(_ code: String) -> String? {
+    static func fontAwesomeIcon(_ code: String) -> String? {
         if let icon = fontAwesomeIconArr[code] {
             return icon
         }
         return nil
     }
 
-    public static func fontOcticon(_ code: String) -> String? {
+    static func fontOcticon(_ code: String) -> String? {
         if let icon = octiconArr[code] {
             return icon
         }
         return nil
     }
 
-    public static func fontIonIcon(_ code: String) -> String? {
+    static func fontIonIcon(_ code: String) -> String? {
         if let icon = ioniconArr[code] {
             return icon
         }
         return nil
     }
 
-    public static func fontIconicIcon(_ code: String) -> String? {
+    static func fontIconicIcon(_ code: String) -> String? {
         if let icon = iconicIconArr[code] {
             return icon
         }
         return nil
     }
 
-    public static func fontThemifyIcon(_ code: String) -> String? {
+    static func fontThemifyIcon(_ code: String) -> String? {
         if let icon = temifyIconArr[code] {
             return icon
         }
         return nil
     }
 
-    public static func fontMapIcon(_ code: String) -> String? {
+    static func fontMapIcon(_ code: String) -> String? {
         if let icon = mapIconArr[code] {
             return icon
         }
         return nil
     }
 
-    public static func fontMaterialIcon(_ code: String) -> String? {
+    static func fontMaterialIcon(_ code: String) -> String? {
         if let icon = materialIconArr[code] {
             return icon
         }

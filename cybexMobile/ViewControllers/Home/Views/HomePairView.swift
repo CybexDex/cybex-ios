@@ -42,8 +42,8 @@ class HomePairView: UIView {
                 let quoteInfo = appData.assetInfo[ticker.quote] else { return }
 
             let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(Pair(base: ticker.base, quote: ticker.quote))
-            self.asset2.text = quoteInfo.symbol.filterJade
-            self.asset1.text = "/" + baseInfo.symbol.filterJade
+            self.asset2.text = quoteInfo.symbol.filterSystemPrefix
+            self.asset1.text = "/" + baseInfo.symbol.filterSystemPrefix
 
             let url = AppConfiguration.ServerIconsBaseURLString +
                 ticker.quote.replacingOccurrences(of: ".", with: "_") +

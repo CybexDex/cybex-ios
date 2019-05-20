@@ -17,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
   /**
    需要先调用getuserkey
    **/
-    
+
++ (NSString *)updateAccount:(int)block_num block_id:(NSString *)block_id
+                 expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
+                  operation:(NSString *)operation;
 + (NSString *)getLimitOrder:(int)block_num block_id:(NSString *)block_id
                  expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                     user_id:(int)user_id order_expiration:(NSTimeInterval)order_expiration
@@ -70,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getRecodeLoginOperation:(NSString *)accountName asset:(NSString *)asset fundType:(NSString *)fundType size:(int)size offset:(int)offset expiration:(int)expiration;
   
 + (NSString *)getMemo:(NSString *)memo;
-
++ (NSString *)sign:(NSString *)str;
 + (NSString *)signMessage:(NSString *)username message:(NSString *)message;
 
 

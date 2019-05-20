@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh
+${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework
+${BUILT_PRODUCTS_DIR}/cocore/cocore.framework
+${BUILT_PRODUCTS_DIR}/coswift/coswift.framework
+${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework
+${BUILT_PRODUCTS_DIR}/swift_qrcodejs/swift_qrcodejs.framework

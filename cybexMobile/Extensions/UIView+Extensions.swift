@@ -198,9 +198,9 @@ extension UIView {
             prepareForLayout()
 
             switch relation {
-            case .equal: return topAnchor.constraint(equalTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(active: isActive)
-            case .equalOrLess: return topAnchor.constraint(lessThanOrEqualTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(active: isActive)
-            case .equalOrGreater: return topAnchor.constraint(greaterThanOrEqualTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(active: isActive)
+            case .equal: return topAnchor.constraint(equalTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(isActive)
+            case .equalOrLess: return topAnchor.constraint(lessThanOrEqualTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(isActive)
+            case .equalOrGreater: return topAnchor.constraint(greaterThanOrEqualTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(isActive)
             }
         }
     }

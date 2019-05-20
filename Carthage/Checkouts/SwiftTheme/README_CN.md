@@ -1,4 +1,4 @@
-![SwiftTheme](https://raw.githubusercontent.com/jiecao-fm/SwiftThemeResources/master/Screenshots/logo.png)
+![SwiftTheme](https://raw.githubusercontent.com/wxxsw/SwiftThemeResources/master/Screenshots/logo.png)
 
 <p align="center">
 <a href="#前言">前言</a> -
@@ -11,25 +11,23 @@
 </p>
 
 <p align="center">
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/language-swift3-f48041.svg?style=flat"></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/language-swift5-f48041.svg?style=flat"></a>
 <a href="https://developer.apple.com/ios"><img src="https://img.shields.io/badge/platform-iOS%208%2B-blue.svg?style=flat"></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 <a href="http://cocoadocs.org/docsets/SwiftTheme"><img src="https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat"></a>
-<a href="https://github.com/jiecao-fm/SwiftTheme/blob/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat"></a>
-<a href="https://github.com/jiecao-fm/SwiftTheme/tree/0.4.0"><img src="https://img.shields.io/badge/release-0.4.0-blue.svg"></a>
-<a href="https://travis-ci.org/jiecao-fm/SwiftTheme"><img src="https://travis-ci.org/jiecao-fm/SwiftTheme.svg"></a>
-<a href="https://codebeat.co/projects/github-com-jiecao-fm-swifttheme"><img alt="codebeat badge" src="https://codebeat.co/badges/900eef02-9b88-46eb-8ce9-440c1dc31435" /></a>
+<a href="https://github.com/wxxsw/SwiftTheme/blob/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat"></a>
+<a href="https://github.com/wxxsw/SwiftTheme/tree/0.4.4"><img src="https://img.shields.io/badge/release-0.4.4-blue.svg"></a>
 </p>
 
 ## 截屏
 
-![](https://github.com/jiecao-fm/SwiftThemeResources/blob/master/Screenshots/switch.gif)
+![](https://github.com/wxxsw/SwiftThemeResources/blob/master/Screenshots/switch.gif)
 
 > 运行：打开`SwiftTheme.xcworkspace`选择构建目标为`PlistDemo`
 
 ## 前言
 ### 缘起
-项目需求，我们要为[节操精选](http://um0.cn/5FpZs)开发夜间模式功能。我们的需求不是简单的调整亮度或者`alpha`，而是更换为一套更深色的UI。因此所谓夜间模式其实就是特定的更换主题（换肤）功能。
+项目需求，我们要为 App 开发夜间模式功能。我们的需求不是简单的调整亮度或者`alpha`，而是更换为一套更深色的UI。因此所谓夜间模式其实就是特定的更换主题（换肤）功能。
 
 如何实现呢？判断某个全局变量，然后在初始化视图控件时设置不同的背景色或者加载不同的切图文件？但是在切换主题时，已经初始化好的视图控件呢？没错，也许你也想到了通过通知让相应的视图控件修改背景色或切图。想到这里你应该也意识到了Controller中将充斥着注册通知、`if...else`、更新视图控件的代码，糟糕的是如果忘记了注销通知还可能引起应用崩溃。
 
@@ -120,8 +118,8 @@ ThemeManager.setTheme(plistName: "Red", path: .MainBundle)
 
 上面用到的`plist`、`image`展示如下：
 
-![](https://github.com/jiecao-fm/SwiftThemeResources/blob/master/Screenshots/1.pic.jpg)
-![](https://github.com/jiecao-fm/SwiftThemeResources/blob/master/Screenshots/2.pic.jpg)
+![](https://github.com/wxxsw/SwiftThemeResources/blob/master/Screenshots/1.pic.jpg)
+![](https://github.com/wxxsw/SwiftThemeResources/blob/master/Screenshots/2.pic.jpg)
 
 
 ### 自定义行为
@@ -171,7 +169,7 @@ use_frameworks!
 
 #### Carthage
 ```swift
-github "jiecao-fm/SwiftTheme"
+github "wxxsw/SwiftTheme"
 ```
 
 #### 源文件
@@ -405,35 +403,15 @@ ThemeActivityIndicatorViewStylePicker.pickerWithKeyPath("someStringKeyPath")
 ## 贡献
 
 ### Issue
-如果你需要帮助或者遇到Bug，请[创建一个Issue](https://github.com/jiecao-fm/SwiftTheme/issues/new)
+如果你需要帮助或者遇到Bug，请[创建一个Issue](https://github.com/wxxsw/SwiftTheme/issues/new)
 
 ### Pull Request
 期待你的贡献 :D。但是请确保你添加的功能不要偏离主旨，并保证其足够简单易用，如果你不确定可以先通过issue与我们讨论。
 
 ### Contributors
-[GeSen](https://github.com/wxxsw), [Zhoujun](https://github.com/shannonchou)
+[Gesen](https://github.com/wxxsw), [Zhoujun](https://github.com/shannonchou)
 
 
 ## Lisence
 
 The MIT License (MIT)
-
-Copyright (c) 2016 节操精选 http://jiecao.fm
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

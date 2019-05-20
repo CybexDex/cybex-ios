@@ -783,11 +783,11 @@
 					};
 					D04725E919E49ED7006002AA = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1020;
 					};
 					D04725F419E49ED7006002AA = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1020;
 					};
 					D047260B19E49F82006002AA = {
 						CreatedOnToolsVersion = 6.1;
@@ -801,10 +801,11 @@
 			};
 			buildConfigurationList = D04725E419E49ED7006002AA /* Build configuration list for PBXProject "ReactiveSwift" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D04725E019E49ED7006002AA;
 			productRefGroup = D04725EB19E49ED7006002AA /* Products */;
@@ -1338,6 +1339,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/ReactiveSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(PROJECT_NAME)Tests";
 			};
 			name = Debug;
@@ -1348,6 +1350,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/ReactiveSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(PROJECT_NAME)Tests";
 			};
 			name = Release;
@@ -1433,6 +1436,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/ReactiveSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(PROJECT_NAME)Tests";
 			};
 			name = Profile;
@@ -1496,6 +1500,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/ReactiveSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(PROJECT_NAME)Tests";
 			};
 			name = Test;

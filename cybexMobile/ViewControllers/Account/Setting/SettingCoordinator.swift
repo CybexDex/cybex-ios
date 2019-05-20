@@ -14,13 +14,12 @@ protocol SettingCoordinatorProtocol {
     func openSettingDetail(type: SettingPage)
     func dismiss()
     func openHelpWebView()
-    
 }
 
 protocol SettingStateManagerProtocol {
     var state: SettingState { get }
 
-    func changeEnveronment(_ callback:@escaping(Bool) -> Void)
+    func changeEnveronment()
 }
 
 class SettingCoordinator: NavCoordinator {
@@ -57,24 +56,24 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
 }
 
 extension SettingCoordinator: SettingStateManagerProtocol {
-    func changeEnveronment(_ callback:@escaping(Bool) -> Void) {
-        if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-            Defaults[.environment] = ""
-        } else {
-            Defaults[.environment] = "test"
+    func changeEnveronment() {
+        UserManager.shared.logout()
+
+        CybexWebSocketService.shared.disconnect()
+        CybexConfiguration.shared.chainID.accept("")
+        AppConfiguration.shared.enableSetting.accept(nil)
+        AssetConfiguration.shared.whiteListOfIds.accept([])
+        MarketConfiguration.shared.importMarketLists.accept([])
+        AssetConfiguration.shared.quoteToProjectNames.accept([:])
+        MarketConfiguration.shared.marketPairs.accept([])
+        CybexWebSocketService.shared.canSendMessageReactive.accept(false)
+        appData.tickerData.accept([])
+
+        CybexWebSocketService.shared.connect()
+
+        if let del = UIApplication.shared.delegate as? AppDelegate {
+            del.checkSetting()
         }
-//        MarketConfiguration.shared.marketPairs = []
-//        AssetConfiguration.shared.whiteListOfIds = []
-//
-//        appData.tickerData.accept([])
-//
-//        CybexWebSocketService.shared.disconnect()
-//        UserManager.shared.logout()
-//        callback(isTest)
-//        self.rootVC.popViewController()
-//        if let appdelegate =  UIApplication.shared.delegate as? AppDelegate {
-//            appdelegate.fetchEtoHiddenRequest(true)
-//            CybexWebSocketService.shared.connect()
-//        }
+
     }
 }

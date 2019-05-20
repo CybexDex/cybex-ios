@@ -1,9 +1,10 @@
 {
-  "commitish" : "5.2.0",
+  "commitish" : "5.3.1",
   "iOS" : [
     {
       "name" : "Kingfisher",
-      "hash" : "f0a763ae0cb1522f20362cdaecf844eb93253876c09713c63dc809277fed4a02"
+      "hash" : "fe1db6c1fa4eef1eab75938d278650c0a9e1b2115e45c8fe6a275b433f3170c7",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

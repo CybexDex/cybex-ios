@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "WKWebViewJavascriptBridge",
-      "hash" : "ac67987a53dd063c7d442c300ba2059be3cfb52289d58e692c32af4a9e6b3af2"
+      "hash" : "878eecb5c8c29ee737f89cd09f6e988641ddd85bbb6e5522cee837a1413f77d2",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

@@ -23,34 +23,7 @@ class TransferContentView: UIView {
     var data: Any? {
         didSet {
             if let data = data as? TransferRecordViewModel {
-                addressView.nameLocali = data.isSend ? R.string.localizable.transfer_detail_send_address.key.localized() : R.string.localizable.transfer_detail_income_address.key.localized()
-                addressView.contentLocali = data.isSend ? data.to : data.from
-                timeView.contentLocali = data.time
-
-                if data.vestingPeriod == "0" {
-                    vestingPeriodView.contentLocali = R.string.localizable.transfer_detail_nodata.key.localized()
-                } else {
-                    vestingPeriodView.contentLocali = transferTimeType(Int(data.vestingPeriod)!)
-                }
-                if data.memo == "" {
-                    memoView.contentLocali = R.string.localizable.transfer_detail_nodata.key.localized()
-                } else {
-                    memoView.contentLocali = R.string.localizable.transfer_detail_click.key.localized()
-                    memoView.content.textColor = UIColor.pastelOrange
-                    memoView.isUserInteractionEnabled = true
-                    memoView.content.rx.tapGesture().when(.recognized).asObservable().subscribe(onNext: { [weak self](_) in
-                        guard let self = self else { return }
-                        self.next?.sendEventWith(Event.transferMemo.rawValue, userinfo: ["memoView": ""])
-                        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-                }
-
-                if let feeInfo = data.fee, let assetInfo = appData.assetInfo[feeInfo.assetId] {
-                    feeView.contentLocali = AssetHelper.getRealAmount(
-                        feeInfo.assetId,
-                        amount: feeInfo.amount).string(
-                            digits: assetInfo.precision,
-                            roundingMode: .down) + " " + assetInfo.symbol.filterJade
-                }
+                fillContent(data)
                 updateHeight()
             }
         }
@@ -62,6 +35,37 @@ class TransferContentView: UIView {
                 self.memoView.contentLocali = text
                 updateHeight()
             }
+        }
+    }
+
+    func fillContent(_ data: TransferRecordViewModel) {
+        addressView.nameLocali = data.isSend ? R.string.localizable.transfer_detail_send_address.key.localized() : R.string.localizable.transfer_detail_income_address.key.localized()
+        addressView.contentLocali = data.isSend ? data.to : data.from
+        timeView.contentLocali = data.time
+
+        if data.vestingPeriod == "0" {
+            vestingPeriodView.contentLocali = R.string.localizable.transfer_detail_nodata.key.localized()
+        } else {
+            vestingPeriodView.contentLocali = transferTimeType(Int(data.vestingPeriod)!)
+        }
+        if data.memo.isEmpty {
+            memoView.contentLocali = R.string.localizable.transfer_detail_nodata.key.localized()
+        } else {
+            memoView.contentLocali = R.string.localizable.transfer_detail_click.key.localized()
+            memoView.content.textColor = UIColor.pastelOrange
+            memoView.isUserInteractionEnabled = true
+            memoView.content.rx.tapGesture().when(.recognized).asObservable().subscribe(onNext: { [weak self](_) in
+                guard let self = self else { return }
+                self.next?.sendEventWith(Event.transferMemo.rawValue, userinfo: ["memoView": ""])
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        }
+
+        if let feeInfo = data.fee, let assetInfo = appData.assetInfo[feeInfo.assetId] {
+            let realAmount = AssetHelper.getRealAmount(feeInfo.assetId, amount: feeInfo.amount)
+            var amountStr = realAmount.string(digits: assetInfo.precision, roundingMode: .down) + " "
+            amountStr.append(assetInfo.symbol.filterSystemPrefix)
+
+            feeView.contentLocali = amountStr
         }
     }
 

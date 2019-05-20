@@ -68,7 +68,7 @@ class SettingViewController: BaseViewController {
             refreshCloudPasswordStatus()
         }
 
-        language.contentLocali =  R.string.localizable.setting_language.key
+        language.contentLocali = R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
         theme.contentLocali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
         frequency.contentLocali = UserManager.shared.frequencyType.description()
@@ -77,7 +77,7 @@ class SettingViewController: BaseViewController {
 
     func refreshCloudPasswordStatus() {
         if UserManager.shared.loginType == .nfc {
-            if UserManager.shared.checkNeedCloudPassword() {
+            if !UserManager.shared.checkExistCloudPassword() {
                 eNotesCloudPasswordSet.contentLocali = R.string.localizable.enotes_cloudpassword_unset.key
                 eNotesCloudPasswordSet.rightIcon.isHidden = false
             } else {
@@ -108,9 +108,11 @@ class SettingViewController: BaseViewController {
     
     func clickCellView(_ sender: NormalCellView) {
         if sender == eNotesUnlockType {
-            chooseUnlockType()
+            if UserManager.shared.checkExistCloudPassword() {
+                chooseUnlockType()
+            }
         } else if sender == eNotesCloudPasswordSet {
-            if UserManager.shared.checkNeedCloudPassword() {
+            if !UserManager.shared.checkExistCloudPassword() {
                 pushCloudPasswordViewController(nil)
             }
         } else if sender == language {
@@ -128,9 +130,7 @@ class SettingViewController: BaseViewController {
         } else if sender == theme {
             self.coordinator?.openSettingDetail(type: .theme)
         } else if sender == environment {
-            self.coordinator?.changeEnveronment({ isTest in
-                self.showToastBox(true, message: isTest == true ? "当前为测试环境" : "当前为正式环境")
-            })
+            self.switchEnv()
         }
     }
     
@@ -179,6 +179,20 @@ extension SettingViewController {
             })
         ]
         openSelectedActionViewController(UserManager.shared.frequencyType.rawValue, actions: actions)
+    }
+
+    func switchEnv() {
+        let actions = AppEnv.allCases.map { (env) -> XLActionController.Action<String> in
+            return Action(env.rawValue, style: .destructive, handler: {[weak self] _ in
+                guard let self = self else {return}
+
+                self.showToastBox(true, message: "当前为\(env.rawValue)环境")
+                Defaults[.environment] = env.rawValue
+                self.coordinator?.changeEnveronment()
+            })
+        }
+
+        openSelectedActionViewController(AppEnv.current.index, actions: actions)
     }
 
     func chooseUnlockType() {

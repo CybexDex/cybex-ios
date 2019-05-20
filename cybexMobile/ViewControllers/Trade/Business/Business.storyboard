@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,6 +23,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="IaZ-qh-8gZ"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjy-RN-PdR">
                                 <rect key="frame" x="0.0" y="60" width="375" height="32"/>
@@ -229,6 +234,86 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHW-vR-7Tl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="832.79999999999995" y="-528.48575712143929"/>
+        </scene>
+        <!--Trade Contest View Controller-->
+        <scene sceneID="CdE-tB-OoM">
+            <objects>
+                <viewController storyboardIdentifier="TradeContestViewController" id="a2Z-qT-X2O" customClass="TradeContestViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7wO-Dy-2WW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myq-kJ-9Fc">
+                                <rect key="frame" x="13" y="0.0" width="349" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BUQ-NO-2Bb">
+                                        <rect key="frame" x="0.0" y="0.0" width="349" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s59-P8-nzk">
+                                                <rect key="frame" x="10" y="13" width="329" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="contest_notice"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="s59-P8-nzk" secondAttribute="bottom" constant="10" id="QMl-cu-x3Z"/>
+                                            <constraint firstAttribute="trailing" secondItem="s59-P8-nzk" secondAttribute="trailing" constant="10" id="WOe-B5-Gbg"/>
+                                            <constraint firstItem="s59-P8-nzk" firstAttribute="leading" secondItem="BUQ-NO-2Bb" secondAttribute="leading" constant="10" id="qeq-vU-yDG"/>
+                                            <constraint firstItem="s59-P8-nzk" firstAttribute="top" secondItem="BUQ-NO-2Bb" secondAttribute="top" constant="13" id="sDN-BZ-Daf"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="BUQ-NO-2Bb" firstAttribute="top" secondItem="myq-kJ-9Fc" secondAttribute="top" id="2nX-lS-jga"/>
+                                    <constraint firstAttribute="bottom" secondItem="BUQ-NO-2Bb" secondAttribute="bottom" id="6fZ-Kr-voW"/>
+                                    <constraint firstAttribute="trailing" secondItem="BUQ-NO-2Bb" secondAttribute="trailing" id="76d-YH-fRj"/>
+                                    <constraint firstItem="BUQ-NO-2Bb" firstAttribute="width" secondItem="myq-kJ-9Fc" secondAttribute="width" id="HsI-0o-5wm"/>
+                                    <constraint firstItem="BUQ-NO-2Bb" firstAttribute="leading" secondItem="myq-kJ-9Fc" secondAttribute="leading" id="ReT-IG-DA1"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="myq-kJ-9Fc" firstAttribute="top" secondItem="7wO-Dy-2WW" secondAttribute="top" id="2mt-Fp-Bcj"/>
+                            <constraint firstItem="myq-kJ-9Fc" firstAttribute="leading" secondItem="MjM-0w-dzz" secondAttribute="leading" constant="13" id="ICa-YY-0Ww"/>
+                            <constraint firstItem="MjM-0w-dzz" firstAttribute="trailing" secondItem="myq-kJ-9Fc" secondAttribute="trailing" constant="13" id="aR6-q1-UKN"/>
+                            <constraint firstItem="MjM-0w-dzz" firstAttribute="bottom" secondItem="myq-kJ-9Fc" secondAttribute="bottom" id="zWa-Ws-nvc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MjM-0w-dzz"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="contentLabel" destination="s59-P8-nzk" id="p51-73-7I9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f2P-0g-QpO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2215" y="415"/>
         </scene>
         <!--Business View Controller-->
         <scene sceneID="XBz-bH-pb2">

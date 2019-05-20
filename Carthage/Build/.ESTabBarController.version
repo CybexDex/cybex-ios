@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "ESTabBarController",
-      "hash" : "e72c510d4bdf2154ffc4d2e3605624dc6a0997ac2076022de43489747e7c8fde"
+      "hash" : "407b41044e3273d8959444a8bf0bf1f023f7c47d7d9c3c7722e2a44d0465e75a",
+      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
     }
   ]
 }

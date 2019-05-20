@@ -21,21 +21,16 @@ extension DefaultsKeys {
 
     static let username = DefaultsKey<String>("com.nbltrust.cybex.username", defaultValue: "")
     static let keys = DefaultsKey<String>("com.nbltrust.cybex.keys", defaultValue: "")
+    static let enotesKeys = DefaultsKey<String>("com.nbltrust.cybex.enotesKeys", defaultValue: "")
     static let account = DefaultsKey<String>("com.nbltrust.cybex.account", defaultValue: "")
 
     static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList", defaultValue: [])
     static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList", defaultValue: [])
 
-    static let environment = DefaultsKey<String>("environment", defaultValue: "")
+    static let environment = DefaultsKey<String>("environment", defaultValue: "product")
     static let showContestTip = DefaultsKey<Bool>("showContestTip", defaultValue: false)
 
     static let isRealName = DefaultsKey<Bool>("isRealName", defaultValue: false)
     
     static let hasCode = DefaultsKey<Bool>("hasCode", defaultValue: false)
-}
-
-extension UserDefaults {
-    var isTestEnv : Bool {
-        return Defaults[.environment] == "test"
-    }
 }

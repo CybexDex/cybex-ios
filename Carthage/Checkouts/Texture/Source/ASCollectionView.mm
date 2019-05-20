@@ -318,12 +318,6 @@ static NSString * const kReuseIdentifier = @"_ASCollectionReuseIdentifier";
   
   [self _configureCollectionViewLayout:layout];
   
-  if (ASActivateExperimentalFeature(ASExperimentalNewDefaultCellLayoutMode)) {
-    _cellLayoutMode = ASCellLayoutModeSyncForSmallContent;
-  } else {
-    _cellLayoutMode = ASCellLayoutModeNone;
-  }
-  
   return self;
 }
 
@@ -340,8 +334,10 @@ static NSString * const kReuseIdentifier = @"_ASCollectionReuseIdentifier";
   }
 
   // Data controller & range controller may own a ton of nodes, let's deallocate those off-main.
-  ASPerformBackgroundDeallocation(&_dataController);
-  ASPerformBackgroundDeallocation(&_rangeController);
+  if (ASActivateExperimentalFeature(ASExperimentalOOMBackgroundDeallocDisable) == NO) {
+    ASPerformBackgroundDeallocation(&_dataController);
+    ASPerformBackgroundDeallocation(&_rangeController);
+  }
 }
 
 #pragma mark -
@@ -1912,20 +1908,18 @@ static NSString * const kReuseIdentifier = @"_ASCollectionReuseIdentifier";
   if (ASCellLayoutModeIncludes(ASCellLayoutModeAlwaysAsync)) {
     return NO;
   }
-  if (ASCellLayoutModeIncludes(ASCellLayoutModeSyncForSmallContent)) {
-    // Reload data is expensive, don't block main while doing so.
-    if (changeSet.includesReloadData) {
-      return NO;
-    }
-    // If we have very few ASCellNodes (besides UIKit passthrough ones), match UIKit by blocking.
-    if (changeSet.countForAsyncLayout < 2) {
-      return YES;
-    }
-    CGSize contentSize = self.contentSize;
-    CGSize boundsSize = self.bounds.size;
-    if (contentSize.height <= boundsSize.height && contentSize.width <= boundsSize.width) {
-      return YES;
-    }
+  // Reload data is expensive, don't block main while doing so.
+  if (changeSet.includesReloadData) {
+    return NO;
+  }
+  // If we have very few ASCellNodes (besides UIKit passthrough ones), match UIKit by blocking.
+  if (changeSet.countForAsyncLayout < 2) {
+    return YES;
+  }
+  CGSize contentSize = self.contentSize;
+  CGSize boundsSize = self.bounds.size;
+  if (contentSize.height <= boundsSize.height && contentSize.width <= boundsSize.width) {
+    return YES;
   }
   return NO; // ASCellLayoutModeNone
 }
@@ -2520,9 +2514,7 @@ static NSString * const kReuseIdentifier = @"_ASCollectionReuseIdentifier";
 
 - (NSArray *)accessibilityElements
 {
-  if (!ASActivateExperimentalFeature(ASExperimentalSkipAccessibilityWait)) {
-    [self waitUntilAllUpdatesAreCommitted];
-  }
+  [self waitUntilAllUpdatesAreCommitted];
   return [super accessibilityElements];
 }
 

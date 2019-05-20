@@ -20,6 +20,8 @@ protocol TradeCoordinatorProtocol {
 
     func setupChildVC(_ segue: UIStoryboardSegue)
     func showNoticeVC()
+    
+    func openRuleVC()
 }
 
 protocol TradeStateManagerProtocol {
@@ -165,6 +167,12 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
             segueinfo.destination.coordinator = OpenedOrdersCoordinator(rootVC: self.rootVC)
             segueinfo.destination.pageType = .exchange
         }
+    }
+    
+    func openRuleVC() {
+        guard let _ = self.rootVC.topViewController as? TradeViewController else { return }
+        guard let ruleVC = R.storyboard.business.tradeContestViewController() else {return}
+        self.rootVC.pushViewController(ruleVC, animated: true)
     }
 }
 

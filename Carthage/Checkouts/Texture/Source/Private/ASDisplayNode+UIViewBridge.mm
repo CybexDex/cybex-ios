@@ -181,7 +181,9 @@ if (shouldApply) { _layer.layerProperty = (layerValueExpr); } else { ASDisplayNo
 
 - (void)setCornerRadius:(CGFloat)newCornerRadius
 {
-  [self updateCornerRoundingWithType:self.cornerRoundingType cornerRadius:newCornerRadius];
+  [self updateCornerRoundingWithType:self.cornerRoundingType
+                        cornerRadius:newCornerRadius
+                       maskedCorners:self.maskedCorners];
 }
 
 - (ASCornerRoundingType)cornerRoundingType
@@ -192,7 +194,20 @@ if (shouldApply) { _layer.layerProperty = (layerValueExpr); } else { ASDisplayNo
 
 - (void)setCornerRoundingType:(ASCornerRoundingType)newRoundingType
 {
-  [self updateCornerRoundingWithType:newRoundingType cornerRadius:self.cornerRadius];
+  [self updateCornerRoundingWithType:newRoundingType cornerRadius:self.cornerRadius maskedCorners:self.maskedCorners];
+}
+
+- (CACornerMask)maskedCorners
+{
+  AS::MutexLocker l(__instanceLock__);
+  return _maskedCorners;
+}
+
+- (void)setMaskedCorners:(CACornerMask)newMaskedCorners
+{
+  [self updateCornerRoundingWithType:self.cornerRoundingType
+                        cornerRadius:self.cornerRadius
+                       maskedCorners:newMaskedCorners];
 }
 
 - (NSString *)contentsGravity
@@ -944,6 +959,18 @@ if (shouldApply) { _layer.layerProperty = (layerValueExpr); } else { ASDisplayNo
   }
 }
 
+- (NSDictionary<NSString *,id<CAAction>> *)actions
+{
+  _bridge_prologue_read;
+  return _getFromLayer(actions);
+}
+
+- (void)setActions:(NSDictionary<NSString *,id<CAAction>> *)actions
+{
+  _bridge_prologue_write;
+  _setToLayer(actions, actions);
+}
+
 - (void)safeAreaInsetsDidChange
 {
   ASDisplayNodeAssertMainThread();
@@ -969,6 +996,27 @@ if (shouldApply) { _layer.layerProperty = (layerValueExpr); } else { ASDisplayNo
 {
   _bridge_prologue_write;
   _setToLayer(cornerRadius, newLayerCornerRadius);
+}
+
+- (CACornerMask)layerMaskedCorners
+{
+  _bridge_prologue_read;
+  if (AS_AVAILABLE_IOS_TVOS(11, 11)) {
+    return _getFromLayer(maskedCorners);
+  } else {
+    return kASCACornerAllCorners;
+  }
+}
+
+- (void)setLayerMaskedCorners:(CACornerMask)newLayerMaskedCorners
+{
+  _bridge_prologue_write;
+  if (AS_AVAILABLE_IOS_TVOS(11, 11)) {
+    _setToLayer(maskedCorners, newLayerMaskedCorners);
+  } else {
+    ASDisplayNodeAssert(newLayerMaskedCorners == kASCACornerAllCorners,
+                        @"Cannot change maskedCorners property in iOS < 11 while using DefaultSlowCALayer rounding.");
+  }
 }
 
 - (BOOL)_locked_insetsLayoutMarginsFromSafeArea
@@ -1219,6 +1267,20 @@ nodeProperty = nodeValueExpr; _setToViewOnly(viewAndPendingViewStateProperty, vi
   _bridge_prologue_read;
   return _getAccessibilityFromViewOrProperty(_accessibilityNavigationStyle, accessibilityNavigationStyle);
 }
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+- (void)setAccessibilityCustomActions:(NSArray *)accessibilityCustomActions
+{
+  _bridge_prologue_write;
+  _setAccessibilityToViewAndProperty(_accessibilityCustomActions, accessibilityCustomActions, accessibilityCustomActions, accessibilityCustomActions);
+}
+
+- (NSArray *)accessibilityCustomActions
+{
+  _bridge_prologue_read;
+  return _getAccessibilityFromViewOrProperty(_accessibilityCustomActions, accessibilityCustomActions);
+}
+#endif
 
 #if TARGET_OS_TV
 - (void)setAccessibilityHeaderElements:(NSArray *)accessibilityHeaderElements

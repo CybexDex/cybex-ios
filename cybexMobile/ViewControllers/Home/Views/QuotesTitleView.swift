@@ -119,11 +119,8 @@ class QuotesTitleView: UIView {
                     if let titleL =  titleView.viewWithTag(9) as? UILabel {
                         titleL.theme1TitleColor = .white
                         titleL.theme2TitleColor = .darkTwo
-                        // 为了测试
-                        var selectedIndex = index - 1
-                        if Defaults[.environment] == "test", selectedIndex == 3 {
-                            selectedIndex = 2
-                        }
+                        let selectedIndex = index - 1
+
                         self.next?.sendEventWith(Event.tagDidSelected.rawValue, userinfo: ["selectedIndex": selectedIndex, "save": save])
                     }
                 }

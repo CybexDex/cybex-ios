@@ -35,6 +35,12 @@ class OrderBookCoordinator: NavCoordinator {
         middleware: [trackingMiddleware]
     )
 
+    lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
+        if !AppHelper.shared.infront {
+            self.service.disconnect()
+        }
+    })
+
     let service = MDPWebSocketService("", quoteName: "")
     var popoverVC: RecordChooseViewController?
 
@@ -148,7 +154,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             self.service.reconnect()
         }
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
-            self.service.disconnect()
+            self.disconnectDispatch()
         }
     }
 

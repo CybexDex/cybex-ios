@@ -27,12 +27,13 @@ typedef NS_OPTIONS(NSUInteger, ASExperimentalFeatures) {
   ASExperimentalFramesetterCache = 1 << 6,                  // exp_framesetter_cache
   ASExperimentalSkipClearData = 1 << 7,                     // exp_skip_clear_data
   ASExperimentalDidEnterPreloadSkipASMLayout = 1 << 8,      // exp_did_enter_preload_skip_asm_layout
-  ASExperimentalDisableAccessibilityCache = 1 << 9,        // exp_disable_a11y_cache
-  ASExperimentalSkipAccessibilityWait = 1 << 10,            // exp_skip_a11y_wait
-  ASExperimentalNewDefaultCellLayoutMode = 1 << 11,         // exp_new_default_cell_layout_mode
-  ASExperimentalDispatchApply = 1 << 12,                    // exp_dispatch_apply
-  ASExperimentalImageDownloaderPriority = 1 << 13,          // exp_image_downloader_priority
-  ASExperimentalTextDrawing = 1 << 14,                      // exp_text_drawing
+  ASExperimentalDisableAccessibilityCache = 1 << 9,         // exp_disable_a11y_cache
+  ASExperimentalDispatchApply = 1 << 10,                    // exp_dispatch_apply
+  ASExperimentalImageDownloaderPriority = 1 << 11,          // exp_image_downloader_priority
+  ASExperimentalTextDrawing = 1 << 12,                      // exp_text_drawing
+  ASExperimentalFixRangeController = 1 << 13,               // exp_fix_range_controller
+  ASExperimentalOOMBackgroundDeallocDisable = 1 << 14,      // exp_oom_bg_dealloc_disable
+  ASExperimentalTransactionOperationRetainCycle = 1 << 15,   // exp_transaction_operation_retain_cycle
   ASExperimentalFeatureAll = 0xFFFFFFFF
 };
 

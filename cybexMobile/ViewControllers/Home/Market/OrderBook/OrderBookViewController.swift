@@ -74,8 +74,11 @@ class OrderBookViewController: BaseViewController {
             TradeConfiguration.shared.tradePairPrecisions.asObservable().subscribe(onNext: { [weak self](data) in
                 guard let self = self,
                     let selfPair = self.pair,
-                    selfPair == pair,
-                    let result = data[pair] else { return }
+                    selfPair == pair else {
+                        return
+                }
+
+                let result = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
 
                 self.coordinator?.subscribe(pair, depth: oldDepth == 0 ? result.price : oldDepth, count: count)
 
@@ -126,13 +129,13 @@ class OrderBookViewController: BaseViewController {
             let baseInfo = appData.assetInfo[pair.base],
             let quoteInfo = appData.assetInfo[pair.quote] else { return }
         if vcType == OrderbookType.tradeView.rawValue {
-            self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
-            self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
+            self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + baseInfo.symbol.filterSystemPrefix + ")"
+            self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quoteInfo.symbol.filterSystemPrefix + ")"
         } else {
-            self.contentView.buyPrice.text =  R.string.localizable.orderbook_buy_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
-            self.contentView.buyVolume.text = R.string.localizable.orderbook_volume.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
-            self.contentView.sellPrice.text = R.string.localizable.orderbook_sell_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
-            self.contentView.sellVolume.text = R.string.localizable.orderbook_volume.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
+            self.contentView.buyPrice.text =  R.string.localizable.orderbook_buy_price.key.localized() + "(" + baseInfo.symbol.filterSystemPrefix + ")"
+            self.contentView.buyVolume.text = R.string.localizable.orderbook_volume.key.localized() + "(" + quoteInfo.symbol.filterSystemPrefix + ")"
+            self.contentView.sellPrice.text = R.string.localizable.orderbook_sell_price.key.localized() + "(" + baseInfo.symbol.filterSystemPrefix + ")"
+            self.contentView.sellVolume.text = R.string.localizable.orderbook_volume.key.localized() + "(" + quoteInfo.symbol.filterSystemPrefix + ")"
         }
     }
 

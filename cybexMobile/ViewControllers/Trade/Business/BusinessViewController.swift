@@ -13,6 +13,7 @@ import ReSwift
 import SwiftTheme
 import Localize_Swift
 import SwifterSwift
+import cybex_ios_core_cpp
 
 class BusinessViewController: BaseViewController {
     var pair: Pair? {
@@ -87,7 +88,7 @@ class BusinessViewController: BaseViewController {
     func refreshView() {
         guard let pair = pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
         
-        self.containerView.quoteName.text = quoteInfo.symbol.filterJade
+        self.containerView.quoteName.text = quoteInfo.symbol.filterSystemPrefix
         
         self.coordinator?.getFee(self.type == .buy ? baseInfo.id : quoteInfo.id)
         
@@ -129,7 +130,7 @@ class BusinessViewController: BaseViewController {
             guard let pair = pair, let quoteInfo = appData.assetInfo[pair.quote] else { return }
             self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key : R.string.localizable.openedSell.key
             if let title = self.containerView.button.button.titleLabel?.text {
-                self.containerView.button.button.setTitle("\(title) \(quoteInfo.symbol.filterJade)", for: .normal)
+                self.containerView.button.button.setTitle("\(title) \(quoteInfo.symbol.filterSystemPrefix)", for: .normal)
             }
         } else {
             self.containerView.button.locali = R.string.localizable.business_login_title.key
@@ -155,10 +156,16 @@ class BusinessViewController: BaseViewController {
             R.string.localizable.openedorder_buy_ensure.key.localized() :
             R.string.localizable.openedorder_sell_ensure.key.localized()
 
-        let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterJade
-        let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterJade
-        let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterJade
-        showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy))
+        let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterSystemPrefix
+        let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterSystemPrefix
+        let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterSystemPrefix
+
+        if UserManager.shared.checkExistCloudPassword(), UserManager.shared.loginType == .nfc {
+            let titleLocali = UserManager.shared.unlockType == .cloudPassword ? R.string.localizable.enotes_use_type_0.key : R.string.localizable.enotes_use_type_1.key
+            showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy), rightTitleLocali: titleLocali, tag: titleLocali, setup: nil)
+        } else {
+            showConfirm(ensureTitle, attributes: UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy))
+        }
     }
     
     override func configureObserveState() {
@@ -186,7 +193,7 @@ class BusinessViewController: BaseViewController {
             }
             
             let info = self.type == .buy ? baseInfo : quoteInfo
-            let symbol = info.symbol.filterJade
+            let symbol = info.symbol.filterSystemPrefix
             let realAmount = balance.formatCurrency(digitNum: info.precision)
             
             self.containerView.balance.text = "\(realAmount) \(symbol)"
@@ -202,7 +209,7 @@ class BusinessViewController: BaseViewController {
                 return
             }
 
-            self.containerView.fee.text = feeAmount.formatCurrency(digitNum: info.precision) + " \(info.symbol.filterJade)"
+            self.containerView.fee.text = feeAmount.formatCurrency(digitNum: info.precision) + " \(info.symbol.filterSystemPrefix)"
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //total
@@ -225,7 +232,7 @@ class BusinessViewController: BaseViewController {
 //                    self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterJade)"
 //                    return
 //                }
-                self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterJade)"
+                self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterSystemPrefix)"
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     func addUserManagerObserverSubscribeAction() {
@@ -353,8 +360,8 @@ class BusinessViewController: BaseViewController {
         }
     }
     deinit {
-        NotificationCenter.default.removeObserver(self.containerView.priceTextfield)
-        NotificationCenter.default.removeObserver(self.containerView.amountTextfield)
+        NotificationCenter.default.removeObserver(self.containerView.priceTextfield!)
+        NotificationCenter.default.removeObserver(self.containerView.amountTextfield!)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
     }
 }
@@ -400,12 +407,8 @@ extension BusinessViewController {
         }
         
         guard checkBalance() else { return }
-        //    if UserManager.shared.isLocked {
-        //      showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
-        //    }
-        //    else {
+
         self.showOpenedOrderInfo()
-        //    }
     }
     
     @objc func adjustPrice(_ data: [String: Bool]) {
@@ -414,6 +417,25 @@ extension BusinessViewController {
         }
         self.coordinator?.adjustPrice(data["plus"]!, pricePricision: self.pricePrecision)
     }
+
+    override func returnEnsureActionWithData(_ tag: String) {
+        if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+            if #available(iOS 11.0, *) {
+                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+                    self.coordinator?.parentStartLoading(self.parent)
+                    self.postOrder()
+                }
+                NFCManager.shared.start()
+            }
+        } else if UserManager.shared.isLocked {
+            showPasswordBox()
+        } else {
+            self.coordinator?.parentStartLoading(self.parent)
+            postOrder()
+        }
+    }
+
     func postOrder() {
         guard let pair = self.pair else { return }
         self.coordinator?.postLimitOrder(pair, isBuy: self.type == .buy, callback: {[weak self] (success) in
@@ -421,20 +443,25 @@ extension BusinessViewController {
             self.coordinator?.parentEndLoading(self.parent)
             if success {
                 self.coordinator?.resetState()
+                self.refreshView()
             }
             self.showToastBox(success, message: success ? R.string.localizable.order_create_success.key.localized() : R.string.localizable.order_create_fail.key.localized())
         })
     }
-    
-    override func returnEnsureAction() {
-        ShowToastManager.shared.hide()
-        if UserManager.shared.isLocked {
-            SwifterSwift.delay(milliseconds: 100) {
-                self.showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
+
+    override func didClickedRightAction(_ tag: String) {
+        if tag == R.string.localizable.enotes_use_type_0.key { //enotes
+            if #available(iOS 11.0, *) {
+                NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                    BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+
+                    self.coordinator?.parentStartLoading(self.parent)
+                    self.postOrder()
+                }
+                NFCManager.shared.start()
             }
         } else {
-            self.coordinator?.parentStartLoading(self.parent)
-            postOrder()
+            showPasswordBox()
         }
     }
     

@@ -23,6 +23,8 @@ class WithdrawView: UIView {
     @IBOutlet weak var copyAddress: UIButton!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var tagView: UIView!
+
+    var needTag: Bool = false
     
     @IBAction func saveTag(_ sender: Any) {
         self.next?.sendEventWith(EventName.copyTag.rawValue, userinfo: ["tag": tagLabel.text ?? ""])
@@ -40,7 +42,7 @@ class WithdrawView: UIView {
         didSet {
             if let data = data as? AccountAddressRecord {
                 self.projectInfoView.isHidden = false
-                if data.asset.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue {
+                if needTag {
                     self.tagLabel.text = data.address.components(separatedBy: "[").last?.replacingOccurrences(of: "]", with: "")
                     self.address.text = data.address.components(separatedBy: "[").first
                 }

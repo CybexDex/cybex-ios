@@ -14,6 +14,7 @@ class CybexPasswordView: UIView {
 
     @IBOutlet weak var textField: UITextField!
 
+    @IBOutlet weak var hint: BaseLabel!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var error: UILabel!
     var data: Any? {

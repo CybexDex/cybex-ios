@@ -67,6 +67,11 @@ public func ABAddressBookRequestAccess() -> Promise<ABAddressBook> {
                 throw AddressBookError.denied
             case .authorized:
                 fatalError("This should not happen")
+          #if swift(>=4.3)
+            @unknown default:
+                print("warning: PromiseKit: unknown case statement, please PR a fix!")
+                throw AddressBookError.denied
+          #endif
             }
         }
 

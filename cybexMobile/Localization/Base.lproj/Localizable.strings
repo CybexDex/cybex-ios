@@ -276,8 +276,8 @@
 "eos_copy_code" = "Copy Code";
 "eos_reset_code" = "Get New Code";
 
-"xrp_code" = "XRP Deposit Tag";
-"xrp_code_tip" = "(Please send your XRP with the tag displayed below. please do not put any other information on Tag)";
+"xrp_code" = "Deposit Tag";
+"xrp_code_tip" = "(Please send with the tag displayed below. please do not put any other information on Tag)";
 
 "business_login_title" = "Log in to exchange";
 
@@ -381,7 +381,7 @@
 "transfer_account" = "Account";
 "transfer_account_name" = "Transfer Account";
 
-"address_or_account" = "Note/Account";
+"address_or_account" = "Address/Account";
 "account_or_address" = "Note/Address";
 
 "account_exit" = "The account is already existed";
@@ -605,28 +605,38 @@
 "orderbook_show_type_2" = "Buy Orders";
 "orderbook_show_type_3" = "Default";
 
-"contest_notice" = "The contest has a duration of 14 days. Participation by API and quantitative models is encouraged by the host that will provide various assistance for quantitative APIs.\nThis contest uses the virtual assets ARENA.ETH, ARENA.USDT, ARENA.EOS, ARENA.BTC that can be freely traded during the game (transfer not permitted). Only 3 trading pairs are accessible during the game: ARENA.ETH/ARENA.USDT, ARENA.EOS/ARENA.USDT, ARENA.BTC/ARENA.USDT.\nEach contestant will be given an initial capital of 100,000 ARENA.USDT by the form of an airdrop once successfully registered to the game. During the competition, the host will take snapshots of the account balance of the competitors regularly and convert it to USDT value by the median price of the corresponding assets in CYBEX exchange.\nReward calculations are based on changes in account balances. The final rank will be made by considerating yield rate (ie, the difference between the balance and the initial capital), the Sharpe ratio (revenue volatility), and the turnover rate(accumulated volume per natural day exceeds 20%), etc. comprehensively. The real-time ranking status can be queried on the official website.\nTo ensure fairness, please help us in the prevention of cheating in any form.";
+"contest_notice" = "1. The contest has a duration of 14 days. Participation by API and quantitative models is encouraged by the host that will provide various assistance for quantitative APIs.\n\n2. This contest uses the virtual assets ARENA.ETH, ARENA.USDT, ARENA.EOS, ARENA.BTC that can be freely traded during the game (transfer not permitted). Only 3 trading pairs are accessible during the game: ARENA.ETH/ARENA.USDT, ARENA.EOS/ARENA.USDT, ARENA.BTC/ARENA.USDT.\n\n3. Each contestant will be given an initial capital of 100,000 ARENA.USDT by the form of an airdrop once successfully registered to the game. During the competition, the host will take snapshots of the account balance of the competitors regularly and convert it to USDT value by the median price of the corresponding assets in CYBEX exchange.\n\n4.Reward calculations are based on changes in account balances. The final rank will be made by considerating yield rate (ie, the difference between the balance and the initial capital), the Sharpe ratio (revenue volatility), and the turnover rate(accumulated volume per natural day exceeds 20%), etc. comprehensively. The real-time ranking status can be queried on the official website.\n\n5. To ensure fairness, please help us in the prevention of cheating in any form.\n\n6. The constest is jointly held by Cybex and HashBang. Apple Inc. is not a sponsor or involved in the activity in ny manner.All rights reserved to Cybex Decentralized Exchange.";
 "contest_notice_title" = "Contest Rules";
 "contest_notice_not_tip" = "Do not show";
 "contest_notice_close" = "Cancel";
 
 "enotes_unlock_type_title" = "Default unlock method";
-"enotes_unlock_type_0" = "eNotes Unlock";
+"enotes_unlock_type_0" = "CybKey Unlock";
 "enotes_unlock_type_1" = "Password Unlock";
 "enotes_cloudpassword_title" = "Cloud Password Setup";
 "enotes_cloudpassword_unset" = "Set now";
 "enotes_cloudpassword_haveset" = "Setted";
-"enotes_use_type_0" = "Use eNotes";
+"enotes_use_type_0" = "Use CybKey";
 "enotes_use_type_1" = "Use password";
 "enotes_password_wrong" = "Wrong password. Try again!";
-"enotes_transfer_memo_hint" = "Enotes card does not support memo now. Please enter cloud password.";
+"enotes_transfer_memo_hint" = "CybKey card does not support memo now. Please enter cloud password.";
 "enotes_feature_hint" = "The function is not accessible until cloud wallet password is added and used to unlock the account. Add password now?";
 "enotes_feature_add" = "Add";
-"enotes_cloudpassword_set_hint" = "Cloud password verifies your operations to the account when your eNotes Card is not with you, and cannot be tampered or traced back once set. Please keep your password properly. We strongly suggest the adoption of long password to ensure assets safety.";
-"enotes_pin_validtor_title" = "Verify eNotes password";
-"enotes_not_match" = "Wrong eNotes Card";
-"enotes_login" = "eNotes Login";
+"enotes_cloudpassword_set_hint" = "Cloud password verifies your operations to the account when your CybKey Card is not with you, and cannot be tampered or traced back once set. Please keep your password properly. We strongly suggest the adoption of long password to ensure assets safety.";
+"enotes_pin_validtor_title" = "Verify CybKey password";
+"enotes_not_match" = "Wrong CybKey Card";
+"enotes_login" = "CybKey Login";
+"enotes_cloudPassword_add_success" = "Added Success";
+"enotes_cloudPassword_add_fail" = "Added Fail";
 "confirm_hint_title" = "HINT";
 "lock_time" = "%d min";
 "lock_time_title" = "UnLock Time";
 "progress_hud_loading" = "loading...";
+"socket_loading" = "Connecting...";
+"socket_success" = "Connection successful";
+"socket_failed" = "Connection fail";
+
+"coin_age" = "Coin Age: %@";
+"coin_age_desc" = "Coin age is calculated based on the CYB in the CYBEX account. It is updated at UTC+00:00 every day.\n<password>Calculation Rules</password>\nStarting time: the date of CYBEX exchange launched\nCoin age = coin age of the previous day * a depreciation coefficient (X = 0.975) + open interests of CYB for the day\nCoin age of the first day = open interests of CYB\nFor the convenience, coin age on APP = coin age * (1 - depreciation coefficient)\nNote\nCYB in order and lock is not counted.\nIf you have very little open interests or very large depreciation, the coin age may be 0 due to the accuracy.\nExample\nUser A holds position of 10,000 CYB for one year, the coin age (A) = 10000*（1+0.975+……+0.975^364）=399960, while coin age on APP (A) = 399960*（1-0.975）= 9999.\nIf user B wants to have the same coin age as user A, he/she needs to purchase CYB that is 40 times of A’s.\nIf user C purchases 10,000 CYB and sells it the same day, coin age = 10000; After 28 days, C’s coin age = 10000*0.975^27 = 5048, which is a half of the initial.\n\n";
+"coin_age_title" = "COIN AGE";
+"coin_age_desc_get" = "I KNOW";

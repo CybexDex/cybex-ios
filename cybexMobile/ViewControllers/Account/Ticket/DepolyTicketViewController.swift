@@ -185,7 +185,7 @@ extension DepolyTicketViewController {
             let vc = DeployTicketResultViewController()
             vc.qrcodeInfo = result
             vc.transactionId = self.transactionId
-            vc.assetName = chooseAsset.symbol.filterJade
+            vc.assetName = chooseAsset.symbol.filterSystemPrefix
             self.navigationController?.pushViewController(vc)
         }
     }

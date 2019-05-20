@@ -15,6 +15,7 @@ protocol CybexTextViewDelegate {
     func clickCancle(_ sender: CybexTextView)
     func returnEnsureAction()
     func returnEnsureImageAction()
+    func didClickedRightAction()
 }
 
 class CybexTextView: UIView {
@@ -22,7 +23,7 @@ class CybexTextView: UIView {
     enum TextViewType: Int {
         case normal
         case time
-        case code
+        case `switch`
     }
 
     var middleView: (UIView&Views)? {
@@ -50,9 +51,12 @@ class CybexTextView: UIView {
         }
     }
 
+    @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var hSeparateView: UIView!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var rightTitle: UILabel!
+
     @IBOutlet weak var cancle: UIButton!
     @IBOutlet weak var ensure: UIButton!
 
@@ -75,6 +79,13 @@ class CybexTextView: UIView {
 
     func setup() {
         self.cancle.setTitleColor(ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo, for: .normal)
+
+        self.rightTitle.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
+            guard let self = self else {
+                return
+            }
+            self.delegate?.didClickedRightAction()
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
     override var intrinsicContentSize: CGSize {
