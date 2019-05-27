@@ -117,13 +117,15 @@ class AccountViewController: BaseViewController {
     func getCoinAge() {
         guard let id = UserManager.shared.fullAccount.value?.account?.id else { return }
         //:[{"id":"10.1.17","asset":"1.3.0","account":"1.2.28","score":155842895}]
+    
         CybexDatabaseApiService.request(target: DatabaseApi.getAccountTokenAge(id: id)).map { (json) -> Decimal in
-            if let object = json.array?.first?.dictionaryObject,
-                let score = object["score"] as? Int,
-                let assetId = object["asset"] as? String,
-                let precision = AssetHelper.getPrecision(assetId) {
-
-                return score.decimal / pow(10, precision)
+            if let object = json.array?.first {
+                let score = object["score"].stringValue
+                let assetId = object["asset"].stringValue
+                if let precision = AssetHelper.getPrecision(assetId) {
+                    return score.decimal() / pow(10, precision)
+                }
+                return 0
             }
             return 0
             }.done { (score) in
