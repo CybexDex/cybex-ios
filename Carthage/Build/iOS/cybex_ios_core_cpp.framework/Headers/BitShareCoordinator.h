@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)cancelUserKey;
   
   
-  
++ (NSString *)transactionIdFromSigned:(NSString *)jsonStr;
 + (NSString *)getRecodeLoginOperation:(NSString *)accountName asset:(NSString *)asset fundType:(NSString *)fundType size:(int)size offset:(int)offset expiration:(int)expiration;
   
 + (NSString *)getMemo:(NSString *)memo;
