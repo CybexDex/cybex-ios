@@ -98,7 +98,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                                                                  from_memo_key: "",
                                                                  to_memo_key: "")
         
-        CybexChainHelper.calculateFee(operation, operationID: .transfer, focusAssetId: assetID) { (success, amount, feeId) in
+        CybexChainHelper.calculateFee(operation, operationID: OperationId.transfer, focusAssetId: assetID) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
             if success {

@@ -149,7 +149,7 @@ class CloudPasswordSettingViewController: BaseViewController {
                         }
 
                         CybexChainHelper.calculateFee(operation,
-                                                      operationID: .accountUpdate, focusAssetId: AssetConfiguration.CybexAsset.CYB.id) { (success, amount, assetID) in
+                                                      operationID: OperationId.accountUpdate, focusAssetId: AssetConfiguration.CybexAsset.CYB.id) { (success, amount, assetID) in
                                                         if success {
                                                             guard let newOperation = self.updateFeeOfOperation(operation, amount: amount) else {
                                                                 return

@@ -147,7 +147,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                           from_memo_key: "",
                                                                           to_memo_key: "")
 
-        CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
+        CybexChainHelper.calculateFee(operationString, operationID: OperationId.transfer, focusAssetId: assetId) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
             guard let fee = Fee.deserialize(from: dictionary) else { return }
             self.store.dispatch(FetchCybexFee(data: (fee, success:success)))

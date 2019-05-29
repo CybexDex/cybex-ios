@@ -380,7 +380,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                           to_memo_key: "")
         }
         
-        CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
+        CybexChainHelper.calculateFee(operationString, operationID: OperationId.transfer, focusAssetId: assetId) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
             self.store.dispatch(SetFeeAction(fee: Fee.deserialize(from: dictionary)!))

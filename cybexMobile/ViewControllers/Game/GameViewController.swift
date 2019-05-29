@@ -289,7 +289,7 @@ extension GameViewController {
                                                               from_memo_key: "",
                                                               to_memo_key: "")
 
-        CybexChainHelper.calculateFee(feeJir, operationID: .transfer, focusAssetId: asset) { (success, feeAmount, feeId) in
+        CybexChainHelper.calculateFee(feeJir, operationID: OperationId.transfer, focusAssetId: asset) { (success, feeAmount, feeId) in
             let realAmount = AssetHelper.setRealAmount(asset, amount: amount).stringValue
             let feeRealAmount = AssetHelper.setRealAmount(feeId, amount: feeAmount.stringValue)
             self.collectiton(account, feeId, asset, feeRealAmount.stringValue, realAmount,seal: seal)

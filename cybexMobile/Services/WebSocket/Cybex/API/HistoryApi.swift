@@ -13,7 +13,6 @@ import SwiftyJSON
 enum HistoryCatogery: String {
     case getMarketHistory
     case getFillOrderHistory //逐笔成交单
-    case getAccountHistory
 }
 
 struct AssetPairQueryParams {
@@ -22,60 +21,6 @@ struct AssetPairQueryParams {
     var timeGap: Int
     var startTime: Date
     var endTime: Date
-}
-
-struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
-    var accountID: String
-    var response: RPCSResponse
-    var method: String {
-        return "call"
-    }
-
-    var parameters: Any? {
-        return [ApiCategory.history,
-                HistoryCatogery.getAccountHistory.rawValue.snakeCased(),
-                [accountID, ObjectID.operationHistoryObject.rawValue.snakeCased(),
-                 "100",
-                 ObjectID.operationHistoryObject.rawValue.snakeCased()]
-        ]
-    }
-
-    func transferResponse(from resultObject: Any) throws -> Any {
-        if let response = resultObject as? [[String: Any]] {
-            var fillOrders: [FillOrder] = []
-            var transferRecords: [TransferRecord] = []
-            for item in response {
-                if let opItem = item["op"] as? [Any],
-                    let opcode = opItem[0] as? Int,
-                    var operation = opItem[1] as? [String: Any],
-                    let blockNum = item["block_num"] {
-                    operation["block_num"] = blockNum
-                    if opcode == ChainTypesOperations.fillOrder.rawValue {
-                        if let fillorder = FillOrder.deserialize(from: operation) {
-                            fillOrders.append(fillorder)
-                        }
-                    } else if opcode == ChainTypesOperations.transfer.rawValue {
-                        // 转账记录
-                        if let extensions = operation["extensions"] as? [Any],
-                            extensions.count > 0,
-                            let lockUpInfos = extensions[0] as? [Any],
-                            lockUpInfos.count >= 2,
-                            let lockUpInfo = lockUpInfos[1] as? [String: Any] {
-                            operation["vesting_period"] = lockUpInfo["vesting_period"]
-                            operation["public_key"] = lockUpInfo["public_key"]
-                        }
-
-                        if let transferRecord = TransferRecord.deserialize(from: operation) {
-                            transferRecords.append(transferRecord)
-                        }
-                    }
-                }
-            }
-            return (fillOrders, transferRecords)
-        } else {
-            throw CastError(actualValue: resultObject, expectedType: Response.self)
-        }
-    }
 }
 
 struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
