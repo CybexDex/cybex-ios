@@ -1,0 +1,51 @@
+BUILD_CONFIGURATIONS:
+  Debug: :debug
+  Release: :release
+  Tests: :release
+CACHE_KEYS:
+  cocore:
+    BUILD_SETTINGS_CHECKSUM:
+      cocore: 418233a5d774511a97ec14efbb5a3d97
+    CHECKSUM: dfaf5fb52b518fbbb5076061386294051a8f62d3
+    SPECS:
+      - cocore (1.1.0)
+  coswift:
+    BUILD_SETTINGS_CHECKSUM:
+      coswift: 5fb5bc3285378c8702f1db559222b4ee
+    CHECKSUM: 70c091e93203daa20e9fdc378dbfefaa5f9057de
+    SPECS:
+      - coswift (1.1.2)
+  EFQRCode:
+    BUILD_SETTINGS_CHECKSUM:
+      EFQRCode: 62a607d5224758c2c4e97b4cd0d8eabd
+    CHECKSUM: 07437cfbce3a1e497397a4f3d766c980d8972608
+    SPECS:
+      - EFQRCode (5.0.0)
+  Pods-ChatRoom:
+    BUILD_SETTINGS_CHECKSUM:
+      Debug: 9b1f6577268c4cc90d99d152946ddf6e
+      Release: 9b1f6577268c4cc90d99d152946ddf6e
+      Tests: 9b1f6577268c4cc90d99d152946ddf6e
+  Pods-cybexMobile:
+    BUILD_SETTINGS_CHECKSUM:
+      Debug: f62a58f57257fcbf08d149ca6e2586c7
+      Release: f62a58f57257fcbf08d149ca6e2586c7
+      Tests: f62a58f57257fcbf08d149ca6e2586c7
+  Pods-cybexMobileTests:
+    BUILD_SETTINGS_CHECKSUM:
+      Debug: 8e5386f38fd3b8e6f407015da0e0f2f6
+      Release: 8e5386f38fd3b8e6f407015da0e0f2f6
+      Tests: 8e5386f38fd3b8e6f407015da0e0f2f6
+  secp256k1_swift:
+    BUILD_SETTINGS_CHECKSUM:
+      secp256k1_swift: 38ae293841c1dafecdbf16a8e0a1d189
+    CHECKSUM: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
+    SPECS:
+      - secp256k1_swift (1.0.3)
+  swift_qrcodejs:
+    BUILD_SETTINGS_CHECKSUM:
+      swift_qrcodejs: fd71933b2f9273ed2802cc2ecb91061d
+    CHECKSUM: 0bacbfe321a99954c7b8e04c75562007ea4e4f7c
+    SPECS:
+      - swift_qrcodejs (1.1.1)
+OBJECT_VERSION: 51

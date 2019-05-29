@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0EE2A168032455D0AB8B0FDD6CDFC854 /* coroutine_context.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FAAB65497825BEC0B9478BF31E349E0 /* coroutine_context.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		21325BCF5E8052CE942552F29A3073E0 /* co_errors.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA3FC27FE3EEC287DBF586751ECDDB9 /* co_errors.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		288BBB171764BB266974F95EBF3800F3 /* co_csp.h in Headers */ = {isa = PBXBuildFile; fileRef = A0D1BB450F15986C6F0615C7F03AF214 /* co_csp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		30832EE87EEF42752E91B799DFCB5321 /* cofishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = DEC917802119DCE48570F48B12803AA2 /* cofishhook.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		39205BFFF041649C7B5873AAD8B8957A /* co_queuedebugging_support.h in Headers */ = {isa = PBXBuildFile; fileRef = D95B247AA7A5FD6E8EF1B139A38B7555 /* co_queuedebugging_support.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3C07246E1F6B5AD0C2FA8DF07E30ECF2 /* coroutine.h in Headers */ = {isa = PBXBuildFile; fileRef = C56FF764ACB252CED4B40F15D964793E /* coroutine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D39BC652017CE7A236B20DE4B4FDDC7 /* co_queue.h in Headers */ = {isa = PBXBuildFile; fileRef = E977EB018F07AEE58B53ADC4D0FB87F1 /* co_queue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53664488D574A7BC1331B124C9E991C7 /* cocore.h in Headers */ = {isa = PBXBuildFile; fileRef = C237152E30F87CE5631FCFF910DEC19A /* cocore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57D9D67A0CF58CC8763D77F27996AF27 /* cofishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 293422C9C7EFE952CB74A85C344EF21A /* cofishhook.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61203356F2A5BCFBBCDDD48F9859E741 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A2253CE282229B846AE1725D632692 /* Foundation.framework */; };
+		6A577A60B15B0DEEBFA32E073750C4F4 /* coroutine.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE55270E3C30702F66621713AEA0270 /* coroutine.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		735341B6C909D8A8775903E1A99E3D76 /* co_autorelease.h in Headers */ = {isa = PBXBuildFile; fileRef = 76FB3CFA09EE4C9532E5ACE07ED0112C /* co_autorelease.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AD486DC2D31BB58EAEB25729C3EEACF /* co_autorelease.mm in Sources */ = {isa = PBXBuildFile; fileRef = B47329BF2B14CE0B04CDED6B9D75A1C5 /* co_autorelease.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A2840E33179ED4CCC1DE2B7777E94FA8 /* co_queue.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE3FAB3DFBA2B0BAD107B286F284997 /* co_queue.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		AC9C3D7A4C173F4F20812A113C74A684 /* co_csp.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D9D0ECA3B8CAD16781FA0EFBE1A681 /* co_csp.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		AD3D518042CA482E6501C3F994FA20F4 /* coroutine_context.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EEEE124B597A4DE6E2F200647909FB6 /* coroutine_context.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B951BA0D778C8EEF66A3B0F637F2D927 /* coroutine_context.s in Sources */ = {isa = PBXBuildFile; fileRef = E95F423447CDA35636E296C6B76989E1 /* coroutine_context.s */; };
+		C51C353027B0FF451AA6A04AF832E873 /* cocore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3350D9007BE403AE8BDA84C055038CC8 /* cocore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D60C3BACD53A6B8341C3ABBFC0875D45 /* co_errors.h in Headers */ = {isa = PBXBuildFile; fileRef = 9503FEC3ABDE048C5D0F4ECB8F56DA68 /* co_errors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECB4178A6322628E1B71589E1B9BB95D /* co_queuedebugging_support.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B78EB94F14F0B7574AB35FFD259412 /* co_queuedebugging_support.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		ED173E647AC81C84842B322222CDA04D /* cocore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF3EC430C91F0E06FE95FFDFEC96961 /* cocore-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0EEEE124B597A4DE6E2F200647909FB6 /* coroutine_context.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = coroutine_context.h; path = cocore/coroutine_context.h; sourceTree = "<group>"; };
+		216A0182A52D2F643AE1100AB70E4C65 /* cocore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = cocore.framework; path = cocore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A2253CE282229B846AE1725D632692 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		245B978BB01967525B682BE66602C78B /* cocore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "cocore-Info.plist"; sourceTree = "<group>"; };
+		293422C9C7EFE952CB74A85C344EF21A /* cofishhook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cofishhook.h; path = cocore/cofishhook.h; sourceTree = "<group>"; };
+		2FAAB65497825BEC0B9478BF31E349E0 /* coroutine_context.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = coroutine_context.m; path = cocore/coroutine_context.m; sourceTree = "<group>"; };
+		3350D9007BE403AE8BDA84C055038CC8 /* cocore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "cocore-umbrella.h"; sourceTree = "<group>"; };
+		581C234F1E184138639BCF219E8A363B /* cocore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = cocore.modulemap; sourceTree = "<group>"; };
+		5CF3EC430C91F0E06FE95FFDFEC96961 /* cocore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "cocore-dummy.m"; sourceTree = "<group>"; };
+		68F1F312526B67DE0A28D40C2E923493 /* cocore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "cocore-prefix.pch"; sourceTree = "<group>"; };
+		76D9D0ECA3B8CAD16781FA0EFBE1A681 /* co_csp.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = co_csp.m; path = cocore/co_csp.m; sourceTree = "<group>"; };
+		76FB3CFA09EE4C9532E5ACE07ED0112C /* co_autorelease.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = co_autorelease.h; path = cocore/co_autorelease.h; sourceTree = "<group>"; };
+		9503FEC3ABDE048C5D0F4ECB8F56DA68 /* co_errors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = co_errors.h; path = cocore/co_errors.h; sourceTree = "<group>"; };
+		A0D1BB450F15986C6F0615C7F03AF214 /* co_csp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = co_csp.h; path = cocore/co_csp.h; sourceTree = "<group>"; };
+		B47329BF2B14CE0B04CDED6B9D75A1C5 /* co_autorelease.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = co_autorelease.mm; path = cocore/co_autorelease.mm; sourceTree = "<group>"; };
+		BAE55270E3C30702F66621713AEA0270 /* coroutine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = coroutine.m; path = cocore/coroutine.m; sourceTree = "<group>"; };
+		C237152E30F87CE5631FCFF910DEC19A /* cocore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cocore.h; path = cocore/cocore.h; sourceTree = "<group>"; };
+		C56FF764ACB252CED4B40F15D964793E /* coroutine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = coroutine.h; path = cocore/coroutine.h; sourceTree = "<group>"; };
+		CAA3FC27FE3EEC287DBF586751ECDDB9 /* co_errors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = co_errors.m; path = cocore/co_errors.m; sourceTree = "<group>"; };
+		D95B247AA7A5FD6E8EF1B139A38B7555 /* co_queuedebugging_support.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = co_queuedebugging_support.h; path = cocore/co_queuedebugging_support.h; sourceTree = "<group>"; };
+		D9B78EB94F14F0B7574AB35FFD259412 /* co_queuedebugging_support.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = co_queuedebugging_support.m; path = cocore/co_queuedebugging_support.m; sourceTree = "<group>"; };
+		DAE3FAB3DFBA2B0BAD107B286F284997 /* co_queue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = co_queue.m; path = cocore/co_queue.m; sourceTree = "<group>"; };
+		DEC917802119DCE48570F48B12803AA2 /* cofishhook.c */ = {isa = PBXFileReference; includeInIndex = 1; name = cofishhook.c; path = cocore/cofishhook.c; sourceTree = "<group>"; };
+		E95F423447CDA35636E296C6B76989E1 /* coroutine_context.s */ = {isa = PBXFileReference; includeInIndex = 1; name = coroutine_context.s; path = cocore/coroutine_context.s; sourceTree = "<group>"; };
+		E977EB018F07AEE58B53ADC4D0FB87F1 /* co_queue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = co_queue.h; path = cocore/co_queue.h; sourceTree = "<group>"; };
+		F49AA797F99C7A9EA3EA1B00FF6AA750 /* cocore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = cocore.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9357227C17FFC2DEEA5B0DAA1277A9EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61203356F2A5BCFBBCDDD48F9859E741 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		058D831E5937699F54B94BFBCF28EE80 = {
+			isa = PBXGroup;
+			children = (
+				CF36920F2CAEA092B8AF975F4F15B909 /* cocore */,
+				270F349238CCEC8B9E36A1A86AA87EE6 /* Frameworks */,
+				A5CE51EA1DAE74468010BEFDED7C8A9C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		270F349238CCEC8B9E36A1A86AA87EE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8630624D68625F027EC30F2B74C01AA7 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8630624D68625F027EC30F2B74C01AA7 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				21A2253CE282229B846AE1725D632692 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		A5CE51EA1DAE74468010BEFDED7C8A9C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				216A0182A52D2F643AE1100AB70E4C65 /* cocore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD7A18436177FD149A99AACD18813DD4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				581C234F1E184138639BCF219E8A363B /* cocore.modulemap */,
+				F49AA797F99C7A9EA3EA1B00FF6AA750 /* cocore.xcconfig */,
+				5CF3EC430C91F0E06FE95FFDFEC96961 /* cocore-dummy.m */,
+				245B978BB01967525B682BE66602C78B /* cocore-Info.plist */,
+				68F1F312526B67DE0A28D40C2E923493 /* cocore-prefix.pch */,
+				3350D9007BE403AE8BDA84C055038CC8 /* cocore-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/cocore";
+			sourceTree = "<group>";
+		};
+		CF36920F2CAEA092B8AF975F4F15B909 /* cocore */ = {
+			isa = PBXGroup;
+			children = (
+				76FB3CFA09EE4C9532E5ACE07ED0112C /* co_autorelease.h */,
+				B47329BF2B14CE0B04CDED6B9D75A1C5 /* co_autorelease.mm */,
+				A0D1BB450F15986C6F0615C7F03AF214 /* co_csp.h */,
+				76D9D0ECA3B8CAD16781FA0EFBE1A681 /* co_csp.m */,
+				9503FEC3ABDE048C5D0F4ECB8F56DA68 /* co_errors.h */,
+				CAA3FC27FE3EEC287DBF586751ECDDB9 /* co_errors.m */,
+				E977EB018F07AEE58B53ADC4D0FB87F1 /* co_queue.h */,
+				DAE3FAB3DFBA2B0BAD107B286F284997 /* co_queue.m */,
+				D95B247AA7A5FD6E8EF1B139A38B7555 /* co_queuedebugging_support.h */,
+				D9B78EB94F14F0B7574AB35FFD259412 /* co_queuedebugging_support.m */,
+				C237152E30F87CE5631FCFF910DEC19A /* cocore.h */,
+				DEC917802119DCE48570F48B12803AA2 /* cofishhook.c */,
+				293422C9C7EFE952CB74A85C344EF21A /* cofishhook.h */,
+				C56FF764ACB252CED4B40F15D964793E /* coroutine.h */,
+				BAE55270E3C30702F66621713AEA0270 /* coroutine.m */,
+				0EEEE124B597A4DE6E2F200647909FB6 /* coroutine_context.h */,
+				2FAAB65497825BEC0B9478BF31E349E0 /* coroutine_context.m */,
+				E95F423447CDA35636E296C6B76989E1 /* coroutine_context.s */,
+				AD7A18436177FD149A99AACD18813DD4 /* Support Files */,
+			);
+			name = cocore;
+			path = cocore;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A9CCE52F842B1C2F12379813325EF33E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				735341B6C909D8A8775903E1A99E3D76 /* co_autorelease.h in Headers */,
+				288BBB171764BB266974F95EBF3800F3 /* co_csp.h in Headers */,
+				D60C3BACD53A6B8341C3ABBFC0875D45 /* co_errors.h in Headers */,
+				4D39BC652017CE7A236B20DE4B4FDDC7 /* co_queue.h in Headers */,
+				39205BFFF041649C7B5873AAD8B8957A /* co_queuedebugging_support.h in Headers */,
+				C51C353027B0FF451AA6A04AF832E873 /* cocore-umbrella.h in Headers */,
+				53664488D574A7BC1331B124C9E991C7 /* cocore.h in Headers */,
+				57D9D67A0CF58CC8763D77F27996AF27 /* cofishhook.h in Headers */,
+				3C07246E1F6B5AD0C2FA8DF07E30ECF2 /* coroutine.h in Headers */,
+				AD3D518042CA482E6501C3F994FA20F4 /* coroutine_context.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		44B9F3DF1A76463ECB2E752DB51A596B /* cocore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0838AD41C192B0CC1B357ADD4045074 /* Build configuration list for PBXNativeTarget "cocore" */;
+			buildPhases = (
+				A9CCE52F842B1C2F12379813325EF33E /* Headers */,
+				E6CA5F933151B54EFEC59CC1A5AE5516 /* Sources */,
+				9357227C17FFC2DEEA5B0DAA1277A9EE /* Frameworks */,
+				90B456CA37D77314616F14CF599CD498 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cocore;
+			productName = cocore;
+			productReference = 216A0182A52D2F643AE1100AB70E4C65 /* cocore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D38CF1B0F8F724A15D9C5E6235375CFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+			};
+			buildConfigurationList = 36915E3BCD8239898BCD4941E8CC5E10 /* Build configuration list for PBXProject "cocore" */;
+			compatibilityVersion = "Xcode 10.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 058D831E5937699F54B94BFBCF28EE80;
+			productRefGroup = A5CE51EA1DAE74468010BEFDED7C8A9C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				44B9F3DF1A76463ECB2E752DB51A596B /* cocore */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		90B456CA37D77314616F14CF599CD498 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E6CA5F933151B54EFEC59CC1A5AE5516 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AD486DC2D31BB58EAEB25729C3EEACF /* co_autorelease.mm in Sources */,
+				AC9C3D7A4C173F4F20812A113C74A684 /* co_csp.m in Sources */,
+				21325BCF5E8052CE942552F29A3073E0 /* co_errors.m in Sources */,
+				A2840E33179ED4CCC1DE2B7777E94FA8 /* co_queue.m in Sources */,
+				ECB4178A6322628E1B71589E1B9BB95D /* co_queuedebugging_support.m in Sources */,
+				ED173E647AC81C84842B322222CDA04D /* cocore-dummy.m in Sources */,
+				30832EE87EEF42752E91B799DFCB5321 /* cofishhook.c in Sources */,
+				6A577A60B15B0DEEBFA32E073750C4F4 /* coroutine.m in Sources */,
+				0EE2A168032455D0AB8B0FDD6CDFC854 /* coroutine_context.m in Sources */,
+				B951BA0D778C8EEF66A3B0F637F2D927 /* coroutine_context.s in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1F1CA9D9447436E10F77C3A78341A074 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F49AA797F99C7A9EA3EA1B00FF6AA750 /* cocore.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/cocore/cocore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/cocore/cocore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/cocore/cocore.modulemap";
+				PRODUCT_MODULE_NAME = cocore;
+				PRODUCT_NAME = cocore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		271DD4B48A69E18AFB60C6859DEB3A99 /* Tests */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F49AA797F99C7A9EA3EA1B00FF6AA750 /* cocore.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/cocore/cocore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/cocore/cocore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/cocore/cocore.modulemap";
+				PRODUCT_MODULE_NAME = cocore;
+				PRODUCT_NAME = cocore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Tests;
+		};
+		34D4B0E242596B86FEE86C33A095C515 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F49AA797F99C7A9EA3EA1B00FF6AA750 /* cocore.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/cocore/cocore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/cocore/cocore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/cocore/cocore.modulemap";
+				PRODUCT_MODULE_NAME = cocore;
+				PRODUCT_NAME = cocore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9D954A4973D6C8E2A686F7A88A6C79CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		9E17EBBD11D7D7F2010D939DB1BBA426 /* Tests */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_TESTS=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Tests;
+		};
+		E35EA82D622CCADB2C919D1AF02FCF0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		36915E3BCD8239898BCD4941E8CC5E10 /* Build configuration list for PBXProject "cocore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E35EA82D622CCADB2C919D1AF02FCF0C /* Debug */,
+				9D954A4973D6C8E2A686F7A88A6C79CE /* Release */,
+				9E17EBBD11D7D7F2010D939DB1BBA426 /* Tests */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0838AD41C192B0CC1B357ADD4045074 /* Build configuration list for PBXNativeTarget "cocore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F1CA9D9447436E10F77C3A78341A074 /* Debug */,
+				34D4B0E242596B86FEE86C33A095C515 /* Release */,
+				271DD4B48A69E18AFB60C6859DEB3A99 /* Tests */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D38CF1B0F8F724A15D9C5E6235375CFC /* Project object */;
+}
