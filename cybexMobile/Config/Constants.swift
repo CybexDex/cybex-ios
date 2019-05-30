@@ -70,6 +70,16 @@ enum OperationId {
             return 52
         }
     }
+    static var participate_exchange: Int {
+        switch AppEnv.current {
+        case .product:
+            return 63
+        case .test:
+            return 63
+        case .uat:
+            return 63
+        }
+    }
 }
 
 enum ObjectID {
@@ -81,6 +91,16 @@ enum ObjectID {
             return "2.1.0"
         case .uat:
             return "2.1.0"
+        }
+    }
+    static var exchangeObject: String {
+        switch AppEnv.current {
+        case .product:
+            return "1.20.0"
+        case .test:
+            return "1.20.0"
+        case .uat:
+            return "1.20.0"
         }
     }
 }

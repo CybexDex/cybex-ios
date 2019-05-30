@@ -484,7 +484,7 @@
 "eto_project_stop_reserve" = "Stop Reserve";
 "eto_project_waiting" = "Waiting for ETO";
 "eto_project_join" = "Join ETO Now";
-"eto_project_rejected" = "Rejected";
+"eto_project_rejected" = "Not Qualified";
 "eto_project_kyc" = "KYC Verification";
 "eto_project_login" = "Login";
 
@@ -498,7 +498,9 @@
 
 
 "eto_transfer_title" = "Verifying";
-"eto_transfer_content" = "Do not repeat transfers";
+"eto_transfer_content" = "Do not repeat subscriptions";
+"eto_subscritions_success" = "Subscription success";
+"eto_subscritions_failed" = "Subscription failed";
 
 "eto_invite_code_error" = "Please enter a valid invitation code";
 "eto_invite_code_title" = "Invitation code";

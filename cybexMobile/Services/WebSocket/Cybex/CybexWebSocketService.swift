@@ -412,6 +412,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         let data = JSON(parseJSON: message)
 //            Log.print("receive message: \(data.rawString()!)\n")
 
+        
         guard let sendId = data["id"].int else {
             return
         }

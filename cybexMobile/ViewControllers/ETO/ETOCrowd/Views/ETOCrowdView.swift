@@ -17,6 +17,7 @@ class ETOCrowdView: CybexBaseView {
     @IBOutlet weak var actionButton: LGButton!
     @IBOutlet weak var descLabel: BaseLabel!
 
+    @IBOutlet weak var equalLabel: UILabel!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
 

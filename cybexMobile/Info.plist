@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1080</string>
+	<string>1086</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -61,8 +61,14 @@
 	<string>NFC tag to read NDEF messages into the application</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>10.18.120.241:3049</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
 	</dict>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>

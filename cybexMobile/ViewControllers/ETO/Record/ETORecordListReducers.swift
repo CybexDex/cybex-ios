@@ -22,7 +22,6 @@ func ETORecordListReducer(action: Action, state: ETORecordListState?) -> ETOReco
             } else {
                 appendModel = model
             }
-
             let changeset = StagedChangeset(source: state.data.value, target: appendModel)
             state.changeSet.accept(changeset)
         }

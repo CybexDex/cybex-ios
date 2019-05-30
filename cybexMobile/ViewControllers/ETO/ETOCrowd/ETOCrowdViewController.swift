@@ -69,8 +69,14 @@ class ETOCrowdViewController: BaseViewController {
         }
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (_) in
-            guard let self = self, let amount = self.contentView.titleTextView.textField.text?.decimal() else { return }
-
+            guard let self = self, let amount = self.contentView.titleTextView.textField.text?.decimal(), let data = self.coordinator?.state.data.value else { return }
+            let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
+            if data.userBuyToken == data.baseTokenName {
+                self.contentView.equalLabel.text = (amount / rate).string() + data.tokenName
+            }
+            else {
+                self.contentView.equalLabel.text = (amount * rate).string() + data.baseTokenName
+            }
             self.coordinator?.checkValidStatus(amount)
         }
     }
@@ -137,21 +143,24 @@ extension ETOCrowdViewController {
     }
 
     override func returnEnsureAction() {
-        guard let price = self.contentView.titleTextView.textField.text?.decimal() else { return }
+        guard let price = self.contentView.titleTextView.textField.text?.decimal(), let data = self.coordinator?.state.data.value else { return }
         self.startLoading()
-        self.coordinator?.joinCrowd(price, callback: { [weak self](data) in
+        let project = data.project.getSuffixID
+        self.coordinator?.joinCrowd(price,projectId: project, callback: { [weak self](data) in
             guard let self = self else { return }
             self.endLoading()
             if String(describing: data) == "<null>" {
                 self.showWaiting(R.string.localizable.eto_transfer_title.key.localized(), content: R.string.localizable.eto_transfer_content.key.localized(), time: 5)
+//                self.showToastBox(false, message: R.string.localizable.transfer_successed.key.localized())
             } else {
-                self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
+                self.showToastBox(false, message: R.string.localizable.eto_subscritions_failed.key.localized())
             }
         })
     }
 
     override func ensureWaitingAction(_ sender: CybexWaitingView) {
         ShowToastManager.shared.hide(0)
+        self.showToastBox(true, message: R.string.localizable.eto_subscritions_success.key.localized())
         self.coordinator?.reOpenCrowd()
     }
 

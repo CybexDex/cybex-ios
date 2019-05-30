@@ -26,9 +26,11 @@ enum ETOMGAPI {
 
 struct ETOMGService {
     enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "https://eto.cybex.io/api")!
+//        http://10.18.120.241:3049/api/
+//        static let productURL = URL(string: "https://eto.cybex.io/api")!
+        static let productURL = URL(string: "http://10.18.120.241:3049/api")!
         static let devURL = URL(string: "https://ieo-apitest.cybex.io/api")!
-        static let uatURL = URL(string: "https://ieo-apitest.cybex.io/api")!
+        static let uatURL = URL(string: "http://10.18.120.241:3049/api")!
     }
 
     static let provider = MoyaProvider<ETOMGAPI>(callbackQueue: nil,
@@ -73,7 +75,7 @@ struct ETOMGService {
     static func defaultManager() -> Alamofire.SessionManager {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
-        configuration.timeoutIntervalForRequest = 15
+        configuration.timeoutIntervalForRequest = 20
 
         let manager = Alamofire.SessionManager(configuration: configuration)
         manager.startRequestsImmediately = false
@@ -121,15 +123,16 @@ extension ETOMGAPI: TargetType {
         case .getBanner:
             return ["client": "mobile"]
         case .getProjectDetail(let id):
-            return ["project": id]
+            
+            return ["project": ObjectID.exchangeObject.replacingOccurrences(of: ".0", with: ".\(id)")]
         case .getProjects(let offset, let limit):
             return ["limit": limit, "offset": offset]
         case .refreshProject(let id):
-            return ["project": id]
+            return ["project": ObjectID.exchangeObject.replacingOccurrences(of: ".0", with: ".\(id)")]
         case .checkUserState(let name, let id):
-            return ["cybex_name": name, "project": id]
+            return ["cybex_name": name, "project": ObjectID.exchangeObject.replacingOccurrences(of: ".0", with: ".\(id)")]
         case .refreshUserState(let name, let id):
-            return ["cybex_name": name, "project": id]
+            return ["cybex_name": name, "project": ObjectID.exchangeObject.replacingOccurrences(of: ".0", with: ".\(id)")]
         case .getUserTradeList(let name, let page, let limit):
             return ["cybex_name": name, "page": page, "limit": limit]
         default:
@@ -149,7 +152,7 @@ extension ETOMGAPI: TargetType {
     var task: Task {
         switch self {
         default:
-            return .requestCompositeData(bodyData: sampleData, urlParameters: urlParameters)
+            return .requestParameters(parameters: urlParameters, encoding: URLEncoding.default)
         }
     }
 

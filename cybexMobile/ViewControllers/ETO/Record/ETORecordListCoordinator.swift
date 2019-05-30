@@ -53,7 +53,7 @@ extension ETORecordListCoordinator: ETORecordListStateManagerProtocol {
         ETOMGService.request(target: .getUserTradeList(name: name, page: page, limit: 20), success: { (json) in
             self.store.dispatch(ETONextPageAction(page: page))
 
-            let data = json["data"]
+            let data = json
             if data.arrayValue.count == 0 && reason != .manualLoadMore {
                 self.switchPageState(.noData)
             } else if data.arrayValue.count < 20 {
