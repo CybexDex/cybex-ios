@@ -80,9 +80,9 @@ class AppConfiguration {
 extension AppConfiguration {
     func fetchAppEnableSettingRequest() {
         AppService.request(target: .setting, success: { (json) in
-            var model = AppEnableSetting.deserialize(from: json.dictionaryObject)
-            model?.isETOEnabled = true
-            model?.contestEnabled = false
+            let model = AppEnableSetting.deserialize(from: json.dictionaryObject)
+//            model?.isETOEnabled = true
+//            model?.contestEnabled = false
             self.enableSetting.accept(model)
 
             AppConfiguration.shared.appCoordinator.start()
