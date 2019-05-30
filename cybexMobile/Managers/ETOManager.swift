@@ -59,8 +59,10 @@ extension ETOJoinButtonState: Equatable {
             return titlelhs == titlerhs && stylelhs == stylerhs && actionlhs == actionrhs
         case let (.disable(titlelhs, stylelhs), .disable(titlerhs, stylerhs)):
             return titlelhs == titlerhs && stylelhs == stylerhs
-        case (_, _):
+        case (.notShow, .notShow):
             return true
+        default:
+            return false
         }
     }
 }

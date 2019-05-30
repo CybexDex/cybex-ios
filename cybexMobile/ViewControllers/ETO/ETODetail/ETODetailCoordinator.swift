@@ -95,8 +95,8 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             if let model = coor.state.selectedProjectModel.value, let projectModel = model.projectModel {
                 self.store.dispatch(SetProjectDetailAction(data: projectModel))
             } else {
-                if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id.int {
-                    fetchProjectModelWithId(bannerId)
+                if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id, let id = bannerId.int {
+                    fetchProjectModelWithId(id)
                 } else {
 
                 }
@@ -123,7 +123,10 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
 
     func fetchUserState() {
-        if let name = UserManager.shared.name.value, let data = self.state.data.value, let projectModel = data.projectModel, let projectId = projectModel.project.components(separatedBy: ".").last?.int {
+        if let name = UserManager.shared.name.value,
+            let data = self.state.data.value,
+            let projectModel = data.projectModel,
+            let projectId = projectModel.project.components(separatedBy: ".").last?.int {
             ETOMGService.request(target: ETOMGAPI.checkUserState(name: name, id: projectId), success: { (json) in
                 if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data) {
 

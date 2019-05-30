@@ -22,7 +22,7 @@ extension ETOProjectView {
 
         model.currentPercent.asObservable().subscribe(onNext: { [weak self](currentProgress) in
             guard let self = self else { return }
-            self.progressLabel.text = currentProgress
+            self.progressLabel.text = currentProgress.string(digits: 2, roundingMode: .down)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         model.progress.asObservable().subscribe(onNext: { [weak self](progress) in

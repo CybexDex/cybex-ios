@@ -14,7 +14,7 @@ import RxCocoa
 import Localize_Swift
 
 struct ETOBannerModel: HandyJSON {
-    var id: String = ""
+    var id: String?
     var addsBannerMobile: String = ""
     var addsBannerMobileLangEn: String = ""
 
@@ -229,6 +229,7 @@ class ETOProjectModel: HandyJSON {
     var userBuyToken: String = ""
     var baseTokenCount: String = ""
     var quoteTokenCount: String = ""
+    var etoRate: String = ""
     
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.baseTokenCount <-- "base_token_count"
@@ -277,6 +278,7 @@ class ETOProjectModel: HandyJSON {
             self.createAt <-- ("create_at", GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss"))
         mapper <<< self.userBuyToken <-- "user_buy_token"
         mapper <<< self.quoteAccuracy <-- "quote_accuracy"
+        mapper <<< self.etoRate <-- "eto_rate"
     }
 
     required init() {}
@@ -329,8 +331,6 @@ class ETOProjectViewModel {
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.tokenName + "\n"
-            //            var adds_token_total: String = ""
-            //            var adds_token_total__lang_en: String = ""
             if data.addsTokenTotal.count != 0 || data.addsTokenTotalLangEn.count != 0 {
                 if Localize.currentLanguage() == "en" {
                     result += R.string.localizable.eto_total_supply.key.localized() + data.addsTokenTotalLangEn + "\n"
@@ -338,9 +338,13 @@ class ETOProjectViewModel {
                     result += R.string.localizable.eto_total_supply.key.localized() + data.addsTokenTotal + "\n"
                 }
             }
-            if let startAt = data.startAt, let endAt = data.endAt, let lockAt = data.lockAt{
+            if let startAt = data.startAt{
                 result += R.string.localizable.eto_start_time.key.localized() + startAt.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            }
+            if let endAt = data.endAt {
                 result += R.string.localizable.eto_end_time.key.localized() + endAt.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            }
+            if let lockAt = data.lockAt {
                 result += R.string.localizable.eto_start_at.key.localized() + lockAt.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
             if data.offerAt == nil {
@@ -349,8 +353,17 @@ class ETOProjectViewModel {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offerAt!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
             result += R.string.localizable.eto_currency.key.localized() + data.baseTokenName.filterSystemPrefix + "\n"
-
-            result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.baseTokenName + "=" + "\(data.rate)" + data.tokenName
+            
+            
+            
+            result += R.string.localizable.eto_exchange_ratio.key.localized() + data.etoRate
+//            let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
+//            if data.userBuyToken == data.baseTokenName {
+//                result += "1" + data.baseTokenName + "=" + "\((1 / rate).stringValue)" + data.tokenName
+//            }
+//            else {
+//                result += "1" + data.tokenName + "=" + "\(rate.stringValue)" + data.baseTokenName
+//            }
         }
         return result
     }
@@ -397,6 +410,7 @@ class ETOProjectViewModel {
                 if projectModel.tTotalTime == "" {
                     if let finishAt = projectModel.finishAt, let startAt = projectModel.startAt{
                         self.detailTime.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                        
                         self.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
                     }
                 } else {

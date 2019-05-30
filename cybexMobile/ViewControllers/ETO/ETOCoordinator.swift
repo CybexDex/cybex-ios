@@ -118,8 +118,8 @@ extension ETOCoordinator: ETOStateManagerProtocol {
         self.store.dispatch(SetSelectedBannerModelAction(data: model))
         if let projectModels = self.state.data.value {
             for projectModel in projectModels {
-                if let data = projectModel.projectModel {
-                    if data.project == model.id {
+                if let data = projectModel.projectModel, let id = model.id {
+                    if data.project == id {
                         self.setSelectedProjectData(projectModel)
                         return
                     }

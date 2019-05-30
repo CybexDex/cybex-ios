@@ -94,6 +94,8 @@ class ETOViewController: BaseViewController {
     override func configureObserveState() {
         coordinator?.state.pageState.asObservable().subscribe(onNext: {(state) in
             if case let .error(error, _) = state {
+                self.infosRepeater?.pause()
+                self.infosRepeater = nil
                 self.endLoading()
                 self.showToastBox(false, message: error.localizedDescription)
             }
@@ -124,7 +126,8 @@ extension ETOViewController {
     }
 
     @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
-        if let models = self.coordinator?.state.banners.value, let index = data["data"] as? Int, models.count >= index, models[index].id != "" {
+        if let models = self.coordinator?.state.banners.value, let index = data["data"] as? Int, models.count >= index, let id = models[index].id,
+            id != "" {
             self.coordinator?.setSelectedBannerData(models[index])
         }
     }
