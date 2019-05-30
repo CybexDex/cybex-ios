@@ -35,14 +35,14 @@ extension ETOCrowdView {
         var itemValues = [String]()
         if (model.userBuyToken.filterSystemPrefix == model.baseTokenName || model.userBuyToken == "") {
             itemValues = ["\(max) \(model.baseTokenName)", "\(unit) \(model.baseTokenName)", "-- \(model.baseTokenName)", "\(model.baseMinQuota) \(model.baseTokenName)", "--  \(model.baseTokenName)"]
-            self.equalLabel.text = "0\(model.tokenName)"
+            self.equalLabel.text = "=0\(model.tokenName)"
         }
         else {
             let name = model.userBuyToken.filterSystemPrefix
             let quoteAccuracy = model.quoteAccuracy
             let rate = model.quoteTokenCount.decimal() / model.baseTokenCount.decimal()
             itemValues = ["\((max * rate).string()) \(name)", "\(quoteAccuracy) \(name)", "-- \(name)", "\((model.baseMinQuota.decimal * rate).string()) \(name)", "--  \(name)"]
-            self.equalLabel.text = "0\(model.baseTokenName)"
+            self.equalLabel.text = "=0\(model.baseTokenName)"
         }
 
         for (idx, item) in itemViews.enumerated() {
