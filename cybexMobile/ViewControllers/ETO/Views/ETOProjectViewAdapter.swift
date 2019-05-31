@@ -53,10 +53,12 @@ extension ETOProjectView {
             if time == "" {
                 self.timeLabel.isHidden = true
                 self.timeState.isHidden = true
+                self.timeImgView.isHidden = true
             }
             else {
                 self.timeLabel.isHidden = false
                 self.timeState.isHidden = false
+                self.timeImgView.isHidden = false
                 self.timeLabel.text = time
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

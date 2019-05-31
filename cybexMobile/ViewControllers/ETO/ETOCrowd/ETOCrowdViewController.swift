@@ -137,9 +137,15 @@ extension ETOCrowdViewController {
             return
         }
 
-        guard let price = self.contentView.titleTextView.textField.text else { return }
-
-        self.coordinator?.showConfirm(price.decimal())
+        guard let price = self.contentView.titleTextView.textField.text, let data = self.coordinator?.state.data.value else { return }
+        
+        if data.userBuyToken == data.baseTokenName {
+            self.coordinator?.showConfirm(price.decimal())
+        }
+        else {
+            let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
+            self.coordinator?.showConfirm(price.decimal() * rate)
+        }
     }
 
     override func returnEnsureAction() {
