@@ -141,17 +141,23 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                             viewModel.progress.accept(refreshModel.currentPercent)
                             viewModel.status.accept(refreshModel.status!.description())
                             viewModel.projectState.accept(refreshModel.status)
-
-                            if refreshModel.status! == .pre {
-                                viewModel.time.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                            } else if refreshModel.status! == .ok {
-                                viewModel.time.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                            } else if refreshModel.status! == .finish {
-                                if refreshModel.finishAt != nil {
-                                    if projectModel.tTotalTime == "" {
-                                        viewModel.time.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
-                                    } else {
-                                        viewModel.time.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
+                            
+                            if let status = refreshModel.status {
+                                if status == .pre {
+                                    if let startAt = projectModel.startAt {
+                                        viewModel.time.accept(timeHandle(startAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                                    }
+                                } else if status == .ok {
+                                    if let endAt = projectModel.endAt {
+                                        viewModel.time.accept(timeHandle(endAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                                    }
+                                } else if status == .finish {
+                                    if refreshModel.finishAt != nil {
+                                        if projectModel.tTotalTime == "" {
+                                            viewModel.time.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
+                                        } else {
+                                            viewModel.time.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
+                                        }
                                     }
                                 }
                             }
