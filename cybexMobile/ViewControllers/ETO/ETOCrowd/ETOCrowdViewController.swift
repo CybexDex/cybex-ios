@@ -171,8 +171,14 @@ extension ETOCrowdViewController {
     override func passwordPassed(_ passed: Bool) {
         self.endLoading()
         if passed == true {
-            guard let price = self.contentView.titleTextView.textField.text else { return }
-            self.coordinator?.showConfirm(price.decimal())
+            guard let price = self.contentView.titleTextView.textField.text, let data = self.coordinator?.state.data.value else { return }
+            if data.userBuyToken == data.baseTokenName {
+                self.coordinator?.showConfirm(price.decimal())
+            }
+            else {
+                let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
+                self.coordinator?.showConfirm(price.decimal() * rate)
+            }
         } else {
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
         }

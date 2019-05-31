@@ -48,6 +48,7 @@ class ETODetailView: CybexBaseView {
         ETOManager.shared.changeState(.unset)
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
+        self.getJoinButtonState()
     }
 
     func getJoinButtonState() {
@@ -78,6 +79,7 @@ class ETODetailView: CybexBaseView {
         case .normal:
             stateButton.titleColor = UIColor.white
             stateButton.gradientStartColor = UIColor.peach
+            stateButton.gradient = nil
             stateButton.gradientEndColor = UIColor.maincolor
             stateButton.alpha = 1
             stateButton.isUserInteractionEnabled = true

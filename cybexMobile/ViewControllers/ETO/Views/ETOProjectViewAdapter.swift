@@ -50,7 +50,15 @@ extension ETOProjectView {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         model.time.asObservable().subscribe(onNext: { [weak self]time in
             guard let self = self else {return}
-            self.timeLabel.text = time
+            if time == "" {
+                self.timeLabel.isHidden = true
+                self.timeState.isHidden = true
+            }
+            else {
+                self.timeLabel.isHidden = false
+                self.timeState.isHidden = false
+                self.timeLabel.text = time
+            }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.nameLabel.text = model.name

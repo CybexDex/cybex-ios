@@ -413,6 +413,11 @@ class ETOProjectViewModel {
                         
                         self.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
                     }
+                    else{
+                        self.detailTime.accept("")
+                        self.time.accept("")
+
+                    }
                 } else {
                     if let tTotalTimeDouble = projectModel.tTotalTime.double() {
                         self.detailTime.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
