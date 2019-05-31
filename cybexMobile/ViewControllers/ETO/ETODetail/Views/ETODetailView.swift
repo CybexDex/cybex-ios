@@ -75,6 +75,7 @@ class ETODetailView: CybexBaseView {
     }
 
     func updateJoinButton(style: ETOJoinButtonStyle) {
+        
         switch style {
         case .normal:
             stateButton.titleColor = UIColor.white
@@ -87,11 +88,18 @@ class ETODetailView: CybexBaseView {
             stateButton.titleColor = UIColor.pastelOrange
             stateButton.btn_borderColor = UIColor.peach
             stateButton.btn_borderWidth = 1
-            stateButton.gradientStartColor = UIColor.clear
-            stateButton.gradientEndColor = UIColor.clear
+            if ThemeManager.currentThemeIndex == 0 {
+                stateButton.gradientStartColor = UIColor.dark
+                stateButton.gradientEndColor = UIColor.dark
+            }
+            else {
+                stateButton.gradientStartColor = UIColor.paleGrey
+                stateButton.gradientEndColor = UIColor.paleGrey
+            }
             stateButton.bgColor = UIColor.clear
             stateButton.alpha = 1
             stateButton.isUserInteractionEnabled = false
+            
         case .notPassed:
             if ThemeManager.currentThemeIndex == 0 {
                 stateButton.titleColor = UIColor.white

@@ -20,7 +20,11 @@ public class LGButton: UIControl {
 
     let availableFontIcons = ["fa", "io", "oc", "ic", "ma", "ti", "mi"]
 
-    var gradient: CAGradientLayer?
+    var gradient: CAGradientLayer? {
+        didSet {
+            
+        }
+    }
 
     fileprivate var rootView: UIView!
     @IBOutlet fileprivate weak var titleLbl: UILabel!

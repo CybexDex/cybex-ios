@@ -155,7 +155,7 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
             lhs.occurence == rhs.occurence
     }
     var hashValue: Int {
-        return id.int!
+        return Int(id.getSuffixID)
     }
 
 }
@@ -230,7 +230,7 @@ class ETOProjectModel: HandyJSON {
     var baseTokenCount: String = ""
     var quoteTokenCount: String = ""
     var etoRate: String = ""
-    
+    var projectName: String = ""
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.baseTokenCount <-- "base_token_count"
         mapper <<< self.quoteTokenCount <-- "quote_token_count"
@@ -279,6 +279,7 @@ class ETOProjectModel: HandyJSON {
         mapper <<< self.userBuyToken <-- "user_buy_token"
         mapper <<< self.quoteAccuracy <-- "quote_accuracy"
         mapper <<< self.etoRate <-- "eto_rate"
+        mapper <<< self.projectName <-- "project"
     }
 
     required init() {}
@@ -394,7 +395,7 @@ class ETOProjectViewModel {
     var projectState: BehaviorRelay<ProjectState?> = BehaviorRelay(value: nil)
     init(_ projectModel: ETOProjectModel) {
         self.projectModel = projectModel
-        self.name = projectModel.name
+        self.name = projectModel.projectName
         self.keyWords = projectModel.addsKeyword
         self.keyWordsEn = projectModel.addsKeywordLangEn
         if let projectStatus = projectModel.status {
