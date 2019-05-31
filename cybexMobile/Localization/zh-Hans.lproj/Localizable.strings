@@ -413,7 +413,7 @@
 "eto_available" = "可用余额 %@ %@";
 "eto_join" = "参与ETO";
 
-"eto_project_detail_title" = "Project Details";
+"eto_project_detail_title" = "项目详情";
 
 "eto_project_detail" = "项目详情：";
 
@@ -473,7 +473,7 @@
 "eto_project_join" = "立即ETO";
 "eto_project_rejected" = "无参与资格";
 "eto_project_kyc" = "进行KYC";
-"eto_project_login" = "请登录";
+"eto_project_login" = "请登录后参与";
 
 
 

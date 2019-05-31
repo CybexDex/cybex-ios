@@ -132,8 +132,8 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     func refreshProjectDatas() {
         if let projectModels = self.state.data.value {
             for viewModel in projectModels {
-                if let projectModel = viewModel.projectModel {
-                    ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { (json) in
+                if let projectModel = viewModel.projectModel,let project = projectModel.project.components(separatedBy: ".").last, let projectId = project.int {
+                    ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectId), success: { (json) in
                         if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                             projectModel.status = refreshModel.status
                             projectModel.finishAt = refreshModel.finishAt

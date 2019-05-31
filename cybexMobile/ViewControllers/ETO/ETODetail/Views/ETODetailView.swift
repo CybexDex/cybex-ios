@@ -106,8 +106,10 @@ class ETODetailView: CybexBaseView {
         case .disable:
             stateButton.titleColor = UIColor.white
             stateButton.gradientStartColor = UIColor.steel
+            stateButton.gradient = nil
             stateButton.gradientEndColor = UIColor.steel
             stateButton.alpha = 0.5
+            stateButton.bgColor = UIColor.steel
             stateButton.isUserInteractionEnabled = false
         }
     }

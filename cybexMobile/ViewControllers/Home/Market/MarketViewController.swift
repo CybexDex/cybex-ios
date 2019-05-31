@@ -106,8 +106,8 @@ class MarketViewController: BaseViewController {
             }
 
             switch reachability.connection {
-            case .wifi, .cellular:
-                self.fetchNotReadMessageIdData()
+            case .wifi, .cellular: break
+//                self.fetchNotReadMessageIdData()
             case .none:
 
                 break
@@ -117,7 +117,7 @@ class MarketViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchNotReadMessageIdData()
+//        fetchNotReadMessageIdData()
     }
     
     func fetchNotReadMessageIdData() {
@@ -129,7 +129,7 @@ class MarketViewController: BaseViewController {
                 guard let self = self else {
                     return
                 }
-                self.kLineView.messageCount = lastId
+//                self.kLineView.messageCount = lastId
             })
         }
     }
@@ -365,9 +365,9 @@ extension MarketViewController {
         self.coordinator?.setDropBoxViewController()
     }
     
-    @objc func openMessageVC(_ data: [String: Any]) {
-        self.coordinator?.openChatVC(self.pair!)
-    }
+//    @objc func openMessageVC(_ data: [String: Any]) {
+//        self.coordinator?.openChatVC(self.pair!)
+//    }
 }
 
 
