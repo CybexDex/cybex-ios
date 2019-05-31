@@ -277,14 +277,22 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 //            }
 //            CybexWebSocketService.shared.send(request: accountRequeset)
         }
-
     }
 
     func fetchData() {
         Broadcaster.notify(ETODetailStateManagerProtocol.self) {(coor) in
-            if let model = coor.state.data.value?.projectModel {
-                self.store.dispatch(SetProjectDetailAction(data: model))
-            }
+            if let model = coor.state.data.value,
+                let projectModel = model.projectModel, let project = projectModel.project.components(separatedBy: ".").last, let id = project.int {
+                self.store.dispatch(SetProjectDetailAction(data: projectModel))
+                ETOMGService.request(target: ETOMGAPI.getProjectDetail(id: id), success: { json in
+                    if let dataJson = json.dictionaryObject, let refreshModel = ETOProjectModel.deserialize(from: dataJson) {
+                        self.store.dispatch(SetProjectDetailAction(data: refreshModel))
+                        }
+                    
+                }, error: { (_) in
+                }) { _ in
+                }
+        }
         }
     }
 

@@ -33,15 +33,15 @@ extension ETOCrowdView {
         let unit = 1.0 / pow(10, model.baseAccuracy)
         let max = model.baseMaxQuota.decimal
         var itemValues = [String]()
+        let rate = model.quoteTokenCount.decimal() / model.baseTokenCount.decimal()
         if (model.userBuyToken.filterSystemPrefix == model.baseTokenName || model.userBuyToken == "") {
-            itemValues = ["\(max) \(model.baseTokenName)", "\(unit) \(model.baseTokenName)", "-- \(model.baseTokenName)", "\(model.baseMinQuota) \(model.baseTokenName)", "--  \(model.baseTokenName)"]
+            itemValues = ["\(max) \(model.baseTokenName)", "\(unit) \(model.baseTokenName)", "-- \(model.baseTokenName)", "\(model.baseMinQuota) \(model.baseTokenName)", "--  \(model.baseTokenName)","\((model.currentQuote.decimal() / rate).string()) \(model.baseTokenName)"]
             self.equalLabel.text = "=0\(model.tokenName)"
         }
         else {
             let name = model.userBuyToken.filterSystemPrefix
             let quoteAccuracy = model.quoteAccuracy
-            let rate = model.quoteTokenCount.decimal() / model.baseTokenCount.decimal()
-            itemValues = ["\((max * rate).string()) \(name)", "\(quoteAccuracy) \(name)", "-- \(name)", "\((model.baseMinQuota.decimal * rate).string()) \(name)", "--  \(name)"]
+            itemValues = ["\((max * rate).string()) \(name)", "\(quoteAccuracy) \(name)", "-- \(name)", "\((model.baseMinQuota.decimal * rate).string()) \(name)", "--  \(name)", "\(model.currentQuote)  \(name)"]
             self.equalLabel.text = "=0\(model.baseTokenName)"
         }
 
@@ -52,7 +52,7 @@ extension ETOCrowdView {
     }
 
     func adapterModelToUserCrowdView(_ model:(projectModel: ETOProjectModel, userModel: ETOUserModel)) {
-        let subView = itemViews.last!
+        let subView = itemViews[itemViews.count - 2]
 
         let remainView = itemViews[2]
         let remain = model.projectModel.baseMaxQuota - model.userModel.currentBaseTokenCount

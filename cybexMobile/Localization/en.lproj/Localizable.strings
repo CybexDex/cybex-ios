@@ -434,6 +434,7 @@
 "eto_remaining" = "Remaining";
 "eto_min_subscription" = "Min.Subscription";
 "eto_subscribed" = "Subscribed";
+"eto_total_remaining" = "Total Remaining";
 
 "eto_available" = "Available %@ %@";
 "eto_join" = "Join ETO";

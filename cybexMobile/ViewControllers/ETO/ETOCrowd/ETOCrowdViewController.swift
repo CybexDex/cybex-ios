@@ -160,6 +160,7 @@ extension ETOCrowdViewController {
 //                self.showToastBox(false, message: R.string.localizable.transfer_successed.key.localized())
             } else {
                 self.showToastBox(false, message: R.string.localizable.eto_subscritions_failed.key.localized())
+                self.coordinator?.reOpenCrowd()
             }
         })
     }

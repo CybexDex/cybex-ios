@@ -412,6 +412,8 @@
 "eto_subscribed" = "已认购限额";
 "eto_available" = "可用余额 %@ %@";
 "eto_join" = "参与ETO";
+"eto_total_remaining" = "本轮剩余额度";
+
 
 "eto_project_detail_title" = "项目详情";
 

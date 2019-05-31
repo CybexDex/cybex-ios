@@ -68,10 +68,11 @@ extension ETOCrowdView: GridContentViewDataSource {
             R.string.localizable.eto_subscription_unit,
             R.string.localizable.eto_remaining,
             R.string.localizable.eto_min_subscription,
-            R.string.localizable.eto_subscribed
+            R.string.localizable.eto_subscribed,
+            R.string.localizable.eto_total_remaining
         ]
 
-        let views = Array(0...4).map({ (index) -> ETOCrowdGridItemView in
+        let views = Array(0...5).map({ (index) -> ETOCrowdGridItemView in
             let item = ETOCrowdGridItemView()
             item.titleLabel.locali = titles[index].key
             item.valueLabel.text = "-- ETH"

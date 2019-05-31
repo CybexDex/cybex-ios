@@ -49,7 +49,6 @@ struct ETOShortProjectStatusModel: HandyJSON {
     var currentPercent: Double = 0
     var status: ProjectState? //finish pre ok
     var finishAt: Date!
-
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.finishAt <-- ("finish_at", GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss"))
@@ -231,6 +230,7 @@ class ETOProjectModel: HandyJSON {
     var quoteTokenCount: String = ""
     var etoRate: String = ""
     var projectName: String = ""
+    var currentQuote: String = ""
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.baseTokenCount <-- "base_token_count"
         mapper <<< self.quoteTokenCount <-- "quote_token_count"
@@ -280,6 +280,8 @@ class ETOProjectModel: HandyJSON {
         mapper <<< self.quoteAccuracy <-- "quote_accuracy"
         mapper <<< self.etoRate <-- "eto_rate"
         mapper <<< self.projectName <-- "project"
+        mapper <<< self.currentQuote <-- "current_remain_quota_count"
+
     }
 
     required init() {}
@@ -330,7 +332,7 @@ class ETOProjectViewModel {
     var etoDetail: String {
         var result: String = ""
         if let data = self.projectModel {
-            result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
+            result += R.string.localizable.eto_project_name.key.localized() + data.projectName + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.tokenName + "\n"
             if data.addsTokenTotal.count != 0 || data.addsTokenTotalLangEn.count != 0 {
                 if Localize.currentLanguage() == "en" {
@@ -395,7 +397,7 @@ class ETOProjectViewModel {
     var projectState: BehaviorRelay<ProjectState?> = BehaviorRelay(value: nil)
     init(_ projectModel: ETOProjectModel) {
         self.projectModel = projectModel
-        self.name = projectModel.projectName
+        self.name = projectModel.name
         self.keyWords = projectModel.addsKeyword
         self.keyWordsEn = projectModel.addsKeywordLangEn
         if let projectStatus = projectModel.status {
