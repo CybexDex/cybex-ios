@@ -111,7 +111,7 @@ class ETOManager {
         case .checkedAndImmutable:
             return .disable(title: R.string.localizable.eto_project_waiting.key.localized(), style: .wait)
         case .notShow:
-            if state.contains(.notReserved) {
+            if state.contains(.notReserved) && !state.contains(.finished) {
                 return .disable(title: R.string.localizable.eto_project_rejected.key.localized(), style: .disable)
             }
             else if state.contains(.notLogin) && !state.contains(.finished) {
