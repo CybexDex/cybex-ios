@@ -28,9 +28,9 @@ struct ETOMGService {
     enum Config: NetworkHTTPEnv {
 //        http://10.18.120.241:3049/api/
 //        static let productURL = URL(string: "https://eto.cybex.io/api")!
-        static let productURL = URL(string: "http://10.18.120.241:3049/api")!
+        static let productURL = URL(string: "http://52.76.51.139:3049/api")!
         static let devURL = URL(string: "https://ieo-apitest.cybex.io/api")!
-        static let uatURL = URL(string: "http://10.18.120.241:3049/api")!
+        static let uatURL = URL(string: "http://52.76.51.139:3049/api")!
     }
 
     static let provider = MoyaProvider<ETOMGAPI>(callbackQueue: nil,
