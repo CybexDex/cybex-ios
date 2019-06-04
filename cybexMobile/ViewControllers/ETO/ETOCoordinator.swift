@@ -152,13 +152,62 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                                         viewModel.time.accept(timeHandle(endAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
                                     }
                                 } else if status == .finish {
+                                    /*
+                                     if projectModel.tTotalTime == "" {
+                                     if let finishAt = projectModel.finishAt, let startAt = projectModel.startAt{
+                                     self.detailTime.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                     
+                                     self.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                     }
+                                     else{
+                                     self.detailTime.accept("")
+                                     self.time.accept("")
+                                     
+                                     }
+                                     } else {
+                                     if let tTotalTimeDouble = projectModel.tTotalTime.double() {
+                                     self.detailTime.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                     self.time.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                     }
+                                     }
+                                     */
+                                    
+                                    
+                                    
                                     if refreshModel.finishAt != nil {
                                         if projectModel.tTotalTime == "" {
-                                            viewModel.time.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
+                                            if let finishAt = refreshModel.finishAt, let startAt = projectModel.startAt {
+                                                viewModel.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                            }
+                                            else {
+                                                viewModel.time.accept("")
+                                            }
                                         } else {
-                                            viewModel.time.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
+                                            if let tTotalTimeDouble = Double(projectModel.tTotalTime) {
+                                                viewModel.time.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                            }else {
+                                                if let finishAt = refreshModel.finishAt, let startAt = projectModel.startAt {
+                                                    viewModel.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                                }
+                                                else {
+                                                    viewModel.time.accept("")
+                                                }
+                                            }
                                         }
                                     }
+                                    else {
+                                        if projectModel.tTotalTime == "" {
+                                            viewModel.time.accept("")
+                                        }
+                                        else {
+                                            if let tTotalTimeDouble = Double(projectModel.tTotalTime) {
+                                                viewModel.time.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                            }else {
+                                                viewModel.time.accept("")
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }

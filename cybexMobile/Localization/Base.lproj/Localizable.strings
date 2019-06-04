@@ -435,6 +435,9 @@
 "eto_subscribed" = "Subscribed";
 "eto_total_remaining" = "Total Remaining";
 
+"eto_textfiled_placeholder" = "Enter Purchase Amount";
+
+
 "eto_available" = "Available %@ %@";
 "eto_join" = "Join ETO";
 "eto_project_detail" = "Project Details：";

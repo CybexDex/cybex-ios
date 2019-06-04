@@ -415,6 +415,7 @@
 "eto_total_remaining" = "本轮剩余额度";
 
 
+
 "eto_project_detail_title" = "项目详情";
 
 "eto_project_detail" = "项目详情：";
@@ -445,6 +446,7 @@
 "eto_submit_check_error_4" = "不可低于单笔最低限额";
 "eto_submit_check_error_5" = "认购金额为最小认购单位整数倍";
 "eto_submit_confirm" = "ETO确认";
+"eto_textfiled_placeholder" = "请输入认购数量";
 
 "eto_project_time_finish" = "完成时间：";
 "eto_project_time_comming" = "距离结束：";

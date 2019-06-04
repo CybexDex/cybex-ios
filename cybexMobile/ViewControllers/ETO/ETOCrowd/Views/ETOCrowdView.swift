@@ -42,6 +42,7 @@ class ETOCrowdView: CybexBaseView {
         self.titleTextView.textField.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
         self.titleTextView.gapView.isHidden = true
         self.titleTextView.titleLabel.locali = R.string.localizable.eto_quantity.key
+        self.titleTextView.textField.placeholder = R.string.localizable.eto_textfiled_placeholder.key.localized()
         self.actionButton.locali = R.string.localizable.eto_join.key
         self.actionButton.bgColor = UIColor.steel
 //        self.actionButton.isEnabled = false
