@@ -40,7 +40,7 @@ extension EntryCoordinator: EntryCoordinatorProtocol {
     func switchToEnotesLogin(_ pinCodeValidator: ((Card) -> Void)?, error: ((Card) -> Void)?) {
         if #available(iOS 11.0, *) {
             NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
-                UserManager.shared.enotesLogin(card.base58PubKey).done {
+                UserManager.shared.enotesLogin(card.base58PubKey, account: card.account).done {
                         self.dismiss()
                     }.catch({ (error) in
                         self.rootVC.topViewController?.showToastBox(false, message: R.string.localizable.enotes_not_match.key.localized())
