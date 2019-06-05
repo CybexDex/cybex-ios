@@ -403,8 +403,14 @@ class ETOProjectViewModel {
         if let projectStatus = projectModel.status {
             self.status.accept(projectStatus.description())
         }
-        self.currentPercent.accept((projectModel.currentPercent * 100).string(digits: 2, roundingMode: .down).formatCurrency(digitNum: 2) + "%")
-        self.progress.accept(projectModel.currentPercent)
+        if projectModel.currentPercent <= 1 {
+            self.currentPercent.accept((projectModel.currentPercent * 100).string(digits: 2, roundingMode: .down).formatCurrency(digitNum: 2) + "%")
+            self.progress.accept(projectModel.currentPercent)
+        }
+        else {
+            self.currentPercent.accept(100.string(digits: 2, roundingMode: .down).formatCurrency(digitNum: 2) + "%")
+            self.progress.accept(1)
+        }
         self.icon = projectModel.addsLogoMobile
         self.iconEn = projectModel.addsLogoMobileLangEn
         self.projectState.accept(projectModel.status)
