@@ -213,8 +213,15 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                 projectModel.finishAt = refreshModel.finishAt
                 projectModel.status = refreshModel.status
-                model.currentPercent.accept((refreshModel.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
-                model.progress.accept(refreshModel.currentPercent)
+                if refreshModel.currentPercent < 1 {
+                    model.currentPercent.accept((refreshModel.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                    model.progress.accept(refreshModel.currentPercent)
+                }
+                else {
+                    model.currentPercent.accept(100.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                    model.progress.accept(1)
+                }
+             
                 if let refreshStatus = refreshModel.status {
                     model.status.accept(refreshStatus.description())
                 }
