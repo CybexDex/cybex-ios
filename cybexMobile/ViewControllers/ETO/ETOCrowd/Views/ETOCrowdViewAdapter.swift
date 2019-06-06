@@ -46,7 +46,9 @@ extension ETOCrowdView {
         }
 
         for (idx, item) in itemViews.enumerated() {
-            item.valueLabel.text = itemValues[idx]
+            if idx != 2 && idx != 4 {
+                item.valueLabel.text = itemValues[idx]
+            }
         }
 
     }

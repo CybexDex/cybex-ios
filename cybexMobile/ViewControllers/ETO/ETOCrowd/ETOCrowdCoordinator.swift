@@ -59,10 +59,7 @@ extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
         self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(),
                                                    attributes: UIHelper.confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)",
                                                     fee: "\(feeAmount) \(feeInfo.symbol.filterSystemPrefix)"), setup: { (_) in
-                //            for label in labels {
-                //                label.content.numberOfLines = 1
-                //                label.content.lineBreakMode = .byTruncatingMiddle
-                //            }
+           
             })
     }
 
@@ -233,8 +230,6 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         CybexChainHelper.blockchainParams { (blockInfo) in
             let jsonstr = BitShareCoordinator.exchangeParticipate(blockInfo.block_num.int32, block_id: blockInfo.block_id, expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration, chain_id:  CybexConfiguration.shared.chainID.value, user_id: uid.getSuffixID, exchange_id: projectId, asset_id: assetID.getSuffixID, amount: amount.int64Value, fee_id: fee.assetId.getSuffixID, fee_amount: feeAmout.int64Value)
-//            let tranid = BitShareCoordinator.transactionId(fromSigned: jsonstr)
-            
             let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                 main {
                     callback(data)
@@ -242,40 +237,6 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                 }
             }, jsonstr: jsonstr)
             CybexWebSocketService.shared.send(request: withdrawRequest)
-            
-            
-//            let accountRequeset = GetFullAccountsRequest(name: data.receiveAddress) { (response) in
-//                if let response = response as? FullAccount, let account = response.account {
-//
-//
-//                    let jsonstr =  BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
-//                                                                      block_id: blockInfo.block_id,
-//                                                                      expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-//                                                                      chain_id: CybexConfiguration.shared.chainID.value,
-//                                                                      from_user_id: uid.getSuffixID,
-//                                                                      to_user_id: account.id.getSuffixID,
-//                                                                      asset_id: assetID.getSuffixID,
-//                                                                      receive_asset_id: assetID.getSuffixID,
-//                                                                      amount: amount.int64Value,
-//                                                                      fee_id: fee.assetId.getSuffixID,
-//                                                                      fee_amount: feeAmout.int64Value,
-//                                                                      memo: "",
-//                                                                      from_memo_key: "",
-//                                                                      to_memo_key: "")
-//
-//                    let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-//                        main {
-//                            callback(data)
-//                        }
-//                    }, jsonstr: jsonstr)
-//                    CybexWebSocketService.shared.send(request: withdrawRequest)
-//                } else {
-//                    main {
-//                        callback("")
-//                    }
-//                }
-//            }
-//            CybexWebSocketService.shared.send(request: accountRequeset)
         }
     }
 
@@ -288,7 +249,6 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                     if let dataJson = json.dictionaryObject, let refreshModel = ETOProjectModel.deserialize(from: dataJson) {
                         self.store.dispatch(SetProjectDetailAction(data: refreshModel))
                         }
-                    
                 }, error: { (_) in
                 }) { _ in
                 }
@@ -303,7 +263,6 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             if let model = ETOUserModel.deserialize(from: json.dictionaryObject) {
                 self.store.dispatch(FetchCurrentTokenCountAction(userModel: model))
             }
-
         }, error: { (_) in
 
         }) { (_) in
