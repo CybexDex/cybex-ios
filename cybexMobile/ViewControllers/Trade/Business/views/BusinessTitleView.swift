@@ -22,7 +22,7 @@ class BusinessTitleView: UIView {
                 if leftView.viewType == QuotesTitleView.ViewType.game.rawValue {
                     self.reloadData = data.filter({$0.base == MarketConfiguration.gameMarketBaseAssets.map({ $0.id })[currentBaseIndex]})
                 } else {
-                    self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                    self.reloadData = data.filter({$0.base == MarketConfiguration.newMarketBaseAssets.map({ $0.id })[currentBaseIndex]})
                 }
             }
         }
@@ -35,8 +35,8 @@ class BusinessTitleView: UIView {
                     heightConstraint.constant = CGFloat(54 * MarketConfiguration.gameMarketBaseAssets.count)
                     self.reloadData = data.filter({$0.base == MarketConfiguration.gameMarketBaseAssets.map({ $0.id })[currentBaseIndex]})
                 } else {
-                    heightConstraint.constant = CGFloat(54 * MarketConfiguration.marketBaseAssets.count)
-                    self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                    heightConstraint.constant = CGFloat(54 * MarketConfiguration.newMarketBaseAssets.count)
+                    self.reloadData = data.filter({$0.base == MarketConfiguration.newMarketBaseAssets.map({ $0.id })[currentBaseIndex]})
                 }
             }
         }

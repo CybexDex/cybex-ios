@@ -79,14 +79,14 @@ class HomeContentView: UIView {
     }
 
     func dealWithReloadData(_ sender: [Ticker]) -> [Ticker] {
-        let originalData = sender.filter({$0.base == MarketConfiguration.marketBaseAssets[currentBaseIndex].id})
+        let originalData = sender.filter({$0.base == MarketConfiguration.newMarketBaseAssets[currentBaseIndex].id})
 
         switch self.sortedAction {
         case .none://热门交易对排前面
             var hotPairsData: [Ticker] = []
             var otherData: [Ticker] = originalData
 
-            if let hotPairs = MarketConfiguration.shared.importMarketLists.value.filter( { $0.base == MarketConfiguration.marketBaseAssets[currentBaseIndex].id}).first {
+            if let hotPairs = MarketConfiguration.shared.importMarketLists.value.filter( { $0.base == MarketConfiguration.newMarketBaseAssets[currentBaseIndex].id}).first {
                 hotPairsData = originalData.filter { (ticker) -> Bool in
                     if hotPairs.quotes.contains(ticker.quote) {
                         hotPairsData.append(ticker)

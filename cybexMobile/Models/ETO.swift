@@ -212,7 +212,9 @@ class ETOProjectModel: HandyJSON {
     var createAt: Date?
 
     var tokenName: String = ""
+    var token: String = ""
     var baseTokenName: String = ""
+    var baseToken: String = ""
     var rate: Double = 0 //1 base
 
     var baseMaxQuota: Double = 0
@@ -257,7 +259,9 @@ class ETOProjectModel: HandyJSON {
         mapper <<< self.receiveAddress <-- "receive_address"
         mapper <<< self.currentPercent <-- "current_percent"
         mapper <<< self.tokenName <-- "token_name"
+        mapper <<< self.token <-- "token"
         mapper <<< self.baseTokenName <-- "base_token_name"
+        mapper <<< self.baseToken <-- "base_token"
         mapper <<< self.baseMaxQuota <-- "base_max_quota"
         mapper <<< self.baseAccuracy <-- "base_accuracy"
         mapper <<< self.baseMinQuota <-- "base_min_quota"
@@ -355,18 +359,12 @@ class ETOProjectViewModel {
             } else {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offerAt!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
-            result += R.string.localizable.eto_currency.key.localized() + data.baseTokenName.filterSystemPrefix + "\n"
+            result += R.string.localizable.eto_currency.key.localized() + data.baseTokenName + "\n"
             
             
             
             result += R.string.localizable.eto_exchange_ratio.key.localized() + data.etoRate
-//            let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
-//            if data.userBuyToken == data.baseTokenName {
-//                result += "1" + data.baseTokenName + "=" + "\((1 / rate).stringValue)" + data.tokenName
-//            }
-//            else {
-//                result += "1" + data.tokenName + "=" + "\(rate.stringValue)" + data.baseTokenName
-//            }
+
         }
         return result
     }

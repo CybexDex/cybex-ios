@@ -71,7 +71,7 @@ class ETOCrowdViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (_) in
             guard let self = self, let amount = self.contentView.titleTextView.textField.text?.decimal(), let data = self.coordinator?.state.data.value else { return }
             let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
-            if data.userBuyToken == data.baseTokenName {
+            if data.userBuyToken == data.baseToken {
                 self.contentView.equalLabel.text = "=" + (amount / rate).string() + data.tokenName
             }
             else {
@@ -139,7 +139,7 @@ extension ETOCrowdViewController {
 
         guard let price = self.contentView.titleTextView.textField.text, let data = self.coordinator?.state.data.value else { return }
         
-        if data.userBuyToken == data.baseTokenName {
+        if data.userBuyToken == data.baseToken {
             self.coordinator?.showConfirm(price.decimal())
         }
         else {
@@ -179,7 +179,7 @@ extension ETOCrowdViewController {
         self.endLoading()
         if passed == true {
             guard let price = self.contentView.titleTextView.textField.text, let data = self.coordinator?.state.data.value else { return }
-            if data.userBuyToken == data.baseTokenName {
+            if data.userBuyToken == data.baseToken {
                 self.coordinator?.showConfirm(price.decimal())
             }
             else {

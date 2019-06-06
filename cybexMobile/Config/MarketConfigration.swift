@@ -56,6 +56,27 @@ class MarketConfiguration {
     private init() {
         
     }
+    
+    // 修改后页面的base列表
+    static var newMarketBaseAssets: [AssetConfiguration.CybexAsset] {
+        switch AppEnv.current {
+        case .product:
+            return [AssetConfiguration.CybexAsset.USDT,
+                    AssetConfiguration.CybexAsset.ETH,
+                    AssetConfiguration.CybexAsset.CYB,
+                    AssetConfiguration.CybexAsset.BTC]
+        case .test:
+            return [AssetConfiguration.CybexAsset.USDT,
+                    AssetConfiguration.CybexAsset.ETH,
+                    AssetConfiguration.CybexAsset.CYB,
+                    AssetConfiguration.CybexAsset.BTC]
+        case .uat:
+            return [AssetConfiguration.CybexAsset.USDT,
+                    AssetConfiguration.CybexAsset.ETH,
+                    AssetConfiguration.CybexAsset.CYB,
+                    AssetConfiguration.CybexAsset.BTC]
+        }
+    }
 
     //行情页面base列表
     static var marketBaseAssets: [AssetConfiguration.CybexAsset] {

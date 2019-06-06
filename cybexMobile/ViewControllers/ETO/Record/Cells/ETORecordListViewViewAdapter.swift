@@ -22,7 +22,6 @@ import Foundation
 extension ETORecordListViewView {
     func adapterModelToETORecordListViewView(_ model: ETOTradeHistoryModel) {
         nameLabel.text = model.exchangeName
-//        AssetHelper.getRealAmount(<#T##id: String##String#>, amount: <#T##String#>)
         if let payInfo = appData.assetInfo[model.payAssetID], let receiveInfo = appData.assetInfo[model.receiveAssetID] {
             actionLabel.text = "\(AssetHelper.getRealAmount(model.payAssetID, amount: model.payAmount.string))" + payInfo.symbol.filterSystemPrefix
             amountLabel.text = "\(AssetHelper.getRealAmount(model.receiveAssetID, amount: model.receiveAmount.string))" + receiveInfo.symbol.filterSystemPrefix

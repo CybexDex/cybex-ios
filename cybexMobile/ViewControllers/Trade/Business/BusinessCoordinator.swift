@@ -126,6 +126,9 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             let amount = AssetHelper.getRealAmount(balances.assetType, amount: balances.balance)
             self.store.dispatch(BalanceFetchedAction(amount: amount))
         }
+        else {
+            self.store.dispatch(BalanceFetchedAction(amount: 0))
+        }
     }
 
     func resetState() {

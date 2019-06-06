@@ -82,7 +82,7 @@ extension AppConfiguration {
         AppService.request(target: .setting, success: { (json) in
             var model = AppEnableSetting.deserialize(from: json.dictionaryObject)
             model?.isETOEnabled = true
-//            model?.contestEnabled = false
+//            model?.contestEnabled = true
             self.enableSetting.accept(model)
 
             AppConfiguration.shared.appCoordinator.start()

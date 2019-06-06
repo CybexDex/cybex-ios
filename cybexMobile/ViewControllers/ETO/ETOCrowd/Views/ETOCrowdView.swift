@@ -77,7 +77,7 @@ extension ETOCrowdView: GridContentViewDataSource {
         let views = Array(0...5).map({ (index) -> ETOCrowdGridItemView in
             let item = ETOCrowdGridItemView()
             item.titleLabel.locali = titles[index].key
-            item.valueLabel.text = "-- ETH"
+            item.valueLabel.text = "--"
             item.lineView.isHidden = index == 4
             return item
         })

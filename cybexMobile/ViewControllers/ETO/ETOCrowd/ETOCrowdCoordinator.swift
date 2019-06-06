@@ -77,7 +77,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         var assetID = ""
         for (_, value) in appData.assetInfo {
-            if value.symbol.filterSystemPrefix == data.baseTokenName {
+            if value.symbol == data.baseToken {
                 assetID = value.id
                 break
             }
@@ -85,17 +85,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         guard !assetID.isEmpty else { return }
         
-        let operation = BitShareCoordinator.exchangeParticipateJSON(0, exchange_id: 0, asset_id: assetID.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0)
-//        let operation = BitShareCoordinator.getTransterOperation(0,
-//                                                                 to_user_id: 0,
-//                                                                 asset_id: assetID.getSuffixID,
-//                                                                 amount: 0,
-//                                                                 fee_id: 0,
-//                                                                 fee_amount: 0,
-//                                                                 memo: "",
-//                                                                 from_memo_key: "",
-//                                                                 to_memo_key: "")
-        
+        let operation = BitShareCoordinator.exchangeParticipateJSON(0, exchange_id: 0, asset_id: assetID.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0)        
         CybexChainHelper.calculateFee(operation, operationID: OperationId.participate_exchange, focusAssetId: assetID) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
@@ -126,7 +116,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         let balance = balances.filter { (balance) -> Bool in
             if let name = appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix {
-                return name == data.baseTokenName
+                return name == data.baseToken
             }
 
             return false
@@ -135,7 +125,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         if let balance = balance, let _ = appData.assetInfo[balance.assetType] {
             let amount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance)
             
-            if data.userBuyToken.filterSystemPrefix == data.baseTokenCount {
+            if data.userBuyToken == data.baseToken {
                 if transferAmount > amount {
                     self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
                     return
@@ -154,7 +144,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         
         let remain = data.baseMaxQuota - userModel.currentBaseTokenCount
         let unit:Decimal
-        if data.userBuyToken.filterSystemPrefix == data.baseTokenCount {
+        if data.userBuyToken == data.baseToken {
             // base 显示
             if transferAmount > data.baseMaxQuota.decimal {
                 self.store.dispatch(ChangeETOValidStatusAction(status: .moreThanLimit))
@@ -206,7 +196,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         guard let fee = self.state.fee.value, let data = self.state.data.value else { return }
         var assetID = ""
         for (_, value) in appData.assetInfo {
-            if value.symbol.filterSystemPrefix == data.baseTokenName {
+            if value.symbol.filterSystemPrefix == data.baseToken {
                 assetID = value.id
                 break
             }
@@ -218,7 +208,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             let feeInfo = appData.assetInfo[fee.assetId] else { return }
         let value = pow(10, info.precision)
         let amount: Decimal
-        if data.userBuyToken == data.baseTokenName {
+        if data.userBuyToken == data.baseToken {
             amount = transferAmount * value
         }
         else {
