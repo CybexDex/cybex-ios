@@ -116,11 +116,7 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
         }
         else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.getCachedAccount()?.id {
             if pair == nil { // 个人页面
-                var fout: [Pair] = []
-
-                if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-                    fout = MarketConfiguration.shared.gameMarketPairs
-                }
+                let fout: [Pair] = MarketConfiguration.shared.gameMarketPairs
 
                 AccountHistoryService.request(target: AccountHistoryAPI.getFillByPairs(userId: uid, page: page, filterInPairs: nil, filterOutPairs: fout), success: { (json) in
                     self.endLoading()
