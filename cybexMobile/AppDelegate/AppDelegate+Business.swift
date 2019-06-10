@@ -9,10 +9,31 @@
 import Foundation
 import Reachability
 import RxSwift
+import SwiftyJSON
 
 extension AppDelegate {
     func requestSetting() {
         monitorNetworkOfSetting()
+
+        AppConfiguration.shared.nodes.asObservable().skip(1).subscribe(onNext: { (json) in
+            if let node = json?["nodes"].object, let mdp = json?["mdp"].object, let limitOrder = json?["limit_order"].object {
+                if AppEnv.current == .product {
+                    let nodes = [node].flatMapped(with: String.self)
+                    CybexWebSocketService.Config.productURL = nodes.map({ URL(string: $0)! })
+
+                    let mdps = [mdp].flatMapped(with: String.self)
+                    MDPWebSocketService.Config.productURL = mdps.map({ URL(string: $0)! })
+
+                    let limitOrders = [limitOrder].flatMapped(with: String.self)
+                    OCOWebSocketService.Config.productURL = limitOrders.map({ URL(string: $0)! })
+
+                    let connected = CybexWebSocketService.shared.checkNetworConnected()
+                    if !connected {
+                        CybexWebSocketService.shared.connect()
+                    }
+                }
+            }
+        }).disposed(by: disposeBag)
 
         AppConfiguration.shared.enableSetting.asObservable().skip(1).subscribe(onNext: { (appSetting) in
             AssetConfiguration.shared.fetchWhiteListAssets()
@@ -75,6 +96,10 @@ extension AppDelegate {
     }
 
     func checkSetting() {
+        if AppConfiguration.shared.nodes.value == nil {
+            AppConfiguration.shared.fetchNodes()
+        }
+
         if AppConfiguration.shared.enableSetting.value != nil,
             AssetConfiguration.shared.whiteListOfIds.value.isEmpty {
             AssetConfiguration.shared.fetchWhiteListAssets()

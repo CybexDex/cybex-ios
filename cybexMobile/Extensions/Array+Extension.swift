@@ -14,3 +14,18 @@ extension Array {
         }
     }
 }
+
+extension Array {
+    func flatMapped<T>(with type: T.Type) -> [T] {
+        return flatMap { element -> [T] in
+            switch element {
+            case let x as [Any]:
+                return x.flatMapped(with: type)
+            case let x as T:
+                return [x]
+            default:
+                return []
+            }
+        }
+    }
+}

@@ -14,6 +14,7 @@ import SwiftyUserDefaults
 import Localize_Swift
 
 enum AppAPI {
+    case nodesURL
     case setting  // 是否显示ETO Share
     case checkVersionUpdate
     case checkAppStoreVersionUpdate
@@ -107,6 +108,8 @@ extension AppAPI: TargetType {
 
     var path: String {
         switch self {
+        case .nodesURL:
+            return "/json/nodes_config.json"
         case .setting:
             return "/json/settings.json"
         case .checkVersionUpdate:

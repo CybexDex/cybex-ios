@@ -30,7 +30,7 @@ extension NetworkHTTPEnv {
 }
 
 protocol NetworkWebsocketNodeEnv {
-    static var productURL: [URL] { get }
+    static var productURL: [URL] { get set }
     static var devURL: [URL] { get }
     static var uatURL: [URL] { get }
 
