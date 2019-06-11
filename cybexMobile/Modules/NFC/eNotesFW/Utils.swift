@@ -50,7 +50,9 @@ public class Utils {
         card.oneTimeSignatureChecksum = oneTimeSignatureChecksumData.toInt16Value()!
         card.oneTimePrivateKeyChecksum = oneTimePrivateKeyChecksumData.toInt16Value()!
         card.transactionPinStatus = transactionPinStatus.toInt()! != 0
-        card.account = tlv[Data(hex: TlvTag.Account)]?.hexEncodedString()
+        if let accountData = tlv[Data(hex: TlvTag.Account)] {
+            card.account = String(decoding: accountData, as: UTF8.self)
+        }
         card.cert = parser.toCert()
 
         return card

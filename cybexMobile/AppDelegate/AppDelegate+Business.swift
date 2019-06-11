@@ -16,7 +16,8 @@ extension AppDelegate {
         monitorNetworkOfSetting()
 
         AppConfiguration.shared.nodes.asObservable().skip(1).subscribe(onNext: { (json) in
-            if let node = json?["nodes"].object, let mdp = json?["mdp"].object, let limitOrder = json?["limit_order"].object {
+            if let node = json?["nodes"].object, let mdp = json?["mdp"].object, let limitOrder = json?["limit_order"].object,
+                let eto = json?["eto"].string {
                 if AppEnv.current == .product {
                     let nodes = [node].flatMapped(with: String.self)
                     CybexWebSocketService.Config.productURL = nodes.map({ URL(string: $0)! })
@@ -27,6 +28,7 @@ extension AppDelegate {
                     let limitOrders = [limitOrder].flatMapped(with: String.self)
                     OCOWebSocketService.Config.productURL = limitOrders.map({ URL(string: $0)! })
 
+                    ETOMGService.Config.productURL = URL(string: eto)!
                     let connected = CybexWebSocketService.shared.checkNetworConnected()
                     if !connected {
                         CybexWebSocketService.shared.connect()

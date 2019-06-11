@@ -42,7 +42,7 @@ enum AppAPI {
 
 struct AppService {
     enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "https://app.cybex.io")!
+        static var productURL = URL(string: "https://app.cybex.io")!
         static let devURL = URL(string: "http://47.91.242.71:3039")!
         static let uatURL = URL(string: "http://47.100.98.113:3039")!
     }
