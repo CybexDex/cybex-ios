@@ -402,7 +402,7 @@ class ETOProjectViewModel {
             self.status.accept(projectStatus.description())
         }
         if projectModel.currentPercent <= 1 {
-            self.currentPercent.accept((projectModel.currentPercent * 100).string(digits: 2, roundingMode: .down).formatCurrency(digitNum: 2) + "%")
+            self.currentPercent.accept((projectModel.currentPercent.decimal * 100).string(digits: 2, roundingMode: .down).formatCurrency(digitNum: 2) + "%")
             self.progress.accept(projectModel.currentPercent)
         }
         else {

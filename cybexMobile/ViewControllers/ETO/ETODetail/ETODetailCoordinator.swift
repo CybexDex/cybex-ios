@@ -214,7 +214,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 projectModel.finishAt = refreshModel.finishAt
                 projectModel.status = refreshModel.status
                 if refreshModel.currentPercent < 1 {
-                    model.currentPercent.accept((refreshModel.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                    model.currentPercent.accept((refreshModel.currentPercent.decimal * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
                     model.progress.accept(refreshModel.currentPercent)
                 }
                 else {

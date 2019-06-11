@@ -61,6 +61,8 @@ extension ETODetailHeaderView {
             case .ok:
                 self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.ongoingen() : R.image.ongoingcn()
                 self.progressLabel.textColor = UIColor.pastelOrange
+                self.progressView.beginColor = UIColor.apricot
+                self.progressView.endColor = UIColor.orangeish
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }

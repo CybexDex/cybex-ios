@@ -83,6 +83,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
 
     func fetchProjectData() {
         ETOMGService.request(target: ETOMGAPI.getProjects(offset: 0, limit: 4), success: { json in
+            print("fetchProjectData: \(json.arrayValue)")
             if let projects = json.arrayValue.map({ (data)  in
                 ETOProjectModel.deserialize(from: data.dictionaryObject)
             }) as? [ETOProjectModel] {
@@ -138,7 +139,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                             projectModel.status = refreshModel.status
                             projectModel.finishAt = refreshModel.finishAt
                             if refreshModel.currentPercent <= 1 {
-                                viewModel.currentPercent.accept((refreshModel.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                                viewModel.currentPercent.accept((refreshModel.currentPercent.decimal * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
                                 viewModel.progress.accept(refreshModel.currentPercent)
                             }
                             else {

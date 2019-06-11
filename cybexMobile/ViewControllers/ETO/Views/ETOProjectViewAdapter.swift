@@ -41,6 +41,8 @@ extension ETOProjectView {
                 self.stateLabel.textColor = self.nameLabel.textColor
                 self.progressLabel.textColor = self.nameLabel.textColor
             case .ok:
+                self.progressView.beginColor = UIColor.apricot
+                self.progressView.endColor = UIColor.orangeish
                 self.stateLabel.textColor = UIColor.pastelOrange
                 self.progressLabel.textColor = UIColor.pastelOrange
             case .pre:

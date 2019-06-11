@@ -36,8 +36,9 @@ class ETOViewController: BaseViewController {
         self.infosRepeater = Repeater.every(.seconds(3), { [weak self](_) in
             main {
                 guard let self = self else { return }
-                self.coordinator?.refreshProjectDatas()
-                self.coordinator?.refreshTime()
+                self.fetchProjectData()
+//                self.coordinator?.refreshProjectDatas()
+//                self.coordinator?.refreshTime()
             }
         })
     }
@@ -93,11 +94,11 @@ class ETOViewController: BaseViewController {
 
     override func configureObserveState() {
         coordinator?.state.pageState.asObservable().subscribe(onNext: {(state) in
-            if case let .error(error, _) = state {
-                self.infosRepeater?.pause()
-                self.infosRepeater = nil
+            if case let .error(_, _) = state {
+//                self.infosRepeater?.pause()
+//                self.infosRepeater = nil
                 self.endLoading()
-                self.showToastBox(false, message: error.localizedDescription)
+//                self.showToastBox(false, message: error.localizedDescription)
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
