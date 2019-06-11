@@ -19,7 +19,7 @@ enum EvaApi {
 struct EvaService {
     
     enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "https://api.evaluape.io")!
+        static var productURL = URL(string: "https://api.evaluape.io")!
         static let devURL = URL(string: "https://api.evaluape.io")!
         static let uatURL = URL(string: "https://api.evaluape.io")!
     }

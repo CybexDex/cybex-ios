@@ -20,7 +20,7 @@ enum AccountHistoryAPI {
 
 struct AccountHistoryService {
     enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "https://live.cybex.io")!
+        static var productURL = URL(string: "https://live.cybex.io")!
         static let devURL = URL(string: "http://39.105.55.115:8081")!
         static let uatURL = URL(string: "http://47.100.98.113:8081")!
     }

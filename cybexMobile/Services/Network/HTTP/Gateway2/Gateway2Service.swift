@@ -25,7 +25,7 @@ enum GatewayAPI {
 
 struct Gateway2Service {
     enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "http://47.75.48.121:8181")!
+        static var productURL = URL(string: "http://47.75.48.121:8181")!
         static let devURL = URL(string: "http://39.98.58.238:8181")!
         static let uatURL = URL(string: "http://39.98.58.238:8181")!
     }

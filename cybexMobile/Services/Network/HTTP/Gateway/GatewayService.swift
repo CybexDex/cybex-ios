@@ -22,7 +22,7 @@ import PromiseKit
 ///
 class GatewayService {
     enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "https://gateway.cybex.io/gateway")!
+        static var productURL = URL(string: "https://gateway.cybex.io/gateway")!
         static let devURL = URL(string: "https://gateway.cybex.io/gateway")!
         static let uatURL = URL(string: "http://47.100.98.113:5681/gateway")!
 

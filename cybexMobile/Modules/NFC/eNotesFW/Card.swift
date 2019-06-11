@@ -42,7 +42,7 @@ public struct Card {
     public var transactionPinStatus = false //是否加密
     public var oneTimeSignatureChecksum: UInt16 = 0
     public var oneTimePrivateKeyChecksum: UInt16 = 0
-    public var account: String?
+    public var account: String? = nil
 
     public var cert = Cert()
 

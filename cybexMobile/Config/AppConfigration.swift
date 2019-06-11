@@ -11,6 +11,7 @@ import RxCocoa
 import Repeat
 import RxSwift
 import SwiftyUserDefaults
+import SwiftyJSON
 
 enum AppEnv: String, CaseIterable {
     case product
@@ -46,6 +47,8 @@ class AppConfiguration {
     static let shared = AppConfiguration()
 
     var enableSetting: BehaviorRelay<AppEnableSetting?> = BehaviorRelay(value: nil)
+    var nodes: BehaviorRelay<JSON?> = BehaviorRelay(value: nil)
+
     var rmbPrices: BehaviorRelay<[RMBPrices]> = BehaviorRelay(value: [])
 
     var appCoordinator: AppCoordinator!
@@ -125,6 +128,18 @@ extension AppConfiguration {
         }
 
         return true
+    }
+
+    func fetchNodes() {
+        AppService.request(target: AppAPI.nodesURL, success: { (json) in
+            if let _ = json["nodes"].arrayObject, let _ = json["mdp"].string, let _ = json["limit_order"].string {
+                self.nodes.accept(json)
+            }
+        }, error: { (_) in
+            self.nodes.accept(nil)
+        }) { (_) in
+            self.nodes.accept(nil)
+        }
     }
 }
 

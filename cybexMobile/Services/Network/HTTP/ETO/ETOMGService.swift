@@ -28,7 +28,7 @@ struct ETOMGService {
     enum Config: NetworkHTTPEnv {
 //        http://10.18.120.241:3049/api/
 //        static let productURL = URL(string: "https://eto.cybex.io/api")!
-        static let productURL = URL(string: "https://etoapi.cybex.io/api")!
+        static var productURL = URL(string: "https://etoapi.cybex.io/api")!
         static let devURL = URL(string: "https://etoapi.cybex.io/api")!
         static let uatURL = URL(string: "https://etoapi.cybex.io/api")!
     }
