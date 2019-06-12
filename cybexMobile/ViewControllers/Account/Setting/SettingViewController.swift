@@ -53,9 +53,9 @@ class SettingViewController: BaseViewController {
     }
     
     func setupUI() {
-//        #if DEBUG
+        #if DEBUG
         self.environment.isHidden = false
-//        #endif
+        #endif
 
         if UserManager.shared.loginType != .nfc {
             eNotesUnlockType.isHidden = true

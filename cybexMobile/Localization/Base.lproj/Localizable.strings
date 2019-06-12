@@ -185,6 +185,8 @@
 "withdraw"                = "WITHDRAW";
 
 "withdraw_miss_authority" = "Missing authority\nfor withdrawal";
+"transfer_miss_authority" = "Missing authority\nfor transfer";
+
 "withdraw_unlock_wallet"  = "Unlock Wallet";
 
 "deposit_save"     = "Save QR Code";

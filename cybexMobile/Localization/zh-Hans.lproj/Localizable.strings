@@ -175,6 +175,8 @@
 "recharge_selectCoin"     = "选择币种";
 "withdraw"                = "提现";
 "withdraw_miss_authority" = "您没有提现权限";
+"transfer_miss_authority" = "您没有转账带 Memo 权限";
+
 "withdraw_unlock_wallet"  = "解锁钱包";
 
 "deposit_save"     = "保存二维码";
