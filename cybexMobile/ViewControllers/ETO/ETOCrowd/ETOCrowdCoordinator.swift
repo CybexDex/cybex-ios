@@ -116,7 +116,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         let balance = balances.filter { (balance) -> Bool in
             if let name = appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix {
-                return name == data.baseToken
+                return name == data.baseToken.filterSystemPrefix
             }
 
             return false
@@ -196,7 +196,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         guard let fee = self.state.fee.value, let data = self.state.data.value else { return }
         var assetID = ""
         for (_, value) in appData.assetInfo {
-            if value.symbol.filterSystemPrefix == data.baseToken {
+            if value.symbol.filterSystemPrefix == data.baseToken.filterSystemPrefix {
                 assetID = value.id
                 break
             }
