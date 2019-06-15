@@ -39,7 +39,7 @@ class AccountKeys: HandyJSON {
     }
 
     func addresses() -> [String] {
-        return Array(Set([activeKey, memoKey, ownerKey].compactMap({ $0 }).reduce([], { $0 + $1.addresses })))
+        return [activeKey, memoKey, ownerKey].compactMap({ $0 }).reduce([], { $0 + $1.addresses }).removingDuplicates()
     }
 }
 

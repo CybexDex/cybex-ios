@@ -50,7 +50,7 @@ class YourPorfolioView: UIView {
     func handlerRMBLabel(_ str: String) -> String {
 
         if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable, str == "0.0000" {
-            let ids = Array(Set(MarketConfiguration.shared.gameMarketPairs.flatMap { $0.assets }))
+            let ids = MarketConfiguration.shared.gameMarketPairs.flatMap { $0.assets }.removingDuplicates()
             if ids.contains(name.text!.assetID) {
                 return ""
             }

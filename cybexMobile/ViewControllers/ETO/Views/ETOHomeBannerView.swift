@@ -8,6 +8,7 @@
 
 import Foundation
 import FSPagerView
+import Kingfisher
 
 @IBDesignable
 class ETOHomeBannerView: CybexBaseView {
@@ -17,7 +18,13 @@ class ETOHomeBannerView: CybexBaseView {
     var viewType: Int = 0
     override var data: Any? {
         didSet {
-            if let _ = data as? [String] {
+            if let urlStrings = data as? [String] {
+                for urlStr in urlStrings{
+                    if urlStr.contains("https://") || urlStr.contains("http://") {
+                        KingfisherManager.shared.retrieveImage(with: URL(string: urlStr)!, completionHandler: nil)
+                    }
+                }
+
                 pagerView.reloadData()
             }
         }
