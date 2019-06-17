@@ -87,9 +87,11 @@ class ETORecordListViewController: BaseViewController {
                 self.coordinator?.fetchETORecord(page, reason: PageLoadReason.manualLoadMore)
 
             case .noMore:
+                self.stopPullRefresh(self.recordTableView)
                 self.stopInfiniteScrolling(self.recordTableView, haveNoMore: true)
 
             case .noData:
+                self.stopPullRefresh(self.recordTableView)
                 self.view.showNoData(R.string.localizable.recode_nodata.key.localized(), icon: R.image.img_no_records.name)
 
             case .normal(let reason):

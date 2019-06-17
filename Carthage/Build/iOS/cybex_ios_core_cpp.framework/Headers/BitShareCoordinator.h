@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
                  expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                     user_id:(int)user_id order_expiration:(NSTimeInterval)order_expiration
                    asset_id:(int)asset_id amount:(int64_t)amount receive_asset_id:(int)receive_asset_id
-             receive_amount:(int64_t)receive_amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
-+ (NSString *)getLimitOrderOperation:(int)user_id expiration:(NSTimeInterval)expiration asset_id:(int)asset_id amount:(int64_t)amount receive_asset_id:(int)receive_asset_id receive_amount:(int64_t)receive_amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
+             receive_amount:(int64_t)receive_amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount  fillOrKill:(BOOL)fillOrKill;
++ (NSString *)getLimitOrderOperation:(int)user_id expiration:(NSTimeInterval)expiration asset_id:(int)asset_id amount:(int64_t)amount receive_asset_id:(int)receive_asset_id receive_amount:(int64_t)receive_amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount fillOrKill:(BOOL)fillOrKill;
 + (NSString *)cancelLimitOrder:(int)block_num block_id:(NSString *)block_id
                     expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                        user_id:(int)user_id order_id:(int)order_id
@@ -64,12 +64,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getTransterWithVestingOperation:(int)from_user_id to_user_id:(int)to_user_id asset_id:(int)asset_id amount:(int64_t)amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount memo:(NSString *)memo from_memo_key:(NSString *)from_memo_key to_memo_key:(NSString *)to_memo_key vestingPeroid:(uint64_t)peroid toPubKey:(NSString *)toPubKey;
 
++ (NSString *)exchangeParticipateJSON:(int)user_id exchange_id:(int)exchange_id
+                             asset_id:(int)asset_id amount:(int64_t)amount
+                               fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
+
++ (NSString *)exchangeParticipate:(int)block_num block_id:(NSString *)block_id
+                    expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
+                       user_id:(int)user_id exchange_id:(int)exchange_id
+                          asset_id:(int)asset_id amount:(int64_t)amount
+                        fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
+
 + (void)resetDefaultPublicKey:(NSString *)str;//每次登录设置默认签名的公钥  默认为active-key
   
 + (void)cancelUserKey;
   
   
-  
++ (NSString *)transactionIdFromSigned:(NSString *)jsonStr;
 + (NSString *)getRecodeLoginOperation:(NSString *)accountName asset:(NSString *)asset fundType:(NSString *)fundType size:(int)size offset:(int)offset expiration:(int)expiration;
   
 + (NSString *)getMemo:(NSString *)memo;

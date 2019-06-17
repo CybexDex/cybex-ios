@@ -14,3 +14,32 @@ extension Array {
         }
     }
 }
+
+extension Array {
+    func flatMapped<T>(with type: T.Type) -> [T] {
+        return flatMap { element -> [T] in
+            switch element {
+            case let x as [Any]:
+                return x.flatMapped(with: type)
+            case let x as T:
+                return [x]
+            default:
+                return []
+            }
+        }
+    }
+}
+
+extension Array where Element: Hashable {
+    func removingDuplicates() -> [Element] {
+        var addedDict = [Element: Bool]()
+
+        return filter {
+            addedDict.updateValue(true, forKey: $0) == nil
+        }
+    }
+
+    mutating func removeDuplicates() {
+        self = self.removingDuplicates()
+    }
+}

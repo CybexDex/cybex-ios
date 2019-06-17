@@ -59,27 +59,6 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                 let amount = balance.amount.decimal()
                 let balanceAmount = amount
 
-                if cloudpasswordUnlock {
-                    guard let keys = UserManager.shared.getCachedKeysExcludePrivate(), let pubkey = KeyHelper.getPubKeyFrom(sender.owner, account: keys) else {
-                        return
-                    }
-                    BitShareCoordinator.resetDefaultPublicKey(pubkey)
-                } else {
-                    if #available(iOS 11.0, *) {
-                        NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
-                            BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
-                            claimBroadcast()
-                        }
-                        NFCManager.shared.start()
-                        return
-                    }
-                }
-
-
-                if cloudpasswordUnlock {
-                    BitShareCoordinator.resetDefaultPublicKey(UserManager.shared.permission.defaultKey)
-                }
-
                 func claimBroadcast() {
                     let jsonstr = BitShareCoordinator.getClaimedSign(blockInfo.block_num.int32,
                                                                      block_id: blockInfo.block_id,
@@ -104,7 +83,30 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                     CybexWebSocketService.shared.send(request: withdrawRequest)
                 }
 
-                claimBroadcast()
+                if cloudpasswordUnlock {
+                    guard let keys = UserManager.shared.getCachedKeysExcludePrivate(), let pubkey = KeyHelper.getPubKeyFrom(sender.owner, account: keys) else {
+                        return
+                    }
+                    BitShareCoordinator.resetDefaultPublicKey(pubkey)
+                    claimBroadcast()
+                } else {
+                    if #available(iOS 11.0, *) {
+                        NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in
+                            BitShareCoordinator.setDerivedOperationExtensions(card.base58PubKey, derived_private_key: card.base58OnePriKey, derived_public_key: card.base58OnePubKey, nonce: Int32(card.oneTimeNonce), signature: card.compactSign)
+                            claimBroadcast()
+                        }
+                        NFCManager.shared.start()
+                        return
+                    }
+                }
+
+
+                if cloudpasswordUnlock {
+                    BitShareCoordinator.resetDefaultPublicKey(UserManager.shared.permission.defaultKey)
+                }
+
+
+
             }
 
         }

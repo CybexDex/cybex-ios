@@ -1,0 +1,32 @@
+cocore:
+  LABEL: cocore
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/cocore.xcodeproj"
+  UUID: 44B9F3DF1A76463ECB2E752DB51A596B
+coswift:
+  LABEL: coswift
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/coswift.xcodeproj"
+  UUID: 4C3F1839BC2B44D4E8D7EC863FB4D28E
+EFQRCode:
+  LABEL: EFQRCode
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/EFQRCode.xcodeproj"
+  UUID: 471E11C58AB72F0CB3881586D081D8DE
+Pods-ChatRoom:
+  LABEL: Pods-ChatRoom
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/Pods.xcodeproj"
+  UUID: D6FDDEF52B23DBB11C9270F70A9E1FA3
+Pods-cybexMobile:
+  LABEL: Pods-cybexMobile
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/Pods.xcodeproj"
+  UUID: 5309BF3DFA8342BDE3B0063B0FAA2934
+Pods-cybexMobileTests:
+  LABEL: Pods-cybexMobileTests
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/Pods.xcodeproj"
+  UUID: C8FF1C6C52325646BC84D47904B1023F
+secp256k1_swift:
+  LABEL: secp256k1_swift
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/secp256k1_swift.xcodeproj"
+  UUID: EAF4A3513D0F455EA20C9AA676F36C94
+swift_qrcodejs:
+  LABEL: swift_qrcodejs
+  PROJECT_PATH: "/Users/koofrank/Documents/CybexDex/cybex-ios/Pods/swift_qrcodejs.xcodeproj"
+  UUID: D91104AC20E00ADE5D01182B36526AB7

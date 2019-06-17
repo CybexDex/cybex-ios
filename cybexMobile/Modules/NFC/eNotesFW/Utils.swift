@@ -16,7 +16,7 @@ public class Utils {
     
     public static func parseNDEFMessage(messages: [NFCNDEFMessage]) -> Card? {
         for message in messages {
-            if(message.records.count == 3){
+            if(message.records.count >= 3){
                 let re = message.records[2]
                 return parseNDEFData(data: re.payload)
             }
@@ -32,7 +32,6 @@ public class Utils {
             let oneTimePrivateKeyData = tlv[Data(hex: TlvTag.OneTime_PrivateKey)],
             let oneTimePublicKey = tlv[Data(hex: TlvTag.OneTime_PublicKey)],
             let oneTimeNonce = tlv[Data(hex: TlvTag.OneTime_Nonce)],
-            let _ = tlv[Data(hex: TlvTag.Account)],
             let oneTimeSignatureData = tlv[Data(hex: TlvTag.OneTime_Signature)],
             let transactionPinStatus = tlv[Data(hex: TlvTag.TransactionPinStatus)],
             let oneTimeSignatureChecksumData = tlv[Data(hex: TlvTag.OneTime_SignatureChecksum)],
@@ -51,6 +50,9 @@ public class Utils {
         card.oneTimeSignatureChecksum = oneTimeSignatureChecksumData.toInt16Value()!
         card.oneTimePrivateKeyChecksum = oneTimePrivateKeyChecksumData.toInt16Value()!
         card.transactionPinStatus = transactionPinStatus.toInt()! != 0
+        if let accountData = tlv[Data(hex: TlvTag.Account)] {
+            card.account = String(decoding: accountData, as: UTF8.self)
+        }
         card.cert = parser.toCert()
 
         return card

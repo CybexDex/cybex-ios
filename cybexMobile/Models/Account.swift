@@ -117,7 +117,7 @@ class Account: HandyJSON {
 
         var canUnlock = false
 
-        let allKeys = Array(Set(keys.reduce([], { $0 + $1.pubKeys })))
+        let allKeys = keys.reduce([], { $0 + $1.pubKeys }).removingDuplicates()
 
         for key in allKeys {
             if allPubKeys.contains(key) {

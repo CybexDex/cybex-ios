@@ -17,15 +17,15 @@ typealias WebSocketJSONResponse = (JSON) -> Void
 /// limit_order_status
 /// https://github.com/CybexDex/cybex-node-doc/blob/master/limit-order-status-api/limit_order_status.md
 class OCOWebSocketService: NSObject {
-    enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "wss://apihk.cybex.io")!
-        static let devURL = URL(string: "wss://shenzhen.51nebula.com")!
-        static let uatURL = URL(string: "ws://47.100.98.113:38090")!
+    enum Config: NetworkWebsocketNodeEnv {
+        static var productURL: [URL] = []
+        static let devURL = [URL(string: "wss://shenzhen.51nebula.com")!]
+        static let uatURL = [URL(string: "ws://47.100.98.113:38090")!]
     }
 
     private var batchFactory: BatchFactory!
 
-    lazy var socket = SRWebSocket(url: Config.currentEnv)
+    lazy var socket = SRWebSocket(url: OCOWebSocketService.Config.uatURL.first!)
     private(set) var idGenerator: JsonIdGenerator = JsonIdGenerator()
     private var responses: [Int: WebSocketJSONResponse] = [:] //id: response callback
 
@@ -45,8 +45,12 @@ class OCOWebSocketService: NSObject {
 
     public func connect() {
         if !checkNetworConnected()  {
-            socket.delegate = self
-            socket.open()
+            if let url = Config.currentEnv.first {
+                socket = SRWebSocket(url: url)
+                socket.delegate = self
+                socket.open()
+            }
+
         }
         else {
             messageCanSend.call()
@@ -75,9 +79,11 @@ class OCOWebSocketService: NSObject {
 
         if !checkNetworConnected()  {
             socket.close()
-            socket = SRWebSocket(url: Config.currentEnv)
-            socket.delegate = self
-            socket.open()
+            if let url = Config.currentEnv.first {
+                socket = SRWebSocket(url: url)
+                socket.delegate = self
+                socket.open()
+            }
         }
     }
 

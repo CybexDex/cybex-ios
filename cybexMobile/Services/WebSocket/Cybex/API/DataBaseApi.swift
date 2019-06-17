@@ -32,7 +32,7 @@ struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
     var response: RPCSResponse
     var operationStr: String
     var assetID: String
-    var operationID: ChainTypesOperations
+    var operationID: Int
 
     var method: String {
         return "call"
@@ -41,7 +41,7 @@ struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
     var parameters: Any? {
         return [ApiCategory.database,
                 DataBaseCatogery.getRequiredFees.rawValue.snakeCased(),
-                [[[operationID.rawValue, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID]]
+                [[[operationID, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -145,7 +145,7 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
             }
 
             if let response = result as? [[String: Any]] {
-                if ids.first == ObjectID.dynamicGlobalPropertyObject.rawValue {
+                if ids.first == ObjectID.dynamicGlobalPropertyObject {
                     var headBlockId = ""
                     var headBlockNumber = ""
                     for res in response.first! {

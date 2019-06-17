@@ -39,11 +39,15 @@ class ETODetailCoordinator: NavCoordinator {
     }
 
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
-        let vc = R.storyboard.etoDetail.etoDetailViewController()!
-        let coordinator = ETODetailCoordinator(rootVC: root)
-        vc.coordinator = coordinator
-        coordinator.store.dispatch(RouteContextAction(context: context))
-        return vc
+        if let vc = R.storyboard.etoDetail.etoDetailViewController(){
+            let coordinator = ETODetailCoordinator(rootVC: root)
+            vc.coordinator = coordinator
+            coordinator.store.dispatch(RouteContextAction(context: context))
+            return vc
+        }
+        else {
+            return BaseViewController()
+        }
     }
 
     override func register() {
@@ -61,10 +65,11 @@ extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
     }
 
     func openETOCrowdVC() {
-        let vc = R.storyboard.etO.etoCrowdViewController()!
-        let coor = ETOCrowdCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coor
-        self.rootVC.pushViewController(vc)
+        if let vc = R.storyboard.etO.etoCrowdViewController(){
+            let coor = ETOCrowdCoordinator(rootVC: self.rootVC)
+            vc.coordinator = coor
+            self.rootVC.pushViewController(vc)
+        }
     }
 
     func openWebWithUrl(_ sender: String, type: CybexWebViewController.WebType) {
@@ -90,8 +95,8 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             if let model = coor.state.selectedProjectModel.value, let projectModel = model.projectModel {
                 self.store.dispatch(SetProjectDetailAction(data: projectModel))
             } else {
-                if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id.int {
-                    fetchProjectModelWithId(bannerId)
+                if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id, let id = bannerId.int {
+                    fetchProjectModelWithId(id)
                 } else {
 
                 }
@@ -118,8 +123,10 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
 
     func fetchUserState() {
-        if let name = UserManager.shared.name.value, let data = self.state.data.value, let projectModel = data.projectModel, let projectId = projectModel.project.int {
-
+        if let name = UserManager.shared.name.value,
+            let data = self.state.data.value,
+            let projectModel = data.projectModel,
+            let projectId = projectModel.project.components(separatedBy: ".").last?.int {
             ETOMGService.request(target: ETOMGAPI.checkUserState(name: name, id: projectId), success: { (json) in
                 if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data) {
 
@@ -153,35 +160,19 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             etoState.insert(.notLogin)
         } else {
             etoState.insert(.login)
-            if state.kycStatus == .notStart {
-                etoState.insert(.KYCNotPassed)
-                ETOManager.shared.changeState(etoState)
-                if let vc = self.rootVC.topViewController as? ETODetailViewController {
-                    vc.contentView.getJoinButtonState()
-                }
-                return
-            } else if state.kycStatus == .ok {
-                etoState.insert(.KYCPassed)
+//            if state.kycStatus == .notStart {
+//                ETOManager.shared.changeState(etoState)
+//                if let vc = self.rootVC.topViewController as? ETODetailViewController {
+//                    vc.contentView.getJoinButtonState()
+//                }
+//                return
+//            } else if state.kycStatus == .ok {
                 if state.status == .unstart {
                     etoState.insert(.notReserved)
                 } else {
                     etoState.insert(.reserved)
                 }
-
-                if model.isUserIn == "0" {
-                    etoState.insert(.notBookable)
-                } else {
-                    etoState.insert(.bookable)
-                }
-
-                if state.status == .waiting {
-                    etoState.insert(.waitAudit)
-                } else if state.status == .ok {
-                    etoState.insert(.auditPassed)
-                } else if state.status == .reject {
-                    etoState.insert(.auditNotPassed)
-                }
-            }
+//            }
         }
         if projectState == .finish {
             etoState.insert(.finished)
@@ -217,26 +208,38 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
 
     func updateETOProjectDetailAction() {
-        guard let model = self.state.data.value, let projectModel = model.projectModel else { return }
-        ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { json in
+        guard let model = self.state.data.value, let projectModel = model.projectModel, let project = projectModel.project.components(separatedBy: ".").last, let id = project.int else { return }
+        ETOMGService.request(target: ETOMGAPI.refreshProject(id: id), success: { json in
             if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                 projectModel.finishAt = refreshModel.finishAt
                 projectModel.status = refreshModel.status
-                model.currentPercent.accept((refreshModel.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
-                model.progress.accept(refreshModel.currentPercent)
-                model.status.accept(refreshModel.status!.description())
+                if refreshModel.currentPercent < 1 {
+                    model.currentPercent.accept((refreshModel.currentPercent.decimal * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                    model.progress.accept(refreshModel.currentPercent)
+                }
+                else {
+                    model.currentPercent.accept(100.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                    model.progress.accept(1)
+                }
+             
+                if let refreshStatus = refreshModel.status {
+                    model.status.accept(refreshStatus.description())
+                }
                 model.projectState.accept(refreshModel.status)
-
-                if refreshModel.status! == .pre {
-                    model.detailTime.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                } else if refreshModel.status! == .ok {
-                    model.detailTime.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                } else if refreshModel.status! == .finish {
-                    if refreshModel.finishAt != nil {
-                        if projectModel.tTotalTime == "" {
-                            model.detailTime.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
-                        } else {
-                            model.detailTime.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
+                if let status = refreshModel.status {
+                    if status == .pre, let startAt = projectModel.startAt{
+                        model.detailTime.accept(timeHandle(startAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                    } else if status == .ok, let endAt = projectModel.endAt {
+                        model.detailTime.accept(timeHandle(endAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                    } else if status == .finish {
+                        if let finishAt = refreshModel.finishAt {
+                            if projectModel.tTotalTime == "" {
+                                model.detailTime.accept(timeHandle(finishAt.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
+                            } else {
+                                if let tTotalTimeDouble = projectModel.tTotalTime.double() {
+                                    model.detailTime.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                }
+                            }
                         }
                     }
                 }
@@ -245,23 +248,5 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         }, error: { (_) in
         }) { _ in
         }
-//        }
-
-//        if projectModel.status! == .pre {
-//            model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-//        }
-//        else if projectModel.status! == .ok {
-//            model.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-//        }
-//        else if projectModel.status! == .finish {
-//            if projectModel.finish_at != nil {
-//                if projectModel.t_total_time == "" {
-//                    model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
-//                }
-//                else {
-//                    model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
-//                }
-//            }
-//        }
     }
 }

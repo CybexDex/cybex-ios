@@ -210,8 +210,11 @@ extension UserManager {
 
 //eNotes
 extension UserManager {
-    func enotesLogin(_ pubKey: String) -> Promise<Void> {
+    func enotesLogin(_ pubKey: String, account: String? = nil) -> Promise<Void> {
         if let keys: AccountKeys = AccountKeys.deserialize(from: BitShareCoordinator.getActiveUserKeys(pubKey)) {
+            if let name = account {
+                return self.enotesLoginWith(name, pubKey: pubKey, keys: keys)
+            }
             let promise = CybexDatabaseApiService.request(target: .getKeyReferences(pubkey: pubKey)).then { (json) -> Promise<JSON>  in
                 if let id = json[0][0].string {
                     return CybexDatabaseApiService.request(target: .getObjects(id: id))
@@ -220,20 +223,7 @@ extension UserManager {
                 }
             }.then { (json) -> Promise<Void> in
                 if let name = json[0]["name"].string {
-                    return self.fetchAccountInfo(name).map { (full, account) -> Void in
-                        if account.activePubKeys.contains(pubKey) {
-                            self.enotesKeys = keys
-                            self.saveEnotesKeys()
-                            self.saveUserInfo(name)
-                            self.loginType = .nfc
-                            self.unlockType = .nfc
-                            self.timer?.pause()
-                            self.timer = nil
-                            self.handlerFullAcount(full)
-                        } else {
-                            throw CybexError.tipError(.loginFail)
-                        }
-                    }
+                    return self.enotesLoginWith(name, pubKey: pubKey, keys: keys)
                 } else {
                     throw CybexError.tipError(.loginFail)
                 }
@@ -242,6 +232,23 @@ extension UserManager {
             return promise
         } else {
             return Promise(error: CybexError.tipError(.loginFail))
+        }
+    }
+
+    func enotesLoginWith(_ name: String, pubKey: String, keys: AccountKeys) -> Promise<Void> {
+        return self.fetchAccountInfo(name).map { (full, account) -> Void in
+            if account.activePubKeys.contains(pubKey) {
+                self.enotesKeys = keys
+                self.saveEnotesKeys()
+                self.saveUserInfo(name)
+                self.loginType = .nfc
+                self.unlockType = .nfc
+                self.timer?.pause()
+                self.timer = nil
+                self.handlerFullAcount(full)
+            } else {
+                throw CybexError.tipError(.loginFail)
+            }
         }
     }
 

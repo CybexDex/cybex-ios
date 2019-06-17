@@ -30,7 +30,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     var pair: Pair? {
         didSet {
             if vcType == ViewType.businessTitle.rawValue {
-                guard let pair = pair, let index = MarketConfiguration.marketBaseAssets.map({ $0.id }).firstIndex(of: pair.base) else { return }
+                guard let pair = pair, let index = MarketConfiguration.newMarketBaseAssets.map({ $0.id }).firstIndex(of: pair.base) else { return }
 
                 if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).firstIndex(where: { (ticker) -> Bool in
                     return ticker.quote == pair.quote

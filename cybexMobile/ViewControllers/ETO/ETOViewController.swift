@@ -36,8 +36,9 @@ class ETOViewController: BaseViewController {
         self.infosRepeater = Repeater.every(.seconds(3), { [weak self](_) in
             main {
                 guard let self = self else { return }
-                self.coordinator?.refreshProjectDatas()
-                self.coordinator?.refreshTime()
+                self.fetchProjectData()
+//                self.coordinator?.refreshProjectDatas()
+//                self.coordinator?.refreshTime()
             }
         })
     }
@@ -92,7 +93,13 @@ class ETOViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        coordinator?.state.pageState.asObservable().subscribe(onNext: {(_) in
+        coordinator?.state.pageState.asObservable().subscribe(onNext: {(state) in
+            if case let .error(_, _) = state {
+//                self.infosRepeater?.pause()
+//                self.infosRepeater = nil
+                self.endLoading()
+//                self.showToastBox(false, message: error.localizedDescription)
+            }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
@@ -120,8 +127,10 @@ extension ETOViewController {
     }
 
     @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
-        if let models = self.coordinator?.state.banners.value, let index = data["data"] as? Int, models.count >= index {
+        if let models = self.coordinator?.state.banners.value, let index = data["data"] as? Int, models.count >= index, let id = models[index].id,
+            id != "" {
             self.coordinator?.setSelectedBannerData(models[index])
         }
     }
 }
+

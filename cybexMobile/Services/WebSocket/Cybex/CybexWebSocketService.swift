@@ -46,9 +46,7 @@ open class AsyncRequestOperation: AsyncBlockOperation {
 
 class CybexWebSocketService: NSObject {
     enum Config: NetworkWebsocketNodeEnv {
-        static var productURL: [URL] {
-            return [NodeURLString.hongkong, NodeURLString.hkback, NodeURLString.singapore, NodeURLString.tokyo, NodeURLString.korea].map { URL(string: $0.rawValue)! }
-        }
+        static var productURL: [URL] = []
 
         static var devURL: [URL] {
             return [NodeURLString.test, NodeURLString.test2].map { URL(string: $0.rawValue)! }
@@ -156,7 +154,7 @@ class CybexWebSocketService: NSObject {
     }
 
     func connect() {
-        if !self.isConnecting {
+        if !self.isConnecting, Config.currentEnv.count > 0 {
             isConnecting = true
             isClosing = false
             needAutoConnect = true
@@ -412,6 +410,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         let data = JSON(parseJSON: message)
 //            Log.print("receive message: \(data.rawString()!)\n")
 
+        
         guard let sendId = data["id"].int else {
             return
         }

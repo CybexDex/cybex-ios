@@ -18,7 +18,6 @@ class ETORecordListViewView: CybexBaseView {
 
     @IBOutlet weak var timeLabel: UILabel!
 
-    @IBOutlet weak var statusLabel: UILabel!
 
     enum Event: String {
         case ETORecordListViewViewDidClicked

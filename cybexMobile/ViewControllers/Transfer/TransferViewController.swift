@@ -177,6 +177,11 @@ class TransferViewController: BaseViewController {
     }
 
     func clickTransferAction() {
+        if !self.coordinator!.state.memo.value.isEmpty, !UserManager.shared.permission.withdraw, UserManager.shared.unlockType == .cloudPassword {
+            self.showToastBox(false, message: R.string.localizable.transfer_miss_authority.key.localized())
+            return
+        }
+
         if transfering {
             return
         }
@@ -278,6 +283,7 @@ extension TransferViewController {
             pushCloudPasswordViewController(nil)
             return
         }
+
         if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
             if #available(iOS 11.0, *) {
                 if !self.coordinator!.state.memo.value.isEmpty {
@@ -357,12 +363,12 @@ extension TransferViewController {
 
     @objc func memo(_ data: [String: Any]) {
         guard let content = data["content"] as? String else { return }
+        self.coordinator?.setMemo(content)
 
         if !content.isEmpty, !UserManager.shared.permission.withdraw, UserManager.shared.unlockType == .cloudPassword {
-            showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+            showToastBox(false, message: R.string.localizable.transfer_miss_authority.key.localized())
             return
         }
-        self.coordinator?.setMemo(content)
     }
 }
 

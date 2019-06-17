@@ -59,6 +59,7 @@ class AddAddressViewController: BaseViewController {
         } else {
             self.title = R.string.localizable.account_title_add.key.localized()
             self.containerView.assetShadowView.isHidden = true
+            self.containerView.memo.isHidden = true
             if self.transferAddress != nil {
                 self.containerView.data = transferAddress
                 if transferAddress?.address.isEmpty == false {

@@ -28,7 +28,7 @@ protocol ETOCrowdStateManagerProtocol {
     func unsetValidStatus()
     func checkValidStatus(_ transferAmount: Decimal)
 
-    func joinCrowd(_ transferAmount: Decimal, callback: @escaping CommonAnyCallback)
+    func joinCrowd(_ transferAmount: Decimal, projectId: Int32, callback: @escaping CommonAnyCallback)
 }
 
 class ETOCrowdCoordinator: NavCoordinator {
@@ -59,10 +59,7 @@ extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
         self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(),
                                                    attributes: UIHelper.confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)",
                                                     fee: "\(feeAmount) \(feeInfo.symbol.filterSystemPrefix)"), setup: { (_) in
-                //            for label in labels {
-                //                label.content.numberOfLines = 1
-                //                label.content.lineBreakMode = .byTruncatingMiddle
-                //            }
+           
             })
     }
 
@@ -80,25 +77,16 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         var assetID = ""
         for (_, value) in appData.assetInfo {
-            if value.symbol.filterSystemPrefix == data.baseTokenName {
+            if value.symbol == data.baseToken {
                 assetID = value.id
                 break
             }
         }
 
         guard !assetID.isEmpty else { return }
-
-        let operation = BitShareCoordinator.getTransterOperation(0,
-                                                                 to_user_id: 0,
-                                                                 asset_id: assetID.getSuffixID,
-                                                                 amount: 0,
-                                                                 fee_id: 0,
-                                                                 fee_amount: 0,
-                                                                 memo: "",
-                                                                 from_memo_key: "",
-                                                                 to_memo_key: "")
         
-        CybexChainHelper.calculateFee(operation, operationID: .transfer, focusAssetId: assetID) { (success, amount, feeId) in
+        let operation = BitShareCoordinator.exchangeParticipateJSON(0, exchange_id: 0, asset_id: assetID.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0)        
+        CybexChainHelper.calculateFee(operation, operationID: OperationId.participate_exchange, focusAssetId: assetID) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
             if success {
@@ -118,13 +106,17 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
     }
 
     func checkValidStatus(_ transferAmount: Decimal) {
+        if transferAmount == 0 {
+            self.store.dispatch(ChangeETOValidStatusAction(status: .notValid))
+            return
+        }
         guard self.state.validStatus.value == .notValid else { return }
 
         guard let balances = UserManager.shared.fullAccount.value?.balances, let data = self.state.data.value, let userModel = self.state.userData.value else { return }
 
         let balance = balances.filter { (balance) -> Bool in
             if let name = appData.assetInfo[balance.assetType]?.symbol.filterSystemPrefix {
-                return name == data.baseTokenName
+                return name == data.baseToken.filterSystemPrefix
             }
 
             return false
@@ -132,35 +124,64 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         if let balance = balance, let _ = appData.assetInfo[balance.assetType] {
             let amount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance)
-
-            if transferAmount > amount {
-                self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
-                return
+            
+            if data.userBuyToken == data.baseToken {
+                if transferAmount > amount {
+                    self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
+                    return
+                }
+            }
+            else {
+                if transferAmount * (data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()) > amount {
+                    self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
+                    return
+                }
             }
         } else {
             self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
             return
         }
-
-        if transferAmount > data.baseMaxQuota.decimal {
-            self.store.dispatch(ChangeETOValidStatusAction(status: .moreThanLimit))
-            return
-        }
-
+        
         let remain = data.baseMaxQuota - userModel.currentBaseTokenCount
-
-        if transferAmount > remain.decimal {
-            self.store.dispatch(ChangeETOValidStatusAction(status: .notAvaliableLimit))
-            return
+        let unit:Decimal
+        if data.userBuyToken == data.baseToken {
+            // base 显示
+            if transferAmount > data.baseMaxQuota.decimal {
+                self.store.dispatch(ChangeETOValidStatusAction(status: .moreThanLimit))
+                return
+            }
+            
+            if transferAmount > remain.decimal {
+                self.store.dispatch(ChangeETOValidStatusAction(status: .notAvaliableLimit))
+                return
+            }
+            
+            if transferAmount < data.baseMinQuota.decimal {
+                self.store.dispatch(ChangeETOValidStatusAction(status: .lessThanLeastLimit))
+                return
+            }
+            unit = 1 / pow(10, data.baseAccuracy)
         }
-
-        if transferAmount < data.baseMinQuota.decimal {
-            self.store.dispatch(ChangeETOValidStatusAction(status: .lessThanLeastLimit))
-            return
+        else {
+            // quote 显示
+            let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
+            
+            if transferAmount * rate > data.baseMaxQuota.decimal{
+                self.store.dispatch(ChangeETOValidStatusAction(status: .moreThanLimit))
+                return
+            }
+            
+            if transferAmount * rate > remain.decimal {
+                self.store.dispatch(ChangeETOValidStatusAction(status: .notAvaliableLimit))
+                return
+            }
+            
+            if transferAmount * rate < data.baseMinQuota.decimal {
+                self.store.dispatch(ChangeETOValidStatusAction(status: .lessThanLeastLimit))
+                return
+            }
+            unit = data.quoteAccuracy.decimal
         }
-
-        let unit:Decimal = 1 / pow(10, data.baseAccuracy)
-
         let multiple = transferAmount / unit
         let mantissa = multiple.floor
 
@@ -171,12 +192,11 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         self.store.dispatch(ChangeETOValidStatusAction(status: .ok))
     }
 
-    func joinCrowd(_ transferAmount: Decimal, callback: @escaping CommonAnyCallback) {
+    func joinCrowd(_ transferAmount: Decimal, projectId: Int32,callback: @escaping CommonAnyCallback) {
         guard let fee = self.state.fee.value, let data = self.state.data.value else { return }
-
         var assetID = ""
         for (_, value) in appData.assetInfo {
-            if value.symbol.filterSystemPrefix == data.baseTokenName {
+            if value.symbol.filterSystemPrefix == data.baseToken.filterSystemPrefix {
                 assetID = value.id
                 break
             }
@@ -187,61 +207,52 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             let info = appData.assetInfo[assetID],
             let feeInfo = appData.assetInfo[fee.assetId] else { return }
         let value = pow(10, info.precision)
-        let amount = transferAmount * value
-
+        let amount: Decimal
+        if data.userBuyToken == data.baseToken {
+            amount = transferAmount * value
+        }
+        else {
+            let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
+            amount = transferAmount * rate * value
+        }
+        
         let feeAmout = fee.amount.decimal() * pow(10, feeInfo.precision)
 
         CybexChainHelper.blockchainParams { (blockInfo) in
-            let accountRequeset = GetFullAccountsRequest(name: data.receiveAddress) { (response) in
-                if let response = response as? FullAccount, let account = response.account {
-                    let jsonstr =  BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
-                                                                      block_id: blockInfo.block_id,
-                                                                      expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                      chain_id: CybexConfiguration.shared.chainID.value,
-                                                                      from_user_id: uid.getSuffixID,
-                                                                      to_user_id: account.id.getSuffixID,
-                                                                      asset_id: assetID.getSuffixID,
-                                                                      receive_asset_id: assetID.getSuffixID,
-                                                                      amount: amount.int64Value,
-                                                                      fee_id: fee.assetId.getSuffixID,
-                                                                      fee_amount: feeAmout.int64Value,
-                                                                      memo: "",
-                                                                      from_memo_key: "",
-                                                                      to_memo_key: "")
-
-                    let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                        main {
-                            callback(data)
-                        }
-                    }, jsonstr: jsonstr)
-                    CybexWebSocketService.shared.send(request: withdrawRequest)
-                } else {
-                    main {
-                        callback("")
-                    }
+            let jsonstr = BitShareCoordinator.exchangeParticipate(blockInfo.block_num.int32, block_id: blockInfo.block_id, expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration, chain_id:  CybexConfiguration.shared.chainID.value, user_id: uid.getSuffixID, exchange_id: projectId, asset_id: assetID.getSuffixID, amount: amount.int64Value, fee_id: fee.assetId.getSuffixID, fee_amount: feeAmout.int64Value)
+            let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                main {
+                    callback(data)
+                    
                 }
-            }
-            CybexWebSocketService.shared.send(request: accountRequeset)
+            }, jsonstr: jsonstr)
+            CybexWebSocketService.shared.send(request: withdrawRequest)
         }
-
     }
 
     func fetchData() {
         Broadcaster.notify(ETODetailStateManagerProtocol.self) {(coor) in
-            if let model = coor.state.data.value?.projectModel {
-                self.store.dispatch(SetProjectDetailAction(data: model))
-            }
+            if let model = coor.state.data.value,
+                let projectModel = model.projectModel, let project = projectModel.project.components(separatedBy: ".").last, let id = project.int {
+                self.store.dispatch(SetProjectDetailAction(data: projectModel))
+                ETOMGService.request(target: ETOMGAPI.getProjectDetail(id: id), success: { json in
+                    if let dataJson = json.dictionaryObject, let refreshModel = ETOProjectModel.deserialize(from: dataJson) {
+                        self.store.dispatch(SetProjectDetailAction(data: refreshModel))
+                        }
+                }, error: { (_) in
+                }) { _ in
+                }
+        }
         }
     }
 
     func fetchUserRecord() {
-        guard let name = UserManager.shared.name.value, let data = self.state.data.value else { return }
+        guard let name = UserManager.shared.name.value, let data = self.state.data.value, let project = data.project.components(separatedBy: ".").last, let projectId = project.int else { return }
 
-        ETOMGService.request(target: .refreshUserState(name: name, pid: data.id), success: { (json) in
+        ETOMGService.request(target: .refreshUserState(name: name, pid: projectId), success: { (json) in
             if let model = ETOUserModel.deserialize(from: json.dictionaryObject) {
                 self.store.dispatch(FetchCurrentTokenCountAction(userModel: model))
             }
-
         }, error: { (_) in
 
         }) { (_) in

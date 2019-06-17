@@ -14,6 +14,7 @@ import SwiftyUserDefaults
 import Localize_Swift
 
 enum AppAPI {
+    case nodesURL
     case setting  // 是否显示ETO Share
     case checkVersionUpdate
     case checkAppStoreVersionUpdate
@@ -41,7 +42,7 @@ enum AppAPI {
 
 struct AppService {
     enum Config: NetworkHTTPEnv {
-        static let productURL = URL(string: "https://app.cybex.io")!
+        static var productURL = URL(string: "https://app.cybex.io")!
         static let devURL = URL(string: "http://47.91.242.71:3039")!
         static let uatURL = URL(string: "http://47.100.98.113:3039")!
     }
@@ -107,6 +108,8 @@ extension AppAPI: TargetType {
 
     var path: String {
         switch self {
+        case .nodesURL:
+            return "/json/nodes_config.json"
         case .setting:
             return "/json/settings.json"
         case .checkVersionUpdate:

@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         requestSetting()
 
         start()
+        
+        
 
 //        let vc = R.storyboard.eva.evaViewController()!
 //        vc.view.backgroundColor = UIColor.darkTwo

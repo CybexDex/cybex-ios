@@ -14,7 +14,7 @@ import RxCocoa
 
 extension ETOProjectView {
     func adapterModelToETOProjectView(_ model: ETOProjectViewModel) {
-
+        
         model.status.asObservable().subscribe(onNext: { [weak self](status) in
             guard let self = self else { return }
             self.stateLabel.text = status
@@ -41,6 +41,8 @@ extension ETOProjectView {
                 self.stateLabel.textColor = self.nameLabel.textColor
                 self.progressLabel.textColor = self.nameLabel.textColor
             case .ok:
+                self.progressView.beginColor = UIColor.apricot
+                self.progressView.endColor = UIColor.orangeish
                 self.stateLabel.textColor = UIColor.pastelOrange
                 self.progressLabel.textColor = UIColor.pastelOrange
             case .pre:
@@ -50,7 +52,17 @@ extension ETOProjectView {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         model.time.asObservable().subscribe(onNext: { [weak self]time in
             guard let self = self else {return}
-            self.timeLabel.text = time
+            if time == "" {
+                self.timeLabel.isHidden = true
+                self.timeState.isHidden = true
+                self.timeImgView.isHidden = true
+            }
+            else {
+                self.timeLabel.isHidden = false
+                self.timeState.isHidden = false
+                self.timeImgView.isHidden = false
+                self.timeLabel.text = time
+            }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.nameLabel.text = model.name

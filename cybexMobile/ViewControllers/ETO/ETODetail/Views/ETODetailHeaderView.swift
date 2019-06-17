@@ -20,6 +20,8 @@ class ETODetailHeaderView: CybexBaseView {
     @IBOutlet weak var stateImgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
 
+    @IBOutlet weak var timeStackView: UIStackView!
+    
     enum Event: String {
         case ETODetailHeaderViewDidClicked
     }

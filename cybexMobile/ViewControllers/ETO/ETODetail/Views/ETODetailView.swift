@@ -44,10 +44,11 @@ class ETODetailView: CybexBaseView {
 
     func setupUI() {
         clearBgColor()
-        self.stateView.isHidden = true
+//        self.stateView.isHidden = true
         ETOManager.shared.changeState(.unset)
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
+        self.getJoinButtonState()
     }
 
     func getJoinButtonState() {
@@ -74,10 +75,12 @@ class ETODetailView: CybexBaseView {
     }
 
     func updateJoinButton(style: ETOJoinButtonStyle) {
+        
         switch style {
         case .normal:
             stateButton.titleColor = UIColor.white
             stateButton.gradientStartColor = UIColor.peach
+            stateButton.gradient = nil
             stateButton.gradientEndColor = UIColor.maincolor
             stateButton.alpha = 1
             stateButton.isUserInteractionEnabled = true
@@ -85,11 +88,18 @@ class ETODetailView: CybexBaseView {
             stateButton.titleColor = UIColor.pastelOrange
             stateButton.btn_borderColor = UIColor.peach
             stateButton.btn_borderWidth = 1
-            stateButton.gradientStartColor = UIColor.clear
-            stateButton.gradientEndColor = UIColor.clear
+            if ThemeManager.currentThemeIndex == 0 {
+                stateButton.gradientStartColor = UIColor.dark
+                stateButton.gradientEndColor = UIColor.dark
+            }
+            else {
+                stateButton.gradientStartColor = UIColor.paleGrey
+                stateButton.gradientEndColor = UIColor.paleGrey
+            }
             stateButton.bgColor = UIColor.clear
             stateButton.alpha = 1
             stateButton.isUserInteractionEnabled = false
+            
         case .notPassed:
             if ThemeManager.currentThemeIndex == 0 {
                 stateButton.titleColor = UIColor.white
@@ -106,8 +116,10 @@ class ETODetailView: CybexBaseView {
         case .disable:
             stateButton.titleColor = UIColor.white
             stateButton.gradientStartColor = UIColor.steel
+            stateButton.gradient = nil
             stateButton.gradientEndColor = UIColor.steel
             stateButton.alpha = 0.5
+            stateButton.bgColor = UIColor.steel
             stateButton.isUserInteractionEnabled = false
         }
     }

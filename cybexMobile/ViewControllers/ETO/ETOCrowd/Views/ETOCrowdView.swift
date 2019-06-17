@@ -17,6 +17,7 @@ class ETOCrowdView: CybexBaseView {
     @IBOutlet weak var actionButton: LGButton!
     @IBOutlet weak var descLabel: BaseLabel!
 
+    @IBOutlet weak var equalLabel: UILabel!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
 
@@ -41,6 +42,8 @@ class ETOCrowdView: CybexBaseView {
         self.titleTextView.textField.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
         self.titleTextView.gapView.isHidden = true
         self.titleTextView.titleLabel.locali = R.string.localizable.eto_quantity.key
+        self.titleTextView.textField.placeholder = R.string.localizable.eto_textfiled_placeholder.key.localized()
+        self.titleTextView.textField.setPlaceHolderTextColor(UIColor.steel50)
         self.actionButton.locali = R.string.localizable.eto_join.key
         self.actionButton.bgColor = UIColor.steel
 //        self.actionButton.isEnabled = false
@@ -67,13 +70,14 @@ extension ETOCrowdView: GridContentViewDataSource {
             R.string.localizable.eto_subscription_unit,
             R.string.localizable.eto_remaining,
             R.string.localizable.eto_min_subscription,
-            R.string.localizable.eto_subscribed
+            R.string.localizable.eto_subscribed,
+            R.string.localizable.eto_total_remaining
         ]
 
-        let views = Array(0...4).map({ (index) -> ETOCrowdGridItemView in
+        let views = Array(0...5).map({ (index) -> ETOCrowdGridItemView in
             let item = ETOCrowdGridItemView()
             item.titleLabel.locali = titles[index].key
-            item.valueLabel.text = "-- ETH"
+            item.valueLabel.text = "--"
             item.lineView.isHidden = index == 4
             return item
         })

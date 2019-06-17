@@ -20,7 +20,7 @@ class CBKLineView: UIView {
     private var timeGapView: TimeGapView!
     
     private var boxView: CBKKindView!
-    private var messageView: CBKMessageView!
+//    private var messageView: CBKMessageView!
     
     private let configuration = CBConfiguration.sharedConfiguration
     var indicator: Indicator = .ma {
@@ -38,11 +38,11 @@ class CBKLineView: UIView {
         }
     }
     
-    var messageCount: Int = 0 {
-        didSet {
-            messageView.messageNumberLabel.text = "\(messageCount)"
-        }
-    }
+//    var messageCount: Int = 0 {
+//        didSet {
+//            messageView.messageNumberLabel.text = "\(messageCount)"
+//        }
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,20 +67,20 @@ class CBKLineView: UIView {
         //        loadAccessoryCollectionView()
         loadKineView()
         //        loadTimeGapView()
-        loadMessageView()
+//        loadMessageView()
         
         loadingDrawView()
     }
     
-    func loadMessageView() {
-        messageView = CBKMessageView()
-        addSubview(messageView)
-        
-        messageView.left(to: self, offset: 0)
-        messageView.bottom(to: self)
-        messageView.right(to: self, offset: 0)
-        messageView.height(48)
-    }
+//    func loadMessageView() {
+//        messageView = CBKMessageView()
+//        addSubview(messageView)
+//
+//        messageView.left(to: self, offset: 0)
+//        messageView.bottom(to: self)
+//        messageView.right(to: self, offset: 0)
+//        messageView.height(48)
+//    }
     
     func loadKineView() {
         boxView = CBKKindView()
@@ -123,12 +123,13 @@ class CBKLineView: UIView {
         klineDrawView.topToBottom(of: boxView)
         klineDrawView.left(to: self)
         klineDrawView.right(to: self)
-        klineDrawView.bottomToTop(of: messageView)
+        klineDrawView.bottom(to: self)
+//        klineDrawView.bottomToTop(of: messageView)
     }
 }
 
 extension CBKLineView {
-    @objc func cBKMessageViewDidClicked(_ data: [String: Any]) {
-        self.next?.sendEventWith(Event.openMessageVC.rawValue, userinfo: data)
-    }
+//    @objc func cBKMessageViewDidClicked(_ data: [String: Any]) {
+//        self.next?.sendEventWith(Event.openMessageVC.rawValue, userinfo: data)
+//    }
 }

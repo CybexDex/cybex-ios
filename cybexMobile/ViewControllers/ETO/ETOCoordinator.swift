@@ -83,6 +83,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
 
     func fetchProjectData() {
         ETOMGService.request(target: ETOMGAPI.getProjects(offset: 0, limit: 4), success: { json in
+            print("fetchProjectData: \(json.arrayValue)")
             if let projects = json.arrayValue.map({ (data)  in
                 ETOProjectModel.deserialize(from: data.dictionaryObject)
             }) as? [ETOProjectModel] {
@@ -118,8 +119,8 @@ extension ETOCoordinator: ETOStateManagerProtocol {
         self.store.dispatch(SetSelectedBannerModelAction(data: model))
         if let projectModels = self.state.data.value {
             for projectModel in projectModels {
-                if let data = projectModel.projectModel {
-                    if data.project == model.id {
+                if let data = projectModel.projectModel, let id = model.id {
+                    if data.project == id {
                         self.setSelectedProjectData(projectModel)
                         return
                     }
@@ -132,27 +133,88 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     func refreshProjectDatas() {
         if let projectModels = self.state.data.value {
             for viewModel in projectModels {
-                if let projectModel = viewModel.projectModel {
-                    ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { (json) in
+                if let projectModel = viewModel.projectModel,let project = projectModel.project.components(separatedBy: ".").last, let projectId = project.int {
+                    ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectId), success: { (json) in
                         if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                             projectModel.status = refreshModel.status
                             projectModel.finishAt = refreshModel.finishAt
-                            viewModel.currentPercent.accept((refreshModel.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
-                            viewModel.progress.accept(refreshModel.currentPercent)
+                            if refreshModel.currentPercent <= 1 {
+                                viewModel.currentPercent.accept((refreshModel.currentPercent.decimal * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                                viewModel.progress.accept(refreshModel.currentPercent)
+                            }
+                            else {
+                                viewModel.currentPercent.accept(100.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
+                                viewModel.progress.accept(1)
+                            }
                             viewModel.status.accept(refreshModel.status!.description())
                             viewModel.projectState.accept(refreshModel.status)
-
-                            if refreshModel.status! == .pre {
-                                viewModel.time.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                            } else if refreshModel.status! == .ok {
-                                viewModel.time.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                            } else if refreshModel.status! == .finish {
-                                if refreshModel.finishAt != nil {
-                                    if projectModel.tTotalTime == "" {
-                                        viewModel.time.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
-                                    } else {
-                                        viewModel.time.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
+                            
+                            if let status = refreshModel.status {
+                                if status == .pre {
+                                    if let startAt = projectModel.startAt {
+                                        viewModel.time.accept(timeHandle(startAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
                                     }
+                                } else if status == .ok {
+                                    if let endAt = projectModel.endAt {
+                                        viewModel.time.accept(timeHandle(endAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                                    }
+                                } else if status == .finish {
+                                    /*
+                                     if projectModel.tTotalTime == "" {
+                                     if let finishAt = projectModel.finishAt, let startAt = projectModel.startAt{
+                                     self.detailTime.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                     
+                                     self.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                     }
+                                     else{
+                                     self.detailTime.accept("")
+                                     self.time.accept("")
+                                     
+                                     }
+                                     } else {
+                                     if let tTotalTimeDouble = projectModel.tTotalTime.double() {
+                                     self.detailTime.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                     self.time.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                     }
+                                     }
+                                     */
+                                    
+                                    
+                                    
+                                    if refreshModel.finishAt != nil {
+                                        if projectModel.tTotalTime == "" {
+                                            if let finishAt = refreshModel.finishAt, let startAt = projectModel.startAt {
+                                                viewModel.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                            }
+                                            else {
+                                                viewModel.time.accept("")
+                                            }
+                                        } else {
+                                            if let tTotalTimeDouble = Double(projectModel.tTotalTime) {
+                                                viewModel.time.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                            }else {
+                                                if let finishAt = refreshModel.finishAt, let startAt = projectModel.startAt {
+                                                    viewModel.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                                                }
+                                                else {
+                                                    viewModel.time.accept("")
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        if projectModel.tTotalTime == "" {
+                                            viewModel.time.accept("")
+                                        }
+                                        else {
+                                            if let tTotalTimeDouble = Double(projectModel.tTotalTime) {
+                                                viewModel.time.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                                            }else {
+                                                viewModel.time.accept("")
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }

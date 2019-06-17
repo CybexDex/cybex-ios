@@ -18,7 +18,7 @@ typealias FeeResult = (success: Bool, amount: Decimal, assetID: String)
 
 class CybexChainHelper {
     class func blockchainParams(callback: @escaping (TransactionBaseType) -> Void) {
-        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()], refLib: false) { (infos) in
+        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject], refLib: false) { (infos) in
             if let infos = infos as? TransactionBaseType {
                 callback(infos)
             }
@@ -27,7 +27,7 @@ class CybexChainHelper {
     }
 
     class func blockchainParamsRefLib(callback: @escaping (TransactionBaseType) -> Void) {
-        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()], refLib: true) { (infos) in
+        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject], refLib: true) { (infos) in
             if var infos = infos as? TransactionBaseType {
                 let nextBlockNum = infos.block_num.int! + 1
                 let request = GetBlockHeaderRequest(blockNum: nextBlockNum.string) { result in
@@ -51,7 +51,7 @@ class CybexChainHelper {
     ///   - focusAssetId: alternative asset id
     ///   - completion:
     class func calculateFee(_ operation: String,
-                            operationID: ChainTypesOperations = .limitOrderCreate,
+                            operationID: Int = OperationId.limitOrderCreate,
                             focusAssetId: String,
                             completion: @escaping (FeeResult) -> Void) {
         let cybBalance = UserHelper.getBalanceFromAssetID(AssetConfiguration.CybexAsset.CYB.id)
@@ -79,7 +79,7 @@ class CybexChainHelper {
 
     class func calculateFeeOfAsset(_ assetID: String,
                                operation: String,
-                               operationID: ChainTypesOperations = .limitOrderCreate,
+                               operationID: Int = OperationId.limitOrderCreate,
                                completion: @escaping (Decimal) -> Void) {
         let request = GetRequiredFees(response: { (data) in
             guard let fees = data as? [Fee], let amount = fees.first?.amount.decimal() else {

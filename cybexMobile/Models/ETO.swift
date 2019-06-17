@@ -14,7 +14,7 @@ import RxCocoa
 import Localize_Swift
 
 struct ETOBannerModel: HandyJSON {
-    var id: String = ""
+    var id: String?
     var addsBannerMobile: String = ""
     var addsBannerMobileLangEn: String = ""
 
@@ -24,10 +24,10 @@ struct ETOBannerModel: HandyJSON {
     }
 }
 
-enum UserKYCStatus: String, HandyJSONEnum {
-    case notStart = "not_start"
-    case ok = "ok"
-}
+//enum UserKYCStatus: String, HandyJSONEnum {
+//    case notStart = "not_start"
+//    case ok = "ok"
+//}
 
 enum UserStatus: String, HandyJSONEnum {
     case unstart = "unstart"
@@ -37,11 +37,11 @@ enum UserStatus: String, HandyJSONEnum {
 }
 
 struct ETOUserAuditModel: HandyJSON {
-    var kycStatus: UserKYCStatus = .notStart //not_start, ok
+//    var kycStatus: UserKYCStatus = .notStart //not_start, ok
     var status: UserStatus = .unstart //unstart: 没有预约 waiting,ok,reject
 
     mutating func mapping(mapper: HelpingMapper) {
-        mapper <<< self.kycStatus <-- "kyc_status"
+//        mapper <<< self.kycStatus <-- "kyc_status"
     }
 }
 
@@ -49,7 +49,6 @@ struct ETOShortProjectStatusModel: HandyJSON {
     var currentPercent: Double = 0
     var status: ProjectState? //finish pre ok
     var finishAt: Date!
-
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.finishAt <-- ("finish_at", GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss"))
@@ -67,7 +66,6 @@ struct ETOUserModel: HandyJSON {
 
 enum ETOTradeHistoryStatus: String, HandyJSONEnum {
     case ok = ""
-
     case projectNotExist = "1"
     case userNotInWhiteList = "2"
     case userFallShort = "3"
@@ -118,36 +116,63 @@ enum ETOIEOType: String, HandyJSONEnum {
 }
 
 struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
-    var projectId: Int = 0
-    var projectName: String = ""
-    var ieoType: ETOIEOType = .receive //receive: 参与ETO send: 到账成功
-    var reason: ETOTradeHistoryStatus = .ok
-    var createdAt: Date!
-    var tokenCount: String = ""
-    var token: String = ""
-
+    var id: String = "0"
+    var exchangeToRecord: String = ""
+    var exchangeName: String = ""
+    var exchangeDescription: String = ""
+    var rate: Rate? = nil
+    var participator: String = ""
+    var payAssetID: String = ""
+    var payAmount: Int = 0
+    var receiveAssetID: String = ""
+    var receiveAmount: Int = 0
+    var occurence: Date!
+    
     mutating func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.createdAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
-        mapper <<< self.projectId <-- "project_id"
-        mapper <<< self.projectName <-- "project_name"
-        mapper <<< self.ieoType <-- "ieo_type"
-        mapper <<< self.createdAt <-- "created_at"
-        mapper <<< self.tokenCount <-- "token_count"
+        mapper <<< self.id <-- "id"
+        mapper <<< self.exchangeToRecord <-- "exchange_to_record"
+        mapper <<< self.exchangeName <-- "exchange_name"
+        mapper <<< self.exchangeDescription <-- "exchange_description"
+        mapper <<< self.rate <-- "rate"
+        mapper <<< self.participator <-- "participator"
+        mapper <<< self.payAssetID <-- "pay_asset_id"
+        mapper <<< self.payAmount <-- "pay_amount"
+        mapper <<< self.receiveAssetID <-- "receive_asset_id"
+        mapper <<< self.receiveAmount <-- "receive_amount"
+        mapper <<< self.occurence <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss")
     }
-
     static func == (lhs: ETOTradeHistoryModel, rhs: ETOTradeHistoryModel) -> Bool {
-        return lhs.projectId == rhs.projectId &&
-            lhs.projectName == rhs.projectName &&
-            lhs.ieoType == rhs.ieoType &&
-            lhs.reason == rhs.reason &&
-            lhs.createdAt == rhs.createdAt &&
-            lhs.tokenCount == rhs.tokenCount &&
-            lhs.token == rhs.token
+        return lhs.id == rhs.id &&
+            lhs.exchangeToRecord == rhs.exchangeToRecord &&
+            lhs.exchangeName == rhs.exchangeName &&
+            lhs.exchangeDescription == rhs.exchangeDescription &&
+            lhs.participator == rhs.participator &&
+            lhs.payAssetID == rhs.payAssetID &&
+            lhs.payAmount == rhs.payAmount &&
+            lhs.receiveAssetID == rhs.receiveAssetID &&
+            lhs.receiveAmount == rhs.receiveAmount &&
+            lhs.occurence == rhs.occurence
+    }
+    var hashValue: Int {
+        return Int(id.getSuffixID)
     }
 
-    var hashValue: Int {
-        return projectId
+}
+
+// MARK: - Rate
+struct Rate: HandyJSON {
+    var base: Base?
+    var quote: Base?
+    
+}
+
+// MARK: - Base
+struct Base: HandyJSON {
+    var amount: Int = 0
+    var assetID: String = ""
+    mutating func mapping(mapper: HelpingMapper) {
+        mapper <<< self.amount <-- "amount"
+        mapper <<< self.assetID <-- "asset_id"
     }
 }
 
@@ -187,20 +212,30 @@ class ETOProjectModel: HandyJSON {
     var createAt: Date?
 
     var tokenName: String = ""
+    var token: String = ""
     var baseTokenName: String = ""
-    var rate: Int = 0 //1 base
+    var baseToken: String = ""
+    var rate: Double = 0 //1 base
 
     var baseMaxQuota: Double = 0
     var baseAccuracy: Int = 0
     var baseMinQuota: Double = 0
-
+    
+    var quoteAccuracy: Int = 0
     var project: String = ""
 
     var isUserIn: String = "0" // 0不准预约 1可以预约
 
     var tTotalTime: String = ""
-
+    var userBuyToken: String = ""
+    var baseTokenCount: String = ""
+    var quoteTokenCount: String = ""
+    var etoRate: String = ""
+    var projectName: String = ""
+    var currentQuote: String = ""
     func mapping(mapper: HelpingMapper) {
+        mapper <<< self.baseTokenCount <-- "base_token_count"
+        mapper <<< self.quoteTokenCount <-- "quote_token_count"
         mapper <<< self.addsLogoMobile <-- "adds_logo_mobile"
         mapper <<< self.addsLogoMobileLangEn <-- "adds_logo_mobile__lang_en"
         mapper <<< self.addsKeyword <-- "adds_keyword"
@@ -224,12 +259,15 @@ class ETOProjectModel: HandyJSON {
         mapper <<< self.receiveAddress <-- "receive_address"
         mapper <<< self.currentPercent <-- "current_percent"
         mapper <<< self.tokenName <-- "token_name"
+        mapper <<< self.token <-- "token"
         mapper <<< self.baseTokenName <-- "base_token_name"
+        mapper <<< self.baseToken <-- "base_token"
         mapper <<< self.baseMaxQuota <-- "base_max_quota"
         mapper <<< self.baseAccuracy <-- "base_accuracy"
         mapper <<< self.baseMinQuota <-- "base_min_quota"
         mapper <<< self.isUserIn <-- "is_user_in"
         mapper <<< self.tTotalTime <-- "t_total_time"
+        mapper <<< self.project <-- "id"
         mapper <<<
             self.startAt <-- ("start_at", GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss"))
         mapper <<<
@@ -242,6 +280,12 @@ class ETOProjectModel: HandyJSON {
             self.lockAt <-- ("lock_at", GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss"))
         mapper <<<
             self.createAt <-- ("create_at", GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss"))
+        mapper <<< self.userBuyToken <-- "user_buy_token"
+        mapper <<< self.quoteAccuracy <-- "quote_accuracy"
+        mapper <<< self.etoRate <-- "eto_rate"
+        mapper <<< self.projectName <-- "project"
+        mapper <<< self.currentQuote <-- "current_remain_quota_count"
+
     }
 
     required init() {}
@@ -292,10 +336,8 @@ class ETOProjectViewModel {
     var etoDetail: String {
         var result: String = ""
         if let data = self.projectModel {
-            result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
+            result += R.string.localizable.eto_project_name.key.localized() + data.projectName + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.tokenName + "\n"
-            //            var adds_token_total: String = ""
-            //            var adds_token_total__lang_en: String = ""
             if data.addsTokenTotal.count != 0 || data.addsTokenTotalLangEn.count != 0 {
                 if Localize.currentLanguage() == "en" {
                     result += R.string.localizable.eto_total_supply.key.localized() + data.addsTokenTotalLangEn + "\n"
@@ -303,20 +345,26 @@ class ETOProjectViewModel {
                     result += R.string.localizable.eto_total_supply.key.localized() + data.addsTokenTotal + "\n"
                 }
             }
-
-            result += R.string.localizable.eto_start_time.key.localized() + data.startAt!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
-            result += R.string.localizable.eto_end_time.key.localized() + data.endAt!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
-            if data.lockAt != nil {
-                result += R.string.localizable.eto_start_at.key.localized() + data.lockAt!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            if let startAt = data.startAt{
+                result += R.string.localizable.eto_start_time.key.localized() + startAt.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            }
+            if let endAt = data.endAt {
+                result += R.string.localizable.eto_end_time.key.localized() + endAt.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            }
+            if let lockAt = data.lockAt {
+                result += R.string.localizable.eto_start_at.key.localized() + lockAt.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
             if data.offerAt == nil {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
             } else {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offerAt!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
-            result += R.string.localizable.eto_currency.key.localized() + data.baseTokenName.filterSystemPrefix + "\n"
+            result += R.string.localizable.eto_currency.key.localized() + data.baseTokenName + "\n"
+            
+            
+            
+            result += R.string.localizable.eto_exchange_ratio.key.localized() + data.etoRate
 
-            result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.baseTokenName + "=" + "\(data.rate)" + data.tokenName
         }
         return result
     }
@@ -350,29 +398,51 @@ class ETOProjectViewModel {
         self.name = projectModel.name
         self.keyWords = projectModel.addsKeyword
         self.keyWordsEn = projectModel.addsKeywordLangEn
-        self.status.accept(projectModel.status!.description())
-        self.currentPercent.accept((projectModel.currentPercent * 100).string(digits: 2, roundingMode: .down) + "%")
-        self.progress.accept(projectModel.currentPercent)
+        if let projectStatus = projectModel.status {
+            self.status.accept(projectStatus.description())
+        }
+        if projectModel.currentPercent <= 1 {
+            self.currentPercent.accept((projectModel.currentPercent.decimal * 100).string(digits: 2, roundingMode: .down).formatCurrency(digitNum: 2) + "%")
+            self.progress.accept(projectModel.currentPercent)
+        }
+        else {
+            self.currentPercent.accept(100.string(digits: 2, roundingMode: .down).formatCurrency(digitNum: 2) + "%")
+            self.progress.accept(1)
+        }
         self.icon = projectModel.addsLogoMobile
         self.iconEn = projectModel.addsLogoMobileLangEn
         self.projectState.accept(projectModel.status)
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.tTotalTime == "" {
-                    if projectModel.finishAt != nil {
-                        self.detailTime.accept(timeHandle(projectModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
-                        self.time.accept(timeHandle(projectModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
+                    if let finishAt = projectModel.finishAt, let startAt = projectModel.startAt{
+                        self.detailTime.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                        
+                        self.time.accept(timeHandle(finishAt.timeIntervalSince1970 - startAt.timeIntervalSince1970, isHiddenSecond: false))
+                    }
+                    else{
+                        self.detailTime.accept("")
+                        self.time.accept("")
+
                     }
                 } else {
-                    self.detailTime.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
-                    self.time.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
+                    if let tTotalTimeDouble = projectModel.tTotalTime.double() {
+                        self.detailTime.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                        self.time.accept(timeHandle(tTotalTimeDouble, isHiddenSecond: false))
+                    }
                 }
             } else if state == .pre {
-                self.detailTime.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                self.time.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                guard let startAt = projectModel.startAt else {
+                    return
+                }
+                self.detailTime.accept(timeHandle(startAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                self.time.accept(timeHandle(startAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
             } else {
-                self.detailTime.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                self.time.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                guard let endAt = projectModel.endAt else {
+                    return
+                }
+                self.detailTime.accept(timeHandle(endAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                self.time.accept(timeHandle(endAt.timeIntervalSince1970 - Date().timeIntervalSince1970))
             }
         }
     }

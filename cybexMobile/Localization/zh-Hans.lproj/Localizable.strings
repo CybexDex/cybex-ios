@@ -175,6 +175,8 @@
 "recharge_selectCoin"     = "选择币种";
 "withdraw"                = "提现";
 "withdraw_miss_authority" = "您没有提现权限";
+"transfer_miss_authority" = "您没有转账带 Memo 权限";
+
 "withdraw_unlock_wallet"  = "解锁钱包";
 
 "deposit_save"     = "保存二维码";
@@ -412,8 +414,11 @@
 "eto_subscribed" = "已认购限额";
 "eto_available" = "可用余额 %@ %@";
 "eto_join" = "参与ETO";
+"eto_total_remaining" = "本轮剩余额度";
 
-"eto_project_detail_title" = "Project Details";
+
+
+"eto_project_detail_title" = "项目详情";
 
 "eto_project_detail" = "项目详情：";
 
@@ -443,6 +448,7 @@
 "eto_submit_check_error_4" = "不可低于单笔最低限额";
 "eto_submit_check_error_5" = "认购金额为最小认购单位整数倍";
 "eto_submit_confirm" = "ETO确认";
+"eto_textfiled_placeholder" = "请输入认购数量";
 
 "eto_project_time_finish" = "完成时间：";
 "eto_project_time_comming" = "距离结束：";
@@ -471,14 +477,16 @@
 "eto_project_stop_reserve" = "停止预约";
 "eto_project_waiting" = "等待ETO开始";
 "eto_project_join" = "立即ETO";
-"eto_project_rejected" = "审核未通过";
+"eto_project_rejected" = "无参与资格";
 "eto_project_kyc" = "进行KYC";
-"eto_project_login" = "请登录";
+"eto_project_login" = "请登录后参与";
 
 
 
-"eto_transfer_title" = "转账待确认中";
-"eto_transfer_content" = "请勿重复转账";
+"eto_transfer_title" = "认购确认中";
+"eto_transfer_content" = "请勿重复认购";
+"eto_subscritions_success" = "认购成功";
+"eto_subscritions_failed" = "认购失败";
 
 "eto_invite_code_error" = "请输入正确的邀请码";
 "eto_invite_code_title" = "输入邀请码";

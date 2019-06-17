@@ -355,17 +355,18 @@ extension RechargeDetailViewController {
         }
     }
 
-    func checkPermisson() {
+    func checkPermisson() -> Bool {
         if !UserManager.shared.permission.withdraw, UserManager.shared.unlockType == .cloudPassword {
             self.showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
-            return
+            return false
         }
 
         if self.isWithdraw == false, let trade = self.trade {
             self.showToastBox(false, message: Localize.currentLanguage() == "en" ? trade.enMsg : trade.cnMsg)
-            return
+            return false
         }
 
+        return true
     }
     
     func withDrawAction() {
@@ -379,15 +380,16 @@ extension RechargeDetailViewController {
         delay(milliseconds: 300) {
             self.withdrawing = false
 
-            self.checkPermisson()
-            if self.contentView.addressView.addressState != .success {
-                return
-            }
-            if !self.contentView.withdraw.isEnable {
-                return
-            }
+            if self.checkPermisson() {
+                if self.contentView.addressView.addressState != .success {
+                    return
+                }
+                if !self.contentView.withdraw.isEnable {
+                    return
+                }
 
-            self.confirm()
+                self.confirm()
+            }
         }
 
     }
