@@ -109,6 +109,26 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
     func fetchWithDrawInfoData(_ assetName: String) {
+        guard let setting = AppConfiguration.shared.enableSetting.value else {
+            return
+        }
+
+        let gateway2 = setting.gateWay2
+        if gateway2 {
+            Gateway2Service.request(target: .asset(name: assetName), success: { (json) in
+                if let model = GatewayAssetResponseModel.deserialize(from: json.dictionaryObject) {
+                    GatewayService.Config.gateway2ID = model.withdrawPrefix
+                    let info = WithdrawinfoObject(minValue: model.minWithdraw.double()!, fee: model.withdrawFee.double()!, type: "", asset: "", gatewayAccount: model.gatewayAccount, precision: model.precision.int!)
+                    self.store.dispatch(FetchWithdrawInfo(data: info))
+                }
+            }, error: { (_) in
+
+            }) { (_) in
+                
+            }
+            return
+        }
+
         GatewayService().getWithdrawInfo(assetName: assetName).done { (data) in
             if case let data? = data {
                 self.getWithdrawAccountInfo(data.gatewayAccount)
@@ -155,6 +175,21 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
    class func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void) {
+        guard let setting = AppConfiguration.shared.enableSetting.value else {
+            return
+        }
+
+        let gateway2 = setting.gateWay2
+        if gateway2 {
+            Gateway2Service.request(target: .validateAddress(assetName: assetName, address: address), success: { (json) in
+                callback(json["valid"].boolValue)
+            }, error: { (_) in
+                callback(false)
+            }) { (_) in
+                callback(false)
+            }
+            return
+        }
         GatewayService().verifyAddress(assetName: assetName, address: address).done { (data) in
             if case let data? = data {
                 callback(data.valid)

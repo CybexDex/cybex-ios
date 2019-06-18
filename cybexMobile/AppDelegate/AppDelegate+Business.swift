@@ -15,24 +15,27 @@ extension AppDelegate {
     func requestSetting() {
         monitorNetworkOfSetting()
 
-        AppConfiguration.shared.nodes.asObservable().skip(1).subscribe(onNext: { (json) in
-            if let node = json?["nodes"].object, let mdp = json?["mdp"].object, let limitOrder = json?["limit_order"].object,
-                let eto = json?["eto"].string {
+        AppConfiguration.shared.nodes.asObservable().skip(1).subscribe(onNext: { (node) in
+            if let node = node {
                 if AppEnv.current == .product {
-                    let nodes = [node].flatMapped(with: String.self)
+                    let nodes = [node.nodes].flatMapped(with: String.self)
                     CybexWebSocketService.Config.productURL = nodes.map({ URL(string: $0)! })
 
-                    let mdps = [mdp].flatMapped(with: String.self)
+                    let mdps = [node.mdp].flatMapped(with: String.self)
                     MDPWebSocketService.Config.productURL = mdps.map({ URL(string: $0)! })
 
-                    let limitOrders = [limitOrder].flatMapped(with: String.self)
+                    let limitOrders = [node.limitOrder].flatMapped(with: String.self)
                     OCOWebSocketService.Config.productURL = limitOrders.map({ URL(string: $0)! })
 
-                    ETOMGService.Config.productURL = URL(string: eto)!
+                    ETOMGService.Config.productURL = URL(string: node.eto)!
                     let connected = CybexWebSocketService.shared.checkNetworConnected()
                     if !connected {
                         CybexWebSocketService.shared.connect()
                     }
+
+                    GatewayService.Config.productURL = URL(string: node.gateway1)!
+                    GatewayQueryService.Config.productURL = URL(string: node.gateway1Query)!
+                    Gateway2Service.Config.productURL = URL(string: node.gateway2)!
                 }
             }
         }).disposed(by: disposeBag)

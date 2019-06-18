@@ -48,8 +48,8 @@ func filterData(_ trades: [Trade]) -> [Trade] {
             for var trade in data {
                 guard let info = appData.assetInfo[trade.id] else { continue }
                 if trade.id == balance.assetType {
-                    trade.amount = AssetHelper.getRealAmount(balance.assetType,
-                                                 amount: balance.balance).formatCurrency(digitNum: info.precision)
+//                    trade.amount = AssetHelper.getRealAmount(balance.assetType,
+//                                                 amount: balance.balance).formatCurrency(digitNum: info.precision)
                     tradesInfo.append(trade)
                 }
             }
@@ -69,18 +69,18 @@ func filterData(_ trades: [Trade]) -> [Trade] {
 
 func filterEmptyOrSortedNameTrades(_ trades: [Trade], isEmpty: Bool, name: String) -> [Trade] {
     if name.isEmpty {
-        if isEmpty {
-            return trades.filter({$0.amount != "0"})
-        }
+//        if isEmpty {
+//            return trades.filter({$0.amount != "0"})
+//        }
         return trades
     } else {
         let data = trades.filter({ (trade) -> Bool in
             guard let tradeInfo = appData.assetInfo[trade.id] else { return false }
             return tradeInfo.symbol.filterSystemPrefix.contains(name.uppercased())
         })
-        if isEmpty {
-            return data.filter({$0.amount != "0"})
-        }
+//        if isEmpty {
+//            return data.filter({$0.amount != "0"})
+//        }
         return data
     }
 }

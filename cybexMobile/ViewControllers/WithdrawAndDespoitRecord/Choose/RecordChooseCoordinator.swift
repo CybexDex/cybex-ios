@@ -64,6 +64,27 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
         case RecordChooseType.asset.rawValue:
             let accountName = UserManager.shared.name.value ?? ""
 
+            guard let setting = AppConfiguration.shared.enableSetting.value else {
+                return
+            }
+
+            let gateway2 = setting.gateWay2
+            if gateway2 {
+                Gateway2Service.request(target: .assetsOfTransactions(userName: accountName), success: { (json) in
+                    let records =  json["records"].arrayValue.map({ (record) -> AccountAssetModel in
+                        let model = AccountAssetModel(count: record["total"].intValue, groupInfo: GroupInfo(asset: record["asset"].stringValue, fundType: ""))
+                        return model
+                    })
+                    let assets = AccountAssets(total: json["total"].intValue, offset: 0, size: 0, records: records)
+                    self.store.dispatch(FetchAccountAssetAction(data: assets))
+                }, error: { (_) in
+
+                }) { (_) in
+
+                }
+                return
+            }
+
             GatewayQueryService.request(target: .login(accountName: accountName), success: { (_) in
                 GatewayQueryService.request(target: .assetKinds(accountName: accountName), success: { (json) in
                     if let data = AccountAssets.deserialize(from: json.dictionaryObject) {

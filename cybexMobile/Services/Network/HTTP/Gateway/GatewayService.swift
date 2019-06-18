@@ -29,13 +29,15 @@ class GatewayService {
         static var gatewayID: String {
             switch AppEnv.current {
             case .product:
-                return "CybexGateway"
+                return "withdraw:CybexGateway"
             case .test:
-                return "CybexGatewayDev"
+                return "withdraw:CybexGatewayDev"
             case .uat:
-                return "CybexGateway"
+                return "withdraw:CybexGateway"
             }
         }
+
+        static var gateway2ID: String = ""
     }
 
     let apollo = ApolloClient(url: Config.currentEnv)
@@ -52,7 +54,16 @@ class GatewayService {
     ///   - address: 地址
     /// - Returns: memo
     class func withDrawMemo(_ assetName: String, address: String) -> String {
-        return "withdraw:\(Config.gatewayID):\(assetName):\(address)"
+        var prefixID = Config.gatewayID
+
+        if let setting = AppConfiguration.shared.enableSetting.value {
+            let gateway2 = setting.gateWay2
+            if gateway2 {
+                prefixID = Config.gateway2ID
+            }
+        }
+
+        return "\(prefixID):\(assetName):\(address)"
     }
 
 //======================= MARK: - Requests

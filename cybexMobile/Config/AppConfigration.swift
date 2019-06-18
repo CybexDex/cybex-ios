@@ -47,7 +47,7 @@ class AppConfiguration {
     static let shared = AppConfiguration()
 
     var enableSetting: BehaviorRelay<AppEnableSetting?> = BehaviorRelay(value: nil)
-    var nodes: BehaviorRelay<JSON?> = BehaviorRelay(value: nil)
+    var nodes: BehaviorRelay<NodesURLSettingModel?> = BehaviorRelay(value: nil)
 
     var rmbPrices: BehaviorRelay<[RMBPrices]> = BehaviorRelay(value: [])
 
@@ -132,8 +132,8 @@ extension AppConfiguration {
 
     func fetchNodes() {
         AppService.request(target: AppAPI.nodesURL, success: { (json) in
-            if let _ = json["nodes"].arrayObject, let _ = json["mdp"].string, let _ = json["limit_order"].string {
-                self.nodes.accept(json)
+            if let model = NodesURLSettingModel.deserialize(from: json.dictionaryObject) {
+                self.nodes.accept(model)
             }
         }, error: { (_) in
             self.nodes.accept(nil)

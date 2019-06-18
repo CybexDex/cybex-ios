@@ -410,6 +410,9 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         let data = JSON(parseJSON: message)
 //            Log.print("receive message: \(data.rawString()!)\n")
 
+        if data["error"].dictionaryObject != nil {
+            Log.fail(message)
+        }
         
         guard let sendId = data["id"].int else {
             return

@@ -25,9 +25,9 @@ enum GatewayAPI {
 
 struct Gateway2Service {
     enum Config: NetworkHTTPEnv {
-        static var productURL = URL(string: "http://47.75.48.121:8181")!
+        static var productURL = URL(string: "https://gateway2test.cybex.io")!
         static let devURL = URL(string: "http://39.98.58.238:8181")!
-        static let uatURL = URL(string: "http://39.98.58.238:8181")!
+        static let uatURL = URL(string: "https://gateway2test.cybex.io")!
     }
 
     static let provider = MoyaProvider<GatewayAPI>(callbackQueue: nil, manager: defaultManager(),
@@ -48,14 +48,14 @@ struct Gateway2Service {
                 do {
                     let response = try response.filterSuccessfulStatusCodes()
                     let json = try JSON(response.mapJSON())
-                    if json["code"].intValue == 200 {
-                        let result = json["data"]
+//                    if json["code"].intValue == 200 {
+//                        let result = json["data"]
 
-                        successCallback(result)
-                    } else {
-                        errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
-                                                                      desc: json["data"]))
-                    }
+                    successCallback(json)
+//                    } else {
+//                        errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
+//                                                                      desc: json["data"]))
+//                    }
                 } catch let serverError {
                     if let json = try? JSON(response.mapJSON()) {
                         if json["code"].intValue != 0 {
@@ -119,11 +119,16 @@ extension GatewayAPI: TargetType {
     var urlParameters: [String: Any] {
         switch self {
         case let .transactions(fundType: fundType, assetName: assetName, userName: _, fromId: fromId):
-            if let id = fromId {
-                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName, "lastid": id]
-            } else {
-                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName]
+            var p: [String: Any] = ["asset": assetName]
+
+            if fundType != .ALL {
+                p["fundType"] = fundType.rawValue.lowercased()
             }
+            if let id = fromId {
+                p["lastid"] = id
+            } 
+
+            return p
         default:
             return [:]
         }

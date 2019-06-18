@@ -34,6 +34,23 @@ class WithdrawDetailCoordinator: NavCoordinator {
 extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     func fetchDepositAddress(_ assetName: String) {
         if let name = UserManager.shared.name.value {
+            guard let setting = AppConfiguration.shared.enableSetting.value else {
+                return
+            }
+
+            let gateway2 = setting.gateWay2
+            if gateway2 {
+                Gateway2Service.request(target: .topUPAddress(assetName: assetName, userName: name), success: { (json) in
+                    let info = AccountAddressRecord(accountName: name, address: json["address"].stringValue, asset: assetName)
+                    self.store.dispatch(FetchAddressInfo(data: info))
+                }, error: { (_) in
+
+                }) { (_) in
+
+                }
+                return
+            }
+
             GatewayService().getDepositAddress(accountName: name, assetName: assetName).done { (data) in
                 if case let data? = data {
                     self.store.dispatch(FetchAddressInfo(data: data))
