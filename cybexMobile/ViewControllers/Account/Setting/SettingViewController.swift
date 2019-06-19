@@ -55,6 +55,11 @@ class SettingViewController: BaseViewController {
     func setupUI() {
         #if DEBUG
         self.environment.isHidden = false
+        #else
+        self.view.rx.tapGesture(numberOfTouchesRequired: 2, numberOfTapsRequired: 5).when(.recognized).subscribe(onNext: {[weak self] _ in
+            guard let self = self else { return }
+            self.environment.isHidden = false
+        }).disposed(by: disposeBag)
         #endif
 
         if UserManager.shared.loginType != .nfc {
