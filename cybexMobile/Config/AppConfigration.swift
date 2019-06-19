@@ -59,6 +59,7 @@ class AppConfiguration {
     static let amountPrecision = 2
 
     static let debounceDisconnectTime = 10
+    static let autoLockWalletInbackground = 60 * 5
 
     private init() {
         let rootVC = BaseTabbarViewController()

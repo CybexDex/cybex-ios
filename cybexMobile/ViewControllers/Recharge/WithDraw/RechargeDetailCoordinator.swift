@@ -119,6 +119,8 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                 if let model = GatewayAssetResponseModel.deserialize(from: json.dictionaryObject) {
                     GatewayService.Config.gateway2ID = model.withdrawPrefix
                     let info = WithdrawinfoObject(minValue: model.minWithdraw.double()!, fee: model.withdrawFee.double()!, type: "", asset: "", gatewayAccount: model.gatewayAccount, precision: model.precision.int!)
+                    
+                    self.getWithdrawAccountInfo(info.gatewayAccount)
                     self.store.dispatch(FetchWithdrawInfo(data: info))
                 }
             }, error: { (_) in
@@ -140,7 +142,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     func getWithdrawAccountInfo(_ userID: String) {
         let requeset = GetFullAccountsRequest(name: userID) { (response) in
             if let data = response as? FullAccount, let account = data.account {
-                self.store.dispatch(FetchWithdrawMemokey(data: account.memoKey))
+                self.store.dispatch(FetchWithdrawMemokey(memoKey: account.memoKey, gatewayUid: account.id))
             }
         }
         CybexWebSocketService.shared.send(request: requeset)
@@ -222,7 +224,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                  expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                  chain_id: CybexConfiguration.shared.chainID.value,
                                                                  from_user_id: uid.getSuffixID,
-                                                                 to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
+                                                                 to_user_id: self.state.gatewayUid.value!.getSuffixID,
                                                                  asset_id: assetId.getSuffixID,
                                                                  receive_asset_id: assetId.getSuffixID,
                                                                  amount: amount.int64Value,

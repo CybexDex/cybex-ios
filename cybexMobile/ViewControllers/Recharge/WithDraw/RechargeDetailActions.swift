@@ -18,6 +18,8 @@ struct RechargeDetailState: BaseState {
 
     var data: BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil) // 提现网关相关信息
     var memoKey: BehaviorRelay<String?> = BehaviorRelay(value: nil) // 提现网关memo公钥
+    var gatewayUid: BehaviorRelay<String?> = BehaviorRelay(value: nil) // 提现网关memo公钥
+
     var fee: BehaviorRelay<(Fee, success: Bool)?> = BehaviorRelay(value: nil)
     var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
     var withdrawAddress: BehaviorRelay<WithdrawAddress?> = BehaviorRelay(value: nil)
@@ -29,7 +31,8 @@ struct FetchWithdrawInfo: Action {
 }
 
 struct FetchWithdrawMemokey: Action {
-    let data: String
+    let memoKey: String
+    let gatewayUid: String
 }
 
 struct FetchCybexFee: Action {

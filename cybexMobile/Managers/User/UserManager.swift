@@ -371,6 +371,12 @@ class UserManager {
         }
     }
 
+    lazy var autoLockDispatch = debounce(delay: .seconds(AppConfiguration.autoLockWalletInbackground), action: {
+        if !AppHelper.shared.infront {
+            self.keys = nil
+        }
+    })
+
     private var enotesKeys: AccountKeys? // enotes keys
 
     var fullAccount: BehaviorRelay<FullAccount?> = BehaviorRelay(value: nil)
@@ -385,6 +391,10 @@ class UserManager {
                     }
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (notifi) in
+            self.autoLockDispatch()
+        }
     }
 
     func handlerFullAcount(_ data: FullAccount) {

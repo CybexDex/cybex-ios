@@ -93,13 +93,13 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
                     var oldRecord = Record()
                     oldRecord.address = model.outAddr
                     if let assetID = AssetHelper.getAssetId(model.asset) {
-                        let amount = AssetHelper.getRealAmount(assetID, amount: model.totalAmount).intValue
+                        let amount = AssetHelper.setRealAmount(assetID, amount: model.totalAmount).intValue
                         oldRecord.amount = amount
                     }
                     oldRecord.asset = model.asset
                     oldRecord.fundType = model.type
-                    oldRecord.state = model.status.rawValue
-                    oldRecord.updateAt = model.updateAt
+                    oldRecord.state = model.status.rawValue.lowercased()
+                    oldRecord.updateAt = model.updatedAt
                     oldRecord.details = [RecordDetail(id: model.id.string, state: "", hash: model.outHash)]
                     return oldRecord
                 })

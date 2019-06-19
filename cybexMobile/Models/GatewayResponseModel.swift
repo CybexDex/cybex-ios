@@ -44,14 +44,14 @@ struct GatewayTransactionResponseModel: HandyJSON {
     var amount: String = ""
     var status: GateWayTransactionStatus = .pending
     var fee: String = ""
-    var updateAt: Date!
+    var updatedAt: Date!
     var link: String = ""
     var outHash: String = ""
     var type: String = ""
 
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            self.updatedAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     }
 }
 

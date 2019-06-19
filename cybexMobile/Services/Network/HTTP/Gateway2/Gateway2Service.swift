@@ -99,7 +99,7 @@ extension GatewayAPI: TargetType {
         case let .asset(name: name):
             return apiVersion + "/assets/\(name)"
         case let .validateAddress(assetName: assetName, address: address):
-            return apiVersion + "/assets/\(assetName)/address/\(address)"
+            return apiVersion + "/assets/\(assetName)/address/\(address)/verify"
         case let .topUPAddress(assetName: assetName, userName: userName):
             return apiVersion + "/users/\(userName)/assets/\(assetName)/address"
         case let .transactions(fundType: _, assetName: _, userName: userName, fromId: _):
