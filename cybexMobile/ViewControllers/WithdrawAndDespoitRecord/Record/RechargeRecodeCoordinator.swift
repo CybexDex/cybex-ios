@@ -44,7 +44,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
         }
         if url.count == 0 {
             for explorer in explorers {
-                if explorer.asset.filterSystemPrefix == "ETH" {
+                if explorer.asset.filterSystemPrefix == AssetConfiguration.CybexAsset.ETH.name {
                     url = explorer.explorer + hash
                 }
             }

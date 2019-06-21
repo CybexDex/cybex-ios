@@ -163,7 +163,8 @@ extension GatewayAPI: TargetType {
             return ""
         }
 
-        let token = BitShareCoordinator.sign("\(time)\(userName)")
+        let token = BitShareCoordinator.sign("\(time)\(userName)").replacingOccurrences(of: "\"", with: "")
+
         let jwt = [time, userName, token]
 
         return jwt.joined(separator: ".")
@@ -174,7 +175,7 @@ extension GatewayAPI: TargetType {
 
         switch self {
         case .topUPAddress, .transactions, .assetsOfTransactions:
-            commonHeader["authorization"] = "bearer " + signer
+            commonHeader["Authorization"] = "Bearer \(signer)"
             return commonHeader
         default:
             return nil

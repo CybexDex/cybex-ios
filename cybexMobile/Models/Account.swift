@@ -119,10 +119,11 @@ class Account: HandyJSON {
 
         let allKeys = keys.reduce([], { $0 + $1.pubKeys }).removingDuplicates()
 
-        for key in allKeys {
-            if allPubKeys.contains(key) {
+        for key in allPubKeys {
+            if allKeys.contains(key) {
                 canUnlock = true
                 permission.defaultKey = key
+                break
             }
         }
 
