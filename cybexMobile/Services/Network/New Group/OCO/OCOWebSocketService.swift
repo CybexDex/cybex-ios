@@ -19,8 +19,8 @@ typealias WebSocketJSONResponse = (JSON) -> Void
 class OCOWebSocketService: NSObject {
     enum Config: NetworkWebsocketNodeEnv {
         static var productURL: [URL] = []
-        static let devURL = [URL(string: "wss://shenzhen.51nebula.com")!]
-        static let uatURL = [URL(string: "ws://47.100.98.113:38090")!]
+        static var devURL = [URL(string: "wss://shenzhen.51nebula.com")!]
+        static var uatURL = [URL(string: "ws://47.100.98.113:38090")!]
     }
 
     private var batchFactory: BatchFactory!

@@ -36,8 +36,8 @@ enum GatewayQueryAPI {
 struct GatewayQueryService {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://gateway-query.cybex.io")!
-        static let devURL = URL(string: "https://gateway-query.cybex.io")!
-        static let uatURL = URL(string: "http://47.100.98.113:5681/query")!
+        static var devURL = URL(string: "https://gateway-query.cybex.io")!
+        static var uatURL = URL(string: "http://47.100.98.113:5681/query")!
 
         static let loginExpiration: Double = 600
     }

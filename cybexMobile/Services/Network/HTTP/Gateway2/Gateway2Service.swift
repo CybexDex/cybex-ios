@@ -26,8 +26,8 @@ enum GatewayAPI {
 struct Gateway2Service {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://gateway2test.cybex.io")!
-        static let devURL = URL(string: "http://39.98.58.238:8181")!
-        static let uatURL = URL(string: "https://gateway2test.cybex.io")!
+        static var devURL = URL(string: "http://39.98.58.238:8181")!
+        static var uatURL = URL(string: "https://gateway2test.cybex.io")!
     }
 
     static let provider = MoyaProvider<GatewayAPI>(callbackQueue: nil, manager: defaultManager(),

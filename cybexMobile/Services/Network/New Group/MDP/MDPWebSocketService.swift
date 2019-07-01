@@ -23,8 +23,8 @@ class MDPWebSocketService: NSObject {
 
     enum Config: NetworkWebsocketNodeEnv {
         static var productURL: [URL] = []
-        static let devURL = [URL(string: "ws://47.244.40.252:18888")!]
-        static let uatURL = [URL(string: "wss://rteuat.cybex.io")!]
+        static var devURL = [URL(string: "ws://47.244.40.252:18888")!]
+        static var uatURL = [URL(string: "wss://rteuat.cybex.io")!]
     }
 
     lazy var socket = SRWebSocket(url: MDPWebSocketService.Config.uatURL.first!)

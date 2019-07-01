@@ -20,7 +20,7 @@ struct IMService {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://chat.cybex.io")!
         static let devURL = URL(string: "http://47.91.242.71:9099")!
-        static let uatURL = URL(string: "http://47.91.242.71:9099")!
+        static var uatURL = URL(string: "http://47.91.242.71:9099")!
     }
 
     static let provider = MoyaProvider<IMAPI>(callbackQueue: nil, manager: defaultManager(),

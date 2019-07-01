@@ -48,13 +48,9 @@ class CybexWebSocketService: NSObject {
     enum Config: NetworkWebsocketNodeEnv {
         static var productURL: [URL] = []
 
-        static var devURL: [URL] {
-            return [NodeURLString.test, NodeURLString.test2].map { URL(string: $0.rawValue)! }
-        }
+        static var devURL: [URL] = []
 
-        static var uatURL: [URL] {
-            return [NodeURLString.uat].map { URL(string: $0.rawValue)! }
-        }
+        static var uatURL: [URL] = []
     }
 
     private var batchFactory: BatchFactory!

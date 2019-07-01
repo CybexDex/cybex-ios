@@ -68,8 +68,7 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         MarketConfiguration.shared.marketPairs.accept([])
         CybexWebSocketService.shared.canSendMessageReactive.accept(false)
         appData.tickerData.accept([])
-
-        CybexWebSocketService.shared.connect()
+        AppConfiguration.shared.switchNetworkNode()
 
         if let del = UIApplication.shared.delegate as? AppDelegate {
             del.checkSetting()

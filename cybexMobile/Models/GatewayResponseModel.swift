@@ -11,7 +11,7 @@ import HandyJSON
 
 struct GatewayAssetResponseModel: HandyJSON {
     var name: String = ""
-    var blockchain: String = ""
+    var projectname: String = ""
     var cybname: String = ""
     var cybid: String = ""
 

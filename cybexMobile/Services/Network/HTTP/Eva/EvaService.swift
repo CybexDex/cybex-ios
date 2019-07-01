@@ -21,7 +21,7 @@ struct EvaService {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://api.evaluape.io")!
         static let devURL = URL(string: "https://api.evaluape.io")!
-        static let uatURL = URL(string: "https://api.evaluape.io")!
+        static var uatURL = URL(string: "https://api.evaluape.io")!
     }
     
     static let provider = MoyaProvider<EvaApi>(callbackQueue: nil, manager: defaultManager(),

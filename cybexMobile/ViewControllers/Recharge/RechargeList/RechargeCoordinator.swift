@@ -132,7 +132,7 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
                     var trade = Trade()
                     //                    trade.amount =
                     trade.id = newModel.cybid
-                    trade.projectName = newModel.blockchain
+                    trade.projectName = newModel.projectname
                     trade.enable = withdraw ? newModel.withdrawSwitch : newModel.depositSwitch
                     if let withdrawDic = newModel.info["withdraw"] as? [String: String],
                         let depositDic = newModel.info["deposit"] as? [String: String],
