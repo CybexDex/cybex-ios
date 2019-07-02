@@ -119,7 +119,7 @@ extension GatewayAPI: TargetType {
     var urlParameters: [String: Any] {
         switch self {
         case let .transactions(fundType: fundType, assetName: assetName, userName: _, fromId: fromId):
-            var p: [String: Any] = ["asset": assetName]
+            var p: [String: Any] = ["asset": assetName, "size": 20]
 
             if fundType != .ALL {
                 p["fundType"] = fundType.rawValue.lowercased()

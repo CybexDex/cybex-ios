@@ -57,8 +57,21 @@ class WithdrawDetailViewController: BaseViewController {
             }
         } else {
             if let balance = self.trade?.id, let name = appData.assetInfo[balance]?.symbol.filterSystemPrefix {
-                startLoading()
-                self.coordinator?.fetchDepositAddress(name)
+                if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+                    if #available(iOS 11.0, *) {
+                        if !UserManager.shared.checkExistCloudPassword() {
+                            showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+                        } else {
+                            showPasswordBox()
+                        }
+                    }
+                } else if UserManager.shared.isLocked {
+                    showPasswordBox()
+                } else {
+                    self.startLoading()
+                    self.coordinator?.fetchDepositAddress(name)
+                }
+
             }
         }
     }
@@ -182,4 +195,33 @@ extension WithdrawDetailViewController {
         }
         openPage(url)
     }
+}
+
+extension WithdrawDetailViewController {
+    override func passwordDetecting() {
+        self.startLoading()
+    }
+
+    override func passwordPassed(_ passed: Bool) {
+        self.endLoading()
+
+        if passed {
+            if let balance = self.trade?.id, let name = appData.assetInfo[balance]?.symbol.filterSystemPrefix {
+                self.startLoading()
+                self.coordinator?.fetchDepositAddress(name)
+            }
+        } else {
+            if self.isVisible {
+                self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+            }
+        }
+    }
+
+    override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.enotes_feature_hint.key.localized() { // 添加云账户
+            pushCloudPasswordViewController(nil)
+            return
+        }
+    }
+
 }
