@@ -106,7 +106,8 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
 
                 var tradeRecord = TradeRecord()
                 tradeRecord.total = json["total"].intValue
-                tradeRecord.total = json["size"].intValue
+                tradeRecord.size = json["size"].intValue
+                tradeRecord.offset = offset
                 tradeRecord.records = data
 
                 self.store.dispatch(FetchDepositRecordsAction(data: tradeRecord))

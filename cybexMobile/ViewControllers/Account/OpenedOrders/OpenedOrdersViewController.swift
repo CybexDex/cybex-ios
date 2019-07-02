@@ -64,7 +64,12 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
 
         disappear()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        appear()
+    }
+
     func setupUI() {
         switchContainerView()
     }
@@ -159,8 +164,11 @@ extension OpenedOrdersViewController: TradePair {
     }
 
     func appear() {
-        guard let pair = pair else { return }
-        self.coordinator?.fetchOpenedOrder(pair)
+        guard let pair = pair else {
+            startFetchOpenedOrders()
+            return
+        }
+        setupData()
     }
 
     func disappear() {
