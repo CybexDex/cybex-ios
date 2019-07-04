@@ -24,4 +24,13 @@ struct RegisterService {
     }
 ```
 
+History server配置在 https://github.com/CybexDex/cybex-ios/blob/master/cybexMobile/Services/Network/HTTP/AccountHistory/AccountHistoryService.swift
+```
+struct AccountHistoryService {
+    enum Config: NetworkHTTPEnv {
+        static var productURL = URL(string: "https://live.cybex.io")! // 生产
+        static let devURL = URL(string: "http://39.105.55.115:8081")!
+        static let uatURL = URL(string: "http://47.100.98.113:8081")! // uat域名 http://uatliveapi.51nebula.com
+    }
+```
 节点等配置信息配置在config server, 详情参考 https://github.com/CybexDex/config-server
