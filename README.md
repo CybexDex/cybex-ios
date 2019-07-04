@@ -20,7 +20,7 @@ struct RegisterService {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://faucet.cybex.io")! // 生产水龙头
         static let devURL = URL(string: "https://faucet.51nebula.com")!
-        static let uatURL = URL(string: "http://uatfaucet.51nebula.com")! // uat水龙头
+        static let uatURL = URL(string: "https://uatfaucet.51nebula.com")! // uat水龙头
     }
 ```
 
