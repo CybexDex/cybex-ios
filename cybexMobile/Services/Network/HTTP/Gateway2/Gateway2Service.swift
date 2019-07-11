@@ -144,10 +144,13 @@ extension GatewayAPI: TargetType {
     var task: Task {
         switch self {
         default:
-            return .requestCompositeParameters(bodyParameters: parameters,
-                                               bodyEncoding: JSONEncoding.default,
-                                               urlParameters: urlParameters)
+            if method == .get {
+                return .requestParameters(parameters: urlParameters, encoding: URLEncoding.default)
+            } else {
+                return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            }
         }
+
     }
 
     var sampleData: Data {

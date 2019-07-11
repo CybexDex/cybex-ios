@@ -51,7 +51,7 @@ struct GatewayTransactionResponseModel: HandyJSON {
 
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.updatedAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            self.updatedAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss'Z'")
     }
 }
 

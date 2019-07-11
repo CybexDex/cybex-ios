@@ -22,7 +22,7 @@ struct RegisterService {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://faucet.cybex.io")!
         static let devURL = URL(string: "https://faucet.51nebula.com")!
-        static var uatURL = URL(string: "https://faucet.51nebula.com")!
+        static var uatURL = URL(string: "https://uatfaucet.51nebula.com")!
     }
 
     static let provider = MoyaProvider<RegisterApi>(callbackQueue: nil, manager: defaultManager(),
@@ -123,9 +123,11 @@ extension RegisterApi : TargetType {
     var task: Task {
         switch self {
         default:
-            return .requestCompositeParameters(bodyParameters: parameters,
-                                               bodyEncoding: JSONEncoding.default,
-                                               urlParameters: urlParameters)
+            if method == .get {
+                return .requestParameters(parameters: urlParameters, encoding: URLEncoding.default)
+            } else {
+                return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            }
         }
     }
 
