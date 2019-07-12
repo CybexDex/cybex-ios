@@ -130,7 +130,7 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
             Gateway2Service.request(target: .assetLists, success: { (json) in
                 let list = JSON(json).arrayValue.compactMap({ GatewayAssetResponseModel.deserialize(from: $0.dictionaryObject) }).map({ (newModel) -> Trade in
                     var trade = Trade()
-                    //                    trade.amount =
+                    trade.name = newModel.name
                     trade.id = newModel.cybid
                     trade.projectName = newModel.projectname
                     trade.enable = withdraw ? newModel.withdrawSwitch : newModel.depositSwitch

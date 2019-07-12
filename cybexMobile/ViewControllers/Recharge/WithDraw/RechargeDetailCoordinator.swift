@@ -14,7 +14,7 @@ import cybex_ios_core_cpp
 
 protocol RechargeDetailCoordinatorProtocol {
     func pop()
-    func openWithdrawRecodeList(_ assetId: String)
+    func openWithdrawRecodeList(_ assetName: String)
     func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress)
 }
 
@@ -60,11 +60,11 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         }
     }
 
-    func openWithdrawRecodeList(_ assetId: String) {
+    func openWithdrawRecodeList(_ assetName: String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
             vc.recordType = .WITHDRAW
-            vc.assetInfo = appData.assetInfo[assetId]
+            vc.assetName = assetName
             self.rootVC.pushViewController(vc, animated: true)
         }
     }

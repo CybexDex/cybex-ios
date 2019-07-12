@@ -18,7 +18,7 @@ protocol RechargeRecodeCoordinatorProtocol {
 protocol RechargeRecodeStateManagerProtocol {
     var state: RechargeRecodeState { get }
 
-    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, assetId: String, callback:@escaping (Bool) -> Void)
+    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, callback:@escaping (Bool) -> Void)
 
     func setAssetAction(_ asset: String)
 
@@ -73,7 +73,6 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
                                  size: Int,
                                  offset: Int,
                                  expiration: Int,
-                                 assetId: String,
                                  callback:@escaping (Bool) -> Void) {
         guard let setting = AppConfiguration.shared.enableSetting.value else {
             callback(false)

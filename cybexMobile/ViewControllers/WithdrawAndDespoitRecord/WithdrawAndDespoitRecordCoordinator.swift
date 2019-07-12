@@ -74,16 +74,9 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                     switch index {
                     case .asset:
                         if info == R.string.localizable.openedAll.key.localized() {
-                            childVC.assetInfo = nil
+                            childVC.assetName = ""
                         } else {
-                            var assetInfo: AssetInfo?
-                            for (_, value) in appData.assetInfo {
-                                if value.symbol.filterSystemPrefix == info.filterSystemPrefix {
-                                    assetInfo = value
-                                    break
-                                }
-                            }
-                            childVC.assetInfo = assetInfo
+                            childVC.assetName = info
                         }
                         break
                     case .foudType:

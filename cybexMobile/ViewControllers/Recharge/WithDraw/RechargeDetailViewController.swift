@@ -64,7 +64,7 @@ class RechargeDetailViewController: BaseViewController {
             self.title = tradeInfo.symbol.filterSystemPrefix + R.string.localizable.recharge_title.key.localized()
             
             self.startLoading()
-            self.coordinator?.fetchWithDrawInfoData(tradeInfo.symbol.filterSystemPrefix)
+            self.coordinator?.fetchWithDrawInfoData(trade.name)
         }
         
         setupUI()
@@ -92,7 +92,7 @@ class RechargeDetailViewController: BaseViewController {
     }
     
     override func rightAction(_ sender: UIButton) {
-        self.coordinator?.openWithdrawRecodeList((self.trade?.id)!)
+        self.coordinator?.openWithdrawRecodeList((self.trade?.name)!)
     }
     
     func setupKeyboardEvent() {
@@ -165,11 +165,9 @@ class RechargeDetailViewController: BaseViewController {
                         return
                     }
 
-                    if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-                        let assetName = tradeInfo.symbol.filterSystemPrefix
-
+                    if let trade = self.trade {
                         self.contentView.addressView.addressState = .loading
-                        RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
+                        RechargeDetailCoordinator.verifyAddress(trade.name, address: address, callback: { (success) in
                             if success {
                                 self.isTrueAddress = true
                                 self.contentView.addressView.addressState = .success

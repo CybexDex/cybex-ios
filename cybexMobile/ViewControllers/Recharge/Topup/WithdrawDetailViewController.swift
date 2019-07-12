@@ -56,28 +56,27 @@ class WithdrawDetailViewController: BaseViewController {
                 showToastBox(false, message: errorMsg)
             }
         } else {
-            if let balance = self.trade?.id, let name = appData.assetInfo[balance]?.symbol.filterSystemPrefix {
-                if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
-                    if #available(iOS 11.0, *) {
-                        if !UserManager.shared.checkExistCloudPassword() {
-                            showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
-                        } else {
-                            showPasswordBox()
-                        }
+            if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
+                if #available(iOS 11.0, *) {
+                    if !UserManager.shared.checkExistCloudPassword() {
+                        showPureContentConfirm(R.string.localizable.confirm_hint_title.key.localized(), ensureButtonLocali: R.string.localizable.enotes_feature_add.key, content: R.string.localizable.enotes_feature_hint.key, tag: R.string.localizable.enotes_feature_hint.key.localized())
+                    } else {
+                        showPasswordBox()
                     }
-                } else if UserManager.shared.isLocked {
-                    showPasswordBox()
-                } else {
-                    self.startLoading()
+                }
+            } else if UserManager.shared.isLocked {
+                showPasswordBox()
+            } else {
+                self.startLoading()
+                if let name = self.trade?.name {
                     self.coordinator?.fetchDepositAddress(name)
                 }
-
             }
         }
     }
     
     override func rightAction(_ sender: UIButton) {
-        self.coordinator?.openDepositRecode((self.trade?.id)!)
+        self.coordinator?.openDepositRecode((self.trade?.name)!)
     }
     
     override func configureObserveState() {
@@ -113,8 +112,9 @@ class WithdrawDetailViewController: BaseViewController {
         }
         startLoading()
         self.isFetching = true
-        let name = appData.assetInfo[(self.trade?.id)!]?.symbol.filterSystemPrefix
-        self.coordinator?.resetDepositAddress(name!)
+        if let name = self.trade?.name {
+            self.coordinator?.resetDepositAddress(name)
+        }
     }
 }
 
@@ -206,7 +206,7 @@ extension WithdrawDetailViewController {
         self.endLoading()
 
         if passed {
-            if let balance = self.trade?.id, let name = appData.assetInfo[balance]?.symbol.filterSystemPrefix {
+            if let name = self.trade?.name {
                 self.startLoading()
                 self.coordinator?.fetchDepositAddress(name)
             }
