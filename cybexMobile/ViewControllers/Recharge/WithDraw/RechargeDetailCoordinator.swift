@@ -118,7 +118,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             Gateway2Service.request(target: .asset(name: assetName), success: { (json) in
                 if let model = GatewayAssetResponseModel.deserialize(from: json.dictionaryObject) {
                     GatewayService.Config.gateway2ID = model.withdrawPrefix
-                    let info = WithdrawinfoObject(minValue: model.minWithdraw.double()!, fee: model.withdrawFee.double()!, type: "", asset: "", gatewayAccount: model.gatewayAccount, precision: model.precision.int!)
+                    let info = WithdrawinfoObject(minValue: model.minWithdraw.double() ?? 0, fee: model.withdrawFee.double() ?? 0, type: "", asset: "", gatewayAccount: model.gatewayAccount, precision: model.precision.int ?? 0)
                     
                     self.getWithdrawAccountInfo(info.gatewayAccount)
                     self.store.dispatch(FetchWithdrawInfo(data: info))

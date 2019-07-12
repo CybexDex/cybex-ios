@@ -44,9 +44,9 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
                     let info = AccountAddressRecord(accountName: name, address: json["address"].stringValue, asset: assetName)
                     self.store.dispatch(FetchAddressInfo(data: info))
                 }, error: { (_) in
-
+                    self.state.data.accept(nil)
                 }) { (_) in
-
+                    self.state.data.accept(nil)
                 }
                 return
             }
