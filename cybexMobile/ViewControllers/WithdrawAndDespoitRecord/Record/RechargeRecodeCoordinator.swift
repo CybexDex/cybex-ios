@@ -91,11 +91,11 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
                     let model = GatewayTransactionResponseModel.deserialize(from: record.dictionaryObject)!
                     var oldRecord = Record()
                     oldRecord.address = model.outAddr
-                    if let assetID = AssetHelper.getAssetId(model.asset) {
+                    if let assetID = AssetHelper.getAssetId(model.cybexAsset.filterSystemPrefix) {
                         let amount = AssetHelper.setRealAmount(assetID, amount: model.totalAmount).intValue
                         oldRecord.amount = amount
                     }
-                    oldRecord.asset = model.asset
+                    oldRecord.asset = model.cybexAsset.filterSystemPrefix
                     oldRecord.fundType = model.type
                     oldRecord.state = model.status.rawValue.lowercased()
                     oldRecord.updateAt = model.updatedAt

@@ -42,6 +42,7 @@ struct GatewayTransactionResponseModel: HandyJSON {
     var asset: String = ""
     var totalAmount: String = ""
     var amount: String = ""
+    var cybexAsset: String = ""
     var status: GateWayTransactionStatus = .pending
     var fee: String = ""
     var updatedAt: Date!
