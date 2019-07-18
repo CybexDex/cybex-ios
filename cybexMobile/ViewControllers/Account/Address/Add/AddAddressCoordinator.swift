@@ -22,7 +22,7 @@ protocol AddAddressCoordinatorProtocol {
 protocol AddAddressStateManagerProtocol {
     var state: AddAddressState { get }
 
-    func verityAddress(_ address: String, type: AddressType)
+    func verityAddress(_ address: String, type: AddressType, name: String)
 
     func setAsset(_ asset: String)
 
@@ -63,7 +63,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
         return store.state
     }
 
-    func verityAddress(_ address: String, type: AddressType) {
+    func verityAddress(_ address: String, type: AddressType, name: String) {
         switch type {
         case .transfer:
 
@@ -75,13 +75,10 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
             }).cauterize()
 
         case .withdraw:
-            if let assetInfo = appData.assetInfo[self.state.asset.value] {
-
-                RechargeDetailCoordinator.verifyAddress(assetInfo.symbol.filterSystemPrefix, address: address, callback: { (isSuccess) in
-                    self.store.dispatch(VerificationAddressAction(success: isSuccess))
-                    self.store.dispatch(SetAddressAction(data: address))
-                })
-            }
+            RechargeDetailCoordinator.verifyAddress(name, address: address, callback: { (isSuccess) in
+                self.store.dispatch(VerificationAddressAction(success: isSuccess))
+                self.store.dispatch(SetAddressAction(data: address))
+            })
         }
     }
 

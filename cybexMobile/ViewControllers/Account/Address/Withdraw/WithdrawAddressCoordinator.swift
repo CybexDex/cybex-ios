@@ -79,6 +79,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
                     vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
                     vc.addressType = .withdraw
                     vc.asset = id
+                    vc.name = viewmodel.viewModel.model.name
                     vc.needTag = viewmodel.viewModel.model.tag
                     self.rootVC.pushViewController(vc, animated: true)
                 }
