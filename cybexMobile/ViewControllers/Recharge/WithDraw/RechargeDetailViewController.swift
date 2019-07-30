@@ -225,13 +225,13 @@ class RechargeDetailViewController: BaseViewController {
                     let trade = self.trade {
                     if address.isEmpty == false {
                         if self.isTrueAddress == true {
-                            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
-                            self.coordinator?.chooseOrAddAddress(withdrawAddress)
+                            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: trade.name, address: address, currency: trade.id, memo: memo)
+                            self.coordinator?.chooseOrAddAddress(withdrawAddress, needTag: trade.tag)
                         }
                     }
                     else {
-                        let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
-                        self.coordinator?.chooseOrAddAddress(withdrawAddress)
+                        let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: trade.name, address: address, currency: trade.id, memo: memo)
+                        self.coordinator?.chooseOrAddAddress(withdrawAddress, needTag: trade.tag)
                     }
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -489,8 +489,8 @@ extension RechargeDetailViewController {
         if let address = self.contentView.addressView.content.text,
             let memo = self.contentView.memoView.content.text,
             let trade = self.trade {
-            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
-            self.coordinator?.openAddAddressWithAddress(withdrawAddress)
+            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: trade.name, address: address, currency: trade.id, memo: memo)
+            self.coordinator?.openAddAddressWithAddress(withdrawAddress, needTag: trade.tag)
         }
     }
 }

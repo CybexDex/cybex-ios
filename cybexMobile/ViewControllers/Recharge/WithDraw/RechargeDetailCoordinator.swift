@@ -15,7 +15,7 @@ import cybex_ios_core_cpp
 protocol RechargeDetailCoordinatorProtocol {
     func pop()
     func openWithdrawRecodeList(_ assetName: String)
-    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress)
+    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress, needTag: Bool)
 }
 
 protocol RechargeDetailStateManagerProtocol {
@@ -33,7 +33,7 @@ protocol RechargeDetailStateManagerProtocol {
                     callback:@escaping (Any) -> Void)
     func getFinalAmount(feeId: String, amount: Decimal, available: Decimal) -> (Decimal, String)
 
-    func chooseOrAddAddress(_ sender: WithdrawAddress)
+    func chooseOrAddAddress(_ sender: WithdrawAddress, needTag: Bool)
     func fetchDepositWriteInfo(_ assetId: String)
 }
 
@@ -50,12 +50,14 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         self.rootVC.popViewController(animated: true)
     }
 
-    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress) {
+    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress, needTag: Bool) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
             vc.withdrawAddress = withdrawAddress
             vc.asset = withdrawAddress.currency
             vc.popActionType = .selectVC
+            vc.needTag = needTag
+            vc.name = withdrawAddress.name
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -92,12 +94,14 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         }
     }
 
-    func openAddAddress(_ withdrawAddress: WithdrawAddress) {
+    func openAddAddress(_ withdrawAddress: WithdrawAddress, needTag: Bool) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
             vc.addressType = .withdraw
             vc.withdrawAddress = withdrawAddress
             vc.asset = withdrawAddress.currency
+            vc.needTag = needTag
+            vc.name = withdrawAddress.name
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -265,9 +269,9 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         return (finalAmount, requestAmount)
     }
 
-    func chooseOrAddAddress(_ sender: WithdrawAddress) {
+    func chooseOrAddAddress(_ sender: WithdrawAddress, needTag:Bool) {
         if AddressManager.shared.getWithDrawAddressListWith(sender.currency).count == 0 {
-            self.openAddAddress(sender)
+            self.openAddAddress(sender, needTag: needTag)
         } else {
             showPicker(sender.currency)
         }
