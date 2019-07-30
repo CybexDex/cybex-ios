@@ -64,7 +64,7 @@ class RechargeDetailViewController: BaseViewController {
             self.title = tradeInfo.symbol.filterSystemPrefix + R.string.localizable.recharge_title.key.localized()
             
             self.startLoading()
-            self.coordinator?.fetchWithDrawInfoData(tradeInfo.symbol.filterSystemPrefix)
+            self.coordinator?.fetchWithDrawInfoData(trade.name)
         }
         
         setupUI()
@@ -92,7 +92,7 @@ class RechargeDetailViewController: BaseViewController {
     }
     
     override func rightAction(_ sender: UIButton) {
-        self.coordinator?.openWithdrawRecodeList((self.trade?.id)!)
+        self.coordinator?.openWithdrawRecodeList((self.trade?.name)!)
     }
     
     func setupKeyboardEvent() {
@@ -165,11 +165,9 @@ class RechargeDetailViewController: BaseViewController {
                         return
                     }
 
-                    if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-                        let assetName = tradeInfo.symbol.filterSystemPrefix
-
+                    if let trade = self.trade {
                         self.contentView.addressView.addressState = .loading
-                        RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
+                        RechargeDetailCoordinator.verifyAddress(trade.name, address: address, callback: { (success) in
                             if success {
                                 self.isTrueAddress = true
                                 self.contentView.addressView.addressState = .success
@@ -227,13 +225,13 @@ class RechargeDetailViewController: BaseViewController {
                     let trade = self.trade {
                     if address.isEmpty == false {
                         if self.isTrueAddress == true {
-                            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
-                            self.coordinator?.chooseOrAddAddress(withdrawAddress)
+                            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: trade.name, address: address, currency: trade.id, memo: memo)
+                            self.coordinator?.chooseOrAddAddress(withdrawAddress, needTag: trade.tag)
                         }
                     }
                     else {
-                        let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
-                        self.coordinator?.chooseOrAddAddress(withdrawAddress)
+                        let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: trade.name, address: address, currency: trade.id, memo: memo)
+                        self.coordinator?.chooseOrAddAddress(withdrawAddress, needTag: trade.tag)
                     }
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -247,11 +245,13 @@ class RechargeDetailViewController: BaseViewController {
         
         setupEndEditingEvent()
         self.coordinator?.state.withdrawAddress.asObservable().subscribe(onNext: { [weak self](address) in
-            guard let self = self, let address = address else { return }
+            guard let self = self, let trade = self.trade, let address = address else { return }
             self.contentView.addressView.content.text = address.address
             self.contentView.addressView.addressState = .success
             self.contentView.memoView.content.text = address.memo
             self.isTrueAddress = true
+            self.coordinator?.getFee(trade.id, address: address.address, tag: trade.tag)
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     }
@@ -331,7 +331,7 @@ class RechargeDetailViewController: BaseViewController {
         guard let text = self.contentView.amountView.content.text, let amount = Decimal(string: text) else { return }
         guard let (finalAmount, requireAmount) = self.coordinator?.getFinalAmount(feeId: self.feeAssetId, amount: amount, available: self.available) else { return }
         self.requireAmount = requireAmount
-        guard finalAmount > 0,
+        guard finalAmount >= 0,
             let balance = self.balance,
             let balanceInfo = appData.assetInfo[balance.assetType],
             let precision = self.precision else { return }
@@ -489,8 +489,8 @@ extension RechargeDetailViewController {
         if let address = self.contentView.addressView.content.text,
             let memo = self.contentView.memoView.content.text,
             let trade = self.trade {
-            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
-            self.coordinator?.openAddAddressWithAddress(withdrawAddress)
+            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: trade.name, address: address, currency: trade.id, memo: memo)
+            self.coordinator?.openAddAddressWithAddress(withdrawAddress, needTag: trade.tag)
         }
     }
 }

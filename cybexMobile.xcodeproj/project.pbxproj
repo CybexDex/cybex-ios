@@ -719,6 +719,7 @@
 		73D9C15521DF15CE005B9022 /* MarketDetailPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */; };
 		73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9C20C21E5CC46005B9022 /* TangramKit.framework */; };
 		73D9C21421E5EBD5005B9022 /* DepolyTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */; };
+		73E3FF7122B78BF400151F51 /* NodesURLSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E3FF7022B78BF400151F51 /* NodesURLSetting.swift */; };
 		73E61F6821F9B3AD00B54612 /* PostVestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6721F9B3AD00B54612 /* PostVestingView.swift */; };
 		73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */; };
 		73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */; };
@@ -1636,6 +1637,7 @@
 		73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailPageTabViewController.swift; sourceTree = "<group>"; };
 		73D9C20C21E5CC46005B9022 /* TangramKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TangramKit.framework; path = Carthage/Build/iOS/TangramKit.framework; sourceTree = "<group>"; };
 		73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepolyTicketViewController.swift; sourceTree = "<group>"; };
+		73E3FF7022B78BF400151F51 /* NodesURLSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodesURLSetting.swift; sourceTree = "<group>"; };
 		73E61F6721F9B3AD00B54612 /* PostVestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVestingView.swift; sourceTree = "<group>"; };
 		73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostVestingView+Layout.swift"; sourceTree = "<group>"; };
 		73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPageTabViewController.swift; sourceTree = "<group>"; };
@@ -2461,6 +2463,7 @@
 			isa = PBXGroup;
 			children = (
 				D6641FBBE1138F95A426447E21E05B55 /* Account.swift */,
+				73E3FF7022B78BF400151F51 /* NodesURLSetting.swift */,
 				ABA998072FECB6775C8C12638DB4F7B0 /* AssetInfo.swift */,
 				D5DBC2C0B93A30F13528E542DFB9D0A4 /* Balance.swift */,
 				9037BC25051001E9F8FCE16E650544D1 /* Bucket.swift */,
@@ -5389,6 +5392,7 @@
 				D97554A68B333ECF6F33B4558E08E005 /* MyHistoryCell.swift in Sources */,
 				72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */,
 				E432C445702EFB8154F16B502E4EE186 /* MyHistoryCellView.swift in Sources */,
+				73E3FF7122B78BF400151F51 /* NodesURLSetting.swift in Sources */,
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				73B4782D222CEB8E00189632 /* Cert.swift in Sources */,
 				406AB4BA0BF043D771D15D751F7AB45D /* MyHistoryReducers.swift in Sources */,

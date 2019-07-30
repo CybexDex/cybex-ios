@@ -23,6 +23,7 @@ class AddAddressViewController: BaseViewController {
     var coordinator: (AddAddressCoordinatorProtocol & AddAddressStateManagerProtocol)?
     var addressType: AddressType = .withdraw
     var asset: String = ""
+    var name: String = ""
     var withdrawAddress: WithdrawAddress?
     var transferAddress: TransferAddress?
     var popActionType: PopType = .normal
@@ -97,7 +98,7 @@ class AddAddressViewController: BaseViewController {
                     return
                 }
                 self.containerView.addressState = .loading
-                self.coordinator?.verityAddress(text.trimmed, type: self.addressType)
+                self.coordinator?.verityAddress(text.trimmed, type: self.addressType, name: self.name)
             } else {
                 self.containerView.addressState = .normal
                 self.coordinator?.veritiedAddress(false)

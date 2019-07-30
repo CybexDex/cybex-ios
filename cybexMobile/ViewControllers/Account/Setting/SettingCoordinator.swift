@@ -59,6 +59,8 @@ extension SettingCoordinator: SettingStateManagerProtocol {
     func changeEnveronment() {
         UserManager.shared.logout()
 
+        AppConfiguration.shared.nodes.accept(nil)
+        
         CybexWebSocketService.shared.disconnect()
         CybexConfiguration.shared.chainID.accept("")
         AppConfiguration.shared.enableSetting.accept(nil)
@@ -69,7 +71,6 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         CybexWebSocketService.shared.canSendMessageReactive.accept(false)
         appData.tickerData.accept([])
 
-        CybexWebSocketService.shared.connect()
 
         if let del = UIApplication.shared.delegate as? AppDelegate {
             del.checkSetting()

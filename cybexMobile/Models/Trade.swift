@@ -43,9 +43,7 @@ struct Trade: HandyJSON {
     var tag: Bool = false
     var enMsg: String = ""
     var cnMsg: String = ""
-    var enInfo: String = ""
-    var cnInfo: String = ""
-    var amount: String = "0"
+    var name: String = ""
     var projectName: String = ""
 }
 

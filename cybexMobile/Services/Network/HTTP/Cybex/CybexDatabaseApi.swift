@@ -25,7 +25,7 @@ struct CybexDatabaseApiService {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://hongkong.cybex.io")! // https://hongkong.cybex.io
         static let devURL = URL(string: "https://hangzhou.51nebula.com")! //http://47.100.98.113:38090
-        static let uatURL = URL(string: "http://47.100.98.113:38090")!
+        static var uatURL = URL(string: "http://47.100.98.113:38090")!
     }
 
     static let provider = MoyaProvider<DatabaseApi>(callbackQueue: nil, manager: defaultManager(),
@@ -150,9 +150,12 @@ extension DatabaseApi : TargetType {
     var task: Task {
         switch self {
         default:
-            return .requestCompositeParameters(bodyParameters: parameters,
-                                               bodyEncoding: JSONEncoding.default,
-                                               urlParameters: urlParameters)
+            if method == .get {
+                return .requestParameters(parameters: urlParameters, encoding: URLEncoding.default)
+            } else {
+                return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            }
+
         }
     }
 

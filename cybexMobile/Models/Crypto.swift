@@ -15,11 +15,11 @@ class AccountKeys: HandyJSON {
     var memoKey: Key?
 
     var pubKeys: [String] {
-        return [memoKey, ownerKey, activeKey].compactMap({ $0?.publicKey })
+        return [activeKey, memoKey, ownerKey].compactMap({ $0?.publicKey })
     }
 
     var keys: [Key] {
-        return [memoKey, ownerKey, activeKey].compactMap({ $0 })
+        return [activeKey, memoKey, ownerKey].compactMap({ $0 })
     }
 
     required init() {

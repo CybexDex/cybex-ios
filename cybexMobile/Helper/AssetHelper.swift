@@ -16,6 +16,22 @@ class AssetHelper {
         return nil
     }
 
+    class func getPrecisionWith(_ assetName: String) -> Int? {
+        if let assetID = getAssetId(assetName) {
+            return getPrecision(assetID)
+        }
+
+        return nil
+    }
+
+    class func getAssetId(_ assetName: String) -> String? {
+        if let assetId = appData.assetNameToIds.value[assetName] {
+            return assetId
+        }
+
+        return nil
+    }
+
     class func singleAssetRMBPrice(_ assetID: String) -> Decimal {
         if let baseAsset = AssetConfiguration.CybexAsset(assetID), MarketConfiguration.marketBaseAssets.contains(baseAsset) {
             return AssetConfiguration.shared.rmbOf(asset: baseAsset)

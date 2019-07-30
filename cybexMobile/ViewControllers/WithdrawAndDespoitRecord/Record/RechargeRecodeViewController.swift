@@ -16,10 +16,7 @@ class RechargeRecodeViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var coordinator: (RechargeRecodeCoordinatorProtocol & RechargeRecodeStateManagerProtocol)?
 
-    var assetInfo: AssetInfo? {
-        didSet {
-        }
-    }
+    var assetName: String = ""
     var data: [Record] = [Record]()
     var isNoMoreData: Bool = false
     var recordType: FundType = .ALL {
@@ -103,12 +100,11 @@ class RechargeRecodeViewController: BaseViewController {
         startLoading()
         if let name = UserManager.shared.name.value {
             self.coordinator?.fetchRechargeRecodeList(name,
-                                                      asset: self.assetInfo?.symbol ?? "",
+                                                      asset: assetName,
                                                       fundType: recordType,
                                                       size: 20,
                                                       offset: offset,
                                                       expiration: Int(Date().timeIntervalSince1970 + 600),
-                                                      assetId: self.assetInfo?.id ?? "",
                                                       callback: { [weak self] success in
 
                 guard let self = self else {return}

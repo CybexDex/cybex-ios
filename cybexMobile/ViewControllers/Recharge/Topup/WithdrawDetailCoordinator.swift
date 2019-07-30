@@ -15,7 +15,7 @@ import SwiftyJSON
 protocol WithdrawDetailCoordinatorProtocol {
     func fetchDepositAddress(_ assetName: String)
     func resetDepositAddress(_ assetName: String)
-    func openDepositRecode(_ assetId: String)
+    func openDepositRecode(_ assetName: String)
     func fetchDepositWordInfo(_ assetId: String)
 }
 
@@ -34,6 +34,23 @@ class WithdrawDetailCoordinator: NavCoordinator {
 extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     func fetchDepositAddress(_ assetName: String) {
         if let name = UserManager.shared.name.value {
+            guard let setting = AppConfiguration.shared.enableSetting.value else {
+                return
+            }
+
+            let gateway2 = setting.gateWay2
+            if gateway2 {
+                Gateway2Service.request(target: .topUPAddress(assetName: assetName, userName: name), success: { (json) in
+                    let info = AccountAddressRecord(accountName: name, address: json["address"].stringValue, asset: assetName)
+                    self.store.dispatch(FetchAddressInfo(data: info))
+                }, error: { (_) in
+                    self.state.data.accept(nil)
+                }) { (_) in
+                    self.state.data.accept(nil)
+                }
+                return
+            }
+
             GatewayService().getDepositAddress(accountName: name, assetName: assetName).done { (data) in
                 if case let data? = data {
                     self.store.dispatch(FetchAddressInfo(data: data))
@@ -56,10 +73,10 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
         }
     }
 
-    func openDepositRecode(_ assetId: String) {
+    func openDepositRecode(_ assetName: String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.recordType = .DEPOSIT
-            vc.assetInfo = appData.assetInfo[assetId]
+            vc.assetName = assetName
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
         }

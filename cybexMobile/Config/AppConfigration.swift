@@ -47,7 +47,7 @@ class AppConfiguration {
     static let shared = AppConfiguration()
 
     var enableSetting: BehaviorRelay<AppEnableSetting?> = BehaviorRelay(value: nil)
-    var nodes: BehaviorRelay<JSON?> = BehaviorRelay(value: nil)
+    var nodes: BehaviorRelay<NodesURLSettingModel?> = BehaviorRelay(value: nil)
 
     var rmbPrices: BehaviorRelay<[RMBPrices]> = BehaviorRelay(value: [])
 
@@ -59,6 +59,7 @@ class AppConfiguration {
     static let amountPrecision = 2
 
     static let debounceDisconnectTime = 10
+    static let autoLockWalletInbackground = 60 * 5
 
     private init() {
         let rootVC = BaseTabbarViewController()
@@ -83,7 +84,7 @@ class AppConfiguration {
 extension AppConfiguration {
     func fetchAppEnableSettingRequest() {
         AppService.request(target: .setting, success: { (json) in
-            let model = AppEnableSetting.deserialize(from: json.dictionaryObject)
+            var model = AppEnableSetting.deserialize(from: json.dictionaryObject)
 //            model?.isETOEnabled = true
 //            model?.contestEnabled = true
             self.enableSetting.accept(model)
@@ -132,13 +133,78 @@ extension AppConfiguration {
 
     func fetchNodes() {
         AppService.request(target: AppAPI.nodesURL, success: { (json) in
-            if let _ = json["nodes"].arrayObject, let _ = json["mdp"].string, let _ = json["limit_order"].string {
-                self.nodes.accept(json)
+            if let model = NodesURLSettingModel.deserialize(from: json.dictionaryObject) {
+                self.nodes.accept(model)
             }
         }, error: { (_) in
             self.nodes.accept(nil)
         }) { (_) in
             self.nodes.accept(nil)
+        }
+    }
+
+    func switchNetworkNode() {
+        let node = nodes.value!
+
+        if AppEnv.current == .product {
+            let nodes = [node.nodes].flatMapped(with: String.self)
+            CybexWebSocketService.Config.productURL = nodes.map({ URL(string: $0)! })
+
+            let mdps = [node.mdp].flatMapped(with: String.self)
+            MDPWebSocketService.Config.productURL = mdps.map({ URL(string: $0)! })
+
+            let limitOrders = [node.limitOrder].flatMapped(with: String.self)
+            OCOWebSocketService.Config.productURL = limitOrders.map({ URL(string: $0)! })
+
+            ETOMGService.Config.productURL = URL(string: node.eto)!
+            let connected = CybexWebSocketService.shared.checkNetworConnected()
+            if !connected {
+                CybexWebSocketService.shared.connect()
+            }
+
+            GatewayService.Config.productURL = URL(string: node.gateway1)!
+            GatewayQueryService.Config.productURL = URL(string: node.gateway1Query)!
+            Gateway2Service.Config.productURL = URL(string: node.gateway2)!
+        }
+        else if AppEnv.current == .uat {
+            let nodes = [node.nodes].flatMapped(with: String.self)
+            CybexWebSocketService.Config.uatURL = nodes.map({ URL(string: $0)! })
+
+            let mdps = [node.mdp].flatMapped(with: String.self)
+            MDPWebSocketService.Config.uatURL = mdps.map({ URL(string: $0)! })
+
+            let limitOrders = [node.limitOrder].flatMapped(with: String.self)
+            OCOWebSocketService.Config.uatURL = limitOrders.map({ URL(string: $0)! })
+
+            ETOMGService.Config.uatURL = URL(string: node.eto)!
+            let connected = CybexWebSocketService.shared.checkNetworConnected()
+            if !connected {
+                CybexWebSocketService.shared.connect()
+            }
+
+            GatewayService.Config.uatURL = URL(string: node.gateway1)!
+            GatewayQueryService.Config.uatURL = URL(string: node.gateway1Query)!
+            Gateway2Service.Config.uatURL = URL(string: node.gateway2)!
+        }
+        else if AppEnv.current == .test {
+            let nodes = [node.nodes].flatMapped(with: String.self)
+            CybexWebSocketService.Config.devURL = nodes.map({ URL(string: $0)! })
+
+            let mdps = [node.mdp].flatMapped(with: String.self)
+            MDPWebSocketService.Config.devURL = mdps.map({ URL(string: $0)! })
+
+            let limitOrders = [node.limitOrder].flatMapped(with: String.self)
+            OCOWebSocketService.Config.devURL = limitOrders.map({ URL(string: $0)! })
+
+            ETOMGService.Config.devURL = URL(string: node.eto)!
+            let connected = CybexWebSocketService.shared.checkNetworConnected()
+            if !connected {
+                CybexWebSocketService.shared.connect()
+            }
+
+            GatewayService.Config.devURL = URL(string: node.gateway1)!
+            GatewayQueryService.Config.devURL = URL(string: node.gateway1Query)!
+            Gateway2Service.Config.devURL = URL(string: node.gateway2)!
         }
     }
 }

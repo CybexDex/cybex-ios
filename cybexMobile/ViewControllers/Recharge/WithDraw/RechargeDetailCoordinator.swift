@@ -14,8 +14,8 @@ import cybex_ios_core_cpp
 
 protocol RechargeDetailCoordinatorProtocol {
     func pop()
-    func openWithdrawRecodeList(_ assetId: String)
-    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress)
+    func openWithdrawRecodeList(_ assetName: String)
+    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress, needTag: Bool)
 }
 
 protocol RechargeDetailStateManagerProtocol {
@@ -33,7 +33,7 @@ protocol RechargeDetailStateManagerProtocol {
                     callback:@escaping (Any) -> Void)
     func getFinalAmount(feeId: String, amount: Decimal, available: Decimal) -> (Decimal, String)
 
-    func chooseOrAddAddress(_ sender: WithdrawAddress)
+    func chooseOrAddAddress(_ sender: WithdrawAddress, needTag: Bool)
     func fetchDepositWriteInfo(_ assetId: String)
 }
 
@@ -50,21 +50,23 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         self.rootVC.popViewController(animated: true)
     }
 
-    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress) {
+    func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress, needTag: Bool) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
             vc.withdrawAddress = withdrawAddress
             vc.asset = withdrawAddress.currency
             vc.popActionType = .selectVC
+            vc.needTag = needTag
+            vc.name = withdrawAddress.name
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
 
-    func openWithdrawRecodeList(_ assetId: String) {
+    func openWithdrawRecodeList(_ assetName: String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
             vc.recordType = .WITHDRAW
-            vc.assetInfo = appData.assetInfo[assetId]
+            vc.assetName = assetName
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -92,12 +94,14 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         }
     }
 
-    func openAddAddress(_ withdrawAddress: WithdrawAddress) {
+    func openAddAddress(_ withdrawAddress: WithdrawAddress, needTag: Bool) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
             vc.addressType = .withdraw
             vc.withdrawAddress = withdrawAddress
             vc.asset = withdrawAddress.currency
+            vc.needTag = needTag
+            vc.name = withdrawAddress.name
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -109,6 +113,28 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
     func fetchWithDrawInfoData(_ assetName: String) {
+        guard let setting = AppConfiguration.shared.enableSetting.value else {
+            return
+        }
+
+        let gateway2 = setting.gateWay2
+        if gateway2 {
+            Gateway2Service.request(target: .asset(name: assetName), success: { (json) in
+                if let model = GatewayAssetResponseModel.deserialize(from: json.dictionaryObject) {
+                    GatewayService.Config.gateway2ID = model.withdrawPrefix
+                    let info = WithdrawinfoObject(minValue: model.minWithdraw.double() ?? 0, fee: model.withdrawFee.double() ?? 0, type: "", asset: "", gatewayAccount: model.gatewayAccount, precision: model.precision.int ?? 0)
+                    
+                    self.getWithdrawAccountInfo(info.gatewayAccount)
+                    self.store.dispatch(FetchWithdrawInfo(data: info))
+                }
+            }, error: { (_) in
+
+            }) { (_) in
+                
+            }
+            return
+        }
+
         GatewayService().getWithdrawInfo(assetName: assetName).done { (data) in
             if case let data? = data {
                 self.getWithdrawAccountInfo(data.gatewayAccount)
@@ -120,7 +146,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     func getWithdrawAccountInfo(_ userID: String) {
         let requeset = GetFullAccountsRequest(name: userID) { (response) in
             if let data = response as? FullAccount, let account = data.account {
-                self.store.dispatch(FetchWithdrawMemokey(data: account.memoKey))
+                self.store.dispatch(FetchWithdrawMemokey(memoKey: account.memoKey, gatewayUid: account.id))
             }
         }
         CybexWebSocketService.shared.send(request: requeset)
@@ -155,6 +181,21 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
    class func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void) {
+        guard let setting = AppConfiguration.shared.enableSetting.value else {
+            return
+        }
+
+        let gateway2 = setting.gateWay2
+        if gateway2 {
+            Gateway2Service.request(target: .validateAddress(assetName: assetName, address: address), success: { (json) in
+                callback(json["valid"].boolValue)
+            }, error: { (_) in
+                callback(false)
+            }) { (_) in
+                callback(false)
+            }
+            return
+        }
         GatewayService().verifyAddress(assetName: assetName, address: address).done { (data) in
             if case let data? = data {
                 callback(data.valid)
@@ -187,7 +228,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                  expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                  chain_id: CybexConfiguration.shared.chainID.value,
                                                                  from_user_id: uid.getSuffixID,
-                                                                 to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
+                                                                 to_user_id: self.state.gatewayUid.value!.getSuffixID,
                                                                  asset_id: assetId.getSuffixID,
                                                                  receive_asset_id: assetId.getSuffixID,
                                                                  amount: amount.int64Value,
@@ -198,9 +239,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                  to_memo_key: memoKey)
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                     callback(data)
-                    if String(describing: data) != "<null>"{
-                        Log.fail(data)
-                    }
                 }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)
             }
@@ -231,9 +269,9 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         return (finalAmount, requestAmount)
     }
 
-    func chooseOrAddAddress(_ sender: WithdrawAddress) {
+    func chooseOrAddAddress(_ sender: WithdrawAddress, needTag:Bool) {
         if AddressManager.shared.getWithDrawAddressListWith(sender.currency).count == 0 {
-            self.openAddAddress(sender)
+            self.openAddAddress(sender, needTag: needTag)
         } else {
             showPicker(sender.currency)
         }

@@ -10,47 +10,23 @@ import Foundation
 import HandyJSON
 
 struct GatewayAssetResponseModel: HandyJSON {
-    var fullName: String = ""
-    var confirmationNums: Int = 0
     var name: String = ""
-    var id: String = ""
+    var projectname: String = ""
+    var cybname: String = ""
+    var cybid: String = ""
+
     var gatewayAccount: String = ""
-    var withdrawSwith: Bool = false
+    var withdrawPrefix: String = ""
     var depositSwitch: Bool = false
-    var withdrawFee: String = ""
+    var withdrawSwitch: Bool = false
+    var minDeposit: String = ""
     var minWithdraw: String = ""
+    var withdrawFee: String = ""
+    var depositFee: String = ""
     var precision: String = ""
-    var info: GatewayAssetInfoResponseModel = GatewayAssetInfoResponseModel()
-
-    mutating func mapping(mapper: HelpingMapper) {
-        mapper <<< fullName                   <-- "blockchain.name"
-        mapper <<< confirmationNums           <-- "blockchain.confirmation"
-    }
-}
-
-struct GatewayAssetInfoResponseModel: HandyJSON {
-    var projectNameCn: String = ""
-    var projectNameEn: String = ""
-
-    var projectAddressCn: String = ""
-    var projectAddressEn: String = ""
-
-    var projectLinkCn: String = ""
-    var projectLinkEn: String = ""
-
-    var enInfo: String = ""
-    var cnInfo: String = ""
-
-    mutating func mapping(mapper: HelpingMapper) {
-        mapper <<< projectNameCn               <-- ("msg_cn", ExportArrayValueTransform(0, key: "value"))
-        mapper <<< projectAddressCn               <-- ("msg_cn", ExportArrayValueTransform(1, key: "value"))
-        mapper <<< projectLinkCn               <-- ("msg_cn", ExportArrayValueTransform(1, key: "link"))
-        mapper <<< projectNameEn               <-- ("msg_en", ExportArrayValueTransform(0, key: "value"))
-        mapper <<< projectAddressEn               <-- ("msg_en", ExportArrayValueTransform(1, key: "value"))
-        mapper <<< projectLinkEn               <-- ("msg_en", ExportArrayValueTransform(1, key: "link"))
-        mapper <<< enInfo               <--  ("notice_en.adds", CombineTextTransform())
-        mapper <<< cnInfo               <-- ("notice_cn.adds", CombineTextTransform())
-    }
+    var hashLink: String = ""
+    var useMemo: Bool = false
+    var info: [String: Any] = [:]
 }
 
 enum GateWayTransactionStatus: String, HandyJSONEnum {
@@ -64,15 +40,19 @@ struct GatewayTransactionResponseModel: HandyJSON {
     var outAddr: String = ""
     var confirms: String = ""
     var asset: String = ""
+    var totalAmount: String = ""
     var amount: String = ""
+    var cybexAsset: String = ""
     var status: GateWayTransactionStatus = .pending
     var fee: String = ""
-    var updateAt: Date!
+    var updatedAt: Date!
     var link: String = ""
+    var outHash: String = ""
+    var type: String = ""
 
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            self.updatedAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss'Z'")
     }
 }
 

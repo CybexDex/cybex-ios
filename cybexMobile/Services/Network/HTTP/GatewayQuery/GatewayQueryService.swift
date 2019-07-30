@@ -36,8 +36,8 @@ enum GatewayQueryAPI {
 struct GatewayQueryService {
     enum Config: NetworkHTTPEnv {
         static var productURL = URL(string: "https://gateway-query.cybex.io")!
-        static let devURL = URL(string: "https://gateway-query.cybex.io")!
-        static let uatURL = URL(string: "http://47.100.98.113:5684")!
+        static var devURL = URL(string: "https://gateway-query.cybex.io")!
+        static var uatURL = URL(string: "http://47.100.98.113:5681/query")!
 
         static let loginExpiration: Double = 600
     }
@@ -148,9 +148,11 @@ extension GatewayQueryAPI: TargetType {
     var task: Task {
         switch self {
         default:
-            return .requestCompositeParameters(bodyParameters: parameters,
-                                               bodyEncoding: JSONEncoding.default,
-                                               urlParameters: urlParameters)
+            if method == .get {
+                return .requestParameters(parameters: urlParameters, encoding: URLEncoding.default)
+            } else {
+                return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            }
         }
     }
 

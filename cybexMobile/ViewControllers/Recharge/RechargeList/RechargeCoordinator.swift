@@ -93,6 +93,10 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
     }
 
     func fetchWithdrawIdsInfo() {
+        if checkAndfetchFromGateway2(true) {
+            return
+        }
+
         AppService.request(target: AppAPI.withdrawList, success: { (json) in
             let list = JSON(json).arrayValue.compactMap({ Trade.deserialize(from: $0.dictionaryObject) })
             self.store.dispatch(FecthWithdrawIds(data: list))
@@ -103,6 +107,9 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
         }
     }
     func fetchDepositIdsInfo() {
+        if checkAndfetchFromGateway2(false) {
+            return
+        }
         AppService.request(target: AppAPI.topUpList, success: { (json) in
             let list = JSON(json).arrayValue.compactMap({ Trade.deserialize(from: $0.dictionaryObject) })
             self.store.dispatch(FecthDepositIds(data: list))
@@ -112,6 +119,47 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
 
         }
     }
+
+    func checkAndfetchFromGateway2(_ withdraw: Bool) -> Bool {
+        guard let setting = AppConfiguration.shared.enableSetting.value else {
+            return false
+        }
+
+        let gateway2 = setting.gateWay2
+        if gateway2 {
+            Gateway2Service.request(target: .assetLists, success: { (json) in
+                let list = JSON(json).arrayValue.compactMap({ GatewayAssetResponseModel.deserialize(from: $0.dictionaryObject) }).map({ (newModel) -> Trade in
+                    var trade = Trade()
+                    trade.name = newModel.name
+                    trade.id = newModel.cybid
+                    trade.projectName = newModel.projectname
+                    trade.enable = withdraw ? newModel.withdrawSwitch : newModel.depositSwitch
+                    if let withdrawDic = newModel.info["withdraw"] as? [String: String],
+                        let depositDic = newModel.info["deposit"] as? [String: String],
+                        let cnMsg = withdraw ? withdrawDic["cnMsg"] : depositDic["cnMsg"],
+                     let enMsg = withdraw ? withdrawDic["enMsg"] : depositDic["enMsg"]{
+                        trade.cnMsg = cnMsg
+                        trade.enMsg = enMsg
+                    }
+
+                    trade.tag = newModel.useMemo
+                    return trade
+                });
+
+                if withdraw {
+                    self.store.dispatch(FecthWithdrawIds(data: list))
+                } else {
+                    self.store.dispatch(FecthDepositIds(data: list))
+                }
+            }, error: { (_) in
+
+            }) { (_) in
+
+            }
+        }
+        return gateway2
+    }
+
     func sortedEmptyAsset(_ isEmpty: Bool) {
         self.store.dispatch(SortedByEmptyAssetAction(data: isEmpty))
     }

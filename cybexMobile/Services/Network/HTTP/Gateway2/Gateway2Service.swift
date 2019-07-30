@@ -25,9 +25,9 @@ enum GatewayAPI {
 
 struct Gateway2Service {
     enum Config: NetworkHTTPEnv {
-        static var productURL = URL(string: "http://47.75.48.121:8181")!
-        static let devURL = URL(string: "http://39.98.58.238:8181")!
-        static let uatURL = URL(string: "http://39.98.58.238:8181")!
+        static var productURL = URL(string: "https://gateway2test.cybex.io")!
+        static var devURL = URL(string: "http://39.98.58.238:8181")!
+        static var uatURL = URL(string: "https://gateway2test.cybex.io")!
     }
 
     static let provider = MoyaProvider<GatewayAPI>(callbackQueue: nil, manager: defaultManager(),
@@ -48,14 +48,14 @@ struct Gateway2Service {
                 do {
                     let response = try response.filterSuccessfulStatusCodes()
                     let json = try JSON(response.mapJSON())
-                    if json["code"].intValue == 200 {
-                        let result = json["data"]
+//                    if json["code"].intValue == 200 {
+//                        let result = json["data"]
 
-                        successCallback(result)
-                    } else {
-                        errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
-                                                                      desc: json["data"]))
-                    }
+                    successCallback(json)
+//                    } else {
+//                        errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue,
+//                                                                      desc: json["data"]))
+//                    }
                 } catch let serverError {
                     if let json = try? JSON(response.mapJSON()) {
                         if json["code"].intValue != 0 {
@@ -99,7 +99,7 @@ extension GatewayAPI: TargetType {
         case let .asset(name: name):
             return apiVersion + "/assets/\(name)"
         case let .validateAddress(assetName: assetName, address: address):
-            return apiVersion + "/assets/\(assetName)/address/\(address)"
+            return apiVersion + "/assets/\(assetName)/address/\(address)/verify"
         case let .topUPAddress(assetName: assetName, userName: userName):
             return apiVersion + "/users/\(userName)/assets/\(assetName)/address"
         case let .transactions(fundType: _, assetName: _, userName: userName, fromId: _):
@@ -119,11 +119,16 @@ extension GatewayAPI: TargetType {
     var urlParameters: [String: Any] {
         switch self {
         case let .transactions(fundType: fundType, assetName: assetName, userName: _, fromId: fromId):
-            if let id = fromId {
-                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName, "lastid": id]
-            } else {
-                return ["fundType": fundType.rawValue.lowercased(), "asset": assetName]
+            var p: [String: Any] = ["asset": assetName, "size": 20]
+
+            if fundType != .ALL {
+                p["fundType"] = fundType.rawValue.lowercased()
             }
+            if let id = fromId {
+                p["lastid"] = id
+            } 
+
+            return p
         default:
             return [:]
         }
@@ -139,10 +144,13 @@ extension GatewayAPI: TargetType {
     var task: Task {
         switch self {
         default:
-            return .requestCompositeParameters(bodyParameters: parameters,
-                                               bodyEncoding: JSONEncoding.default,
-                                               urlParameters: urlParameters)
+            if method == .get {
+                return .requestParameters(parameters: urlParameters, encoding: URLEncoding.default)
+            } else {
+                return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            }
         }
+
     }
 
     var sampleData: Data {
@@ -158,7 +166,8 @@ extension GatewayAPI: TargetType {
             return ""
         }
 
-        let token = BitShareCoordinator.sign("\(time)\(userName)")
+        let token = BitShareCoordinator.sign("\(time)\(userName)").replacingOccurrences(of: "\"", with: "")
+
         let jwt = [time, userName, token]
 
         return jwt.joined(separator: ".")
@@ -169,7 +178,7 @@ extension GatewayAPI: TargetType {
 
         switch self {
         case .topUPAddress, .transactions, .assetsOfTransactions:
-            commonHeader["authorization"] = "bearer " + signer
+            commonHeader["Authorization"] = "Bearer \(signer)"
             return commonHeader
         default:
             return nil

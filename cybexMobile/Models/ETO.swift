@@ -453,4 +453,5 @@ struct AppEnableSetting: HandyJSON {
     var isShareEnabled: Bool = false
     var contestEnabled: Bool = false
     var ageRate: Double = 0
+    var gateWay2: Bool = false
 }
