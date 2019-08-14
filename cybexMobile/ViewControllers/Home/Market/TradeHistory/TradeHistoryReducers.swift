@@ -50,12 +50,12 @@ func convertDataToTradeHistoryViewModel(_ pair:Pair, data: [JSON]) -> [TradeHist
             let receiveVolume = Decimal(string: pay["amount"].stringValue)! / basePrecision
 
             let price = baseVolume / quoteVolume
-            let tradePrice = price.formatCurrency(digitNum: tradePrecision.price)
+            let tradePrice = price.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
             let viewModel = TradeHistoryViewModel(
                 pay: false,
                 price: tradePrice,
-                quoteVolume: payVolume.suffixNumber(digitNum: tradePrecision.amount),
-                baseVolume: receiveVolume.suffixNumber(digitNum: tradePrecision.total),
+                quoteVolume: payVolume.suffixNumber(digitNum: tradePrecision.book.amount.int!),
+                baseVolume: receiveVolume.suffixNumber(digitNum: tradePrecision.book.total.int!),
                 time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
             showData.append(viewModel)
         } else {
@@ -67,12 +67,12 @@ func convertDataToTradeHistoryViewModel(_ pair:Pair, data: [JSON]) -> [TradeHist
 
             let price = baseVolume / quoteVolume
 
-            let tradePrice = price.formatCurrency(digitNum: tradePrecision.price)
+            let tradePrice = price.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
             let viewModel = TradeHistoryViewModel(
                 pay: true,
                 price: tradePrice,
-                quoteVolume: payVolume.suffixNumber(digitNum: tradePrecision.amount),
-                baseVolume: receiveVolume.suffixNumber(digitNum: tradePrecision.total),
+                quoteVolume: payVolume.suffixNumber(digitNum: tradePrecision.book.amount.int!),
+                baseVolume: receiveVolume.suffixNumber(digitNum: tradePrecision.book.total.int!),
                 time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
             showData.append(viewModel)
         }

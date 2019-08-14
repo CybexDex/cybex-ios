@@ -134,9 +134,9 @@ extension MyHistoryCellView {
 
             let time = data.createTime.string(withFormat: "MM/dd HH:mm:ss")
 
-            var average = data.getAveragePrice().toReal().formatCurrency(digitNum: tradePrecision.price)
+            var average = data.getAveragePrice().toReal().formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
 
-            let price = data.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price)
+            let price = data.getPrice().toReal().formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
 
             var dealAmountString = ""
 
@@ -146,11 +146,11 @@ extension MyHistoryCellView {
                     average = "--"
                 }
                 else {
-                    dealAmountString = data.getAveragePrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true) + " " + pair.quote.symbol
+                    dealAmountString = data.getAveragePrice().quote.volume().suffixNumber(digitNum: tradePrecision.book.amount.int!, padZero: true) + " " + pair.quote.symbol
                 }
             }
 
-            let amountString = data.getPrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true) + " " + pair.quote.symbol
+            let amountString = data.getPrice().quote.volume().suffixNumber(digitNum: tradePrecision.book.amount.int!, padZero: true) + " " + pair.quote.symbol
 
             return ViewModel(oid: data.orderId,
                              isBuy: isBuy,
@@ -172,18 +172,18 @@ extension MyHistoryCellView {
 
             let time = Formatter.iso8601.date(from: orginTime)!.string(withFormat: "MM/dd HH:mm:ss")
 
-            let price = data.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price)
+            let price = data.getPrice().toReal().formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
 
             var dealAmount: String
             var totalAmount: String
 
             if pair.quote == data.pays.assetID {
-                dealAmount = data.pays.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true)
-                totalAmount = data.receives.volume().suffixNumber(digitNum: tradePrecision.total, padZero: true) + " " + pair.base.symbol
+                dealAmount = data.pays.volume().suffixNumber(digitNum: tradePrecision.book.amount.int!, padZero: true)
+                totalAmount = data.receives.volume().suffixNumber(digitNum: tradePrecision.book.total.int!, padZero: true) + " " + pair.base.symbol
             }
             else {
-                dealAmount = data.receives.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true)
-                totalAmount = data.pays.volume().suffixNumber(digitNum: tradePrecision.total, padZero: true) + " " + pair.base.symbol
+                dealAmount = data.receives.volume().suffixNumber(digitNum: tradePrecision.book.amount.int!, padZero: true)
+                totalAmount = data.pays.volume().suffixNumber(digitNum: tradePrecision.book.total.int!, padZero: true) + " " + pair.base.symbol
             }
 
             let feeAmount = data.fee.volumeString()  + " " + data.fee.assetID.symbol

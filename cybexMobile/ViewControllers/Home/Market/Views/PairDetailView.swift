@@ -70,7 +70,7 @@ class PairDetailView: UIView {
                 self.baseVolume.text = self.baseName + ": " + ticker.baseVolume.suffixNumber(digitNum: AppConfiguration.amountPrecision)
                 self.quoteVolume.text = self.quoteName + ": " + ticker.quoteVolume.suffixNumber(digitNum: AppConfiguration.amountPrecision)
                 
-                self.price.text = ticker.latest.formatCurrency(digitNum: tradePrecision.price)
+                self.price.text = ticker.latest.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
                 self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
                 self.bulking.textColor = ticker.incre.color()
                 self.bulkingIcon.image = ticker.incre.icon()

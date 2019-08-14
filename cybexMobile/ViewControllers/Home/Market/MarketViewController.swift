@@ -236,7 +236,7 @@ class MarketViewController: BaseViewController {
                                              low: lowPrice,
                                              towardsVolume: (isBase ? Double(data.quoteVolume)! : Double(data.baseVolume)!) / quotePrecision,
                                              volume: (isBase ? Double(data.baseVolume)! : Double(data.quoteVolume)!) / basePrecision,
-                                             precision: tradePrecision.price)
+                                             precision: tradePrecision.book.lastPrice.int!)
 
                     let lastIdx = dataArray.count - 1
                     if lastIdx >= 0 {
@@ -283,8 +283,8 @@ class MarketViewController: BaseViewController {
                     if let ticker = self.ticker, let _ = appData.assetInfo[ticker.base], self.timeGap == .oneDay {
                         lastModel = dataArray.last!
                         DispatchQueue.main.async {
-                            self.detailView.highLabel.text = "High: " + lastModel.high.decimal.formatCurrency(digitNum: tradePrecision.price)
-                            self.detailView.lowLabel.text = "Low: " + lastModel.low.decimal.formatCurrency(digitNum: tradePrecision.price)
+                            self.detailView.highLabel.text = "High: " + lastModel.high.decimal.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
+                            self.detailView.lowLabel.text = "Low: " + lastModel.low.decimal.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
                         }
                     }
                 }

@@ -268,7 +268,7 @@ class TradeView: UIView {
     
     func setAmountAction(_ sender: (Decimal, UIColor), pair: Pair) {
         let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
-        let lastPrice = sender.0.formatCurrency(digitNum: tradePrecision.price)
+        let lastPrice = sender.0.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
 
         var rmbPrice: Decimal = 0
         if let baseAsset = AssetConfiguration.CybexAsset(pair.base) {

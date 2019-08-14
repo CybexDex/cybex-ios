@@ -84,6 +84,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
         startLoading()
         setupUI()
+        setupTableView()
     }
 
     func setupUI() {
@@ -93,6 +94,16 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
         self.localizedText = R.string.localizable.navWatchlist.key.localizedContainer()
         switchContainerView()
+    }
+
+    func setupTableView() {
+        if self.vcType == ViewType.homeContent.rawValue {
+            self.addPullToRefresh(self.contentView!.tableView) {[weak self] (completion) in
+
+                appCoodinator.getLatestData()
+                completion?()
+            }
+        }
     }
 
     func switchContainerView() {

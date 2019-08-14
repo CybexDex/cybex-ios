@@ -15,6 +15,7 @@ import Presentr
 protocol AccountCoordinatorProtocol {
     func openOpenedOrders()
     func openLockupAssets()
+    func openHashLockupAssets()
     func openAddressManager()
     func openYourProtfolio()
     func openSetting()
@@ -101,6 +102,11 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
         let vc = R.storyboard.account.lockupAssetsViewController()!
         let coordinator = LockupAssetsCoordinator(rootVC: self.rootVC)
         vc.coordinator  = coordinator
+        self.rootVC.pushViewController(vc, animated: true)
+    }
+
+    func openHashLockupAssets() {
+        let vc = HashLockupAssetsViewController.instantiate()
         self.rootVC.pushViewController(vc, animated: true)
     }
 

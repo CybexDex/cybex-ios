@@ -64,6 +64,13 @@
 "pin.code"= "Pin Code";
 
 "lockupAssets.title"           = "Lockup Assets";
+"hashlockupAssets.title"           = "Hash Lockup Assets";
+"hashlock.initiator" = "Initiator: ";
+"hashlock.receiver" = "Receiver: ";
+"hashlock.endtime" = "End Time of Locking: ";
+"hashlock.algorithm" = "Hash Algorithm: ";
+"hashlock.hash" = "Hash: ";
+
 
 "portfolio.title"              = "Your Portfolio";
 "portfolio.price"              = "Price (CYB):";
@@ -648,3 +655,6 @@
 "coin_age_desc" = "Coin age is calculated based on the CYB in the CYBEX account. It is updated at UTC+00:00 every day.\n<password>Calculation Rules</password>\nStarting time: the date of CYBEX exchange launched\nCoin age = coin age of the previous day * a depreciation coefficient (X = 0.975) + open interests of CYB for the day\nCoin age of the first day = open interests of CYB\nFor the convenience, coin age on APP = coin age * (1 - depreciation coefficient)\nNote\nCYB in order and lock is not counted.\nIf you have very little open interests or very large depreciation, the coin age may be 0 due to the accuracy.\nExample\nUser A holds position of 10,000 CYB for one year, the coin age (A) = 10000*（1+0.975+……+0.975^364）=399960, while coin age on APP (A) = 399960*（1-0.975）= 9999.\nIf user B wants to have the same coin age as user A, he/she needs to purchase CYB that is 40 times of A’s.\nIf user C purchases 10,000 CYB and sells it the same day, coin age = 10000; After 28 days, C’s coin age = 10000*0.975^27 = 5048, which is a half of the initial.\n\n";
 "coin_age_title" = "COIN AGE";
 "coin_age_desc_get" = "I KNOW";
+
+"min_order_value_remind" = "Total must be greater than %@";
+"price_offset_remind" = "The price of your order is far from the last traded price. Are you sure to continue?";

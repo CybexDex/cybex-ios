@@ -40,22 +40,22 @@ class OpenedOrdersView: UIView {
                 self.progressLabel.text = order.decimalProgress().formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
                 self.timeLabel.text = order.createTime.string(withFormat: "MM/dd HH:mm:ss")
                 
-                self.basePrice.text = order.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price) + " " + pair.base.symbol
+                self.basePrice.text = order.getPrice().toReal().formatCurrency(digitNum: tradePrecision.book.lastPrice.int!) + " " + pair.base.symbol
                 if order.isBuyOrder() {
                     self.orderType.openedStatus = 0
                     self.amount.text = AssetHelper.getRealAmount(pair.quote,
-                                                                 amount: order.receivedAmount.string).formatCurrency(digitNum: tradePrecision.amount) + "/" +
+                                                                 amount: order.receivedAmount.string).formatCurrency(digitNum: tradePrecision.book.amount.int!) + "/" +
                         AssetHelper.getRealAmount(pair.quote,
-                                                  amount: order.amountToReceive.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.quote.symbol
+                                                  amount: order.amountToReceive.string).formatCurrency(digitNum: tradePrecision.book.amount.int!) + " " + pair.quote.symbol
                     self.progressLabel.textColor = self.orderType.buyColor
                 }
                 else {
                     self.orderType.openedStatus = 1
                     self.progressLabel.textColor = self.orderType.sellColor
                     self.amount.text = AssetHelper.getRealAmount(pair.quote,
-                                                                 amount: order.soldAmount.string).formatCurrency(digitNum: tradePrecision.amount) + "/" +
+                                                                 amount: order.soldAmount.string).formatCurrency(digitNum: tradePrecision.book.amount.int!) + "/" +
                         AssetHelper.getRealAmount(pair.quote,
-                                                  amount: order.amountToSell.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.quote.symbol
+                                                  amount: order.amountToSell.string).formatCurrency(digitNum: tradePrecision.book.amount.int!) + " " + pair.quote.symbol
                 }
             }
         }

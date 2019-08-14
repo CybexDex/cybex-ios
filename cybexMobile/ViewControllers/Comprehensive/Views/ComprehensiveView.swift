@@ -16,6 +16,7 @@ class ComprehensiveView: CybexBaseView {
     @IBOutlet weak var announceView: AnnounceView!
     @IBOutlet weak var hotAssetsView: HotAssetsView!
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var middleItemsView: ComprehensiveItemsView!
 
     @IBOutlet weak var containerView: UIView!

@@ -61,7 +61,12 @@
 "attention" = "注意事项";
 
 "lockupAssets.title"    = "锁定期资产";
-
+"hashlockupAssets.title"           = "哈希锁定资产";
+"hashlock.initiator" = "发起人: ";
+"hashlock.receiver" = "接收人: ";
+"hashlock.endtime" = "锁定期到期时间: ";
+"hashlock.algorithm" = "哈希算法: ";
+"hashlock.hash" = "哈希值: ";
 
 "portfolio.title"       = "可用资产";
 "portfolio.price"       = "价格(CYB):";
@@ -630,3 +635,6 @@
 "coin_age_desc" = "基于Cybex账户中的CYB持币历史情况，计算得出账户币龄，每天的UTC0点更新。\n<password>计算规则</password>\n以Cybex交易所上线为起始日期;\n币龄=前一天的币龄*折旧系数（X=0.975）+当天CYB持仓量;\n第一天币龄=CYB持仓量;\n为了方便展示，显示币龄=币龄*（1-折旧系数）。\n\n注意\n委托单和锁定中的CYB不计入;\n当持币量过小,或折旧过大时由于精度问题，币龄为0。\n\n样例\n用户A一年前购入10000CYB持有至今，币龄（A）=10000*（1+0.975+……+0.975^364）=399960;\n显示币龄（A）=399960*（1-0.975）=9999;\n用户B想要和A有同样的币龄则需要购入A持币量的40倍;\n用户C今天购买10000CYB并卖出，此时C的币龄=10000 ，28天后C的币龄=10000*0.975^27=5048 ，此时币龄为初始时的一半。\n\n";
 "coin_age_title" = "币龄";
 "coin_age_desc_get" = "我知道了";
+
+"min_order_value_remind" = "成交额必须大于 %@";
+"price_offset_remind" = "挂单价格偏离最新成交价，是否继续挂单？";

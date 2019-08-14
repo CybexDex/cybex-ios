@@ -14,7 +14,8 @@ import ReSwift
 class ExchangeViewController: BaseViewController {
     var coordinator: (ExchangeCoordinatorProtocol & ExchangeStateManagerProtocol)?
     var type: ExchangeType = .buy
-
+    var lastPrice: Decimal = 0
+    
     var pair: Pair? {
         didSet {
             self.children.forEach { (viewController) in

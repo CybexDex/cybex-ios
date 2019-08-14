@@ -92,13 +92,15 @@ class AccountViewController: BaseViewController {
         setupIconImg()
         self.configRightNavButton(R.image.icSettings24Px())
 
-        let imgArray = [R.image.icBalance(), R.image.w(), R.image.ic_address_28_px(), R.image.icOrder28Px(), R.image.icLockAsset()]
+        let imgArray = [R.image.icBalance(), R.image.w(), R.image.ic_address_28_px(), R.image.icOrder28Px(), R.image.icLockAsset(), R.image.icHashLocksAssets24Px()]
 
         let nameArray = [R.string.localizable.my_property.key.localized(),
                          R.string.localizable.deposit_withdraw.key.localized(),
                          R.string.localizable.address_manager.key.localized(),
                          R.string.localizable.order_value.key.localized(),
-                         R.string.localizable.lockupAssetsTitle.key.localized()]
+                         R.string.localizable.lockupAssetsTitle.key.localized(),
+                         R.string.localizable.hashlockupAssetsTitle.key.localized()
+                         ]
 
         dataArray.removeAll()
         for index in 0..<nameArray.count {
@@ -197,12 +199,21 @@ extension AccountViewController {
             } else {
                 self.coordinator?.openOpenedOrders()
             }
-        default:
+        case 4:
             if !UserManager.shared.logined {
                 appCoodinator.showLogin()
             } else {
                 openLockupAssets([:])
             }
+
+        case 5:
+            if !UserManager.shared.logined {
+                appCoodinator.showLogin()
+            } else {
+                self.coordinator?.openHashLockupAssets()
+            }
+        default:
+           break
         }
     }
 

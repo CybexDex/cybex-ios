@@ -564,6 +564,10 @@
 		737E596F21A54211001199E4 /* JWA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596E21A54211001199E4 /* JWA.swift */; };
 		737E597121A5422B001199E4 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E597021A5422B001199E4 /* JWT.swift */; };
 		737E597321A5423E001199E4 /* JWTHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E597221A5423E001199E4 /* JWTHelpers.swift */; };
+		737EBAD8230139740077B47E /* HashLockupAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EBAD7230139730077B47E /* HashLockupAssetsViewController.swift */; };
+		737EBADB230147810077B47E /* HashLockupAssetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EBAD9230147810077B47E /* HashLockupAssetsTableViewCell.swift */; };
+		737EBADC230147810077B47E /* HashLockupAssetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737EBADA230147810077B47E /* HashLockupAssetsTableViewCell.xib */; };
+		737EBADE23014A9D0077B47E /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737EBADD23014A9C0077B47E /* Reusable.framework */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
@@ -1477,6 +1481,10 @@
 		737E597021A5422B001199E4 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		737E597221A5423E001199E4 /* JWTHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTHelpers.swift; sourceTree = "<group>"; };
 		737E597421A5487C001199E4 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		737EBAD7230139730077B47E /* HashLockupAssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashLockupAssetsViewController.swift; sourceTree = "<group>"; };
+		737EBAD9230147810077B47E /* HashLockupAssetsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashLockupAssetsTableViewCell.swift; sourceTree = "<group>"; };
+		737EBADA230147810077B47E /* HashLockupAssetsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashLockupAssetsTableViewCell.xib; sourceTree = "<group>"; };
+		737EBADD23014A9C0077B47E /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1849,6 +1857,7 @@
 			files = (
 				732DDEC52255F00A002EE523 /* Sentry.framework in Frameworks */,
 				73E9C052224C69810023B274 /* BigInt.framework in Frameworks */,
+				737EBADE23014A9D0077B47E /* Reusable.framework in Frameworks */,
 				739AB59E224B666C0023AEA9 /* RxMoya.framework in Frameworks */,
 				73E9BFFD224B8EC30023B274 /* Result.framework in Frameworks */,
 				739AB59C224B66620023AEA9 /* Moya.framework in Frameworks */,
@@ -2442,6 +2451,7 @@
 				E23A7899E7F6A8D557A94E81F2014FC5 /* LockupAssetsCoordinator.swift */,
 				80FA4313328951A16A1DD333661E3284 /* LockupAssetsReducers.swift */,
 				90712234E28EE675FA991ADB398400A0 /* LockupAssetsViewController.swift */,
+				737EBAD7230139730077B47E /* HashLockupAssetsViewController.swift */,
 			);
 			path = LockupAssets;
 			sourceTree = "<group>";
@@ -4098,6 +4108,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				737EBADD23014A9C0077B47E /* Reusable.framework */,
 				732DDEC42255F009002EE523 /* Sentry.framework */,
 				73E9C053224C73320023B274 /* PromiseKit.framework */,
 				73E9C051224C69810023B274 /* BigInt.framework */,
@@ -4332,6 +4343,8 @@
 			children = (
 				3CCB3C0AFB17090A4505E27B0E6CD5B9 /* LockupAssetsCell.swift */,
 				1A7B610EE01DFB63C0F436ABA5DAC4C0 /* LockupAssetsCell.xib */,
+				737EBAD9230147810077B47E /* HashLockupAssetsTableViewCell.swift */,
+				737EBADA230147810077B47E /* HashLockupAssetsTableViewCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -4412,7 +4425,7 @@
 				7398BEC42181C209004C042E /* swiftlint */,
 				73A33072219420B900707D8F /* Embed Frameworks */,
 				732DDEC62255F09C002EE523 /* Sentry */,
-				68BCE4348CD1CFADA1FC515A /* [CP] Embed Pods Frameworks */,
+				40688D7AF38D81B0AD053A97 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4575,6 +4588,7 @@
 				72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */,
 				1EB781DE21D381F7009BB8C1 /* EvaView.xib in Resources */,
 				7217B0892122BBE500608531 /* AddressItemView.xib in Resources */,
+				737EBADC230147810077B47E /* HashLockupAssetsTableViewCell.xib in Resources */,
 				192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */,
 				72D58294219C188700BB9842 /* ChatUpInputView.xib in Resources */,
 				56D03074319AE5D578E9B4CD28B6C1F9 /* BusinessTitleItemView.xib in Resources */,
@@ -4753,6 +4767,36 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT/rswift\" generate \"$SRCROOT\"\n";
 		};
+		40688D7AF38D81B0AD053A97 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework",
+				"${BUILT_PRODUCTS_DIR}/cocore/cocore.framework",
+				"${BUILT_PRODUCTS_DIR}/coswift/coswift.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework",
+				"${BUILT_PRODUCTS_DIR}/swift_qrcodejs/swift_qrcodejs.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFQRCode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cocore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/coswift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/swift_qrcodejs.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		63B89CB4897862A41FC84BA0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4793,23 +4837,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Carthage/Build/iOS/Fabric.framework/run\" a0bbb6d623feca529afaf6ed110e62a77f47b16a 3b264ff6cab506aaf14bce576c156ea66229ad7b6dfb666b4fbb91089deb17e2\n";
-		};
-		68BCE4348CD1CFADA1FC515A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		730E59A621992248006DDCDD /* unuse files */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4999,7 +5026,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 			showEnvVarsInLog = 0;
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {
@@ -5393,6 +5420,7 @@
 				72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */,
 				E432C445702EFB8154F16B502E4EE186 /* MyHistoryCellView.swift in Sources */,
 				73E3FF7122B78BF400151F51 /* NodesURLSetting.swift in Sources */,
+				737EBADB230147810077B47E /* HashLockupAssetsTableViewCell.swift in Sources */,
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				73B4782D222CEB8E00189632 /* Cert.swift in Sources */,
 				406AB4BA0BF043D771D15D751F7AB45D /* MyHistoryReducers.swift in Sources */,
@@ -5481,6 +5509,7 @@
 				7391101D21BA509C00412CE1 /* DataBaseApi.swift in Sources */,
 				7391101B21BA509C00412CE1 /* CybexWebSocketService.swift in Sources */,
 				72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */,
+				737EBAD8230139740077B47E /* HashLockupAssetsViewController.swift in Sources */,
 				3B824A2F2135350200D7A4A7 /* ETODetailReducers.swift in Sources */,
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
 				665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */,

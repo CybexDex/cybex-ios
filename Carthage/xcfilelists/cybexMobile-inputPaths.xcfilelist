@@ -34,6 +34,7 @@ $(SRCROOT)/Carthage/Build/iOS/ReSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Reachability.framework
 $(SRCROOT)/Carthage/Build/iOS/Repeat.framework
 $(SRCROOT)/Carthage/Build/iOS/Result.framework
+$(SRCROOT)/Carthage/Build/iOS/Reusable.framework
 $(SRCROOT)/Carthage/Build/iOS/Rswift.framework
 $(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework
 $(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework

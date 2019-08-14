@@ -27,10 +27,19 @@ class ComprehensiveViewController: BaseViewController {
         setupData()
         setupUI()
         setupEvent()
+        setupTableView()
     }
 
     func setupNavi() {
         self.navigationController?.navigationBar.isHidden = true
+    }
+
+    func setupTableView() {
+
+        self.addPullToRefresh(contentView.scrollView) {[weak self] (completion) in
+            self?.coordinator?.fetchData()
+//            completion?()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +137,7 @@ class ComprehensiveViewController: BaseViewController {
             guard let self = self, let items = middleItems else { return }
 
             self.contentView.middleItemsView.adapterModelToComprehensiveItemsView(items)
+            self.stopPullRefresh(self.contentView.scrollView)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](_) in
@@ -139,9 +149,10 @@ class ComprehensiveViewController: BaseViewController {
                                  self.coordinator!.state.middleItems.asObservable(),
                                  self.coordinator!.state.banners.asObservable(),
                                  self.coordinator!.state.announces.asObservable()).subscribe(onNext: { [weak self](hotPairs, middleItems, banners, announces) in
-                                    guard self != nil else { return }
+                                    guard let self = self else { return }
                                     if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
 //                                        self.endLoading()
+//                                        self.stopPullRefresh(self.contentView.scrollView)
                                     }
 
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

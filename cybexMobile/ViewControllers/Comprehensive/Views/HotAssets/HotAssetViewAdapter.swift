@@ -23,7 +23,7 @@ extension HotAssetView {
             let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(
                 Pair(base: model.base, quote: model.quote)
             )
-            amountLabel.text = model.latest.formatCurrency(digitNum: tradePrecision.price)
+            amountLabel.text = model.latest.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
             amountLabel.textColor = model.incre.color()
             self.trendLabel.text = (model.incre == .greater ? "+" : "") +
                 model.percentChange.formatCurrency(digitNum: AppConfiguration.amountPrecision) + "%"

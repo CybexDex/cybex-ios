@@ -105,4 +105,22 @@ enum ObjectID {
     }
 }
 
+enum HashAlgorithm: String, CaseIterable {
+    case ripemd160
+    case xxx
+    case sha256
+
+    func asInt() -> Int {
+        return HashAlgorithm.allCases.firstIndex(of: self)!
+    }
+
+    init?(value: Int) {
+        if value < HashAlgorithm.allCases.count {
+            self = HashAlgorithm.allCases[value]
+        } else {
+            return nil
+        }
+    }
+}
+
 

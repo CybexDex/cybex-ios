@@ -23,7 +23,7 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
         if var order = action.data {
             let precision = TradeConfiguration.shared.getPairPrecisionWithPair(action.pair)
             order.pricePrecision = state.depth.value
-            order.amountPrecision = precision.amount
+            order.amountPrecision = precision.book.amount.int!
             state.data.accept(order)
         }
         else {

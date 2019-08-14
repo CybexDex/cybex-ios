@@ -46,9 +46,9 @@ class BusinessViewController: BaseViewController {
     func fetchLatestPrice() {
         guard let pair = pair else { return }
         let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
-        pricePrecision = tradePrecision.price
-        amountPrecision = tradePrecision.amount
-        totalPrecision = tradePrecision.total
+        pricePrecision = tradePrecision.book.lastPrice.int!
+        amountPrecision = tradePrecision.book.amount.int!
+        totalPrecision = tradePrecision.book.total.int!
     }
     
     func setupUI() {
@@ -109,6 +109,7 @@ class BusinessViewController: BaseViewController {
                 amount.decimal() > 0,
                 let price =  self.containerView.priceTextfield.text,
                 price.decimal() > 0 {
+                self.containerView.errorMessage.locali = R.string.localizable.withdraw_nomore.key
                 self.containerView.tipView.isHidden = false
             } else {
                 self.containerView.tipView.isHidden = true
@@ -117,12 +118,33 @@ class BusinessViewController: BaseViewController {
         }
         
         if !canPost {
+            self.containerView.errorMessage.locali = R.string.localizable.withdraw_nomore.key
             self.containerView.tipView.isHidden = false
             return false
         } else {
             self.containerView.tipView.isHidden = true
             return true
         }
+    }
+
+    @discardableResult func formRules() -> Bool {
+        if let pair = pair, let amount = self.containerView.amountTextfield.text,
+            amount.decimal() > 0,
+            let price =  self.containerView.priceTextfield.text,
+            price.decimal() > 0 {
+            let precision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
+
+            if precision.form.minOrderValue.decimal() <= amount.decimal() * price.decimal() {
+                self.containerView.tipView.isHidden = true
+                return true
+            } else {
+                self.containerView.errorMessage.text = R.string.localizable.min_order_value_remind.key.localizedFormat(precision.form.minOrderValue)
+                self.containerView.tipView.isHidden = false
+                return false
+            }
+        }
+
+        return true
     }
     
     func changeButtonState() {
@@ -187,6 +209,7 @@ class BusinessViewController: BaseViewController {
                     amount.decimal() > 0,
                     let price =  self.containerView.priceTextfield.text,
                     price.decimal() > 0 {
+                    self.containerView.errorMessage.locali = R.string.localizable.withdraw_nomore.key
                     self.containerView.tipView.isHidden = false
                 }
                 return
@@ -259,7 +282,9 @@ class BusinessViewController: BaseViewController {
         //RMB
         self.coordinator!.state.price.subscribe(onNext: {[weak self] (text) in
             guard let self = self else { return }
-            self.checkBalance()
+            if self.checkBalance() {
+                self.formRules()
+            }
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
                 let text = self.containerView.priceTextfield.text, text != "", text.decimal() != 0,
                 text.components(separatedBy: ".").count <= 2 && text != "." else {
@@ -276,7 +301,9 @@ class BusinessViewController: BaseViewController {
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             
-            self.checkBalance()
+            if self.checkBalance() {
+                self.formRules()
+            }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
@@ -405,10 +432,22 @@ extension BusinessViewController {
             appCoodinator.showLogin()
             return
         }
-        
-        guard checkBalance() else { return }
 
-        self.showOpenedOrderInfo()
+        if let price = self.containerView.priceTextfield.text,
+        price.decimal() > 0, checkBalance() && formRules(), let exVC = self.parent as? ExchangeViewController {
+            if self.type == .buy {
+                if price.decimal() > exVC.lastPrice * 1.2 {
+                    showPureContentConfirm(content: R.string.localizable.price_offset_remind.key, tag: R.string.localizable.price_offset_remind.key)
+                    return
+                }
+            } else if self.type == .sell {
+                if price.decimal() < exVC.lastPrice * 0.8 {
+                    showPureContentConfirm(content: R.string.localizable.price_offset_remind.key, tag: R.string.localizable.price_offset_remind.key)
+                    return
+                }
+            }
+            self.showOpenedOrderInfo()
+        }
     }
     
     @objc func adjustPrice(_ data: [String: Bool]) {
@@ -419,6 +458,10 @@ extension BusinessViewController {
     }
 
     override func returnEnsureActionWithData(_ tag: String) {
+        if tag == R.string.localizable.price_offset_remind.key {
+            self.showOpenedOrderInfo()
+            return
+        }
         if UserManager.shared.loginType == .nfc, UserManager.shared.unlockType == .nfc {
             if #available(iOS 11.0, *) {
                 NFCManager.shared.didReceivedMessage.delegate(on: self) { (self, card) in

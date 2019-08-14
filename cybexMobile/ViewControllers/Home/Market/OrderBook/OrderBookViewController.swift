@@ -26,6 +26,8 @@ class OrderBookViewController: BaseViewController {
     var tradeView: TradeView!
     var vcType: Int = OrderbookType.contentView.rawValue
     var pair: Pair?
+    let lastPriceReceiver = Delegate<Decimal, Void>()
+
 
     override func viewDidLoad() {
         setupUI()
@@ -80,19 +82,19 @@ class OrderBookViewController: BaseViewController {
 
                 let result = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
 
-                self.coordinator?.subscribe(pair, depth: oldDepth == 0 ? result.price : oldDepth, count: count)
+                self.coordinator?.subscribe(pair, depth: oldDepth == 0 ? result.book.lastPrice.int! : oldDepth, count: count)
 
                 if self.vcType == OrderbookType.tradeView.rawValue {
-                    self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(result.price)
+                    self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(result.book.lastPrice.int!)
                 }
 
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
             return
         }
         if self.vcType == OrderbookType.tradeView.rawValue {
-            self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(tradePairPrecision.price)
+            self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(tradePairPrecision.book.lastPrice.int!)
         }
-        self.coordinator?.subscribe(pair, depth:  oldDepth == 0 ? tradePairPrecision.price : oldDepth, count: count)
+        self.coordinator?.subscribe(pair, depth:  oldDepth == 0 ? tradePairPrecision.book.lastPrice.int! : oldDepth, count: count)
     }
 
     func setupUI() {
@@ -183,6 +185,7 @@ class OrderBookViewController: BaseViewController {
             self.coordinator?.state.lastPrice.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
                 guard let self = self, let pair = self.pair else { return }
 
+                self.lastPriceReceiver.call(result.0)
                 self.tradeView.setAmountAction(result, pair: pair)
 
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -242,7 +245,7 @@ extension OrderBookViewController {
             self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: coor.state.depth.value, selectedDecimal: coor.state.depth.value, senderVC: self)
             return
         }
-        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: tradePairPrecision.price, selectedDecimal: coor.state.depth.value, senderVC: self)
+        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: tradePairPrecision.book.lastPrice.int!, selectedDecimal: coor.state.depth.value, senderVC: self)
     }
 
     @objc func switchTradeViewShowType(_ data: [String: Any]) {

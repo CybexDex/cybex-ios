@@ -27,7 +27,7 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    func addPullToRefresh(_ tableView: UITableView, callback:@escaping(((()->Void)?)->Void)) {
+    func addPullToRefresh(_ tableView: UIScrollView, callback:@escaping(((()->Void)?)->Void)) {
         let headerView = tableView.es.addPullToRefresh {
             callback({[weak self] in
                 self?.stopPullRefresh(tableView)
@@ -46,11 +46,11 @@ extension UIViewController {
 
     }
 
-    func stopPullRefresh(_ tableView: UITableView) {
+    func stopPullRefresh(_ tableView: UIScrollView) {
         tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
     }
 
-    func addInfiniteScrolling(_ tableView: UITableView, callback:@escaping(((Bool)->Void)?)->Void) {
+    func addInfiniteScrolling(_ tableView: UIScrollView, callback:@escaping(((Bool)->Void)?)->Void) {
          let footerView = tableView.es.addInfiniteScrolling {
             callback({[weak self] isNoMoreData in
                 self?.stopInfiniteScrolling(tableView, haveNoMore: isNoMoreData)
@@ -67,7 +67,7 @@ extension UIViewController {
         }
     }
 
-    func stopInfiniteScrolling(_ tableView: UITableView, haveNoMore: Bool) {
+    func stopInfiniteScrolling(_ tableView: UIScrollView, haveNoMore: Bool) {
         if haveNoMore {
             tableView.es.noticeNoMoreData()
         } else {

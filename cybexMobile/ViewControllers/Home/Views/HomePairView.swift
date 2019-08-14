@@ -51,7 +51,7 @@ class HomePairView: UIView {
             self.icon.kf.setImage(with: URL(string: url))
             self.volume.text = ticker.baseVolume.suffixNumber(digitNum: AppConfiguration.amountPrecision)
 
-            self.price.text = ticker.latest.formatCurrency(digitNum: tradePrecision.price)
+            self.price.text = ticker.latest.formatCurrency(digitNum: tradePrecision.book.lastPrice.int!)
 
             self.bulking.text = (ticker.incre == .greater ? "+" : "") +
                 ticker.percentChange.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"

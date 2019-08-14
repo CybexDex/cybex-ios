@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +17,7 @@
                 <outlet property="containerView" destination="EZn-fH-M19" id="qhh-DE-Zzd"/>
                 <outlet property="hotAssetsView" destination="44G-7F-E3W" id="cth-6I-cOe"/>
                 <outlet property="middleItemsView" destination="dYL-dQ-b1J" id="uqo-iS-eIc"/>
+                <outlet property="scrollView" destination="WPE-rN-dMX" id="Lin-5n-81K"/>
                 <outlet property="topGainersView" destination="Mdn-bC-eGH" id="WKn-Tu-zb0"/>
             </connections>
         </placeholder>
@@ -25,13 +26,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPE-rN-dMX">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPE-rN-dMX">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XZA-ba-mfx">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="789"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZA-ba-mfx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="811"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pG-uuE">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pG-uuE">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="811"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiZ-49-g8l" customClass="ETOHomeBannerView" customModule="cybexMobile" customModuleProvider="target">
@@ -61,10 +62,10 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="showTouchFeedback" value="NO"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-dQ-b1J" customClass="ComprehensiveItemsView" customModule="cybexMobile" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-dQ-b1J" customClass="ComprehensiveItemsView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="264" width="375" height="90"/>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZn-fH-M19">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZn-fH-M19">
                                             <rect key="frame" x="0.0" y="354" width="375" height="457"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CG-Jz-SPa">

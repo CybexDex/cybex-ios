@@ -47,6 +47,9 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
       if let container = exchange.containerView, let rightView = container.rightView, let parentCoor = parent as? TradeCoordinator {
         orderbook.coordinator = parentCoor.orderCoodinator
         orderbook.vcType = OrderbookType.tradeView.rawValue
+        orderbook.lastPriceReceiver.delegate(on: self) { (self, price) in
+            exchange.lastPrice = price
+        }
         exchange.addChild(orderbook)
 
         rightView.addSubview(orderbook.view)
