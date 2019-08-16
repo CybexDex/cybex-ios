@@ -436,12 +436,12 @@ extension BusinessViewController {
         if let price = self.containerView.priceTextfield.text,
         price.decimal() > 0, checkBalance() && formRules(), let exVC = self.parent as? ExchangeViewController {
             if self.type == .buy {
-                if price.decimal() > exVC.lastPrice * 1.2 {
+                if exVC.lastPrice > 0 && price.decimal() > exVC.lastPrice * 1.2 {
                     showPureContentConfirm(content: R.string.localizable.price_offset_remind.key, tag: R.string.localizable.price_offset_remind.key)
                     return
                 }
             } else if self.type == .sell {
-                if price.decimal() < exVC.lastPrice * 0.8 {
+                if exVC.lastPrice > 0 && price.decimal() < exVC.lastPrice * 0.8 {
                     showPureContentConfirm(content: R.string.localizable.price_offset_remind.key, tag: R.string.localizable.price_offset_remind.key)
                     return
                 }

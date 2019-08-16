@@ -8,6 +8,7 @@
 
 import Foundation
 import Guitar
+import coswift
 
 enum FrequencyType: Int {
     case normal = 0
@@ -24,6 +25,34 @@ enum FrequencyType: Int {
 }
 
 class UserHelper {
+    var cachedIdToName: [String: String] = [:]
+
+    static var shared = UserHelper()
+
+    func getName(id: String) -> Promise<String> {
+        if let name = cachedIdToName[id] {
+            return Promise.init(constructor: { (fulfill, reject) in
+                fulfill(name)
+            })
+        }
+
+        return Promise.init(constructor: { (fulfill, reject) in
+            CybexDatabaseApiService.request(target: .getObjects(id: id), success: { (json) in
+                if let name = json[0]["name"].string {
+                    self.cachedIdToName[id] = name
+                    fulfill(name)
+                } else {
+                    reject(CybexError.tipError(.userNotExist))
+                }
+            }, error: { (json) in
+                reject(CybexError.tipError(.userNotExist))
+
+            }) { (error) in
+                reject(CybexError.tipError(.userNotExist))
+            }
+        })
+    }
+    
     class func getBalanceFromAssetID(_ assetID: String) -> Decimal {
         if let balance = getBalanceWithAssetId(assetID) {
             return balance.balance.decimal()

@@ -656,5 +656,5 @@
 "coin_age_title" = "COIN AGE";
 "coin_age_desc_get" = "I KNOW";
 
-"min_order_value_remind" = "Total must be greater than %@";
+"min_order_value_remind" = "must be greater than %@";
 "price_offset_remind" = "The price of your order is far from the last traded price. Are you sure to continue?";

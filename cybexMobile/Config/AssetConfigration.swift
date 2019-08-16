@@ -248,6 +248,10 @@ extension String {
     var symbolOnlyFilterJade: String {
         return appData.assetInfo[self]?.symbol.filterOnlySystemPrefix ?? self
     }
+
+    var cachedSymbolOnlyFilterJade: String {
+        return AssetHelper.shared.cachedAssetInfo[self]?.symbol.filterOnlySystemPrefix ?? self
+    }
     
     var precision: Int {
         return appData.assetInfo[self]?.precision ?? 0

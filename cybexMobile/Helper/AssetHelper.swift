@@ -7,8 +7,37 @@
 //
 
 import Foundation
+import coswift
 
 class AssetHelper {
+    var cachedAssetInfo: [String: AssetInfo] = [:]
+
+    static var shared = AssetHelper()
+
+    func getAsset(id: String) -> Promise<AssetInfo> {
+        if let info = cachedAssetInfo[id] {
+            return Promise.init(constructor: { (fulfill, reject) in
+                fulfill(info)
+            })
+        }
+
+        return Promise.init(constructor: { (fulfill, reject) in
+            CybexDatabaseApiService.request(target: .getObjects(id: id), success: { (json) in
+                if let info = AssetInfo.deserialize(from: json.dictionaryObject) {
+                    self.cachedAssetInfo[id] = info
+                    fulfill(info)
+                } else {
+                    reject(CybexError.tipError(.assetNotExist))
+                }
+            }, error: { (json) in
+                reject(CybexError.tipError(.assetNotExist))
+
+            }) { (error) in
+                reject(CybexError.tipError(.assetNotExist))
+            }
+        })
+    }
+
     class func getPrecision(_ assetID: String) -> Int? {
         if let info = appData.assetInfo[assetID] {
             return info.precision

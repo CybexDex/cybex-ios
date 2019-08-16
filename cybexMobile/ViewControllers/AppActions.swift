@@ -86,6 +86,7 @@ struct AppPropertyState {
 
     //assetID -> info
     var assetInfo: [String: AssetInfo] = [:]
+
     //filted Jade
     var assetNameToIds: BehaviorRelay<[String: String]> = BehaviorRelay(value: [:])
 }

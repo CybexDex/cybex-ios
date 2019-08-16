@@ -17,8 +17,6 @@ class HashLockupAssetsViewController: BaseViewController, StoryboardSceneBased {
 
     var list: [Htlc] = []
 
-    var cachedIdToName: [String: String] = [:]
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +32,7 @@ class HashLockupAssetsViewController: BaseViewController, StoryboardSceneBased {
             endLoading()
             return
         }
-        cachedIdToName[id] = name
+        UserHelper.shared.cachedIdToName[id] = name
         CybexDatabaseApiService.request(target: .getAccount(name: name), success: { (data) in
             self.list = data[0][1]["htlcs"].arrayValue.map({ (d) -> Htlc? in
                 do {
@@ -50,7 +48,7 @@ class HashLockupAssetsViewController: BaseViewController, StoryboardSceneBased {
             co_launch {
                 for (index, item) in self.list.enumerated() {
                     let waitFromResult = try await {
-                       self.getName(id: item.transfer.from)
+                       UserHelper.shared.getName(id: item.transfer.from)
                     }
 
                     if case let .fulfilled(result) = waitFromResult {
@@ -58,7 +56,7 @@ class HashLockupAssetsViewController: BaseViewController, StoryboardSceneBased {
                     }
 
                     let waitToResult = try await {
-                        self.getName(id: item.transfer.to)
+                        UserHelper.shared.getName(id: item.transfer.to)
                     }
 
                     if case let .fulfilled(result) = waitToResult {
@@ -79,29 +77,7 @@ class HashLockupAssetsViewController: BaseViewController, StoryboardSceneBased {
         }
     }
 
-    func getName(id: String) -> Promise<String> {
-        if let name = cachedIdToName[id] {
-            return Promise.init(constructor: { (fulfill, reject) in
-                fulfill(name)
-            })
-        }
-
-        return Promise.init(constructor: { (fulfill, reject) in
-            CybexDatabaseApiService.request(target: .getObjects(id: id), success: { (json) in
-                if let name = json[0]["name"].string {
-                    self.cachedIdToName[id] = name
-                    fulfill(name)
-                } else {
-                    reject(CybexError.tipError(.loginFail))
-                }
-            }, error: { (json) in
-                reject(CybexError.tipError(.loginFail))
-
-            }) { (error) in
-                reject(CybexError.tipError(.loginFail))
-            }
-        })
-    }
+    
 }
 
 extension HashLockupAssetsViewController: UITableViewDelegate, UITableViewDataSource {

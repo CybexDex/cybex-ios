@@ -152,7 +152,6 @@ class ComprehensiveViewController: BaseViewController {
                                     guard let self = self else { return }
                                     if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
 //                                        self.endLoading()
-//                                        self.stopPullRefresh(self.contentView.scrollView)
                                     }
 
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

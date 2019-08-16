@@ -55,6 +55,8 @@ extension CybexError {
         case unlockFail
         case registerFail(code: Int)
         case loginFail
+        case assetNotExist
+
         case databaseApiError(json: JSON)
 
         var errorDescription: String {
