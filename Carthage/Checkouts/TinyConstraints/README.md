@@ -1,16 +1,16 @@
+**TinyConstraints** is the syntactic sugar that makes Auto Layout sweeter for human use.
+
 <p align="center">
     <img src="Art/header.png" width="890" alt="TinyConstraints"/>
     <img src="Art/header.gif" width="890" alt="TinyConstraints"/>
 </p>
 
-**TinyConstraints** is the syntactic sugar that makes Auto Layout sweeter for human use.
-
 ## Features
 
 - [X] Pure Swift 5 sweetness.
-- [X] Shortest possible syntax for creating layout constraints.
+- [X] Everything you can do with Auto Layout, but shorter.
 - [X] Constraints are active by default.
-- [X] 100% compatible with Auto Layout.
+- [X] 100% compatible with other Auto Layout code.
 - [X] Optionally store your constraints.
 - [X] Set constraint priorities upon creation.
 - [X] Constrain directly to the superview.
@@ -177,6 +177,11 @@ it, simply add the following line to your Cartfile:
 ```
 github "roberthein/TinyConstraints"
 ```
+
+## Tutorials
+
+Here are some [video tutorials](https://www.youtube.com/playlist?list=PL_csAAO9PQ8ZDbGk57RlBRnNpxBGBAEOc) made by [Alex Nagy](https://github.com/rebeloper).
+
 
 ## Suggestions or feedback?
 

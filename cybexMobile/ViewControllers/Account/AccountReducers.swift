@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func gAccountReducer(action: Action, state: AccountState?) -> AccountState {
+func gAccountReducer(action: ReSwift.Action, state: AccountState?) -> AccountState {
     let state = state ?? AccountState()
     return state
 }

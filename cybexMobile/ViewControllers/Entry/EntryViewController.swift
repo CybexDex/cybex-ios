@@ -122,7 +122,7 @@ extension EntryViewController {
     override func returnUserPassword(_ sender: String, textView: CybexTextView) {
         if let card = self.card, card.validatorPin(sender).success {
             UserManager.shared.enotesLogin(card.base58PubKey, account: card.account).done {
-                Defaults[.pinCodes][card.base58PubKey] = sender
+                Defaults[\.pinCodes][card.base58PubKey] = sender
                 self.passwordPassed(true)
                 self.coordinator?.dismiss()
                 }.catch({ (error) in

@@ -23,22 +23,22 @@ struct ETOState: BaseState {
 }
 
 // MARK: - Action
-struct FetchProjectModelAction: Action {
+struct FetchProjectModelAction: ReSwift.Action {
     var data: [ETOProjectModel]
 }
 
-struct FetchBannerModelAction: Action {
+struct FetchBannerModelAction: ReSwift.Action {
     var data: [ETOBannerModel]
 }
 
-struct SetSelectedProjectModelAction: Action {
+struct SetSelectedProjectModelAction: ReSwift.Action {
     var data: ETOProjectViewModel
 }
 
-struct SetSelectedBannerModelAction: Action {
+struct SetSelectedBannerModelAction: ReSwift.Action {
     var data: ETOBannerModel
 }
 
-struct ResetBannerUrlsAction: Action {
+struct ResetBannerUrlsAction: ReSwift.Action {
     var data: [ETOBannerModel]
 }

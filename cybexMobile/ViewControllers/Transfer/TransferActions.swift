@@ -38,34 +38,34 @@ struct TransferState: BaseState {
     var toAccount: BehaviorRelay<Account?> = BehaviorRelay(value: nil)
 }
 
-struct ValidAccountAction: Action {
+struct ValidAccountAction: ReSwift.Action {
     var status: AccountValidStatus = .unValided
 }
 
-struct ValidAmountAction: Action {
+struct ValidAmountAction: ReSwift.Action {
     var isValid: Bool = false
 }
 
-struct SetBalanceAction: Action {
+struct SetBalanceAction: ReSwift.Action {
     let balance: Balance
 }
 
-struct SetFeeAction: Action {
+struct SetFeeAction: ReSwift.Action {
     let fee: Fee
 }
 
-struct SetToAccountAction: Action {
+struct SetToAccountAction: ReSwift.Action {
     let account: Account?
 }
 
-struct ResetDataAction: Action {
+struct ResetDataAction: ReSwift.Action {
 
 }
 
-struct CleanToAccountAction: Action {
+struct CleanToAccountAction: ReSwift.Action {
 
 }
 
-struct ChooseAccountAction: Action {
+struct ChooseAccountAction: ReSwift.Action {
     var account: TransferAddress
 }

@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import SwiftyJSON
 
-func tradeHistoryReducer(action: Action, state: TradeHistoryState?) -> TradeHistoryState {
+func tradeHistoryReducer(action: ReSwift.Action, state: TradeHistoryState?) -> TradeHistoryState {
     let state = state ?? TradeHistoryState()
 
     switch action {

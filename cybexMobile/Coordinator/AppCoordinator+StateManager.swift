@@ -58,7 +58,7 @@ extension AppCoordinator {
         fetchMarketListTimer = Observable<Int>.interval(UserManager.shared.refreshTime, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (n) in
             guard let self = self else { return }
 
-            if reachability.connection == .none ||
+            if reachability.connection == .unavailable ||
                 !CybexWebSocketService.shared.checkNetworConnected() {
                 self.fetchMarketListTimer?.dispose()
                 return

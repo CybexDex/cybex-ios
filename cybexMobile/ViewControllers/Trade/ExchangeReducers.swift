@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func exchangeReducer(action: Action, state: ExchangeState?) -> ExchangeState {
+func exchangeReducer(action: ReSwift.Action, state: ExchangeState?) -> ExchangeState {
     let state = state ?? ExchangeState()
 
     return state

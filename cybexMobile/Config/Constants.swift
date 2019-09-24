@@ -107,7 +107,7 @@ enum ObjectID {
 
 enum HashAlgorithm: String, CaseIterable {
     case ripemd160
-    case xxx
+    case sha1
     case sha256
 
     func asInt() -> Int {

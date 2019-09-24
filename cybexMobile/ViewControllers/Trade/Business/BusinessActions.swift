@@ -25,33 +25,33 @@ struct BusinessState: BaseState {
     var balance: BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
 }
 
-struct ChangePriceAction: Action {
+struct ChangePriceAction: ReSwift.Action {
     var price: String
 }
 
-struct ChangeAmountAction: Action {
+struct ChangeAmountAction: ReSwift.Action {
     var amount: String
 }
 
-struct AdjustPriceAction: Action {
+struct AdjustPriceAction: ReSwift.Action {
     var plus: Bool
     var pricision: Int
 }
 
-struct FeeFetchedAction: Action {
+struct FeeFetchedAction: ReSwift.Action {
     var success: Bool
     var amount: Decimal
     var assetID: String
 }
 
-struct BalanceFetchedAction: Action {
+struct BalanceFetchedAction: ReSwift.Action {
     var amount: Decimal
 }
 
-struct SwitchPercentAction: Action {
+struct SwitchPercentAction: ReSwift.Action {
     var amount: Decimal
     var pricision: Int
 }
 
-struct ResetTrade: Action {
+struct ResetTrade: ReSwift.Action {
 }

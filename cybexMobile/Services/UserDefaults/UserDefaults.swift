@@ -10,27 +10,27 @@ import Foundation
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    static let theme = DefaultsKey<Int>("theme", defaultValue: 0)
-    static let language = DefaultsKey<String>("language", defaultValue: "")
-    static let refreshTime = DefaultsKey<Double>("refreshTime", defaultValue: 0)
-    static let frequencyType = DefaultsKey<Int>("frequency_type", defaultValue: 0)
-    static let loginType = DefaultsKey<Int>("logintype", defaultValue: 0)
-    static let locktime = DefaultsKey<Int>("locktime", defaultValue: UserManager.LockTime.low.rawValue)
-    static let unlockType = DefaultsKey<Int>("unlockType", defaultValue: 0)
-    static let pinCodes = DefaultsKey<[String: Any]>("pincodes", defaultValue: [:])
+    var theme : DefaultsKey<Int> { .init("theme", defaultValue: 0) }
+    var language : DefaultsKey<String> { .init("language", defaultValue: "") }
+    var refreshTime : DefaultsKey<Double> {.init("refreshTime", defaultValue: 0)}
+    var frequencyType : DefaultsKey<Int> {.init("frequency_type", defaultValue: 0)}
+    var loginType : DefaultsKey<Int>{.init("logintype", defaultValue: 0)}
+    var locktime : DefaultsKey<Int>{.init("locktime", defaultValue: UserManager.LockTime.low.rawValue)}
+    var unlockType : DefaultsKey<Int>{.init("unlockType", defaultValue: 0)}
+    var pinCodes : DefaultsKey<[String: Any]>{.init("pincodes", defaultValue: [:])}
 
-    static let username = DefaultsKey<String>("com.nbltrust.cybex.username", defaultValue: "")
-    static let keys = DefaultsKey<String>("com.nbltrust.cybex.keys", defaultValue: "")
-    static let enotesKeys = DefaultsKey<String>("com.nbltrust.cybex.enotesKeys", defaultValue: "")
-    static let account = DefaultsKey<String>("com.nbltrust.cybex.account", defaultValue: "")
+    var username : DefaultsKey<String>{.init("com.nbltrust.cybex.username", defaultValue: "")}
+    var keys : DefaultsKey<String>{.init("com.nbltrust.cybex.keys", defaultValue: "")}
+    var enotesKeys : DefaultsKey<String>{.init("com.nbltrust.cybex.enotesKeys", defaultValue: "")}
+    var account : DefaultsKey<String>{.init("com.nbltrust.cybex.account", defaultValue: "")}
 
-    static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList", defaultValue: [])
-    static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList", defaultValue: [])
+    var transferAddressList : DefaultsKey<[TransferAddress]>{.init("TransferAddressList", defaultValue: [])}
+    var withdrawAddressList : DefaultsKey<[WithdrawAddress]>{.init("WithdrawAddressList", defaultValue: [])}
 
-    static let environment = DefaultsKey<String>("environment", defaultValue: "product")
-    static let showContestTip = DefaultsKey<Bool>("showContestTip", defaultValue: false)
+    var environment : DefaultsKey<String>{.init("environment", defaultValue: "product")}
+    var showContestTip : DefaultsKey<Bool>{.init("showContestTip", defaultValue: false)}
 
-    static let isRealName = DefaultsKey<Bool>("isRealName", defaultValue: false)
-    
-    static let hasCode = DefaultsKey<Bool>("hasCode", defaultValue: false)
+    var isRealName : DefaultsKey<Bool>{.init("isRealName", defaultValue: false)}
+
+        var hasCode : DefaultsKey<Bool>{.init("hasCode", defaultValue: false)}
 }

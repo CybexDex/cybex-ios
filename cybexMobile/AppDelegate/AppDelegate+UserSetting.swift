@@ -12,27 +12,27 @@ import SwiftyUserDefaults
 
 extension AppDelegate {
     func setupUserSetting() {
-        let name = Defaults[.username]
+        let name = Defaults[\.username]
         if name.count > 0 {
             UserManager.shared.name.accept(name)
         }
 
-        let loginType = Defaults[.loginType]
+        let loginType = Defaults[\.loginType]
         if loginType > 0 {
             UserManager.shared.loginType = UserManager.LoginType(rawValue: loginType)!
         } else {
             UserManager.shared.logout()
         }
 
-        let unlockType = Defaults[.unlockType]
+        let unlockType = Defaults[\.unlockType]
         if unlockType > 0 {
             UserManager.shared.unlockType = UserManager.UnlockType(rawValue: unlockType)!
         }
 
-        UserManager.shared.lockTime = UserManager.LockTime(rawValue: Defaults[.locktime])!
+        UserManager.shared.lockTime = UserManager.LockTime(rawValue: Defaults[\.locktime])!
 
-        if Defaults.hasKey(.frequencyType) {
-            UserManager.shared.frequencyType = FrequencyType(rawValue: Defaults[.frequencyType])!
+        if Defaults.hasKey(\.frequencyType) {
+            UserManager.shared.frequencyType = FrequencyType(rawValue: Defaults[\.frequencyType])!
         }
 
         accountObserved()
@@ -59,6 +59,8 @@ extension AppDelegate {
                 }
             case .none:
 
+                break
+            case .unavailable:
                 break
             }
 

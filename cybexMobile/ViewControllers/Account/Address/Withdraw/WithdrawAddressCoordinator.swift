@@ -8,8 +8,7 @@
 
 import UIKit
 import ReSwift
-import NBLCommonModule
-import XLActionController
+
 
 protocol WithdrawAddressCoordinatorProtocol {
     func openActionVC(_ dismissCallback: CommonCallback?)

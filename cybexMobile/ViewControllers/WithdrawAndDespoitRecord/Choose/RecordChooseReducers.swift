@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func recordChooseReducer(action: Action, state: RecordChooseState?) -> RecordChooseState {
+func recordChooseReducer(action: ReSwift.Action, state: RecordChooseState?) -> RecordChooseState {
     let state = state ?? RecordChooseState()
 
     switch action {

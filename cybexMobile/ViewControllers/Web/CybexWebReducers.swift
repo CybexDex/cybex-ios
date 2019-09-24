@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func cybexWebReducer(action: Action, state: CybexWebState?) -> CybexWebState {
+func cybexWebReducer(action: ReSwift.Action, state: CybexWebState?) -> CybexWebState {
     let state = state ?? CybexWebState()
 
     switch action {

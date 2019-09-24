@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import RxCocoa
 
-func withdrawAddressHomeReducer(action: Action, state: WithdrawAddressHomeState?) -> WithdrawAddressHomeState {
+func withdrawAddressHomeReducer(action: ReSwift.Action, state: WithdrawAddressHomeState?) -> WithdrawAddressHomeState {
     let state = state ?? WithdrawAddressHomeState()
 
     switch action {

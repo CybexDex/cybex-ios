@@ -147,6 +147,8 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             case .none:
                 self.service.disconnect()
                 break
+            case .unavailable:
+                break
             }
         }
 

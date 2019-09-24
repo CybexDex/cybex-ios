@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func transferDetailReducer(action: Action, state: TransferDetailState?) -> TransferDetailState {
+func transferDetailReducer(action: ReSwift.Action, state: TransferDetailState?) -> TransferDetailState {
     let state = state ?? TransferDetailState()
     return state
 }

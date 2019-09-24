@@ -24,18 +24,18 @@ struct RechargeState: BaseState {
     var sortedName: BehaviorRelay<String> = BehaviorRelay(value: "")
 }
 
-struct FecthWithdrawIds: Action {
+struct FecthWithdrawIds: ReSwift.Action {
     let data: [Trade]
 }
 
-struct FecthDepositIds: Action {
+struct FecthDepositIds: ReSwift.Action {
     let data: [Trade]
 }
 
-struct SortedByEmptyAssetAction: Action {
+struct SortedByEmptyAssetAction: ReSwift.Action {
     let data: Bool
 }
 
-struct SortedByNameAssetAction: Action {
+struct SortedByNameAssetAction: ReSwift.Action {
     let data: String
 }

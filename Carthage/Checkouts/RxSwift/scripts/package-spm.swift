@@ -268,9 +268,8 @@ func buildAllTestsTarget(_ testsPath: String) throws {
     try serializedMainContent.write(toFile: "\(testsPath)/main.swift", atomically: true, encoding: String.Encoding.utf8)
 }
 
-try packageRelativePath(["RxAtomic/RxAtomic.c"], targetDirName: "RxAtomic")
-try packageRelativePath(["RxAtomic/include"], targetDirName: "RxAtomic/include")
 try packageRelativePath(["RxSwift"], targetDirName: "RxSwift")
+try packageRelativePath(["RxRelay"], targetDirName: "RxRelay")
 try packageRelativePath([
     "RxCocoa/RxCocoa.swift",
     "RxCocoa/Deprecated.swift",
@@ -298,6 +297,7 @@ try packageRelativePath(["RxTest"], targetDirName: "RxTest")
 // It doesn't work under `Tests` subpath ¯\_(ツ)_/¯
 try packageRelativePath([
         "Tests/RxSwiftTests",
+        "Tests/RxRelayTests",
         "Tests/RxBlockingTests",
         "RxSwift/RxMutableBox.swift",
         "Tests/RxTest.swift",

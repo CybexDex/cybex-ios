@@ -112,9 +112,6 @@ class WithdrawDetailViewController: BaseViewController {
         }
         startLoading()
         self.isFetching = true
-        if let name = self.trade?.name {
-            self.coordinator?.resetDepositAddress(name)
-        }
     }
 }
 

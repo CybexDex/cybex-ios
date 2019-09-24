@@ -1,6 +1,6 @@
 import Dispatch
 
-public final class DataLoader<Key: Hashable, Value> {
+final class DataLoader<Key: Hashable, Value> {
   public typealias BatchLoad = ([Key]) -> Promise<[Value]>
   typealias Load = (key: Key, fulfill: (Value) -> Void, reject: (Error) -> Void)
   
@@ -47,7 +47,9 @@ public final class DataLoader<Key: Hashable, Value> {
       
       let keys = loads.map { $0.key }
       
-      self.batchLoad(keys).andThen { values in
+      self.batchLoad(keys).catch { error in
+        loads.forEach { $0.reject(error) }
+      }.andThen { values in
         for (load, value) in zip(loads, values) {
           load.fulfill(value)
         }

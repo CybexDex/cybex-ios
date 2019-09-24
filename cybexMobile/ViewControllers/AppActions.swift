@@ -130,44 +130,44 @@ struct Pair: Hashable {//id
 class LoadingActionCreator {
 }
 
-struct RouteContextAction: Action {
+struct RouteContextAction: ReSwift.Action {
     var context: RouteContext?
 }
 
-struct PageStateAction: Action {
+struct PageStateAction: ReSwift.Action {
     var state: PageState
 }
 
 // MARK: - Common Actions
-struct StartLoading: Action {
+struct StartLoading: ReSwift.Action {
     var vc: BaseViewController?
 }
-struct EndLoading: Action {
+struct EndLoading: ReSwift.Action {
     var vc: BaseViewController?
 }
 
-struct NoData: Action {
+struct NoData: ReSwift.Action {
 }
 
-struct NetworkErrorMessage: Action {
+struct NetworkErrorMessage: ReSwift.Action {
     let errorMessage: String
 }
-struct CleanErrorMessage: Action {}
+struct CleanErrorMessage: ReSwift.Action {}
 
-struct NextPage: Action {}
+struct NextPage: ReSwift.Action {}
 
-struct ResetPage: Action {}
+struct ResetPage: ReSwift.Action {}
 
-struct TickerFetched: Action {
+struct TickerFetched: ReSwift.Action {
     let asset: Ticker
 }
 
-struct RefreshState: Action {
+struct RefreshState: ReSwift.Action {
     let sel: Selector
     let vc: BaseViewController?
 }
 
-struct AssetInfoAction: Action {
+struct AssetInfoAction: ReSwift.Action {
     let info: [AssetInfo]
 }
 

@@ -1,0 +1,124 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ActiveLabel",
+        "repositoryURL": "https://github.com/optonaut/ActiveLabel.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "dacc4cfbcdf511424985ce8a1a9260345bd8f2d5",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "DifferenceKit",
+        "repositoryURL": "https://github.com/ra1028/DifferenceKit.git",
+        "state": {
+          "branch": null,
+          "revision": "4eb31f8e85e4cb13732f9664d6e01e507cd592a0",
+          "version": "1.1.3"
+        }
+      },
+      {
+        "package": "Guitar",
+        "repositoryURL": "https://github.com/ArtSabintsev/Guitar.git",
+        "state": {
+          "branch": "master",
+          "revision": "0dcb356fb7fcf669509c198d4cd486eeff542b17",
+          "version": null
+        }
+      },
+      {
+        "package": "IQKeyboardManagerSwift",
+        "repositoryURL": "https://github.com/hackiftekhar/IQKeyboardManager",
+        "state": {
+          "branch": null,
+          "revision": "be563396713fa3a6bf286c1b98bfb0d85ef0e650",
+          "version": "6.4.2"
+        }
+      },
+      {
+        "package": "R.swift.Library",
+        "repositoryURL": "https://github.com/mac-cain13/R.swift.Library",
+        "state": {
+          "branch": "master",
+          "revision": "3365947d725398694d6ed49f2e6622f05ca3fc0f",
+          "version": null
+        }
+      },
+      {
+        "package": "Reachability",
+        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
+        "state": {
+          "branch": "master",
+          "revision": "92c47e653f38c258affb1055615a2298cbf7152f",
+          "version": null
+        }
+      },
+      {
+        "package": "Repeat",
+        "repositoryURL": "https://github.com/malcommac/Repeat.git",
+        "state": {
+          "branch": null,
+          "revision": "9df757d0936c15dfd9d01067766fab87e927f838",
+          "version": "0.6.0"
+        }
+      },
+      {
+        "package": "ReSwift",
+        "repositoryURL": "https://github.com/ReSwift/ReSwift",
+        "state": {
+          "branch": null,
+          "revision": "b92762b5aa85c5e94053d942fbd37124ee939e5b",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "SwifterSwift",
+        "repositoryURL": "https://github.com/SwifterSwift/SwifterSwift",
+        "state": {
+          "branch": null,
+          "revision": "644ebf4ba6e282712406c448bed90010fd4d7360",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "SwiftRichString",
+        "repositoryURL": "https://github.com/malcommac/SwiftRichString",
+        "state": {
+          "branch": "develop",
+          "revision": "2c8e0db2b74496006da30931341bae1962f68e39",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON",
+        "state": {
+          "branch": null,
+          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "SwiftyUserDefaults",
+        "repositoryURL": "https://github.com/sunshinejr/SwiftyUserDefaults",
+        "state": {
+          "branch": "master",
+          "revision": "bbb5f8e0f325c5d5f4eb6ac353d615f7fab00d60",
+          "version": null
+        }
+      },
+      {
+        "package": "TinyConstraints",
+        "repositoryURL": "https://github.com/roberthein/TinyConstraints",
+        "state": {
+          "branch": null,
+          "revision": "f413ea53b886de81b925eeb37a14538fe6ae4912",
+          "version": "4.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

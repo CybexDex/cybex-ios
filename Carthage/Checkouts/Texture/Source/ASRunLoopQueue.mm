@@ -10,12 +10,9 @@
 #import <AsyncDisplayKit/ASAvailability.h>
 #import <AsyncDisplayKit/ASConfigurationInternal.h>
 #import <AsyncDisplayKit/ASLog.h>
-#import <AsyncDisplayKit/ASObjectDescriptionHelpers.h>
 #import <AsyncDisplayKit/ASRunLoopQueue.h>
 #import <AsyncDisplayKit/ASThread.h>
 #import <AsyncDisplayKit/ASSignpost.h>
-#import <QuartzCore/QuartzCore.h>
-#import <cstdlib>
 #import <deque>
 #import <vector>
 
@@ -149,8 +146,8 @@ static void runLoopSourceCallback(void *info) {
     }
     
     // Self is guaranteed to outlive the observer.  Without the high cost of a weak pointer,
-    // __unsafe_unretained allows us to avoid flagging the memory cycle detector.
-    __unsafe_unretained __typeof__(self) weakSelf = self;
+    // unowned(__unsafe_unretained) allows us to avoid flagging the memory cycle detector.
+    unowned __typeof__(self) weakSelf = self;
     void (^handlerBlock) (CFRunLoopObserverRef observer, CFRunLoopActivity activity) = ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
       [weakSelf processQueue];
     };
@@ -215,7 +212,7 @@ static void runLoopSourceCallback(void *info) {
       return;
     }
 
-    ASSignpostStart(ASSignpostRunLoopQueueBatch);
+    ASSignpostStart(RunLoopQueueBatch, self, "%s", object_getClassName(self));
 
     // Snatch the next batch of items.
     NSInteger maxCountToProcess = MIN(internalQueueCount, self.batchSize);
@@ -233,7 +230,7 @@ static void runLoopSourceCallback(void *info) {
        * object will be added to the autorelease pool. If the queue is strong,
        * it will retain the object until we transfer it (retain it) in itemsToProcess.
        */
-      __unsafe_unretained id ptr = (__bridge id)[_internalQueue pointerAtIndex:i];
+      unowned id ptr = (__bridge id)[_internalQueue pointerAtIndex:i];
       if (ptr != nil) {
         foundItemCount++;
         if (hasExecutionBlock) {
@@ -263,7 +260,7 @@ static void runLoopSourceCallback(void *info) {
     as_activity_scope_verbose(as_activity_create("Process run loop queue batch", _rootActivity, OS_ACTIVITY_FLAG_DEFAULT));
     const auto itemsEnd = itemsToProcess.cend();
     for (auto iterator = itemsToProcess.begin(); iterator < itemsEnd; iterator++) {
-      __unsafe_unretained id value = *iterator;
+      unowned id value = *iterator;
       _queueConsumer(value, isQueueDrained && iterator == itemsEnd - 1);
       as_log_verbose(ASDisplayLog(), "processed %@", value);
     }
@@ -278,7 +275,7 @@ static void runLoopSourceCallback(void *info) {
     CFRunLoopWakeUp(_runLoop);
   }
   
-  ASSignpostEnd(ASSignpostRunLoopQueueBatch);
+  ASSignpostEnd(RunLoopQueueBatch, self, "count: %d", (int)count);
 }
 
 - (void)enqueue:(id)object
@@ -378,8 +375,8 @@ dispatch_once_t _ASSharedCATransactionQueueOnceToken;
     }
 
     // Self is guaranteed to outlive the observer.  Without the high cost of a weak pointer,
-    // __unsafe_unretained allows us to avoid flagging the memory cycle detector.
-    __unsafe_unretained __typeof__(self) weakSelf = self;
+    // unowned(__unsafe_unretained) allows us to avoid flagging the memory cycle detector.
+    unowned __typeof__(self) weakSelf = self;
     _preTransactionObserver = CFRunLoopObserverCreateWithHandler(NULL, kCFRunLoopBeforeWaiting, true, kASASCATransactionQueueOrder, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
       while (!weakSelf->_internalQueue.empty()) {
         [weakSelf processQueue];
@@ -440,7 +437,7 @@ dispatch_once_t _ASSharedCATransactionQueueOnceToken;
     return;
   }
   as_activity_scope_verbose(as_activity_create("Process run loop queue batch", _rootActivity, OS_ACTIVITY_FLAG_DEFAULT));
-  ASSignpostStart(ASSignpostRunLoopQueueBatch);
+  ASSignpostStart(RunLoopQueueBatch, self, "CATransactionQueue");
   
   // Swap buffers, clear our hash table.
   _internalQueue.swap(_batchBuffer);
@@ -455,7 +452,7 @@ dispatch_once_t _ASSharedCATransactionQueueOnceToken;
   }
   _batchBuffer.clear();
   as_log_verbose(ASDisplayLog(), "processed %lu items", (unsigned long)count);
-  ASSignpostEnd(ASSignpostRunLoopQueueBatch);
+  ASSignpostEnd(RunLoopQueueBatch, self, "count: %d", (int)count);
 }
 
 - (void)enqueue:(id<ASCATransactionQueueObserving>)object

@@ -1,6 +1,26 @@
 # master
 *Please add new entries at the top.*
 
+# 6.1.0
+
+1. add possibility to use `all` and `any` operators with array of arguments (#735, kudos to @olejnjak)
+   ```swift
+   let property = Property.any([boolProperty1, boolProperty2, boolProperty3])
+   ```
+1. Fixed Result extensions ambiguity (#733, kudos to @nekrich)
+1. Add `<~` binding operator to `Signal.Observer` (#635, kudos to @Marcocanc)
+
+# 6.0.0
+1. Dropped support for Swift 4.2 (Xcode 9)
+2. Removed dependency on https://github.com/antitypical/Result (#702, kudos to @NachoSoto and @mdiep)
+
+**Upgrade to 6.0.0**
+
+* If you have used `Result` only as dependency of `ReactiveSwift`, remove all instances of `import Result`, `import enum Result.NoError` or `import struct Result.AnyError` and remove the `Result` Framework from your project.
+* Replace all cases where `NoError` was used in a `Signal` or `SignalProducer` with `Never`
+* Replace all cases where `AnyError` was used in a `Signal` or `SignalProducer` with `Swift.Error`
+
+
 # 5.0.1
 1. Fix warnings in Xcode 10.2
 

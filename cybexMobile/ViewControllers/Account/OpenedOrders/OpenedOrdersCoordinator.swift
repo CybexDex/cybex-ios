@@ -129,6 +129,8 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
             case .none:
                 self.service.disconnect()
                 break
+            case .unavailable:
+                break
             }
         }
 

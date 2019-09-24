@@ -28,14 +28,14 @@ struct ETODetailState: BaseState {
 
 // MARK: - Action
 
-struct SetProjectDetailAction: Action {
+struct SetProjectDetailAction: ReSwift.Action {
     var data: ETOProjectModel
 }
 
-struct FetchUserStateAction: Action {
+struct FetchUserStateAction: ReSwift.Action {
     var data: ETOUserAuditModel
 }
 
-struct RefrehProjectModelAction: Action {
+struct RefrehProjectModelAction: ReSwift.Action {
     var data: ETOShortProjectStatusModel
 }

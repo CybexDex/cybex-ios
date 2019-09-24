@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Kingfisher"
-  s.version      = "5.3.1"
+  s.version      = "5.7.1"
   s.summary      = "A lightweight and pure Swift implemented library for downloading and cacheing image from the web."
 
   s.description  = <<-DESC
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
   s.authors            = { "onevcat" => "onevcat@gmail.com" }
-  s.social_media_url   = "http://twitter.com/onevcat"
+  s.social_media_url   = "https://twitter.com/onevcat"
 
   s.swift_version = "4.2"
   s.swift_versions = ['4.0', '4.2', '5.0']

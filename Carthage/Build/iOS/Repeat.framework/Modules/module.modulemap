@@ -1,4 +1,0 @@
-framework module Repeat {
-  header "Repeat-Swift.h"
-  requires objc
-}

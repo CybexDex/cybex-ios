@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func myHistoryReducer(action: Action, state: MyHistoryState?) -> MyHistoryState {
+func myHistoryReducer(action: ReSwift.Action, state: MyHistoryState?) -> MyHistoryState {
     let state = state ?? MyHistoryState()
 
     switch action {

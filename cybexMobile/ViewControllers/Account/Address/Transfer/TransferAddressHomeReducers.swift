@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func transferAddressHomeReducer(action: Action, state: TransferAddressHomeState?) -> TransferAddressHomeState {
+func transferAddressHomeReducer(action: ReSwift.Action, state: TransferAddressHomeState?) -> TransferAddressHomeState {
     let state = state ?? TransferAddressHomeState()
 
     switch action {

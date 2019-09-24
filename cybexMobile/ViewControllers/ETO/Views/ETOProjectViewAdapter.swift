@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Fakery
 import Localize_Swift
 import RxSwift
 import RxCocoa

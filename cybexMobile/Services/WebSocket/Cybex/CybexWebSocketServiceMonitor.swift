@@ -17,7 +17,7 @@ extension CybexWebSocketService {
 
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notifi) in
             let status = reachability.connection
-            let reactable = (status != .none)
+            let reactable = (status != .unavailable)
 
             if !CybexWebSocketService.shared.checkNetworConnected() && !CybexWebSocketService.shared.needAutoConnect && reactable {//避免第一次 不是主动断开的链接
 
@@ -40,6 +40,8 @@ extension CybexWebSocketService {
                 CybexWebSocketService.shared.disconnect()
 
                 UIHelper.showErrorTop(R.string.localizable.noNetwork.key.localized())
+                break
+            case .unavailable:
                 break
             }
 

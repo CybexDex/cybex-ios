@@ -49,7 +49,7 @@
     
     navigationBar.theme_tintColor = globalBarTextColorPicker;
     navigationBar.theme_barTintColor = globalBarTintColorPicker;
-    navigationBar.theme_titleTextAttributes = [ThemeDictionaryPicker pickerWithDicts:titleAttributes];
+    navigationBar.theme_titleTextAttributes = [ThemeStringAttributesPicker pickerWithAttributes:titleAttributes];
 
     // tab bar
     

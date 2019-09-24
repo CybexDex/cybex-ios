@@ -21,7 +21,7 @@ struct LockupAssetsState: BaseState {
     var ethPrice: Double = 0
 }
 
-struct FetchedLockupAssetsData: Action {
+struct FetchedLockupAssetsData: ReSwift.Action {
     let data: [LockUpAssetsMData]
 }
 

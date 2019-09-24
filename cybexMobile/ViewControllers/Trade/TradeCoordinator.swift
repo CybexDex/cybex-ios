@@ -74,7 +74,7 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
     func showNoticeVC() {
         let v = CybexScrollNoticeView.show()
         v.didConfirmNotTip.delegate(on: self) { (self, _) in
-            Defaults[.showContestTip] = false
+            Defaults[\.showContestTip] = false
         }
     }
 

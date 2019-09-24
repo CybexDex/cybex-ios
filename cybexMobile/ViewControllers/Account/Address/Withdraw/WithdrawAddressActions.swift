@@ -19,14 +19,14 @@ struct WithdrawAddressState: BaseState {
     var selectedAsset: BehaviorRelay<String?> = BehaviorRelay(value: "")
 }
 
-struct WithdrawAddressDataAction: Action {
+struct WithdrawAddressDataAction: ReSwift.Action {
     var data: [WithdrawAddress]
 }
 
-struct WithdrawAddressSelectDataAction: Action {
+struct WithdrawAddressSelectDataAction: ReSwift.Action {
     var data: WithdrawAddress?
 }
 
-struct SetSelectedAssetAction: Action {
+struct SetSelectedAssetAction: ReSwift.Action {
     var asset: String
 }

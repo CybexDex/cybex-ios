@@ -1,4 +1,0 @@
-framework module Fakery {
-  header "Fakery-Swift.h"
-  requires objc
-}

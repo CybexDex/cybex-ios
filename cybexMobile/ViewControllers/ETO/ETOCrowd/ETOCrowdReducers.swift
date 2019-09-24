@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func ETOCrowdReducer(action: Action, state: ETOCrowdState?) -> ETOCrowdState {
+func ETOCrowdReducer(action: ReSwift.Action, state: ETOCrowdState?) -> ETOCrowdState {
     let state = state ?? ETOCrowdState()
 
     switch action {

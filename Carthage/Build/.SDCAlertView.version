@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "SDCAlertView",
-      "hash" : "766834d0ef40d1f64cab944bd483176b4974ac73046cda22d3d132831f8ba0b7",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "d7dfcfe388cbd3f757ce0499614c0059032589ade888d96bc78e4401241760ea",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

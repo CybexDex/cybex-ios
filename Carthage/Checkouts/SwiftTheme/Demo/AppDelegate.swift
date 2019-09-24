@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationBar.theme_tintColor = GlobalPicker.barTextColor
         navigationBar.theme_barTintColor = GlobalPicker.barTintColor
-        navigationBar.theme_titleTextAttributes = ThemeDictionaryPicker.pickerWithAttributes(titleAttributes)
+        navigationBar.theme_titleTextAttributes = ThemeStringAttributesPicker.pickerWithAttributes(titleAttributes)
         
         // tab bar
         

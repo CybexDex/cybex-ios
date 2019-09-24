@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-import NBLCommonModule
+
 
 class WithdrawAddressViewController: BaseViewController {
     var asset: String = ""

@@ -18,6 +18,6 @@ struct TransferListState: BaseState {
     var data: BehaviorRelay<[TransferRecordViewModel]?> = BehaviorRelay(value: nil)
 }
 
-struct ReduceTansferRecordsAction: Action {
+struct ReduceTansferRecordsAction: ReSwift.Action {
     var data: [(TransferRecord, time: String)]
 }

@@ -14,7 +14,6 @@ import SwiftyJSON
 
 protocol WithdrawDetailCoordinatorProtocol {
     func fetchDepositAddress(_ assetName: String)
-    func resetDepositAddress(_ assetName: String)
     func openDepositRecode(_ assetName: String)
     func fetchDepositWordInfo(_ assetId: String)
 }
@@ -51,27 +50,10 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
                 return
             }
 
-            GatewayService().getDepositAddress(accountName: name, assetName: assetName).done { (data) in
-                if case let data? = data {
-                    self.store.dispatch(FetchAddressInfo(data: data))
-                } else {
-                    self.state.data.accept(nil)
-                }
-            }.cauterize()
+
         }
     }
 
-    func resetDepositAddress(_ assetName: String) {
-        if let name = UserManager.shared.name.value {
-            GatewayService().updateDepositAddress(accountName: name, assetName: assetName).done { (data) in
-                if case let data? = data {
-                    self.store.dispatch(FetchAddressInfo(data: data))
-                } else {
-                    self.state.data.accept(nil)
-                }
-            }.cauterize()
-        }
-    }
 
     func openDepositRecode(_ assetName: String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {

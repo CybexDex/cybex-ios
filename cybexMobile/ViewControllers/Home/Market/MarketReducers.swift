@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func marketReducer(action: Action, state: MarketState?) -> MarketState {
+func marketReducer(action: ReSwift.Action, state: MarketState?) -> MarketState {
     let state = state ?? MarketState()
     var klineDatas = state.detailData.value ?? [:]
 

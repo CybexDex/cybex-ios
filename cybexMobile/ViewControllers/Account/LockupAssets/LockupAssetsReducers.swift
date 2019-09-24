@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import SwiftTheme
 
-func gLockupAssetsReducer(action: Action, state: LockupAssetsState?) -> LockupAssetsState {
+func gLockupAssetsReducer(action: ReSwift.Action, state: LockupAssetsState?) -> LockupAssetsState {
     let state = state ?? LockupAssetsState()
     switch action {
     case let action as FetchedLockupAssetsData:

@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func businessReducer(action: Action, state: BusinessState?) -> BusinessState {
+func businessReducer(action: ReSwift.Action, state: BusinessState?) -> BusinessState {
     let state = state ?? BusinessState()
 
     switch action {

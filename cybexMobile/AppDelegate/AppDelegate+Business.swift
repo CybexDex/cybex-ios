@@ -56,7 +56,7 @@ extension AppDelegate {
 
     func monitorNetworkOfSetting() {
         //第一次会直接走回调
-        if reachability.connection == .none {
+        if reachability.connection == .unavailable {
             NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
                 guard let reachability = note.object as? Reachability else {
                     return
@@ -67,6 +67,8 @@ extension AppDelegate {
                     self.checkSetting()
                 case .none:
 
+                    break
+                case .unavailable:
                     break
                 }
 

@@ -1,10 +1,10 @@
 {
-  "commitish" : "1.3.1",
+  "commitish" : "1.4.0",
   "iOS" : [
     {
       "name" : "TangramKit",
-      "hash" : "74d09e1c73b34e7dcbc1a1b1f6fcbf5a20fe65013ce21e8d0ff9cc2af1d274ff",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "f1627671be580a12dcb53aca4cc51d8cba4455f15e9db93dbab369695f3ea32c",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

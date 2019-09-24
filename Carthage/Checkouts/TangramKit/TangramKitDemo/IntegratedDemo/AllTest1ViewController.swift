@@ -82,7 +82,7 @@ class AllTest1ViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         self.displayLink = CADisplayLink(target: self, selector: #selector(tick))
-        self.displayLink.add(to:.main, forMode: .commonModes)
+        self.displayLink.add(to:.main, forMode: RunLoop.Mode.common)
         
     }
     
@@ -108,14 +108,15 @@ class AllTest1ViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 60
         
         //设置所有cell的高度为高度自适应，如果cell高度是动态的请这么设置。 如果不同的cell有差异那么可以通过实现协议方法tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)来定制化处理。
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         
         //不仅是UITableviewCell的高度可以自适应，sectionHeader以及sectionFooter也一样的可以实现自适应高度，您同样的可以用相似的方法来进行处理。
         
         self.tableView.separatorStyle = .none
         self.tableView.register(AllTest1TableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "headerfooterview")
         self.tableView.register(AllTest1TableViewCell.self, forCellReuseIdentifier: "alltest1_cell")
-        
+        self.tableView.register(AllTest1TableViewCellForAutoLayout.self, forCellReuseIdentifier: "alltest1_cell_forautolayout")
+
         //初始化所有图片为未隐藏状态
         for _ in 0 ..< self.datas.count
         {
@@ -151,7 +152,7 @@ class AllTest1ViewController: UITableViewController {
     func createTableHeaderView() {
         //这个例子用来构建一个自适应高度的头部布局视图。
         let tableHeaderViewLayout = TGLinearLayout(.vert)
-        tableHeaderViewLayout.tg_padding = UIEdgeInsetsMake(10, 10, 10, 10)
+        tableHeaderViewLayout.tg_padding = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         tableHeaderViewLayout.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 0) //这里没有设置高度，但设置了明确的宽度
         //高度不确定可以设置为0。尽量不要在代码中使用kScreenWidth,kScreenHeight，SCREEN_WIDTH。之类这样的宏来设定视图的宽度和高度。要充分利用Tangram的特性，减少常数的使用。
         tableHeaderViewLayout.tg_width.equal(.fill) //这里注意设置宽度和父布局保持一致。
@@ -203,7 +204,7 @@ class AllTest1ViewController: UITableViewController {
     func createTableFooterView() {
         //这个例子用来构建一个固定高度的尾部布局视图。
         let tableFooterViewLayout = TGLinearLayout(.vert)
-        tableFooterViewLayout.tg_padding = UIEdgeInsetsMake(10, 10, 10, 10)
+        tableFooterViewLayout.tg_padding = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         tableFooterViewLayout.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 80) ////这里明确设定高度。
         tableFooterViewLayout.tg_width.equal(.fill) //这里注意设置宽度和父布局保持一致。
         tableFooterViewLayout.backgroundColor = CFTool.color(6)
@@ -274,22 +275,25 @@ class AllTest1ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        let cell:AllTest1TableViewCell = tableView.dequeueReusableCell(withIdentifier: "alltest1_cell", for:indexPath) as! AllTest1TableViewCell
+        let identifier:[String] = ["alltest1_cell", "alltest1_cell_forautolayout"]
+    
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier[Int(arc4random_uniform(2))], for:indexPath)
         
         let model = self.datas[indexPath.row]
         
-        cell.setModel(model: model,isImageMessageHidden:self.imageHiddenFlags[indexPath.row])
+        let all1cell = cell as! AllTest1Cell
+        
+        all1cell.setModel(model: model,isImageMessageHidden:self.imageHiddenFlags[indexPath.row])
         
         //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
         if (indexPath.row  == self.datas.count - 1)
         {
-            cell.rootLayout.tg_bottomBorderline = nil;
+            all1cell.rootLayout.tg_bottomBorderline = nil;
         }
         else
         {
             let bld = TGBorderline(color:UIColor.red)
-            cell.rootLayout.tg_bottomBorderline = bld;
+            all1cell.rootLayout.tg_bottomBorderline = bld;
         }
         
         

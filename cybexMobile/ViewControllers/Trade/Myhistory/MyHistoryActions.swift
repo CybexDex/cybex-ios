@@ -18,7 +18,7 @@ struct MyHistoryState: BaseState {
     var fillOrders: BehaviorRelay<[LimitOrderStatus]> = BehaviorRelay(value: [])
 }
 
-struct FillOrderDataFetchedAction: Action {
+struct FillOrderDataFetchedAction: ReSwift.Action {
     var data: [LimitOrderStatus]
     var all: Bool = false
 }

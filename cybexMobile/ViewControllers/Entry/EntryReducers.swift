@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func entryReducer(action: Action, state: EntryState?) -> EntryState {
+func entryReducer(action: ReSwift.Action, state: EntryState?) -> EntryState {
     let state = state ?? EntryState()
 
     return state

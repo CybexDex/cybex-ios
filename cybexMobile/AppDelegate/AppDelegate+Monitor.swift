@@ -9,7 +9,7 @@
 import Foundation
 import Reachability
 
-let reachability = Reachability()!
+let reachability = try! Reachability()
 
 extension AppDelegate {
     func monitorNetwork() {

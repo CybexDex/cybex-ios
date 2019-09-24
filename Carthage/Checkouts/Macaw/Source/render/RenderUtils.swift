@@ -20,7 +20,7 @@ class RenderUtils {
         _ node: Node,
         view: MacawView?,
         animationCache: AnimationCache?
-        ) -> NodeRenderer {
+    ) -> NodeRenderer {
         if let group = node as? Group {
             return GroupRenderer(group: group, view: view, animationCache: animationCache)
         } else if let shape = node as? Shape {

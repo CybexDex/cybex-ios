@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 import HandyJSON
-import NBLCommonModule
+
 import SwiftyJSON
 
 struct RechargeContext: RouteContext, HandyJSON {

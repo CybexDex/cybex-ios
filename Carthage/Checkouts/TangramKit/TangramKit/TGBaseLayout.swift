@@ -530,6 +530,25 @@ extension UIView
         self.tg_height.equalHelper(val: height)
     }
     
+    /// 高宽相等时设置tg_width和tg_height的简化方法。
+    ///
+    /// - Parameters:
+    ///   - sidelength: 边长
+    public func tg_size(_ sideLength: TGLayoutSize)
+    {
+        self.tg_width.equal(sideLength)
+        self.tg_height.equal(sideLength)
+    }
+    
+    /// 高宽相等时设置tg_width和tg_height的简化方法。
+    ///
+    /// - Parameters:
+    ///   - sidelength: 边长
+    public func tg_size(_ sideLength: TGLayoutSizeType)
+    {
+        self.tg_width.equalHelper(val: sideLength)
+        self.tg_height.equalHelper(val: sideLength)
+    }
     
     /// 四周边距或者间距设置的简化方法
     ///
@@ -674,9 +693,6 @@ public class TGBorderline
     
 }
 
-@available(*, deprecated:1.0.5, message: "use TGBorderline to instead", renamed:"TGBorderline")
-public typealias TGLayoutBorderline = TGBorderline
-
 /**
  布局视图基类，基类不支持实例化对象。在编程时我们经常会用到一些视图，这种视图只是负责将里面的子视图按照某种规则进行排列和布局，而别无其他的作用。因此我们称这种视图为容器视图或者称为布局视图。
 
@@ -700,6 +716,11 @@ open class TGBaseLayout: UIView,TGLayoutViewSizeClass {
         {
             TGViewSizeClassImpl.IsRTL = newValue
         }
+    }
+    
+    public static func tg_updateArabicUI(_ isArabic:Bool, inWindow window:UIWindow)
+    {
+        window.tgUpdateBasisUIView(isArabic)
     }
     
     
@@ -1059,22 +1080,6 @@ open class TGBaseLayout: UIView,TGLayoutViewSizeClass {
      在布局视图进行布局时是否调用基类的layoutSubviews方法，默认设置为false。
      */
     public var tg_priorAutoresizingMask:Bool = false
-    
-    /**
-     这个属性在新版本将失效并且无任何意义了。如果想让子视图隐藏时是否继续占据位置则请参考使用子视图的tg_visibility属性来设置。
-     */
-    @available(*, deprecated:1.0.6, message: "this property was invalid, please use subview's tg_visibility to instead")
-    public var tg_layoutHiddenSubviews:Bool
-        {
-        get
-        {
-             return false
-        }
-        set
-        {
-           print("tg_layoutHiddenSubviews is invalid please use subview's tg_visibility to instead")
-        }
-    }
     
     /// 返回当前布局视图是否正在执行布局。
     public private(set) var tg_isLayouting = false
@@ -1477,6 +1482,165 @@ open class TGBaseLayout: UIView,TGLayoutViewSizeClass {
         }
         
     }
+    
+    override open func setNeedsLayout() {
+        super.setNeedsLayout()
+        if !self.translatesAutoresizingMaskIntoConstraints
+        {
+            let lsc = self.tgCurrentSizeClass as! TGViewSizeClassImpl
+            if lsc.width.isWrap || lsc.height.isWrap
+            {
+                self.invalidateIntrinsicContentSize()
+            }
+        }
+    }
+    
+    
+   override open var intrinsicContentSize: CGSize
+        {
+        get{
+           
+            var sz:CGSize = super.intrinsicContentSize
+            let lsc = self.tgCurrentSizeClass as! TGViewSizeClassImpl
+            if (!self.translatesAutoresizingMaskIntoConstraints && (lsc.width.isWrap || lsc.height.isWrap) && self.superview != nil)
+            {
+                if lsc.width.isWrap && lsc.height.isWrap
+                {
+                    sz = self.sizeThatFits(CGSize.zero)
+                }
+                else if lsc.width.isWrap
+                {
+                    var heightConstraint:NSLayoutConstraint! = nil
+                    for constraint:NSLayoutConstraint in self.constraints
+                    {
+                        if (constraint.firstItem === self && constraint.firstAttribute == NSLayoutConstraint.Attribute.height)
+                        {
+                            heightConstraint = constraint
+                            break
+                        }
+                    }
+                    
+                    if (heightConstraint == nil)
+                    {
+                        for constraint:NSLayoutConstraint in self.superview!.constraints
+                        {
+                            if (constraint.firstItem === self && constraint.firstAttribute == NSLayoutConstraint.Attribute.height)
+                            {
+                                heightConstraint = constraint
+                                break
+                            }
+                        }
+                    }
+                    
+                    if (heightConstraint != nil)
+                    {
+                        var dependHeight:CGFloat = -1
+                        if let t = heightConstraint.secondItem as? UIView
+                        {
+                            let dependViewRect = t.bounds
+                            if heightConstraint.secondAttribute == NSLayoutConstraint.Attribute.height
+                            {
+                                dependHeight = dependViewRect.height
+                            }
+                            else if heightConstraint.secondAttribute == NSLayoutConstraint.Attribute.width
+                            {
+                                dependHeight = dependViewRect.width
+                            }
+                            else
+                            {
+                                dependHeight = -1
+                            }
+                        }
+                        else if heightConstraint.secondItem == nil
+                        {
+                            dependHeight = 0
+                        }
+                        else
+                        {
+                            
+                        }
+                        
+                        if dependHeight != -1
+                        {
+                            dependHeight *= heightConstraint.multiplier
+                            dependHeight += heightConstraint.constant
+                            
+                            sz.width = self.sizeThatFits(CGSize(width: 0, height: dependHeight)).width
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    var widthConstraint:NSLayoutConstraint! = nil
+                    for constraint:NSLayoutConstraint in self.constraints
+                    {
+                        if (constraint.firstItem === self && constraint.firstAttribute == NSLayoutConstraint.Attribute.width)
+                        {
+                            widthConstraint = constraint
+                            break
+                        }
+                    }
+                    
+                    if (widthConstraint == nil)
+                    {
+                        for constraint:NSLayoutConstraint in self.superview!.constraints
+                        {
+                            if (constraint.firstItem === self && constraint.firstAttribute == NSLayoutConstraint.Attribute.width)
+                            {
+                                widthConstraint = constraint
+                                break
+                            }
+                        }
+                    }
+                    
+                    if (widthConstraint != nil)
+                    {
+                        var dependWidth:CGFloat = -1
+                        if let t = widthConstraint.secondItem as? UIView
+                        {
+                            let dependViewRect = t.bounds
+                            if widthConstraint.secondAttribute == NSLayoutConstraint.Attribute.width
+                            {
+                                dependWidth = dependViewRect.width
+                            }
+                            else if widthConstraint.secondAttribute == NSLayoutConstraint.Attribute.height
+                            {
+                                dependWidth = dependViewRect.height
+                            }
+                            else
+                            {
+                                dependWidth = -1
+                            }
+                        }
+                        else if widthConstraint.secondItem == nil
+                        {
+                            dependWidth = 0
+                        }
+                        else
+                        {
+                            
+                        }
+                        
+                        if dependWidth != -1
+                        {
+                            dependWidth *= widthConstraint.multiplier
+                            dependWidth += widthConstraint.constant
+                            
+                            sz.height = self.sizeThatFits(CGSize(width: dependWidth, height: 0)).height
+                        }
+                    }
+                }
+                
+            }
+
+            return sz
+           
+        }
+    }
+
+    
+    
     
     override open func layoutSubviews() {
         
@@ -4421,6 +4585,28 @@ extension UIView
         return TGViewSizeClassImpl(view:self)
     }
     
+}
+
+extension UIWindow
+{
+    fileprivate func tgUpdateBasisUIView(_ isRTL:Bool)
+    {
+        TGBaseLayout.tg_isRTL = isRTL
+        self.tgSetBasisUISubviewsNeedLayout(self)
+    }
+    
+    fileprivate func tgSetBasisUISubviewsNeedLayout(_ v:UIView)
+    {
+        for sv:UIView in v.subviews
+        {
+            if let t = sv as? TGBaseLayout
+            {
+                t.setNeedsLayout()
+            }
+            
+            tgSetBasisUISubviewsNeedLayout(sv)
+        }
+    }
 }
 
 

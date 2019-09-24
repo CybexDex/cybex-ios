@@ -28,10 +28,10 @@ struct WithdrawAddressHomeViewModel {
     var model: Trade = Trade()
 }
 
-struct WithdrawAddressHomeSelectedAction: Action {
+struct WithdrawAddressHomeSelectedAction: ReSwift.Action {
     var index: Int
 }
 
-struct WithdrawAddressHomeAddressDataAction: Action {
+struct WithdrawAddressHomeAddressDataAction: ReSwift.Action {
     var data: [String: [WithdrawAddress]]
 }

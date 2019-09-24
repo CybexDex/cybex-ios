@@ -65,7 +65,7 @@ struct TestCustomAppState: StateType {
 
 struct NoOpAction: Action {}
 
-struct SetValueAction {
+struct SetValueAction: Action {
 
     let value: Int?
     static let type = "SetValueAction"
@@ -75,19 +75,7 @@ struct SetValueAction {
     }
 }
 
-@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
-extension SetValueAction: StandardActionConvertible {
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! Int?
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueAction.type, payload: ["value": value as AnyObject],
-                              isTypedAction: true)
-    }
-}
-
-struct SetValueStringAction {
+struct SetValueStringAction: Action {
 
     var value: String
     static let type = "SetValueStringAction"
@@ -95,45 +83,15 @@ struct SetValueStringAction {
     init (_ value: String) {
         self.value = value
     }
-
 }
 
-@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
-extension SetValueStringAction: StandardActionConvertible {
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! String
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type,
-                              payload: ["value": value as AnyObject],
-                              isTypedAction: true)
-    }
-
-}
-
-struct SetCustomSubstateAction {
+struct SetCustomSubstateAction: Action {
 
     var value: Int
     static let type = "SetCustomSubstateAction"
 
     init (_ value: Int) {
         self.value = value
-    }
-
-}
-
-@available(*, deprecated, message: "Moved to ReSwift-Recorder, unnecessary for base ReSwift usage.")
-extension SetCustomSubstateAction: StandardActionConvertible {
-
-    init(_ standardAction: StandardAction) {
-        self.value = standardAction.payload!["value"] as! Int
-    }
-
-    func toStandardAction() -> StandardAction {
-        return StandardAction(type: SetValueStringAction.type,
-                              payload: ["value": value as AnyObject],
-                              isTypedAction: true)
     }
 }
 

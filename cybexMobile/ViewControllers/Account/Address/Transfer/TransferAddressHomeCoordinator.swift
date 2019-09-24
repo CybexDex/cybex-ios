@@ -8,8 +8,6 @@
 
 import UIKit
 import ReSwift
-import NBLCommonModule
-import XLActionController
 
 protocol TransferAddressHomeCoordinatorProtocol {
     func openAddTransferAddress()

@@ -33,8 +33,15 @@ class CybexWebViewController: BaseWebViewController {
 
     override func viewDidLoad() {
         if vcType == .help {
-            let url = Defaults[.theme] == 0 ? AppConfiguration.HelpNightURL + Localize.currentLanguage() : AppConfiguration.HelpLightURL + Localize.currentLanguage()
-            self.url = URL(string: url)
+            let language = Localize.currentLanguage()
+            let nightURL = AppConfiguration.HelpNightURL + language
+            let lightURL = AppConfiguration.HelpLightURL + language
+            let themeIndex: Int = Defaults[\.theme]
+            if themeIndex == 0 {
+                self.url = URL(string: nightURL)
+            } else {
+                self.url = URL(string: lightURL)
+            }
         } else if vcType == .agreement {
             self.navigationItem.title = R.string.localizable.eto_user_agreenment.key.localized()
             var urlString = ""

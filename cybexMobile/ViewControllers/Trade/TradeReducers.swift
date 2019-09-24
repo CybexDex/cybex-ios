@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func tradeReducer(action: Action, state: TradeState?) -> TradeState {
+func tradeReducer(action: ReSwift.Action, state: TradeState?) -> TradeState {
     let state = state ?? TradeState()
 
     return state

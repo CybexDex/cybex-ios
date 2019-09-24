@@ -25,11 +25,11 @@ struct ETORecordListState: BaseState {
 
 // MARK: - Action
 
-struct ETORecordListFetchedAction: Action {
+struct ETORecordListFetchedAction: ReSwift.Action {
     var data: JSON
     var add: Bool
 }
 
-struct ETONextPageAction: Action {
+struct ETONextPageAction: ReSwift.Action {
     var page: Int
 }

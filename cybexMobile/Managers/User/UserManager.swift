@@ -93,8 +93,8 @@ extension UserManager {
     }
 
     func logout() {
-        Defaults.remove(.keys)
-        Defaults.remove(.enotesKeys)
+        Defaults.remove(\.keys)
+        Defaults.remove(\.enotesKeys)
         self.keys = nil
         self.enotesKeys = nil
         self.loginType = .none
@@ -102,8 +102,8 @@ extension UserManager {
         timer?.pause()
         timer = nil
 
-        Defaults.remove(.username)
-        Defaults.remove(.account)
+        Defaults.remove(\.username)
+        Defaults.remove(\.account)
         self.name.accept(nil)
         self.permission = AccountPermission()
         self.fullAccount.accept(nil)
@@ -184,17 +184,17 @@ extension UserManager {
     }
 
     func getCachedKeysExcludePrivate() -> AccountKeys? {
-        let keys = Defaults[.keys]
+        let keys = Defaults[\.keys]
         return AccountKeys.deserialize(from: keys)
     }
 
     func getCachedEnotesKeysExcludePrivate() -> AccountKeys? {
-        let keys = Defaults[.enotesKeys]
+        let keys = Defaults[\.enotesKeys]
         return AccountKeys.deserialize(from: keys)
     }
 
     func getCachedAccount() -> Account? {
-        let account = Defaults[.account]
+        let account = Defaults[\.account]
         return Account.deserialize(from: account)
     }
 
@@ -303,7 +303,7 @@ class UserManager {
 
     var frequencyType: FrequencyType = .wiFi {
         didSet {
-            Defaults[.frequencyType] = self.frequencyType.rawValue
+            Defaults[\.frequencyType] = self.frequencyType.rawValue
             switch self.frequencyType {
             case .normal:self.refreshTime = 6
             case .time:self.refreshTime = 3
@@ -320,20 +320,20 @@ class UserManager {
 
     var loginType: LoginType = .none {
         didSet {
-            Defaults[.loginType] = loginType.rawValue
+            Defaults[\.loginType] = loginType.rawValue
         }
     }
 
     var lockTime: LockTime = .low {
         didSet {
-            Defaults[.locktime] = lockTime.rawValue
+            Defaults[\.locktime] = lockTime.rawValue
             timingLock()
         }
     }
 
     var unlockType: UnlockType = .none {
         didSet {
-            Defaults[.unlockType] = unlockType.rawValue
+            Defaults[\.unlockType] = unlockType.rawValue
         }
     }
 
@@ -441,26 +441,26 @@ class UserManager {
     }
 
     private func saveName(_ name: String) {
-        Defaults[.username] = name
+        Defaults[\.username] = name
     }
 
     private func saveAccount(_ account: Account?) {
         guard let account = account else { return }
-        Defaults[.account] = account.toJSONString() ?? ""
+        Defaults[\.account] = account.toJSONString() ?? ""
     }
 
     private func saveKeys() {
         guard let keys = keys else { return }
         keys.removePrivateKey()
         
-        Defaults[.keys] = keys.toJSONString() ?? ""
+        Defaults[\.keys] = keys.toJSONString() ?? ""
     }
 
     private func saveEnotesKeys() {
         guard let keys = enotesKeys else { return }
         keys.removePrivateKey()
 
-        Defaults[.enotesKeys] = keys.toJSONString() ?? ""
+        Defaults[\.enotesKeys] = keys.toJSONString() ?? ""
     }
 
 }

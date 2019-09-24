@@ -8,7 +8,7 @@
 
 import UIKit
 import ReSwift
-import NBLCommonModule
+
 import SwiftyJSON
 import cybex_ios_core_cpp
 
@@ -85,21 +85,6 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
                 return
             }
 
-            GatewayQueryService.request(target: .login(accountName: accountName), success: { (_) in
-                GatewayQueryService.request(target: .assetKinds(accountName: accountName), success: { (json) in
-                    if let data = AccountAssets.deserialize(from: json.dictionaryObject) {
-                        self.store.dispatch(FetchAccountAssetAction(data: data))
-                    }
-                }, error: { (_) in
-
-                }) { (_) in
-
-                }
-            }, error: { (_) in
-
-            }) { (_) in
-
-            }
 
         case RecordChooseType.foudType.rawValue:
             

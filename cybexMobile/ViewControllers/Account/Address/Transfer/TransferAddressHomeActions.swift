@@ -18,10 +18,10 @@ struct TransferAddressHomeState: BaseState {
     var selectedAddress: BehaviorRelay<TransferAddress?> = BehaviorRelay(value: nil)
 }
 
-struct TransferAddressHomeDataAction: Action {
+struct TransferAddressHomeDataAction: ReSwift.Action {
     var data: [TransferAddress]
 }
 
-struct TransferAddressSelectDataAction: Action {
+struct TransferAddressSelectDataAction: ReSwift.Action {
     var data: TransferAddress?
 }

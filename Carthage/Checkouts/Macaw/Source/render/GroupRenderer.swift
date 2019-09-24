@@ -65,7 +65,7 @@ class GroupRenderer: NodeRenderer {
         }
         renderers.removeAll()
 
-        if let updatedRenderers = group?.contents.compactMap ({ child -> NodeRenderer? in
+        if let updatedRenderers = group?.contents.compactMap({ child -> NodeRenderer? in
             let childRenderer = RenderUtils.createNodeRenderer(child, view: view, animationCache: animationCache)
             childRenderer.parentRenderer = self
             return childRenderer

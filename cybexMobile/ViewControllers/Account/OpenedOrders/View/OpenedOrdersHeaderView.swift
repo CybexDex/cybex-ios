@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxGesture
 
 class OpenedOrdersHeaderView: UIView {
 

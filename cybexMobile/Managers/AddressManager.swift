@@ -42,13 +42,13 @@ class AddressManager {
     }
 
     func getWithDrawAddressListWith(_ currency: String) -> [WithdrawAddress] {
-        let list = Defaults[.withdrawAddressList]
+        let list = Defaults[\.withdrawAddressList]
 
         return list.filter({$0.currency == currency })
     }
 
     func containAddressOfWithDraw(_ address: String, currency: String) -> (Bool, [WithdrawAddress]) {
-        let list = Defaults[.withdrawAddressList]
+        let list = Defaults[\.withdrawAddressList]
 
         let filterList = list.filter { (info) -> Bool in
             return info.currency == currency
@@ -64,7 +64,7 @@ class AddressManager {
     }
 
     func containWithDrawAddress(_ id: String) -> (Bool, WithdrawAddress?) {
-        let list = Defaults[.withdrawAddressList]
+        let list = Defaults[\.withdrawAddressList]
 
         let filterList = list.filter { (info) -> Bool in
             return info.id == id
@@ -78,21 +78,21 @@ class AddressManager {
     }
 
     func addWithDrawAddress(_ info: WithdrawAddress) {
-        var list = Defaults[.withdrawAddressList]
+        var list = Defaults[\.withdrawAddressList]
 
         list.append(info)
-        Defaults[.withdrawAddressList] = list
+        Defaults[\.withdrawAddressList] = list
     }
 
     @discardableResult
     func removeWithDrawAddress(_ id: String) -> Bool {
-        var list = Defaults[.withdrawAddressList]
+        var list = Defaults[\.withdrawAddressList]
 
         let result = containWithDrawAddress(id)
 
         if result.0 {
             list.removeAll(result.1!)
-            Defaults[.withdrawAddressList] = list
+            Defaults[\.withdrawAddressList] = list
 
             return true
         }
@@ -103,13 +103,13 @@ class AddressManager {
     // MARK: - - Transfer
 
     func getTransferAddressList() -> [TransferAddress] {
-        let list = Defaults[.transferAddressList]
+        let list = Defaults[\.transferAddressList]
 
         return list
     }
 
     func containAddressOfTransfer(_ address: String) -> (Bool, [TransferAddress]) {
-        let list = Defaults[.transferAddressList]
+        let list = Defaults[\.transferAddressList]
 
         let filterList = list.filter { (info) -> Bool in
             return info.address == address
@@ -123,7 +123,7 @@ class AddressManager {
     }
 
     func containTransferAddress(_ id: String) -> (Bool, TransferAddress?) {
-        let list = Defaults[.transferAddressList]
+        let list = Defaults[\.transferAddressList]
 
         let filterList = list.filter { (info) -> Bool in
             return info.id == id
@@ -137,21 +137,21 @@ class AddressManager {
     }
 
     func addTransferAddress(_ info: TransferAddress) {
-        var list = Defaults[.transferAddressList]
+        var list = Defaults[\.transferAddressList]
 
         list.append(info)
-        Defaults[.transferAddressList] = list
+        Defaults[\.transferAddressList] = list
     }
 
     @discardableResult
     func removeTransferAddress(_ id: String) -> Bool {
-        var list = Defaults[.transferAddressList]
+        var list = Defaults[\.transferAddressList]
 
         let result = containTransferAddress(id)
 
         if result.0 {
             list.removeAll(result.1!)
-            Defaults[.transferAddressList] = list
+            Defaults[\.transferAddressList] = list
 
             return true
         }

@@ -35,7 +35,6 @@ class ExampleViewController: UIViewController {
         return selectedIndex == 0 ? .top : .bottom
     }
 
-    var date: Date!
 }
 
 extension ExampleViewController: NotificationBannerDelegate {
@@ -130,7 +129,7 @@ extension ExampleViewController: ExampleViewDelegate {
             // Basic Warning Notification with Custom Color
             let banner = NotificationBanner(title: "Basic Notification",
                                             subtitle: "Must Be Dismissed Manually",
-                                            style: .none)
+                                            style: .customView)
             banner.delegate = self
             banner.backgroundColor = blockColor(at: IndexPath(row: 5, section: 0))
             banner.autoDismiss = false
@@ -193,19 +192,6 @@ extension ExampleViewController: ExampleViewDelegate {
             let banner = NotificationBanner(title: "Info Notification", subtitle: "This notification has two side views!", leftView: leftView, rightView: rightView, style: .info)
             banner.delegate = self
             banner.show(queuePosition: selectedQueuePosition(), bannerPosition: selectedBannerPosition())
-        case 3:
-            // Growing Notification with left view
-            let leftView = UIImageView(image: #imageLiteral(resourceName: "success"))
-            let banner = GrowingNotificationBanner(
-                title: "Growing Notification",
-                subtitle: """
-                This is a growing notification.
-                Instead of using a scroll animation the view grows in height if needed.
-                """,
-                leftView: leftView,
-                style: .success)
-            banner.delegate = self
-            banner.show(queuePosition: selectedQueuePosition(), bannerPosition: selectedBannerPosition())
         default:
             return
         }
@@ -220,6 +206,61 @@ extension ExampleViewController: ExampleViewDelegate {
             banner.show(queuePosition: selectedQueuePosition(), bannerPosition: selectedBannerPosition())
         default:
             return
+        }
+    }
+    
+    internal func basicGrowingNotificationCellSelected(at index: Int) {
+        switch index {
+        case 0:
+            let leftView = UIImageView(image: #imageLiteral(resourceName: "danger"))
+            let banner = GrowingNotificationBanner(title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", subtitle: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", leftView: leftView, style: .success)
+            banner.delegate = self
+            banner.show(queuePosition: selectedQueuePosition(), bannerPosition: selectedBannerPosition())
+        default:
+            let leftView = UIImageView(image: #imageLiteral(resourceName: "danger"))
+            let banner = GrowingNotificationBanner(title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", subtitle: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", leftView: leftView, style: .danger, sideViewSize: 48)
+            banner.delegate = self
+            banner.show(queuePosition: selectedQueuePosition(), bannerPosition: selectedBannerPosition())
+        }
+    }
+    
+    internal func basicFloatingNotificationCellSelected(at index: Int) {
+        switch index {
+        case 0:
+            let banner = FloatingNotificationBanner(title: "Success Notification",
+                                                    subtitle: "This type of banner floats and has the capability of growing to an infinite amount of lines. This one also has a shadow.",
+                                                    style: .success)
+
+            banner.delegate = self
+            banner.show(queuePosition: selectedQueuePosition(),
+                        bannerPosition: selectedBannerPosition(),
+                        cornerRadius: 10,
+                        shadowBlurRadius: 15)
+        case 1:
+            let banner = FloatingNotificationBanner(title: "Danger Notification",
+                                                    subtitle: "This type of banner floats and has the capability of growing to an infinite amount of lines.",
+                                                    style: .danger)
+            banner.delegate = self
+            banner.show(queuePosition: selectedQueuePosition(),
+                        bannerPosition: selectedBannerPosition(),
+                        cornerRadius: 10)
+        case 2:
+            let banner = FloatingNotificationBanner(title: "Info Notification",
+                                                    subtitle: "With adjusted transparency!",
+                                                    style: .info)
+            banner.delegate = self
+            banner.transparency = 0.75
+            banner.show(queuePosition: selectedQueuePosition(),
+                        bannerPosition: selectedBannerPosition(),
+                        cornerRadius: 10)
+        default:
+            let banner = FloatingNotificationBanner(customView: NorthCarolinaBannerView())
+            banner.delegate = self
+            banner.transparency = 0.75
+            banner.show(queuePosition: selectedQueuePosition(),
+                        bannerPosition: selectedBannerPosition(),
+                        cornerRadius: 10,
+                        shadowBlurRadius: 15)
         }
     }
     
@@ -283,12 +324,16 @@ extension ExampleViewController: ExampleViewDelegate {
     internal func numberOfCells(for section: Int) -> Int {
         switch section {
         case 0:
-            return 7
+            return 6
         case 1:
             return 4
         case 2:
             return 1
         case 3:
+            return 2
+        case 4:
+            return 4
+        case 5:
             return 6
         default:
             return 0
@@ -304,6 +349,10 @@ extension ExampleViewController: ExampleViewDelegate {
         case 2:
             return "Notification Banner with Custom View"
         case 3:
+            return "Growing Notification Banners"
+        case 4:
+            return "Floating Notification Banners"
+        case 5:
             return "Status Bar Notifications"
         default:
             return ""
@@ -313,7 +362,7 @@ extension ExampleViewController: ExampleViewDelegate {
     internal func blockColor(at indexPath: IndexPath) -> UIColor {
         
         if indexPath == IndexPath(row: numberOfCells(for: indexPath.section) - 2, section: 0)
-            || indexPath == IndexPath(row: numberOfCells(for: indexPath.section) - 2, section: 3){
+            || indexPath == IndexPath(row: numberOfCells(for: indexPath.section) - 2, section: 5) {
             return CustomBannerColors().color(for: .warning)
         }
         
@@ -377,6 +426,28 @@ extension ExampleViewController: ExampleViewDelegate {
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
+                return ("Success Notification", "With default side view size")
+            case 1:
+                return ("Danger Notification", "With custom side view size")
+            default:
+                return ("", nil)
+            }
+        } else if indexPath.section == 4 {
+            switch indexPath.row {
+            case 0:
+                return ("Success Notification", "This type of banner can float and can have its cornerRadius property adjusted")
+            case 1:
+                return ("Danger Notification", "This type of banner can float and can have its cornerRadius property adjusted")
+            case 2:
+                return ("Info Notification", "With adjusted transparency!")
+            case 3:
+                return ("Tarheels Notification", "This type of banner can float and can have its cornerRadius property adjusted")
+            default:
+                return ("", nil)
+            }
+        } else if indexPath.section == 5 {
+            switch indexPath.row {
+            case 0:
                 return ("Success Notification", nil)
             case 1:
                 return ("Danger Notification", nil)
@@ -400,6 +471,13 @@ extension ExampleViewController: ExampleViewDelegate {
         if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
+                return #imageLiteral(resourceName: "unc_logo")
+            default:
+                return nil
+            }
+        } else if indexPath.section == 4 {
+            switch indexPath.row {
+            case 3:
                 return #imageLiteral(resourceName: "unc_logo")
             default:
                 return nil

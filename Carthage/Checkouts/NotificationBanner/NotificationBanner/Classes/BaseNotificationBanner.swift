@@ -19,11 +19,7 @@
 import UIKit
 import SnapKit
 
-#if CARTHAGE_CONFIG
-    import MarqueeLabelSwift
-#else
-    import MarqueeLabel
-#endif
+import MarqueeLabel
 
 public protocol NotificationBannerDelegate: class {
     func notificationBannerWillAppear(_ banner: BaseNotificationBanner)
@@ -33,7 +29,7 @@ public protocol NotificationBannerDelegate: class {
 }
 
 @objcMembers
-public class BaseNotificationBanner: UIView {
+open class BaseNotificationBanner: UIView {
     
     /// Notification that will be posted when a notification banner will appear
     public static let BannerWillAppear: Notification.Name = Notification.Name(rawValue: "NotificationBannerWillAppear")
@@ -52,6 +48,9 @@ public class BaseNotificationBanner: UIView {
     
     /// The delegate of the notification banner
     public weak var delegate: NotificationBannerDelegate?
+    
+    /// The style of the notification banner
+    public let style: BannerStyle
 
     /// The height of the banner when it is presented
     public var bannerHeight: CGFloat {
@@ -86,6 +85,18 @@ public class BaseNotificationBanner: UIView {
         }
     }
     
+    /// The transparency of the background of the notification banner
+    public var transparency: CGFloat = 1.0 {
+        didSet {
+            if let customView = customView {
+                customView.backgroundColor = customView.backgroundColor?.withAlphaComponent(transparency)
+            } else {
+                let color = backgroundColor
+                self.backgroundColor = color
+            }
+        }
+    }
+    
     /// The type of haptic to generate when a banner is displayed
     public var haptic: BannerHaptic = .heavy
     
@@ -116,6 +127,9 @@ public class BaseNotificationBanner: UIView {
     /// A view that helps the spring animation look nice when the banner appears
     internal var spacerView: UIView!
     
+    // The custom view inside the notification banner
+    internal var customView: UIView?
+    
     /// The default offset for spacerView top or bottom
     internal var spacerViewDefaultOffset: CGFloat = 10.0
 
@@ -132,7 +146,19 @@ public class BaseNotificationBanner: UIView {
     var isSuspended: Bool = false
     
     /// The main window of the application which banner views are placed on
-    private let appWindow: UIWindow = UIApplication.shared.delegate!.window!!
+    private let appWindow: UIWindow = {
+        if #available(iOS 13.0, *) {
+            let connectedScenes = UIApplication.shared.connectedScenes
+            for scene in connectedScenes {
+                if scene.activationState == .foregroundActive {
+                    let windowScene = scene as? UIWindowScene
+                    return windowScene?.windows.first! ?? UIWindow()
+                }
+            }
+        }
+        
+        return UIApplication.shared.delegate!.window!!
+    }()
     
     /// The position the notification banner should slide in from
     private(set) var bannerPosition: BannerPosition!
@@ -154,16 +180,19 @@ public class BaseNotificationBanner: UIView {
         return [BaseNotificationBanner.BannerObjectKey: self]
     }
     
-    public override var backgroundColor: UIColor? {
+    open override var backgroundColor: UIColor? {
         get {
             return contentView.backgroundColor
         } set {
-            contentView.backgroundColor = newValue
-            spacerView.backgroundColor = newValue
+            guard style != .customView else { return }
+            let color = newValue?.withAlphaComponent(transparency)
+            contentView.backgroundColor = color
+            spacerView.backgroundColor = color
         }
     }
     
     init(style: BannerStyle, colors: BannerColorsProtocol? = nil) {
+        self.style = style
         super.init(frame: .zero)
         
         spacerView = UIView()
@@ -184,7 +213,7 @@ public class BaseNotificationBanner: UIView {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {

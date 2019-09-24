@@ -8,7 +8,7 @@
 
 import UIKit
 import ReSwift
-import NBLCommonModule
+
 import cybex_ios_core_cpp
 
 protocol ETOCrowdCoordinatorProtocol {

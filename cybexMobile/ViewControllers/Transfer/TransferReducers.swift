@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func transferReducer(action: Action, state: TransferState?) -> TransferState {
+func transferReducer(action: ReSwift.Action, state: TransferState?) -> TransferState {
     let state = state ?? TransferState()
 
     switch action {

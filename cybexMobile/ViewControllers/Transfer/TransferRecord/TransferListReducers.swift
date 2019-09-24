@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import HandyJSON
 
-func transferListReducer(action: Action, state: TransferListState?) -> TransferListState {
+func transferListReducer(action: ReSwift.Action, state: TransferListState?) -> TransferListState {
     let state = state ?? TransferListState()
 
     switch action {

@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func withdrawAddressReducer(action: Action, state: WithdrawAddressState?) -> WithdrawAddressState {
+func withdrawAddressReducer(action: ReSwift.Action, state: WithdrawAddressState?) -> WithdrawAddressState {
     let state = state ?? WithdrawAddressState()
 
     switch action {

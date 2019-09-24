@@ -24,20 +24,20 @@ extension AppDelegate {
     func configThemeAndLocalize() {
         UIApplication.shared.theme_setStatusBarStyle([.lightContent, .default], animated: true)
 
-        if !Defaults.hasKey(.theme) {
+        if !Defaults.hasKey(\.theme) {
             ThemeManager.setTheme(index: 0)
         } else {
-            ThemeManager.setTheme(index: Defaults[.theme])
+            ThemeManager.setTheme(index: Defaults[\.theme])
         }
 
-        if !Defaults.hasKey(.language) {
+        if !Defaults.hasKey(\.language) {
             if let language = NSLocale.preferredLanguages.first, language == "zh-Hans-CN" {
                 Localize.setCurrentLanguage("zh-Hans")
             } else {
                 Localize.setCurrentLanguage("en")
             }
         } else {
-            Localize.setCurrentLanguage(Defaults[.language])
+            Localize.setCurrentLanguage(Defaults[\.language])
         }
     }
 

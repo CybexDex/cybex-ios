@@ -12,7 +12,6 @@ import Localize_Swift
 import SwiftTheme
 import SwiftyUserDefaults
 import SwifterSwift
-import XLActionController
 
 class SettingViewController: BaseViewController {
     
@@ -187,12 +186,12 @@ extension SettingViewController {
     }
 
     func switchEnv() {
-        let actions = AppEnv.allCases.map { (env) -> XLActionController.Action<String> in
+        let actions = AppEnv.allCases.map { (env) -> Action<String> in
             return Action(env.rawValue, style: .destructive, handler: {[weak self] _ in
                 guard let self = self else {return}
 
                 self.showToastBox(true, message: "当前为\(env.rawValue)环境")
-                Defaults[.environment] = env.rawValue
+                Defaults[\.environment] = env.rawValue
                 self.coordinator?.changeEnveronment()
             })
         }

@@ -40,14 +40,14 @@ ASDISPLAYNODE_INLINE AS_WARN_UNUSED_RESULT BOOL ASDisplayNodeThreadIsMain()
 
 /// Same as ASLockScope(1) but lock isn't retained (be careful).
 #define ASLockScopeUnowned(nsLocking) \
-  __unsafe_unretained id<NSLocking> __lockToken __attribute__((cleanup(_ASLockScopeUnownedCleanup))) = nsLocking; \
+  unowned id<NSLocking> __lockToken __attribute__((cleanup(_ASLockScopeUnownedCleanup))) = nsLocking; \
   [__lockToken lock];
 
 ASDISPLAYNODE_INLINE void _ASLockScopeCleanup(id<NSLocking> __strong * const lockPtr) {
   [*lockPtr unlock];
 }
 
-ASDISPLAYNODE_INLINE void _ASLockScopeUnownedCleanup(id<NSLocking> __unsafe_unretained * const lockPtr) {
+ASDISPLAYNODE_INLINE void _ASLockScopeUnownedCleanup(id<NSLocking> unowned * const lockPtr) {
   [*lockPtr unlock];
 }
 
@@ -100,8 +100,8 @@ ASDISPLAYNODE_INLINE void _ASUnlockScopeCleanup(id<NSLocking> __strong *lockPtr)
 #include <thread>
 
 // These macros are here for legacy reasons. We may get rid of them later.
-#define ASAssertLocked(m) m.AssertHeld()
-#define ASAssertUnlocked(m) m.AssertNotHeld()
+#define DISABLED_ASAssertLocked(m)
+#define DISABLED_ASAssertUnlocked(m)
 
 namespace AS {
   

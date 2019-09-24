@@ -8,10 +8,10 @@ lib-lint:
 	bundle exec pod lib lint
 
 pod-release:
-	bundle exec pod trunk push
+	bundle exec pod trunk push --allow-warnings
 
 test-linux:
-	sh scripts/test-linux.sh
+	sh test-linux.sh
 
 generate-linuxmain:
 	swift test --generate-linuxmain

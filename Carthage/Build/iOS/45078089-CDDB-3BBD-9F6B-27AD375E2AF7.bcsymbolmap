@@ -1,0 +1,911 @@
+BCSymbolMap Version: 2.0
+-[SentryQueueableRequestManager initWithSession:]
+-[SentryQueueableRequestManager isReady]
+-[SentryQueueableRequestManager addRequest:completionHandler:]
+___62-[SentryQueueableRequestManager addRequest:completionHandler:]_block_invoke
+___copy_helper_block_e4_20s24b
+___destroy_helper_block_e4_20s24s
+-[SentryQueueableRequestManager cancelAllOperations]
+-[SentryQueueableRequestManager queue]
+-[SentryQueueableRequestManager setQueue:]
+-[SentryQueueableRequestManager session]
+-[SentryQueueableRequestManager setSession:]
+-[SentryQueueableRequestManager .cxx_destruct]
+___block_descriptor_28_e4_20s24bs_e38_v12?0"NSHTTPURLResponse"4"NSError"8l
+__OBJC_PROTOCOL_$_SentryRequestManager
+__OBJC_LABEL_PROTOCOL_$_SentryRequestManager
+_OBJC_IVAR_$_SentryQueueableRequestManager._queue
+_OBJC_IVAR_$_SentryQueueableRequestManager._session
+Apple clang version 11.0.0 (clang-1100.0.33.8)
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryQueueableRequestManager.m
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa
+Sources/Sentry/SentryQueueableRequestManager.m
+__destroy_helper_block_e4_20s24s
+__copy_helper_block_e4_20s24b
+__62-[SentryQueueableRequestManager addRequest:completionHandler:]_block_invoke
++[SentryJavaScriptBridgeHelper numberFormatter]
+___47+[SentryJavaScriptBridgeHelper numberFormatter]_block_invoke
++[SentryJavaScriptBridgeHelper frameRegex]
+___42+[SentryJavaScriptBridgeHelper frameRegex]_block_invoke
++[SentryJavaScriptBridgeHelper parseRavenFrames:]
++[SentryJavaScriptBridgeHelper parseJavaScriptStacktrace:]
++[SentryJavaScriptBridgeHelper createSentryBreadcrumbFromJavaScriptBreadcrumb:]
++[SentryJavaScriptBridgeHelper createSentryEventFromJavaScriptEvent:]
++[SentryJavaScriptBridgeHelper convertReactNativeStacktrace:]
++[SentryJavaScriptBridgeHelper addExceptionToEvent:type:value:frames:]
++[SentryJavaScriptBridgeHelper createSentryUserFromJavaScriptUser:]
++[SentryJavaScriptBridgeHelper sentrySeverityFromLevel:]
++[SentryJavaScriptBridgeHelper sentryLogLevelFromJavaScriptLevel:]
++[SentryJavaScriptBridgeHelper sanitizeDictionary:]
+_numberFormatter.onceToken
+_numberFormatter.formatter
+___block_descriptor_20_e5_v4?0l
+___block_literal_global
+_frameRegex.onceTokenRegex
+_frameRegex.regex
+___block_literal_global.12
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryJavaScriptBridgeHelper.m
+Sources/Sentry/SentryJavaScriptBridgeHelper.m
+__42+[SentryJavaScriptBridgeHelper frameRegex]_block_invoke
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.sdk/usr/include/dispatch/once.h
+__47+[SentryJavaScriptBridgeHelper numberFormatter]_block_invoke
+-[SentryDsn initWithString:didFailWithError:]
+-[SentryDsn getHash]
+-[SentryDsn convertDsnString:didFailWithError:]
+-[SentryDsn url]
+-[SentryDsn setUrl:]
+-[SentryDsn .cxx_destruct]
+_OBJC_IVAR_$_SentryDsn._url
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryDsn.m
+Sources/Sentry/SentryDsn.m
+Sources/Sentry/include/SentryDsn.h
+-[SentryDebugMeta init]
+-[SentryDebugMeta serialize]
+-[SentryDebugMeta uuid]
+-[SentryDebugMeta setUuid:]
+-[SentryDebugMeta type]
+-[SentryDebugMeta setType:]
+-[SentryDebugMeta cpuType]
+-[SentryDebugMeta setCpuType:]
+-[SentryDebugMeta cpuSubType]
+-[SentryDebugMeta setCpuSubType:]
+-[SentryDebugMeta name]
+-[SentryDebugMeta setName:]
+-[SentryDebugMeta imageSize]
+-[SentryDebugMeta setImageSize:]
+-[SentryDebugMeta imageVmAddress]
+-[SentryDebugMeta setImageVmAddress:]
+-[SentryDebugMeta imageAddress]
+-[SentryDebugMeta setImageAddress:]
+-[SentryDebugMeta majorVersion]
+-[SentryDebugMeta setMajorVersion:]
+-[SentryDebugMeta minorVersion]
+-[SentryDebugMeta setMinorVersion:]
+-[SentryDebugMeta revisionVersion]
+-[SentryDebugMeta setRevisionVersion:]
+-[SentryDebugMeta .cxx_destruct]
+__OBJC_PROTOCOL_$_NSObject
+__OBJC_LABEL_PROTOCOL_$_NSObject
+__OBJC_PROTOCOL_$_SentrySerializable
+__OBJC_LABEL_PROTOCOL_$_SentrySerializable
+_OBJC_IVAR_$_SentryDebugMeta._uuid
+_OBJC_IVAR_$_SentryDebugMeta._type
+_OBJC_IVAR_$_SentryDebugMeta._cpuType
+_OBJC_IVAR_$_SentryDebugMeta._cpuSubType
+_OBJC_IVAR_$_SentryDebugMeta._name
+_OBJC_IVAR_$_SentryDebugMeta._imageSize
+_OBJC_IVAR_$_SentryDebugMeta._imageVmAddress
+_OBJC_IVAR_$_SentryDebugMeta._imageAddress
+_OBJC_IVAR_$_SentryDebugMeta._majorVersion
+_OBJC_IVAR_$_SentryDebugMeta._minorVersion
+_OBJC_IVAR_$_SentryDebugMeta._revisionVersion
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryDebugMeta.m
+Sources/Sentry/SentryDebugMeta.m
+Sources/Sentry/include/SentryDebugMeta.h
+-[SentryClient initWithDsn:didFailWithError:]
+-[SentryClient initWithDsn:requestManager:didFailWithError:]
+-[SentryClient setupQueueing]
+___29-[SentryClient setupQueueing]_block_invoke
+-[SentryClient enableAutomaticBreadcrumbTracking]
++[SentryClient sharedClient]
++[SentryClient setSharedClient:]
++[SentryClient versionString]
++[SentryClient sdkName]
++[SentryClient setLogLevel:]
++[SentryClient logLevel]
+-[SentryClient sendEvent:withCompletionHandler:]
+-[SentryClient prepareEvent:useClientProperties:]
+-[SentryClient storeEvent:]
+-[SentryClient sendEvent:useClientProperties:withCompletionHandler:]
+___Block_byref_object_copy_
+___Block_byref_object_dispose_
+___68-[SentryClient sendEvent:useClientProperties:withCompletionHandler:]_block_invoke
+___copy_helper_block_e4_20s24s28s32b36r
+___destroy_helper_block_e4_20s24s28s32s36r
+-[SentryClient sendRequest:withCompletionHandler:]
+-[SentryClient sendAllStoredEvents]
+___35-[SentryClient sendAllStoredEvents]_block_invoke
+___copy_helper_block_e4_20s24s
+-[SentryClient setSharedPropertiesOnEvent:]
+-[SentryClient appendStacktraceToEvent:]
+-[SentryClient setTags:]
+-[SentryClient setExtra:]
+-[SentryClient setUser:]
+-[SentryClient clearContext]
+-[SentryClient restoreContextBeforeCrash]
+-[SentryClient setSampleRate:]
+___30-[SentryClient setSampleRate:]_block_invoke
+-[SentryClient reportUserException:reason:language:lineOfCode:stackTrace:logAllThreads:terminateProgram:]
+-[SentryClient startCrashHandlerWithError:]
+-[SentryClient crash]
+-[SentryClient crashedLastLaunch]
+-[SentryClient snapshotStacktrace:]
+-[SentryClient tags]
+-[SentryClient extra]
+-[SentryClient user]
+-[SentryClient sampleRate]
+-[SentryClient lastContext]
+-[SentryClient setLastContext:]
+-[SentryClient lastEvent]
+-[SentryClient setLastEvent:]
+-[SentryClient breadcrumbs]
+-[SentryClient setBreadcrumbs:]
+-[SentryClient beforeSerializeEvent]
+-[SentryClient setBeforeSerializeEvent:]
+-[SentryClient beforeSendRequest]
+-[SentryClient setBeforeSendRequest:]
+-[SentryClient shouldSendEvent]
+-[SentryClient setShouldSendEvent:]
+-[SentryClient shouldQueueEvent]
+-[SentryClient setShouldQueueEvent:]
+-[SentryClient dsn]
+-[SentryClient setDsn:]
+-[SentryClient fileManager]
+-[SentryClient setFileManager:]
+-[SentryClient requestManager]
+-[SentryClient setRequestManager:]
+-[SentryClient _snapshotThreads]
+-[SentryClient set_snapshotThreads:]
+-[SentryClient _debugMeta]
+-[SentryClient set_debugMeta:]
+-[SentryClient .cxx_destruct]
+_sharedClient
+_logLevel
+___block_descriptor_20_e54_c16?0"SentryEvent"4"NSHTTPURLResponse"8"NSError"12l
+___block_descriptor_40_e4_20s24s28s32bs36r_e38_v12?0"NSHTTPURLResponse"4"NSError"8l
+___block_descriptor_28_e4_20s24s_e38_v12?0"NSHTTPURLResponse"4"NSError"8l
+___block_descriptor_24_e20_c8?0"SentryEvent"4l
+_OBJC_IVAR_$_SentryClient._tags
+_OBJC_IVAR_$_SentryClient._extra
+_OBJC_IVAR_$_SentryClient._user
+_OBJC_IVAR_$_SentryClient._sampleRate
+_OBJC_IVAR_$_SentryClient._lastContext
+_OBJC_IVAR_$_SentryClient._lastEvent
+_OBJC_IVAR_$_SentryClient._breadcrumbs
+_OBJC_IVAR_$_SentryClient._beforeSerializeEvent
+_OBJC_IVAR_$_SentryClient._beforeSendRequest
+_OBJC_IVAR_$_SentryClient._shouldSendEvent
+_OBJC_IVAR_$_SentryClient._shouldQueueEvent
+_OBJC_IVAR_$_SentryClient._dsn
+_OBJC_IVAR_$_SentryClient._fileManager
+_OBJC_IVAR_$_SentryClient._requestManager
+_OBJC_IVAR_$_SentryClient.__snapshotThreads
+_OBJC_IVAR_$_SentryClient.__debugMeta
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryClient.m
+Sources/Sentry/SentryClient.m
+Sources/Sentry/include/SentryClient+Internal.h
+Sources/Sentry/include/SentryClient.h
+__30-[SentryClient setSampleRate:]_block_invoke
+__copy_helper_block_e4_20s24s
+__35-[SentryClient sendAllStoredEvents]_block_invoke
+__destroy_helper_block_e4_20s24s28s32s36r
+__copy_helper_block_e4_20s24s28s32b36r
+__68-[SentryClient sendEvent:useClientProperties:withCompletionHandler:]_block_invoke
+__Block_byref_object_dispose_
+__Block_byref_object_copy_
+__29-[SentryClient setupQueueing]_block_invoke
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryError.m
+NSErrorFromSentryError
+Sources/Sentry/SentryError.m
+-[SentryBreadcrumbStore initWithFileManager:]
+-[SentryBreadcrumbStore addBreadcrumb:]
+-[SentryBreadcrumbStore count]
+-[SentryBreadcrumbStore clear]
+-[SentryBreadcrumbStore serialize]
+-[SentryBreadcrumbStore maxBreadcrumbs]
+-[SentryBreadcrumbStore setMaxBreadcrumbs:]
+-[SentryBreadcrumbStore fileManager]
+-[SentryBreadcrumbStore setFileManager:]
+-[SentryBreadcrumbStore .cxx_destruct]
+_OBJC_IVAR_$_SentryBreadcrumbStore._maxBreadcrumbs
+_OBJC_IVAR_$_SentryBreadcrumbStore._fileManager
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryBreadcrumbStore.m
+Sources/Sentry/SentryBreadcrumbStore.m
+Sources/Sentry/include/SentryBreadcrumbStore.h
+-[SentryFrame init]
+-[SentryFrame serialize]
+-[SentryFrame symbolAddress]
+-[SentryFrame setSymbolAddress:]
+-[SentryFrame fileName]
+-[SentryFrame setFileName:]
+-[SentryFrame function]
+-[SentryFrame setFunction:]
+-[SentryFrame module]
+-[SentryFrame setModule:]
+-[SentryFrame package]
+-[SentryFrame setPackage:]
+-[SentryFrame imageAddress]
+-[SentryFrame setImageAddress:]
+-[SentryFrame platform]
+-[SentryFrame setPlatform:]
+-[SentryFrame instructionAddress]
+-[SentryFrame setInstructionAddress:]
+-[SentryFrame lineNumber]
+-[SentryFrame setLineNumber:]
+-[SentryFrame columnNumber]
+-[SentryFrame setColumnNumber:]
+-[SentryFrame .cxx_destruct]
+_OBJC_IVAR_$_SentryFrame._symbolAddress
+_OBJC_IVAR_$_SentryFrame._fileName
+_OBJC_IVAR_$_SentryFrame._function
+_OBJC_IVAR_$_SentryFrame._module
+_OBJC_IVAR_$_SentryFrame._package
+_OBJC_IVAR_$_SentryFrame._imageAddress
+_OBJC_IVAR_$_SentryFrame._platform
+_OBJC_IVAR_$_SentryFrame._instructionAddress
+_OBJC_IVAR_$_SentryFrame._lineNumber
+_OBJC_IVAR_$_SentryFrame._columnNumber
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryFrame.m
+Sources/Sentry/SentryFrame.m
+Sources/Sentry/include/SentryFrame.h
+-[SentryNSURLRequest initStoreRequestWithDsn:andEvent:didFailWithError:]
+-[SentryNSURLRequest initStoreRequestWithDsn:andData:didFailWithError:]
++[SentryNSURLRequest getStoreUrlFromDsn:]
+-[SentryNSURLRequest dsn]
+-[SentryNSURLRequest setDsn:]
+-[SentryNSURLRequest .cxx_destruct]
+_newHeaderPart
+_OBJC_IVAR_$_SentryNSURLRequest._dsn
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryNSURLRequest.m
+newHeaderPart
+Sources/Sentry/SentryNSURLRequest.m
+newAuthHeader
+-[SentryException initWithValue:type:]
+-[SentryException serialize]
+-[SentryException value]
+-[SentryException setValue:]
+-[SentryException type]
+-[SentryException setType:]
+-[SentryException mechanism]
+-[SentryException setMechanism:]
+-[SentryException module]
+-[SentryException setModule:]
+-[SentryException userReported]
+-[SentryException setUserReported:]
+-[SentryException thread]
+-[SentryException setThread:]
+-[SentryException .cxx_destruct]
+_OBJC_IVAR_$_SentryException._value
+_OBJC_IVAR_$_SentryException._type
+_OBJC_IVAR_$_SentryException._mechanism
+_OBJC_IVAR_$_SentryException._module
+_OBJC_IVAR_$_SentryException._userReported
+_OBJC_IVAR_$_SentryException._thread
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryException.m
+Sources/Sentry/SentryException.m
+Sources/Sentry/include/SentryException.h
+-[SentryBreadcrumb initWithLevel:category:]
+-[SentryBreadcrumb serialize]
+-[SentryBreadcrumb level]
+-[SentryBreadcrumb setLevel:]
+-[SentryBreadcrumb category]
+-[SentryBreadcrumb setCategory:]
+-[SentryBreadcrumb timestamp]
+-[SentryBreadcrumb setTimestamp:]
+-[SentryBreadcrumb type]
+-[SentryBreadcrumb setType:]
+-[SentryBreadcrumb message]
+-[SentryBreadcrumb setMessage:]
+-[SentryBreadcrumb data]
+-[SentryBreadcrumb setData:]
+-[SentryBreadcrumb .cxx_destruct]
+_SentrySeverityNames
+_OBJC_IVAR_$_SentryBreadcrumb._level
+_OBJC_IVAR_$_SentryBreadcrumb._category
+_OBJC_IVAR_$_SentryBreadcrumb._timestamp
+_OBJC_IVAR_$_SentryBreadcrumb._type
+_OBJC_IVAR_$_SentryBreadcrumb._message
+_OBJC_IVAR_$_SentryBreadcrumb._data
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryBreadcrumb.m
+Sources/Sentry/SentryBreadcrumb.m
+Sources/Sentry/include/SentryBreadcrumb.h
+-[NSDictionary(Sanitize) sentry_sanitize]
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/NSDictionary+Sanitize.m
+Sources/Sentry/NSDictionary+Sanitize.m
+-[SentryRequestOperation initWithSession:request:completionHandler:]
+___68-[SentryRequestOperation initWithSession:request:completionHandler:]_block_invoke
+___copy_helper_block_e4_20b24s
+-[SentryRequestOperation cancel]
+-[SentryRequestOperation main]
+-[SentryRequestOperation task]
+-[SentryRequestOperation setTask:]
+-[SentryRequestOperation request]
+-[SentryRequestOperation setRequest:]
+-[SentryRequestOperation .cxx_destruct]
+___block_descriptor_28_e4_20bs24s_e45_v16?0"NSData"4"NSURLResponse"8"NSError"12l
+_OBJC_IVAR_$_SentryRequestOperation._task
+_OBJC_IVAR_$_SentryRequestOperation._request
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryRequestOperation.m
+Sources/Sentry/SentryRequestOperation.m
+__copy_helper_block_e4_20b24s
+__68-[SentryRequestOperation initWithSession:request:completionHandler:]_block_invoke
++[SentryLog logWithMessage:andLevel:]
++[SentryLog logLevelToString:]
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryLog.m
+Sources/Sentry/SentryLog.m
+-[SentryKSCrashReportConverter initWithReport:]
+-[SentryKSCrashReportConverter convertReportToEvent]
+-[SentryKSCrashReportConverter convertExtra]
+-[SentryKSCrashReportConverter convertTags]
+-[SentryKSCrashReportConverter convertUser]
+-[SentryKSCrashReportConverter convertContext]
+-[SentryKSCrashReportConverter addAppContext:]
+-[SentryKSCrashReportConverter addDeviceContext:]
+-[SentryKSCrashReportConverter addOsContext:]
+-[SentryKSCrashReportConverter family]
+-[SentryKSCrashReportConverter rawStackTraceForThreadIndex:]
+-[SentryKSCrashReportConverter registersForThreadIndex:]
+-[SentryKSCrashReportConverter binaryImageForAddress:]
+-[SentryKSCrashReportConverter threadAtIndex:stripCrashedStacktrace:]
+-[SentryKSCrashReportConverter stackFrameAtIndex:inThreadIndex:]
+-[SentryKSCrashReportConverter stackFramesForThreadIndex:]
+-[SentryKSCrashReportConverter stackTraceForThreadIndex:]
+-[SentryKSCrashReportConverter crashedThread]
+-[SentryKSCrashReportConverter convertDebugMeta]
+-[SentryKSCrashReportConverter convertExceptions]
+-[SentryKSCrashReportConverter enhanceValueFromNotableAddresses:]
+-[SentryKSCrashReportConverter extractMechanism]
+-[SentryKSCrashReportConverter convertThreads]
+-[SentryKSCrashReportConverter userContext]
+-[SentryKSCrashReportConverter setUserContext:]
+-[SentryKSCrashReportConverter report]
+-[SentryKSCrashReportConverter setReport:]
+-[SentryKSCrashReportConverter crashedThreadIndex]
+-[SentryKSCrashReportConverter setCrashedThreadIndex:]
+-[SentryKSCrashReportConverter exceptionContext]
+-[SentryKSCrashReportConverter setExceptionContext:]
+-[SentryKSCrashReportConverter binaryImages]
+-[SentryKSCrashReportConverter setBinaryImages:]
+-[SentryKSCrashReportConverter threads]
+-[SentryKSCrashReportConverter setThreads:]
+-[SentryKSCrashReportConverter systemContext]
+-[SentryKSCrashReportConverter setSystemContext:]
+-[SentryKSCrashReportConverter diagnosis]
+-[SentryKSCrashReportConverter setDiagnosis:]
+-[SentryKSCrashReportConverter .cxx_destruct]
+_OBJC_IVAR_$_SentryKSCrashReportConverter._userContext
+_OBJC_IVAR_$_SentryKSCrashReportConverter._report
+_OBJC_IVAR_$_SentryKSCrashReportConverter._crashedThreadIndex
+_OBJC_IVAR_$_SentryKSCrashReportConverter._exceptionContext
+_OBJC_IVAR_$_SentryKSCrashReportConverter._binaryImages
+_OBJC_IVAR_$_SentryKSCrashReportConverter._threads
+_OBJC_IVAR_$_SentryKSCrashReportConverter._systemContext
+_OBJC_IVAR_$_SentryKSCrashReportConverter._diagnosis
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryKSCrashReportConverter.m
+Sources/Sentry/SentryKSCrashReportConverter.m
+Sources/Sentry/include/SentryKSCrashReportConverter.h
+hexAddress
++[NSDate(Extras) getIso8601Formatter]
+___37+[NSDate(Extras) getIso8601Formatter]_block_invoke
++[NSDate(Extras) sentry_fromIso8601String:]
+-[NSDate(Extras) sentry_toIso8601String]
+_getIso8601Formatter.isoFormatter
+_getIso8601Formatter.onceToken
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/NSDate+Extras.m
+Sources/Sentry/NSDate+Extras.m
+__37+[NSDate(Extras) getIso8601Formatter]_block_invoke
+-[SentryMechanism initWithType:]
+-[SentryMechanism serialize]
+-[SentryMechanism type]
+-[SentryMechanism setType:]
+-[SentryMechanism desc]
+-[SentryMechanism setDesc:]
+-[SentryMechanism data]
+-[SentryMechanism setData:]
+-[SentryMechanism handled]
+-[SentryMechanism setHandled:]
+-[SentryMechanism helpLink]
+-[SentryMechanism setHelpLink:]
+-[SentryMechanism meta]
+-[SentryMechanism setMeta:]
+-[SentryMechanism .cxx_destruct]
+_OBJC_IVAR_$_SentryMechanism._type
+_OBJC_IVAR_$_SentryMechanism._desc
+_OBJC_IVAR_$_SentryMechanism._data
+_OBJC_IVAR_$_SentryMechanism._handled
+_OBJC_IVAR_$_SentryMechanism._helpLink
+_OBJC_IVAR_$_SentryMechanism._meta
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryMechanism.m
+Sources/Sentry/SentryMechanism.m
+Sources/Sentry/include/SentryMechanism.h
+-[SentryStacktrace initWithFrames:registers:]
+-[SentryStacktrace fixDuplicateFrames]
+-[SentryStacktrace serialize]
+-[SentryStacktrace frames]
+-[SentryStacktrace setFrames:]
+-[SentryStacktrace registers]
+-[SentryStacktrace setRegisters:]
+-[SentryStacktrace .cxx_destruct]
+_OBJC_IVAR_$_SentryStacktrace._frames
+_OBJC_IVAR_$_SentryStacktrace._registers
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryStacktrace.m
+Sources/Sentry/SentryStacktrace.m
+Sources/Sentry/include/SentryStacktrace.h
+-[NSData(Compression) sentry_gzippedWithCompressionLevel:error:]
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/NSData+Compression.m
+Sources/Sentry/NSData+Compression.m
+-[SentryBreadcrumbTracker start]
+-[SentryBreadcrumbTracker addEnabledCrumb]
+-[SentryBreadcrumbTracker swizzleSendAction]
+___44-[SentryBreadcrumbTracker swizzleSendAction]_block_invoke
+___44-[SentryBreadcrumbTracker swizzleSendAction]_block_invoke_2
+___copy_helper_block_e4_20s
+___destroy_helper_block_e4_20s
+-[SentryBreadcrumbTracker swizzleViewDidAppear]
+___47-[SentryBreadcrumbTracker swizzleViewDidAppear]_block_invoke
+___47-[SentryBreadcrumbTracker swizzleViewDidAppear]_block_invoke_2
+_swizzleSendAction.swizzleSendActionKey
+___block_descriptor_28_e4_20s_e28_c24?04:81216"UIEvent"20l
+___block_descriptor_24_e26_8?0"SentrySwizzleInfo"4l
+_swizzleViewDidAppear.swizzleViewDidAppearKey
+___block_descriptor_28_e4_20s_e10_v12?04c8l
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryBreadcrumbTracker.m
+__47-[SentryBreadcrumbTracker swizzleViewDidAppear]_block_invoke_2
+Sources/Sentry/SentryBreadcrumbTracker.m
+__47-[SentryBreadcrumbTracker swizzleViewDidAppear]_block_invoke
+__destroy_helper_block_e4_20s
+__copy_helper_block_e4_20s
+__44-[SentryBreadcrumbTracker swizzleSendAction]_block_invoke_2
+__44-[SentryBreadcrumbTracker swizzleSendAction]_block_invoke
+-[SentryAsynchronousOperation init]
+-[SentryAsynchronousOperation start]
+-[SentryAsynchronousOperation cancel]
+-[SentryAsynchronousOperation completeOperation]
+-[SentryAsynchronousOperation isAsynchronous]
+-[SentryAsynchronousOperation isExecuting]
+-[SentryAsynchronousOperation isFinished]
+-[SentryAsynchronousOperation isCancelled]
+-[SentryAsynchronousOperation setCancelled:]
+-[SentryAsynchronousOperation setExecuting:]
+-[SentryAsynchronousOperation setFinished:]
+_OBJC_IVAR_$_SentryAsynchronousOperation._finished
+_OBJC_IVAR_$_SentryAsynchronousOperation._executing
+_OBJC_IVAR_$_SentryAsynchronousOperation._cancelled
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryAsynchronousOperation.m
+Sources/Sentry/SentryAsynchronousOperation.m
+-[SentryKSCrashInstallation sendAllReports]
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryKSCrashInstallation.m
+Sources/Sentry/SentryKSCrashInstallation.m
+-[SentryThread initWithThreadId:]
+-[SentryThread serialize]
+-[SentryThread threadId]
+-[SentryThread setThreadId:]
+-[SentryThread name]
+-[SentryThread setName:]
+-[SentryThread stacktrace]
+-[SentryThread setStacktrace:]
+-[SentryThread crashed]
+-[SentryThread setCrashed:]
+-[SentryThread current]
+-[SentryThread setCurrent:]
+-[SentryThread .cxx_destruct]
+_OBJC_IVAR_$_SentryThread._threadId
+_OBJC_IVAR_$_SentryThread._name
+_OBJC_IVAR_$_SentryThread._stacktrace
+_OBJC_IVAR_$_SentryThread._crashed
+_OBJC_IVAR_$_SentryThread._current
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryThread.m
+Sources/Sentry/SentryThread.m
+Sources/Sentry/include/SentryThread.h
+-[SentryContext init]
+-[SentryContext serialize]
+-[SentryContext fixSystemName]
+-[SentryContext generatedOsContext]
+-[SentryContext generatedDeviceContext]
+-[SentryContext generatedAppContext]
+-[SentryContext osContext]
+-[SentryContext setOsContext:]
+-[SentryContext deviceContext]
+-[SentryContext setDeviceContext:]
+-[SentryContext appContext]
+-[SentryContext setAppContext:]
+-[SentryContext .cxx_destruct]
+_OBJC_IVAR_$_SentryContext._osContext
+_OBJC_IVAR_$_SentryContext._deviceContext
+_OBJC_IVAR_$_SentryContext._appContext
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryContext.m
+Sources/Sentry/SentryContext.m
+Sources/Sentry/include/SentryContext.h
+-[SentryUser initWithUserId:]
+-[SentryUser init]
+-[SentryUser serialize]
+-[SentryUser userId]
+-[SentryUser setUserId:]
+-[SentryUser email]
+-[SentryUser setEmail:]
+-[SentryUser username]
+-[SentryUser setUsername:]
+-[SentryUser extra]
+-[SentryUser setExtra:]
+-[SentryUser .cxx_destruct]
+_OBJC_IVAR_$_SentryUser._userId
+_OBJC_IVAR_$_SentryUser._email
+_OBJC_IVAR_$_SentryUser._username
+_OBJC_IVAR_$_SentryUser._extra
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryUser.m
+Sources/Sentry/SentryUser.m
+Sources/Sentry/include/SentryUser.h
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryKSCrashReportSink.m
+-[SentrySwizzleInfo getOriginalImplementation]
+-[SentrySwizzleInfo selector]
+-[SentrySwizzleInfo setSelector:]
+-[SentrySwizzleInfo impProviderBlock]
+-[SentrySwizzleInfo setImpProviderBlock:]
+-[SentrySwizzleInfo .cxx_destruct]
++[SentrySwizzle swizzleInstanceMethod:inClass:newImpFactory:mode:key:]
+_swizzledClassesForKey
++[SentrySwizzle swizzleClassMethod:inClass:newImpFactory:]
+_swizzledClassesDictionary
+___swizzledClassesDictionary_block_invoke
+___swizzle_block_invoke
+___copy_helper_block_e4_20r
+___destroy_helper_block_e4_20r
+_OBJC_IVAR_$_SentrySwizzleInfo._selector
+_OBJC_IVAR_$_SentrySwizzleInfo._impProviderBlock
+_swizzledClassesDictionary.swizzledClasses
+_swizzledClassesDictionary.onceToken
+_swizzle.gLock
+___block_descriptor_32_e4_20r_e6_^?4?0lu24l4
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentrySwizzle.m
+__destroy_helper_block_e4_20r
+__copy_helper_block_e4_20r
+__swizzle_block_invoke
+Sources/Sentry/SentrySwizzle.m
+__swizzledClassesDictionary_block_invoke
+swizzledClassesDictionary
+swizzledClassesForKey
+swizzle
+Sources/Sentry/include/SentrySwizzle.h
+-[SentryFileManager initWithDsn:didFailWithError:]
+-[SentryFileManager deleteAllFolders]
+-[SentryFileManager uniqueAcendingJsonName]
+-[SentryFileManager getAllStoredEvents]
+-[SentryFileManager getAllStoredBreadcrumbs]
+-[SentryFileManager allFilesContentInFolder:]
+-[SentryFileManager deleteAllStoredEvents]
+-[SentryFileManager deleteAllStoredBreadcrumbs]
+-[SentryFileManager allFilesInFolder:]
+-[SentryFileManager removeFileAtPath:]
+-[SentryFileManager storeEvent:]
+-[SentryFileManager storeEvent:maxCount:]
+-[SentryFileManager storeBreadcrumb:]
+-[SentryFileManager storeBreadcrumb:maxCount:]
+-[SentryFileManager storeDictionary:toPath:]
+-[SentryFileManager handleFileManagerLimit:maxCount:]
++[SentryFileManager createDirectoryAtPath:withError:]
+-[SentryFileManager sentryPath]
+-[SentryFileManager setSentryPath:]
+-[SentryFileManager breadcrumbsPath]
+-[SentryFileManager setBreadcrumbsPath:]
+-[SentryFileManager eventsPath]
+-[SentryFileManager setEventsPath:]
+-[SentryFileManager currentFileCounter]
+-[SentryFileManager setCurrentFileCounter:]
+-[SentryFileManager .cxx_destruct]
+_OBJC_IVAR_$_SentryFileManager._sentryPath
+_OBJC_IVAR_$_SentryFileManager._breadcrumbsPath
+_OBJC_IVAR_$_SentryFileManager._eventsPath
+_OBJC_IVAR_$_SentryFileManager._currentFileCounter
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryFileManager.m
+Sources/Sentry/SentryFileManager.m
+-[SentryEvent initWithLevel:]
+-[SentryEvent serialize]
+-[SentryEvent addOptionalListProperties:]
+-[SentryEvent addDebugImages:]
+-[SentryEvent addExceptions:]
+-[SentryEvent addThreads:]
+-[SentryEvent addSdkInformation:]
+-[SentryEvent addSimpleProperties:]
+-[SentryEvent eventId]
+-[SentryEvent setEventId:]
+-[SentryEvent message]
+-[SentryEvent setMessage:]
+-[SentryEvent timestamp]
+-[SentryEvent setTimestamp:]
+-[SentryEvent level]
+-[SentryEvent setLevel:]
+-[SentryEvent platform]
+-[SentryEvent setPlatform:]
+-[SentryEvent logger]
+-[SentryEvent setLogger:]
+-[SentryEvent serverName]
+-[SentryEvent setServerName:]
+-[SentryEvent releaseName]
+-[SentryEvent setReleaseName:]
+-[SentryEvent dist]
+-[SentryEvent setDist:]
+-[SentryEvent environment]
+-[SentryEvent setEnvironment:]
+-[SentryEvent transaction]
+-[SentryEvent setTransaction:]
+-[SentryEvent tags]
+-[SentryEvent setTags:]
+-[SentryEvent extra]
+-[SentryEvent setExtra:]
+-[SentryEvent sdk]
+-[SentryEvent setSdk:]
+-[SentryEvent modules]
+-[SentryEvent setModules:]
+-[SentryEvent fingerprint]
+-[SentryEvent setFingerprint:]
+-[SentryEvent user]
+-[SentryEvent setUser:]
+-[SentryEvent context]
+-[SentryEvent setContext:]
+-[SentryEvent threads]
+-[SentryEvent setThreads:]
+-[SentryEvent exceptions]
+-[SentryEvent setExceptions:]
+-[SentryEvent stacktrace]
+-[SentryEvent setStacktrace:]
+-[SentryEvent debugMeta]
+-[SentryEvent setDebugMeta:]
+-[SentryEvent breadcrumbsSerialized]
+-[SentryEvent setBreadcrumbsSerialized:]
+-[SentryEvent infoDict]
+-[SentryEvent setInfoDict:]
+-[SentryEvent .cxx_destruct]
+_OBJC_IVAR_$_SentryEvent._eventId
+_OBJC_IVAR_$_SentryEvent._message
+_OBJC_IVAR_$_SentryEvent._timestamp
+_OBJC_IVAR_$_SentryEvent._level
+_OBJC_IVAR_$_SentryEvent._platform
+_OBJC_IVAR_$_SentryEvent._logger
+_OBJC_IVAR_$_SentryEvent._serverName
+_OBJC_IVAR_$_SentryEvent._releaseName
+_OBJC_IVAR_$_SentryEvent._dist
+_OBJC_IVAR_$_SentryEvent._environment
+_OBJC_IVAR_$_SentryEvent._transaction
+_OBJC_IVAR_$_SentryEvent._tags
+_OBJC_IVAR_$_SentryEvent._extra
+_OBJC_IVAR_$_SentryEvent._sdk
+_OBJC_IVAR_$_SentryEvent._modules
+_OBJC_IVAR_$_SentryEvent._fingerprint
+_OBJC_IVAR_$_SentryEvent._user
+_OBJC_IVAR_$_SentryEvent._context
+_OBJC_IVAR_$_SentryEvent._threads
+_OBJC_IVAR_$_SentryEvent._exceptions
+_OBJC_IVAR_$_SentryEvent._stacktrace
+_OBJC_IVAR_$_SentryEvent._debugMeta
+_OBJC_IVAR_$_SentryEvent._breadcrumbsSerialized
+_OBJC_IVAR_$_SentryEvent._infoDict
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryEvent.m
+Sources/Sentry/SentryEvent.m
+Sources/Sentry/include/SentryEvent.h
+/Users/koofrank/Documents/CybexDex/cybex-ios/Carthage/Checkouts/sentry-cocoa/Sources/Sentry/SentryCrashExceptionApplication.m
+__ZL15__ARCLite__loadv
+__ZL30add_image_hook_autoreleasepoolPK11mach_headerl
+__ZL34__arclite_objc_autoreleasePoolPushv
+__ZL33__arclite_objc_autoreleasePoolPopPv
+__ZL19patch_lazy_pointersPK11mach_headerP7patch_tm
+__ZL42__arclite_NSArray_objectAtIndexedSubscriptP7NSArrayP13objc_selectorj
+__ZL53__arclite_NSMutableArray_setObject_atIndexedSubscriptP14NSMutableArrayP13objc_selectorP11objc_objectj
+__ZL46__arclite_NSDictionary_objectForKeyedSubscriptP12NSDictionaryP13objc_selectorP11objc_object
+__ZL47__arclite_NSOrderedSet_objectAtIndexedSubscriptP12NSOrderedSetP13objc_selectorj
+__ZL58__arclite_NSMutableOrderedSet_setObject_atIndexedSubscriptP19NSMutableOrderedSetP13objc_selectorP11objc_objectj
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL18add_image_hook_ARCPK11mach_headerl
+__ZL27__arclite_objc_loadClassrefPP10objc_class
+__ZL36__arclite_object_setInstanceVariableP11objc_objectPKcPv
+__ZL24__arclite_object_setIvarP11objc_objectP9objc_ivarS0_
+__ZL21__arclite_object_copyP11objc_objectm
+__ZL21__arclite_objc_retainP11objc_object
+__ZL26__arclite_objc_retainBlockP11objc_object
+__ZL22__arclite_objc_releaseP11objc_object
+__ZL26__arclite_objc_autoreleaseP11objc_object
+__ZL32__arclite_objc_retainAutoreleaseP11objc_object
+__ZL37__arclite_objc_autoreleaseReturnValueP11objc_object
+__ZL43__arclite_objc_retainAutoreleaseReturnValueP11objc_object
+__ZL44__arclite_objc_retainAutoreleasedReturnValueP11objc_object
+__ZL26__arclite_objc_storeStrongPP11objc_objectS0_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+__ZL23NSAutoreleasePool_class
+__ZZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+__ZGVZL30add_image_hook_autoreleasepoolPK11mach_headerlE7patches
+__OBJC_PROTOCOL_$___ARCLiteIndexedSubscripting__
+__OBJC_LABEL_PROTOCOL_$___ARCLiteIndexedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteIndexedSubscripting__
+__OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+__OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZZL18add_image_hook_ARCPK11mach_headerlE7patches
+__ZGVZL18add_image_hook_ARCPK11mach_headerlE7patches
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ --target=armv7-apple-ios4.3 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -fno-sanitize=vptr -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-objc-interface-ivars -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -D OBJC_OLD_DISPATCH_PROTOTYPES=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources-normal/armv7 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/armv7 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=deprecated-declarations -Wno-error=documentation -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=deprecated-declarations -Wno-error=documentation -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/armv7/arclite.o -Wno-framework-include-private-from-public -Wno-atimport-in-framework-header -Wno-extra-semi-stmt -Wno-quoted-include-in-framework-header -mlinker-version=512.4 -march=armv7a
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76
+fixStringForCoreData
+source/arclite.mm
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.Internal.sdk/usr/include/_ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_objc_storeStrong
+__arclite_objc_release
+__arclite_objc_retain
+__arclite_objc_retainAutoreleasedReturnValue
+__arclite_objc_retainAutoreleaseReturnValue
+__arclite_objc_autoreleaseReturnValue
+__arclite_objc_retainAutorelease
+__arclite_objc_autorelease
+__arclite_objc_retainBlock
+__arclite_object_copy
+fixupCopiedReferences
+_class_getInstanceStart
+alignedInstanceStart
+__arclite_class_usesAutomaticRetainRelease
+classOrSuperClassesUseARR
+__arclite_object_setIvar
+isScannedOffset
+_ivar_getClass
+__arclite_object_setInstanceVariable
+__arclite_objc_loadClassref
+add_image_hook_ARC
+patch_t<void (id *, id)>
+patch_t<id (id)>
+patch_t<void (id)>
+patch_t<id (id, unsigned long)>
+patch_t<void (id, objc_ivar *, id)>
+patch_t<objc_ivar *(id, const char *, void *)>
+patch_t<Class (Class *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__arclite_NSMutableOrderedSet_setObject_atIndexedSubscript
+__arclite_NSOrderedSet_objectAtIndexedSubscript
+__arclite_NSDictionary_objectForKeyedSubscript
+__arclite_NSMutableArray_setObject_atIndexedSubscript
+__arclite_NSArray_objectAtIndexedSubscript
+patch_lazy_pointers
+__arclite_objc_autoreleasePoolPop
+__arclite_objc_autoreleasePoolPush
+add_image_hook_autoreleasepool
+patch_t<void (void *)>
+patch_t<void *()>
+__ARCLite__load
+install_swiftV1
+replaceMethod
+install_ARC
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter
+install_subscripting
+addMethod
+indexedGetter
+install_autoreleasepool

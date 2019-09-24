@@ -79,7 +79,7 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
 
         let status = card.transactionPinStatus
         if status {
-            if let pincode = Defaults[.pinCodes][pkKey] as? String {
+            if let pincode = Defaults[\.pinCodes][pkKey] as? String {
                 let data = card.validatorPin(pincode)
                 if data.success {
                     privateKey = data.privateKey

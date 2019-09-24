@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func withdrawAndDespoitRecordReducer(action: Action, state: WithdrawAndDespoitRecordState?) -> WithdrawAndDespoitRecordState {
+func withdrawAndDespoitRecordReducer(action: ReSwift.Action, state: WithdrawAndDespoitRecordState?) -> WithdrawAndDespoitRecordState {
     let state = state ?? WithdrawAndDespoitRecordState()
 
     switch action {

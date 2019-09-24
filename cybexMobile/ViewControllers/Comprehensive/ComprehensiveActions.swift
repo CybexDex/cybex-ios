@@ -27,22 +27,22 @@ struct ComprehensiveState: BaseState {
 }
 
 // MARK: - Action
-struct ComprehensiveFetchedAction: Action {
+struct ComprehensiveFetchedAction: ReSwift.Action {
     var data: JSON
 }
 
-struct FetchHotAssetsAction: Action {
+struct FetchHotAssetsAction: ReSwift.Action {
     var data: [Pair]
 }
 
-struct FetchMiddleItemAction: Action {
+struct FetchMiddleItemAction: ReSwift.Action {
     var data: [ComprehensiveItem]
 }
 
-struct FetchAnnouncesAction: Action {
+struct FetchAnnouncesAction: ReSwift.Action {
     var data: [ComprehensiveAnnounce]
 }
 
-struct FetchHomeBannerAction: Action {
+struct FetchHomeBannerAction: ReSwift.Action {
     var data: [ComprehensiveBanner]
 }

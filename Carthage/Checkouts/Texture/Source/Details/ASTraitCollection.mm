@@ -38,11 +38,9 @@ ASPrimitiveTraitCollection ASPrimitiveTraitCollectionMakeDefault() {
     tc.preferredContentSizeCategory = UIContentSizeCategoryUnspecified;
     tc.layoutDirection = UITraitEnvironmentLayoutDirectionUnspecified;
   }
-#if AS_BUILD_UIUSERINTERFACESTYLE
   if (AS_AVAILABLE_IOS_TVOS(12, 10)) {
     tc.userInterfaceStyle = UIUserInterfaceStyleUnspecified;
   }
-#endif
   return tc;
 }
 
@@ -60,12 +58,32 @@ ASPrimitiveTraitCollection ASPrimitiveTraitCollectionFromUITraitCollection(UITra
     ASDisplayNodeCAssertPermanent(traitCollection.preferredContentSizeCategory);
     environmentTraitCollection.preferredContentSizeCategory = traitCollection.preferredContentSizeCategory;
   }
-#if AS_BUILD_UIUSERINTERFACESTYLE
   if (AS_AVAILABLE_IOS_TVOS(12, 10)) {
     environmentTraitCollection.userInterfaceStyle = traitCollection.userInterfaceStyle;
   }
-#endif
   return environmentTraitCollection;
+}
+
+AS_EXTERN UITraitCollection * ASPrimitiveTraitCollectionToUITraitCollection(ASPrimitiveTraitCollection traitCollection) {
+  NSMutableArray *collections = [[NSMutableArray alloc] initWithArray:@[
+    [UITraitCollection traitCollectionWithHorizontalSizeClass:traitCollection.horizontalSizeClass],
+    [UITraitCollection traitCollectionWithVerticalSizeClass:traitCollection.verticalSizeClass],
+    [UITraitCollection traitCollectionWithDisplayScale:traitCollection.displayScale],
+    [UITraitCollection traitCollectionWithUserInterfaceIdiom:traitCollection.userInterfaceIdiom],
+    [UITraitCollection traitCollectionWithForceTouchCapability:traitCollection.forceTouchCapability],
+  ]];
+  
+  if (AS_AVAILABLE_IOS(10)) {
+    [collections addObject:[UITraitCollection traitCollectionWithDisplayGamut:traitCollection.displayGamut]];
+    [collections addObject:[UITraitCollection traitCollectionWithLayoutDirection:traitCollection.layoutDirection]];
+    [collections addObject:[UITraitCollection traitCollectionWithPreferredContentSizeCategory:traitCollection.preferredContentSizeCategory]];
+  }
+  if (AS_AVAILABLE_IOS_TVOS(12, 10)) {
+    [collections addObject:[UITraitCollection traitCollectionWithUserInterfaceStyle:traitCollection.userInterfaceStyle]];
+  }
+  
+  UITraitCollection *result = [UITraitCollection traitCollectionWithTraitsFromCollections:collections];
+  return result;
 }
 
 BOOL ASPrimitiveTraitCollectionIsEqualToASPrimitiveTraitCollection(ASPrimitiveTraitCollection lhs, ASPrimitiveTraitCollection rhs) {
@@ -139,7 +157,6 @@ ASDISPLAYNODE_INLINE NSString *AS_NSStringFromUITraitEnvironmentLayoutDirection(
 }
 
 // Named so as not to conflict with a hidden Apple function, in case compiler decides not to inline
-#if AS_BUILD_UIUSERINTERFACESTYLE
 API_AVAILABLE(tvos(10.0), ios(12.0))
 ASDISPLAYNODE_INLINE NSString *AS_NSStringFromUIUserInterfaceStyle(UIUserInterfaceStyle userInterfaceStyle) {
   switch (userInterfaceStyle) {
@@ -151,7 +168,6 @@ ASDISPLAYNODE_INLINE NSString *AS_NSStringFromUIUserInterfaceStyle(UIUserInterfa
       return @"Unspecified";
   }
 }
-#endif
 
 NSString *NSStringFromASPrimitiveTraitCollection(ASPrimitiveTraitCollection traits) {
   NSMutableArray<NSDictionary *> *props = [NSMutableArray array];
@@ -160,11 +176,9 @@ NSString *NSStringFromASPrimitiveTraitCollection(ASPrimitiveTraitCollection trai
   [props addObject:@{ @"displayScale": [NSString stringWithFormat: @"%.0lf", (double)traits.displayScale] }];
   [props addObject:@{ @"userInterfaceIdiom": AS_NSStringFromUIUserInterfaceIdiom(traits.userInterfaceIdiom) }];
   [props addObject:@{ @"forceTouchCapability": AS_NSStringFromUIForceTouchCapability(traits.forceTouchCapability) }];
-#if AS_BUILD_UIUSERINTERFACESTYLE
   if (AS_AVAILABLE_IOS_TVOS(12, 10)) {
     [props addObject:@{ @"userInterfaceStyle": AS_NSStringFromUIUserInterfaceStyle(traits.userInterfaceStyle) }];
   }
-#endif
   if (AS_AVAILABLE_IOS(10)) {
     [props addObject:@{ @"layoutDirection": AS_NSStringFromUITraitEnvironmentLayoutDirection(traits.layoutDirection) }];
     [props addObject:@{ @"preferredContentSizeCategory": traits.preferredContentSizeCategory }];
@@ -220,12 +234,12 @@ NSString *NSStringFromASPrimitiveTraitCollection(ASPrimitiveTraitCollection trai
 {
   return _prim.containerSize;
 }
-#if AS_BUILD_UIUSERINTERFACESTYLE
+
 - (UIUserInterfaceStyle)userInterfaceStyle
 {
   return _prim.userInterfaceStyle;
 }
-#endif
+
 - (UIContentSizeCategory)preferredContentSizeCategory
 {
   return _prim.preferredContentSizeCategory;

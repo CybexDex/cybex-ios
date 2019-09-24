@@ -13,7 +13,6 @@ import RxSwift
 import SwiftyJSON
 import TinyConstraints
 import Repeat
-import BigInt
 
 enum ViewType: Int {
     case homeContent    = 1

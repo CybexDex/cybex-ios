@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import Localize_Swift
 
-func rechargeDetailReducer(action: Action, state: RechargeDetailState?) -> RechargeDetailState {
+func rechargeDetailReducer(action: ReSwift.Action, state: RechargeDetailState?) -> RechargeDetailState {
     let state = state ?? RechargeDetailState()
     
     switch action {

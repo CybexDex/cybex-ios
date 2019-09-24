@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "Presentr",
-      "hash" : "8413e487281a2df404671990e6ea3c391d90968fbd30be2f2da4317d64e4a767",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "25a4167f45c0562454aafa6c3acf4647c69ff8a015207a6a83c5dbad57ac7696",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

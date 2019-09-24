@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func homeReducer(action: Action, state: HomeState?) -> HomeState {
+func homeReducer(action: ReSwift.Action, state: HomeState?) -> HomeState {
     let state = state ?? HomeState()
 
     switch action {

@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func gSettingDetailReducer(action: Action, state: SettingDetailState?) -> SettingDetailState {
+func gSettingDetailReducer(action: ReSwift.Action, state: SettingDetailState?) -> SettingDetailState {
     let state = state ?? SettingDetailState()
 
     return state

@@ -13,6 +13,7 @@ import SwifterSwift
 import SwiftyJSON
 import SwiftyUserDefaults
 import RxCocoa
+import Repeat
 
 enum NodeURLString: String {
     case shanghai = "wss://shanghai.51nebula.com"
@@ -80,6 +81,7 @@ class CybexWebSocketService: NSObject {
     private var queue: OperationQueue!
 
     var ids: [ApiCategory: Int] = [:]
+    var timer: Repeater?
 
     static let shared = CybexWebSocketService()
 
@@ -89,6 +91,7 @@ class CybexWebSocketService: NSObject {
     private override init() {
         super.init()
 
+        
         monitor()
         self.queue = OperationQueue()
 
@@ -96,6 +99,16 @@ class CybexWebSocketService: NSObject {
         self.queue.isSuspended = true
 
         self.batchFactory = BatchFactory(version: "2.0", idGenerator: self.idGenerator)
+//        openHeart()
+    }
+
+    func openHeart() {
+        self.timer = Repeater.every(.seconds(5), { [weak self] _ in
+            guard let self = self else { return }
+            if self.checkNetworConnected() {
+                try? self.socket.sendPing(nil)
+            }
+        })
     }
 
     // MARK: - TestSocket -
@@ -421,5 +434,19 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             }
         }
         //    log.info("end receieveMessage --- current operations Count: \(queue.operationCount)")
+    }
+
+    public func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
+        //1000 主动断开
+        //code 1001 断线心跳检测不到
+
+    }
+
+    public func webSocket(_ webSocket: SRWebSocket, didReceivePingWith data: Data?) {
+
+    }
+
+    public func webSocket(_ webSocket: SRWebSocket, didReceivePong pongData: Data?) {
+
     }
 }

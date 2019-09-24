@@ -3,7 +3,7 @@
 import Apollo
 
 /// The episodes in the Star Wars trilogy
-public enum Episode: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+public enum Episode: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// Star Wars Episode IV: A New Hope, released in 1977.
   case newhope
@@ -41,6 +41,14 @@ public enum Episode: RawRepresentable, Equatable, Hashable, Apollo.JSONDecodable
       default: return false
     }
   }
+
+  public static var allCases: [Episode] {
+    return [
+      .newhope,
+      .empire,
+      .jedi,
+    ]
+  }
 }
 
 /// The input object sent when someone is creating a new review
@@ -64,7 +72,7 @@ public struct ReviewInput: GraphQLMapConvertible {
   /// Comment about the movie, optional
   public var commentary: Swift.Optional<String?> {
     get {
-      return graphQLMap["commentary"] as! Swift.Optional<String?>
+      return graphQLMap["commentary"] as? Swift.Optional<String?> ?? .none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "commentary")
@@ -74,7 +82,7 @@ public struct ReviewInput: GraphQLMapConvertible {
   /// Favorite color, optional
   public var favoriteColor: Swift.Optional<ColorInput?> {
     get {
-      return graphQLMap["favorite_color"] as! Swift.Optional<ColorInput?>
+      return graphQLMap["favorite_color"] as? Swift.Optional<ColorInput?> ?? .none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "favorite_color")
@@ -118,9 +126,216 @@ public struct ColorInput: GraphQLMapConvertible {
   }
 }
 
-public final class HeroAndFriendsNamesQuery: GraphQLQuery {
+public final class CreateReviewForEpisodeMutation: GraphQLMutation {
+  /// mutation CreateReviewForEpisode($episode: Episode!, $review: ReviewInput!) {
+  ///   createReview(episode: $episode, review: $review) {
+  ///     __typename
+  ///     stars
+  ///     commentary
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroAndFriendsNames($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    name\n    friends {\n      __typename\n      name\n    }\n  }\n}"
+    "mutation CreateReviewForEpisode($episode: Episode!, $review: ReviewInput!) { createReview(episode: $episode, review: $review) { __typename stars commentary } }"
+
+  public let operationName = "CreateReviewForEpisode"
+
+  public var episode: Episode
+  public var review: ReviewInput
+
+  public init(episode: Episode, review: ReviewInput) {
+    self.episode = episode
+    self.review = review
+  }
+
+  public var variables: GraphQLMap? {
+    return ["episode": episode, "review": review]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("createReview", arguments: ["episode": GraphQLVariable("episode"), "review": GraphQLVariable("review")], type: .object(CreateReview.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(createReview: CreateReview? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "createReview": createReview.flatMap { (value: CreateReview) -> ResultMap in value.resultMap }])
+    }
+
+    public var createReview: CreateReview? {
+      get {
+        return (resultMap["createReview"] as? ResultMap).flatMap { CreateReview(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "createReview")
+      }
+    }
+
+    public struct CreateReview: GraphQLSelectionSet {
+      public static let possibleTypes = ["Review"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("stars", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("commentary", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(stars: Int, commentary: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Review", "stars": stars, "commentary": commentary])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The number of stars this review gave, 1-5
+      public var stars: Int {
+        get {
+          return resultMap["stars"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "stars")
+        }
+      }
+
+      /// Comment about the movie
+      public var commentary: String? {
+        get {
+          return resultMap["commentary"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "commentary")
+        }
+      }
+    }
+  }
+}
+
+public final class CreateAwesomeReviewMutation: GraphQLMutation {
+  /// mutation CreateAwesomeReview {
+  ///   createReview(episode: JEDI, review: {stars: 10, commentary: "This is awesome!"}) {
+  ///     __typename
+  ///     stars
+  ///     commentary
+  ///   }
+  /// }
+  public let operationDefinition =
+    "mutation CreateAwesomeReview { createReview(episode: JEDI, review: {stars: 10, commentary: \"This is awesome!\"}) { __typename stars commentary } }"
+
+  public let operationName = "CreateAwesomeReview"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("createReview", arguments: ["episode": "JEDI", "review": ["stars": 10, "commentary": "This is awesome!"]], type: .object(CreateReview.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(createReview: CreateReview? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "createReview": createReview.flatMap { (value: CreateReview) -> ResultMap in value.resultMap }])
+    }
+
+    public var createReview: CreateReview? {
+      get {
+        return (resultMap["createReview"] as? ResultMap).flatMap { CreateReview(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "createReview")
+      }
+    }
+
+    public struct CreateReview: GraphQLSelectionSet {
+      public static let possibleTypes = ["Review"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("stars", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("commentary", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(stars: Int, commentary: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Review", "stars": stars, "commentary": commentary])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The number of stars this review gave, 1-5
+      public var stars: Int {
+        get {
+          return resultMap["stars"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "stars")
+        }
+      }
+
+      /// Comment about the movie
+      public var commentary: String? {
+        get {
+          return resultMap["commentary"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "commentary")
+        }
+      }
+    }
+  }
+}
+
+public final class HeroAndFriendsNamesQuery: GraphQLQuery {
+  /// query HeroAndFriendsNames($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     name
+  ///     friends {
+  ///       __typename
+  ///       name
+  ///     }
+  ///   }
+  /// }
+  public let operationDefinition =
+    "query HeroAndFriendsNames($episode: Episode) { hero(episode: $episode) { __typename name friends { __typename name } } }"
+
+  public let operationName = "HeroAndFriendsNames"
 
   public var episode: Episode?
 
@@ -256,8 +471,22 @@ public final class HeroAndFriendsNamesQuery: GraphQLQuery {
 }
 
 public final class HeroAndFriendsNamesWithIDsQuery: GraphQLQuery {
+  /// query HeroAndFriendsNamesWithIDs($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     id
+  ///     name
+  ///     friends {
+  ///       __typename
+  ///       id
+  ///       name
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroAndFriendsNamesWithIDs($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    id\n    name\n    friends {\n      __typename\n      id\n      name\n    }\n  }\n}"
+    "query HeroAndFriendsNamesWithIDs($episode: Episode) { hero(episode: $episode) { __typename id name friends { __typename id name } } }"
+
+  public let operationName = "HeroAndFriendsNamesWithIDs"
 
   public var episode: Episode?
 
@@ -415,8 +644,21 @@ public final class HeroAndFriendsNamesWithIDsQuery: GraphQLQuery {
 }
 
 public final class HeroAndFriendsNamesWithIdForParentOnlyQuery: GraphQLQuery {
+  /// query HeroAndFriendsNamesWithIDForParentOnly($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     id
+  ///     name
+  ///     friends {
+  ///       __typename
+  ///       name
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroAndFriendsNamesWithIDForParentOnly($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    id\n    name\n    friends {\n      __typename\n      name\n    }\n  }\n}"
+    "query HeroAndFriendsNamesWithIDForParentOnly($episode: Episode) { hero(episode: $episode) { __typename id name friends { __typename name } } }"
+
+  public let operationName = "HeroAndFriendsNamesWithIDForParentOnly"
 
   public var episode: Episode?
 
@@ -563,8 +805,17 @@ public final class HeroAndFriendsNamesWithIdForParentOnlyQuery: GraphQLQuery {
 }
 
 public final class HeroAndFriendsNamesWithFragmentQuery: GraphQLQuery {
+  /// query HeroAndFriendsNamesWithFragment($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     name
+  ///     ...FriendsNames
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroAndFriendsNamesWithFragment($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    name\n    ...FriendsNames\n  }\n}"
+    "query HeroAndFriendsNamesWithFragment($episode: Episode) { hero(episode: $episode) { __typename name ...FriendsNames } }"
+
+  public let operationName = "HeroAndFriendsNamesWithFragment"
 
   public var queryDocument: String { return operationDefinition.appending(FriendsNames.fragmentDefinition) }
 
@@ -729,8 +980,25 @@ public final class HeroAndFriendsNamesWithFragmentQuery: GraphQLQuery {
 }
 
 public final class HeroAndFriendsNamesWithFragmentTwiceQuery: GraphQLQuery {
+  /// query HeroAndFriendsNamesWithFragmentTwice($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     friends {
+  ///       __typename
+  ///       ...CharacterName
+  ///     }
+  ///     ... on Droid {
+  ///       friends {
+  ///         __typename
+  ///         ...CharacterName
+  ///       }
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroAndFriendsNamesWithFragmentTwice($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    friends {\n      __typename\n      ...CharacterName\n    }\n    ... on Droid {\n      friends {\n        __typename\n        ...CharacterName\n      }\n    }\n  }\n}"
+    "query HeroAndFriendsNamesWithFragmentTwice($episode: Episode) { hero(episode: $episode) { __typename friends { __typename ...CharacterName } ... on Droid { friends { __typename ...CharacterName } } } }"
+
+  public let operationName = "HeroAndFriendsNamesWithFragmentTwice"
 
   public var queryDocument: String { return operationDefinition.appending(CharacterName.fragmentDefinition) }
 
@@ -1008,395 +1276,17 @@ public final class HeroAndFriendsNamesWithFragmentTwiceQuery: GraphQLQuery {
   }
 }
 
-public final class HeroFriendsOfFriendsNamesQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query HeroFriendsOfFriendsNames($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    friends {\n      __typename\n      id\n      friends {\n        __typename\n        name\n      }\n    }\n  }\n}"
-
-  public var episode: Episode?
-
-  public init(episode: Episode? = nil) {
-    self.episode = episode
-  }
-
-  public var variables: GraphQLMap? {
-    return ["episode": episode]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(hero: Hero? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
-    }
-
-    public var hero: Hero? {
-      get {
-        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
-      }
-    }
-
-    public struct Hero: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("friends", type: .list(.object(Friend.selections))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(friends: [Friend?]? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Human", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
-      }
-
-      public static func makeDroid(friends: [Friend?]? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Droid", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The friends of the character, or an empty list if they have none
-      public var friends: [Friend?]? {
-        get {
-          return (resultMap["friends"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Friend?] in value.map { (value: ResultMap?) -> Friend? in value.flatMap { (value: ResultMap) -> Friend in Friend(unsafeResultMap: value) } } }
-        }
-        set {
-          resultMap.updateValue(newValue.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }, forKey: "friends")
-        }
-      }
-
-      public struct Friend: GraphQLSelectionSet {
-        public static let possibleTypes = ["Human", "Droid"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("friends", type: .list(.object(Friend.selections))),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public static func makeHuman(id: GraphQLID, friends: [Friend?]? = nil) -> Friend {
-          return Friend(unsafeResultMap: ["__typename": "Human", "id": id, "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
-        }
-
-        public static func makeDroid(id: GraphQLID, friends: [Friend?]? = nil) -> Friend {
-          return Friend(unsafeResultMap: ["__typename": "Droid", "id": id, "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// The ID of the character
-        public var id: GraphQLID {
-          get {
-            return resultMap["id"]! as! GraphQLID
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "id")
-          }
-        }
-
-        /// The friends of the character, or an empty list if they have none
-        public var friends: [Friend?]? {
-          get {
-            return (resultMap["friends"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Friend?] in value.map { (value: ResultMap?) -> Friend? in value.flatMap { (value: ResultMap) -> Friend in Friend(unsafeResultMap: value) } } }
-          }
-          set {
-            resultMap.updateValue(newValue.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }, forKey: "friends")
-          }
-        }
-
-        public struct Friend: GraphQLSelectionSet {
-          public static let possibleTypes = ["Human", "Droid"]
-
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          ]
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public static func makeHuman(name: String) -> Friend {
-            return Friend(unsafeResultMap: ["__typename": "Human", "name": name])
-          }
-
-          public static func makeDroid(name: String) -> Friend {
-            return Friend(unsafeResultMap: ["__typename": "Droid", "name": name])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          /// The name of the character
-          public var name: String {
-            get {
-              return resultMap["name"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-public final class HeroNameAndAppearsInWithFragmentQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query HeroNameAndAppearsInWithFragment($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    ...CharacterNameAndAppearsIn\n  }\n}"
-
-  public var queryDocument: String { return operationDefinition.appending(CharacterNameAndAppearsIn.fragmentDefinition) }
-
-  public var episode: Episode?
-
-  public init(episode: Episode? = nil) {
-    self.episode = episode
-  }
-
-  public var variables: GraphQLMap? {
-    return ["episode": episode]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(hero: Hero? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
-    }
-
-    public var hero: Hero? {
-      get {
-        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
-      }
-    }
-
-    public struct Hero: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(name: String, appearsIn: [Episode?]) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Human", "name": name, "appearsIn": appearsIn])
-      }
-
-      public static func makeDroid(name: String, appearsIn: [Episode?]) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "appearsIn": appearsIn])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The name of the character
-      public var name: String {
-        get {
-          return resultMap["name"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      /// The movies this character appears in
-      public var appearsIn: [Episode?] {
-        get {
-          return resultMap["appearsIn"]! as! [Episode?]
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "appearsIn")
-        }
-      }
-
-      public var fragments: Fragments {
-        get {
-          return Fragments(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-
-      public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public var characterNameAndAppearsIn: CharacterNameAndAppearsIn {
-          get {
-            return CharacterNameAndAppearsIn(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
-      }
-    }
-  }
-}
-
-public final class StarshipQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query Starship {\n  starship(id: 3000) {\n    __typename\n    name\n    coordinates\n  }\n}"
-
-  public init() {
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("starship", arguments: ["id": 3000], type: .object(Starship.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(starship: Starship? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "starship": starship.flatMap { (value: Starship) -> ResultMap in value.resultMap }])
-    }
-
-    public var starship: Starship? {
-      get {
-        return (resultMap["starship"] as? ResultMap).flatMap { Starship(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "starship")
-      }
-    }
-
-    public struct Starship: GraphQLSelectionSet {
-      public static let possibleTypes = ["Starship"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("coordinates", type: .list(.nonNull(.list(.nonNull(.scalar(Double.self)))))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public init(name: String, coordinates: [[Double]]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Starship", "name": name, "coordinates": coordinates])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The name of the starship
-      public var name: String {
-        get {
-          return resultMap["name"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var coordinates: [[Double]]? {
-        get {
-          return resultMap["coordinates"] as? [[Double]]
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "coordinates")
-        }
-      }
-    }
-  }
-}
-
 public final class HeroAppearsInQuery: GraphQLQuery {
+  /// query HeroAppearsIn {
+  ///   hero {
+  ///     __typename
+  ///     appearsIn
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroAppearsIn {\n  hero {\n    __typename\n    appearsIn\n  }\n}"
+    "query HeroAppearsIn { hero { __typename appearsIn } }"
+
+  public let operationName = "HeroAppearsIn"
 
   public init() {
   }
@@ -1472,8 +1362,16 @@ public final class HeroAppearsInQuery: GraphQLQuery {
 }
 
 public final class HeroAppearsInWithFragmentQuery: GraphQLQuery {
+  /// query HeroAppearsInWithFragment($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     ...CharacterAppearsIn
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroAppearsInWithFragment($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    ...CharacterAppearsIn\n  }\n}"
+    "query HeroAppearsInWithFragment($episode: Episode) { hero(episode: $episode) { __typename ...CharacterAppearsIn } }"
+
+  public let operationName = "HeroAppearsInWithFragment"
 
   public var queryDocument: String { return operationDefinition.appending(CharacterAppearsIn.fragmentDefinition) }
 
@@ -1584,967 +1482,17 @@ public final class HeroAppearsInWithFragmentQuery: GraphQLQuery {
   }
 }
 
-public final class HeroDetailsQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query HeroDetails($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    name\n    ... on Human {\n      height\n    }\n    ... on Droid {\n      primaryFunction\n    }\n  }\n}"
-
-  public var episode: Episode?
-
-  public init(episode: Episode? = nil) {
-    self.episode = episode
-  }
-
-  public var variables: GraphQLMap? {
-    return ["episode": episode]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(hero: Hero? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
-    }
-
-    public var hero: Hero? {
-      get {
-        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
-      }
-    }
-
-    public struct Hero: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLTypeCase(
-          variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
-          default: [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          ]
-        )
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(name: String, height: Double? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
-      }
-
-      public static func makeDroid(name: String, primaryFunction: String? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The name of the character
-      public var name: String {
-        get {
-          return resultMap["name"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var asHuman: AsHuman? {
-        get {
-          if !AsHuman.possibleTypes.contains(__typename) { return nil }
-          return AsHuman(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsHuman: GraphQLSelectionSet {
-        public static let possibleTypes = ["Human"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("height", type: .scalar(Double.self)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(name: String, height: Double? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// What this human calls themselves
-        public var name: String {
-          get {
-            return resultMap["name"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        /// Height in the preferred unit, default is meters
-        public var height: Double? {
-          get {
-            return resultMap["height"] as? Double
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "height")
-          }
-        }
-      }
-
-      public var asDroid: AsDroid? {
-        get {
-          if !AsDroid.possibleTypes.contains(__typename) { return nil }
-          return AsDroid(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsDroid: GraphQLSelectionSet {
-        public static let possibleTypes = ["Droid"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("primaryFunction", type: .scalar(String.self)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(name: String, primaryFunction: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// What others call this droid
-        public var name: String {
-          get {
-            return resultMap["name"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        /// This droid's primary function
-        public var primaryFunction: String? {
-          get {
-            return resultMap["primaryFunction"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "primaryFunction")
-          }
-        }
-      }
-    }
-  }
-}
-
-public final class HeroDetailsWithFragmentQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query HeroDetailsWithFragment($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    ...HeroDetails\n  }\n}"
-
-  public var queryDocument: String { return operationDefinition.appending(HeroDetails.fragmentDefinition) }
-
-  public var episode: Episode?
-
-  public init(episode: Episode? = nil) {
-    self.episode = episode
-  }
-
-  public var variables: GraphQLMap? {
-    return ["episode": episode]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(hero: Hero? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
-    }
-
-    public var hero: Hero? {
-      get {
-        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
-      }
-    }
-
-    public struct Hero: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLTypeCase(
-          variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
-          default: [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          ]
-        )
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(name: String, height: Double? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
-      }
-
-      public static func makeDroid(name: String, primaryFunction: String? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The name of the character
-      public var name: String {
-        get {
-          return resultMap["name"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var fragments: Fragments {
-        get {
-          return Fragments(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-
-      public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public var heroDetails: HeroDetails {
-          get {
-            return HeroDetails(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
-      }
-
-      public var asHuman: AsHuman? {
-        get {
-          if !AsHuman.possibleTypes.contains(__typename) { return nil }
-          return AsHuman(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsHuman: GraphQLSelectionSet {
-        public static let possibleTypes = ["Human"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("height", type: .scalar(Double.self)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(name: String, height: Double? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// What this human calls themselves
-        public var name: String {
-          get {
-            return resultMap["name"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        /// Height in the preferred unit, default is meters
-        public var height: Double? {
-          get {
-            return resultMap["height"] as? Double
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "height")
-          }
-        }
-
-        public var fragments: Fragments {
-          get {
-            return Fragments(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
-
-        public struct Fragments {
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public var heroDetails: HeroDetails {
-            get {
-              return HeroDetails(unsafeResultMap: resultMap)
-            }
-            set {
-              resultMap += newValue.resultMap
-            }
-          }
-        }
-      }
-
-      public var asDroid: AsDroid? {
-        get {
-          if !AsDroid.possibleTypes.contains(__typename) { return nil }
-          return AsDroid(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsDroid: GraphQLSelectionSet {
-        public static let possibleTypes = ["Droid"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("primaryFunction", type: .scalar(String.self)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(name: String, primaryFunction: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// What others call this droid
-        public var name: String {
-          get {
-            return resultMap["name"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        /// This droid's primary function
-        public var primaryFunction: String? {
-          get {
-            return resultMap["primaryFunction"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "primaryFunction")
-          }
-        }
-
-        public var fragments: Fragments {
-          get {
-            return Fragments(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
-
-        public struct Fragments {
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public var heroDetails: HeroDetails {
-            get {
-              return HeroDetails(unsafeResultMap: resultMap)
-            }
-            set {
-              resultMap += newValue.resultMap
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-public final class DroidDetailsWithFragmentQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query DroidDetailsWithFragment($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    ...DroidDetails\n  }\n}"
-
-  public var queryDocument: String { return operationDefinition.appending(DroidDetails.fragmentDefinition) }
-
-  public var episode: Episode?
-
-  public init(episode: Episode? = nil) {
-    self.episode = episode
-  }
-
-  public var variables: GraphQLMap? {
-    return ["episode": episode]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(hero: Hero? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
-    }
-
-    public var hero: Hero? {
-      get {
-        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
-      }
-    }
-
-    public struct Hero: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLTypeCase(
-          variants: ["Droid": AsDroid.selections],
-          default: [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          ]
-        )
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman() -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Human"])
-      }
-
-      public static func makeDroid(name: String, primaryFunction: String? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var fragments: Fragments {
-        get {
-          return Fragments(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-
-      public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public var droidDetails: DroidDetails? {
-          get {
-            if !DroidDetails.possibleTypes.contains(resultMap["__typename"]! as! String) { return nil }
-            return DroidDetails(unsafeResultMap: resultMap)
-          }
-          set {
-            guard let newValue = newValue else { return }
-            resultMap += newValue.resultMap
-          }
-        }
-      }
-
-      public var asDroid: AsDroid? {
-        get {
-          if !AsDroid.possibleTypes.contains(__typename) { return nil }
-          return AsDroid(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsDroid: GraphQLSelectionSet {
-        public static let possibleTypes = ["Droid"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("primaryFunction", type: .scalar(String.self)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(name: String, primaryFunction: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// What others call this droid
-        public var name: String {
-          get {
-            return resultMap["name"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        /// This droid's primary function
-        public var primaryFunction: String? {
-          get {
-            return resultMap["primaryFunction"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "primaryFunction")
-          }
-        }
-
-        public var fragments: Fragments {
-          get {
-            return Fragments(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
-
-        public struct Fragments {
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public var droidDetails: DroidDetails {
-            get {
-              return DroidDetails(unsafeResultMap: resultMap)
-            }
-            set {
-              resultMap += newValue.resultMap
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-public final class SameHeroTwiceQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query SameHeroTwice {\n  hero {\n    __typename\n    name\n  }\n  r2: hero {\n    __typename\n    appearsIn\n  }\n}"
-
-  public init() {
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("hero", type: .object(Hero.selections)),
-      GraphQLField("hero", alias: "r2", type: .object(R2.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(hero: Hero? = nil, r2: R2? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }, "r2": r2.flatMap { (value: R2) -> ResultMap in value.resultMap }])
-    }
-
-    public var hero: Hero? {
-      get {
-        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
-      }
-    }
-
-    public var r2: R2? {
-      get {
-        return (resultMap["r2"] as? ResultMap).flatMap { R2(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "r2")
-      }
-    }
-
-    public struct Hero: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(name: String) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Human", "name": name])
-      }
-
-      public static func makeDroid(name: String) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The name of the character
-      public var name: String {
-        get {
-          return resultMap["name"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-    }
-
-    public struct R2: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(appearsIn: [Episode?]) -> R2 {
-        return R2(unsafeResultMap: ["__typename": "Human", "appearsIn": appearsIn])
-      }
-
-      public static func makeDroid(appearsIn: [Episode?]) -> R2 {
-        return R2(unsafeResultMap: ["__typename": "Droid", "appearsIn": appearsIn])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The movies this character appears in
-      public var appearsIn: [Episode?] {
-        get {
-          return resultMap["appearsIn"]! as! [Episode?]
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "appearsIn")
-        }
-      }
-    }
-  }
-}
-
-public final class TwoHeroesQuery: GraphQLQuery {
-  public let operationDefinition =
-    "query TwoHeroes {\n  r2: hero {\n    __typename\n    name\n  }\n  luke: hero(episode: EMPIRE) {\n    __typename\n    name\n  }\n}"
-
-  public init() {
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("hero", alias: "r2", type: .object(R2.selections)),
-      GraphQLField("hero", alias: "luke", arguments: ["episode": "EMPIRE"], type: .object(Luke.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(r2: R2? = nil, luke: Luke? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "r2": r2.flatMap { (value: R2) -> ResultMap in value.resultMap }, "luke": luke.flatMap { (value: Luke) -> ResultMap in value.resultMap }])
-    }
-
-    public var r2: R2? {
-      get {
-        return (resultMap["r2"] as? ResultMap).flatMap { R2(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "r2")
-      }
-    }
-
-    public var luke: Luke? {
-      get {
-        return (resultMap["luke"] as? ResultMap).flatMap { Luke(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "luke")
-      }
-    }
-
-    public struct R2: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(name: String) -> R2 {
-        return R2(unsafeResultMap: ["__typename": "Human", "name": name])
-      }
-
-      public static func makeDroid(name: String) -> R2 {
-        return R2(unsafeResultMap: ["__typename": "Droid", "name": name])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The name of the character
-      public var name: String {
-        get {
-          return resultMap["name"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-    }
-
-    public struct Luke: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human", "Droid"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(name: String) -> Luke {
-        return Luke(unsafeResultMap: ["__typename": "Human", "name": name])
-      }
-
-      public static func makeDroid(name: String) -> Luke {
-        return Luke(unsafeResultMap: ["__typename": "Droid", "name": name])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      /// The name of the character
-      public var name: String {
-        get {
-          return resultMap["name"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-    }
-  }
-}
-
 public final class HeroNameConditionalExclusionQuery: GraphQLQuery {
+  /// query HeroNameConditionalExclusion($skipName: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     name @skip(if: $skipName)
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameConditionalExclusion($skipName: Boolean!) {\n  hero {\n    __typename\n    name @skip(if: $skipName)\n  }\n}"
+    "query HeroNameConditionalExclusion($skipName: Boolean!) { hero { __typename name @skip(if: $skipName) } }"
+
+  public let operationName = "HeroNameConditionalExclusion"
 
   public var skipName: Bool
 
@@ -2629,8 +1577,16 @@ public final class HeroNameConditionalExclusionQuery: GraphQLQuery {
 }
 
 public final class HeroNameConditionalInclusionQuery: GraphQLQuery {
+  /// query HeroNameConditionalInclusion($includeName: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     name @include(if: $includeName)
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameConditionalInclusion($includeName: Boolean!) {\n  hero {\n    __typename\n    name @include(if: $includeName)\n  }\n}"
+    "query HeroNameConditionalInclusion($includeName: Boolean!) { hero { __typename name @include(if: $includeName) } }"
+
+  public let operationName = "HeroNameConditionalInclusion"
 
   public var includeName: Bool
 
@@ -2715,8 +1671,16 @@ public final class HeroNameConditionalInclusionQuery: GraphQLQuery {
 }
 
 public final class HeroNameConditionalBothQuery: GraphQLQuery {
+  /// query HeroNameConditionalBoth($skipName: Boolean!, $includeName: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     name @skip(if: $skipName) @include(if: $includeName)
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameConditionalBoth($skipName: Boolean!, $includeName: Boolean!) {\n  hero {\n    __typename\n    name @skip(if: $skipName) @include(if: $includeName)\n  }\n}"
+    "query HeroNameConditionalBoth($skipName: Boolean!, $includeName: Boolean!) { hero { __typename name @skip(if: $skipName) @include(if: $includeName) } }"
+
+  public let operationName = "HeroNameConditionalBoth"
 
   public var skipName: Bool
   public var includeName: Bool
@@ -2805,8 +1769,17 @@ public final class HeroNameConditionalBothQuery: GraphQLQuery {
 }
 
 public final class HeroNameConditionalBothSeparateQuery: GraphQLQuery {
+  /// query HeroNameConditionalBothSeparate($skipName: Boolean!, $includeName: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     name @skip(if: $skipName)
+  ///     name @include(if: $includeName)
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameConditionalBothSeparate($skipName: Boolean!, $includeName: Boolean!) {\n  hero {\n    __typename\n    name @skip(if: $skipName)\n    name @include(if: $includeName)\n  }\n}"
+    "query HeroNameConditionalBothSeparate($skipName: Boolean!, $includeName: Boolean!) { hero { __typename name @skip(if: $skipName) name @include(if: $includeName) } }"
+
+  public let operationName = "HeroNameConditionalBothSeparate"
 
   public var skipName: Bool
   public var includeName: Bool
@@ -2896,8 +1869,19 @@ public final class HeroNameConditionalBothSeparateQuery: GraphQLQuery {
 }
 
 public final class HeroDetailsInlineConditionalInclusionQuery: GraphQLQuery {
+  /// query HeroDetailsInlineConditionalInclusion($includeDetails: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     ... @include(if: $includeDetails) {
+  ///       name
+  ///       appearsIn
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroDetailsInlineConditionalInclusion($includeDetails: Boolean!) {\n  hero {\n    __typename\n    ... @include(if: $includeDetails) {\n      name\n      appearsIn\n    }\n  }\n}"
+    "query HeroDetailsInlineConditionalInclusion($includeDetails: Boolean!) { hero { __typename ... @include(if: $includeDetails) { name appearsIn } } }"
+
+  public let operationName = "HeroDetailsInlineConditionalInclusion"
 
   public var includeDetails: Bool
 
@@ -2993,8 +1977,16 @@ public final class HeroDetailsInlineConditionalInclusionQuery: GraphQLQuery {
 }
 
 public final class HeroDetailsFragmentConditionalInclusionQuery: GraphQLQuery {
+  /// query HeroDetailsFragmentConditionalInclusion($includeDetails: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     ...HeroDetails @include(if: $includeDetails)
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroDetailsFragmentConditionalInclusion($includeDetails: Boolean!) {\n  hero {\n    __typename\n    ...HeroDetails @include(if: $includeDetails)\n  }\n}"
+    "query HeroDetailsFragmentConditionalInclusion($includeDetails: Boolean!) { hero { __typename ...HeroDetails @include(if: $includeDetails) } }"
+
+  public let operationName = "HeroDetailsFragmentConditionalInclusion"
 
   public var queryDocument: String { return operationDefinition.appending(HeroDetails.fragmentDefinition) }
 
@@ -3303,8 +2295,19 @@ public final class HeroDetailsFragmentConditionalInclusionQuery: GraphQLQuery {
 }
 
 public final class HeroNameTypeSpecificConditionalInclusionQuery: GraphQLQuery {
+  /// query HeroNameTypeSpecificConditionalInclusion($episode: Episode, $includeName: Boolean!) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     name @include(if: $includeName)
+  ///     ... on Droid {
+  ///       name
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameTypeSpecificConditionalInclusion($episode: Episode, $includeName: Boolean!) {\n  hero(episode: $episode) {\n    __typename\n    name @include(if: $includeName)\n    ... on Droid {\n      name\n    }\n  }\n}"
+    "query HeroNameTypeSpecificConditionalInclusion($episode: Episode, $includeName: Boolean!) { hero(episode: $episode) { __typename name @include(if: $includeName) ... on Droid { name } } }"
+
+  public let operationName = "HeroNameTypeSpecificConditionalInclusion"
 
   public var episode: Episode?
   public var includeName: Bool
@@ -3448,8 +2451,22 @@ public final class HeroNameTypeSpecificConditionalInclusionQuery: GraphQLQuery {
 }
 
 public final class HeroFriendsDetailsConditionalInclusionQuery: GraphQLQuery {
+  /// query HeroFriendsDetailsConditionalInclusion($includeFriendsDetails: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     friends @include(if: $includeFriendsDetails) {
+  ///       __typename
+  ///       name
+  ///       ... on Droid {
+  ///         primaryFunction
+  ///       }
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroFriendsDetailsConditionalInclusion($includeFriendsDetails: Boolean!) {\n  hero {\n    __typename\n    friends @include(if: $includeFriendsDetails) {\n      __typename\n      name\n      ... on Droid {\n        primaryFunction\n      }\n    }\n  }\n}"
+    "query HeroFriendsDetailsConditionalInclusion($includeFriendsDetails: Boolean!) { hero { __typename friends @include(if: $includeFriendsDetails) { __typename name ... on Droid { primaryFunction } } } }"
+
+  public let operationName = "HeroFriendsDetailsConditionalInclusion"
 
   public var includeFriendsDetails: Bool
 
@@ -3641,8 +2658,26 @@ public final class HeroFriendsDetailsConditionalInclusionQuery: GraphQLQuery {
 }
 
 public final class HeroFriendsDetailsUnconditionalAndConditionalInclusionQuery: GraphQLQuery {
+  /// query HeroFriendsDetailsUnconditionalAndConditionalInclusion($includeFriendsDetails: Boolean!) {
+  ///   hero {
+  ///     __typename
+  ///     friends {
+  ///       __typename
+  ///       name
+  ///     }
+  ///     friends @include(if: $includeFriendsDetails) {
+  ///       __typename
+  ///       name
+  ///       ... on Droid {
+  ///         primaryFunction
+  ///       }
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroFriendsDetailsUnconditionalAndConditionalInclusion($includeFriendsDetails: Boolean!) {\n  hero {\n    __typename\n    friends {\n      __typename\n      name\n    }\n    friends @include(if: $includeFriendsDetails) {\n      __typename\n      name\n      ... on Droid {\n        primaryFunction\n      }\n    }\n  }\n}"
+    "query HeroFriendsDetailsUnconditionalAndConditionalInclusion($includeFriendsDetails: Boolean!) { hero { __typename friends { __typename name } friends @include(if: $includeFriendsDetails) { __typename name ... on Droid { primaryFunction } } } }"
+
+  public let operationName = "HeroFriendsDetailsUnconditionalAndConditionalInclusion"
 
   public var includeFriendsDetails: Bool
 
@@ -3846,25 +2881,39 @@ public final class HeroFriendsDetailsUnconditionalAndConditionalInclusionQuery: 
   }
 }
 
-public final class HumanQuery: GraphQLQuery {
+public final class HeroDetailsQuery: GraphQLQuery {
+  /// query HeroDetails($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     name
+  ///     ... on Human {
+  ///       height
+  ///     }
+  ///     ... on Droid {
+  ///       primaryFunction
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query Human($id: ID!) {\n  human(id: $id) {\n    __typename\n    name\n    mass\n  }\n}"
+    "query HeroDetails($episode: Episode) { hero(episode: $episode) { __typename name ... on Human { height } ... on Droid { primaryFunction } } }"
 
-  public var id: GraphQLID
+  public let operationName = "HeroDetails"
 
-  public init(id: GraphQLID) {
-    self.id = id
+  public var episode: Episode?
+
+  public init(episode: Episode? = nil) {
+    self.episode = episode
   }
 
   public var variables: GraphQLMap? {
-    return ["id": id]
+    return ["episode": episode]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("human", arguments: ["id": GraphQLVariable("id")], type: .object(Human.selections)),
+      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -3873,26 +2922,30 @@ public final class HumanQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(human: Human? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "human": human.flatMap { (value: Human) -> ResultMap in value.resultMap }])
+    public init(hero: Hero? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
     }
 
-    public var human: Human? {
+    public var hero: Hero? {
       get {
-        return (resultMap["human"] as? ResultMap).flatMap { Human(unsafeResultMap: $0) }
+        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "human")
+        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
       }
     }
 
-    public struct Human: GraphQLSelectionSet {
-      public static let possibleTypes = ["Human"]
+    public struct Hero: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
 
       public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("mass", type: .scalar(Double.self)),
+        GraphQLTypeCase(
+          variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
+          default: [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          ]
+        )
       ]
 
       public private(set) var resultMap: ResultMap
@@ -3901,8 +2954,12 @@ public final class HumanQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String, mass: Double? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Human", "name": name, "mass": mass])
+      public static func makeHuman(name: String, height: Double? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
+      }
+
+      public static func makeDroid(name: String, primaryFunction: String? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
       }
 
       public var __typename: String {
@@ -3914,7 +2971,7 @@ public final class HumanQuery: GraphQLQuery {
         }
       }
 
-      /// What this human calls themselves
+      /// The name of the character
       public var name: String {
         get {
           return resultMap["name"]! as! String
@@ -3924,13 +2981,824 @@ public final class HumanQuery: GraphQLQuery {
         }
       }
 
-      /// Mass in kilograms, or null if unknown
-      public var mass: Double? {
+      public var asHuman: AsHuman? {
         get {
-          return resultMap["mass"] as? Double
+          if !AsHuman.possibleTypes.contains(__typename) { return nil }
+          return AsHuman(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "mass")
+          guard let newValue = newValue else { return }
+          resultMap = newValue.resultMap
+        }
+      }
+
+      public struct AsHuman: GraphQLSelectionSet {
+        public static let possibleTypes = ["Human"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("height", type: .scalar(Double.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String, height: Double? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// What this human calls themselves
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// Height in the preferred unit, default is meters
+        public var height: Double? {
+          get {
+            return resultMap["height"] as? Double
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "height")
+          }
+        }
+      }
+
+      public var asDroid: AsDroid? {
+        get {
+          if !AsDroid.possibleTypes.contains(__typename) { return nil }
+          return AsDroid(unsafeResultMap: resultMap)
+        }
+        set {
+          guard let newValue = newValue else { return }
+          resultMap = newValue.resultMap
+        }
+      }
+
+      public struct AsDroid: GraphQLSelectionSet {
+        public static let possibleTypes = ["Droid"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("primaryFunction", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String, primaryFunction: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// What others call this droid
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// This droid's primary function
+        public var primaryFunction: String? {
+          get {
+            return resultMap["primaryFunction"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "primaryFunction")
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class HeroDetailsWithFragmentQuery: GraphQLQuery {
+  /// query HeroDetailsWithFragment($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     ...HeroDetails
+  ///   }
+  /// }
+  public let operationDefinition =
+    "query HeroDetailsWithFragment($episode: Episode) { hero(episode: $episode) { __typename ...HeroDetails } }"
+
+  public let operationName = "HeroDetailsWithFragment"
+
+  public var queryDocument: String { return operationDefinition.appending(HeroDetails.fragmentDefinition) }
+
+  public var episode: Episode?
+
+  public init(episode: Episode? = nil) {
+    self.episode = episode
+  }
+
+  public var variables: GraphQLMap? {
+    return ["episode": episode]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(hero: Hero? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
+    }
+
+    public var hero: Hero? {
+      get {
+        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
+      }
+    }
+
+    public struct Hero: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLTypeCase(
+          variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
+          default: [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          ]
+        )
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public static func makeHuman(name: String, height: Double? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
+      }
+
+      public static func makeDroid(name: String, primaryFunction: String? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The name of the character
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var heroDetails: HeroDetails {
+          get {
+            return HeroDetails(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+
+      public var asHuman: AsHuman? {
+        get {
+          if !AsHuman.possibleTypes.contains(__typename) { return nil }
+          return AsHuman(unsafeResultMap: resultMap)
+        }
+        set {
+          guard let newValue = newValue else { return }
+          resultMap = newValue.resultMap
+        }
+      }
+
+      public struct AsHuman: GraphQLSelectionSet {
+        public static let possibleTypes = ["Human"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("height", type: .scalar(Double.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String, height: Double? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// What this human calls themselves
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// Height in the preferred unit, default is meters
+        public var height: Double? {
+          get {
+            return resultMap["height"] as? Double
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "height")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var heroDetails: HeroDetails {
+            get {
+              return HeroDetails(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
+          }
+        }
+      }
+
+      public var asDroid: AsDroid? {
+        get {
+          if !AsDroid.possibleTypes.contains(__typename) { return nil }
+          return AsDroid(unsafeResultMap: resultMap)
+        }
+        set {
+          guard let newValue = newValue else { return }
+          resultMap = newValue.resultMap
+        }
+      }
+
+      public struct AsDroid: GraphQLSelectionSet {
+        public static let possibleTypes = ["Droid"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("primaryFunction", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String, primaryFunction: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// What others call this droid
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// This droid's primary function
+        public var primaryFunction: String? {
+          get {
+            return resultMap["primaryFunction"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "primaryFunction")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var heroDetails: HeroDetails {
+            get {
+              return HeroDetails(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class DroidDetailsWithFragmentQuery: GraphQLQuery {
+  /// query DroidDetailsWithFragment($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     ...DroidDetails
+  ///   }
+  /// }
+  public let operationDefinition =
+    "query DroidDetailsWithFragment($episode: Episode) { hero(episode: $episode) { __typename ...DroidDetails } }"
+
+  public let operationName = "DroidDetailsWithFragment"
+
+  public var queryDocument: String { return operationDefinition.appending(DroidDetails.fragmentDefinition) }
+
+  public var episode: Episode?
+
+  public init(episode: Episode? = nil) {
+    self.episode = episode
+  }
+
+  public var variables: GraphQLMap? {
+    return ["episode": episode]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(hero: Hero? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
+    }
+
+    public var hero: Hero? {
+      get {
+        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
+      }
+    }
+
+    public struct Hero: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLTypeCase(
+          variants: ["Droid": AsDroid.selections],
+          default: [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          ]
+        )
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public static func makeHuman() -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Human"])
+      }
+
+      public static func makeDroid(name: String, primaryFunction: String? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var droidDetails: DroidDetails? {
+          get {
+            if !DroidDetails.possibleTypes.contains(resultMap["__typename"]! as! String) { return nil }
+            return DroidDetails(unsafeResultMap: resultMap)
+          }
+          set {
+            guard let newValue = newValue else { return }
+            resultMap += newValue.resultMap
+          }
+        }
+      }
+
+      public var asDroid: AsDroid? {
+        get {
+          if !AsDroid.possibleTypes.contains(__typename) { return nil }
+          return AsDroid(unsafeResultMap: resultMap)
+        }
+        set {
+          guard let newValue = newValue else { return }
+          resultMap = newValue.resultMap
+        }
+      }
+
+      public struct AsDroid: GraphQLSelectionSet {
+        public static let possibleTypes = ["Droid"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("primaryFunction", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String, primaryFunction: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// What others call this droid
+        public var name: String {
+          get {
+            return resultMap["name"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// This droid's primary function
+        public var primaryFunction: String? {
+          get {
+            return resultMap["primaryFunction"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "primaryFunction")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var droidDetails: DroidDetails {
+            get {
+              return DroidDetails(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class HeroFriendsOfFriendsNamesQuery: GraphQLQuery {
+  /// query HeroFriendsOfFriendsNames($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     friends {
+  ///       __typename
+  ///       id
+  ///       friends {
+  ///         __typename
+  ///         name
+  ///       }
+  ///     }
+  ///   }
+  /// }
+  public let operationDefinition =
+    "query HeroFriendsOfFriendsNames($episode: Episode) { hero(episode: $episode) { __typename friends { __typename id friends { __typename name } } } }"
+
+  public let operationName = "HeroFriendsOfFriendsNames"
+
+  public var episode: Episode?
+
+  public init(episode: Episode? = nil) {
+    self.episode = episode
+  }
+
+  public var variables: GraphQLMap? {
+    return ["episode": episode]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(hero: Hero? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
+    }
+
+    public var hero: Hero? {
+      get {
+        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
+      }
+    }
+
+    public struct Hero: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("friends", type: .list(.object(Friend.selections))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public static func makeHuman(friends: [Friend?]? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Human", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
+      }
+
+      public static func makeDroid(friends: [Friend?]? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Droid", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The friends of the character, or an empty list if they have none
+      public var friends: [Friend?]? {
+        get {
+          return (resultMap["friends"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Friend?] in value.map { (value: ResultMap?) -> Friend? in value.flatMap { (value: ResultMap) -> Friend in Friend(unsafeResultMap: value) } } }
+        }
+        set {
+          resultMap.updateValue(newValue.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }, forKey: "friends")
+        }
+      }
+
+      public struct Friend: GraphQLSelectionSet {
+        public static let possibleTypes = ["Human", "Droid"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("friends", type: .list(.object(Friend.selections))),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public static func makeHuman(id: GraphQLID, friends: [Friend?]? = nil) -> Friend {
+          return Friend(unsafeResultMap: ["__typename": "Human", "id": id, "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
+        }
+
+        public static func makeDroid(id: GraphQLID, friends: [Friend?]? = nil) -> Friend {
+          return Friend(unsafeResultMap: ["__typename": "Droid", "id": id, "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// The ID of the character
+        public var id: GraphQLID {
+          get {
+            return resultMap["id"]! as! GraphQLID
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "id")
+          }
+        }
+
+        /// The friends of the character, or an empty list if they have none
+        public var friends: [Friend?]? {
+          get {
+            return (resultMap["friends"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Friend?] in value.map { (value: ResultMap?) -> Friend? in value.flatMap { (value: ResultMap) -> Friend in Friend(unsafeResultMap: value) } } }
+          }
+          set {
+            resultMap.updateValue(newValue.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }, forKey: "friends")
+          }
+        }
+
+        public struct Friend: GraphQLSelectionSet {
+          public static let possibleTypes = ["Human", "Droid"]
+
+          public static let selections: [GraphQLSelection] = [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          ]
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public static func makeHuman(name: String) -> Friend {
+            return Friend(unsafeResultMap: ["__typename": "Human", "name": name])
+          }
+
+          public static func makeDroid(name: String) -> Friend {
+            return Friend(unsafeResultMap: ["__typename": "Droid", "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          /// The name of the character
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
+          }
         }
       }
     }
@@ -3938,8 +3806,16 @@ public final class HumanQuery: GraphQLQuery {
 }
 
 public final class HeroNameQuery: GraphQLQuery {
+  /// query HeroName($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     name
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroName($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    name\n  }\n}"
+    "query HeroName($episode: Episode) { hero(episode: $episode) { __typename name } }"
+
+  public let operationName = "HeroName"
 
   public var episode: Episode?
 
@@ -4022,8 +3898,17 @@ public final class HeroNameQuery: GraphQLQuery {
 }
 
 public final class HeroNameWithIdQuery: GraphQLQuery {
+  /// query HeroNameWithID($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     id
+  ///     name
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameWithID($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    id\n    name\n  }\n}"
+    "query HeroNameWithID($episode: Episode) { hero(episode: $episode) { __typename id name } }"
+
+  public let operationName = "HeroNameWithID"
 
   public var episode: Episode?
 
@@ -4117,8 +4002,16 @@ public final class HeroNameWithIdQuery: GraphQLQuery {
 }
 
 public final class HeroNameWithFragmentQuery: GraphQLQuery {
+  /// query HeroNameWithFragment($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     ...CharacterName
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameWithFragment($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    ...CharacterName\n  }\n}"
+    "query HeroNameWithFragment($episode: Episode) { hero(episode: $episode) { __typename ...CharacterName } }"
+
+  public let operationName = "HeroNameWithFragment"
 
   public var queryDocument: String { return operationDefinition.appending(CharacterName.fragmentDefinition) }
 
@@ -4230,8 +4123,17 @@ public final class HeroNameWithFragmentQuery: GraphQLQuery {
 }
 
 public final class HeroNameWithFragmentAndIdQuery: GraphQLQuery {
+  /// query HeroNameWithFragmentAndID($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     id
+  ///     ...CharacterName
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroNameWithFragmentAndID($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    id\n    ...CharacterName\n  }\n}"
+    "query HeroNameWithFragmentAndID($episode: Episode) { hero(episode: $episode) { __typename id ...CharacterName } }"
+
+  public let operationName = "HeroNameWithFragmentAndID"
 
   public var queryDocument: String { return operationDefinition.appending(CharacterName.fragmentDefinition) }
 
@@ -4353,9 +4255,19 @@ public final class HeroNameWithFragmentAndIdQuery: GraphQLQuery {
   }
 }
 
-public final class HeroTypeDependentAliasedFieldQuery: GraphQLQuery {
+public final class HeroNameAndAppearsInWithFragmentQuery: GraphQLQuery {
+  /// query HeroNameAndAppearsInWithFragment($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     ...CharacterNameAndAppearsIn
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroTypeDependentAliasedField($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    ... on Human {\n      property: homePlanet\n    }\n    ... on Droid {\n      property: primaryFunction\n    }\n  }\n}"
+    "query HeroNameAndAppearsInWithFragment($episode: Episode) { hero(episode: $episode) { __typename ...CharacterNameAndAppearsIn } }"
+
+  public let operationName = "HeroNameAndAppearsInWithFragment"
+
+  public var queryDocument: String { return operationDefinition.appending(CharacterNameAndAppearsIn.fragmentDefinition) }
 
   public var episode: Episode?
 
@@ -4397,186 +4309,10 @@ public final class HeroTypeDependentAliasedFieldQuery: GraphQLQuery {
       public static let possibleTypes = ["Human", "Droid"]
 
       public static let selections: [GraphQLSelection] = [
-        GraphQLTypeCase(
-          variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
-          default: [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          ]
-        )
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public static func makeHuman(property: String? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Human", "property": property])
-      }
-
-      public static func makeDroid(property: String? = nil) -> Hero {
-        return Hero(unsafeResultMap: ["__typename": "Droid", "property": property])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var asHuman: AsHuman? {
-        get {
-          if !AsHuman.possibleTypes.contains(__typename) { return nil }
-          return AsHuman(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsHuman: GraphQLSelectionSet {
-        public static let possibleTypes = ["Human"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("homePlanet", alias: "property", type: .scalar(String.self)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(property: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Human", "property": property])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// The home planet of the human, or null if unknown
-        public var property: String? {
-          get {
-            return resultMap["property"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "property")
-          }
-        }
-      }
-
-      public var asDroid: AsDroid? {
-        get {
-          if !AsDroid.possibleTypes.contains(__typename) { return nil }
-          return AsDroid(unsafeResultMap: resultMap)
-        }
-        set {
-          guard let newValue = newValue else { return }
-          resultMap = newValue.resultMap
-        }
-      }
-
-      public struct AsDroid: GraphQLSelectionSet {
-        public static let possibleTypes = ["Droid"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("primaryFunction", alias: "property", type: .scalar(String.self)),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(property: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "Droid", "property": property])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        /// This droid's primary function
-        public var property: String? {
-          get {
-            return resultMap["property"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "property")
-          }
-        }
-      }
-    }
-  }
-}
-
-public final class ReviewAddedSubscription: GraphQLSubscription {
-  public let operationDefinition =
-    "subscription ReviewAdded($episode: Episode) {\n  reviewAdded(episode: $episode) {\n    __typename\n    episode\n    stars\n    commentary\n  }\n}"
-
-  public var episode: Episode?
-
-  public init(episode: Episode? = nil) {
-    self.episode = episode
-  }
-
-  public var variables: GraphQLMap? {
-    return ["episode": episode]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Subscription"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("reviewAdded", arguments: ["episode": GraphQLVariable("episode")], type: .object(ReviewAdded.selections)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(reviewAdded: ReviewAdded? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Subscription", "reviewAdded": reviewAdded.flatMap { (value: ReviewAdded) -> ResultMap in value.resultMap }])
-    }
-
-    public var reviewAdded: ReviewAdded? {
-      get {
-        return (resultMap["reviewAdded"] as? ResultMap).flatMap { ReviewAdded(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "reviewAdded")
-      }
-    }
-
-    public struct ReviewAdded: GraphQLSelectionSet {
-      public static let possibleTypes = ["Review"]
-
-      public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("episode", type: .scalar(Episode.self)),
-        GraphQLField("stars", type: .nonNull(.scalar(Int.self))),
-        GraphQLField("commentary", type: .scalar(String.self)),
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -4585,8 +4321,12 @@ public final class ReviewAddedSubscription: GraphQLSubscription {
         self.resultMap = unsafeResultMap
       }
 
-      public init(episode: Episode? = nil, stars: Int, commentary: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Review", "episode": episode, "stars": stars, "commentary": commentary])
+      public static func makeHuman(name: String, appearsIn: [Episode?]) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Human", "name": name, "appearsIn": appearsIn])
+      }
+
+      public static func makeDroid(name: String, appearsIn: [Episode?]) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name, "appearsIn": appearsIn])
       }
 
       public var __typename: String {
@@ -4598,33 +4338,49 @@ public final class ReviewAddedSubscription: GraphQLSubscription {
         }
       }
 
-      /// The movie
-      public var episode: Episode? {
+      /// The name of the character
+      public var name: String {
         get {
-          return resultMap["episode"] as? Episode
+          return resultMap["name"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "episode")
+          resultMap.updateValue(newValue, forKey: "name")
         }
       }
 
-      /// The number of stars this review gave, 1-5
-      public var stars: Int {
+      /// The movies this character appears in
+      public var appearsIn: [Episode?] {
         get {
-          return resultMap["stars"]! as! Int
+          return resultMap["appearsIn"]! as! [Episode?]
         }
         set {
-          resultMap.updateValue(newValue, forKey: "stars")
+          resultMap.updateValue(newValue, forKey: "appearsIn")
         }
       }
 
-      /// Comment about the movie
-      public var commentary: String? {
+      public var fragments: Fragments {
         get {
-          return resultMap["commentary"] as? String
+          return Fragments(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "commentary")
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var characterNameAndAppearsIn: CharacterNameAndAppearsIn {
+          get {
+            return CharacterNameAndAppearsIn(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
         }
       }
     }
@@ -4632,8 +4388,34 @@ public final class ReviewAddedSubscription: GraphQLSubscription {
 }
 
 public final class HeroParentTypeDependentFieldQuery: GraphQLQuery {
+  /// query HeroParentTypeDependentField($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     name
+  ///     ... on Human {
+  ///       friends {
+  ///         __typename
+  ///         name
+  ///         ... on Human {
+  ///           height(unit: FOOT)
+  ///         }
+  ///       }
+  ///     }
+  ///     ... on Droid {
+  ///       friends {
+  ///         __typename
+  ///         name
+  ///         ... on Human {
+  ///           height(unit: METER)
+  ///         }
+  ///       }
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "query HeroParentTypeDependentField($episode: Episode) {\n  hero(episode: $episode) {\n    __typename\n    name\n    ... on Human {\n      friends {\n        __typename\n        name\n        ... on Human {\n          height(unit: FOOT)\n        }\n      }\n    }\n    ... on Droid {\n      friends {\n        __typename\n        name\n        ... on Human {\n          height(unit: METER)\n        }\n      }\n    }\n  }\n}"
+    "query HeroParentTypeDependentField($episode: Episode) { hero(episode: $episode) { __typename name ... on Human { friends { __typename name ... on Human { height(unit: FOOT) } } } ... on Droid { friends { __typename name ... on Human { height(unit: METER) } } } } }"
+
+  public let operationName = "HeroParentTypeDependentField"
 
   public var episode: Episode?
 
@@ -5054,27 +4836,38 @@ public final class HeroParentTypeDependentFieldQuery: GraphQLQuery {
   }
 }
 
-public final class CreateReviewForEpisodeMutation: GraphQLMutation {
+public final class HeroTypeDependentAliasedFieldQuery: GraphQLQuery {
+  /// query HeroTypeDependentAliasedField($episode: Episode) {
+  ///   hero(episode: $episode) {
+  ///     __typename
+  ///     ... on Human {
+  ///       property: homePlanet
+  ///     }
+  ///     ... on Droid {
+  ///       property: primaryFunction
+  ///     }
+  ///   }
+  /// }
   public let operationDefinition =
-    "mutation CreateReviewForEpisode($episode: Episode!, $review: ReviewInput!) {\n  createReview(episode: $episode, review: $review) {\n    __typename\n    stars\n    commentary\n  }\n}"
+    "query HeroTypeDependentAliasedField($episode: Episode) { hero(episode: $episode) { __typename ... on Human { property: homePlanet } ... on Droid { property: primaryFunction } } }"
 
-  public var episode: Episode
-  public var review: ReviewInput
+  public let operationName = "HeroTypeDependentAliasedField"
 
-  public init(episode: Episode, review: ReviewInput) {
+  public var episode: Episode?
+
+  public init(episode: Episode? = nil) {
     self.episode = episode
-    self.review = review
   }
 
   public var variables: GraphQLMap? {
-    return ["episode": episode, "review": review]
+    return ["episode": episode]
   }
 
   public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Mutation"]
+    public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("createReview", arguments: ["episode": GraphQLVariable("episode"), "review": GraphQLVariable("review")], type: .object(CreateReview.selections)),
+      GraphQLField("hero", arguments: ["episode": GraphQLVariable("episode")], type: .object(Hero.selections)),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -5083,26 +4876,29 @@ public final class CreateReviewForEpisodeMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(createReview: CreateReview? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Mutation", "createReview": createReview.flatMap { (value: CreateReview) -> ResultMap in value.resultMap }])
+    public init(hero: Hero? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }])
     }
 
-    public var createReview: CreateReview? {
+    public var hero: Hero? {
       get {
-        return (resultMap["createReview"] as? ResultMap).flatMap { CreateReview(unsafeResultMap: $0) }
+        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "createReview")
+        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
       }
     }
 
-    public struct CreateReview: GraphQLSelectionSet {
-      public static let possibleTypes = ["Review"]
+    public struct Hero: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
 
       public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("stars", type: .nonNull(.scalar(Int.self))),
-        GraphQLField("commentary", type: .scalar(String.self)),
+        GraphQLTypeCase(
+          variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
+          default: [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          ]
+        )
       ]
 
       public private(set) var resultMap: ResultMap
@@ -5111,8 +4907,12 @@ public final class CreateReviewForEpisodeMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(stars: Int, commentary: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Review", "stars": stars, "commentary": commentary])
+      public static func makeHuman(property: String? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Human", "property": property])
+      }
+
+      public static func makeDroid(property: String? = nil) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Droid", "property": property])
       }
 
       public var __typename: String {
@@ -5124,41 +4924,132 @@ public final class CreateReviewForEpisodeMutation: GraphQLMutation {
         }
       }
 
-      /// The number of stars this review gave, 1-5
-      public var stars: Int {
+      public var asHuman: AsHuman? {
         get {
-          return resultMap["stars"]! as! Int
+          if !AsHuman.possibleTypes.contains(__typename) { return nil }
+          return AsHuman(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "stars")
+          guard let newValue = newValue else { return }
+          resultMap = newValue.resultMap
         }
       }
 
-      /// Comment about the movie
-      public var commentary: String? {
+      public struct AsHuman: GraphQLSelectionSet {
+        public static let possibleTypes = ["Human"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("homePlanet", alias: "property", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(property: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Human", "property": property])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// The home planet of the human, or null if unknown
+        public var property: String? {
+          get {
+            return resultMap["property"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "property")
+          }
+        }
+      }
+
+      public var asDroid: AsDroid? {
         get {
-          return resultMap["commentary"] as? String
+          if !AsDroid.possibleTypes.contains(__typename) { return nil }
+          return AsDroid(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "commentary")
+          guard let newValue = newValue else { return }
+          resultMap = newValue.resultMap
+        }
+      }
+
+      public struct AsDroid: GraphQLSelectionSet {
+        public static let possibleTypes = ["Droid"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("primaryFunction", alias: "property", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(property: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Droid", "property": property])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        /// This droid's primary function
+        public var property: String? {
+          get {
+            return resultMap["property"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "property")
+          }
         }
       }
     }
   }
 }
 
-public final class CreateAwesomeReviewMutation: GraphQLMutation {
+public final class SameHeroTwiceQuery: GraphQLQuery {
+  /// query SameHeroTwice {
+  ///   hero {
+  ///     __typename
+  ///     name
+  ///   }
+  ///   r2: hero {
+  ///     __typename
+  ///     appearsIn
+  ///   }
+  /// }
   public let operationDefinition =
-    "mutation CreateAwesomeReview {\n  createReview(episode: JEDI, review: {stars: 10, commentary: \"This is awesome!\"}) {\n    __typename\n    stars\n    commentary\n  }\n}"
+    "query SameHeroTwice { hero { __typename name } r2: hero { __typename appearsIn } }"
+
+  public let operationName = "SameHeroTwice"
 
   public init() {
   }
 
   public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Mutation"]
+    public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("createReview", arguments: ["episode": "JEDI", "review": ["stars": 10, "commentary": "This is awesome!"]], type: .object(CreateReview.selections)),
+      GraphQLField("hero", type: .object(Hero.selections)),
+      GraphQLField("hero", alias: "r2", type: .object(R2.selections)),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -5167,24 +5058,262 @@ public final class CreateAwesomeReviewMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(createReview: CreateReview? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Mutation", "createReview": createReview.flatMap { (value: CreateReview) -> ResultMap in value.resultMap }])
+    public init(hero: Hero? = nil, r2: R2? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "hero": hero.flatMap { (value: Hero) -> ResultMap in value.resultMap }, "r2": r2.flatMap { (value: R2) -> ResultMap in value.resultMap }])
     }
 
-    public var createReview: CreateReview? {
+    public var hero: Hero? {
       get {
-        return (resultMap["createReview"] as? ResultMap).flatMap { CreateReview(unsafeResultMap: $0) }
+        return (resultMap["hero"] as? ResultMap).flatMap { Hero(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "createReview")
+        resultMap.updateValue(newValue?.resultMap, forKey: "hero")
       }
     }
 
-    public struct CreateReview: GraphQLSelectionSet {
+    public var r2: R2? {
+      get {
+        return (resultMap["r2"] as? ResultMap).flatMap { R2(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "r2")
+      }
+    }
+
+    public struct Hero: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public static func makeHuman(name: String) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Human", "name": name])
+      }
+
+      public static func makeDroid(name: String) -> Hero {
+        return Hero(unsafeResultMap: ["__typename": "Droid", "name": name])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The name of the character
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+    }
+
+    public struct R2: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public static func makeHuman(appearsIn: [Episode?]) -> R2 {
+        return R2(unsafeResultMap: ["__typename": "Human", "appearsIn": appearsIn])
+      }
+
+      public static func makeDroid(appearsIn: [Episode?]) -> R2 {
+        return R2(unsafeResultMap: ["__typename": "Droid", "appearsIn": appearsIn])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The movies this character appears in
+      public var appearsIn: [Episode?] {
+        get {
+          return resultMap["appearsIn"]! as! [Episode?]
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "appearsIn")
+        }
+      }
+    }
+  }
+}
+
+public final class StarshipQuery: GraphQLQuery {
+  /// query Starship {
+  ///   starship(id: 3000) {
+  ///     __typename
+  ///     name
+  ///     coordinates
+  ///   }
+  /// }
+  public let operationDefinition =
+    "query Starship { starship(id: 3000) { __typename name coordinates } }"
+
+  public let operationName = "Starship"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("starship", arguments: ["id": 3000], type: .object(Starship.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(starship: Starship? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "starship": starship.flatMap { (value: Starship) -> ResultMap in value.resultMap }])
+    }
+
+    public var starship: Starship? {
+      get {
+        return (resultMap["starship"] as? ResultMap).flatMap { Starship(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "starship")
+      }
+    }
+
+    public struct Starship: GraphQLSelectionSet {
+      public static let possibleTypes = ["Starship"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("coordinates", type: .list(.nonNull(.list(.nonNull(.scalar(Double.self)))))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(name: String, coordinates: [[Double]]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Starship", "name": name, "coordinates": coordinates])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The name of the starship
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var coordinates: [[Double]]? {
+        get {
+          return resultMap["coordinates"] as? [[Double]]
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "coordinates")
+        }
+      }
+    }
+  }
+}
+
+public final class ReviewAddedSubscription: GraphQLSubscription {
+  /// subscription ReviewAdded($episode: Episode) {
+  ///   reviewAdded(episode: $episode) {
+  ///     __typename
+  ///     episode
+  ///     stars
+  ///     commentary
+  ///   }
+  /// }
+  public let operationDefinition =
+    "subscription ReviewAdded($episode: Episode) { reviewAdded(episode: $episode) { __typename episode stars commentary } }"
+
+  public let operationName = "ReviewAdded"
+
+  public var episode: Episode?
+
+  public init(episode: Episode? = nil) {
+    self.episode = episode
+  }
+
+  public var variables: GraphQLMap? {
+    return ["episode": episode]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Subscription"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("reviewAdded", arguments: ["episode": GraphQLVariable("episode")], type: .object(ReviewAdded.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(reviewAdded: ReviewAdded? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Subscription", "reviewAdded": reviewAdded.flatMap { (value: ReviewAdded) -> ResultMap in value.resultMap }])
+    }
+
+    public var reviewAdded: ReviewAdded? {
+      get {
+        return (resultMap["reviewAdded"] as? ResultMap).flatMap { ReviewAdded(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "reviewAdded")
+      }
+    }
+
+    public struct ReviewAdded: GraphQLSelectionSet {
       public static let possibleTypes = ["Review"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("episode", type: .scalar(Episode.self)),
         GraphQLField("stars", type: .nonNull(.scalar(Int.self))),
         GraphQLField("commentary", type: .scalar(String.self)),
       ]
@@ -5195,8 +5324,8 @@ public final class CreateAwesomeReviewMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(stars: Int, commentary: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Review", "stars": stars, "commentary": commentary])
+      public init(episode: Episode? = nil, stars: Int, commentary: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Review", "episode": episode, "stars": stars, "commentary": commentary])
       }
 
       public var __typename: String {
@@ -5205,6 +5334,16 @@ public final class CreateAwesomeReviewMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The movie
+      public var episode: Episode? {
+        get {
+          return resultMap["episode"] as? Episode
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "episode")
         }
       }
 
@@ -5231,56 +5370,34 @@ public final class CreateAwesomeReviewMutation: GraphQLMutation {
   }
 }
 
-public struct FriendsNames: GraphQLFragment {
-  public static let fragmentDefinition =
-    "fragment FriendsNames on Character {\n  __typename\n  friends {\n    __typename\n    name\n  }\n}"
+public final class HumanQuery: GraphQLQuery {
+  /// query Human($id: ID!) {
+  ///   human(id: $id) {
+  ///     __typename
+  ///     name
+  ///     mass
+  ///   }
+  /// }
+  public let operationDefinition =
+    "query Human($id: ID!) { human(id: $id) { __typename name mass } }"
 
-  public static let possibleTypes = ["Human", "Droid"]
+  public let operationName = "Human"
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("friends", type: .list(.object(Friend.selections))),
-  ]
+  public var id: GraphQLID
 
-  public private(set) var resultMap: ResultMap
-
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
+  public init(id: GraphQLID) {
+    self.id = id
   }
 
-  public static func makeHuman(friends: [Friend?]? = nil) -> FriendsNames {
-    return FriendsNames(unsafeResultMap: ["__typename": "Human", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
+  public var variables: GraphQLMap? {
+    return ["id": id]
   }
 
-  public static func makeDroid(friends: [Friend?]? = nil) -> FriendsNames {
-    return FriendsNames(unsafeResultMap: ["__typename": "Droid", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  /// The friends of the character, or an empty list if they have none
-  public var friends: [Friend?]? {
-    get {
-      return (resultMap["friends"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Friend?] in value.map { (value: ResultMap?) -> Friend? in value.flatMap { (value: ResultMap) -> Friend in Friend(unsafeResultMap: value) } } }
-    }
-    set {
-      resultMap.updateValue(newValue.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }, forKey: "friends")
-    }
-  }
-
-  public struct Friend: GraphQLSelectionSet {
-    public static let possibleTypes = ["Human", "Droid"]
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      GraphQLField("human", arguments: ["id": GraphQLVariable("id")], type: .object(Human.selections)),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -5289,406 +5406,219 @@ public struct FriendsNames: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public static func makeHuman(name: String) -> Friend {
-      return Friend(unsafeResultMap: ["__typename": "Human", "name": name])
+    public init(human: Human? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "human": human.flatMap { (value: Human) -> ResultMap in value.resultMap }])
     }
 
-    public static func makeDroid(name: String) -> Friend {
-      return Friend(unsafeResultMap: ["__typename": "Droid", "name": name])
-    }
-
-    public var __typename: String {
+    public var human: Human? {
       get {
-        return resultMap["__typename"]! as! String
+        return (resultMap["human"] as? ResultMap).flatMap { Human(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue, forKey: "__typename")
+        resultMap.updateValue(newValue?.resultMap, forKey: "human")
       }
     }
 
-    /// The name of the character
-    public var name: String {
+    public struct Human: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("mass", type: .scalar(Double.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(name: String, mass: Double? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Human", "name": name, "mass": mass])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// What this human calls themselves
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      /// Mass in kilograms, or null if unknown
+      public var mass: Double? {
+        get {
+          return resultMap["mass"] as? Double
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "mass")
+        }
+      }
+    }
+  }
+}
+
+public final class TwoHeroesQuery: GraphQLQuery {
+  /// query TwoHeroes {
+  ///   r2: hero {
+  ///     __typename
+  ///     name
+  ///   }
+  ///   luke: hero(episode: EMPIRE) {
+  ///     __typename
+  ///     name
+  ///   }
+  /// }
+  public let operationDefinition =
+    "query TwoHeroes { r2: hero { __typename name } luke: hero(episode: EMPIRE) { __typename name } }"
+
+  public let operationName = "TwoHeroes"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("hero", alias: "r2", type: .object(R2.selections)),
+      GraphQLField("hero", alias: "luke", arguments: ["episode": "EMPIRE"], type: .object(Luke.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(r2: R2? = nil, luke: Luke? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "r2": r2.flatMap { (value: R2) -> ResultMap in value.resultMap }, "luke": luke.flatMap { (value: Luke) -> ResultMap in value.resultMap }])
+    }
+
+    public var r2: R2? {
       get {
-        return resultMap["name"]! as! String
+        return (resultMap["r2"] as? ResultMap).flatMap { R2(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue, forKey: "name")
+        resultMap.updateValue(newValue?.resultMap, forKey: "r2")
       }
     }
-  }
-}
 
-public struct CharacterNameAndAppearsIn: GraphQLFragment {
-  public static let fragmentDefinition =
-    "fragment CharacterNameAndAppearsIn on Character {\n  __typename\n  name\n  appearsIn\n}"
-
-  public static let possibleTypes = ["Human", "Droid"]
-
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("name", type: .nonNull(.scalar(String.self))),
-    GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
-  ]
-
-  public private(set) var resultMap: ResultMap
-
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
-  }
-
-  public static func makeHuman(name: String, appearsIn: [Episode?]) -> CharacterNameAndAppearsIn {
-    return CharacterNameAndAppearsIn(unsafeResultMap: ["__typename": "Human", "name": name, "appearsIn": appearsIn])
-  }
-
-  public static func makeDroid(name: String, appearsIn: [Episode?]) -> CharacterNameAndAppearsIn {
-    return CharacterNameAndAppearsIn(unsafeResultMap: ["__typename": "Droid", "name": name, "appearsIn": appearsIn])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
+    public var luke: Luke? {
+      get {
+        return (resultMap["luke"] as? ResultMap).flatMap { Luke(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "luke")
+      }
     }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
 
-  /// The name of the character
-  public var name: String {
-    get {
-      return resultMap["name"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "name")
-    }
-  }
+    public struct R2: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
 
-  /// The movies this character appears in
-  public var appearsIn: [Episode?] {
-    get {
-      return resultMap["appearsIn"]! as! [Episode?]
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "appearsIn")
-    }
-  }
-}
-
-public struct CharacterAppearsIn: GraphQLFragment {
-  public static let fragmentDefinition =
-    "fragment CharacterAppearsIn on Character {\n  __typename\n  appearsIn\n}"
-
-  public static let possibleTypes = ["Human", "Droid"]
-
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
-  ]
-
-  public private(set) var resultMap: ResultMap
-
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
-  }
-
-  public static func makeHuman(appearsIn: [Episode?]) -> CharacterAppearsIn {
-    return CharacterAppearsIn(unsafeResultMap: ["__typename": "Human", "appearsIn": appearsIn])
-  }
-
-  public static func makeDroid(appearsIn: [Episode?]) -> CharacterAppearsIn {
-    return CharacterAppearsIn(unsafeResultMap: ["__typename": "Droid", "appearsIn": appearsIn])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  /// The movies this character appears in
-  public var appearsIn: [Episode?] {
-    get {
-      return resultMap["appearsIn"]! as! [Episode?]
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "appearsIn")
-    }
-  }
-}
-
-public struct HeroDetails: GraphQLFragment {
-  public static let fragmentDefinition =
-    "fragment HeroDetails on Character {\n  __typename\n  name\n  ... on Human {\n    height\n  }\n  ... on Droid {\n    primaryFunction\n  }\n}"
-
-  public static let possibleTypes = ["Human", "Droid"]
-
-  public static let selections: [GraphQLSelection] = [
-    GraphQLTypeCase(
-      variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
-      default: [
+      public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
       ]
-    )
-  ]
 
-  public private(set) var resultMap: ResultMap
+      public private(set) var resultMap: ResultMap
 
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
-  }
-
-  public static func makeHuman(name: String, height: Double? = nil) -> HeroDetails {
-    return HeroDetails(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
-  }
-
-  public static func makeDroid(name: String, primaryFunction: String? = nil) -> HeroDetails {
-    return HeroDetails(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  /// The name of the character
-  public var name: String {
-    get {
-      return resultMap["name"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "name")
-    }
-  }
-
-  public var asHuman: AsHuman? {
-    get {
-      if !AsHuman.possibleTypes.contains(__typename) { return nil }
-      return AsHuman(unsafeResultMap: resultMap)
-    }
-    set {
-      guard let newValue = newValue else { return }
-      resultMap = newValue.resultMap
-    }
-  }
-
-  public struct AsHuman: GraphQLSelectionSet {
-    public static let possibleTypes = ["Human"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("name", type: .nonNull(.scalar(String.self))),
-      GraphQLField("height", type: .scalar(Double.self)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(name: String, height: Double? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
       }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
+
+      public static func makeHuman(name: String) -> R2 {
+        return R2(unsafeResultMap: ["__typename": "Human", "name": name])
+      }
+
+      public static func makeDroid(name: String) -> R2 {
+        return R2(unsafeResultMap: ["__typename": "Droid", "name": name])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The name of the character
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
       }
     }
 
-    /// What this human calls themselves
-    public var name: String {
-      get {
-        return resultMap["name"]! as! String
+    public struct Luke: GraphQLSelectionSet {
+      public static let possibleTypes = ["Human", "Droid"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
       }
-      set {
-        resultMap.updateValue(newValue, forKey: "name")
+
+      public static func makeHuman(name: String) -> Luke {
+        return Luke(unsafeResultMap: ["__typename": "Human", "name": name])
       }
-    }
 
-    /// Height in the preferred unit, default is meters
-    public var height: Double? {
-      get {
-        return resultMap["height"] as? Double
+      public static func makeDroid(name: String) -> Luke {
+        return Luke(unsafeResultMap: ["__typename": "Droid", "name": name])
       }
-      set {
-        resultMap.updateValue(newValue, forKey: "height")
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
       }
-    }
-  }
 
-  public var asDroid: AsDroid? {
-    get {
-      if !AsDroid.possibleTypes.contains(__typename) { return nil }
-      return AsDroid(unsafeResultMap: resultMap)
-    }
-    set {
-      guard let newValue = newValue else { return }
-      resultMap = newValue.resultMap
-    }
-  }
-
-  public struct AsDroid: GraphQLSelectionSet {
-    public static let possibleTypes = ["Droid"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("name", type: .nonNull(.scalar(String.self))),
-      GraphQLField("primaryFunction", type: .scalar(String.self)),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(name: String, primaryFunction: String? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
+      /// The name of the character
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
       }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    /// What others call this droid
-    public var name: String {
-      get {
-        return resultMap["name"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "name")
-      }
-    }
-
-    /// This droid's primary function
-    public var primaryFunction: String? {
-      get {
-        return resultMap["primaryFunction"] as? String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "primaryFunction")
-      }
-    }
-  }
-}
-
-public struct DroidDetails: GraphQLFragment {
-  public static let fragmentDefinition =
-    "fragment DroidDetails on Droid {\n  __typename\n  name\n  primaryFunction\n}"
-
-  public static let possibleTypes = ["Droid"]
-
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("name", type: .nonNull(.scalar(String.self))),
-    GraphQLField("primaryFunction", type: .scalar(String.self)),
-  ]
-
-  public private(set) var resultMap: ResultMap
-
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
-  }
-
-  public init(name: String, primaryFunction: String? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  /// What others call this droid
-  public var name: String {
-    get {
-      return resultMap["name"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "name")
-    }
-  }
-
-  /// This droid's primary function
-  public var primaryFunction: String? {
-    get {
-      return resultMap["primaryFunction"] as? String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "primaryFunction")
-    }
-  }
-}
-
-public struct CharacterName: GraphQLFragment {
-  public static let fragmentDefinition =
-    "fragment CharacterName on Character {\n  __typename\n  name\n}"
-
-  public static let possibleTypes = ["Human", "Droid"]
-
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("name", type: .nonNull(.scalar(String.self))),
-  ]
-
-  public private(set) var resultMap: ResultMap
-
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
-  }
-
-  public static func makeHuman(name: String) -> CharacterName {
-    return CharacterName(unsafeResultMap: ["__typename": "Human", "name": name])
-  }
-
-  public static func makeDroid(name: String) -> CharacterName {
-    return CharacterName(unsafeResultMap: ["__typename": "Droid", "name": name])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  /// The name of the character
-  public var name: String {
-    get {
-      return resultMap["name"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "name")
     }
   }
 }
 
 public struct DroidNameAndPrimaryFunction: GraphQLFragment {
+  /// fragment DroidNameAndPrimaryFunction on Droid {
+  ///   __typename
+  ///   ...CharacterName
+  ///   ...DroidPrimaryFunction
+  /// }
   public static let fragmentDefinition =
-    "fragment DroidNameAndPrimaryFunction on Droid {\n  __typename\n  ...CharacterName\n  ...DroidPrimaryFunction\n}"
+    "fragment DroidNameAndPrimaryFunction on Droid { __typename ...CharacterName ...DroidPrimaryFunction }"
 
   public static let possibleTypes = ["Droid"]
 
@@ -5776,8 +5706,13 @@ public struct DroidNameAndPrimaryFunction: GraphQLFragment {
 }
 
 public struct CharacterNameAndDroidPrimaryFunction: GraphQLFragment {
+  /// fragment CharacterNameAndDroidPrimaryFunction on Character {
+  ///   __typename
+  ///   ...CharacterName
+  ///   ...DroidPrimaryFunction
+  /// }
   public static let fragmentDefinition =
-    "fragment CharacterNameAndDroidPrimaryFunction on Character {\n  __typename\n  ...CharacterName\n  ...DroidPrimaryFunction\n}"
+    "fragment CharacterNameAndDroidPrimaryFunction on Character { __typename ...CharacterName ...DroidPrimaryFunction }"
 
   public static let possibleTypes = ["Human", "Droid"]
 
@@ -5961,8 +5896,15 @@ public struct CharacterNameAndDroidPrimaryFunction: GraphQLFragment {
 }
 
 public struct CharacterNameAndDroidAppearsIn: GraphQLFragment {
+  /// fragment CharacterNameAndDroidAppearsIn on Character {
+  ///   __typename
+  ///   name
+  ///   ... on Droid {
+  ///     appearsIn
+  ///   }
+  /// }
   public static let fragmentDefinition =
-    "fragment CharacterNameAndDroidAppearsIn on Character {\n  __typename\n  name\n  ... on Droid {\n    appearsIn\n  }\n}"
+    "fragment CharacterNameAndDroidAppearsIn on Character { __typename name ... on Droid { appearsIn } }"
 
   public static let possibleTypes = ["Human", "Droid"]
 
@@ -6071,8 +6013,12 @@ public struct CharacterNameAndDroidAppearsIn: GraphQLFragment {
 }
 
 public struct DroidName: GraphQLFragment {
+  /// fragment DroidName on Droid {
+  ///   __typename
+  ///   name
+  /// }
   public static let fragmentDefinition =
-    "fragment DroidName on Droid {\n  __typename\n  name\n}"
+    "fragment DroidName on Droid { __typename name }"
 
   public static let possibleTypes = ["Droid"]
 
@@ -6112,8 +6058,12 @@ public struct DroidName: GraphQLFragment {
 }
 
 public struct DroidPrimaryFunction: GraphQLFragment {
+  /// fragment DroidPrimaryFunction on Droid {
+  ///   __typename
+  ///   primaryFunction
+  /// }
   public static let fragmentDefinition =
-    "fragment DroidPrimaryFunction on Droid {\n  __typename\n  primaryFunction\n}"
+    "fragment DroidPrimaryFunction on Droid { __typename primaryFunction }"
 
   public static let possibleTypes = ["Droid"]
 
@@ -6153,8 +6103,12 @@ public struct DroidPrimaryFunction: GraphQLFragment {
 }
 
 public struct HumanHeightWithVariable: GraphQLFragment {
+  /// fragment HumanHeightWithVariable on Human {
+  ///   __typename
+  ///   height(unit: $heightUnit)
+  /// }
   public static let fragmentDefinition =
-    "fragment HumanHeightWithVariable on Human {\n  __typename\n  height(unit: $heightUnit)\n}"
+    "fragment HumanHeightWithVariable on Human { __typename height(unit: $heightUnit) }"
 
   public static let possibleTypes = ["Human"]
 
@@ -6194,8 +6148,12 @@ public struct HumanHeightWithVariable: GraphQLFragment {
 }
 
 public struct CharacterNameAndAppearsInWithNestedFragments: GraphQLFragment {
+  /// fragment CharacterNameAndAppearsInWithNestedFragments on Character {
+  ///   __typename
+  ///   ...CharacterNameWithNestedAppearsInFragment
+  /// }
   public static let fragmentDefinition =
-    "fragment CharacterNameAndAppearsInWithNestedFragments on Character {\n  __typename\n  ...CharacterNameWithNestedAppearsInFragment\n}"
+    "fragment CharacterNameAndAppearsInWithNestedFragments on Character { __typename ...CharacterNameWithNestedAppearsInFragment }"
 
   public static let possibleTypes = ["Human", "Droid"]
 
@@ -6287,8 +6245,13 @@ public struct CharacterNameAndAppearsInWithNestedFragments: GraphQLFragment {
 }
 
 public struct CharacterNameWithNestedAppearsInFragment: GraphQLFragment {
+  /// fragment CharacterNameWithNestedAppearsInFragment on Character {
+  ///   __typename
+  ///   name
+  ///   ...CharacterAppearsIn
+  /// }
   public static let fragmentDefinition =
-    "fragment CharacterNameWithNestedAppearsInFragment on Character {\n  __typename\n  name\n  ...CharacterAppearsIn\n}"
+    "fragment CharacterNameWithNestedAppearsInFragment on Character { __typename name ...CharacterAppearsIn }"
 
   public static let possibleTypes = ["Human", "Droid"]
 
@@ -6370,8 +6333,21 @@ public struct CharacterNameWithNestedAppearsInFragment: GraphQLFragment {
 }
 
 public struct CharacterNameWithInlineFragment: GraphQLFragment {
+  /// fragment CharacterNameWithInlineFragment on Character {
+  ///   __typename
+  ///   ... on Human {
+  ///     friends {
+  ///       __typename
+  ///       appearsIn
+  ///     }
+  ///   }
+  ///   ... on Droid {
+  ///     ...CharacterName
+  ///     ...FriendsNames
+  ///   }
+  /// }
   public static let fragmentDefinition =
-    "fragment CharacterNameWithInlineFragment on Character {\n  __typename\n  ... on Human {\n    friends {\n      __typename\n      appearsIn\n    }\n  }\n  ... on Droid {\n    ...CharacterName\n    ...FriendsNames\n  }\n}"
+    "fragment CharacterNameWithInlineFragment on Character { __typename ... on Human { friends { __typename appearsIn } } ... on Droid { ...CharacterName ...FriendsNames } }"
 
   public static let possibleTypes = ["Human", "Droid"]
 
@@ -6634,6 +6610,496 @@ public struct CharacterNameWithInlineFragment: GraphQLFragment {
           resultMap.updateValue(newValue, forKey: "name")
         }
       }
+    }
+  }
+}
+
+public struct FriendsNames: GraphQLFragment {
+  /// fragment FriendsNames on Character {
+  ///   __typename
+  ///   friends {
+  ///     __typename
+  ///     name
+  ///   }
+  /// }
+  public static let fragmentDefinition =
+    "fragment FriendsNames on Character { __typename friends { __typename name } }"
+
+  public static let possibleTypes = ["Human", "Droid"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("friends", type: .list(.object(Friend.selections))),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public static func makeHuman(friends: [Friend?]? = nil) -> FriendsNames {
+    return FriendsNames(unsafeResultMap: ["__typename": "Human", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
+  }
+
+  public static func makeDroid(friends: [Friend?]? = nil) -> FriendsNames {
+    return FriendsNames(unsafeResultMap: ["__typename": "Droid", "friends": friends.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// The friends of the character, or an empty list if they have none
+  public var friends: [Friend?]? {
+    get {
+      return (resultMap["friends"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Friend?] in value.map { (value: ResultMap?) -> Friend? in value.flatMap { (value: ResultMap) -> Friend in Friend(unsafeResultMap: value) } } }
+    }
+    set {
+      resultMap.updateValue(newValue.flatMap { (value: [Friend?]) -> [ResultMap?] in value.map { (value: Friend?) -> ResultMap? in value.flatMap { (value: Friend) -> ResultMap in value.resultMap } } }, forKey: "friends")
+    }
+  }
+
+  public struct Friend: GraphQLSelectionSet {
+    public static let possibleTypes = ["Human", "Droid"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("name", type: .nonNull(.scalar(String.self))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public static func makeHuman(name: String) -> Friend {
+      return Friend(unsafeResultMap: ["__typename": "Human", "name": name])
+    }
+
+    public static func makeDroid(name: String) -> Friend {
+      return Friend(unsafeResultMap: ["__typename": "Droid", "name": name])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    /// The name of the character
+    public var name: String {
+      get {
+        return resultMap["name"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "name")
+      }
+    }
+  }
+}
+
+public struct CharacterAppearsIn: GraphQLFragment {
+  /// fragment CharacterAppearsIn on Character {
+  ///   __typename
+  ///   appearsIn
+  /// }
+  public static let fragmentDefinition =
+    "fragment CharacterAppearsIn on Character { __typename appearsIn }"
+
+  public static let possibleTypes = ["Human", "Droid"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public static func makeHuman(appearsIn: [Episode?]) -> CharacterAppearsIn {
+    return CharacterAppearsIn(unsafeResultMap: ["__typename": "Human", "appearsIn": appearsIn])
+  }
+
+  public static func makeDroid(appearsIn: [Episode?]) -> CharacterAppearsIn {
+    return CharacterAppearsIn(unsafeResultMap: ["__typename": "Droid", "appearsIn": appearsIn])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// The movies this character appears in
+  public var appearsIn: [Episode?] {
+    get {
+      return resultMap["appearsIn"]! as! [Episode?]
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "appearsIn")
+    }
+  }
+}
+
+public struct HeroDetails: GraphQLFragment {
+  /// fragment HeroDetails on Character {
+  ///   __typename
+  ///   name
+  ///   ... on Human {
+  ///     height
+  ///   }
+  ///   ... on Droid {
+  ///     primaryFunction
+  ///   }
+  /// }
+  public static let fragmentDefinition =
+    "fragment HeroDetails on Character { __typename name ... on Human { height } ... on Droid { primaryFunction } }"
+
+  public static let possibleTypes = ["Human", "Droid"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLTypeCase(
+      variants: ["Human": AsHuman.selections, "Droid": AsDroid.selections],
+      default: [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      ]
+    )
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public static func makeHuman(name: String, height: Double? = nil) -> HeroDetails {
+    return HeroDetails(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
+  }
+
+  public static func makeDroid(name: String, primaryFunction: String? = nil) -> HeroDetails {
+    return HeroDetails(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// The name of the character
+  public var name: String {
+    get {
+      return resultMap["name"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var asHuman: AsHuman? {
+    get {
+      if !AsHuman.possibleTypes.contains(__typename) { return nil }
+      return AsHuman(unsafeResultMap: resultMap)
+    }
+    set {
+      guard let newValue = newValue else { return }
+      resultMap = newValue.resultMap
+    }
+  }
+
+  public struct AsHuman: GraphQLSelectionSet {
+    public static let possibleTypes = ["Human"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      GraphQLField("height", type: .scalar(Double.self)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(name: String, height: Double? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Human", "name": name, "height": height])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    /// What this human calls themselves
+    public var name: String {
+      get {
+        return resultMap["name"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "name")
+      }
+    }
+
+    /// Height in the preferred unit, default is meters
+    public var height: Double? {
+      get {
+        return resultMap["height"] as? Double
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "height")
+      }
+    }
+  }
+
+  public var asDroid: AsDroid? {
+    get {
+      if !AsDroid.possibleTypes.contains(__typename) { return nil }
+      return AsDroid(unsafeResultMap: resultMap)
+    }
+    set {
+      guard let newValue = newValue else { return }
+      resultMap = newValue.resultMap
+    }
+  }
+
+  public struct AsDroid: GraphQLSelectionSet {
+    public static let possibleTypes = ["Droid"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      GraphQLField("primaryFunction", type: .scalar(String.self)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(name: String, primaryFunction: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    /// What others call this droid
+    public var name: String {
+      get {
+        return resultMap["name"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "name")
+      }
+    }
+
+    /// This droid's primary function
+    public var primaryFunction: String? {
+      get {
+        return resultMap["primaryFunction"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "primaryFunction")
+      }
+    }
+  }
+}
+
+public struct DroidDetails: GraphQLFragment {
+  /// fragment DroidDetails on Droid {
+  ///   __typename
+  ///   name
+  ///   primaryFunction
+  /// }
+  public static let fragmentDefinition =
+    "fragment DroidDetails on Droid { __typename name primaryFunction }"
+
+  public static let possibleTypes = ["Droid"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("name", type: .nonNull(.scalar(String.self))),
+    GraphQLField("primaryFunction", type: .scalar(String.self)),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(name: String, primaryFunction: String? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Droid", "name": name, "primaryFunction": primaryFunction])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// What others call this droid
+  public var name: String {
+    get {
+      return resultMap["name"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  /// This droid's primary function
+  public var primaryFunction: String? {
+    get {
+      return resultMap["primaryFunction"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "primaryFunction")
+    }
+  }
+}
+
+public struct CharacterName: GraphQLFragment {
+  /// fragment CharacterName on Character {
+  ///   __typename
+  ///   name
+  /// }
+  public static let fragmentDefinition =
+    "fragment CharacterName on Character { __typename name }"
+
+  public static let possibleTypes = ["Human", "Droid"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("name", type: .nonNull(.scalar(String.self))),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public static func makeHuman(name: String) -> CharacterName {
+    return CharacterName(unsafeResultMap: ["__typename": "Human", "name": name])
+  }
+
+  public static func makeDroid(name: String) -> CharacterName {
+    return CharacterName(unsafeResultMap: ["__typename": "Droid", "name": name])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// The name of the character
+  public var name: String {
+    get {
+      return resultMap["name"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "name")
+    }
+  }
+}
+
+public struct CharacterNameAndAppearsIn: GraphQLFragment {
+  /// fragment CharacterNameAndAppearsIn on Character {
+  ///   __typename
+  ///   name
+  ///   appearsIn
+  /// }
+  public static let fragmentDefinition =
+    "fragment CharacterNameAndAppearsIn on Character { __typename name appearsIn }"
+
+  public static let possibleTypes = ["Human", "Droid"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("name", type: .nonNull(.scalar(String.self))),
+    GraphQLField("appearsIn", type: .nonNull(.list(.scalar(Episode.self)))),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public static func makeHuman(name: String, appearsIn: [Episode?]) -> CharacterNameAndAppearsIn {
+    return CharacterNameAndAppearsIn(unsafeResultMap: ["__typename": "Human", "name": name, "appearsIn": appearsIn])
+  }
+
+  public static func makeDroid(name: String, appearsIn: [Episode?]) -> CharacterNameAndAppearsIn {
+    return CharacterNameAndAppearsIn(unsafeResultMap: ["__typename": "Droid", "name": name, "appearsIn": appearsIn])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// The name of the character
+  public var name: String {
+    get {
+      return resultMap["name"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  /// The movies this character appears in
+  public var appearsIn: [Episode?] {
+    get {
+      return resultMap["appearsIn"]! as! [Episode?]
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "appearsIn")
     }
   }
 }

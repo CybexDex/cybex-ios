@@ -20,10 +20,10 @@ struct WithdrawDetailState: BaseState {
     var msgInfo: BehaviorRelay<RechageWordVMData?> = BehaviorRelay(value: nil)
 }
 
-struct FetchAddressInfo: Action {
+struct FetchAddressInfo: ReSwift.Action {
     let data: AccountAddressRecord
 }
 
-struct FetchMsgInfo: Action {
+struct FetchMsgInfo: ReSwift.Action {
     var data: RechargeWorldInfo
 }

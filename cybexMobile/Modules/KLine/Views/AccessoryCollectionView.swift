@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxGesture
 
 @IBDesignable
 class AccessoryCollectionView: UIView {

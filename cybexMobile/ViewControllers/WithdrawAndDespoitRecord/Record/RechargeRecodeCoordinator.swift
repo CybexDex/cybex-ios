@@ -119,26 +119,6 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
             return
         }
 
-        GatewayQueryService.request(target: .login(accountName: accountName), success: { (_) in
-            GatewayQueryService.request(target: .records(accountName: accountName, asset: asset, fundType: fundType, offset: offset), success: { (json) in
-                
-                if let data = TradeRecord.deserialize(from: json.dictionaryObject) {
-                    self.store.dispatch(FetchDepositRecordsAction(data: data))
-                    callback(true)
-                } else {
-                    callback(false)
-                }
-            }, error: { (_) in
-                callback(false)
-            }, failure: { (_) in
-                callback(false)
-            })
-        }, error: { (_) in
-            callback(false)
-        }) { (_) in
-            callback(false)
-        }
-
     }
 
     func setAssetAction(_ asset: String) {

@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState {
+func orderBookReducer(action: ReSwift.Action, state: OrderBookState?) -> OrderBookState {
     var state = state ?? OrderBookState()
     switch action {
     case let action as ChangeOrderBookOfPairAction:

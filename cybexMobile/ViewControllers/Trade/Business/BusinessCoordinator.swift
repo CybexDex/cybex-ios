@@ -86,7 +86,9 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 
     func getFee(_ focusAssetId: String) {
         let str = BitShareCoordinator.getLimitOrderOperation(0, expiration: 0, asset_id: 0, amount: 0, receive_asset_id: 0, receive_amount: 0, fee_id: 0, fee_amount: 0, fillOrKill: false)
-        CybexChainHelper.calculateFee(str, focusAssetId: focusAssetId) { (success, amount, assetID) in
+        CybexChainHelper.calculateFee(str, focusAssetId: focusAssetId) { (arg) in
+            
+            let (success, amount, assetID) = arg
             self.store.dispatch(FeeFetchedAction(success: success, amount: amount, assetID: assetID))
         }
     }

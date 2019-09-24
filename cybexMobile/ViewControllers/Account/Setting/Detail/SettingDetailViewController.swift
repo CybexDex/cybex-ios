@@ -89,7 +89,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         case SettingPage.theme:
             self.coordinator?.popViewController(false)
             delay(milliseconds: 10) {
-                Defaults[.theme] = index
+                Defaults[\.theme] = index
                 ThemeManager.setTheme(index: index)
             }
             
@@ -97,7 +97,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
             self.coordinator?.popViewController(false)
             delay(milliseconds: 10) {
                 let language = index == 1 ? "zh-Hans" : "en"
-                Defaults[.language] = language
+                Defaults[\.language] = language
                 Localize.setCurrentLanguage(language)
             }
         }

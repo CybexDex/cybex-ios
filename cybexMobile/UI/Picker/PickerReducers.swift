@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func pickerReducer(action: Action, state: PickerState?) -> PickerState {
+func pickerReducer(action: ReSwift.Action, state: PickerState?) -> PickerState {
     let state = state ?? PickerState()
 
     return state

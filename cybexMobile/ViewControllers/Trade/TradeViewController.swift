@@ -103,11 +103,6 @@ class TradeViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         currentTopViewController?.appear()
-
-//        let noticeShow = !Defaults.hasKey(.showContestTip) || Defaults[.showContestTip]
-//        if let context = self.context, context.pageType == .game, noticeShow {
-//            self.coordinator?.showNoticeVC()
-//        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

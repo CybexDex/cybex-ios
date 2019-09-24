@@ -24,12 +24,12 @@ struct OrderBookState: BaseState {
     var showTypeIndex: BehaviorRelay<Int> = BehaviorRelay(value: 2)
 }
 
-struct ChangeDepthAndCountAction: Action {
+struct ChangeDepthAndCountAction: ReSwift.Action {
     var depth: Int
     var count: Int
 }
 
-struct ChangeShowTypeIndexAction: Action {
+struct ChangeShowTypeIndexAction: ReSwift.Action {
     var index: Int
 }
 
@@ -53,21 +53,21 @@ struct OrderBook: Equatable {
     }
 }
 
-struct FetchedOrderBookData: Action {
+struct FetchedOrderBookData: ReSwift.Action {
     let data: OrderBook?
     var pair: Pair
 }
 
-struct ChangeOrderBookOfPairAction: Action {
+struct ChangeOrderBookOfPairAction: ReSwift.Action {
     let pair: Pair
 }
 
-struct FetchLastPriceAction: Action {
+struct FetchLastPriceAction: ReSwift.Action {
     var price: Decimal
     var pair: Pair
 }
 
-struct ResetTickerAction: Action {}
+struct ResetTickerAction: ReSwift.Action {}
 
 class OrderBookViewModel {
     var orderbook: BehaviorRelay<OrderBook.Order?> = BehaviorRelay(value: nil)

@@ -18,7 +18,7 @@ struct OpenedOrdersState: BaseState {
     var data: BehaviorRelay<[LimitOrderStatus]?> = BehaviorRelay(value: nil)
 }
 
-struct FetchOpenedOrderAction: Action {
+struct FetchOpenedOrderAction: ReSwift.Action {
     var data: [LimitOrderStatus]
     var all: Bool = false
 }

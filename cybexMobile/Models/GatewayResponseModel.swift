@@ -108,3 +108,22 @@ class ExportArrayValueTransform: TransformType {
         return nil
     }
 }
+
+
+struct WithdrawinfoObject {
+    var minValue: Double
+    var fee: Double
+    var type: String
+    var asset: String
+    var gatewayAccount: String
+    var precision: Int?
+}
+
+struct AccountAddressRecord {
+    var accountName: String
+    var address: String
+    var type: String = ""
+    var asset: String
+    var createAt: String = ""
+
+}

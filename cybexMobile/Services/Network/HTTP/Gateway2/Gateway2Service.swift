@@ -30,10 +30,16 @@ struct Gateway2Service {
         static var uatURL = URL(string: "https://gateway2test.cybex.io")!
     }
 
+    static var gateway2ID: String = ""
+
     static let provider = MoyaProvider<GatewayAPI>(callbackQueue: nil, manager: defaultManager(),
                                                         plugins: [NetworkLoggerPlugin(verbose: true)],
                                                         trackInflights: false)
 
+
+    static func withDrawMemo(_ assetName: String, address: String) -> String {
+        return "\(gateway2ID):\(assetName):\(address)"
+    }
 
     static func request(
         target: GatewayAPI,

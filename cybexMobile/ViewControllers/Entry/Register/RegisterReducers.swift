@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func registerReducer(action: Action, state: RegisterState?) -> RegisterState {
+func registerReducer(action: ReSwift.Action, state: RegisterState?) -> RegisterState {
     let state = state ?? RegisterState()
 
     return state

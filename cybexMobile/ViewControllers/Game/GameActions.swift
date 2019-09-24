@@ -24,6 +24,6 @@ struct GameState: BaseState {
 }
 
 //MARK: - Action
-struct GameFetchedAction: Action {
+struct GameFetchedAction: ReSwift.Action {
     var data:JSON
 }

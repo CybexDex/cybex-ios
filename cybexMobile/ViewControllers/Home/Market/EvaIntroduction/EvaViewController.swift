@@ -36,6 +36,8 @@ class EvaViewController: BaseViewController {
             case .none:
 
                 break
+            case .unavailable:
+                break
             }
 
         }

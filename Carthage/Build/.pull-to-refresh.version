@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "ESPullToRefresh",
-      "hash" : "8f4104d1e1883b87a9aa1276386351244587139e52c649797405699c485ede3c",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "dbbcdfac98f56e34070a575f441b32e76fd565d42d611d1eea90a03a4dd319c4",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

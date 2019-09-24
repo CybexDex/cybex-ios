@@ -24,14 +24,14 @@ struct RecordChooseState: BaseState {
 }
 
 // MARK: - Action
-struct RecordChooseFetchedAction: Action {
+struct RecordChooseFetchedAction: ReSwift.Action {
     var data: JSON
 }
 
-struct FetchDataAction: Action {
+struct FetchDataAction: ReSwift.Action {
     var data: [String]
 }
 
-struct FetchAccountAssetAction: Action {
+struct FetchAccountAssetAction: ReSwift.Action {
     var data: AccountAssets
 }

@@ -9,13 +9,8 @@
 import UIKit
 import ReSwift
 
-func imageShareReducer(action: Action, state: ImageShareState?) -> ImageShareState {
+func imageShareReducer(action: ReSwift.Action, state: ImageShareState?) -> ImageShareState {
     let state = state ?? ImageShareState()
-
-    switch action {
-    default:
-        break
-    }
 
     return state
 }

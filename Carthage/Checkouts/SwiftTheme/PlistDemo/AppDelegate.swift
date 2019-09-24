@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationBar.theme_tintColor = "Global.barTextColor"
         navigationBar.theme_barTintColor = "Global.barTintColor"
-        navigationBar.theme_titleTextAttributes = ThemeDictionaryPicker(keyPath: "Global.barTextColor") { value -> [NSAttributedString.Key : AnyObject]? in
+        navigationBar.theme_titleTextAttributes = ThemeStringAttributesPicker(keyPath: "Global.barTextColor") { value -> [NSAttributedString.Key : AnyObject]? in
             guard let rgba = value as? String else {
                 return nil
             }

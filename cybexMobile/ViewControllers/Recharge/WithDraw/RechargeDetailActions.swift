@@ -26,23 +26,23 @@ struct RechargeDetailState: BaseState {
     var withdrawMsgInfo: BehaviorRelay<RechageWordVMData?> = BehaviorRelay(value: nil)
 }
 
-struct FetchWithdrawInfo: Action {
+struct FetchWithdrawInfo: ReSwift.Action {
     let data: WithdrawinfoObject
 }
 
-struct FetchWithdrawMemokey: Action {
+struct FetchWithdrawMemokey: ReSwift.Action {
     let memoKey: String
     let gatewayUid: String
 }
 
-struct FetchCybexFee: Action {
+struct FetchCybexFee: ReSwift.Action {
     let data: (Fee, success: Bool)
 }
 
-struct SelectedAddressAction: Action {
+struct SelectedAddressAction: ReSwift.Action {
     var data: WithdrawAddress
 }
 
-struct FetchWithdrawWordInfo: Action {
+struct FetchWithdrawWordInfo: ReSwift.Action {
     var data: RechargeWorldInfo
 }

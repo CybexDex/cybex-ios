@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "XLPagerTabStrip",
-      "hash" : "2a1747cfe25e904a98093ab0a9f4bcc675e737f779c27f8461cfcd3fbd2a84ad",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "7737fe7f7a61a9c8c5805bed1e9cca81d1b8368ca3cc8f63b2fc64807f33f6c2",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

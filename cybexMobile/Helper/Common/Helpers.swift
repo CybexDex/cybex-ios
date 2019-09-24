@@ -72,20 +72,6 @@ extension ObjectDescriptable {
     }
 }
 
-struct WeakObject<T: AnyObject>: Equatable, Hashable {
-    static func == (lhs: WeakObject<T>, rhs: WeakObject<T>) -> Bool {
-        return lhs.object === rhs.object
-    }
-
-    weak var object: T?
-    init(_ object: T) {
-        self.object = object
-    }
-
-    var hashValue: Int {
-        if let object = self.object { return ObjectIdentifier(object).hashValue } else { return 0 }
-    }
-}
 
 extension Range where Bound == String.Index {
     var nsRange: NSRange {

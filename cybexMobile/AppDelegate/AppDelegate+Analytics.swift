@@ -10,11 +10,20 @@ import Foundation
 import Fabric
 import Crashlytics
 import Sentry
+#if DEBUG
+import DoraemonKit
+#endif
 
 private let UMAppkey = "5b6bf4a8b27b0a3429000016"
 private let SentrySN = "http://856bdd62a8f740f4bfa233870e1632a0@120.27.16.142:9000/15"
 
 extension AppDelegate {
+    func setDoKit() {
+        #if DEBUG
+        DoraemonManager.shareInstance().install()
+        #endif
+    }
+
     func setupSentry() {
         do {
             Client.shared = try Client(dsn: SentrySN)

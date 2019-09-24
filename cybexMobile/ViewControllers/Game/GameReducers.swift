@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func gGameReducer(action:Action, state:GameState?) -> GameState {
+func gGameReducer(action:ReSwift.Action, state:GameState?) -> GameState {
     let state = state ?? GameState()
         
     switch action {

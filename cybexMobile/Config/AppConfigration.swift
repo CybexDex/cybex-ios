@@ -19,7 +19,7 @@ enum AppEnv: String, CaseIterable {
     case uat
 
     static var current: AppEnv {
-        return AppEnv(rawValue: Defaults[.environment]) ?? .product
+        return AppEnv(rawValue: Defaults[\.environment]) ?? .product
     }
 
     var index: Int {
@@ -162,8 +162,6 @@ extension AppConfiguration {
                 CybexWebSocketService.shared.connect()
             }
 
-            GatewayService.Config.productURL = URL(string: node.gateway1)!
-            GatewayQueryService.Config.productURL = URL(string: node.gateway1Query)!
             Gateway2Service.Config.productURL = URL(string: node.gateway2)!
         }
         else if AppEnv.current == .uat {
@@ -182,8 +180,7 @@ extension AppConfiguration {
                 CybexWebSocketService.shared.connect()
             }
 
-            GatewayService.Config.uatURL = URL(string: node.gateway1)!
-            GatewayQueryService.Config.uatURL = URL(string: node.gateway1Query)!
+
             Gateway2Service.Config.uatURL = URL(string: node.gateway2)!
         }
         else if AppEnv.current == .test {
@@ -202,8 +199,6 @@ extension AppConfiguration {
                 CybexWebSocketService.shared.connect()
             }
 
-            GatewayService.Config.devURL = URL(string: node.gateway1)!
-            GatewayQueryService.Config.devURL = URL(string: node.gateway1Query)!
             Gateway2Service.Config.devURL = URL(string: node.gateway2)!
         }
     }

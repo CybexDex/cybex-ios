@@ -12,7 +12,6 @@
 #import <AsyncDisplayKit/_ASCoreAnimationExtras.h>
 #import <AsyncDisplayKit/_ASDisplayLayer.h>
 #import <AsyncDisplayKit/_ASHierarchyChangeSet.h>
-#import <AsyncDisplayKit/ASAssert.h>
 #import <AsyncDisplayKit/ASBatchFetching.h>
 #import <AsyncDisplayKit/ASCellNode+Internal.h>
 #import <AsyncDisplayKit/ASCollectionElement.h>
@@ -21,15 +20,15 @@
 #import <AsyncDisplayKit/ASDelegateProxy.h>
 #import <AsyncDisplayKit/ASDisplayNodeExtras.h>
 #import <AsyncDisplayKit/ASDisplayNode+FrameworkPrivate.h>
+#import <AsyncDisplayKit/ASDisplayNodeInternal.h>
 #import <AsyncDisplayKit/ASElementMap.h>
 #import <AsyncDisplayKit/ASInternalHelpers.h>
 #import <AsyncDisplayKit/ASLayout.h>
 #import <AsyncDisplayKit/ASTableNode+Beta.h>
 #import <AsyncDisplayKit/ASRangeController.h>
-#import <AsyncDisplayKit/ASEqualityHelpers.h>
 #import <AsyncDisplayKit/ASTableLayoutController.h>
-#import <AsyncDisplayKit/ASTableView+Undeprecated.h>
 #import <AsyncDisplayKit/ASBatchContext.h>
+
 
 static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
 
@@ -116,12 +115,14 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
     self.selectionStyle = node.selectionStyle; 
     self.focusStyle = node.focusStyle;
     self.accessoryType = node.accessoryType;
-    self.tintColor = node.tintColor;
     
     // the following ensures that we clip the entire cell to it's bounds if node.clipsToBounds is set (the default)
     // This is actually a workaround for a bug we are seeing in some rare cases (selected background view
     // overlaps other cells if size of ASCellNode has changed.)
     self.clipsToBounds = node.clipsToBounds;
+
+    // If the cell node has been explicitly configured with a tint color, we can apply that directly to the cell view to preserve the previous behavior
+    self.tintColor = node->_tintColor;
   }
   
   [node __setSelectedFromUIKit:self.selected];
@@ -304,10 +305,10 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
-  return [self _initWithFrame:frame style:style dataControllerClass:nil owningNode:nil eventLog:nil];
+  return [self _initWithFrame:frame style:style dataControllerClass:nil owningNode:nil];
 }
 
-- (instancetype)_initWithFrame:(CGRect)frame style:(UITableViewStyle)style dataControllerClass:(Class)dataControllerClass owningNode:(ASTableNode *)tableNode eventLog:(ASEventLog *)eventLog
+- (instancetype)_initWithFrame:(CGRect)frame style:(UITableViewStyle)style dataControllerClass:(Class)dataControllerClass owningNode:(ASTableNode *)tableNode
 {
   if (!(self = [super initWithFrame:frame style:style])) {
     return nil;
@@ -325,7 +326,7 @@ static NSString * const kCellReuseIdentifier = @"_ASTableViewCell";
   _rangeController.dataSource = self;
   _rangeController.delegate = self;
   
-  _dataController = [[dataControllerClass alloc] initWithDataSource:self node:tableNode eventLog:eventLog];
+  _dataController = [[dataControllerClass alloc] initWithDataSource:self node:tableNode];
   _dataController.delegate = _rangeController;
   
   _leadingScreensForBatching = 2.0;

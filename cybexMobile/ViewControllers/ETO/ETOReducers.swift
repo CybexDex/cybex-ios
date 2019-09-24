@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import Localize_Swift
 
-func ETOReducer(action: Action, state: ETOState?) -> ETOState {
+func ETOReducer(action: ReSwift.Action, state: ETOState?) -> ETOState {
     let state = state ?? ETOState()
     switch action {
     case let action as FetchProjectModelAction:

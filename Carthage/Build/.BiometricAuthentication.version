@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "BiometricAuthentication",
-      "hash" : "1d294dfb8f0b22043c2e5c20fd18d88ad33d29f1ff912541da65e0b531a7a5b1",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "1a273eba2b15d758e9b0df0ec3d7ef23a5f3d17f23a301b5050628edb15423e2",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

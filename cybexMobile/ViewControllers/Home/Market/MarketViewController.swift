@@ -111,6 +111,8 @@ class MarketViewController: BaseViewController {
             case .none:
 
                 break
+            case .unavailable:
+                break
             }
         }
     }

@@ -20,7 +20,7 @@ struct MarketState: BaseState {
     var detailData: BehaviorRelay<[Pair: [Candlesticks: [Bucket]]]?> = BehaviorRelay(value: nil)
 }
 
-struct KLineFetched: Action {
+struct KLineFetched: ReSwift.Action {
     let pair: Pair
     let stick: Candlesticks
     let assets: [Bucket]

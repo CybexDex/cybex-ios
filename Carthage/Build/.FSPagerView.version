@@ -1,10 +1,10 @@
 {
-  "commitish" : "0.8.2",
+  "commitish" : "0.8.3",
   "iOS" : [
     {
       "name" : "FSPagerView",
-      "hash" : "ba6d5c8ffb638124ab4fb8ef01cae4f4b8aed7a438f0349cd6160863902ba0a6",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "8098fdd8735f3f3d79c3d0ab53a63b1f482975d1779b6571bbbd6fdf1c6d82be",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

@@ -1,8 +1,8 @@
 import Dispatch
 
-public func whenAll<Value>(_ resultsOrPromises: [ResultOrPromise<Value>], notifyOn queue: DispatchQueue = .global()) -> ResultOrPromise<[Value]> {
+func whenAll<Value>(_ resultsOrPromises: [ResultOrPromise<Value>], notifyOn queue: DispatchQueue = .global()) -> ResultOrPromise<[Value]> {
   onlyResults: do {
-    var results: [Result<Value>] = []
+    var results: [Result<Value, Error>] = []
     for resultOrPromise in resultsOrPromises {
       guard case .result(let result) = resultOrPromise else {
         break onlyResults
@@ -10,7 +10,7 @@ public func whenAll<Value>(_ resultsOrPromises: [ResultOrPromise<Value>], notify
       results.append(result)
     }
     do {
-      let values = try results.map { try $0.valueOrError() }
+      let values = try results.map { try $0.get() }
       return .result(.success(values))
     } catch {
       return .result(.failure(error))
@@ -36,11 +36,11 @@ public func whenAll<Value>(_ resultsOrPromises: [ResultOrPromise<Value>], notify
   })
 }
 
-public enum ResultOrPromise<Value> {
-  case result(Result<Value>)
+enum ResultOrPromise<Value> {
+  case result(Result<Value, Error>)
   case promise(Promise<Value>)
   
-  public init(_ body: () throws -> Value) {
+  init(_ body: () throws -> Value) {
     do {
       let value = try body()
       self = .result(.success(value))
@@ -49,7 +49,7 @@ public enum ResultOrPromise<Value> {
     }
   }
   
-  public var result: Result<Value>? {
+  var result: Result<Value, Error>? {
     switch self {
     case .result(let result):
       return result
@@ -58,10 +58,10 @@ public enum ResultOrPromise<Value> {
     }
   }
   
-  public func await() throws -> Value {
+  func await() throws -> Value {
     switch self {
     case .result(let result):
-      return try result.valueOrError()
+      return try result.get()
     case .promise(let promise):
       return try promise.await()
     }
@@ -76,7 +76,7 @@ public enum ResultOrPromise<Value> {
     }
   }
   
-  @discardableResult public func andThen(_ whenFulfilled: @escaping (Value) throws -> Void) -> ResultOrPromise<Value> {
+  @discardableResult func andThen(_ whenFulfilled: @escaping (Value) throws -> Void) -> ResultOrPromise<Value> {
     switch self {
     case .result(.success(let value)):
       do {
@@ -92,7 +92,7 @@ public enum ResultOrPromise<Value> {
     }
   }
   
-  @discardableResult public func `catch`(_ whenRejected: @escaping (Error) throws -> Void) -> ResultOrPromise<Value> {
+  @discardableResult func `catch`(_ whenRejected: @escaping (Error) throws -> Void) -> ResultOrPromise<Value> {
     switch self {
     case .result(.success(let value)):
       return .result(.success(value))
@@ -108,7 +108,7 @@ public enum ResultOrPromise<Value> {
     }
   }
   
-  public func map<T>(_ transform: @escaping (Value) throws -> T) -> ResultOrPromise<T> {
+  func map<T>(_ transform: @escaping (Value) throws -> T) -> ResultOrPromise<T> {
     switch self {
     case .result(.success(let value)):
       do {
@@ -125,7 +125,7 @@ public enum ResultOrPromise<Value> {
     }
   }
   
-  public func flatMap<T>(_ transform: @escaping (Value) throws -> ResultOrPromise<T>) -> ResultOrPromise<T> {
+ func flatMap<T>(_ transform: @escaping (Value) throws -> ResultOrPromise<T>) -> ResultOrPromise<T> {
     switch self {
     case .result(.success(let value)):
       do {
@@ -142,7 +142,7 @@ public enum ResultOrPromise<Value> {
     }
   }
   
-  public func on(queue: DispatchQueue) -> ResultOrPromise<Value> {
+  func on(queue: DispatchQueue) -> ResultOrPromise<Value> {
     if case .promise(let promise) = self {
       return .promise(promise.on(queue: queue))
     } else {

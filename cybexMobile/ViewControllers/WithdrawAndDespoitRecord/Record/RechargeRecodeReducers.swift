@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func rechargeRecodeReducer(action: Action, state: RechargeRecodeState?) -> RechargeRecodeState {
+func rechargeRecodeReducer(action: ReSwift.Action, state: RechargeRecodeState?) -> RechargeRecodeState {
     var state = state ?? RechargeRecodeState()
 
     switch action {

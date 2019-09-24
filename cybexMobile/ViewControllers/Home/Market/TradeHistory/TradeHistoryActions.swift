@@ -20,7 +20,7 @@ struct TradeHistoryState: BaseState {
     var data: BehaviorRelay<[TradeHistoryViewModel]> = BehaviorRelay(value: [])
 }
 
-struct FetchedFillOrderData: Action {
+struct FetchedFillOrderData: ReSwift.Action {
     let data: [JSON]
     let pair: Pair
 }

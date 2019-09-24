@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func ETODetailReducer(action: Action, state: ETODetailState?) -> ETODetailState {
+func ETODetailReducer(action: ReSwift.Action, state: ETODetailState?) -> ETODetailState {
     let state = state ?? ETODetailState()
 
     switch action {

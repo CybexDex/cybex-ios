@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import Localize_Swift
 
-func withdrawDetailReducer(action: Action, state: WithdrawDetailState?) -> WithdrawDetailState {
+func withdrawDetailReducer(action: ReSwift.Action, state: WithdrawDetailState?) -> WithdrawDetailState {
     let state = state ?? WithdrawDetailState()
 
     switch action {

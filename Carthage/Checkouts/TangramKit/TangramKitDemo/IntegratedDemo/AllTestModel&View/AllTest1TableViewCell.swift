@@ -8,9 +8,13 @@
 
 import UIKit
 
+protocol AllTest1Cell {
+    var rootLayout:TGBaseLayout!{get}
+    func setModel(model: AllTest1DataModel, isImageMessageHidden: Bool)
+}
 
 
-class AllTest1TableViewCell: UITableViewCell {
+class AllTest1TableViewCell: UITableViewCell,AllTest1Cell {
     
     //对于需要动态评估高度的UITableViewCell来说可以把布局视图暴露出来。用于高度评估和边界线处理。以及事件处理的设置。
     fileprivate(set) var rootLayout:TGBaseLayout!
@@ -21,7 +25,7 @@ class AllTest1TableViewCell: UITableViewCell {
     weak var textMessageLabel:UILabel!
     weak var imageMessageImageView:UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

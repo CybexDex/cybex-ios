@@ -27,7 +27,7 @@ let trackingMiddleware: Middleware<Any> = { dispatch, getState in
     }
 }
 
-func loadingReducer(_ state: Bool?, action: Action) -> Bool {
+func loadingReducer(_ state: Bool?, action: ReSwift.Action) -> Bool {
     var state = state ?? false
 
     switch action {
@@ -42,7 +42,7 @@ func loadingReducer(_ state: Bool?, action: Action) -> Bool {
     return state
 }
 
-func errorMessageReducer(_ state: String?, action: Action) -> String {
+func errorMessageReducer(_ state: String?, action: ReSwift.Action) -> String {
     var state = state ?? ""
 
     switch action {
@@ -57,7 +57,7 @@ func errorMessageReducer(_ state: String?, action: Action) -> String {
     return state
 }
 
-func pageReducer(_ state: Int?, action: Action) -> Int {
+func pageReducer(_ state: Int?, action: ReSwift.Action) -> Int {
     var state = state ?? 1
 
     switch action {
@@ -71,12 +71,12 @@ func pageReducer(_ state: Int?, action: Action) -> Int {
     return state
 }
 
-func appReducer(action: Action, state: AppState?) -> AppState {
+func appReducer(action: ReSwift.Action, state: AppState?) -> AppState {
     return AppState(property: appPropertyReducer(state?.property, action: action))
 }
 
 
-func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
+func appPropertyReducer(_ state: AppPropertyState?, action: ReSwift.Action) -> AppPropertyState {
     var state = state ?? AppPropertyState()
 
     switch action {

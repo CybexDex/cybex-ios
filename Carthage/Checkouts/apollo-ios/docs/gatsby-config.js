@@ -1,14 +1,23 @@
+const themeOptions = require('gatsby-theme-apollo-docs/theme-options');
+
 module.exports = {
-  __experimentalThemes: [
+  pathPrefix: '/docs/ios',
+  plugins: [
     {
       resolve: 'gatsby-theme-apollo-docs',
       options: {
+        ...themeOptions,
         root: __dirname,
-        subtitle: 'Apollo iOS Guide',
+        subtitle: 'Client (iOS)',
         description: 'A guide to using Apollo with iOS',
-        contentDir: 'docs/source',
-        basePath: '/docs/ios',
         githubRepo: 'apollographql/apollo-ios',
+        checkLinksOptions: {
+          ignore: [
+            '/api/Apollo/README/',
+            '/api/ApolloWebSocket/README/',
+            '/api/ApolloSQLite/README/'
+          ]
+        },
         sidebarCategories: {
           null: [
             'index',

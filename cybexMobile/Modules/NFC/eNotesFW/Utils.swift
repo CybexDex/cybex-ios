@@ -9,7 +9,6 @@
 import Foundation
 import CoreNFC
 import CommonCrypto
-import BigInt
 
 @available(iOS 11.0, *)
 public class Utils {

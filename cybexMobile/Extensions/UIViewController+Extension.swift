@@ -8,7 +8,6 @@
 
 import Foundation
 import ESPullToRefresh
-import XLActionController
 import SwiftTheme
 
 extension UIViewController {
@@ -147,7 +146,7 @@ extension BaseViewController: UIPopoverPresentationControllerDelegate {
 }
 
 extension BaseViewController {
-    func openSelectedActionViewController(_ selectedIndex: Int, actions: [XLActionController.Action<String>], cancelAction: XLActionController.Action<String> = Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: nil) ) {
+    func openSelectedActionViewController(_ selectedIndex: Int, actions: [Action<String>], cancelAction: Action<String> = Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: nil) ) {
         let actionController = PeriscopeActionController()
         actionController.selectedIndex = IndexPath(row: selectedIndex, section: 0)
 

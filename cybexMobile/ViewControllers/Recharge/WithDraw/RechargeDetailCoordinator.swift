@@ -107,6 +107,7 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
     }
   
 }
+
 extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     var state: RechargeDetailState {
         return store.state
@@ -121,7 +122,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         if gateway2 {
             Gateway2Service.request(target: .asset(name: assetName), success: { (json) in
                 if let model = GatewayAssetResponseModel.deserialize(from: json.dictionaryObject) {
-                    GatewayService.Config.gateway2ID = model.withdrawPrefix
+                    Gateway2Service.gateway2ID = model.withdrawPrefix
                     let info = WithdrawinfoObject(minValue: model.minWithdraw.double() ?? 0, fee: model.withdrawFee.double() ?? 0, type: "", asset: "", gatewayAccount: model.gatewayAccount, precision: model.precision.int ?? 0)
                     
                     self.getWithdrawAccountInfo(info.gatewayAccount)
@@ -135,12 +136,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             return
         }
 
-        GatewayService().getWithdrawInfo(assetName: assetName).done { (data) in
-            if case let data? = data {
-                self.getWithdrawAccountInfo(data.gatewayAccount)
-                self.store.dispatch(FetchWithdrawInfo(data: data))
-            }
-        }.cauterize()
     }
 
     func getWithdrawAccountInfo(_ userID: String) {
@@ -156,10 +151,10 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
         let memo = self.state.memo.value
 
-        var memoAddress = GatewayService.withDrawMemo(name!, address: address)
+        var memoAddress = Gateway2Service.withDrawMemo(name!, address: address)
         if tag {
             if !memo.isEmpty {
-                memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
+                memoAddress = Gateway2Service.withDrawMemo(name!, address: address + "[\(memo)]")
             }
         }
 
@@ -196,23 +191,16 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             }
             return
         }
-        GatewayService().verifyAddress(assetName: assetName, address: address).done { (data) in
-            if case let data? = data {
-                callback(data.valid)
-            } else {
-                callback(false)
-            }
-        }.cauterize()
     }
 
     func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, tag: Bool, callback: @escaping (Any) -> Void) {
         if let memoKey = self.state.memoKey.value {
             let name = appData.assetInfo[assetId]?.symbol.filterSystemPrefix
             let memo = self.state.memo.value
-            var memoAddress = GatewayService.withDrawMemo(name!, address: address)
+            var memoAddress = Gateway2Service.withDrawMemo(name!, address: address)
             if tag {
                 if !memo.isEmpty {
-                    memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
+                    memoAddress = Gateway2Service.withDrawMemo(name!, address: address + "[\(memo)]")
                 }
             }
 

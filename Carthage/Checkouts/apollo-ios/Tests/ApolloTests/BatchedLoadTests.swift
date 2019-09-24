@@ -12,32 +12,36 @@ private final class MockBatchedNormalizedCache: NormalizedCache {
     self.records = records
   }
   
-  func loadRecords(forKeys keys: [CacheKey]) -> Promise<[Record?]> {
+  func loadRecords(forKeys keys: [CacheKey],
+                   callbackQueue: DispatchQueue?,
+                   completion: @escaping (Result<[Record?], Error>) -> Void) {
     OSAtomicIncrement32(&numberOfBatchLoads)
     
-    return Promise { fulfill, reject in
-      DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1)) {
-        let records = keys.map { self.records[$0] }
-        fulfill(records)
-      }
+    DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1)) {
+      let records = keys.map { self.records[$0] }
+      DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
+                                                     action: completion,
+                                                     result: .success(records))
     }
   }
   
-  func merge(records: RecordSet) -> Promise<Set<CacheKey>> {
-    return Promise { fulfill, reject in
-      DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1)) {
-        let changedKeys = self.records.merge(records: records)
-        fulfill(changedKeys)
-      }
+  func merge(records: RecordSet,
+             callbackQueue: DispatchQueue?,
+             completion: @escaping (Result<Set<CacheKey>, Error>) -> Void) {
+    DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1)) {
+      let changedKeys = self.records.merge(records: records)
+      DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
+                                                     action: completion,
+                                                     result: .success(changedKeys))
     }
   }
-	
-  func clear() -> Promise<Void> {
-    return Promise { fulfill, reject in
-      DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1)) {
-        self.records.clear()
-        fulfill(())
-      }
+  
+  func clear(callbackQueue: DispatchQueue?, completion: ((Result<Void, Error>) -> Void)?) {
+    DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1)) {
+      self.records.clear()
+      DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
+                                                     action: completion,
+                                                     result: .success(()))
     }
   }
 }
@@ -64,15 +68,25 @@ class BatchedLoadTests: XCTestCase {
     
     let expectation = self.expectation(description: "Loading query from store")
     
-    store.load(query: query) { (result, error) in
-      XCTAssertNil(error)
-      XCTAssertNil(result?.errors)
+    store.load(query: query) { result in
+      defer {
+        expectation.fulfill()
+      }
       
-      guard let data = result?.data else { XCTFail(); return }
-      XCTAssertEqual(data.hero?.name, "R2-D2")
-      XCTAssertEqual(data.hero?.friends?.count, 100)
-      
-      expectation.fulfill()
+      switch result {
+      case .success(let graphQLResult):
+        XCTAssertNil(graphQLResult.errors)
+        
+        guard let data = graphQLResult.data else {
+          XCTFail("No data returned with result!")
+          return
+        }
+        
+        XCTAssertEqual(data.hero?.name, "R2-D2")
+        XCTAssertEqual(data.hero?.friends?.count, 100)
+      case .failure(let error):
+        XCTFail("Unexpected error: \(error)")
+      }
     }
     
     self.waitForExpectations(timeout: 1)
@@ -105,16 +119,26 @@ class BatchedLoadTests: XCTestCase {
     (1...10).forEach { number in
       let expectation = self.expectation(description: "Loading query #\(number) from store")
       
-      store.load(query: query) { (result, error) in
-        XCTAssertNil(error)
-        XCTAssertNil(result?.errors)
+      store.load(query: query) { result in
+        defer {
+          expectation.fulfill()
+        }
         
-        guard let data = result?.data else { XCTFail(); return }
-        XCTAssertEqual(data.hero?.name, "R2-D2")
-        let friendsNames = data.hero?.friends?.compactMap { $0?.name }
-        XCTAssertEqual(friendsNames, ["Luke Skywalker", "Han Solo", "Leia Organa"])
-        
-        expectation.fulfill()
+        switch result {
+        case .success(let graphQLResult):
+          XCTAssertNil(graphQLResult.errors)
+          
+          guard let data = graphQLResult.data else {
+            XCTFail("No data returned with query!")
+            return
+          
+          }
+          XCTAssertEqual(data.hero?.name, "R2-D2")
+          let friendsNames = data.hero?.friends?.compactMap { $0?.name }
+          XCTAssertEqual(friendsNames, ["Luke Skywalker", "Han Solo", "Leia Organa"])
+        case .failure(let error):
+          XCTFail("Unexpected error: \(error)")
+        }
       }
     }
     

@@ -19,14 +19,14 @@ struct RechargeRecodeState: BaseState {
     var explorers: BehaviorRelay<[BlockExplorer]?> = BehaviorRelay(value: nil)
 }
 
-struct FetchDepositRecordsAction: Action {
+struct FetchDepositRecordsAction: ReSwift.Action {
     var data: TradeRecord?
 }
 
-struct SetWithdrawListAssetAction: Action {
+struct SetWithdrawListAssetAction: ReSwift.Action {
     var asset: String
 }
 
-struct FetchAssetUrlAction: Action {
+struct FetchAssetUrlAction: ReSwift.Action {
     var data: [BlockExplorer]
 }

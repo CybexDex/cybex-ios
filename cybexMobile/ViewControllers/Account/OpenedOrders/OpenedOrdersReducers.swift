@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func gOpenedOrdersReducer(action: Action, state: OpenedOrdersState?) -> OpenedOrdersState {
+func gOpenedOrdersReducer(action: ReSwift.Action, state: OpenedOrdersState?) -> OpenedOrdersState {
     let state = state ?? OpenedOrdersState()
     switch action {
     case let action as FetchOpenedOrderAction:

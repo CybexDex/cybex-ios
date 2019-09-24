@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import DifferenceKit
 
-func ETORecordListReducer(action: Action, state: ETORecordListState?) -> ETORecordListState {
+func ETORecordListReducer(action: ReSwift.Action, state: ETORecordListState?) -> ETORecordListState {
     let state = state ?? ETORecordListState()
 
     switch action {

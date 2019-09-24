@@ -231,7 +231,7 @@ open class MacawView: MView, MGestureRecognizerDelegate {
 
         if !self.node.shouldCheckForPressed() &&
             !self.node.shouldCheckForMoved() &&
-            !self.node.shouldCheckForReleased () {
+            !self.node.shouldCheckForReleased() {
             return
         }
 

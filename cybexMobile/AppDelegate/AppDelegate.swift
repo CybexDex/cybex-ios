@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable") //隐藏 constraint log
 
+        setDoKit()
         setupSentry()
         setupAnalytics()
         setupThirdParty()

@@ -9,6 +9,7 @@
 import UIKit
 import TinyConstraints
 import SwiftTheme
+import RxGesture
 
 protocol CybexTextViewDelegate {
     func returnPassword(_ password: String, sender: CybexTextView)

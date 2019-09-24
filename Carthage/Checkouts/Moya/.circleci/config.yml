@@ -1,7 +1,7 @@
 version: 2
 defaults: &defaults
   macos:
-    xcode: '10.2.0'
+    xcode: 11.0.0
   parallelism: 1
   shell: /bin/bash --login    
   environment:
@@ -18,13 +18,10 @@ jobs:
       - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
       - restore_cache:
           keys:
-            - v1-carthage-no-swiftlint-deps-{{ checksum "Cartfile.resolved" }}
+            - v{{ .Environment.CACHE_VERSION }}-carthage-no-swiftlint-deps-{{ checksum "Cartfile.resolved" }}
       - run:
           name: Set Ruby Version
           command: echo "ruby-2.4" > ~/.ruby-version
-      - run:
-          name: Update Homebrew
-          command: brew update    
       - run:
           name: Carthage checkout
           command: carthage checkout
@@ -32,7 +29,7 @@ jobs:
           name: Test Carthage Build before installing SwiftLint
           command: carthage build --no-skip-current --cache-builds --no-use-binaries --verbose             
       - save_cache:
-          key: v1-carthage-no-swiftlint-deps-{{ checksum "Cartfile.resolved" }}
+          key: v{{ .Environment.CACHE_VERSION }}-carthage-no-swiftlint-deps-{{ checksum "Cartfile.resolved" }}
           paths:
             - Carthage               
   build:
@@ -43,16 +40,16 @@ jobs:
       - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
       - restore_cache:
           keys:
-            - v1-dep-{{ checksum "Cartfile.resolved" }}
+            - v{{ .Environment.CACHE_VERSION }}-dep-{{ checksum "Cartfile.resolved" }}
+      - restore_cache:
+          keys:
+            - v{{ .Environment.CACHE_VERSION }}-dep-{{ checksum "Dangerfile.swift" }}
       - run:
           name: Set Ruby Version
           command: echo "ruby-2.4" > ~/.ruby-version
       - run:
-          name: Update Homebrew
-          command: brew update
-      - run:
           name: Install Swiftlint
-          command: brew install swiftlint
+          command: git clone git@github.com:realm/SwiftLint.git && cd SwiftLint && git submodule update --init --recursive && make install && cd ../
       - run:
           name: Add Python directory to PATH
           command: echo 'export PATH=~/Library/Python/2.7/bin:$PATH' >> $BASH_ENV        
@@ -66,7 +63,7 @@ jobs:
           name: Bootstrap Carthage
           command: scripts/bootstrap-if-needed.sh
       - save_cache:
-          key: v1-dep-{{ checksum "Cartfile.resolved" }}
+          key: v{{ .Environment.CACHE_VERSION }}-dep-{{ checksum "Cartfile.resolved" }}
           paths:
             - vendor/bundle
             - Carthage
@@ -87,10 +84,15 @@ jobs:
           command: rake build_example
       - run:
           name: Run Danger
-          command: bundle exec danger
+          command: brew install danger/tap/danger-swift && danger-swift ci
+      - save_cache:
+          key: v{{ .Environment.CACHE_VERSION }}-dep-{{ checksum "Dangerfile.swift" }}
+          paths:
+            - ~/.danger-swift
+            - /usr/local/Homebrew
       - run:
           name: CocoaPods Spec linting
-          command: bundle exec pod lib lint
+          command: bundle exec pod lib lint --allow-warnings
       - run:
           name: Send Code Coverage to Codecov.io
           command: bash <(curl -s https://codecov.io/bash) -J Moya

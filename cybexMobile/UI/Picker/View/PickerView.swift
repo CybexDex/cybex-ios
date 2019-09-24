@@ -190,7 +190,7 @@ extension PickerView {
             return result[row]
         }
         if let items = self.items as? [[String]] {
-            var items: [String] = items[component]
+            let items: [String] = items[component]
             return items[row]
         }
         if let items = self.items as? [Int: [String: AnyObject]] {

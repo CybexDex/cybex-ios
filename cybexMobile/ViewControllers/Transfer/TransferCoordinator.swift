@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 import Presentr
-import NBLCommonModule
+
 import HandyJSON
 import cybex_ios_core_cpp
 
@@ -435,7 +435,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 }
 
 extension Store {
-    func asyncDispatch(_ action: Action) {
+    func asyncDispatch(_ action: ReSwift.Action) {
         DispatchQueue.main.async {
             self.dispatch(action)
         }

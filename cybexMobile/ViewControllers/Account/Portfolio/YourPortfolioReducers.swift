@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func gYourPortfolioReducer(action: Action, state: YourPortfolioState?) -> YourPortfolioState {
+func gYourPortfolioReducer(action: ReSwift.Action, state: YourPortfolioState?) -> YourPortfolioState {
     let state = state ?? YourPortfolioState()
     return state
 }

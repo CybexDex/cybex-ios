@@ -204,6 +204,8 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
             case .none:
                 self.service.disconnect()
                 break
+            case .unavailable:
+                break
             }
         }
 

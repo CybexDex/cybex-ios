@@ -24,22 +24,22 @@ struct AddAddressState: BaseState {
     var noteVailed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 }
 
-struct VerificationNoteAction: Action {
+struct VerificationNoteAction: ReSwift.Action {
     var data: Bool
 }
 
-struct SetAssetAction: Action {
+struct SetAssetAction: ReSwift.Action {
     var data: String
 }
 
-struct VerificationAddressAction: Action {
+struct VerificationAddressAction: ReSwift.Action {
     var success: Bool
 }
 
-struct SetNoteAction: Action {
+struct SetNoteAction: ReSwift.Action {
     var data: String
 }
 
-struct SetAddressAction: Action {
+struct SetAddressAction: ReSwift.Action {
     var data: String
 }

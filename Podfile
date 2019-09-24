@@ -1,6 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.0'
 #supports_swift_versions '>= 5.0'
 inhibit_all_warnings!
 
@@ -13,7 +13,7 @@ target 'ChatRoom' do
   use_frameworks!
 
   # Pods for ChatRoom
-
+  pod 'RxCocoa', '~> 5'
 end
 
 target 'cybexMobile' do
@@ -25,6 +25,16 @@ target 'cybexMobile' do
     pod 'coswift'
     pod 'secp256k1_swift'
     pod 'EFQRCode', '~> 5.0.0'
+#    pod 'web3.swift.pod', '~> 2.2.1'
+
+    pod 'DoraemonKit/Core', :configurations => ['Debug']
+    pod 'DoraemonKit/WithLogger', :configurations => ['Debug']
+    pod 'LookinServer', :configurations => ['Debug']
+
+    pod 'Kingfisher', '~> 5.0'
+    pod 'RxCocoa', '~> 5'
+    pod 'Moya', '~> 13.0'
+    pod "RxGesture"
 
   target 'cybexMobileTests' do
     inherit! :search_paths
@@ -47,3 +57,14 @@ end
 #    end
 #  end
 #end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if config.name == 'Debug'
+        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
+      end
+    end
+  end
+end
