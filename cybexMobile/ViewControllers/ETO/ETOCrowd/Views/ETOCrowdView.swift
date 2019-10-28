@@ -22,6 +22,7 @@ class ETOCrowdView: CybexBaseView {
     @IBOutlet weak var errorLabel: UILabel!
 
     var itemViews: [ETOCrowdGridItemView]!
+    static let precision = 6
 
     enum Event: String {
         case ETOCrowdViewDidClicked

@@ -380,7 +380,7 @@ extension Decimal { // 解决double 计算精度丢失
 
 extension Double {
     var decimal: Decimal {
-        return Decimal(self)
+        return string.decimal()
     }
     
     // 对齐小数位 不足补0

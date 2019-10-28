@@ -218,10 +218,10 @@ class ETOProjectModel: HandyJSON {
     var rate: Double = 0 //1 base
 
     var baseMaxQuota: Double = 0
-    var baseAccuracy: Int = 0
+    var baseAccuracy: Double = 0
     var baseMinQuota: Double = 0
     
-    var quoteAccuracy: Int = 0
+    var quoteAccuracy: Double = 0
     var project: String = ""
 
     var isUserIn: String = "0" // 0不准预约 1可以预约

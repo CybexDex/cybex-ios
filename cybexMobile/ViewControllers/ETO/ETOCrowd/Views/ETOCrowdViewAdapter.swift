@@ -35,13 +35,14 @@ extension ETOCrowdView {
         var itemValues = [String]()
         let rate = model.quoteTokenCount.decimal() / model.baseTokenCount.decimal()
         if (model.userBuyToken == model.baseToken || model.userBuyToken == "") {
-            itemValues = ["\(max) \(model.baseTokenName)", "\(unit) \(model.baseTokenName)", "-- \(model.baseTokenName)", "\(model.baseMinQuota) \(model.baseTokenName)", "--  \(model.baseTokenName)","\((model.currentQuote.decimal() / rate).string()) \(model.baseTokenName)"]
+            itemValues = ["\(max) \(model.baseTokenName)", "\(unit) \(model.baseTokenName)", "-- \(model.baseTokenName)", "\(model.baseMinQuota) \(model.baseTokenName)", "--  \(model.baseTokenName)","\((model.currentQuote.decimal() / rate).string(digits: ETOCrowdView.precision, roundingMode: .plain)) \(model.baseTokenName)"]
             self.equalLabel.text = "=0\(model.tokenName)"
         }
         else {
             let name = model.tokenName
             let quoteAccuracy = model.quoteAccuracy
-            itemValues = ["\((max * rate).string()) \(name)", "\(quoteAccuracy) \(name)", "-- \(name)", "\((model.baseMinQuota.decimal * rate).string()) \(name)", "--  \(name)", "\(model.currentQuote)  \(name)"]
+            itemValues = ["\((max * rate).string(digits: ETOCrowdView.precision, roundingMode: .plain)) \(name)", "\(quoteAccuracy.string(digits: ETOCrowdView.precision, roundingMode: .plain)) \(name)", "-- \(name)", "\((model.baseMinQuota.decimal * rate).string(digits: ETOCrowdView.precision, roundingMode: .plain)) \(name)", "--  \(name)", "\(model.currentQuote)  \(name)"]
+
             self.equalLabel.text = "=0\(model.baseTokenName)"
         }
 
@@ -65,8 +66,8 @@ extension ETOCrowdView {
         }else {
             let rate = model.projectModel.quoteTokenCount.decimal() / model.projectModel.baseTokenCount.decimal()
             let name = model.projectModel.tokenName
-            subView.valueLabel.text = "\((model.userModel.currentBaseTokenCount.decimal * rate).string()) \(name)"
-            remainView.valueLabel.text = "\((remain.decimal * rate).string()) \(name)"
+            subView.valueLabel.text = "\((model.userModel.currentBaseTokenCount.decimal * rate).string(digits: ETOCrowdView.precision, roundingMode: .plain)) \(name)"
+            remainView.valueLabel.text = "\((remain.decimal * rate).string(digits: ETOCrowdView.precision, roundingMode: .plain)) \(name)"
         }
        
     }

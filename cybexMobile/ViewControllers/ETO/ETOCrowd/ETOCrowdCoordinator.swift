@@ -160,7 +160,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                 self.store.dispatch(ChangeETOValidStatusAction(status: .lessThanLeastLimit))
                 return
             }
-            unit = 1 / pow(10, data.baseAccuracy)
+            unit = Decimal(1 / pow(10, data.baseAccuracy))
         }
         else {
             // quote 显示

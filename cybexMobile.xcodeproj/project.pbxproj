@@ -180,7 +180,7 @@
 		56D03074319AE5D578E9B4CD28B6C1F9 /* BusinessTitleItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EF92464D8A6E8AB4AF83309A4153BDC /* BusinessTitleItemView.xib */; };
 		56FC707000D714C2C1294918AFBB33B6 /* BusinessReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC10B159BF035F5E71D11A1E611B870D /* BusinessReducers.swift */; };
 		5895D5BFE7B77EDC996C7CF7ADCF92ED /* KLineConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB76A27170AA32D7DC8F5BD22BFF40D4 /* KLineConfiguration.swift */; };
-		59662228CB1D233B02EF357CA563A486 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8BD54DF9C57915FAD96B845D9ADABBA /* Launch Screen.storyboard */; };
+		59662228CB1D233B02EF357CA563A486 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8BD54DF9C57915FAD96B845D9ADABBA /* LaunchScreen.storyboard */; };
 		59A469E9C21A3CE0D06E98458A2D1BD6 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2F31F4F1749972F35CE9EC2B2B39C /* BaseWebViewController.swift */; };
 		59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C962259B890C2B377FA6E71A93EF85 /* IconGenerator.swift */; };
 		5B3C22F0CD0A4F093EDD33D80F76C5C1 /* CybexLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA151A9FE7616E94AD8C23BFF6CF10E /* CybexLabel.xib */; };
@@ -1688,7 +1688,7 @@
 		B524C68B2E051D3815E10ECF5088FF27 /* MyHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryViewController.swift; sourceTree = "<group>"; };
 		B6792EE4EA0606E54008867475EAEBFC /* AccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		B814F64ED665AF18577542DDD16C9010 /* ColorTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
-		B8BD54DF9C57915FAD96B845D9ADABBA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		B8BD54DF9C57915FAD96B845D9ADABBA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB0CBD31CA874ACE70FC838C624124BA /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
 		BC10B159BF035F5E71D11A1E611B870D /* BusinessReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessReducers.swift; sourceTree = "<group>"; };
 		BDB2C6198513BBE464900C9565F6D751 /* AccountPortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioCell.swift; sourceTree = "<group>"; };
@@ -3949,7 +3949,7 @@
 				56A43386E14D074DD3A6AA2AEC1C9808 /* Info.plist */,
 				344D3561BDA811115A7E28BC4203C711 /* InfoPlist.strings */,
 				1EB781D721D338BC009BB8C1 /* Eva.storyboard */,
-				B8BD54DF9C57915FAD96B845D9ADABBA /* Launch Screen.storyboard */,
+				B8BD54DF9C57915FAD96B845D9ADABBA /* LaunchScreen.storyboard */,
 				101951300FAFC5192A5E883D926A0C6D /* Main.storyboard */,
 				7398BEC22181C1AE004C042E /* R.generated.swift */,
 				72C844D1214A3EFE0078448C /* cn_dark.html */,
@@ -4513,7 +4513,7 @@
 				8D8F2D36C5546EAF1A176CA54843EC17 /* InfoPlist.strings in Resources */,
 				141F9BF8F7BFFEAE83218B9E885D8FE8 /* IntroduceView.xib in Resources */,
 				72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */,
-				59662228CB1D233B02EF357CA563A486 /* Launch Screen.storyboard in Resources */,
+				59662228CB1D233B02EF357CA563A486 /* LaunchScreen.storyboard in Resources */,
 				722EC86621895F490091F1BF /* RechargeHeaderView.xib in Resources */,
 				7267DA2321363BEE004AF9AF /* ETOHomeView.xib in Resources */,
 				221EC253210609B20059F856 /* TransferView.xib in Resources */,
@@ -5622,7 +5622,6 @@
 			baseConfigurationReference = D6CA43C1AC824DC7B5125E1E /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -5645,6 +5644,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.12.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5719,7 +5719,6 @@
 			baseConfigurationReference = E28DDA7C429262E80BB0E0CB /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -5747,6 +5746,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -5889,7 +5889,6 @@
 			baseConfigurationReference = E67FFC64D65036FC65E8A88E /* Pods-cybexMobile.tests.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -5913,6 +5912,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.12.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

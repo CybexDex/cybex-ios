@@ -72,10 +72,10 @@ class ETOCrowdViewController: BaseViewController {
             guard let self = self, let amount = self.contentView.titleTextView.textField.text?.decimal(), let data = self.coordinator?.state.data.value else { return }
             let rate = data.baseTokenCount.decimal() / data.quoteTokenCount.decimal()
             if data.userBuyToken == data.baseToken {
-                self.contentView.equalLabel.text = "=" + (amount / rate).string() + data.tokenName
+                self.contentView.equalLabel.text = "=" + (amount / rate).string(digits: ETOCrowdView.precision, roundingMode: .plain) + data.tokenName
             }
             else {
-                self.contentView.equalLabel.text = "=" + (amount * rate).string() + data.baseTokenName
+                self.contentView.equalLabel.text = "=" + (amount * rate).string(digits: ETOCrowdView.precision, roundingMode: .plain) + data.baseTokenName
             }
             self.coordinator?.checkValidStatus(amount)
         }

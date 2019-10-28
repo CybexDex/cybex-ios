@@ -160,7 +160,7 @@ class TransferViewController: BaseViewController {
                 self.transferView.contentView.updateContentSize()
                 self.transferView.updateContentSize()
             }
-            else {
+            else if toaccount.activePubKeys.count == 1{
                 let pubkey = toaccount.activePubKeys[0]
                 self.transferView.postVestingView.setPubkey(pubkey)
                 self.transferView.contentView.updateContentSize()
