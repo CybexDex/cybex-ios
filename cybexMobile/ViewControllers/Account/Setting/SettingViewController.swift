@@ -12,6 +12,7 @@ import Localize_Swift
 import SwiftTheme
 import SwiftyUserDefaults
 import SwifterSwift
+import RxGesture
 
 class SettingViewController: BaseViewController {
     
@@ -55,10 +56,14 @@ class SettingViewController: BaseViewController {
         #if DEBUG
         self.environment.isHidden = false
         #else
-        self.view.rx.tapGesture(numberOfTouchesRequired: 2, numberOfTapsRequired: 5).when(.recognized).subscribe(onNext: {[weak self] _ in
+        self.view.rx.tapGesture(configuration: { (tap: UITapGestureRecognizer, delegate: RxGestureRecognizerDelegate) in
+            tap.numberOfTouchesRequired = 2
+            tap.numberOfTapsRequired = 5
+        }).when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let self = self else { return }
             self.environment.isHidden = false
         }).disposed(by: disposeBag)
+
         #endif
 
         if UserManager.shared.loginType != .nfc {

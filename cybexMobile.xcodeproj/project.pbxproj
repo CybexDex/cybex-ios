@@ -677,6 +677,7 @@
 		73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */; };
 		73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */; };
 		73E61F6F21FFFC9400B54612 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */; };
+		73E765F82367DE5200FB158D /* CoreNFC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E765F72367DE5200FB158D /* CoreNFC.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73E7CC462339B73F00576499 /* ChatDirectionLabelViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E7CC2D2339B73E00576499 /* ChatDirectionLabelViewAdapter.swift */; };
 		73E7CC472339B73F00576499 /* ChatDirectionLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E7CC2E2339B73E00576499 /* ChatDirectionLabelView.xib */; };
 		73E7CC482339B73F00576499 /* ChatDirectionLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E7CC2F2339B73E00576499 /* ChatDirectionLabelView.swift */; };
@@ -1565,6 +1566,7 @@
 		73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostVestingView+Layout.swift"; sourceTree = "<group>"; };
 		73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPageTabViewController.swift; sourceTree = "<group>"; };
 		73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		73E765F72367DE5200FB158D /* CoreNFC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNFC.framework; path = System/Library/Frameworks/CoreNFC.framework; sourceTree = SDKROOT; };
 		73E7CC2D2339B73E00576499 /* ChatDirectionLabelViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDirectionLabelViewAdapter.swift; sourceTree = "<group>"; };
 		73E7CC2E2339B73E00576499 /* ChatDirectionLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDirectionLabelView.xib; sourceTree = "<group>"; };
 		73E7CC2F2339B73E00576499 /* ChatDirectionLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDirectionLabelView.swift; sourceTree = "<group>"; };
@@ -1803,6 +1805,7 @@
 				73A4CBAA21EEDB6E00C93DA6 /* PINCache.framework in Frameworks */,
 				73724C9B23386CE500AB7EE6 /* SwiftyJSON in Frameworks */,
 				73A4CBAE21EEDE0400C93DA6 /* PINOperation.framework in Frameworks */,
+				73E765F82367DE5200FB158D /* CoreNFC.framework in Frameworks */,
 				738F75ED2339E76D0091B83F /* BigInt.framework in Frameworks */,
 				73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */,
 				73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */,
@@ -4004,6 +4007,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73E765F72367DE5200FB158D /* CoreNFC.framework */,
 				738F75F62339EA110091B83F /* Starscream.framework */,
 				738F75E62339E76D0091B83F /* BigInt.framework */,
 				738F75E42339E76C0091B83F /* CryptoSwift.framework */,
@@ -5644,11 +5648,13 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.0;
+				MARKETING_VERSION = 1.12.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-weak_framework",
+					Combine,
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Onone -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
@@ -5746,12 +5752,14 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.0;
+				MARKETING_VERSION = 1.12.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-weak_framework",
+					Combine,
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Onone -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
@@ -5912,11 +5920,13 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.0;
+				MARKETING_VERSION = 1.12.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-weak_framework",
+					Combine,
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Onone -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
