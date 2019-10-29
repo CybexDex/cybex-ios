@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import PromiseKit
 
 protocol TransferListCoordinatorProtocol {
 

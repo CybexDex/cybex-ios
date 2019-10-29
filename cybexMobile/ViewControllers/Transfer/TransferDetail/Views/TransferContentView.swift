@@ -40,7 +40,7 @@ class TransferContentView: UIView {
 
     func fillContent(_ data: TransferRecordViewModel) {
         addressView.nameLocali = data.isSend ? R.string.localizable.transfer_detail_send_address.key.localized() : R.string.localizable.transfer_detail_income_address.key.localized()
-        addressView.contentLocali = data.isSend ? data.to : data.from
+        addressView.contentLocali = data.name
         timeView.contentLocali = data.time
 
         if data.vestingPeriod == "0" {

@@ -136,13 +136,13 @@ struct TransferRecord: HandyJSON {
 
 struct TransferRecordViewModel {
     var isSend: Bool = false
-    var from: String = ""
-    var to: String = ""
+    var name: String = ""
     var time: String = ""
-    var amount: HandyAsset?
+    var amount: String = "--" // +1987.000 USDT
     var memo: String = ""
     var vestingPeriod: String = ""
     var fee: HandyAsset?
+    var outside: Bool = false
 }
 
 struct AccountAssetModel: HandyJSON {
