@@ -116,9 +116,9 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
         }
         else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.getCachedAccount()?.id {
             if pair == nil { // 个人页面
-                let fout: [Pair] = MarketConfiguration.shared.gameMarketPairs
+                let fin: [Pair] = MarketConfiguration.shared.marketPairs.value
 
-                AccountHistoryService.request(target: AccountHistoryAPI.getFillByPairs(userId: uid, page: page, filterInPairs: nil, filterOutPairs: fout), success: { (json) in
+                AccountHistoryService.request(target: AccountHistoryAPI.getFillByPairs(userId: uid, page: page, filterInPairs: fin, filterOutPairs: []), success: { (json) in
                     self.endLoading()
                     self.handlerDataFetched(json, callback: callback)
                 }, error: { (error) in
@@ -127,7 +127,7 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                     self.endAllLoading(self.tableView)
                 }
             } else {
-                AccountHistoryService.request(target: AccountHistoryAPI.getFillByPairs(userId: uid, page: page, filterInPairs: pair!, filterOutPairs: []), success: { (json) in
+                AccountHistoryService.request(target: AccountHistoryAPI.getFillByPairs(userId: uid, page: page, filterInPairs: [pair!], filterOutPairs: []), success: { (json) in
                     self.endLoading()
                     self.handlerDataFetched(json, callback: callback)
 

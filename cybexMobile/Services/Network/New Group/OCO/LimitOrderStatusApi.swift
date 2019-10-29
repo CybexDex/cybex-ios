@@ -57,7 +57,7 @@ enum LimitOrderStatusApi {
         case let .addFilteredMarket(pairs):
             return [pairs.map { [$0.base, $0.quote] }]
         case let .getFilteredLimitOrder(userId, lessThanOrderId, limit):
-            return  [userId, lessThanOrderId, limit, false]
+            return  [userId, lessThanOrderId, limit, true]
         case .clearFilteredMarket:
             return []
         }

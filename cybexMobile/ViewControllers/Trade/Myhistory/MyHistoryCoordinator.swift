@@ -124,23 +124,19 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
     }
 
     func fetchAllMyOrderHistory(_ lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
+        let lastExec: () -> Void =  {
+            self.addFilteredPairs(MarketConfiguration.shared.marketPairs.value, callback: { [weak self] in
+                self?.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
+            })
+        }
+
         service.messageCanSend.delegate(on: self) { (self, _) in
-            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-                self.addFilteredPairs(MarketConfiguration.shared.gameMarketPairs, callback: { [weak self] in
-                    self?.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
-                })
-            } else {
-                self.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
-            }
+           lastExec()
+
         }
         if service.checkNetworConnected() {
-            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-                self.addFilteredPairs(MarketConfiguration.shared.gameMarketPairs, callback: { [weak self] in
-                    self?.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
-                })
-            } else {
-                self.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
-            }
+            lastExec()
+
         } else {
             service.reconnect()
         }
@@ -156,13 +152,7 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
 
         guard let oid = lessThanOrderId else {
             maxOrderId {[weak self] (lessThanOrderId) in
-                var statusApi: LimitOrderStatusApi
-                if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-                    statusApi = LimitOrderStatusApi.getFilteredLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20)
-                }
-                else {
-                    statusApi = LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20)
-                }
+                let statusApi = LimitOrderStatusApi.getFilteredLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20)
 
                 let request = GetLimitOrderStatus(response: { (json) in
                     if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {
@@ -176,13 +166,7 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
         }
 
         let preOid = oid.getPrefixOfID + ".\(oid.getSuffixID - 1)"
-        var statusApi: LimitOrderStatusApi
-        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-            statusApi = LimitOrderStatusApi.getFilteredLimitOrder(userId: userId, lessThanOrderId: preOid, limit: 20)
-        }
-        else {
-            statusApi = LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: preOid, limit: 20)
-        }
+        let statusApi = LimitOrderStatusApi.getFilteredLimitOrder(userId: userId, lessThanOrderId: preOid, limit: 20)
 
         let request = GetLimitOrderStatus(response: { (json) in
             if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {

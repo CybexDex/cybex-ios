@@ -14,7 +14,7 @@ import SwiftyUserDefaults
 import Localize_Swift
 
 enum AccountHistoryAPI {
-    case getFillByPairs(userId: String, page: Int, filterInPairs: Pair?, filterOutPairs: [Pair])
+    case getFillByPairs(userId: String, page: Int, filterInPairs: [Pair], filterOutPairs: [Pair])
     case getTransferRecord(userId:String, page: Int)
 }
 
@@ -106,7 +106,8 @@ extension AccountHistoryAPI: TargetType {
             return ["asset": "null", "acct_from": "or", "acct_to": uid, "page": page, "limit": 20]
         case let .getFillByPairs(userId: uid, page: page, filterInPairs: filterInPairs, filterOutPairs: filterOutPairs):
             let fout = filterOutPairs.count == 0 ? "null" : filterOutPairs.map { "\($0.quote)_\($0.base),\($0.base)_\($0.quote)" }.joined(separator: ",")
-            let fin = filterInPairs == nil ? "null" : "\(filterInPairs!.quote)_\(filterInPairs!.base),\(filterInPairs!.base)_\(filterInPairs!.quote)"
+
+            let fin = filterInPairs .count == 0 ? "null" : filterInPairs.map { "\($0.quote)_\($0.base),\($0.base)_\($0.quote)" }.joined(separator: ",")
             return ["account": uid, "start": "null", "end": "null", "filter_in": fin, "filter_out": fout, "limit": 20, "page": page]
         }
     }
