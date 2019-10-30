@@ -51,6 +51,12 @@ class HashLockupAssetsViewController: BaseViewController, StoryboardSceneBased {
                        UserHelper.shared.getName(id: item.transfer.from)
                     }
 
+                    if item.transfer.assetId.assetInfo == nil {
+                        let _ = try await {
+                            AssetHelper.shared.getAsset(id: item.transfer.assetId)
+                        }
+                    }
+
                     if case let .fulfilled(result) = waitFromResult {
                         self.list[index].from = result
                     }

@@ -238,15 +238,28 @@ extension AssetConfiguration {
 
 extension String {
     var originSymbol: String {
-        return appData.assetInfo[self]?.symbol ?? self
+        return assetInfo?.symbol ?? self
     }
 
     var symbol: String {
         return symbolOnlyFilterJade.filterArena
     }
 
+    var assetInfo: AssetInfo? {
+        var assetInfo: AssetInfo? = nil
+
+        if let appAssetInfo = appData.assetInfo[self] {
+            assetInfo = appAssetInfo
+        }
+        if let cached = AssetHelper.shared.cachedAssetInfo[self] {
+            assetInfo = cached
+        }
+
+        return assetInfo
+    }
+
     var symbolOnlyFilterJade: String {
-        return appData.assetInfo[self]?.symbol.filterOnlySystemPrefix ?? self
+        return assetInfo?.symbol.filterOnlySystemPrefix ?? self
     }
 
     var cachedSymbolOnlyFilterJade: String {
@@ -254,7 +267,7 @@ extension String {
     }
     
     var precision: Int {
-        return appData.assetInfo[self]?.precision ?? 0
+        return assetInfo?.precision ?? 0
     }
     
     var assetID: String {

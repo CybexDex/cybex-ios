@@ -23,7 +23,7 @@ class AssetHelper {
 
         return Promise.init(constructor: { (fulfill, reject) in
             CybexDatabaseApiService.request(target: .getObjects(id: id), success: { (json) in
-                if let info = AssetInfo.deserialize(from: json.dictionaryObject) {
+                if  json.arrayValue.count > 0, let info = AssetInfo.deserialize(from: json[0].dictionaryObject) {
                     self.cachedAssetInfo[id] = info
                     fulfill(info)
                 } else {
@@ -39,7 +39,7 @@ class AssetHelper {
     }
 
     class func getPrecision(_ assetID: String) -> Int? {
-        if let info = appData.assetInfo[assetID] {
+        if let info = assetID.assetInfo {
             return info.precision
         }
         return nil
@@ -77,7 +77,7 @@ class AssetHelper {
     }
 
     class func getRealAmount(_ id: String, amount: String) -> Decimal {
-        guard let asset = appData.assetInfo[id] else {
+        guard let asset = id.assetInfo else {
             return 0
         }
 
@@ -87,7 +87,7 @@ class AssetHelper {
     }
 
     class func setRealAmount(_ id: String, amount: String) -> Decimal {
-        guard let asset = appData.assetInfo[id] else {
+        guard let asset = id.assetInfo else {
             return 0
         }
 

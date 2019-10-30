@@ -88,6 +88,7 @@ extension HashLockupAssetsTableViewCell {
 
         self.assetName.text = data.transfer.assetId.symbol
         self.amount.text = AssetHelper.getRealAmount(data.transfer.assetId, amount: data.transfer.amount.string).formatCurrency(digitNum: data.transfer.assetId.precision) + " " + data.transfer.assetId.symbol
+
         self.endTime.text = data.conditions.timeLock.expiration.string(withFormat: "yyyy-MM-dd HH:mm:ss")
 
         if case let .integer(n) = data.conditions.hashLock.preimageHash[0] {
