@@ -22,6 +22,7 @@ enum DataBaseCatogery: String {
     case getRequiredFees
     case getBlock
     case getTicker
+    case getTickerBatch
     case getBlockHeader
     case getRecentTransactionById
     case getKeyReferences
@@ -319,6 +320,34 @@ struct GetTickerRequest: JSONRPCKit.Request, JSONRPCResponse {
         }
 
         return Ticker()
+    }
+}
+
+struct GetTickerBatchRequest: JSONRPCKit.Request, JSONRPCResponse {
+    var pairs: [Pair]
+
+    var response: RPCSResponse
+    var method: String {
+        return "call"
+    }
+
+    var parameters: Any? {
+        return [ApiCategory.database, DataBaseCatogery.getTickerBatch.rawValue.snakeCased(), [pairs.map({[$0.base, $0.quote]})]]
+    }
+
+    func transferResponse(from resultObject: Any) throws -> Any {
+        if let data = JSON(resultObject).arrayObject {
+            var tickers: [Ticker] = []
+            for o in data {
+                if let ticker = Ticker.deserialize(from: o as? [String: Any]) {
+                    tickers.append(ticker)
+                }
+            }
+
+            return tickers
+        }
+
+        return []
     }
 }
 

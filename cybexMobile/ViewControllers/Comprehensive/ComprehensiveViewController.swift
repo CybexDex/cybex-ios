@@ -97,9 +97,13 @@ class ComprehensiveViewController: BaseViewController {
             }
         }).disposed(by: disposeBag)
 
-        appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
+
+        Observable.combineLatest(
+            TradeConfiguration.shared.tradePairPrecisions.skip(1).asObservable(),
+            appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
             return tickers.count >= MarketConfiguration.shared.marketPairs.value.count
-            }.subscribe(onNext: { [weak self](tickers) in
+            }
+        ).subscribe(onNext: { [weak self](precisions, tickers) in
                 guard let self = self else { return }
                 if let hotPairs = self.coordinator?.state.hotPairs.value, self.isVisible {
                     var tickerModel = [Ticker]()

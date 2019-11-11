@@ -406,6 +406,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             self.closeAllTestSocket()
 
             self.currentNode = URL(string: webSocket.url!.absoluteString)!
+//            self.currentNode = URL(string: NodeURLString.beijing.rawValue)! //test
             connectNode(node: self.currentNode!)
 
             return

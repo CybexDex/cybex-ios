@@ -46,6 +46,12 @@ extension AppDelegate {
         self.window?.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
         self.window?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
         window?.rootViewController = AppConfiguration.shared.appCoordinator.rootVC
+
         self.window?.makeKeyAndVisible()
+        if let view = R.storyboard.launchScreen().instantiateInitialViewController()?.view {
+            view.tag = AppDelegate.LaunchViewTag
+
+            window?.addSubview(view)
+        }
     }    
 }

@@ -142,18 +142,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     }
 
     func checkNeedRefresh(_ result: [Ticker]) -> Bool {
-        if self.vcType == ViewType.comprehensive.rawValue {
-            if result.count >= MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
-                return true
-            }
-        } else {
-            let tickers = result.filter { (ticker) -> Bool in
-                return ticker.base == self.base
-            }
-            if tickers.count == MarketConfiguration.shared.marketPairs.value.filter({ $0.base == self.base}).count,
-                tickers.count != 0 {
-                return true
-            }
+        if result.count >= MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
+            return true
         }
         return false
     }

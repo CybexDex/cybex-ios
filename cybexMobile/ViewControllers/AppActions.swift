@@ -162,6 +162,10 @@ struct TickerFetched: ReSwift.Action {
     let asset: Ticker
 }
 
+struct TickerBatchFetched: ReSwift.Action {
+    let assets: [Ticker]
+}
+
 struct RefreshState: ReSwift.Action {
     let sel: Selector
     let vc: BaseViewController?

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BnL-rZ-2Qv">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BnL-rZ-2Qv">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,10 +32,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X8C-nc-w5p">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NP8-xs-njn">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEv-8w-Nao" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
                                                 <rect key="frame" x="13" y="0.0" width="349" height="336"/>
@@ -236,7 +234,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Do-xk-j2g">
-                                                <rect key="frame" x="13" y="519" width="349" height="68"/>
+                                                <rect key="frame" x="13" y="539" width="349" height="68"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDV-f5-Nyx" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="20" width="349" height="48"/>
@@ -338,7 +336,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="48" estimatedRowHeight="-1" sectionHeaderHeight="12" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="DEY-bT-I3T">
-                                <rect key="frame" x="15" y="20" width="345" height="647"/>
+                                <rect key="frame" x="15" y="0.0" width="345" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -426,7 +424,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJm-As-Vxn" customClass="TradeHistoryView" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="13" y="20" width="349" height="647"/>
+                                <rect key="frame" x="13" y="0.0" width="349" height="667"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -455,14 +453,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo_light" translatesAutoresizingMaskIntoConstraints="NO" id="q7d-ee-hdO">
-                                <rect key="frame" x="112.5" y="35" width="150" height="20"/>
+                                <rect key="frame" x="112.5" y="15" width="150" height="20"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="theme1ImageName" value="ic_logo_dark"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="theme2ImageName" value="ic_logo_light"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBs-TW-hEN">
-                                <rect key="frame" x="30" y="92" width="6.5" height="17"/>
+                                <rect key="frame" x="30" y="72" width="6.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -471,7 +469,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayf-hP-Kot">
-                                <rect key="frame" x="13" y="123" width="349" height="96"/>
+                                <rect key="frame" x="13" y="103" width="349" height="96"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bUY-UC-2rT">
                                         <rect key="frame" x="0.0" y="0.0" width="349" height="96"/>
@@ -584,7 +582,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xK9-cC-nwU" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="13" y="235" width="349" height="48"/>
+                                <rect key="frame" x="13" y="215" width="349" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="vF6-cY-2jk"/>
                                 </constraints>
@@ -677,7 +675,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45V-2G-bEZ">
-                                <rect key="frame" x="13" y="32" width="349" height="96"/>
+                                <rect key="frame" x="13" y="12" width="349" height="96"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="foB-ce-9dD">
                                         <rect key="frame" x="0.0" y="0.0" width="349" height="96"/>
@@ -768,7 +766,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Is1-nW-km2">
-                                <rect key="frame" x="25" y="142" width="325" height="54"/>
+                                <rect key="frame" x="25" y="122" width="325" height="54"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jP-bT-uLB">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="54"/>
@@ -819,7 +817,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHb-tF-X5y">
-                                <rect key="frame" x="13" y="208" width="349" height="81.5"/>
+                                <rect key="frame" x="13" y="188" width="349" height="81.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6W-ab-1Lg" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
                                         <rect key="frame" x="12" y="12" width="325" height="57.5"/>
@@ -856,7 +854,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4e-sd-AxN" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="13" y="329.5" width="349" height="48"/>
+                                <rect key="frame" x="13" y="309.5" width="349" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="LgI-Um-1Ji"/>
                                 </constraints>
@@ -905,14 +903,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo_light" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-df-7d2">
-                                <rect key="frame" x="112.5" y="35" width="150" height="20"/>
+                                <rect key="frame" x="112.5" y="15" width="150" height="20"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="theme2ImageName" value="ic_logo_light"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="theme1ImageName" value="ic_logo_dark"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhZ-TF-Kxr">
-                                <rect key="frame" x="30" y="92" width="6.5" height="17"/>
+                                <rect key="frame" x="30" y="72" width="6.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -921,7 +919,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qcx-qv-DCm">
-                                <rect key="frame" x="13" y="123" width="349" height="192"/>
+                                <rect key="frame" x="13" y="103" width="349" height="192"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9dp-IL-zS9">
                                         <rect key="frame" x="0.0" y="0.0" width="349" height="192"/>
@@ -1087,7 +1085,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="Frv-1Z-6FQ">
-                                <rect key="frame" x="39.5" y="88.5" width="24" height="24"/>
+                                <rect key="frame" x="39.5" y="68.5" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="aJR-8F-pX0"/>
                                     <constraint firstAttribute="width" constant="24" id="zpC-0N-RPu"/>
@@ -1123,7 +1121,7 @@
                                 </subviews>
                             </stackView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kCz-iz-2Gk">
-                                <rect key="frame" x="25" y="329" width="325" height="54"/>
+                                <rect key="frame" x="25" y="309" width="325" height="54"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qp1-2n-pjQ">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="54"/>
@@ -1175,7 +1173,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRM-Qk-YOz" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="13" y="389" width="349" height="48"/>
+                                <rect key="frame" x="13" y="369" width="349" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="90f-HA-egO"/>
                                 </constraints>
@@ -1237,10 +1235,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94d-47-SGC">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="448" translatesAutoresizingMaskIntoConstraints="NO" id="pSm-YK-gF2">
-                                        <rect key="frame" x="25" y="20" width="325" height="547.5"/>
+                                        <rect key="frame" x="25" y="20" width="325" height="563"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="云钱包模式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84b-Ph-ISG">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="19.5"/>
@@ -1257,25 +1255,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sju-Z1-wMB">
-                                                <rect key="frame" x="0.0" y="35.5" width="325" height="200.5"/>
+                                                <rect key="frame" x="0.0" y="35.5" width="325" height="216"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Cybex">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="移动端仅支持注册云钱包模式账户。云钱包模式使用密码和账户名衍生出私钥，这使您可以从不同的电脑、移动终端或浏览器登录。但此模式存在面对黑客暴力破解攻击的风险。因此，我们强烈推荐您使用长密码！">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="16" name=".PingFangSC-Regular"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
                                                     <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
+                                                        <string key="content">Cybex移动端仅支持注册云钱包模式账户。云钱包模式使用密码和账户名衍生出私钥，这使您可以从不同的电脑、移动终端或浏览器登录。但此模式存在面对黑客暴力破解攻击的风险。因此，我们强烈推荐您使用长密码！
 </string>
                                                         <attributes>
                                                             <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1305,7 +1288,7 @@ Cg
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD4-ZC-1ID">
-                                                <rect key="frame" x="0.0" y="248" width="325" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="263.5" width="325" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1319,39 +1302,10 @@ Cg
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-X6-NSm">
-                                                <rect key="frame" x="0.0" y="283.5" width="325" height="244"/>
+                                                <rect key="frame" x="0.0" y="299" width="325" height="244"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <string key="content">You can register using a cloud wallet. It uses a password in combination with your account name to generate your private keys on the fly. It restricts you to only logging in with one account at a time</string>
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=",">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="16" name=".PingFangSC-Regular"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content"> in return for ease of use and convenience. But your password is vulnerable to brute-force attacks which means it is important to use a very long password</string>
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" metaFont="system" size="16"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=",">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="16" name=".PingFangSC-Regular"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ideally 20+ characters!">
+                                                        <string key="content">You can register using a cloud wallet. It uses a password in combination with your account name to generate your private keys on the fly. It restricts you to only logging in with one account at a time, in return for ease of use and convenience. But your password is vulnerable to brute-force attacks which means it is important to use a very long password, ideally 20+ characters!</string>
                                                         <attributes>
                                                             <color key="NSColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <font key="NSFont" metaFont="system" size="16"/>
@@ -1434,7 +1388,7 @@ Cg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="viB-8W-lUx" customClass="NoticeBoardView" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -1464,7 +1418,7 @@ Cg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-o2-bsL">
-                                <rect key="frame" x="0.0" y="20" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGL-Rt-Thy">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
@@ -1583,7 +1537,7 @@ Cg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xRq-Yu-GzR">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1612,7 +1566,7 @@ Cg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="vKt-ij-PjH">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">

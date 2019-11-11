@@ -10,7 +10,7 @@ import Foundation
 
 extension AppDelegate {
     func start() {
-        AppConfiguration.shared.appCoordinator.start()
+//        AppConfiguration.shared.appCoordinator.start()
     }
 
 }

@@ -92,7 +92,15 @@ func appPropertyReducer(_ state: AppPropertyState?, action: ReSwift.Action) -> A
         state.assetNameToIds.accept(nameToIds)
 
     case let action as TickerFetched:
-        state.tickerData.accept(applyTickersToState(state, action: action))
+        state.tickerData.accept(applyTickersToState(state, ticker: action.asset))
+    case let action as TickerBatchFetched:
+        let data = action.assets
+        if data.count > 1 {
+            let scored = data.sorted(by: {return $0.baseVolume.decimal() > $1.baseVolume.decimal()})
+            state.tickerData.accept(scored)
+        }
+        state.tickerData.accept(data)
+
     default:
         break
     }
@@ -100,19 +108,19 @@ func appPropertyReducer(_ state: AppPropertyState?, action: ReSwift.Action) -> A
     return state
 }
 
-func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [Ticker] {
+func applyTickersToState(_ state: AppPropertyState, ticker: Ticker) -> [Ticker] {
     var data = state.tickerData.value
-    guard  let _ = state.assetInfo[action.asset.base], let _ = state.assetInfo[action.asset.quote] else {
+    guard  let _ = state.assetInfo[ticker.base], let _ = state.assetInfo[ticker.quote] else {
         return data
     }
     if data.count == 0 {
-        data.append(action.asset)
+        data.append(ticker)
     }
-    let (contain, index) = data.containHashable(action.asset)
+    let (contain, index) = data.containHashable(ticker)
     if !contain {
-        data.append(action.asset)
+        data.append(ticker)
     } else {
-        data[index] = action.asset
+        data[index] = ticker
     }
 
     if data.count > 1 {
