@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		63C7FFF71D5C020D003BAE60 /* PMKHomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C7FFA71D5BEE09003BAE60 /* PMKHomeKit.framework */; };
+		7D619865235E333E001E0F2E /* HMActionSet+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D619864235E333E001E0F2E /* HMActionSet+Promise.swift */; };
+		7D619867235E33AC001E0F2E /* HMTrigger+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D619866235E33AC001E0F2E /* HMTrigger+Promise.swift */; };
+		7D619869235E3401001E0F2E /* HMEventTrigger+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D619868235E3401001E0F2E /* HMEventTrigger+Promise.swift */; };
 		8312EA1521096DF000A47DDF /* HMAccessoryBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312EA1421096DF000A47DDF /* HMAccessoryBrowserTests.swift */; };
 		8312EA19210974F600A47DDF /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312EA18210974F600A47DDF /* UtilsTests.swift */; };
 		838C29D32103FB9700CE5309 /* HMAcessoryBrowser+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838C29CE2103FB9600CE5309 /* HMAcessoryBrowser+Promise.swift */; };
@@ -33,6 +36,9 @@
 		63C7FFF21D5C020D003BAE60 /* PMKHKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMKHKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CCF8121D5C0C4E00503216 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		63CCF8171D5C11B500503216 /* Carthage.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Carthage.xcconfig; sourceTree = "<group>"; };
+		7D619864235E333E001E0F2E /* HMActionSet+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HMActionSet+Promise.swift"; sourceTree = "<group>"; };
+		7D619866235E33AC001E0F2E /* HMTrigger+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HMTrigger+Promise.swift"; sourceTree = "<group>"; };
+		7D619868235E3401001E0F2E /* HMEventTrigger+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HMEventTrigger+Promise.swift"; sourceTree = "<group>"; };
 		8312EA1421096DF000A47DDF /* HMAccessoryBrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAccessoryBrowserTests.swift; sourceTree = "<group>"; };
 		8312EA18210974F600A47DDF /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		838C29CE2103FB9600CE5309 /* HMAcessoryBrowser+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HMAcessoryBrowser+Promise.swift"; sourceTree = "<group>"; };
@@ -87,8 +93,11 @@
 			children = (
 				838C29D02103FB9700CE5309 /* HMCharacteristic+Promise.swift */,
 				838C29CE2103FB9600CE5309 /* HMAcessoryBrowser+Promise.swift */,
+				7D619864235E333E001E0F2E /* HMActionSet+Promise.swift */,
+				7D619868235E3401001E0F2E /* HMEventTrigger+Promise.swift */,
 				838C29CF2103FB9700CE5309 /* HMHome+Promise.swift */,
 				838C29D12103FB9700CE5309 /* HMHomeManager+Promise.swift */,
+				7D619866235E33AC001E0F2E /* HMTrigger+Promise.swift */,
 				838C29D22103FB9700CE5309 /* Utils.swift */,
 			);
 			path = Sources;
@@ -216,8 +225,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				838C29D62103FB9700CE5309 /* HMHomeManager+Promise.swift in Sources */,
+				7D619865235E333E001E0F2E /* HMActionSet+Promise.swift in Sources */,
 				838C29D52103FB9700CE5309 /* HMCharacteristic+Promise.swift in Sources */,
 				838C29D42103FB9700CE5309 /* HMHome+Promise.swift in Sources */,
+				7D619869235E3401001E0F2E /* HMEventTrigger+Promise.swift in Sources */,
+				7D619867235E33AC001E0F2E /* HMTrigger+Promise.swift in Sources */,
 				838C29D32103FB9700CE5309 /* HMAcessoryBrowser+Promise.swift in Sources */,
 				838C29D72103FB9700CE5309 /* Utils.swift in Sources */,
 			);

@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "Proposer",
-      "hash" : "6502ab00b54cc4b6b4525eb550356ef52ecf34a951e35cd48c5a48befc56d183",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "4b6778c04cc720f53d0cfb4310fa0c3744c4d131925fa79da13076e66f56326b",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

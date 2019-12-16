@@ -59,7 +59,7 @@ DEPENDENCIES:
   - secp256k1_swift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - BSBacktraceLogger
     - CocoaLumberjack
@@ -105,6 +105,6 @@ SPEC CHECKSUMS:
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-PODFILE CHECKSUM: fb6c4e85006e806347a484cff002fdb5b5b6b7d9
+PODFILE CHECKSUM: 16960a0c193dae9475ad8e6542c1694ab404ced8
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

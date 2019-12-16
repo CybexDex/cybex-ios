@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>UIStatusBarStyle</key>
-	<string>Default</string>
+	<string>DarkContent</string>
 	<key>Global</key>
 	<dict>
 		<key>backgroundColor</key>

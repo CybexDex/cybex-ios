@@ -1,14 +1,14 @@
 {
-  "commitish" : "a45f86b561ab8746ca81339f778994ba0eb5ab92",
+  "commitish" : "8e539cfa6a79badb099a88d6249c91460bb40735",
   "iOS" : [
     {
       "name" : "secp256k1",
-      "hash" : "f6b744b9e29adcc9f41ef32a3f0950388c08b75b3afffb99e05dd728e118cf20"
+      "hash" : "dd28d274a3bd436761cfaf4f97cf8e360dd5713224ba41e30686aa76ee92bed1"
     },
     {
       "name" : "web3swift",
-      "hash" : "39cc6aca5835dfdc0bb5e2f528eea709e614d0c3d3267b63b81a1bdd4736718f",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "15d8020ca7893b036b97ab6386f364a2600ff721a226178dcd8834a0bc8d642e",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

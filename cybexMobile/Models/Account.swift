@@ -182,6 +182,7 @@ class Htlc: Codable {
         self.transfer = transfer
         self.conditions = conditions
     }
+
 }
 
 // MARK: Htlc convenience initializers and mutators
@@ -407,6 +408,20 @@ class TransferObject: Codable {
         self.assetId = assetId
         self.to = to
         self.from = from
+    }
+
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        assetId = try container.decode(String.self, forKey: .assetId)
+        to = try container.decode(String.self, forKey: .to)
+        from = try container.decode(String.self, forKey: .from)
+
+        if let value = try? container.decode(String.self, forKey: .amount) {
+            amount = Int(value) ?? 0
+        } else {
+            amount = try container.decode(Int.self, forKey: .amount)
+        }
     }
 }
 

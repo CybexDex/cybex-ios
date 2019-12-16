@@ -9,3 +9,12 @@ target 'PlistDemo' do
   pod 'MBProgressHUD'
 
 end
+
+target 'JsonDemo' do
+    
+  # use_frameworks!
+
+  pod 'SSZipArchive'
+  pod 'MBProgressHUD'
+
+end

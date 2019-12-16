@@ -4678,56 +4678,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BSBacktraceLogger/BSBacktraceLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
-				"${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${PODS_ROOT}/LookinServer/LookinServer.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
-				"${BUILT_PRODUCTS_DIR}/cocore/cocore.framework",
-				"${BUILT_PRODUCTS_DIR}/coswift/coswift.framework",
-				"${BUILT_PRODUCTS_DIR}/fishhook/fishhook.framework",
-				"${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework",
-				"${BUILT_PRODUCTS_DIR}/swift_qrcodejs/swift_qrcodejs.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSBacktraceLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFQRCode.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITextView_Placeholder.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cocore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/coswift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fishhook.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/swift_qrcodejs.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5626,6 +5581,7 @@
 			baseConfigurationReference = D6CA43C1AC824DC7B5125E1E /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -5648,7 +5604,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.2;
+				MARKETING_VERSION = 1.12.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5664,6 +5620,7 @@
 				SR_DEBUG_LOG_ENABLED = YES;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -5725,6 +5682,7 @@
 			baseConfigurationReference = E28DDA7C429262E80BB0E0CB /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -5752,7 +5710,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.2;
+				MARKETING_VERSION = 1.12.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -5770,6 +5728,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALID_ARCHS = arm64;
 				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5897,6 +5856,7 @@
 			baseConfigurationReference = E67FFC64D65036FC65E8A88E /* Pods-cybexMobile.tests.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -5920,7 +5880,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.2;
+				MARKETING_VERSION = 1.12.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5936,6 +5896,7 @@
 				SR_DEBUG_LOG_ENABLED = YES;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALID_ARCHS = arm64;
 				"VALID_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				VERSIONING_SYSTEM = "apple-generic";

@@ -1,10 +1,10 @@
 {
-  "commitish" : "5.0.0",
+  "commitish" : "5.0.1",
   "iOS" : [
     {
       "name" : "HandyJSON",
-      "hash" : "99d93c8c63c782c99e64719cdb542634ad5c7482d7f193435584a438a85eb75a",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "ac5d06337f54c4debf62c0fd9582acdd75ef957c40e895b27c67eef110c0a0cc",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

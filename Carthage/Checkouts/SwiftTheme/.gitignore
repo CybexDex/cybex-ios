@@ -30,5 +30,7 @@ builds/
 
 xcuserdata
 
-# xcshareddata
+# XCode
+
+.swiftpm
 

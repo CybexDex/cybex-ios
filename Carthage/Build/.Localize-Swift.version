@@ -1,10 +1,10 @@
 {
-  "commitish" : "3.0.0",
+  "commitish" : "3.1.0",
   "iOS" : [
     {
       "name" : "Localize_Swift",
-      "hash" : "69b4077f6893ccaf0947a8a520681c257b2ff18f22e1b27592a4de3044b36f8b",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "8db1ac9fe06bfb5deb7576ea5b850bb660fcdd9296204e6a8f1264a8a81910bd",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

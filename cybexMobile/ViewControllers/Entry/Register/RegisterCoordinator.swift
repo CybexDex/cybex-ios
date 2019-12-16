@@ -36,7 +36,11 @@ class RegisterCoordinator: NavCoordinator {
     let codePresenter: Presentr = {
         let width = ModalSize.custom(size: 272)
         let height = ModalSize.custom(size: 226)
-        let center = ModalCenterPosition.custom(centerPoint: CGPoint(x: UIApplication.shared.keyWindow!.width / 2, y: (UIApplication.shared.keyWindow!.height / 2) - 130))
+        guard let window = UIApplication.shared.keyWindow else {
+            return Presentr(presentationType: .alert)
+        }
+
+        let center = ModalCenterPosition.custom(centerPoint: CGPoint(x: window.size.width / 2, y: (window.size.height / 2) - 130))
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let customPresenter = Presentr(presentationType: customType)

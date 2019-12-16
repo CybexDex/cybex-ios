@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Device"
-  s.version      = "3.1.2"
+  s.version      = "3.2.1"
   s.summary      = "Light weight tool for detecting the current device and screen size written in swift."
 
   s.description  = "Swift library for detecting the running device's model and screen size. With the newer  devices, developers have more work to do. This library simplifies their job by allowing them to get information about the running device and easily target the ones they want."
@@ -16,5 +16,7 @@ Pod::Spec.new do |s|
   s.requires_arc            = true
   s.source_files            = "Source/*.swift"
   s.ios.source_files        = "Source/iOS/*.swift"
-  s.osx.source_files        = "Source/macOS/*.swift"  
+  s.osx.source_files        = "Source/macOS/*.swift"
+
+  s.swift_version = '5.0' 
 end

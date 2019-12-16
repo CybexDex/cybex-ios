@@ -1,10 +1,10 @@
 {
-  "commitish" : "0.4.6",
+  "commitish" : "0.5.0",
   "iOS" : [
     {
       "name" : "SwiftTheme",
-      "hash" : "fc4c8d4c5e54cdf81f80b570362d1459e6a077b9fd2d3dd749691b0431b974d5",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "b29d099e9be1fbadf6e3aad2bdd82306142fe65e78d784f952660621b13a2162",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

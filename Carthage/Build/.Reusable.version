@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "Reusable",
-      "hash" : "b5cca0754fbbbbb2d9103647ce044827abc2f96da8eaf810ffa8b87c49639336",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "6e09beed5f1a47f98ae0c41e406c23ad5e0656678d22dd450f36ba9ba4cda2b7",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

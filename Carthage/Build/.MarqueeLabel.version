@@ -2,14 +2,14 @@
   "commitish" : "4.0.0",
   "iOS" : [
     {
-      "name" : "MarqueeLabelSwift",
-      "hash" : "e997be981a28b262cd665add38a2a4f444cb836071e841a9492cb64b4f24bf7f",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "name" : "MarqueeLabel",
+      "hash" : "f16e300750a6ea372b44f76d16996b99c949d6299af2ddf76e5399a0b3fc4e10",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     },
     {
-      "name" : "MarqueeLabel",
-      "hash" : "62c273aba2dc615ce313c96b53fb2eb312df07a39f39a3b1aa5f2b76ffb8fa04",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "name" : "MarqueeLabelSwift",
+      "hash" : "f4bec046e1ca36d9cec2c528b6c005c0f2564e84eee9a7f7440b350b45ee6b70",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

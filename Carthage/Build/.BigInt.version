@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "BigInt",
-      "hash" : "bb032027f948e07f8c93ee01aead9f4c61578bbaa332fdb3207f983bd74e876b",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "231214aa4ce7d155fef08e56553b49c2bfa33173d7bd516b10bc382a04046e67",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

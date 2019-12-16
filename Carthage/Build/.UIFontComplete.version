@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "UIFontComplete",
-      "hash" : "ba1a42811883f76f1b36111ac0c13cb2c1e0724bbc142c86bf8ea27a24db89bc",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "e74da1e2dd0364ce7d7efc2b8b4d0ca0c5554c835376ea9dbc98776a3f479646",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }
