@@ -204,8 +204,10 @@ class MarketViewController: BaseViewController {
 
                     let isBase = data.base == baseAssetId
 
-                    let baseInfo = appData.assetInfo[baseAssetId]!
-                    let quoteInfo = appData.assetInfo[quoteAssetId]!
+                    guard let baseInfo = appData.assetInfo[baseAssetId]
+                        , let quoteInfo = appData.assetInfo[quoteAssetId] else {
+                            continue
+                    }
 
                     let basePrecision = pow(10, baseInfo.precision.double)
                     let quotePrecision = pow(10, quoteInfo.precision.double)

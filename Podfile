@@ -21,7 +21,8 @@ target 'cybexMobile' do
   use_frameworks!
 
   # Pods for cybexMobile
-
+#    pod 'UMCCommon'
+#    pod 'UMCAnalytics'
     pod 'coswift'
     pod 'secp256k1_swift'
     pod 'EFQRCode', '~> 5.0.0'

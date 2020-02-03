@@ -258,8 +258,6 @@
 		722EC86421895F490091F1BF /* RechargeHeaderViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722EC86121895F490091F1BF /* RechargeHeaderViewAdapter.swift */; };
 		722EC86521895F490091F1BF /* RechargeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722EC86221895F490091F1BF /* RechargeHeaderView.swift */; };
 		722EC86621895F490091F1BF /* RechargeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722EC86321895F490091F1BF /* RechargeHeaderView.xib */; };
-		7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7231103921805D7E0007E95D /* UMCommon.framework */; };
-		7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7231103A21805D7F0007E95D /* UMAnalytics.framework */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
 		724C5D4121538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */; };
 		724C5D4221538ABD00FF1DE7 /* ComprehensiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D3F21538ABD00FF1DE7 /* ComprehensiveView.swift */; };
@@ -666,6 +664,8 @@
 		73C9813F2338C15000179892 /* DynamicCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C981392338C15000179892 /* DynamicCollectionViewFlowLayout.swift */; };
 		73C981402338C15000179892 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C9813A2338C15000179892 /* Action.swift */; };
 		73C981412338C15000179892 /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C9813B2338C15000179892 /* ActionController.swift */; };
+		73CF1B6523E7F367005C1EEE /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CF1B6323E7F365005C1EEE /* UMCommon.framework */; };
+		73CF1B6623E7F367005C1EEE /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CF1B6423E7F366005C1EEE /* UMAnalytics.framework */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73D9C15221DF1213005B9022 /* IntrinsicTableViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */; };
@@ -1152,8 +1152,6 @@
 		722EC86121895F490091F1BF /* RechargeHeaderViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeHeaderViewAdapter.swift; sourceTree = "<group>"; };
 		722EC86221895F490091F1BF /* RechargeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeHeaderView.swift; sourceTree = "<group>"; };
 		722EC86321895F490091F1BF /* RechargeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RechargeHeaderView.xib; sourceTree = "<group>"; };
-		7231103921805D7E0007E95D /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = Carthage/Build/iOS/UMCommon.framework; sourceTree = "<group>"; };
-		7231103A21805D7F0007E95D /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = Carthage/Build/iOS/UMAnalytics.framework; sourceTree = "<group>"; };
 		724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveViewAdapter.swift; sourceTree = "<group>"; };
 		724C5D3F21538ABD00FF1DE7 /* ComprehensiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveView.swift; sourceTree = "<group>"; };
 		724C5D4021538ABD00FF1DE7 /* ComprehensiveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComprehensiveView.xib; sourceTree = "<group>"; };
@@ -1556,6 +1554,8 @@
 		73C981392338C15000179892 /* DynamicCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		73C9813A2338C15000179892 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		73C9813B2338C15000179892 /* ActionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionController.swift; sourceTree = "<group>"; };
+		73CF1B6323E7F365005C1EEE /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		73CF1B6423E7F366005C1EEE /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalytics.framework; sourceTree = "<group>"; };
 		73D012982159D71800C95896 /* URLNavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigationMap.swift; sourceTree = "<group>"; };
 		73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableViewView.swift; sourceTree = "<group>"; };
 		73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailPageTabViewController.swift; sourceTree = "<group>"; };
@@ -1797,6 +1797,7 @@
 				73724CBF2338777A00AB7EE6 /* TinyConstraints in Frameworks */,
 				73724C8B2338697600AB7EE6 /* ReSwift in Frameworks */,
 				730BB3F0224A326600F07032 /* cybex_ios_core_cpp.framework in Frameworks */,
+				73CF1B6523E7F367005C1EEE /* UMCommon.framework in Frameworks */,
 				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
 				7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */,
 				7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */,
@@ -1810,9 +1811,8 @@
 				73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */,
 				73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */,
 				73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */,
-				7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */,
+				73CF1B6623E7F367005C1EEE /* UMAnalytics.framework in Frameworks */,
 				73724CC22338784E00AB7EE6 /* SwiftRichString in Frameworks */,
-				7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */,
 				73539BFE217980CF008395AC /* BiometricAuthentication.framework in Frameworks */,
 				7336B7BD214F717E0086A9DF /* ESTabBarController.framework in Frameworks */,
 				73539C37217992F1008395AC /* Fabric.framework in Frameworks */,
@@ -4007,6 +4007,8 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73CF1B6423E7F366005C1EEE /* UMAnalytics.framework */,
+				73CF1B6323E7F365005C1EEE /* UMCommon.framework */,
 				73E765F72367DE5200FB158D /* CoreNFC.framework */,
 				738F75F62339EA110091B83F /* Starscream.framework */,
 				738F75E62339E76D0091B83F /* BigInt.framework */,
@@ -4028,8 +4030,6 @@
 				73A4CBA821EEDB6D00C93DA6 /* PINRemoteImage.framework */,
 				73D9C20C21E5CC46005B9022 /* TangramKit.framework */,
 				7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */,
-				7231103A21805D7F0007E95D /* UMAnalytics.framework */,
-				7231103921805D7E0007E95D /* UMCommon.framework */,
 				73539C6E2179AAA8008395AC /* libsqlite3.tbd */,
 				73539C34217992EF008395AC /* Crashlytics.framework */,
 				73539C36217992F0008395AC /* Device.framework */,
@@ -5604,7 +5604,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.3;
+				MARKETING_VERSION = 1.12.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5710,7 +5710,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.3;
+				MARKETING_VERSION = 1.12.4;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -5880,7 +5880,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.12.3;
+				MARKETING_VERSION = 1.12.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
