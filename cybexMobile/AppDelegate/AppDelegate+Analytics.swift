@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Fabric
 import Crashlytics
 import Sentry
 #if DEBUG
@@ -40,16 +39,12 @@ extension AppDelegate {
     }
 
     func setupAnalytics() {
-        Fabric.with([Crashlytics.self, Answers.self])
         UserManager.shared.name.asObservable().subscribe(onNext: { (account) in
             Crashlytics.sharedInstance().setUserName(UserManager.shared.name.value)
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         Crashlytics.sharedInstance().setUserName(UserManager.shared.name.value)
         
-        #if DEBUG
-        Fabric.sharedSDK().debug = true
-        #endif
-
+     
 
         MobClick.setCrashReportEnabled(true)
         UMConfigure.setLogEnabled(true)

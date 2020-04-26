@@ -29,12 +29,30 @@
         }
       },
       {
+        "package": "HandyJSON",
+        "repositoryURL": "https://github.com/alibaba/HandyJSON",
+        "state": {
+          "branch": null,
+          "revision": "dfab665e87f5dd56e16273222718ecd04a9a9d70",
+          "version": "5.0.1"
+        }
+      },
+      {
         "package": "IQKeyboardManagerSwift",
         "repositoryURL": "https://github.com/hackiftekhar/IQKeyboardManager",
         "state": {
           "branch": null,
           "revision": "be563396713fa3a6bf286c1b98bfb0d85ef0e650",
           "version": "6.4.2"
+        }
+      },
+      {
+        "package": "Localize_Swift",
+        "repositoryURL": "https://github.com/marmelroy/Localize-Swift",
+        "state": {
+          "branch": null,
+          "revision": "f2d0c6d790b8af64ae54377ad93494e8d3e46b17",
+          "version": "3.1.0"
         }
       },
       {
@@ -89,6 +107,15 @@
           "branch": "develop",
           "revision": "2c8e0db2b74496006da30931341bae1962f68e39",
           "version": null
+        }
+      },
+      {
+        "package": "SwiftTheme",
+        "repositoryURL": "https://github.com/wxxsw/SwiftTheme",
+        "state": {
+          "branch": null,
+          "revision": "a60c374504c6c7fb1b556bf8ca96b3ab5563fbfd",
+          "version": "0.5.2"
         }
       },
       {

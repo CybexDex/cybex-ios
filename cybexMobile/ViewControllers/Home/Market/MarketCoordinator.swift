@@ -11,7 +11,6 @@ import ReSwift
 import SwifterSwift
 
 protocol MarketCoordinatorProtocol {
-    func openChatVC(_ sender: Pair)
     func openTradeViewChontroller(_ isBuy: Bool, pair: Pair)
     func setDropBoxViewController()
 }
@@ -38,14 +37,7 @@ class MarketCoordinator: NavCoordinator {
 }
 
 extension MarketCoordinator: MarketCoordinatorProtocol {
-    func openChatVC(_ sender: Pair) {
-        if let chatVC = R.storyboard.chat.chatViewController() {
-            let coordinator = ChatCoordinator(rootVC: self.rootVC)
-            chatVC.coordinator = coordinator
-            chatVC.pair = sender
-            self.rootVC.pushViewController(chatVC, animated: true)
-        }
-    }
+
 
     func isExistProjectIntroduction(_ pair: Pair) -> Bool {
         if let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbol], !projectName.isEmpty {

@@ -1,14 +1,44 @@
 # CHANGELOG
 
+## 4.1.1
+
+* Update the README with up-to-date Swift versions and Installation Instructions.  
+  [@kuyazee](https://github.com/kuyazee)
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#95](https://github.com/AliSoftware/Reusable/pull/95)
+
+* Set `APPLICATION_EXTENSION_API_ONLY` build setting on built frameworks.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#98](https://github.com/AliSoftware/Reusable/pull/98)
+  [@nahung89](https://github.com/nahung89)
+  [#88](https://github.com/AliSoftware/Reusable/pull/88)
+
+* Update tools used by the project (Xcode, CocoaPods, CI, Carthage).  
+  Also SPM builds are now tested by CI.  
+  [@AliSoftware](https://github.com/AliSoftware)
+  [#97](https://github.com/AliSoftware/Reusable/pull/97)
+
+* Update SPM `Package.swift` to mention supported platforms.  
+  [@MortyMerr](https://github.com/MortyMerr)
+  [#89](https://github.com/AliSoftware/Reusable/pull/89)
+  [@pahnev](https://github.com/pahnev)
+  [#93](https://github.com/AliSoftware/Reusable/pull/93)
+  [@mackoj](https://github.com/mackoj)
+  [#85](https://github.com/AliSoftware/Reusable/pull/85)
+
+* Fix nib name lookup when using subclassing.  
+  [@calmez](https://github.com/calmez)
+  [#96](https://github.com/AliSoftware/Reusable/pull/96)
+
 ## 4.1.0
 
-* Support for Swift 5.0
+* Support for Swift 5.0  
   [@florentmorin](https://github.com/florentmorin)
   [#80](https://github.com/AliSoftware/Reusable/pull/80)
 
 ## 4.0.5
 
-* Fix for only allowing the use of app extension API.    
+* Fix for only allowing the use of app extension API.  
   [@igorkulman](https://github.com/igorkulman)
   [#73](https://github.com/AliSoftware/Reusable/pull/73)
 

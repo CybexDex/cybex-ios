@@ -1,10 +1,10 @@
 {
-  "commitish" : "dc27e56f665b46d654c58703a4e63ec2c4ccc571",
+  "commitish" : "a852488c04c5bfdb32021711b3dde465ad0899ef",
   "iOS" : [
     {
       "name" : "NotificationBanner",
-      "hash" : "4aa2415bac3691f367c182a4b8234ab55f3a6059d373b9dfc110f694fe8aea61",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "d4ae90e1b44b7eea2c280744658a7e4d41799162d2d9c19125a27f58819a04cf",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

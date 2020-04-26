@@ -8,13 +8,6 @@ inhibit_all_warnings!
 #  :generate_multiple_pod_projects => true,
 #  :incremental_installation => true
 
-target 'ChatRoom' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for ChatRoom
-  pod 'RxCocoa', '~> 5'
-end
 
 target 'cybexMobile' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -36,6 +29,8 @@ target 'cybexMobile' do
     pod 'RxCocoa', '~> 5'
     pod 'Moya', '~> 13.0'
     pod "RxGesture"
+    pod 'UMCCommon'
+    pod 'UMCAnalytics'
 
   target 'cybexMobileTests' do
     inherit! :search_paths

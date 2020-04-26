@@ -53,6 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
                     asset_id:(int)asset_id receive_asset_id:(int)receive_asset_id
                       amount:(int64_t)amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount memo:(NSString *)memo from_memo_key:(NSString *)from_memo_key to_memo_key:(NSString *)to_memo_keyb;
 
++ (NSString *)getTransactionForBBB:(int)block_num block_id:(NSString *)block_id
+                        expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
+                      from_user_id:(int)from_user_id to_user_id:(int)to_user_id
+                          asset_id:(int)asset_id receive_asset_id:(int)receive_asset_id
+                            amount:(int64_t)amount fee_id:(int)fee_id fee_amount:(int64_t)fee_amount memo:(NSString *)memo from_memo_key:(NSString *)from_memo_key to_memo_key:(NSString *)to_memo_key isTwo:(BOOL)isTwo useGateway:(BOOL) useGateway bbb_asset_id:(int)bbb_asset_id gateway_account_id:(int)gateway_account_id gateway_memo_key:(NSString *)gateway_memo_key;
+
 + (NSString *)getTransactionWithVesting:(int)block_num block_id:(NSString *)block_id
                   expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                 from_user_id:(int)from_user_id to_user_id:(int)to_user_id

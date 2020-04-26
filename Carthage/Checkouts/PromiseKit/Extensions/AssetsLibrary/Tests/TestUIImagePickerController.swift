@@ -27,4 +27,5 @@ class UIImagePickerControllerTests: XCTestCase {
         XCUIApplication().launch()
         XCTAssertFalse(value)
     }
+
 }

@@ -1,10 +1,10 @@
 {
-  "commitish" : "1.2.1",
+  "commitish" : "1.2.3",
   "iOS" : [
     {
       "name" : "Proposer",
-      "hash" : "4b6778c04cc720f53d0cfb4310fa0c3744c4d131925fa79da13076e66f56326b",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "904b1c71a82dd41b45c01daf240aae319114f39975c76bc8b15fc825f4821d0b",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

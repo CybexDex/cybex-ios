@@ -1,10 +1,10 @@
 {
-  "commitish" : "2.7",
+  "commitish" : "2.8.0",
   "iOS" : [
     {
       "name" : "ESTabBarController",
-      "hash" : "5b31cc9f9bc149a4508518b99b984d6afe02ffb7134971cf28b339fa5a17419f",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "58e89d9875a1a0c37583844f25af8a4bfac22cb37833caae137b78f51f62e46e",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

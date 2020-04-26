@@ -1,6 +1,2 @@
 #静态库
-binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json"
-binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json"
-binary "https://cybexdex.github.io/cybex-ios-lib-spec/Carthage/iOS/UMCommon.json"
-binary "https://cybexdex.github.io/cybex-ios-lib-spec/Carthage/iOS/UMAnalytics.json"
 git "https://github.com/phpmaple/SocketRocket" "master"

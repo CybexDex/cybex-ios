@@ -17,12 +17,14 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "754BE45F19693E190098E6F3"
-               BuildableName = "CryptoSwiftTests.xctest"
-               BlueprintName = "CryptoSwiftTests"
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
                ReferencedContainer = "container:CryptoSwift.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Test"
@@ -34,6 +36,8 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <AdditionalOptions>
+      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Test"

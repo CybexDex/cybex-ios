@@ -1,4 +1,11 @@
 framework module web3swift {
-  header "web3swift-Swift.h"
-  requires objc
+  umbrella header "web3swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module web3swift.Swift {
+    header "web3swift-Swift.h"
+    requires objc
 }

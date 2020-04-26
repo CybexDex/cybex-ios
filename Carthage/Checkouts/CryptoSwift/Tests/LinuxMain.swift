@@ -1,10 +1,10 @@
 import XCTest
 
-import CryptoSwiftTests
+import Tests
 import TestsPerformance
 
 var tests = [XCTestCaseEntry]()
-tests += CryptoSwiftTests.__allTests()
-tests += TestsPerformance.__allTests()
+tests += Tests.__allTests()
+// tests += TestsPerformance.__allTests()
 
 XCTMain(tests)

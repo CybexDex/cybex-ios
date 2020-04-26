@@ -1,18 +1,15 @@
 github "sberrevoets/SDCAlertView"
 github "xmartlabs/XLPagerTabStrip"
 github "eggswift/ESTabBarController"
-github "alibaba/HandyJSON" ~> 5.0.0
 github "rushisangani/BiometricAuthentication"
 github "nixzhu/Proposer"
 
 git "https://github.com/fxwx23/JSONRPCKit" "xcode10-swift4.2"
-github "marmelroy/Localize-Swift"
 github "Nirma/UIFontComplete"
 github "MoZhouqi/KMNavigationBarTransition"
 github "IcaliaLabs/Presentr"
 github "KennethTsang/GrowingTextView"
 
-github "jiecao-fm/SwiftTheme"
 github "exyte/Macaw"
 github "eggswift/pull-to-refresh"
 github "WenchaoD/FSPagerView"

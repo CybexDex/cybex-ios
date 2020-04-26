@@ -55,15 +55,7 @@ extension GuaranteeTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__GuaranteeTests = [
-        ("testCompactMapValues", testCompactMapValues),
-        ("testFilterValues", testFilterValues),
-        ("testFlatMapValues", testFlatMapValues),
         ("testInit", testInit),
-        ("testMapValues", testMapValues),
-        ("testNoAmbiguityForValue", testNoAmbiguityForValue),
-        ("testSorted", testSorted),
-        ("testSortedBy", testSortedBy),
-        ("testThenFlatMap", testThenFlatMap),
         ("testThenMap", testThenMap),
         ("testWait", testWait),
     ]
@@ -138,7 +130,6 @@ extension PromiseTests {
         ("testIsPending", testIsPending),
         ("testIsRejected", testIsRejected),
         ("testIsResolved", testIsResolved),
-        ("testNoAmbiguityForValue", testNoAmbiguityForValue),
         ("testPipeForResolved", testPipeForResolved),
         ("testThrowInFirstly", testThrowInFirstly),
         ("testThrowInInitializer", testThrowInInitializer),

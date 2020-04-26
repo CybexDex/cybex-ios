@@ -98,10 +98,10 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
             return resultValue as Any
         }
 
-        guard let full = result.first?.arrayValue[1] else {
+        guard let arr = result.first?.arrayValue, arr.count >= 2 else {
             return resultValue as Any
         }
-
+        let full = arr[1]
         return FullAccount.deserialize(from: full.dictionaryObject) as Any
     }
 }

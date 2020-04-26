@@ -45,6 +45,9 @@ PODS:
   - swift_qrcodejs (1.1.1)
   - UICountingLabel (1.2.0)
   - "UITextView+Placeholder (1.2.1)"
+  - UMCAnalytics (6.0.5):
+    - UMCCommon
+  - UMCCommon (2.1.1)
 
 DEPENDENCIES:
   - coswift
@@ -57,6 +60,8 @@ DEPENDENCIES:
   - RxCocoa (~> 5)
   - RxGesture
   - secp256k1_swift
+  - UMCAnalytics
+  - UMCCommon
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -81,6 +86,8 @@ SPEC REPOS:
     - swift_qrcodejs
     - UICountingLabel
     - "UITextView+Placeholder"
+    - UMCAnalytics
+    - UMCCommon
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
@@ -104,7 +111,9 @@ SPEC CHECKSUMS:
   swift_qrcodejs: 0bacbfe321a99954c7b8e04c75562007ea4e4f7c
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
+  UMCAnalytics: 045be2cd1ec05aa95ad62405a850757f932e2d59
+  UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
 
-PODFILE CHECKSUM: bba14b77a54c934e8f2664f1b7054103b2c56207
+PODFILE CHECKSUM: 4a7aee65d493524a468b3f0dbcd83b1a61718beb
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

@@ -3,13 +3,13 @@
   "iOS" : [
     {
       "name" : "NVActivityIndicatorViewAppExtension",
-      "hash" : "55d4e75138700d9c1e055e753d2ca62af4e3c6e45ba3da9934c3a1d1e1908c2e",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "9b52b9be535032c19d7ca29c829f25df490a087d0fa0e67fcdd94ff8e3e7f820",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     },
     {
       "name" : "NVActivityIndicatorView",
-      "hash" : "d67318145479d3375c89c9aef9b0a083b72890a2d0cc6151e43f64e91d62eb19",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "fa2e187b1860510c3e656e9b2c47d8f38ef3621ef4c2f2c8758d0e8308286007",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

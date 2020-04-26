@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "FSPagerView",
-      "hash" : "c9edeaec785db378d8c9804fdd8e179a5996459917da540dcef5476c93e57c55",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "cf2fd29aca755d7f46268e690278a4c26fcf093b350e0e9155ce017110c17eb5",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
-  "commitish" : "4.1.0",
+  "commitish" : "4.1.1",
   "iOS" : [
     {
       "name" : "Reusable",
-      "hash" : "6e09beed5f1a47f98ae0c41e406c23ad5e0656678d22dd450f36ba9ba4cda2b7",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "85824d8b1384145679964d0172b9becfc108adf9caa90ba23fd499908ac163f8",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
-  "commitish" : "0.7.1",
+  "commitish" : "0.7.2",
   "iOS" : [
     {
       "name" : "GrowingTextView",
-      "hash" : "4a0178632530c335b83b83a85a8380cfa21e35f4940b85e972811900f1de3660",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "040dfa8680b97197251648d09795a0095f865ca9bc0fc47a22c2faffe5e771ac",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

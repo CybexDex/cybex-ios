@@ -8,12 +8,12 @@
   "tvOS" : [
 
   ],
-  "commitish" : "2.3.0",
+  "commitish" : "2.7.0",
   "iOS" : [
     {
       "name" : "cybex_ios_core_cpp",
-      "hash" : "8a3905e09cafb5984fc1093dd5b8f106c71834e40050d29659c45265e36d2762",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "886cd78fd15057fc03cf84b0c2cc3c07937598e8ea40ec41ad5562d57d1077e3",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }

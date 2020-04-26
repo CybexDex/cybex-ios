@@ -92,14 +92,14 @@ open class MacawView: MView, MGestureRecognizerDelegate {
     #if os(OSX)
     open override var layer: CALayer? {
         didSet {
-            guard self.layer != nil else {
-                return
-            }
-            initializeView()
+        guard self.layer != nil else {
+        return
+        }
+        initializeView()
 
-            if let cache = self.animationCache {
-                self.renderer = RenderUtils.createNodeRenderer(node, view: self, animationCache: cache)
-            }
+        if let cache = self.animationCache {
+        self.renderer = RenderUtils.createNodeRenderer(node, view: self, animationCache: cache)
+        }
         }
     }
     #endif

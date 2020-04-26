@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BitShareCoordinator.h</key>
 		<data>
-		5Apj1nCT7vtM6g7Jl++BXjGsESs=
+		ZK9Zvgjk32lKpRnEQ68Vp72q+48=
 		</data>
 		<key>Headers/NXSig.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/cybex_ios_core_cpp-Swift.h</key>
 		<data>
-		I7Ml1iiLfw1mHgSDtx9E0vSCvSs=
+		xisEYZxEi8xuxTbCKP7kqPRDOPY=
 		</data>
 		<key>Headers/cybex_ios_core_cpp.h</key>
 		<data>
@@ -22,31 +22,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		5+mxdu4Mb6GTVefDbLiCEfFL2bs=
+		HWygNILznoKJrv1d57NnVKrKuNU=
+		</data>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
+		<data>
+		9HjulZJJAYFn/NZkHWqkKOZaAEA=
+		</data>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/Project/x86_64.swiftsourceinfo</key>
+		<data>
+		9HjulZJJAYFn/NZkHWqkKOZaAEA=
 		</data>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Yl729ltCZNcL2K2MeLMuNqPUAKA=
+		Fq3rs2ccT66DrR6c5fNa3mB2AWs=
 		</data>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		7zG9KKDUkTjB9ZgdX2+nuKQEapc=
+		hIx6UFJFxV+hqPhVKZZVNM/RkMw=
 		</data>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		8a0Lf+wosPwwSZ0EblVqDnIZZ2w=
+		YKfwJZ6EgbcGaOOek2LUtyhgL/s=
 		</data>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		Yl729ltCZNcL2K2MeLMuNqPUAKA=
+		Fq3rs2ccT66DrR6c5fNa3mB2AWs=
 		</data>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		7zG9KKDUkTjB9ZgdX2+nuKQEapc=
+		hIx6UFJFxV+hqPhVKZZVNM/RkMw=
 		</data>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		8a0Lf+wosPwwSZ0EblVqDnIZZ2w=
+		YKfwJZ6EgbcGaOOek2LUtyhgL/s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -455,7 +463,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lLXHGeB610XVpHvLiruV3auUcsPqPDdBLqHkbWllXWk=
+			3//4xTesnACtE2tnAu/j5OTJo/skkIprnPACzfGEzGs=
 			</data>
 		</dict>
 		<key>Headers/NXSig.h</key>
@@ -469,7 +477,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VJrEZ1t5T4A3e+iruyk6pnKRxE2fpGP45sXmOraqv8o=
+			/taH+mzxwK3ZZj7r6RMKe0qtufY1HSj2m3hlgYGXQbU=
 			</data>
 		</dict>
 		<key>Headers/cybex_ios_core_cpp.h</key>
@@ -479,46 +487,60 @@
 			aYVI+cl73hkBMU3sMYgFRxbJ3ih7ikT17zceZBhPIko=
 			</data>
 		</dict>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SFIWKND02A6quDj5BxmK+cb7L92WHckfaf59qG/LBlA=
+			</data>
+		</dict>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/Project/x86_64.swiftsourceinfo</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SFIWKND02A6quDj5BxmK+cb7L92WHckfaf59qG/LBlA=
+			</data>
+		</dict>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dJz+IN+377TSGWDcycUZsDt01jWYW2eOkXY7aN9dNbk=
+			9hQB7IyLxJlc6W1H31awdC5sK/VP9On0+Rz9N/z3fJQ=
 			</data>
 		</dict>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			aKRrb3Xk6ExoGdCG5OTEFxZrAE4Rf9nfuTBUAM+p1Mk=
+			R8PsSzOdgcrqm7xXhq1LBBiEUwezTKHYS8DSB36r6T4=
 			</data>
 		</dict>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			a+EAzQCS/zuP43dz7lG4oOJgutKrEDOVz/Vsn3+7APs=
+			ldNwx1gcetacgZaRYH66sqqn1h2kYO39cCLj9RU68nw=
 			</data>
 		</dict>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dJz+IN+377TSGWDcycUZsDt01jWYW2eOkXY7aN9dNbk=
+			9hQB7IyLxJlc6W1H31awdC5sK/VP9On0+Rz9N/z3fJQ=
 			</data>
 		</dict>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			aKRrb3Xk6ExoGdCG5OTEFxZrAE4Rf9nfuTBUAM+p1Mk=
+			R8PsSzOdgcrqm7xXhq1LBBiEUwezTKHYS8DSB36r6T4=
 			</data>
 		</dict>
 		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			a+EAzQCS/zuP43dz7lG4oOJgutKrEDOVz/Vsn3+7APs=
+			ldNwx1gcetacgZaRYH66sqqn1h2kYO39cCLj9RU68nw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
