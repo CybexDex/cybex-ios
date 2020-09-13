@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "SDCAlertView"
-  s.version          = "11.0"
+  s.version          = "11.1.2"
   s.summary          = "The little alert that could"
   s.homepage         = "https://github.com/sberrevoets/SDCAlertView"
   s.license          = { :type => "MIT" }
@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = 9.0
   s.requires_arc = true
+  s.swift_versions = ["5"]
 end

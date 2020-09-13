@@ -26,7 +26,7 @@ struct RegisterService {
     }
 
     static let provider = MoyaProvider<RegisterApi>(callbackQueue: nil, manager: defaultManager(),
-                                                        plugins: [NetworkLoggerPlugin(verbose: true)],
+                                                    plugins: [AppConfiguration.HTTPLOG],
                                                         trackInflights: false)
 
     static func request(

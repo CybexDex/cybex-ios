@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import JSONRPCKit
 import SwiftyJSON
+import AnyCodable
 
 enum DataBaseCatogery: String {
     case getFullAccounts
@@ -29,7 +29,7 @@ enum DataBaseCatogery: String {
     case getAccountTokenAge
 }
 
-struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
+struct GetRequiredFees: Request, JSONRPCResponse {
     var response: RPCSResponse
     var operationStr: String
     var assetID: String
@@ -39,10 +39,10 @@ struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database,
-                DataBaseCatogery.getRequiredFees.rawValue.snakeCased(),
-                [[[operationID, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                AnyEncodable(DataBaseCatogery.getRequiredFees.rawValue.snakeCased()),
+                AnyEncodable([[[operationID, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -54,7 +54,7 @@ struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetAccountByNameRequest: Request, JSONRPCResponse {
     var name: String
 
     var response: RPCSResponse
@@ -63,8 +63,10 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getAccountByName.rawValue.snakeCased(), [name]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getAccountByName.rawValue.snakeCased()),
+                                          AnyEncodable([name])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -77,7 +79,7 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetFullAccountsRequest: Request, JSONRPCResponse {
     var name: String
     var response: RPCSResponse
 
@@ -85,8 +87,10 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getFullAccounts.rawValue.snakeCased(), [[name], true]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getFullAccounts.rawValue.snakeCased()),
+                                          AnyEncodable([[name], true])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -106,14 +110,16 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetChainIDRequest: Request, JSONRPCResponse {
     var method: String {
         return "call"
     }
     var response: RPCSResponse
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getChainId.rawValue.snakeCased(), []]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getChainId.rawValue.snakeCased()),
+                                          AnyEncodable([])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -125,7 +131,7 @@ struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetObjectsRequest: Request, JSONRPCResponse {
     var ids: [String]
     var refLib: Bool = false
 
@@ -135,8 +141,10 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getObjects.rawValue.snakeCased(), [ids]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getObjects.rawValue.snakeCased()),
+                                          AnyEncodable([ids])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -178,7 +186,7 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct LookupAssetSymbolsRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct LookupAssetSymbolsRequest: Request, JSONRPCResponse {
     var names: [String]
 
     var response: RPCSResponse
@@ -187,8 +195,10 @@ struct LookupAssetSymbolsRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.lookupAssetSymbols.rawValue.snakeCased(), [names]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.lookupAssetSymbols.rawValue.snakeCased()),
+                                          AnyEncodable([names])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -203,7 +213,7 @@ struct LookupAssetSymbolsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCResponse {
+struct SubscribeMarketRequest: Request, RevisionRequest, JSONRPCResponse {
     var ids: [String]
 
     var method: String {
@@ -212,10 +222,10 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
 
     var response: RPCSResponse
 
-    var parameters: Any? {
-        return [ApiCategory.database,
-                DataBaseCatogery.subscribeToMarket.rawValue.snakeCased(),
-                [CybexWebSocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.subscribeToMarket.rawValue.snakeCased()),
+                                          AnyEncodable([CybexWebSocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]])]
     }
 
     func revisionParameters(_ data: Any) -> Any {
@@ -239,7 +249,7 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
     }
 }
 
-struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetLimitOrdersRequest: Request, JSONRPCResponse {
     var pair: Pair
     var response: RPCSResponse
 
@@ -247,10 +257,10 @@ struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database,
-                DataBaseCatogery.getLimitOrders.rawValue.snakeCased(),
-                [pair.base, pair.quote, 500]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getLimitOrders.rawValue.snakeCased()),
+                                          AnyEncodable([pair.base, pair.quote, 500])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -258,7 +268,7 @@ struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetBalanceObjectsRequest: Request, JSONRPCResponse {
     var address: [String]
     var response: RPCSResponse
 
@@ -266,8 +276,10 @@ struct GetBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getBalanceObjects.rawValue.snakeCased(), [address]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getBalanceObjects.rawValue.snakeCased()),
+                                          AnyEncodable([address])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -285,15 +297,17 @@ struct GetBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetBlockRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetBlockRequest: Request, JSONRPCResponse {
     var response: RPCSResponse
 
     var blockNum: Int
     var method: String {
         return "call"
     }
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getBlock.rawValue.snakeCased(), [blockNum]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getBlock.rawValue.snakeCased()),
+                                          AnyEncodable([blockNum])]
     }
     func transferResponse(from resultObject: Any) throws -> Any {
         let data = JSON(resultObject).dictionaryValue
@@ -301,7 +315,7 @@ struct GetBlockRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetTickerRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetTickerRequest: Request, JSONRPCResponse {
     var baseName: String
     var quoteName: String
     var response: RPCSResponse
@@ -309,8 +323,10 @@ struct GetTickerRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getTicker.rawValue.snakeCased(), [baseName, quoteName]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getTicker.rawValue.snakeCased()),
+                                          AnyEncodable([baseName, quoteName])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -323,7 +339,7 @@ struct GetTickerRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetTickerBatchRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetTickerBatchRequest: Request, JSONRPCResponse {
     var pairs: [Pair]
 
     var response: RPCSResponse
@@ -331,8 +347,10 @@ struct GetTickerBatchRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getTickerBatch.rawValue.snakeCased(), [pairs.map({[$0.base, $0.quote]})]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getTickerBatch.rawValue.snakeCased()),
+                                          AnyEncodable([pairs.map({[$0.base, $0.quote]})])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -351,7 +369,7 @@ struct GetTickerBatchRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetBlockHeaderRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetBlockHeaderRequest: Request, JSONRPCResponse {
     var blockNum: String
 
     var response: RPCSResponse
@@ -360,8 +378,10 @@ struct GetBlockHeaderRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getBlockHeader.rawValue.snakeCased(), [blockNum]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getBlockHeader.rawValue.snakeCased()),
+                                          AnyEncodable([blockNum])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -371,7 +391,7 @@ struct GetBlockHeaderRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetRecentTransactionById: JSONRPCKit.Request, JSONRPCResponse {
+struct GetRecentTransactionById: Request, JSONRPCResponse {
     var id: String
 
     var response: RPCSResponse
@@ -380,8 +400,10 @@ struct GetRecentTransactionById: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getRecentTransactionById.rawValue.snakeCased(), [id]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.database.rawValue),
+                             AnyEncodable(DataBaseCatogery.getRecentTransactionById.rawValue.snakeCased()),
+                             AnyEncodable([id])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {

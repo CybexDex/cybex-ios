@@ -25,7 +25,7 @@ struct EvaService {
     }
     
     static let provider = MoyaProvider<EvaApi>(callbackQueue: nil, manager: defaultManager(),
-                                               plugins: [NetworkLoggerPlugin(verbose: true)],
+                                               plugins: [AppConfiguration.HTTPLOG],
                                                trackInflights: false)
     
     static func request(

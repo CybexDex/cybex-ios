@@ -8,12 +8,12 @@
 
 import Foundation
 import SocketRocket
-import JSONRPCKit
 import SwifterSwift
 import SwiftyJSON
 import SwiftyUserDefaults
 import RxCocoa
 import Repeat
+import AnyCodable
 
 enum NodeURLString: String {
     case shanghai = "wss://shanghai.51nebula.com"
@@ -80,7 +80,7 @@ class CybexWebSocketService: NSObject {
 
     private var queue: OperationQueue!
 
-    var ids: [ApiCategory: Int] = [:]
+    var ids: [String: Int] = [:]
     var timer: Repeater?
 
     static let shared = CybexWebSocketService()
@@ -202,7 +202,7 @@ class CybexWebSocketService: NSObject {
         canSendMessageReactive.accept(false)
     }
 
-    func send<Request: JSONRPCKit.Request>(request: Request, priority: Operation.QueuePriority = .normal) {
+    func send<R: Request>(request: R, priority: Operation.QueuePriority = .normal) {
         if let rpcRequest = request as? JSONRPCResponse {
             let block: CybexWebSocketResponse = { data in
                 if !(data["error"].object is NSNull) {
@@ -236,21 +236,21 @@ class CybexWebSocketService: NSObject {
         let registerIDRe = [RegisterIDRequest(api: .database) { reId in
             if let reId = reId as? Int {
                 var nIds = self.ids
-                nIds[.database] = reId
+                nIds["database"] = reId
                 self.ids = nIds
             }
 
             }, RegisterIDRequest(api: .networkBroadcast) { reId in
                 if let reId = reId as? Int {
                     var nIds = self.ids
-                    nIds[.networkBroadcast] = reId
+                    nIds["network_broadcast"] = reId
                     self.ids = nIds
                 }
 
             }, RegisterIDRequest(api: .history) { reId in
                 if let reId = reId as? Int {
                     var nIds = self.ids
-                    nIds[.history] = reId
+                    nIds["history"] = reId
                     self.ids = nIds
                 }
 
@@ -261,15 +261,21 @@ class CybexWebSocketService: NSObject {
         }
     }
 
-    private func constructSendData<Request: JSONRPCKit.Request>(request: Request) -> (JSON, String) {
+    private func constructSendData<R: Request>(request: R) -> (JSON, String) {
         let batch = self.batchFactory.create(request)
 
         var writeJSON: JSON
 
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(batch)
+        
+        let requestEndpoint = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+        
+        
         if let revisionRequest = request as? RevisionRequest {
-            writeJSON = JSON(revisionRequest.revisionParameters(batch.requestObject))
+            writeJSON = JSON(revisionRequest.revisionParameters(requestEndpoint))
         } else {
-            writeJSON = JSON(batch.requestObject)
+            writeJSON = JSON(requestEndpoint)
         }
 
         let sendId = writeJSON["id"].stringValue
@@ -277,7 +283,7 @@ class CybexWebSocketService: NSObject {
         return (writeJSON, sendId)
     }
 
-    private func appendRequestToQueue<Request: JSONRPCKit.Request>(_ request: Request,
+    private func appendRequestToQueue<R: Request>(_ request: R,
                                                                    priority: Operation.QueuePriority = .normal,
                                                                    response:@escaping CybexWebSocketResponse) {
         let sendData = self.constructSendData(request: request)
@@ -290,17 +296,20 @@ class CybexWebSocketService: NSObject {
 
             if self.checkNetworConnected() {
                 var json = sendData.0
-                if var oldParams = request.parameters as? [Any] {
-                    if let api = oldParams[0] as? ApiCategory, let rid = self.ids[api] {
-                        oldParams[0] = rid
-                    } else {
-                        oldParams[0] = 1
+                if var oldParams = request.parameters as? [AnyEncodable] {
+                    if let api = oldParams[0] as? AnyEncodable, let cate = api.value as? String, let rid = self.ids[cate] {
+                        oldParams[0] = AnyEncodable(rid)
                     }
-                    json["params"] = JSON(oldParams)
-
+                  
+                    let encoder = JSONEncoder()
+                    let d = try! encoder.encode(oldParams)
+                    
+                    let requestEndpoint = try? JSONSerialization.jsonObject(with: d, options: .mutableContainers)
+                    json["params"] = JSON(requestEndpoint)
 //                    log.info("request: \(json.rawString()!)")
 
                     let data = try? json.rawData()
+                    
                     try? self.socket.send(data: data)
                 }
             }
@@ -355,10 +364,14 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             }
 
             let batch = self.batchFactory.create(request)
-            let writeJSON: JSON = JSON(batch.requestObject)
+            let encoder = JSONEncoder()
+            let data = try! encoder.encode(batch)
+            
+            let requestEndpoint = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+            
+            let writeJSON: JSON = JSON(requestEndpoint)
 
-            let data = try? writeJSON.rawData()
-            try? webSocket.send(data: data)
+            try? webSocket.send(data: try? writeJSON.rawData())
         } else {
             Log.print(" node: \(webSocket.url!.absoluteString) --- connected")
             UIHelper.showStatusBar(R.string.localizable.socket_success.key, style: .success)

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import JSONRPCKit
+import AnyCodable
 
 enum ApiCategory: String {
     case login
@@ -49,9 +49,7 @@ protocol RevisionRequest {
     func revisionParameters(_ data: Any) -> Any
 }
 
-extension JSONRPCKit.Request {
-    typealias Response = Any
-
+extension Request {
     var method: String {
         return "call"
     }
@@ -76,7 +74,8 @@ extension JSONRPCKit.Request {
     }
 }
 
-struct RegisterIDRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct RegisterIDRequest : JSONRPCResponse, Request  {
+    
     var api: ApiCategory
     var response: RPCSResponse
 
@@ -84,8 +83,10 @@ struct RegisterIDRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.none, api.rawValue.snakeCased(), []]
+    var parameters: Encodable? {
+        return [AnyEncodable(1),
+                             AnyEncodable(api.rawValue.snakeCased()),
+                                          AnyEncodable([])]
     }
 
     var digist: String {
@@ -101,7 +102,7 @@ struct RegisterIDRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct LoginRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct LoginRequest: Request, JSONRPCResponse {
     let username: String
     let password: String
     var response: RPCSResponse
@@ -113,13 +114,13 @@ struct LoginRequest: JSONRPCKit.Request, JSONRPCResponse {
     var digist: String {
         return ""
     }
-
-    var parameters: Any? {
-        return [1, ApiCategory.login.rawValue, [username, password]]
+    
+    var parameters: Encodable? {
+        return [AnyEncodable(1), AnyEncodable(ApiCategory.login.rawValue), AnyEncodable([username, password])]
     }
 }
 
-struct LoginRequest2: JSONRPCKit.Request, JSONRPCResponse {
+struct LoginRequest2: Request, JSONRPCResponse {
     let username: String
     let password: String
     var response: RPCSResponse
@@ -128,7 +129,7 @@ struct LoginRequest2: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [1, ApiCategory.login.rawValue, [username, password]]
+    var parameters: Encodable? {
+        return [AnyEncodable(1), AnyEncodable(ApiCategory.login.rawValue), AnyEncodable([username, password])]
     }
 }

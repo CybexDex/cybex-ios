@@ -27,7 +27,7 @@ import Foundation
 import BigInt
 import CryptoSwift
 import CommonCrypto
-import secp256k1_swift
+import web3swift
 
 public struct Card {
     static var secp256k1_N = BigUInt("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", radix: 16)!

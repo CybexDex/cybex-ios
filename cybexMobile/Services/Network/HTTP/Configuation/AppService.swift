@@ -48,7 +48,7 @@ struct AppService {
     }
 
     static let provider = MoyaProvider<AppAPI>(callbackQueue: nil, manager: defaultManager(),
-                                                        plugins: [NetworkLoggerPlugin(verbose: true)],
+                                               plugins: [AppConfiguration.HTTPLOG],
                                                         trackInflights: false)
 
     static func request(

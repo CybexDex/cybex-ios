@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import JSONRPCKit
 import SwiftyJSON
+import AnyCodable
 
 enum HistoryCatogery: String {
     case getMarketHistory
@@ -23,7 +23,7 @@ struct AssetPairQueryParams {
     var endTime: Date
 }
 
-struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetMarketHistoryRequest: Request, JSONRPCResponse {
     var queryParams: AssetPairQueryParams
     var response: RPCSResponse
 
@@ -31,14 +31,14 @@ struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.history,
-                HistoryCatogery.getMarketHistory.rawValue.snakeCased(),
-                [queryParams.firstAssetId,
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.history.rawValue),
+                AnyEncodable(HistoryCatogery.getMarketHistory.rawValue.snakeCased()),
+                AnyEncodable([queryParams.firstAssetId,
                  queryParams.secondAssetId,
                  queryParams.timeGap,
                  queryParams.startTime.iso8601,
-                 queryParams.endTime.iso8601]]
+                 queryParams.endTime.iso8601])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -52,7 +52,7 @@ struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetFillOrderHistoryRequest: Request, JSONRPCResponse {
     var pair: Pair
     var response: RPCSResponse
 
@@ -60,10 +60,10 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [ApiCategory.history,
-                HistoryCatogery.getFillOrderHistory.rawValue.snakeCased(),
-                [pair.base, pair.quote, 40]]
+    var parameters: Encodable? {
+        return [AnyEncodable(ApiCategory.history.rawValue),
+                AnyEncodable(HistoryCatogery.getFillOrderHistory.rawValue.snakeCased()),
+                AnyEncodable([pair.base, pair.quote, 40])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {

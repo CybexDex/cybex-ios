@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftTheme
-import NotificationBanner
+import NotificationBannerSwift
 
 class UIHelper {
     enum Page: CGFloat {
