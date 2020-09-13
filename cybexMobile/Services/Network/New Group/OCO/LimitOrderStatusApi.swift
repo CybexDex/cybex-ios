@@ -74,7 +74,7 @@ struct GetLimitOrderStatus: Request, JSONRPCResponse {
     }
 
     var parameters: Encodable? {
-        return [AnyEncodable(status.name), AnyEncodable(status.params)]
+        return [AnyEncodable(status.name), status.params]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
