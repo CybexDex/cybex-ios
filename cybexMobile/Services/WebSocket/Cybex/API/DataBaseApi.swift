@@ -260,7 +260,7 @@ struct GetLimitOrdersRequest: Request, JSONRPCResponse {
     var parameters: Encodable? {
         return [AnyEncodable(ApiCategory.database.rawValue),
                              AnyEncodable(DataBaseCatogery.getLimitOrders.rawValue.snakeCased()),
-                                          AnyEncodable([pair.base, pair.quote, 500])]
+                                          AnyEncodable([pair.base, pair.quote, 10000])]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
