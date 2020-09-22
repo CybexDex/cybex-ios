@@ -20,7 +20,6 @@ protocol OrderBookCoordinatorProtocol {
 protocol OrderBookStateManagerProtocol {
     var state: OrderBookState { get }
 
-    func disconnect()
     func subscribe(_ pair: Pair, depth: Int, count: Int)
     func unSubscribe(_ pair: Pair ,depth: Int ,count: Int)
     func resetData(_ pair: Pair)
@@ -35,26 +34,10 @@ class OrderBookCoordinator: NavCoordinator {
         middleware: [trackingMiddleware]
     )
 
-    lazy var disconnectDispatch = debounce(delay: .seconds(AppConfiguration.debounceDisconnectTime), action: {
-        if !AppHelper.shared.infront {
-            self.service.disconnect()
-        }
-    })
-
-    let service = MDPWebSocketService("", quoteName: "")
     var popoverVC: RecordChooseViewController?
 
     override func register() {
-        self.service.connect()
-
-        service.tickerDataDidReceived.delegate(on: self) { (self, data) in
-            self.store.dispatch(FetchLastPriceAction(price: data.0, pair: data.1))
-        }
-
-        service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
-            self.store.dispatch(FetchedOrderBookData(data: orderbook.0, pair: orderbook.1))
-        }
-        self.monitorService()
+       
     }
 }
 
@@ -98,71 +81,125 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     func subscribe(_ pair: Pair, depth: Int, count: Int) {
         guard let baseInfo = appData.assetInfo[pair.base],
             let quoteInfo = appData.assetInfo[pair.quote] else { return }
-        service.baseName = baseInfo.symbol
-        service.quoteName = quoteInfo.symbol
+      
         self.store.dispatch(ChangeOrderBookOfPairAction(pair: pair))
         self.store.dispatch(ChangeDepthAndCountAction(depth: depth, count: count))
 
-        if !service.checkNetworConnected() {
-            service.mdpServiceDidConnected.delegate(on: self) { (self, _) in
-                if let p = self.state.pair.value {
-                    self.subscribe(p, depth: self.state.depth.value, count: self.state.count)
+        let request = GetLimitOrdersRequest(pair: Pair(base: pair.base, quote: pair.quote)) { (resultObject) in
+            DispatchQueue.global().async {
+                let items = JSON(resultObject).arrayValue.compactMap( { LimitOrder.deserialize(from: $0.dictionaryObject) } )
+            
+                var bidLimitOrder: [LimitOrder] = []
+                var askLimitOrder: [LimitOrder] = []
+                
+                var bid_levels: [PriceLevel] = []
+                var ask_levels: [PriceLevel] = []
+
+                for item in items {
+                    item.baseID = pair.base
+                    if (item.direction == "sell") {
+                        askLimitOrder.append(item)
+                    } else {
+                        bidLimitOrder.append(item)
+                    }
+                }
+                
+                for o in askLimitOrder {
+                    if ask_levels.last?.price != o.price.string(digits: depth, roundingMode: .plain) {
+                        ask_levels.append(PriceLevel(price: o.price.string(digits: depth, roundingMode: .plain), amount: o.left_amount))
+                    } else {
+                        ask_levels[ask_levels.count - 1].addMount(m: o.left_amount)
+                    }
+                }
+                
+                for o in bidLimitOrder {
+                    if bid_levels.last?.price != o.price.string(digits: depth, roundingMode: .plain) {
+                        bid_levels.append(PriceLevel(price: o.price.string(digits: depth, roundingMode: .plain), amount: o.left_amount))
+                    } else {
+                        bid_levels[bid_levels.count - 1].addMount(m: o.left_amount)
+                    }
+                }
+                
+               
+                var bids: [OrderBook.Order] = []
+                var asks: [OrderBook.Order] = []
+                var bidsTotalAmount:Decimal = 0
+                var asksTotalAmount:Decimal = 0
+                
+                for lvl in ask_levels {
+                    asks.append(OrderBook.Order(price: lvl.price, volume: lvl.amount.stringValue, volumePercent: 0))
+                    asksTotalAmount += lvl.amount
+                    if (asks.count == count) {
+                        break
+                    }
+                }
+                
+                for lvl in bid_levels {
+                    bids.append(OrderBook.Order(price: lvl.price, volume: lvl.amount.stringValue, volumePercent: 0))
+                    bidsTotalAmount += lvl.amount
+                    if (bids.count == count) {
+                        break
+                    }
+                }
+
+                bids = bids.map { (o) -> OrderBook.Order in
+                    return OrderBook.Order(price: o.price,
+                                           volume: o.volume,
+                                           volumePercent: o.volume.decimal() / bidsTotalAmount)
+                }
+                asks = asks.map { (o) -> OrderBook.Order in
+                    return OrderBook.Order(price: o.price,
+                                           volume: o.volume,
+                                           volumePercent: o.volume.decimal() / asksTotalAmount)
+                }
+                
+                let orderbook = OrderBook(bids: bids, asks: asks)
+                DispatchQueue.main.async {
+                    self.store.dispatch(FetchedOrderBookData(data: orderbook, pair: pair))
                 }
             }
-            service.tickerDataDidReceived.delegate(on: self) { (self, data) in
-                self.store.dispatch(FetchLastPriceAction(price: data.0, pair: data.1))
-            }
             
-            service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
-                self.store.dispatch(FetchedOrderBookData(data: orderbook.0, pair: orderbook.1))
-            }
+            
+        }
+        
+        CybexWebSocketService.shared.send(request: request)
+        
+        let latestPriceRequest = GetFillOrderHistoryRequest(pair: pair) { (response) in
+            let data = JSON(response).arrayValue
+            if (data.count > 0) {
+                let operation = data[0]["op"]
+                let base = operation["fill_price"]["base"]
+                let quote = operation["fill_price"]["quote"]
+              
+                let basePrecision = pow(10, baseInfo.precision)
+                let quotePrecision = pow(10, quoteInfo.precision)
 
-            service.reconnect()
+                if base["asset_id"].stringValue == pair.base {
+                    let quoteVolume = Decimal(string: quote["amount"].stringValue)! / quotePrecision
+                    let baseVolume = Decimal(string: base["amount"].stringValue)! / basePrecision
+                    let price = baseVolume / quoteVolume
+                    self.store.dispatch(FetchLastPriceAction(price: price, pair: pair))
+                } else {
+                    let quoteVolume = Decimal(string: base["amount"].stringValue)! / quotePrecision
+                    let baseVolume = Decimal(string: quote["amount"].stringValue)! / basePrecision
+                    let price = baseVolume / quoteVolume
+                    self.store.dispatch(FetchLastPriceAction(price: price, pair: pair))
+                }
+            }
         }
-        else {
-            self.service.subscribeOrderBook(depth, count: count)
-            self.service.subscribeTicker()
-        }
+
+        CybexWebSocketService.shared.send(request: latestPriceRequest)
+
     }
     
     func unSubscribe(_ pair: Pair ,depth: Int ,count: Int) {
-        if service.checkNetworConnected() {
-            self.service.unSubscribeOrderBook(depth, count: count)
-            self.service.unSubscribeTicker()
-        }
+       
     }
 
     func switchShowType(_ index: Int) {
         self.store.dispatch(ChangeShowTypeIndexAction(index: index))
     }
 
-    func monitorService() { // 第一次执行也会进入callback
-        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
-            guard let reachability = note.object as? Reachability else {
-                return
-            }
-            switch reachability.connection {
-            case .wifi, .cellular:
-                self.service.reconnect()
-            case .none:
-                self.service.disconnect()
-                break
-            case .unavailable:
-                break
-            }
-        }
-
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-            self.service.reconnect()
-        }
-        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
-            self.disconnectDispatch()
-        }
-    }
-
-    func disconnect() {
-        service.disconnect()
-    }
 
     func resetData(_ pair: Pair) {
         self.store.dispatch(FetchedOrderBookData(data: nil, pair: pair))

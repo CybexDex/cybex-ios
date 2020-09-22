@@ -37,15 +37,22 @@ func orderBookReducer(action: ReSwift.Action, state: OrderBookState?) -> OrderBo
             break
         }
         let oldPrice = state.lastPrice.value.0
-        if oldPrice < action.price {
-            state.lastPrice.accept((action.price, UIColor.turtleGreen))
-        }
-        else if oldPrice > action.price {
-            state.lastPrice.accept((action.price, UIColor.reddish))
-        }
-        else {
+        if (oldPrice == 0) {
             state.lastPrice.accept((action.price, UIColor.steel))
+        } else {
+            if oldPrice < action.price {
+                state.lastPrice.accept((action.price, UIColor.turtleGreen))
+            }
+            else if oldPrice > action.price {
+                state.lastPrice.accept((action.price, UIColor.reddish))
+            }
+            else {
+                if (state.lastPrice.value.1 != UIColor.turtleGreen && state.lastPrice.value.1 != UIColor.reddish) {
+                    state.lastPrice.accept((action.price, UIColor.steel))
+                }
+            }
         }
+        
     case _ as ResetTickerAction:
         state.lastPrice.accept((0, UIColor.steel))
     case let action as ChangeShowTypeIndexAction:
