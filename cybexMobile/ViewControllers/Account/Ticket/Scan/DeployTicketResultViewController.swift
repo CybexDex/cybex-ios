@@ -8,10 +8,9 @@
 
 import Foundation
 import TangramKit
-import Proposer
 import EFQRCode
 import RxSwift
-import NotificationBanner
+import NotificationBannerSwift
 
 class DeployTicketResultViewController: BaseViewController {
     var assetName: String!

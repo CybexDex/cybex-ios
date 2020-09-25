@@ -80,3 +80,12 @@ struct RechageWordVMData {
     var projectLink: String = ""
     var messageInfo: String = ""
 }
+
+struct PriceLevel {
+    var price: String
+    var amount: Decimal
+   
+    mutating func addMount(m: Decimal) {
+        self.amount += m
+    }
+}

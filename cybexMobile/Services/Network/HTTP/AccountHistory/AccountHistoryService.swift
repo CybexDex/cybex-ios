@@ -26,7 +26,7 @@ struct AccountHistoryService {
     }
 
     static let provider = MoyaProvider<AccountHistoryAPI>(callbackQueue: nil, manager: defaultManager(),
-                                               plugins: [NetworkLoggerPlugin(verbose: true)],
+                                                          plugins: [AppConfiguration.HTTPLOG],
                                                trackInflights: false)
 
     static func request(

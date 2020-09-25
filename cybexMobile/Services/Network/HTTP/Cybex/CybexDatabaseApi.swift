@@ -29,7 +29,7 @@ struct CybexDatabaseApiService {
     }
 
     static let provider = MoyaProvider<DatabaseApi>(callbackQueue: nil, manager: defaultManager(),
-                                                    plugins: [NetworkLoggerPlugin(verbose: true)],
+                                                    plugins: [AppConfiguration.HTTPLOG],
                                                     trackInflights: false)
 
     static func request(

@@ -154,6 +154,17 @@ class OrderBookViewController: BaseViewController {
             guard let self = self else { return }
             self.setTopTitle()
         })
+        
+        appData.otherRequestRelyData.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if self.isVisible {
+                    guard let coor = self.coordinator ,let oldPair = self.coordinator?.state.pair.value else {
+                        return
+                    }
+                    coor.subscribe(oldPair, depth: coor.state.depth.value, count: self.vcType == OrderbookType.contentView.rawValue ? 20 : 10)
+                }
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
     deinit {
@@ -231,7 +242,7 @@ extension OrderBookViewController: TradePair {
     }
 
     func disappear() {
-        self.coordinator?.disconnect()
+        
     }
 }
 

@@ -106,7 +106,11 @@ extension TradeLineView {
         
         model.percent.asObservable().subscribe(onNext: { [weak self](decimal) in
             guard let `self` = self else { return }
-            self.backViewLeading.constant = self.width * (1 - decimal).cgfloat()
+            DispatchQueue.main.async {
+                if ((self.backViewLeading) != nil && decimal < 1) {
+                    self.backViewLeading.constant = self.width * (1 - decimal).cgfloat()
+                }
+            }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
     }

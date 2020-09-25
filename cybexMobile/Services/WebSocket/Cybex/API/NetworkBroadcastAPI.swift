@@ -7,14 +7,14 @@
 //
 
 import Foundation
-import JSONRPCKit
 import SwiftyJSON
+import AnyCodable
 
 enum BroadcastCatogery: String {
     case broadcastTransactionWithCallback
 }
 
-struct BroadcastTransactionRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct BroadcastTransactionRequest: Request, JSONRPCResponse {
     var response: RPCSResponse
 
     var jsonstr: String
@@ -22,12 +22,12 @@ struct BroadcastTransactionRequest: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
+    var parameters: Encodable? {
 
-        return [ApiCategory.networkBroadcast,
-                BroadcastCatogery.broadcastTransactionWithCallback.rawValue.snakeCased(),
-                [CybexWebSocketService.shared.idGenerator.currentId + 1,
-                 JSON(parseJSON: jsonstr).dictionaryObject ?? [:]]
+        return [AnyEncodable(ApiCategory.networkBroadcast.rawValue.snakeCased()),
+                AnyEncodable(BroadcastCatogery.broadcastTransactionWithCallback.rawValue.snakeCased()),
+                AnyEncodable([CybexWebSocketService.shared.idGenerator.currentId + 1,
+                 JSON(parseJSON: jsonstr).dictionaryObject ?? [:]])
         ]
     }
 

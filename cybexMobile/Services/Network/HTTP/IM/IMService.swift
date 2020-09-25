@@ -24,7 +24,7 @@ struct IMService {
     }
 
     static let provider = MoyaProvider<IMAPI>(callbackQueue: nil, manager: defaultManager(),
-                                                    plugins: [NetworkLoggerPlugin(verbose: true)],
+                                              plugins: [AppConfiguration.HTTPLOG],
                                                     trackInflights: false)
 
     static func request(

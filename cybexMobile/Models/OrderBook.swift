@@ -18,6 +18,8 @@ class LimitOrder: HandyJSON {
     var forSale: String = "" // sellPrice 没有成交的里面的base
     var sellPrice: Price = Price()
     var quoteAmount: String = ""
+    
+    var baseID: String = ""
     /*
      1 sellPrice里面的base 和quote
      2 根据关系判断是买还是卖
@@ -36,6 +38,27 @@ class LimitOrder: HandyJSON {
         return (base == ((assetAInfo != nil) ? assetAInfo!.symbol : ""))
     }
 
+    var price: Decimal {
+        if (direction == "buy") {
+            return AssetHelper.getRealAmount(sellPrice.base.assetID, amount: sellPrice.base.amount) /  AssetHelper.getRealAmount(sellPrice.quote.assetID, amount: sellPrice.quote.amount)
+        } else {
+            return AssetHelper.getRealAmount(sellPrice.quote.assetID, amount: sellPrice.quote.amount) / AssetHelper.getRealAmount(sellPrice.base.assetID, amount: sellPrice.base.amount)
+        }
+    }
+    
+    var left_amount: Decimal {
+        let realAmount = AssetHelper.getRealAmount(sellPrice.base.assetID, amount: forSale)
+        if (direction == "buy") {
+            return realAmount / price
+        } else {
+            return realAmount
+        }
+    }
+    
+    var direction: String { //buy sell
+        return sellPrice.base.assetID == baseID ? "buy" : "sell"
+    }
+    
     required init() {
     }
 

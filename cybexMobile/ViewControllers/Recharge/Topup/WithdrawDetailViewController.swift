@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-import Proposer
 import Localize_Swift
 
 class WithdrawDetailViewController: BaseViewController {

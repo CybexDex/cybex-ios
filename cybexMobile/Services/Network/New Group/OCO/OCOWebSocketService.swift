@@ -10,7 +10,6 @@ import Foundation
 import SocketRocket
 import SwiftyJSON
 import SwiftyUserDefaults
-import JSONRPCKit
 
 typealias WebSocketJSONResponse = (JSON) -> Void
 
@@ -105,7 +104,7 @@ class OCOWebSocketService: NSObject {
         }
     }
 
-    func send<Request: JSONRPCKit.Request>(request: Request) {
+    func send<R: Request>(request: R) {
         if !checkNetworConnected()  {
             return
         }
@@ -120,7 +119,14 @@ class OCOWebSocketService: NSObject {
                 }
             }
 
-            var requestEndpoint = self.batchFactory.create(request).requestObject
+            let batch = self.batchFactory.create(request)
+            let encoder = JSONEncoder()
+            guard let data = try? encoder.encode(batch) else {
+                return
+            }
+            
+            var requestEndpoint = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+            
             if var body = requestEndpoint as? [String: Any], var params = body["params"] as? [Any], let id = body["id"] as? Int {
                 params.prepend(self.limitOrderApiId)
                 body["params"] = params
@@ -130,9 +136,8 @@ class OCOWebSocketService: NSObject {
             }
 
             let writeJSON: JSON = JSON(requestEndpoint)
-            let data = try? writeJSON.rawData()
 
-            try? socket.send(data: data)
+            try? socket.send(data: try? writeJSON.rawData())
         }
 
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BnL-rZ-2Qv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BnL-rZ-2Qv">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,8 +15,8 @@
                     <view key="view" contentMode="scaleToFill" id="vJe-9e-fZa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="dJ0-Wg-64h"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JX1-NA-R1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -300,6 +300,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="biv-q9-gRW"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="biv-q9-gRW" firstAttribute="bottom" secondItem="X8C-nc-w5p" secondAttribute="bottom" id="CmA-0A-6eI"/>
@@ -308,7 +309,6 @@
                             <constraint firstItem="X8C-nc-w5p" firstAttribute="leading" secondItem="biv-q9-gRW" secondAttribute="leading" id="Kc9-FX-OD2"/>
                             <constraint firstItem="biv-q9-gRW" firstAttribute="trailing" secondItem="X8C-nc-w5p" secondAttribute="trailing" id="VKX-Sy-5fd"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="biv-q9-gRW"/>
                     </view>
                     <connections>
                         <outlet property="eNotesCloudPasswordSet" destination="yof-P2-Gk1" id="frK-vY-k1E"/>
@@ -348,7 +348,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g20-vo-4mY">
-                                                    <rect key="frame" x="15" y="0.0" width="315" height="48"/>
+                                                    <rect key="frame" x="16" y="0.0" width="313" height="48"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -383,6 +383,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="gqo-VZ-6hr"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gqo-VZ-6hr" firstAttribute="trailing" secondItem="DEY-bT-I3T" secondAttribute="trailing" constant="15" id="6bj-mS-pvc"/>
@@ -390,7 +391,6 @@
                             <constraint firstItem="DEY-bT-I3T" firstAttribute="bottom" secondItem="gqo-VZ-6hr" secondAttribute="bottom" id="7GV-9a-LTK"/>
                             <constraint firstItem="DEY-bT-I3T" firstAttribute="leading" secondItem="gqo-VZ-6hr" secondAttribute="leading" constant="15" id="Fvl-LL-qPO"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="gqo-VZ-6hr"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="DEY-bT-I3T" id="fiR-eG-Hsq"/>
@@ -407,8 +407,8 @@
                     <view key="view" contentMode="scaleToFill" id="cht-lx-aEE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="SeH-OW-qbz"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2a-Od-wNd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -427,6 +427,7 @@
                                 <rect key="frame" x="13" y="0.0" width="349" height="667"/>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="r6h-2a-7Y8"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZJm-As-Vxn" firstAttribute="leading" secondItem="r6h-2a-7Y8" secondAttribute="leading" constant="13" id="HGU-1w-FJM"/>
@@ -434,7 +435,6 @@
                             <constraint firstItem="r6h-2a-7Y8" firstAttribute="trailing" secondItem="ZJm-As-Vxn" secondAttribute="trailing" constant="13" id="RbN-fg-zvj"/>
                             <constraint firstItem="r6h-2a-7Y8" firstAttribute="bottom" secondItem="ZJm-As-Vxn" secondAttribute="bottom" id="RhB-YW-Pwg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="r6h-2a-7Y8"/>
                     </view>
                     <connections>
                         <outlet property="historyView" destination="ZJm-As-Vxn" id="aSd-0U-1Wo"/>
@@ -595,6 +595,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="3Sf-18-wh0"/>
                         <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pBs-TW-hEN" firstAttribute="leading" secondItem="3Sf-18-wh0" secondAttribute="leading" constant="30" id="0o2-Xf-m31"/>
@@ -614,7 +615,6 @@
                             <constraint firstItem="3Sf-18-wh0" firstAttribute="trailing" secondItem="xK9-cC-nwU" secondAttribute="trailing" constant="13" id="xBk-Xg-WiD"/>
                             <constraint firstItem="xK9-cC-nwU" firstAttribute="top" secondItem="Ayf-hP-Kot" secondAttribute="bottom" constant="16" id="yxj-p7-L8Z"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3Sf-18-wh0"/>
                     </view>
                     <connections>
                         <outlet property="accountTextField" destination="NnV-cN-HNm" id="B2r-R1-HuC"/>
@@ -649,6 +649,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="cHO-Bx-yEo"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MnO-kH-0YR" firstAttribute="leading" secondItem="cHO-Bx-yEo" secondAttribute="leading" id="GTW-oZ-GcL"/>
@@ -656,7 +657,6 @@
                             <constraint firstItem="cHO-Bx-yEo" firstAttribute="bottom" secondItem="MnO-kH-0YR" secondAttribute="bottom" id="WZj-lI-pwt"/>
                             <constraint firstItem="MnO-kH-0YR" firstAttribute="top" secondItem="Hpb-Uf-R7K" secondAttribute="top" id="sNj-UC-T9w"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="cHO-Bx-yEo"/>
                     </view>
                     <connections>
                         <outlet property="homeView" destination="MnO-kH-0YR" id="yHV-iD-g6L"/>
@@ -864,6 +864,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="X6q-ca-Gy5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Y4e-sd-AxN" firstAttribute="top" secondItem="cHb-tF-X5y" secondAttribute="bottom" constant="40" id="9Oz-fl-gdj"/>
@@ -879,7 +880,6 @@
                             <constraint firstAttribute="trailing" secondItem="Is1-nW-km2" secondAttribute="trailing" constant="25" id="may-Hw-NNP"/>
                             <constraint firstItem="cHb-tF-X5y" firstAttribute="leading" secondItem="X6q-ca-Gy5" secondAttribute="leading" constant="13" id="nmi-Zm-6tk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="X6q-ca-Gy5"/>
                     </view>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="DWP-vx-2Tc" id="dux-ri-I6o"/>
@@ -1183,6 +1183,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="i3e-dM-8TI"/>
                         <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="i3e-dM-8TI" firstAttribute="trailing" secondItem="kCz-iz-2Gk" secondAttribute="trailing" constant="25" id="1aG-mb-NLp"/>
@@ -1204,7 +1205,6 @@
                             <constraint firstItem="PRM-Qk-YOz" firstAttribute="leading" secondItem="i3e-dM-8TI" secondAttribute="leading" constant="13" id="tq1-iy-Rct"/>
                             <constraint firstItem="Qcx-qv-DCm" firstAttribute="top" secondItem="rhZ-TF-Kxr" secondAttribute="bottom" constant="14" id="v7O-UF-2z0"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="i3e-dM-8TI"/>
                     </view>
                     <connections>
                         <outlet property="accountTextField" destination="aQb-Vc-IrN" id="gN5-TL-Nsc"/>
@@ -1349,6 +1349,7 @@ Cg
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="b7e-3O-D5t"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="b7e-3O-D5t" firstAttribute="trailing" secondItem="94d-47-SGC" secondAttribute="trailing" id="Dvp-u8-Xdn"/>
@@ -1357,7 +1358,6 @@ Cg
                             <constraint firstItem="94d-47-SGC" firstAttribute="leading" secondItem="b7e-3O-D5t" secondAttribute="leading" id="Rzp-HU-3de"/>
                             <constraint firstItem="pSm-YK-gF2" firstAttribute="width" secondItem="Tr6-RG-0S1" secondAttribute="width" constant="-50" id="tlF-yB-zGM"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="b7e-3O-D5t"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghi-v2-DbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1371,8 +1371,8 @@ Cg
                     <view key="view" contentMode="scaleToFill" id="G4h-hY-oDb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Vq2-qx-MtQ"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mg3-Nu-aen" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1392,6 +1392,7 @@ Cg
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dly-Li-GXM"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="viB-8W-lUx" firstAttribute="top" secondItem="Dly-Li-GXM" secondAttribute="top" id="122-Jf-2XR"/>
@@ -1399,7 +1400,6 @@ Cg
                             <constraint firstItem="Dly-Li-GXM" firstAttribute="bottom" secondItem="viB-8W-lUx" secondAttribute="bottom" id="Wiu-Uq-Xmq"/>
                             <constraint firstItem="Dly-Li-GXM" firstAttribute="trailing" secondItem="viB-8W-lUx" secondAttribute="trailing" id="ZoM-Cv-arY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Dly-Li-GXM"/>
                     </view>
                     <connections>
                         <outlet property="noticeView" destination="viB-8W-lUx" id="e6d-GS-u9O"/>
@@ -1492,6 +1492,7 @@ Cg
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="qRg-Wa-ZSD"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qRg-Wa-ZSD" firstAttribute="trailing" secondItem="0WE-o2-bsL" secondAttribute="trailing" id="6Lw-gE-bfW"/>
@@ -1502,7 +1503,6 @@ Cg
                             <constraint firstItem="WzK-tX-ker" firstAttribute="bottom" secondItem="qRg-Wa-ZSD" secondAttribute="bottom" id="lzv-ZE-Uoq"/>
                             <constraint firstItem="WzK-tX-ker" firstAttribute="top" secondItem="0WE-o2-bsL" secondAttribute="bottom" id="ps2-Sr-eyA"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="qRg-Wa-ZSD"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                 <color key="value" red="0.066666666666666666" green="0.086274509803921567" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
@@ -1540,6 +1540,7 @@ Cg
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="xhd-fb-wtZ"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xRq-Yu-GzR" firstAttribute="leading" secondItem="xhd-fb-wtZ" secondAttribute="leading" id="5u2-rW-4CS"/>
@@ -1547,7 +1548,6 @@ Cg
                             <constraint firstItem="xhd-fb-wtZ" firstAttribute="trailing" secondItem="xRq-Yu-GzR" secondAttribute="trailing" id="ctR-E7-2Mc"/>
                             <constraint firstItem="xRq-Yu-GzR" firstAttribute="top" secondItem="xhd-fb-wtZ" secondAttribute="top" id="sxW-Fv-SP2"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="xhd-fb-wtZ"/>
                     </view>
                     <connections>
                         <outlet property="imgContentView" destination="xRq-Yu-GzR" id="eIs-BC-ZAz"/>
@@ -1582,13 +1582,13 @@ Cg
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="w6L-jn-sW5"/>
                         <constraints>
                             <constraint firstItem="vKt-ij-PjH" firstAttribute="leading" secondItem="w6L-jn-sW5" secondAttribute="leading" id="JrC-XL-fJG"/>
                             <constraint firstItem="w6L-jn-sW5" firstAttribute="bottom" secondItem="vKt-ij-PjH" secondAttribute="bottom" id="Rca-cU-80y"/>
                             <constraint firstItem="w6L-jn-sW5" firstAttribute="trailing" secondItem="vKt-ij-PjH" secondAttribute="trailing" id="jBe-Az-Erm"/>
                             <constraint firstItem="vKt-ij-PjH" firstAttribute="top" secondItem="w6L-jn-sW5" secondAttribute="top" id="pJV-7U-ew6"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="w6L-jn-sW5"/>
                     </view>
                     <connections>
                         <outlet property="recordTableView" destination="vKt-ij-PjH" id="adp-t0-r2D"/>
@@ -1605,8 +1605,8 @@ Cg
                     <view key="view" contentMode="scaleToFill" id="Ey0-Ak-277">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="QyO-Js-IN8"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0J-1C-klK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1648,6 +1648,7 @@ Cg
                                 <rect key="frame" x="0.0" y="44" width="375" height="456"/>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="y1B-A7-dcc"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wMX-6p-fzJ" firstAttribute="top" secondItem="cEd-5d-oCu" secondAttribute="top" id="3Dc-LD-IbF"/>
@@ -1658,7 +1659,6 @@ Cg
                             <constraint firstItem="y1B-A7-dcc" firstAttribute="trailing" secondItem="wMX-6p-fzJ" secondAttribute="trailing" id="tit-ch-7CI"/>
                             <constraint firstItem="wMX-6p-fzJ" firstAttribute="leading" secondItem="y1B-A7-dcc" secondAttribute="leading" id="wNB-Io-j51"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="y1B-A7-dcc"/>
                     </view>
                     <size key="freeformSize" width="375" height="500"/>
                     <connections>
@@ -1671,6 +1671,35 @@ Cg
             <point key="canvasLocation" x="1582" y="-222"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="DWP-vx-2Tc">
+            <size key="intrinsicContentSize" width="5" height="20"/>
+        </designable>
+        <designable name="GUM-AG-rTy">
+            <size key="intrinsicContentSize" width="5" height="20"/>
+        </designable>
+        <designable name="N6W-ab-1Lg">
+            <size key="intrinsicContentSize" width="876.5" height="29"/>
+        </designable>
+        <designable name="NnV-cN-HNm">
+            <size key="intrinsicContentSize" width="5" height="21"/>
+        </designable>
+        <designable name="WIP-LJ-6Yg">
+            <size key="intrinsicContentSize" width="5" height="20"/>
+        </designable>
+        <designable name="WPS-pC-BcR">
+            <size key="intrinsicContentSize" width="5" height="21"/>
+        </designable>
+        <designable name="aQb-Vc-IrN">
+            <size key="intrinsicContentSize" width="5" height="21"/>
+        </designable>
+        <designable name="cH2-f1-6Sg">
+            <size key="intrinsicContentSize" width="5" height="20"/>
+        </designable>
+        <designable name="xQc-ho-ABL">
+            <size key="intrinsicContentSize" width="5" height="20"/>
+        </designable>
+    </designables>
     <resources>
         <image name="check_complete" width="24" height="24"/>
         <image name="cloud_wallet" width="24" height="24"/>

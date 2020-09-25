@@ -12,6 +12,7 @@ import Repeat
 import RxSwift
 import SwiftyUserDefaults
 import SwiftyJSON
+import Moya
 
 enum AppEnv: String, CaseIterable {
     case product
@@ -54,6 +55,7 @@ class AppConfiguration {
     var appCoordinator: AppCoordinator!
     var timer: Disposable?
 
+    static let HTTPLOG = NetworkLoggerPlugin(verbose: true, output: neverPrint)
     static let rmbPrecision = 4
     static let percentPrecision = 2
     static let amountPrecision = 2
@@ -61,6 +63,10 @@ class AppConfiguration {
     static let debounceDisconnectTime = 10
     static let autoLockWalletInbackground = 60 * 5
 
+    static func neverPrint(_ separator: String, terminator: String, items: Any...) {
+       
+    }
+    
     private init() {
         let rootVC = BaseTabbarViewController()
         appCoordinator = AppCoordinator(rootVC: rootVC)
@@ -109,7 +115,7 @@ extension AppConfiguration {
             guard let self = self else { return }
             self.fetchOuterPrice()
 
-            Log.print(n, flag: "timer----")
+//            Log.print(n, flag: "timer----")
         })
     }
 
@@ -120,8 +126,10 @@ extension AppConfiguration {
             if prices.count > 0 {
                 self.rmbPrices.accept(prices)
             }
-        }, error: { (_) in
-        }) { (_) in
+        }, error: { (err) in
+            print(err)
+        }) { (err) in
+            print(err)
         }
     }
 

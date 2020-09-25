@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import JSONRPCKit
+import AnyCodable
 
 enum LimitOrderStatusApi {
     case getMaxLimitOrderIdByTime(date: Date)
@@ -42,7 +42,7 @@ enum LimitOrderStatusApi {
         }
     }
 
-    var params: [Any] {
+    var params: AnyEncodable {
         switch self {
         case let .getMaxLimitOrderIdByTime(date):
             return [date.string(withFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS")]
@@ -64,7 +64,7 @@ enum LimitOrderStatusApi {
     }
 }
 
-struct GetLimitOrderStatus: JSONRPCKit.Request, JSONRPCResponse {
+struct GetLimitOrderStatus: Request, JSONRPCResponse {
     var response: RPCSResponse
     
     var status: LimitOrderStatusApi
@@ -73,11 +73,12 @@ struct GetLimitOrderStatus: JSONRPCKit.Request, JSONRPCResponse {
         return "call"
     }
 
-    var parameters: Any? {
-        return [status.name, status.params]
+    var parameters: Encodable? {
+        return [AnyEncodable(status.name), status.params]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
         return resultObject
     }
+
 }

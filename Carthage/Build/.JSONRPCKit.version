@@ -1,10 +1,10 @@
 {
-  "commitish" : "8faf73b69d1465c9a0c2f6fff0a9e6ce1063357f",
+  "commitish" : "604b941d5c33e21c853afce019e7878257cea1ef",
   "iOS" : [
     {
       "name" : "JSONRPCKit",
-      "hash" : "d521b875ae4211a46d398343ca55ad23c783e10ebd09c711fc205784088d5d73",
-      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
+      "hash" : "9aac7bcde4dbee4d1e85f9014c4c91574505f6bfc0e856d95ddadf4ec3529db0",
+      "swiftToolchainVersion" : "5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"
     }
   ]
 }

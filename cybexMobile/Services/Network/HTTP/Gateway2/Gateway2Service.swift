@@ -33,7 +33,7 @@ struct Gateway2Service {
     static var gateway2ID: String = ""
 
     static let provider = MoyaProvider<GatewayAPI>(callbackQueue: nil, manager: defaultManager(),
-                                                        plugins: [NetworkLoggerPlugin(verbose: true)],
+                                                   plugins: [AppConfiguration.HTTPLOG],
                                                         trackInflights: false)
 
 
