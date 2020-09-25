@@ -9,17 +9,17 @@
 import Foundation
 
 internal protocol BatchElementProcotol: Encodable {
-    associatedtype Request: JSONRPCKit.Request
+    associatedtype R: Request
 
     var decoder: DecoderType { get set }
-    var request: Request { get }
+    var request: R { get }
     var version: String { get }
     var id: Id? { get }
 }
 
 internal extension BatchElementProcotol {
     /// - Throws: JSONRPCError
-    func response(from data: Data) throws -> Request.Response {
+    func response(from data: Data) throws -> R.Response {
         switch result(from: data) {
         case .success(let response):
             return response
@@ -29,7 +29,7 @@ internal extension BatchElementProcotol {
     }
 
     /// - Throws: JSONRPCError
-    func response(fromArray data: Data) throws -> Request.Response {
+    func response(fromArray data: Data) throws -> R.Response {
         switch result(fromArray: data) {
         case .success(let response):
             return response
@@ -38,11 +38,11 @@ internal extension BatchElementProcotol {
         }
     }
 
-    func result(from data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(from data: Data) -> Result<R.Response, JSONRPCError> {
 
-        var response: JSONRPCResponseResult<Request.Response>
+        var response: JSONRPCResponseResult<R.Response>
         do {
-            response = try decoder.decode(JSONRPCResponseResult<Request.Response>.self, from: data)
+            response = try decoder.decode(JSONRPCResponseResult<R.Response>.self, from: data)
         } catch let error as JSONRPCError {
             return .failure(error)
         } catch {
@@ -52,7 +52,7 @@ internal extension BatchElementProcotol {
         return result(from: response)
     }
 
-    func result(fromArray data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(fromArray data: Data) -> Result<R.Response, JSONRPCError> {
 
         let decoder = JSONDecoder()
 
@@ -67,12 +67,12 @@ internal extension BatchElementProcotol {
             return .failure(.responseParseError(error))
         }
 
-        var response: JSONRPCResponseResult<Request.Response>?
+        var response: JSONRPCResponseResult<R.Response>?
         do {
             while !batchContainer.isAtEnd {
                 let decodedId = try? batchContainer.decode(IdOnly.self)
                 if id == decodedId?.id {
-                    response = try batchContainer2.decode(JSONRPCResponseResult<Request.Response>.self)
+                    response = try batchContainer2.decode(JSONRPCResponseResult<R.Response>.self)
                     break
                 } else {
                     // Decode nothing to keep containers at same index
@@ -91,7 +91,7 @@ internal extension BatchElementProcotol {
         return .failure(.responseNotFound(requestId: id))
     }
 
-    private func result(from responseObj: JSONRPCResponseResult<Request.Response>) -> Result<Request.Response, JSONRPCError> {
+    private func result(from responseObj: JSONRPCResponseResult<R.Response>) -> Result<R.Response, JSONRPCError> {
 
 
         let receivedVersion = responseObj.jsonrpc
@@ -177,34 +177,34 @@ private struct JSONRPCErrorResponse: Decodable {
     }
 }
 
-internal extension BatchElementProcotol where Request.Response == NoReply {
+internal extension BatchElementProcotol where R.Response == NoReply {
     /// - Throws: JSONRPCError
-    func response(from data: Data) throws -> Request.Response {
+    func response(from data: Data) throws -> R.Response {
         return NoReply()
     }
 
     /// - Throws: JSONRPCError
-    func response(fromArray data: Data) throws -> Request.Response {
+    func response(fromArray data: Data) throws -> R.Response {
         return NoReply()
     }
 
-    func result(from data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(from data: Data) -> Result<R.Response, JSONRPCError> {
         return .success(NoReply())
     }
 
-    func result(fromArray data: Data) -> Result<Request.Response, JSONRPCError> {
+    func result(fromArray data: Data) -> Result<R.Response, JSONRPCError> {
         return .success(NoReply())
     }
 }
 
-public struct BatchElement<Request: JSONRPCKit.Request>: BatchElementProcotol {
+public struct BatchElement<R: Request>: BatchElementProcotol {
     var decoder: DecoderType = JSONDecoder()
 
-    public let request: Request
+    public let request: R
     public let version: String
     public let id: Id?
 
-    public init(request: Request, version: String, id: Id) {
+    public init(request: R, version: String, id: Id) {
         let id: Id? = request.isNotification ? nil : id
         
         self.request = request

@@ -26,18 +26,18 @@ public protocol Batch: Encodable {
     static func responses(from results: Results) throws -> Responses
 }
 
-public struct Batch1<Request: JSONRPCKit.Request>: Batch {
-    public typealias Responses = Request.Response
-    public typealias Results = Result<Request.Response, JSONRPCError>
+public struct Batch1<R: Request>: Batch {
+    public typealias Responses = R.Response
+    public typealias Results = Result<R.Response, JSONRPCError>
 
-    public var batchElement: BatchElement<Request>
+    public var batchElement: BatchElement<R>
     public var decoder: DecoderType = JSONDecoder() {
         didSet {
             batchElement.decoder = decoder
         }
     }
 
-    init(batchElement: BatchElement<Request>) {
+    init(batchElement: BatchElement<R>) {
         self.batchElement = batchElement
     }
 

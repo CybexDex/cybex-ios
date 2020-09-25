@@ -20,7 +20,7 @@ public final class BatchFactory {
         self.idGenerator = idGenerator
     }
 
-    public func create<Request: JSONRPCKit.Request>(_ request: Request) -> Batch1<Request> {
+    public func create<R: Request>(_ request: R) -> Batch1<R> {
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         let batchElement = BatchElement(request: request, version: version, id: idGenerator.next())
         semaphore.signal()
