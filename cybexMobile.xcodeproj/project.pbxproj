@@ -429,6 +429,14 @@
 		7345FD90219EBF7F0066BD0E /* FCUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD8C219EBF7E0066BD0E /* FCUUID.m */; };
 		7345FD91219EBF7F0066BD0E /* UIDevice+FCUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD8D219EBF7E0066BD0E /* UIDevice+FCUUID.m */; };
 		7345FD93219EC0A80066BD0E /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */; };
+		73494F14251DA75B00194631 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F0C251DA75B00194631 /* Id.swift */; };
+		73494F15251DA75B00194631 /* IdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F0D251DA75B00194631 /* IdGenerator.swift */; };
+		73494F16251DA75B00194631 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F0E251DA75B00194631 /* JSONRPCError.swift */; };
+		73494F17251DA75B00194631 /* BatchElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F0F251DA75B00194631 /* BatchElement.swift */; };
+		73494F18251DA75B00194631 /* NumberIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F10251DA75B00194631 /* NumberIdGenerator.swift */; };
+		73494F19251DA75B00194631 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F11251DA75B00194631 /* Request.swift */; };
+		73494F1A251DA75B00194631 /* BatchFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F12251DA75B00194631 /* BatchFactory.swift */; };
+		73494F1B251DA75B00194631 /* Batch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494F13251DA75B00194631 /* Batch.swift */; };
 		73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BC72178A7CA008395AC /* AsyncOperation.swift */; };
 		73539C1E21798D26008395AC /* KMNavigationBarTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C1221798D26008395AC /* KMNavigationBarTransition.framework */; };
 		73539C37217992F1008395AC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C33217992EF008395AC /* Fabric.framework */; };
@@ -546,14 +554,6 @@
 		73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */; };
 		73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB321EF493D00C93DA6 /* DataCompression.swift */; };
 		73A4CBB821F073A100C93DA6 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB721F073A000C93DA6 /* BinUtils.swift */; };
-		73A9F594250BAB6F008B96A0 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F589250BAB6F008B96A0 /* Id.swift */; };
-		73A9F595250BAB6F008B96A0 /* IdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F58A250BAB6F008B96A0 /* IdGenerator.swift */; };
-		73A9F596250BAB6F008B96A0 /* JSONRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F58B250BAB6F008B96A0 /* JSONRPCError.swift */; };
-		73A9F597250BAB6F008B96A0 /* BatchElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F58C250BAB6F008B96A0 /* BatchElement.swift */; };
-		73A9F598250BAB6F008B96A0 /* NumberIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F58D250BAB6F008B96A0 /* NumberIdGenerator.swift */; };
-		73A9F599250BAB6F008B96A0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F58E250BAB6F008B96A0 /* Request.swift */; };
-		73A9F59A250BAB6F008B96A0 /* BatchFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F58F250BAB6F008B96A0 /* BatchFactory.swift */; };
-		73A9F59B250BAB6F008B96A0 /* Batch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F591250BAB6F008B96A0 /* Batch.swift */; };
 		73A9F5A3250BB12E008B96A0 /* Proposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A9F5A0250BB12E008B96A0 /* Proposer.swift */; };
 		73B4782D222CEB8E00189632 /* Cert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47821222CEB8E00189632 /* Cert.swift */; };
 		73B4782E222CEB8E00189632 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B47822222CEB8E00189632 /* Card.swift */; };
@@ -1205,6 +1205,14 @@
 		7345FD8E219EBF7E0066BD0E /* FCUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCUUID.h; sourceTree = "<group>"; };
 		7345FD8F219EBF7E0066BD0E /* UIDevice+FCUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+FCUUID.h"; sourceTree = "<group>"; };
 		7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Carthage/Build/iOS/UICKeyChainStore.framework; sourceTree = "<group>"; };
+		73494F0C251DA75B00194631 /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
+		73494F0D251DA75B00194631 /* IdGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdGenerator.swift; sourceTree = "<group>"; };
+		73494F0E251DA75B00194631 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
+		73494F0F251DA75B00194631 /* BatchElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchElement.swift; sourceTree = "<group>"; };
+		73494F10251DA75B00194631 /* NumberIdGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdGenerator.swift; sourceTree = "<group>"; };
+		73494F11251DA75B00194631 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		73494F12251DA75B00194631 /* BatchFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchFactory.swift; sourceTree = "<group>"; };
+		73494F13251DA75B00194631 /* Batch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Batch.swift; sourceTree = "<group>"; };
 		73539BC72178A7CA008395AC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		73539C1221798D26008395AC /* KMNavigationBarTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KMNavigationBarTransition.framework; path = Carthage/Build/iOS/KMNavigationBarTransition.framework; sourceTree = "<group>"; };
 		73539C33217992EF008395AC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = "<group>"; };
@@ -1314,14 +1322,6 @@
 		73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
 		73A4CBB321EF493D00C93DA6 /* DataCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCompression.swift; sourceTree = "<group>"; };
 		73A4CBB721F073A000C93DA6 /* BinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
-		73A9F589250BAB6F008B96A0 /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
-		73A9F58A250BAB6F008B96A0 /* IdGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdGenerator.swift; sourceTree = "<group>"; };
-		73A9F58B250BAB6F008B96A0 /* JSONRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPCError.swift; sourceTree = "<group>"; };
-		73A9F58C250BAB6F008B96A0 /* BatchElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchElement.swift; sourceTree = "<group>"; };
-		73A9F58D250BAB6F008B96A0 /* NumberIdGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIdGenerator.swift; sourceTree = "<group>"; };
-		73A9F58E250BAB6F008B96A0 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		73A9F58F250BAB6F008B96A0 /* BatchFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchFactory.swift; sourceTree = "<group>"; };
-		73A9F591250BAB6F008B96A0 /* Batch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Batch.swift; sourceTree = "<group>"; };
 		73A9F5A0250BB12E008B96A0 /* Proposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposer.swift; sourceTree = "<group>"; };
 		73B47821222CEB8E00189632 /* Cert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cert.swift; sourceTree = "<group>"; };
 		73B47822222CEB8E00189632 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -2632,6 +2632,21 @@
 			path = FCUUID;
 			sourceTree = "<group>";
 		};
+		73494F0B251DA75B00194631 /* JSONRPCKit */ = {
+			isa = PBXGroup;
+			children = (
+				73494F0C251DA75B00194631 /* Id.swift */,
+				73494F0D251DA75B00194631 /* IdGenerator.swift */,
+				73494F0E251DA75B00194631 /* JSONRPCError.swift */,
+				73494F0F251DA75B00194631 /* BatchElement.swift */,
+				73494F10251DA75B00194631 /* NumberIdGenerator.swift */,
+				73494F11251DA75B00194631 /* Request.swift */,
+				73494F12251DA75B00194631 /* BatchFactory.swift */,
+				73494F13251DA75B00194631 /* Batch.swift */,
+			);
+			path = JSONRPCKit;
+			sourceTree = "<group>";
+		};
 		73539C3B2179A20F008395AC /* URLNavigator */ = {
 			isa = PBXGroup;
 			children = (
@@ -2998,22 +3013,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		73A9F588250BAB6F008B96A0 /* JSONRPCKit */ = {
-			isa = PBXGroup;
-			children = (
-				73A9F589250BAB6F008B96A0 /* Id.swift */,
-				73A9F58A250BAB6F008B96A0 /* IdGenerator.swift */,
-				73A9F58B250BAB6F008B96A0 /* JSONRPCError.swift */,
-				73A9F58C250BAB6F008B96A0 /* BatchElement.swift */,
-				73A9F58D250BAB6F008B96A0 /* NumberIdGenerator.swift */,
-				73A9F58E250BAB6F008B96A0 /* Request.swift */,
-				73A9F58F250BAB6F008B96A0 /* BatchFactory.swift */,
-				73A9F591250BAB6F008B96A0 /* Batch.swift */,
-			);
-			name = JSONRPCKit;
-			path = "../../../../../../../Downloads/JSONRPCKit-master/Sources/JSONRPCKit";
-			sourceTree = "<group>";
-		};
 		73A9F59F250BB12E008B96A0 /* Proposer */ = {
 			isa = PBXGroup;
 			children = (
@@ -3179,8 +3178,8 @@
 		8B5274A9974EFCDE3D932E9EA52C257A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				73494F0B251DA75B00194631 /* JSONRPCKit */,
 				73A9F59F250BB12E008B96A0 /* Proposer */,
-				73A9F588250BAB6F008B96A0 /* JSONRPCKit */,
 				73C981342338C15000179892 /* XLActionController */,
 				7364D3F7223A03E100021978 /* IProgressHUD */,
 				7345FD8B219EBF7E0066BD0E /* FCUUID */,
@@ -4289,7 +4288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73A9F59B250BAB6F008B96A0 /* Batch.swift in Sources */,
+				73494F1B251DA75B00194631 /* Batch.swift in Sources */,
 				221C616C2137FCCF0021C007 /* ImageShareCoordinator.swift in Sources */,
 				72199D9421045DD000575226 /* TransferListCell.swift in Sources */,
 				04AE2E3C8F409B0337F53AE4DB52FCD0 /* AccessoryCollectionView.swift in Sources */,
@@ -4327,7 +4326,7 @@
 				C281A4038187FCD131A006BA4689D2BD /* AppCoordinator+StateManager.swift in Sources */,
 				7224386621C2630F002DA6BC /* CybexPopoverBackgroundView.swift in Sources */,
 				19864A14CDDAB9987FBB0457B007B23E /* AppCoordinator.swift in Sources */,
-				73A9F599250BAB6F008B96A0 /* Request.swift in Sources */,
+				73494F19251DA75B00194631 /* Request.swift in Sources */,
 				BC2357553B9276EF5A8F867AC75534EC /* AppDelegate.swift in Sources */,
 				BF1E2A89F4A04926CAC7E34A3F384328 /* AppReducer.swift in Sources */,
 				C1FFA2C8BE63611BC0DD9B20A183FEF7 /* AssetInfo.swift in Sources */,
@@ -4473,7 +4472,7 @@
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
 				73E9C04E224C69560023B274 /* String+Extension.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
-				73A9F598250BAB6F008B96A0 /* NumberIdGenerator.swift in Sources */,
+				73494F18251DA75B00194631 /* NumberIdGenerator.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
 				737E596D21A541E6001199E4 /* JWK.swift in Sources */,
 				73A45F8A21E5F1A300B52A7F /* DeployTicketView.swift in Sources */,
@@ -4521,8 +4520,8 @@
 				72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
-				73A9F596250BAB6F008B96A0 /* JSONRPCError.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
+				73494F16251DA75B00194631 /* JSONRPCError.swift in Sources */,
 				73E9C049224C69560023B274 /* Dictionary+Extension.swift in Sources */,
 				5895D5BFE7B77EDC996C7CF7ADCF92ED /* KLineConfiguration.swift in Sources */,
 				AA2AF8469235125BB11F791F769C6392 /* LocalCache.swift in Sources */,
@@ -4566,8 +4565,8 @@
 				D97554A68B333ECF6F33B4558E08E005 /* MyHistoryCell.swift in Sources */,
 				72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */,
 				E432C445702EFB8154F16B502E4EE186 /* MyHistoryCellView.swift in Sources */,
-				73A9F595250BAB6F008B96A0 /* IdGenerator.swift in Sources */,
 				73E3FF7122B78BF400151F51 /* NodesURLSetting.swift in Sources */,
+				73494F15251DA75B00194631 /* IdGenerator.swift in Sources */,
 				737EBADB230147810077B47E /* HashLockupAssetsTableViewCell.swift in Sources */,
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				73B4782D222CEB8E00189632 /* Cert.swift in Sources */,
@@ -4576,8 +4575,8 @@
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
 				7307A91E212518DC00BD6444 /* Iconic.swift in Sources */,
 				724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */,
-				73A9F594250BAB6F008B96A0 /* Id.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
+				73494F14251DA75B00194631 /* Id.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
 				73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
@@ -4628,8 +4627,8 @@
 				813E625BF1238DDBDC460AFDBCEF4049 /* OrderBookReducers.swift in Sources */,
 				73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */,
 				724C5D4D2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift in Sources */,
-				73A9F597250BAB6F008B96A0 /* BatchElement.swift in Sources */,
 				562EE9FB61A1D1EBCB263F8C8DE265B6 /* OrderBookViewController.swift in Sources */,
+				73494F17251DA75B00194631 /* BatchElement.swift in Sources */,
 				7333856C21BFA7BB0026765F /* CybexChainHelper.swift in Sources */,
 				7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */,
 				73539C4E2179A210008395AC /* URLMatcher.swift in Sources */,
@@ -4738,7 +4737,7 @@
 				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
 				4E2B0C9A04FD5D11C7AFA4CC9DF8492F /* TradeCoordinator.swift in Sources */,
 				E549F16D59025C0BE00C28BFA24C9E0D /* TradeHistoryActions.swift in Sources */,
-				73A9F59A250BAB6F008B96A0 /* BatchFactory.swift in Sources */,
+				73494F1A251DA75B00194631 /* BatchFactory.swift in Sources */,
 				7333855B21BF9B370026765F /* AppDelegate+UI.swift in Sources */,
 				221C6178213926570021C007 /* ETORecordListReducers.swift in Sources */,
 				B4125FF4D7849714DA71E04BC6D888AB /* TradeHistoryCell.swift in Sources */,

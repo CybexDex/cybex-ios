@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AnyCodable
 
 /// An empty reply to signify notification.
 /// Could be changed to Never in swift 4.2 when Never starts to conform to Codable
@@ -14,7 +15,7 @@ public struct NoReply: Decodable {}
 
 public protocol Request {
     /// If `Response == NoReply`, request is treated as a notification.
-    associatedtype Response: Decodable
+    associatedtype Response: Decodable = AnyDecodable
     
     var method: String { get }
     var parameters: Encodable? { get }
@@ -24,7 +25,7 @@ public protocol Request {
 }
 
 public extension Request {
-    var parameters: Any? {
+    var parameters: [Any]? {
         return nil
     }
 
