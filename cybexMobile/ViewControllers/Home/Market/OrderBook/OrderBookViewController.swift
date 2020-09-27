@@ -106,8 +106,14 @@ class OrderBookViewController: BaseViewController {
             tradeView = TradeView(frame: self.view.bounds)
             self.view.addSubview(tradeView)
             tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-            setupEvent()
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
+                guard let self = self else { return }
+                self.setTopTitle()
+            })
+            
         }
+        setupEvent()
+
         setTopTitle()
     }
 
@@ -150,11 +156,7 @@ class OrderBookViewController: BaseViewController {
     }
 
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let self = self else { return }
-            self.setTopTitle()
-        })
-        
+       
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
