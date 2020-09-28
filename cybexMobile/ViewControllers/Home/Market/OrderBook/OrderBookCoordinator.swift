@@ -105,16 +105,16 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
                 }
                 
                 for o in askLimitOrder {
-                    if ask_levels.last?.price != o.price.string(digits: depth, roundingMode: .plain) {
-                        ask_levels.append(PriceLevel(price: o.price.string(digits: depth, roundingMode: .plain), amount: o.left_amount))
+                    if ask_levels.last?.price != o.price.string(digits: depth, roundingMode: .up) {
+                        ask_levels.append(PriceLevel(price: o.price.string(digits: depth, roundingMode: .up), amount: o.left_amount))
                     } else {
                         ask_levels[ask_levels.count - 1].addMount(m: o.left_amount)
                     }
                 }
                 
                 for o in bidLimitOrder {
-                    if bid_levels.last?.price != o.price.string(digits: depth, roundingMode: .plain) {
-                        bid_levels.append(PriceLevel(price: o.price.string(digits: depth, roundingMode: .plain), amount: o.left_amount))
+                    if bid_levels.last?.price != o.price.string(digits: depth, roundingMode: .down) {
+                        bid_levels.append(PriceLevel(price: o.price.string(digits: depth, roundingMode: .down), amount: o.left_amount))
                     } else {
                         bid_levels[bid_levels.count - 1].addMount(m: o.left_amount)
                     }
@@ -127,7 +127,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
                 var asksTotalAmount:Decimal = 0
                 
                 for lvl in ask_levels {
-                    asks.append(OrderBook.Order(price: lvl.price, volume: lvl.amount.stringValue, volumePercent: 0))
+                    asks.append(OrderBook.Order(price: lvl.price, volume: lvl.amount, volumePercent: 0))
                     asksTotalAmount += lvl.amount
                     if (asks.count == count) {
                         break
@@ -135,7 +135,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
                 }
                 
                 for lvl in bid_levels {
-                    bids.append(OrderBook.Order(price: lvl.price, volume: lvl.amount.stringValue, volumePercent: 0))
+                    bids.append(OrderBook.Order(price: lvl.price, volume: lvl.amount, volumePercent: 0))
                     bidsTotalAmount += lvl.amount
                     if (bids.count == count) {
                         break
@@ -145,12 +145,12 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
                 bids = bids.map { (o) -> OrderBook.Order in
                     return OrderBook.Order(price: o.price,
                                            volume: o.volume,
-                                           volumePercent: o.volume.decimal() / bidsTotalAmount)
+                                           volumePercent: o.volume / bidsTotalAmount)
                 }
                 asks = asks.map { (o) -> OrderBook.Order in
                     return OrderBook.Order(price: o.price,
                                            volume: o.volume,
-                                           volumePercent: o.volume.decimal() / asksTotalAmount)
+                                           volumePercent: o.volume / asksTotalAmount)
                 }
                 
                 let orderbook = OrderBook(bids: bids, asks: asks)

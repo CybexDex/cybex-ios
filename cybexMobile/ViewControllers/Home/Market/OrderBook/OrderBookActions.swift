@@ -36,7 +36,7 @@ struct ChangeShowTypeIndexAction: ReSwift.Action {
 struct OrderBook: Equatable {
     struct Order: Equatable {
         let price: String
-        let volume: String
+        let volume: Decimal
 
         let volumePercent: Decimal
     }

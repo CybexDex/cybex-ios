@@ -330,27 +330,27 @@ extension Decimal { // 解决double 计算精度丢失
         num = abs(num)
 
         if num / 1000 < 1 {
-            let str = num.string(digits: digitNum, roundingMode: .down)
+            let str = num.string(digits: digitNum, roundingMode: .plain)
             let result = padZero ? str.formatCurrency(digitNum: digitNum, usesGroupingSeparator: false) : str
             return "\(sign)\(result)"
         }
 
         num /= 1000
         if num / 1000 < 1  {
-            let str = num.string(digits: 2, roundingMode: .down)
+            let str = num.string(digits: 2, roundingMode: .plain)
             let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: false) : str
             return "\(sign)\(result)" + "k"
         }
         num /= 1000
         if num / 1000 < 1 {
-            let str = num.string(digits: 2, roundingMode: .down)
+            let str = num.string(digits: 2, roundingMode: .plain)
             let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: false) : str
 
             return "\(sign)\(result)" + "m"
         }
         num /= 1000
 
-        let str = num.string(digits: 2, roundingMode: .down)
+        let str = num.string(digits: 2, roundingMode: .plain)
         let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: false) : str
 
         return "\(sign)\(result)" + "b"

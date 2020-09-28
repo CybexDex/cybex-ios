@@ -214,29 +214,7 @@ extension MDPWebSocketService: SRWebSocketDelegate {
                     tickerDataDidReceived.call((price, pair))
                 }
             case .orderbook:
-                let bidsAmount = messages["bids"].arrayValue.compactMap({ Decimal(string: $0[1].stringValue) })
-                let asksAmount = messages["asks"].arrayValue.compactMap({ Decimal(string: $0[1].stringValue) })
-                let pair = topicToPair(messages["topic"].stringValue)
-
-                let bidsTotalAmount = bidsAmount.reduce(0, +)
-                let asksTotalAmount = asksAmount.reduce(0, +)
-
-                let bids = messages["bids"].arrayValue.map { (json) -> OrderBook.Order in
-                    let volume = json[1].stringValue
-                    let volumeDecimal = Decimal(string: volume) ?? 0
-                    return OrderBook.Order(price: json[0].stringValue,
-                                           volume: volume,
-                                           volumePercent: volumeDecimal / bidsTotalAmount)
-                }
-                let asks = messages["asks"].arrayValue.map { (json) -> OrderBook.Order in
-                    let volume = json[1].stringValue
-                    let volumeDecimal = Decimal(string: volume) ?? 0
-                    return OrderBook.Order(price: json[0].stringValue,
-                                           volume: volume,
-                                           volumePercent: volumeDecimal / asksTotalAmount)
-                }
-                let orderbook = OrderBook(bids: bids, asks: asks)
-                orderbookDataDidReceived.call((orderbook, pair))
+                
                 break
             }
         }
